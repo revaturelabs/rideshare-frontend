@@ -35,11 +35,14 @@ import { HttpClientModule} from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { AdminbanComponent } from './adminban/adminban.component';
+import { DriverComponent} from './driver/driver.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    AdminbanComponent
+    AdminbanComponent,
+    DriverComponent
   ],
   imports: [
     BrowserModule,

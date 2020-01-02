@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MarkInactiveDriverService } from '../mark-inactive-driver.service';
-import { Drivers } from '../mock-driver';
+import { ListUsers } from 'src/app/ListUsers';
 
 @Component({
   selector: 'app-driver',
@@ -9,14 +9,20 @@ import { Drivers } from '../mock-driver';
 })
 export class DriverComponent implements OnInit {
 
+  private driver : ListUsers [];
+
   constructor(private _MarkInactiveDriverService_: MarkInactiveDriverService) { }
 
   ngOnInit() {
-    this._MarkInactiveDriverService_.getDriverById(Drivers).
+    this._MarkInactiveDriverService_.getDriverById(this.driver.userId).
       subscribe(
         data => {this.driver = data;})
+
+        console.log ("driver", this.driver);
   }
 
+    
+  
   // ngOnInit() {
   //   this._MarkInactiveDriverService_.showAllUser()
   //   .subscribe(
@@ -26,7 +32,7 @@ export class DriverComponent implements OnInit {
   //   )
   // }
 
-    driver = Drivers;
+    
 
   // changeAcceptingRides(){
   //   this._MarkInactiveDriverService_.changeDriverIsAccepting(this.Driver).subscribe(res => {

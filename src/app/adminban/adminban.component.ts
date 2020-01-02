@@ -11,6 +11,8 @@ export class AdminbanComponent implements OnInit {
 
   private listofUsers: ListUsers[];
 
+  user = ListUsers;
+
   private displayMessageUpdate: string;
 
   constructor(private adminservice: AdminService) { }

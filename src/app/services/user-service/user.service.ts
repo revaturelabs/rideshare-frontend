@@ -14,7 +14,12 @@ export class UserService {
 
 	constructor(private http: HttpClient) { }
 
+	getAllUsers() {
+		return this.http.get<User[]>(this.url);
+	}
+
 	createDriver(userName, firstName, lastName, email, phone, batchNum) {
+
 		this.batch.batchNumber = batchNum;
 
 		this.user.userName = userName;

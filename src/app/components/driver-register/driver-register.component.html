@@ -27,17 +27,9 @@
                 <input id="phone" type="tel" placeholder="Phone #" [(ngModel)]="phone" name="phone" required><br>
                 <small *ngIf="phone.length && !validatePhone()">Invalid Phone Number</small>
             </div>
-            <!-- <div class="form-group">
-                <label for="batchNum">Batch Number <small>*</small></label><br>
-                <input id="batchNum" type="number" placeholder="Batch Number" [(ngModel)]="batchNum" name="batchNum" required readonly><br>
-            </div>
             <div class="form-group">
                 <label for="address">Address <small>*</small></label><br>
-                <input id="address" type="text" placeholder="Address" [(ngModel)]="address" name="address" required readonly><br>
-            </div> -->
-            <div class="form-group">
-                <label for="address">Address <small>*</small></label><br>
-                <select id="address" [(ngModel)]="batchNum">
+                <select id="address" (change)='changeAddress($event)'>
                     <option *ngFor="let batch of batches" [value]="batch.batchNumber">{{batch.address}}</option>
                 </select>
             </div>
@@ -62,12 +54,13 @@
             </div>
             <div class="form-group">
                 <label for="year">Year <small>*</small></label><br>
-                <input id="year" type="number" placeholder="Year of the Car" [(ngModel)]="year" name="year" required><br>
-            </div><br><br>
-            <div *ngIf="failed" class="alert alert-danger"><strong>Failed!</strong> Please Try Again</div>
+                <select id="year" (change)='changeYear($event)'>
+                    <option *ngFor="let year of years" [value]="year">{{year}}</option>
+                </select>
+            </div><br>
+            <div *ngIf="userFailed" class="alert alert-danger"><strong>Register User Failed!</strong> Please Try Again</div>
             <div class="form-group">
-                <!-- <button id="sign-up-btn" class="btn btn-primary" type="button" (click)="signUp()" [disabled]="!(userName && firstName && lastName && email && phone && address && color && seats && make && model && enable)">Sign Up As Driver</button> -->
-                <button id="sign-up-btn" class="btn btn-primary" type="button" (click)="signUp()">Sign Up As Driver</button>
+                <button id="sign-up-btn" class="btn btn-primary" type="button" (click)="signUp()" [disabled]="!(userName && firstName && lastName && email && phone && color && seats && make && model && enable)">Sign Up As Driver</button>
             </div>
         </div>
     </form>

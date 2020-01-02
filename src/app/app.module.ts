@@ -2,10 +2,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { DriverComponent } from './driver/driver.component';
 import { MarkInactiveDriverService } from './mark-inactive-driver.service';
 import { Drivers } from './mock-driver';
+
 
 @NgModule({
   declarations: [
@@ -16,7 +19,9 @@ import { Drivers } from './mock-driver';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

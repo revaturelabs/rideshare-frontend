@@ -11,20 +11,20 @@ export class DriverComponent implements OnInit {
 
   constructor(private _MarkInactiveDriverService_: MarkInactiveDriverService) { }
 
-  // ngOnInit() {
-  //   this._MarkInactiveDriverService_.getDriverById(Drivers).
-  //     subscribe(
-  //       data => {this.driver = data;})
-  // }
-
   ngOnInit() {
-    this._MarkInactiveDriverService_.showAllUser()
-    .subscribe(
-      data=> {
-        this.driver = data;
-      }
-    )
+    this._MarkInactiveDriverService_.getDriverById(Drivers).
+      subscribe(
+        data => {this.driver = data;})
   }
+
+  // ngOnInit() {
+  //   this._MarkInactiveDriverService_.showAllUser()
+  //   .subscribe(
+  //     data=> {
+  //       this.driver = data;
+  //     }
+  //   )
+  // }
 
     driver = Drivers;
 

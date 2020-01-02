@@ -1,0 +1,28 @@
+<h1> Admin Portal</h1>
+
+<table>
+  <tr>
+    <th> ID </th>
+    <th> UserName </th>
+    <th> First Name </th>
+    <th> Last Name </th>
+    <th> Email </th>
+    <th> Phone Number </th>
+    <th> Batch Number</th>
+    <th> Banned </th>
+    <th> Ban <th>
+  </tr>
+
+  <tr *ngFor="let get of listofUsers">
+    <td>{{get.userId}}</td>
+    <td>{{get.userName}}</td>
+    <td>{{get.firstName}}</td>
+    <td>{{get.lastName}}</td>
+    <td>{{get.email}}</td>
+    <td>{{get.phoneNumber}}</td>
+    <td *ngIf="get.batch">{{get.batch.batchNumber}}</td>
+    <td>{{get.active}}</td>
+    <td><button (click)="banningUser(get.userId, get.userName, get.firstName, get.lastName, get.email, get.phoneNumber, get.batch, get.active)">Ban/UnBan</button></td>
+  </tr>
+
+</table>

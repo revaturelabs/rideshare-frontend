@@ -11,11 +11,13 @@ export class DriverComponent implements OnInit {
 
   private driver : ListUsers [];
 
+   token: number = 1;
+
   
   constructor(private _MarkInactiveDriverService_: MarkInactiveDriverService) { }
 
   ngOnInit() {
-    this._MarkInactiveDriverService_.getDriverById(1).
+    this._MarkInactiveDriverService_.getDriverById(this.token).
       subscribe(
         data => {this.driver = data;})
 
@@ -46,16 +48,16 @@ export class DriverComponent implements OnInit {
   //   })
   // }
 
-  changeAcceptingRides(userid: number, userName: string, firstName: string, lastName: string, email: string, phoneNumber:string, batch: object, active: boolean, isAccepting: boolean){
-    if(isAccepting == true){
-      isAccepting = false;
-      this._MarkInactiveDriverService_.changeDriverIsAccepting (1, userName, firstName, lastName, email, phoneNumber, batch, active, isAccepting);
+  changeAcceptingRides(driver){
+    if(driver.isAccepting == true){
+      driver.isAccepting = false;
+      this._MarkInactiveDriverService_.changeDriverIsAccepting (this.driver);
       alert("Successfully changed to accapting rides!");
       //window.location.reload();
     }
     else {
-      isAccepting = true;
-      this._MarkInactiveDriverService_.changeDriverIsAccepting(1, userName, firstName, lastName, email, phoneNumber, batch, active, isAccepting);
+      driver.isAccepting = true;
+      this._MarkInactiveDriverService_.changeDriverIsAccepting(this.driver);
       alert("Successfully changed to not accapting rides!");
       //window.location.reload();
     }

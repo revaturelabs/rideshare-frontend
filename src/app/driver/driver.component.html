@@ -6,12 +6,12 @@
             <button class="btn btn-primary">Change</button>
         </div>
         <div class="col-sm">
-            <h2>Namber of seats offered:<span></span></h2>
+            <h2>Driver's name:<span>{{driver.firstName}}</span></h2>
             <button class="btn btn-primary">Change</button>
         </div>
         <div class="col-sm">
             <h2>Accepting rides:<span>{{driver.acceptingRides}}</span></h2>
-            <button class="btn btn-primary" (click)="changeAcceptingRides()">Change</button>
+            <button class="btn btn-primary"   (click)="changeAcceptingRides(driver)" >Change</button>
         </div>
 
     </div>

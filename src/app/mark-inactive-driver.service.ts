@@ -9,7 +9,7 @@ export class MarkInactiveDriverService {
 
   // URL
   private url = "http://localhost:8080/users/"
-// body to send update data
+//body to send update data
   private body: string;
 // Http options
   private httpOptions = {
@@ -23,19 +23,24 @@ export class MarkInactiveDriverService {
   constructor(private httpClient: HttpClient) { }
 
 
-getDriverById(str): Observable <any>{
-  return this.httpClient.get(this.url + str);
-}
+getDriverById(id: number): Observable <any>{
+  return this.httpClient.get(this.url + id);
+  }
 
 
 // changeDriverIsAccepting(data) {
 //   return this.httpClient.post(this.url, data)
 // }
 
-changeDriverIsAccepting (userid: number, userName: string, firstName: string, lastName: string, email: string, phoneNumber: string, batch: object, active: boolean, isAccepting: boolean){
-    this.body = JSON.stringify({userId:userid, userName:userName, firstName:firstName, lastName:lastName, email:email, phoneNumber:phoneNumber, batch:batch, active:active, isAccepting:isAccepting});
-    this.httpClient.put(`${this.url + userid}`,this.body,this.httpOptions).subscribe();
-  }
+changeDriverIsAccepting (userid: number, isAccepting: boolean){
+  this.body = JSON.stringify({userId:userid, isAccepting:isAccepting});
+  this.httpClient.post(`${this.url + userid}`,this.body,this.httpOptions).subscribe();
+}
+
+// changeDriverIsAccepting (userid: number, userName: string, firstName: string, lastName: string, email: string, phoneNumber: string, batch: object, active: boolean, isAccepting: boolean){
+//     this.body = JSON.stringify({userId:userid, userName:userName, firstName:firstName, lastName:lastName, email:email, phoneNumber:phoneNumber, batch:batch, active:active, isAccepting:isAccepting});
+//     this.httpClient.put(`${this.url + userid}`,this.body,this.httpOptions).subscribe();
+//   }
 
   showAllUser(): Observable<any>{
     return this.httpClient.get(this.url);

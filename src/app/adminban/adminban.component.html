@@ -8,6 +8,8 @@
       <th> Phone Number </th>
       <th> Batch Number</th>
       <th> Banned </th>
+      <th> Driver </th>
+      <th> Accepting Rides </th>
       <th> Ban <th>
     </tr>
   
@@ -20,11 +22,11 @@
       <td>{{get.phoneNumber}}</td>
       <td *ngIf="get.batch">{{get.batch.batchNumber}}</td>
       <td>{{get.active}}</td>
+      <td>{{get.driver}}</td>
+      <td>{{get.acceptingRides}}</td>
       <td><button (click)="banningUser(get.userId, get.userName, get.firstName, get.lastName, get.email, get.phoneNumber, get.batch, get.active)">Ban/UnBan</button></td>
     </tr>
   
   </table>
 
-  <div>
-    <h1>{{user.userId}}</h1>
-  </div>
+  

@@ -4,6 +4,8 @@ export class ListUsers{
     firstName: string;
     lastName: string;
     active: boolean;
+    driver: boolean;
+    acceptingRides: boolean;
     email: string;
     phoneNumber: string;
     batch: object;

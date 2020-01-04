@@ -13,15 +13,17 @@ export class DriverComponent implements OnInit {
 
    token: number = 1;
 
-  
+   
+   
   constructor(private _MarkInactiveDriverService_: MarkInactiveDriverService) { }
 
   ngOnInit() {
+    console.log ("driver", this.driver);
     this._MarkInactiveDriverService_.getDriverById(this.token).
       subscribe(
         data => {this.driver = data;})
-
-        console.log ("driver", this.driver);
+        // console.log ("driver Name", this.driver.firstName);
+        // console.log ("driver", this.driver);
   }
 
     
@@ -54,12 +56,14 @@ export class DriverComponent implements OnInit {
       this._MarkInactiveDriverService_.changeDriverIsAccepting (this.driver);
       alert("Successfully changed to accapting rides!");
       //window.location.reload();
+      console.log ("driver", this.driver);
     }
     else {
       driver.isAccepting = true;
       this._MarkInactiveDriverService_.changeDriverIsAccepting(this.driver);
       alert("Successfully changed to not accapting rides!");
       //window.location.reload();
+      console.log ("driver", this.driver);
     }
   }
 

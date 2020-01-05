@@ -1,16 +1,31 @@
-<div class="container">
-
+<div class="container-fluid">
     <div class="row" >
-        <div class="col-sm">
-            <h2 >ID:<span>driver.userId</span></h2>
+        <div class="col">
+            <img src='.\assets\logo.png' alt="logo">
+        </div>
+        <div class="col">
+            <h1>{{driver?.firstName}}<span>{{driver?.lastName}}</span>Driver Page</h1>
+        </div>
+        <div class="col">
+            <a href>Log out</a>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="container-fluid">
+    <div class="row" *ngIf="driver" >
+        <div class="col">
+            <h2 >Location:<span>{{driver?.batch.address}}</span></h2>
             <button class="btn btn-primary">Change</button>
         </div>
-        <div class="col-sm">
-            <h2>Driver's name:<span>{{driver.firstName}}</span></h2>
+        <div class="col">
+            <h2>Driver's name:<span>{{driver?.firstName}}</span></h2>
             <button class="btn btn-primary">Change</button>
         </div>
-        <div class="col-sm">
-            <h2>Accepting rides:<span>{{driver.acceptingRides}}</span>{{driver.batch.batchNumber}}</h2>
+        <div class="col">
+            <h2>Accepting rides:<span>{{driver?.acceptingRides}}</span>{{driver.batch.batchNumber}}</h2>
             <button class="btn btn-primary"   (click)="changeAcceptingRides(driver)" >Change</button>
         </div>
 
@@ -18,3 +33,29 @@
 
 </div>
 
+<div class="container-fluid">
+
+<table class="table">
+    <tr>
+      <th> ID </th>
+      <th> Rider's Name </th>
+      <th> Email </th>
+      <th> Phone Number </th>
+      <th> Batch Number</th>
+      <th>Active</th>
+    </tr>
+  
+    <tr *ngFor="let get of listofUsers">
+      <td>{{get.userId}}</td>
+      <td>{{get.userName}}</td>
+      <td>{{get.email}}</td>
+      <td>{{get.phoneNumber}}</td>
+      <td *ngIf="get.batch">{{get.batch.batchNumber}}</td>
+      <td>{{get.active}}</td>
+     
+    </tr>
+  
+  </table>
+
+
+</div>

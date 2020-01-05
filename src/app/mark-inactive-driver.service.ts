@@ -30,8 +30,8 @@ getDriverById(id: number): Observable <any>{
   }
 
 
-changeDriverIsAccepting(data) {
-  return this.httpClient.post(this.url, data)
+changeDriverIsAccepting(data: import("../../../../../../../Users/GEOS/Documents/Revature/rideshare-frontend/src/app/ListUsers").ListUsers[]) {
+  return this.httpClient.put(this.url, data)
 }
 
 // changeDriverIsAccepting (userid: number, isAccepting: boolean){

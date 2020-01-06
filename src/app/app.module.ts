@@ -10,12 +10,14 @@ import { AdminComponent } from './components/admin/admin.component';
 import { UserService } from './services/user-service/user.service';
 import { CarService } from './services/car-service/car.service';
 import { BatchService } from './services/batch-service/batch.service';
+import { CarRegisterComponent } from './components/car-register/car-register.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DriverRegisterComponent,
-    AdminComponent
+    AdminComponent,
+    CarRegisterComponent
   ],
   imports: [
     BrowserModule,

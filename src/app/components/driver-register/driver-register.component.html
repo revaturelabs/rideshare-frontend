@@ -1,67 +1,39 @@
 <div class="container">
-    <form class="form-group row" id="sign-up-form">
-        <div class="col-4">
-            <h3>Your Information</h3>
-            <div class="form-group">
-                <label for="userName">User Name <small>*</small></label><br>
-                <input id="userName" type="text" placeholder="User Name" [(ngModel)]="userName" name="userName" required autocomplete="off"><br>
-                <small *ngIf="userName && !validateUserName()">User Name Should Be 3 to 8 Characters</small>
-            </div>
-            <div class="form-group">
-                <label for="firstName">First Name <small>*</small></label><br>
-                <input id="firstName" type="text" placeholder="First Name" [(ngModel)]="firstName" name="firstName" required><br>
-                <small *ngIf="firstName.length && !validateName(firstName)">Invalid Name</small>
-            </div>
-            <div class="form-group">
-                <label for="lastName">Last Name <small>*</small></label><br>
-                <input id="lastName" type="text" placeholder="Last Name" [(ngModel)]="lastName" name="lastName" required><br>
-                <small *ngIf="lastName.length && !validateName(lastName)">Invalid Name</small>
-            </div>
-            <div class="form-group">
-                <label for="email">Email <small>*</small></label><br>
-                <input id="email" type="email" placeholder="Email" [(ngModel)]="email" name="email" required><br>
-                <small *ngIf="email.length && !validateEmail()">Invalid Email</small>
-            </div>
-            <div class="form-group">
-                <label for="phone">Phone <small>*</small></label><br>
-                <input id="phone" type="tel" placeholder="Phone #" [(ngModel)]="phone" name="phone" required><br>
-                <small *ngIf="phone.length && !validatePhone()">Invalid Phone Number</small>
-            </div>
-            <div class="form-group">
-                <label for="address">Address <small>*</small></label><br>
-                <select id="address" (change)='changeAddress($event)'>
-                    <option *ngFor="let batch of batches" [value]="batch.batchNumber">{{batch.address}}</option>
-                </select>
-            </div>
+    <form class="form-group" id="sign-up-form">
+        <h3>Your Information</h3>
+        <div class="form-group">
+            <label for="userName">User Name <small>*</small></label><br>
+            <input id="userName" type="text" placeholder="User Name" [(ngModel)]="userName" name="userName" required autocomplete="off"><br>
+            <small *ngIf="userName && !validateUserName()">User Name Should Be 3 to 8 Characters</small>
         </div>
-        <div class="col-4">
-            <h3>Car Information</h3>
-            <div class="form-group">
-                <label for="color">Color <small>*</small></label><br>
-                <input id="color" type="text" placeholder="Color of the Car" [(ngModel)]="color" name="color" required><br>
-            </div>
-            <div class="form-group">
-                <label for="seats">Seats <small>*</small></label><br>
-                <input id="seats" type="number" placeholder="Available Seats" [(ngModel)]="seats" name="seats" min="1" step="1" required><br>
-            </div>
-            <div class="form-group">
-                <label for="make">Make <small>*</small></label><br>
-                <input id="make" type="text" placeholder="Brand of the Car" [(ngModel)]="make" name="make" required><br>
-            </div>
-            <div class="form-group">
-                <label for="model">Model <small>*</small></label><br>
-                <input id="model" type="text" placeholder="Car Model" [(ngModel)]="model" name="model" required><br>
-            </div>
-            <div class="form-group">
-                <label for="year">Year <small>*</small></label><br>
-                <select id="year" (change)='changeYear($event)'>
-                    <option *ngFor="let year of years" [value]="year">{{year}}</option>
-                </select>
-            </div><br>
-            <div *ngIf="userFailed" class="alert alert-danger"><strong>Register User Failed!</strong> Please Try Again</div>
-            <div class="form-group">
-                <button id="sign-up-btn" class="btn btn-primary" type="button" (click)="signUp()" [disabled]="!(userName && firstName && lastName && email && phone && color && seats && make && model && enable)">Sign Up As Driver</button>
-            </div>
+        <div class="form-group">
+            <label for="firstName">First Name <small>*</small></label><br>
+            <input id="firstName" type="text" placeholder="First Name" [(ngModel)]="firstName" name="firstName" required><br>
+            <small *ngIf="firstName.length && !validateName(firstName)">Invalid Name</small>
+        </div>
+        <div class="form-group">
+            <label for="lastName">Last Name <small>*</small></label><br>
+            <input id="lastName" type="text" placeholder="Last Name" [(ngModel)]="lastName" name="lastName" required><br>
+            <small *ngIf="lastName.length && !validateName(lastName)">Invalid Name</small>
+        </div>
+        <div class="form-group">
+            <label for="email">Email <small>*</small></label><br>
+            <input id="email" type="email" placeholder="Email" [(ngModel)]="email" name="email" required><br>
+            <small *ngIf="email.length && !validateEmail()">Invalid Email</small>
+        </div>
+        <div class="form-group">
+            <label for="phone">Phone <small>*</small></label><br>
+            <input id="phone" type="tel" placeholder="Phone #" [(ngModel)]="phone" name="phone" required><br>
+            <small *ngIf="phone.length && !validatePhone()">Invalid Phone Number</small>
+        </div>
+        <div class="form-group">
+            <label for="address">Address <small>*</small></label><br>
+            <select id="address" (change)='changeAddress($event)'>
+                <option *ngFor="let batch of batches" [value]="batch.batchNumber">{{batch.address}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <button id="sign-up-btn" class="btn btn-primary" type="button" (click)="signUp()" [disabled]="!(userName && firstName && lastName && email && phone)">Sign Up</button>
         </div>
     </form>
 </div>

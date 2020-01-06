@@ -47,7 +47,7 @@ export class DriverRegisterComponent implements OnInit {
 	}
 
 	validateEmail() {
-		return /^\w+@\w+\.\w{2,4}$/.test(this.email);
+		return /^[\.|\w]+@\w+\.\w{2,4}$/.test(this.email);
 	}
 
 	validatePhone() {

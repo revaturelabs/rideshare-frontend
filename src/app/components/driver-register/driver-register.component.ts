@@ -38,6 +38,12 @@ export class DriverRegisterComponent implements OnInit {
 		return this.userName.length >= 3 && this.userName.length <= 8;
 	}
 
+	/**
+	 * @example
+	 * valiadte the name
+	 * @param {string} name  The target to process
+	 * @returns The processed target number
+	 */
 	validateName(name: string) {
 		return /^([a-zA-z]){1,20}$/.test(name) && name.length < 20;
 	}

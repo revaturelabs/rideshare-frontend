@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user-service/user.service';
-import { CarService } from 'src/app/services/car-service/car.service';
 import { BatchService } from 'src/app/services/batch-service/batch.service';
 import { Batch } from 'src/app/models/batch';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-driver-register',
@@ -20,14 +20,18 @@ export class DriverRegisterComponent implements OnInit {
 	phone: string = '';
 	batchNum: number;
 
-	constructor(private userService: UserService, private batchService: BatchService) { }
+	constructor(private userService: UserService, private batchService: BatchService, private router: Router) { }
 
 	ngOnInit() {
-		this.batchService.getAllBatches()
-			.subscribe(allBatches => {
-				this.batches = allBatches;
-				this.batchNum = this.batches[0].batchNumber;
-		});
+		if (sessionStorage.getItem('auth')) {
+			this.router.navigate(['home']);
+		} else {
+			this.batchService.getAllBatches()
+				.subscribe(allBatches => {
+					this.batches = allBatches;
+					this.batchNum = this.batches[0].batchNumber;
+			});
+		}
 	}
 
 	validateUserName() {
@@ -43,7 +47,7 @@ export class DriverRegisterComponent implements OnInit {
 	}
 
 	phoneFormat(phone: string) {
-		return phone.replace(/(\d{3})(\d{3})(\d{3})/, "($1) $2-$3");
+		return phone.replace(/[^0-9]/g, '').replace(/(\d{3})(\d{3})(\d{3})/, "($1) $2-$3");
 	}
 
 	validateEmail() {

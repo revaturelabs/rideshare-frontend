@@ -33,14 +33,13 @@ export class UserService {
 		this.user.email = email;
 		this.user.phoneNumber = phone;
 		this.user.batch = this.batch;
-		this.user.isDriver = false;
-		this.user.isActive = false;
-		this.user.isAcceptingRides = false;
+		this.user.driver = false;
+		this.user.active = true;
+		this.user.acceptingRides = false;
 
 		this.http.post(this.url, this.user, {observe: 'response'}).subscribe(
 			(response) => {
 				let userId = response.body[Object.keys(response.body)[0]];
-				console.log(response)
 				sessionStorage.setItem('auth', userId);
 				this.router.navigate(['new/car']);
 			},
@@ -56,9 +55,9 @@ export class UserService {
 
 		this.getUserById(userId)
 			.then((response) => {
-				console.log(response);
 				this.user = response;
-				this.user.isDriver = isDriver;
+				this.user.driver = isDriver;
+				this.user.acceptingRides = isDriver === true;
 
 				this.http.put(this.url+userId, this.user).subscribe(
 					(response) => {

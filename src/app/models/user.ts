@@ -8,7 +8,7 @@ export class User {
     lastName: string;
     email: string;
     phoneNumber: string;
-    isDriver: boolean;
-    isActive: boolean;
-    isAcceptingRides: boolean;
+    active: boolean;
+    driver: boolean;
+    acceptingRides: boolean;
 }

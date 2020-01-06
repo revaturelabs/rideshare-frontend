@@ -33,9 +33,10 @@ export class CarService {
 
 		this.http.post(this.url, this.car, {observe: 'response'}).subscribe(
 			(response) => {
-				this.userService.updateIsDriver(true, userId);
-				console.log(response.body);
-				this.router.navigate(['home']);
+				if (response) {
+					this.userService.updateIsDriver(true, userId);
+					this.router.navigate(['home']);
+				}
 			},
 			(error) => {
 				console.warn(error);

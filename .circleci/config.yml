@@ -1,0 +1,20 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:12.13.1
+    steps:
+      - checkout
+      - run:
+          name: Install Node Packages
+          command: npm install
+      - run:
+          name: Install Angular
+          command: echo y | sudo npm install -g @angular/cli
+      - run:
+          name: Build Angular Application
+          command: ng build --prod
+
+          
+
+

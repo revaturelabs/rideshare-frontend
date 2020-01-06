@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MarkInactiveDriverService } from '../mark-inactive-driver.service';
 import { ListUsers } from 'src/app/ListUsers';
 import { AdminService } from '../admin.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -15,11 +16,11 @@ export class DriverComponent implements OnInit {
 
   private listofUsers: ListUsers[];
 
-   token: number = 1;
+   token = parseInt(sessionStorage.getItem("auth"));
 
    
    
-  constructor(private _MarkInactiveDriverService_: MarkInactiveDriverService, private adminservice: AdminService) { }
+  constructor(private _MarkInactiveDriverService_: MarkInactiveDriverService, private adminservice: AdminService, private router: Router) { }
 
   ngOnInit() {
     console.log ("driver before ngOnit", this.driver);
@@ -41,8 +42,7 @@ export class DriverComponent implements OnInit {
     
   
     changeAcceptingRides(driver){
-    console.log ("driver before ", this.driver);
-    if(driver.acceptingRides == true){
+       if(driver.acceptingRides == true){
       driver.acceptingRides = false;
       this._MarkInactiveDriverService_.changeDriverIsAccepting (this.driver);
       
@@ -57,4 +57,10 @@ export class DriverComponent implements OnInit {
     }
   }
 
+  logout() {
+    sessionStorage.clear();
+    this.router.navigate(['']);
+  }
 }
+
+

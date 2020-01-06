@@ -5,11 +5,11 @@
         <div class="col">
             <img src='.\assets\logo.png' alt="logo">
         </div>
-        <div class="col">
-            <h2 class="align-bottom">{{driver?.firstName}} &nbsp;<span>{{driver?.lastName}} &nbsp;</span>Driver Page</h2>
+        <div class="col-md-auto">
+            <h2 class="align-bottom float-center">{{driver?.firstName}} &nbsp;<span>{{driver?.lastName}} &nbsp;</span>Driver Page</h2>
         </div>
         <div class="col">
-           <h2 class="align-bottom" class="text-right"><a  href>Log out</a></h2> 
+            <button class="btn btn-danger float-right" type="button" (click)="logout()">Logout</button>
         </div>
 
     </div>
@@ -54,7 +54,7 @@
       <th>Driver</th>
     </tr>
   
-    <tr *ngFor="let get of listofUsers | tableFilter: driver">
+    <tr *ngFor="let get of listofUsers" >
       <td>{{get.userId}}</td>
       <td>{{get.firstName}}</td>
       <td>{{get.email}}</td>

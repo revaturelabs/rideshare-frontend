@@ -2,7 +2,8 @@
     <select id="users" (change)='changeUser($event)'>
         <option *ngFor="let user of users" [value]="user.userId">{{user.firstName}} {{user.lastName}}: {{user.driver? "Driver" : "Rider"}}</option>
     </select><br>
-    <label for="userName">User Name</label>
+    <label for="userName">User Name: </label>
     <input type="text" id="userName" [(ngModel)]="userName" autocomplete="off"/><br>
+    <p class="alert alert-danger" *ngIf="failed"><strong>Login Failed!</strong></p>
     <button class="btn btn-primary" type="button" id="sign-in-btn" (click)="login()" [disabled]="!userName">Login</button>
 </div>

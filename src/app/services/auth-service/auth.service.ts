@@ -21,9 +21,10 @@ export class AuthService {
 		if (user.userName === chosenUserName) {
 			this.loggedIn = true;
 			this.user = user;
+			sessionStorage.setItem('auth', String(this.user.userId));
 			this.router.navigate(['/home']);
 		} else {
-			alert('Wrong')
+			return false;
 		}
 	}
 }

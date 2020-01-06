@@ -17,6 +17,8 @@ export class LoginComponent implements OnInit {
 	chosenUser: User;
 	userName: string = '';
 
+	failed: boolean = false;
+
 	constructor(private userService: UserService, private router: Router, private http: HttpClient, private authService: AuthService) { }
 
 	ngOnInit() {
@@ -35,13 +37,21 @@ export class LoginComponent implements OnInit {
 		this.chosenUser = this.users[event.target.selectedIndex];
 	}
 
+	loginFailed() {
+		this.userName = '';
+		this.failed = true;
+		setTimeout(() => this.failed = false, 3000);
+	}
+
 	login() {
 		this.http.get<User[]>(`${environment.userUri}?username=${this.userName}`)
 			.subscribe((user: User[]) => {
 				if (!user.length) {
-					this.userName = '';
+					this.loginFailed();
 				} else {
-					this.authService.login(user[0], this.chosenUser.userName);
+					if (!this.authService.login(user[0], this.chosenUser.userName)) {
+						this.loginFailed();
+					}
 				}
 			});
 	}

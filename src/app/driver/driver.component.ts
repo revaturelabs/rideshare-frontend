@@ -34,8 +34,7 @@ export class DriverComponent implements OnInit {
     .subscribe(
       data=> {
         this.listofUsers = data;
-      }
-    )
+      });
         // console.log ("driver Name", this.driver.firstName);
   }
 

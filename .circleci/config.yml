@@ -14,6 +14,9 @@ jobs:
       - run:
           name: Build Angular Application
           command: ng build --prod
+      - run:
+          name: Run Sonar Analysis
+          command: sudo npm run sonar 
 
           
 

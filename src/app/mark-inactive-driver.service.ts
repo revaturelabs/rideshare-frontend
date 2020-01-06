@@ -30,19 +30,12 @@ getDriverById(id: number): Observable <any>{
   }
 
 
-changeDriverIsAccepting(data: import("../../../../../../../Users/GEOS/Documents/Revature/rideshare-frontend/src/app/ListUsers").ListUsers[]) {
-  return this.httpClient.put(this.url, data)
+changeDriverIsAccepting(data) {
+  console.log("put method", data);
+  let id=data.userId;
+  return this.httpClient.put(this.url+id, data)
+  
 }
-
-// changeDriverIsAccepting (userid: number, isAccepting: boolean){
-//   this.body = JSON.stringify({userId:userid, isAccepting:isAccepting});
-//   this.httpClient.post(`${this.url + userid}`,this.body,this.httpOptions).subscribe();
-// }
-
-// changeDriverIsAccepting (userid: number, userName: string, firstName: string, lastName: string, email: string, phoneNumber: string, batch: object, active: boolean, isAccepting: boolean){
-//     this.body = JSON.stringify({userId:userid, userName:userName, firstName:firstName, lastName:lastName, email:email, phoneNumber:phoneNumber, batch:batch, active:active, isAccepting:isAccepting});
-//     this.httpClient.put(`${this.url + userid}`,this.body,this.httpOptions).subscribe();
-//   }
 
   showAllUser(): Observable<any>{
     return this.httpClient.get(this.url);

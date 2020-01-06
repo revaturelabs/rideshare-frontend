@@ -22,13 +22,13 @@ export class DriverComponent implements OnInit {
   constructor(private _MarkInactiveDriverService_: MarkInactiveDriverService, private adminservice: AdminService) { }
 
   ngOnInit() {
-    console.log ("driver", this.driver);
+    console.log ("driver before ngOnit", this.driver);
     this._MarkInactiveDriverService_.getDriverById(this.token).
       subscribe(
         data => {
           console.log(data)
           this.driver = data;
-          console.log ("driver", this.driver);
+          console.log ("driver after ngOnit", this.driver);
         });
         this.adminservice.showAllUser()
     .subscribe(
@@ -41,36 +41,11 @@ export class DriverComponent implements OnInit {
 
     
   
-  // ngOnInit() {
-  //   this._MarkInactiveDriverService_.showAllUser()
-  //   .subscribe(
-  //     data=> {
-  //       this.driver = data;
-  //     }
-  //   )
-  // }
-
-    
-
-  // changeAcceptingRides(){
-  //   this._MarkInactiveDriverService_.changeDriverIsAccepting(this.Driver).subscribe(res => {
-  //     if (res){
-  //       alert("Successfully changed!");
-  //     }
-  //     else{
-  //       alert("Some error happened")
-  //     }
-  //   })
-  // }
-
-  changeAcceptingRides(driver){
+    changeAcceptingRides(driver){
     console.log ("driver before ", this.driver);
     if(driver.acceptingRides == true){
       driver.acceptingRides = false;
       this._MarkInactiveDriverService_.changeDriverIsAccepting (this.driver);
-      console.log ("driver after", this.driver);
-      alert("Successfully changed to accapting rides!");
-      //window.location.reload();
       
     }
     else {
@@ -78,9 +53,8 @@ export class DriverComponent implements OnInit {
       driver.acceptingRides = true;
       this._MarkInactiveDriverService_.changeDriverIsAccepting(this.driver);
       console.log ("driver else after", this.driver);
-      alert("Successfully changed to not accapting rides!");
-      //window.location.reload();
-      console.log ("driver", this.driver);
+      
+      
     }
   }
 

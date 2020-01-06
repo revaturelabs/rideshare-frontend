@@ -58,7 +58,7 @@ export class DriverRegisterComponent implements OnInit {
 		return /^\(?([0-9]{3})\)?[-.\s]?([0-9]{3})[-.\s]?([0-9]{4})$/.test(this.phone);
 	}
 
-	changeAddress(event) {
+	changeLocation(event) {
 		let option = event.target.options.selectedIndex;
 		this.batchNum = this.batches[option].batchNumber;
 	}

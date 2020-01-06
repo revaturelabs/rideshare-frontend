@@ -11,13 +11,16 @@ import { UserService } from './services/user-service/user.service';
 import { CarService } from './services/car-service/car.service';
 import { BatchService } from './services/batch-service/batch.service';
 import { CarRegisterComponent } from './components/car-register/car-register.component';
+import { LoginComponent } from './components/login/login.component';
+import { AuthService } from './services/auth-service/auth.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     DriverRegisterComponent,
     AdminComponent,
-    CarRegisterComponent
+    CarRegisterComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +31,8 @@ import { CarRegisterComponent } from './components/car-register/car-register.com
   providers: [
     UserService,
     CarService,
-    BatchService
+    BatchService,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })

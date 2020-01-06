@@ -23,7 +23,7 @@ export class CarRegisterComponent implements OnInit {
   ngOnInit() {
     this.userId = Number(sessionStorage.getItem('auth'));
     if (!this.userId) {
-      this.router.navigate(['home']);
+      this.router.navigate(['']);
     } else {
       let currentYear = new Date().getFullYear();
       let availableYear = currentYear - 15;

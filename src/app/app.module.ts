@@ -14,6 +14,7 @@ import { CarRegisterComponent } from './components/car-register/car-register.com
 import { LoginComponent } from './components/login/login.component';
 import { AuthService } from './services/auth-service/auth.service';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { MyCarComponent } from './components/my-car/my-car.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     AdminComponent,
     CarRegisterComponent,
     LoginComponent,
-    NavbarComponent
+    NavbarComponent,
+    MyCarComponent
   ],
   imports: [
     BrowserModule,

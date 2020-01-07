@@ -4,6 +4,7 @@ import { AdminComponent } from './components/admin/admin.component';
 import { CarRegisterComponent } from './components/car-register/car-register.component';
 import { DriverRegisterComponent } from './components/driver-register/driver-register.component';
 import { LoginComponent } from './components/login/login.component';
+import { MyCarComponent } from './components/my-car/my-car.component';
 
 
 const routes: Routes = [{
@@ -18,6 +19,13 @@ const routes: Routes = [{
 }, {
   path: 'new/car',
   component: CarRegisterComponent
+}, {
+  path: 'car',
+  component: MyCarComponent
+}, {
+  path: '**',
+  pathMatch: 'full',
+  redirectTo: ''
 }];
 
 @NgModule({

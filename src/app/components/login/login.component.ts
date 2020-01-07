@@ -40,7 +40,6 @@ export class LoginComponent implements OnInit {
 	loginFailed() {
 		this.userName = '';
 		this.failed = true;
-		setTimeout(() => this.failed = false, 3000);
 	}
 
 	login() {

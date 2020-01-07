@@ -1,5 +1,5 @@
 <div class="container">
-    <form class="text-center">
+    <form class="text-center" id="login-form" (ngSubmit)="login()">
         <div class="form-group">
             <label for="users">Select Account: </label>
             <select id="users" (change)='changeUser($event)'>
@@ -11,8 +11,8 @@
             <input type="text" id="userName" [(ngModel)]="userName" name="userName" placeholder="User Name" autocomplete="off"/><br>
         </div>
         <p class="alert alert-danger" *ngIf="failed"><strong>Login Failed!</strong></p>
-        <button class="btn btn-primary" type="button" id="sign-in-btn" (click)="login()" [disabled]="!userName">Login</button>
+        <button class="btn btn-primary" type="submit" id="sign-in-btn" (click)="login()" (keyup.enter)="login()" [disabled]="!userName">Login</button>
         <br><br>
-        <p>Need An Account? <a routerLink="/register">Sign Up</a></p>
+        <p>Need An Account? <a routerLink="/registerDriver">Sign Up</a></p>
     </form>
 </div>

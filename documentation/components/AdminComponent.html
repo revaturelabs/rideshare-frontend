@@ -341,15 +341,18 @@ export class AdminComponent implements OnInit {
     </div>
 
     <div class="tab-pane fade " id="c-templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;button class&#x3D;&quot;btn btn-light&quot; type&#x3D;&quot;button&quot; (click)&#x3D;&quot;logout()&quot;&gt;Logout&lt;/button&gt;
-</code></pre>
+        <pre class="line-numbers"><code class="language-html">&lt;div&gt;
+    &lt;p class&#x3D;&quot;text text-lg-center text-success&quot;&gt;Home&lt;/p&gt;
+&lt;/div&gt;</code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-styleData">
                 <p class="comment">
                     <code>./admin.component.css</code>
                 </p>
-                <pre class="line-numbers"><code class="language-scss"></code></pre>
+                <pre class="line-numbers"><code class="language-scss">small {
+    color: yellow;
+}</code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-tree">
@@ -377,8 +380,8 @@ export class AdminComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><button class="btn btn-light" type="button" (click)="logout()">Logout</button></div>'
-    var COMPONENTS = [{'name': 'AdminComponent', 'selector': 'app-admin'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CarRegisterComponent', 'selector': 'app-car-register'},{'name': 'DriverRegisterComponent', 'selector': 'app-driver-register'},{'name': 'LoginComponent', 'selector': 'app-login'}];
+        var COMPONENT_TEMPLATE = '<div><div>    <p class="text text-lg-center text-success">Home</p></div></div>'
+    var COMPONENTS = [{'name': 'AdminComponent', 'selector': 'app-admin'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CarRegisterComponent', 'selector': 'app-car-register'},{'name': 'DriverRegisterComponent', 'selector': 'app-driver-register'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MyCarComponent', 'selector': 'app-my-car'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'RiderRegisterComponent', 'selector': 'app-rider-register'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'AdminComponent'};
 </script>

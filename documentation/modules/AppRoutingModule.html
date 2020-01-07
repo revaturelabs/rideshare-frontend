@@ -75,7 +75,9 @@ import { Routes, RouterModule } from &#x27;@angular/router&#x27;;
 import { AdminComponent } from &#x27;./components/admin/admin.component&#x27;;
 import { CarRegisterComponent } from &#x27;./components/car-register/car-register.component&#x27;;
 import { DriverRegisterComponent } from &#x27;./components/driver-register/driver-register.component&#x27;;
+import { RiderRegisterComponent } from &#x27;./components/rider-register/rider-register.component&#x27;;
 import { LoginComponent } from &#x27;./components/login/login.component&#x27;;
+import { MyCarComponent } from &#x27;./components/my-car/my-car.component&#x27;;
 
 
 const routes: Routes &#x3D; [{
@@ -85,11 +87,21 @@ const routes: Routes &#x3D; [{
   path: &#x27;login&#x27;,
   component: LoginComponent
 }, {
-  path: &#x27;register&#x27;,
+  path: &#x27;registerDriver&#x27;,
   component: DriverRegisterComponent
+}, {
+  path: &#x27;registerRider&#x27;,
+  component: RiderRegisterComponent
 }, {
   path: &#x27;new/car&#x27;,
   component: CarRegisterComponent
+}, {
+  path: &#x27;car&#x27;,
+  component: MyCarComponent
+}, {
+  path: &#x27;**&#x27;,
+  pathMatch: &#x27;full&#x27;,
+  redirectTo: &#x27;&#x27;
 }];
 
 @NgModule({

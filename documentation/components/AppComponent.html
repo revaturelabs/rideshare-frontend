@@ -203,11 +203,7 @@ export class AppComponent {
 
     <div class="tab-pane fade " id="c-templateData">
         <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;container&quot;&gt;
-	&lt;br&gt;&lt;br&gt;&lt;br&gt;
-	&lt;button class&#x3D;&quot;btn btn-secondary&quot; routerLink&#x3D;&quot;/login&quot;&gt;Sign In&lt;/button&gt;
-	&lt;button class&#x3D;&quot;btn btn-secondary&quot; routerLink&#x3D;&quot;/register&quot;&gt;Sign Up&lt;/button&gt;
-	&lt;button class&#x3D;&quot;btn btn-secondary&quot; routerLink&#x3D;&quot;/new/car&quot;&gt;New Car&lt;/button&gt;
-	&lt;br&gt;&lt;br&gt;
+	&lt;app-navbar&gt;&lt;/app-navbar&gt;
 &lt;/div&gt;
 &lt;router-outlet&gt;&lt;/router-outlet&gt;</code></pre>
     </div>
@@ -244,8 +240,8 @@ export class AppComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="container">	<br><br><br>	<button class="btn btn-secondary" routerLink="/login">Sign In</button>	<button class="btn btn-secondary" routerLink="/register">Sign Up</button>	<button class="btn btn-secondary" routerLink="/new/car">New Car</button>	<br><br></div><router-outlet></router-outlet></div>'
-    var COMPONENTS = [{'name': 'AdminComponent', 'selector': 'app-admin'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CarRegisterComponent', 'selector': 'app-car-register'},{'name': 'DriverRegisterComponent', 'selector': 'app-driver-register'},{'name': 'LoginComponent', 'selector': 'app-login'}];
+        var COMPONENT_TEMPLATE = '<div><div class="container">	<app-navbar></app-navbar></div><router-outlet></router-outlet></div>'
+    var COMPONENTS = [{'name': 'AdminComponent', 'selector': 'app-admin'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CarRegisterComponent', 'selector': 'app-car-register'},{'name': 'DriverRegisterComponent', 'selector': 'app-driver-register'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MyCarComponent', 'selector': 'app-my-car'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'RiderRegisterComponent', 'selector': 'app-rider-register'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'AppComponent'};
 </script>

@@ -1,0 +1,12 @@
+<div class="container">
+    <h2>Update Preference</h2>
+    <div>
+        Active: <button type="button" [ngClass]="isActive? truthy : falsy" (click)="toggleActive()">{{isActive? "On" : "Off"}}</button>
+    </div><br>
+    <div>
+        Driver: <button type="button" [ngClass]="isDriver? truthy : falsy" disabled>{{isDriver? "Yes" : "No"}}</button>
+    </div><br>
+    <div>
+        Accept Rider: <button type="button" [ngClass]="isAcceptingRides? truthy : falsy" (click)="toggleAcceptRider()" [disabled]="!isDriver">{{isAcceptingRides? "On" : "Off"}}</button>
+    </div>
+</div>

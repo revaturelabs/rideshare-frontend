@@ -6,6 +6,8 @@ import { DriverRegisterComponent } from './components/driver-register/driver-reg
 import { RiderRegisterComponent } from './components/rider-register/rider-register.component';
 import { LoginComponent } from './components/login/login.component';
 import { MyCarComponent } from './components/my-car/my-car.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { PreferenceComponent } from './components/preference/preference.component';
 
 
 const routes: Routes = [{
@@ -27,6 +29,12 @@ const routes: Routes = [{
   path: 'car',
   component: MyCarComponent
 }, {
+  path: 'profile',
+  component: ProfileComponent
+},  {
+  path: 'preference',
+  component: PreferenceComponent
+},{
   path: '**',
   pathMatch: 'full',
   redirectTo: ''

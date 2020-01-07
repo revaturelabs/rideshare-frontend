@@ -1,0 +1,56 @@
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user-service/user.service';
+import { User } from 'src/app/models/user';
+
+@Component({
+  selector: 'app-preference',
+  templateUrl: './preference.component.html',
+  styleUrls: ['./preference.component.css']
+})
+export class PreferenceComponent implements OnInit {
+
+  user: User = new User();
+
+  isActive: boolean;
+  isDriver: boolean;
+  isAcceptingRides: boolean;
+
+  truthy: string = 'btn btn-success';
+  falsy: string = 'btn btn-danger';
+
+  constructor(private router: Router, private userService: UserService) { }
+
+  ngOnInit() {
+    this.user.userId = Number(sessionStorage.getItem('auth'));
+    if (!this.user.userId) {
+      this.router.navigate(['']);
+    } else {
+      this.getPreference();
+    }
+  }
+
+  getPreference() {
+    this.userService.getUserById(this.user.userId).then(response => {
+      if (response) {
+        this.user = response;
+        this.isActive = this.user.active;
+        this.isDriver = this.user.driver;
+        this.isAcceptingRides = this.user.acceptingRides;
+      } else {
+        sessionStorage.clear();
+        this.router.navigate(['']);
+      }
+    })
+  }
+
+  toggleActive() {
+    this.isActive = !this.isActive;
+    this.userService.updatePreference('active', this.isActive, this.user.userId);
+  }
+
+  toggleAcceptRider() {
+    this.isAcceptingRides = !this.isAcceptingRides;
+    this.userService.updatePreference('acceptingRides', this.isAcceptingRides, this.user.userId);
+  }
+}

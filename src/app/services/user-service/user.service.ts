@@ -76,4 +76,23 @@ export class UserService {
 				console.warn(e);
 			})
 	}
+
+	updatePreference(property, bool, userId) {
+
+		this.getUserById(userId)
+			.then((response) => {
+				this.user = response;
+				this.user[property] = bool;
+
+				this.http.put(this.url+userId, this.user).subscribe(
+					(response) => {
+					  console.log(response);
+					},
+					  (error) => console.warn(error)
+				);
+			})
+			.catch(e => {
+				console.warn(e);
+			})
+	}
 }

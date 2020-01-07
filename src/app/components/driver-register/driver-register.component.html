@@ -33,7 +33,7 @@
             </select>
         </div>
         <div class="form-group">
-            <button id="sign-up-btn" class="btn btn-primary" type="button" (click)="signUp()" [disabled]="!(userName && firstName && lastName && email && phone)">Sign Up</button>
+            <button id="sign-up-btn" class="btn btn-primary" type="submit" (click)="signUp()" (keyup.enter)="signUp()" [disabled]="!(userName && firstName && lastName && email && phone)">Sign Up</button>
         </div>
     </form>
 </div>

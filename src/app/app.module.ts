@@ -16,6 +16,8 @@ import { LoginComponent } from './components/login/login.component';
 import { AuthService } from './services/auth-service/auth.service';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { MyCarComponent } from './components/my-car/my-car.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { PreferenceComponent } from './components/preference/preference.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { MyCarComponent } from './components/my-car/my-car.component';
     CarRegisterComponent,
     LoginComponent,
     NavbarComponent,
-    MyCarComponent
+    MyCarComponent,
+    ProfileComponent,
+    PreferenceComponent
   ],
   imports: [
     BrowserModule,

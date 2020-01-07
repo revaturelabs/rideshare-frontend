@@ -102,6 +102,9 @@
                                 <a href="#getAllUsers">getAllUsers</a>
                             </li>
                             <li>
+                                <a href="#getEmitter">getEmitter</a>
+                            </li>
+                            <li>
                                 <a href="#getUserById">getUserById</a>
                             </li>
                             <li>
@@ -130,7 +133,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/services/user-service/user.service.ts:14</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/services/user-service/user.service.ts:15</a></div>
                             </td>
                         </tr>
 
@@ -207,8 +210,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="26"
-                            class="link-to-prism">src/app/services/user-service/user.service.ts:26</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="27"
+                            class="link-to-prism">src/app/services/user-service/user.service.ts:27</a></div>
                 </td>
             </tr>
 
@@ -318,8 +321,47 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="18"
-                            class="link-to-prism">src/app/services/user-service/user.service.ts:18</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="19"
+                            class="link-to-prism">src/app/services/user-service/user.service.ts:19</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getEmitter"></a>
+                    <span class="name">
+                        <b>
+                            getEmitter
+                        </b>
+                        <a href="#getEmitter"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getEmitter()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="56"
+                            class="link-to-prism">src/app/services/user-service/user.service.ts:56</a></div>
                 </td>
             </tr>
 
@@ -357,8 +399,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="22"
-                            class="link-to-prism">src/app/services/user-service/user.service.ts:22</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="23"
+                            class="link-to-prism">src/app/services/user-service/user.service.ts:23</a></div>
                 </td>
             </tr>
 
@@ -427,8 +469,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="54"
-                            class="link-to-prism">src/app/services/user-service/user.service.ts:54</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="60"
+                            class="link-to-prism">src/app/services/user-service/user.service.ts:60</a></div>
                 </td>
             </tr>
 
@@ -511,7 +553,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/services/user-service/user.service.ts:14</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/services/user-service/user.service.ts:15</a></div>
                             </td>
                         </tr>
 
@@ -543,7 +585,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/app/services/user-service/user.service.ts:12</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/services/user-service/user.service.ts:13</a></div>
                             </td>
                         </tr>
 
@@ -575,7 +617,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/services/user-service/user.service.ts:13</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/services/user-service/user.service.ts:14</a></div>
                             </td>
                         </tr>
 
@@ -588,7 +630,7 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable, Output, EventEmitter } from &#x27;@angular/core&#x27;;
 import { HttpClient } from &#x27;@angular/common/http&#x27;;
 import { User } from &#x27;src/app/models/user&#x27;;
 import { Batch } from &#x27;src/app/models/batch&#x27;;
@@ -598,6 +640,7 @@ import { Router } from &#x27;@angular/router&#x27;;
   	providedIn: &#x27;root&#x27;
 })
 export class UserService {
+	@Output() fireIsLoggedIn: EventEmitter&lt;any&gt; &#x3D; new EventEmitter&lt;any&gt;();
 
 	url: string &#x3D; &#x27;http://localhost:8080/users/&#x27;;
 	user: User &#x3D; new User();
@@ -631,6 +674,7 @@ export class UserService {
 			(response) &#x3D;&gt; {
 				let userId &#x3D; response.body[Object.keys(response.body)[0]];
 				sessionStorage.setItem(&#x27;auth&#x27;, userId);
+				this.fireIsLoggedIn.emit(response.body);
 				this.router.navigate([&#x27;new/car&#x27;]);
 			},
 			(error) &#x3D;&gt; {
@@ -639,6 +683,10 @@ export class UserService {
 			}
 		);
 
+	}
+
+	getEmitter() {
+		return this.fireIsLoggedIn;
 	}
 
 	updateIsDriver(isDriver, userId) {

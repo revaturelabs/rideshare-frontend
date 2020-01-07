@@ -24,6 +24,8 @@ export class NavbarComponent implements OnInit {
       })
     }
 
+    // notify navbar component that the user state change
+    // navbar will change after user login or sign up
     this.authService.getEmitter().subscribe((user: User) => {
       this.token = user.userId;
       this.name = user.firstName;

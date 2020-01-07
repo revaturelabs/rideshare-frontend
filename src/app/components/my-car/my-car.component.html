@@ -8,7 +8,7 @@
         <table class="table table-hover">
             <tr>
                 <th scope="col">Color</th>
-                <td>{{myCar.color}}</td>
+                <td>{{myCar.color | titlecase}}</td>
             </tr>
             <tr>
                 <th scope="col">Seats</th>
@@ -16,11 +16,11 @@
             </tr>
             <tr>
                 <th scope="col">Make</th>
-                <td>{{myCar.make}}</td>
+                <td>{{myCar.make | titlecase}}</td>
             </tr>
             <tr>
                 <th scope="col">Model</th>
-                <td>{{myCar.model}}</td>
+                <td>{{myCar.model | titlecase}}</td>
             </tr>
             <tr>
                 <th scope="col">Year</th>
@@ -28,7 +28,6 @@
             </tr>
         </table>
         <div class="text-right">
-            <button type="button" class="btn btn-outline-secondary" (click)="updateMyCar()">Update</button>
             <button type="button" class="btn btn-outline-secondary" (click)="removeMyCar()">Remove</button>
         </div>
     </div>

@@ -717,7 +717,7 @@ export class CarRegisterComponent implements OnInit {
 
     <div class="tab-pane fade " id="c-templateData">
         <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;container&quot;&gt;
-    &lt;h3&gt;Car Information&lt;/h3&gt;
+    &lt;h3&gt;Add Car To Become A Driver&lt;/h3&gt;
     &lt;div class&#x3D;&quot;form-group&quot;&gt;
         &lt;label for&#x3D;&quot;color&quot;&gt;Color &lt;small&gt;*&lt;/small&gt;&lt;/label&gt;&lt;br&gt;
         &lt;input id&#x3D;&quot;color&quot; type&#x3D;&quot;text&quot; placeholder&#x3D;&quot;Color of the Car&quot; [(ngModel)]&#x3D;&quot;color&quot; name&#x3D;&quot;color&quot; required&gt;&lt;br&gt;
@@ -743,7 +743,7 @@ export class CarRegisterComponent implements OnInit {
     &lt;/div&gt;
     &lt;div class&#x3D;&quot;form-group&quot;&gt;
         &lt;button id&#x3D;&quot;add-car-btn&quot; class&#x3D;&quot;btn btn-primary&quot; type&#x3D;&quot;button&quot; (click)&#x3D;&quot;addCar()&quot; [disabled]&#x3D;&quot;!(color &amp;&amp; seats &amp;&amp; make &amp;&amp; model)&quot;&gt;Add New Car&lt;/button&gt;
-        &lt;a routerLink&#x3D;&quot;/home&quot;&gt;Skip&lt;/a&gt;
+        &lt;a routerLink&#x3D;&quot;/home&quot;&gt;Cancel&lt;/a&gt;
     &lt;/div&gt;
 &lt;/div&gt;</code></pre>
     </div>
@@ -786,8 +786,8 @@ export class CarRegisterComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="container">    <h3>Car Information</h3>    <div class="form-group">        <label for="color">Color <small>*</small></label><br>        <input id="color" type="text" placeholder="Color of the Car" [(ngModel)]="color" name="color" required><br>    </div>    <div class="form-group">        <label for="seats">Seats <small>*</small></label><br>        <input id="seats" type="number" placeholder="Seats" [(ngModel)]="seats" name="seats" min="1" max="6" step="1" required><br>        <small *ngIf="seats && !validateSeats()">The Passenger Capacity Must Between 1 To 6</small>    </div>    <div class="form-group">        <label for="make">Make <small>*</small></label><br>        <input id="make" type="text" placeholder="Brand of the Car" [(ngModel)]="make" name="make" required><br>    </div>    <div class="form-group">        <label for="model">Model <small>*</small></label><br>        <input id="model" type="text" placeholder="Car Model" [(ngModel)]="model" name="model" required><br>    </div>    <div class="form-group">        <label for="year">Year <small>*</small></label><br>        <select id="year" (change)=\'changeYear($event)\'>            <option *ngFor="let year of years" [value]="year">{{year}}</option>        </select>    </div>    <div class="form-group">        <button id="add-car-btn" class="btn btn-primary" type="button" (click)="addCar()" [disabled]="!(color && seats && make && model)">Add New Car</button>        <a routerLink="/home">Skip</a>    </div></div></div>'
-    var COMPONENTS = [{'name': 'AdminComponent', 'selector': 'app-admin'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CarRegisterComponent', 'selector': 'app-car-register'},{'name': 'DriverRegisterComponent', 'selector': 'app-driver-register'},{'name': 'LoginComponent', 'selector': 'app-login'}];
+        var COMPONENT_TEMPLATE = '<div><div class="container">    <h3>Add Car To Become A Driver</h3>    <div class="form-group">        <label for="color">Color <small>*</small></label><br>        <input id="color" type="text" placeholder="Color of the Car" [(ngModel)]="color" name="color" required><br>    </div>    <div class="form-group">        <label for="seats">Seats <small>*</small></label><br>        <input id="seats" type="number" placeholder="Seats" [(ngModel)]="seats" name="seats" min="1" max="6" step="1" required><br>        <small *ngIf="seats && !validateSeats()">The Passenger Capacity Must Between 1 To 6</small>    </div>    <div class="form-group">        <label for="make">Make <small>*</small></label><br>        <input id="make" type="text" placeholder="Brand of the Car" [(ngModel)]="make" name="make" required><br>    </div>    <div class="form-group">        <label for="model">Model <small>*</small></label><br>        <input id="model" type="text" placeholder="Car Model" [(ngModel)]="model" name="model" required><br>    </div>    <div class="form-group">        <label for="year">Year <small>*</small></label><br>        <select id="year" (change)=\'changeYear($event)\'>            <option *ngFor="let year of years" [value]="year">{{year}}</option>        </select>    </div>    <div class="form-group">        <button id="add-car-btn" class="btn btn-primary" type="button" (click)="addCar()" [disabled]="!(color && seats && make && model)">Add New Car</button>        <a routerLink="/home">Cancel</a>    </div></div></div>'
+    var COMPONENTS = [{'name': 'AdminComponent', 'selector': 'app-admin'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CarRegisterComponent', 'selector': 'app-car-register'},{'name': 'DriverRegisterComponent', 'selector': 'app-driver-register'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MyCarComponent', 'selector': 'app-my-car'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'RiderRegisterComponent', 'selector': 'app-rider-register'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'CarRegisterComponent'};
 </script>

@@ -1,30 +1,32 @@
 <div class="container">
-    <h3>Add Car To Become A Driver</h3>
-    <div class="form-group">
-        <label for="color">Color <small>*</small></label><br>
-        <input id="color" type="text" placeholder="Color of the Car" [(ngModel)]="color" name="color" required><br>
-    </div>
-    <div class="form-group">
-        <label for="seats">Seats <small>*</small></label><br>
-        <input id="seats" type="number" placeholder="Seats" [(ngModel)]="seats" name="seats" min="1" max="6" step="1" required><br>
-        <small *ngIf="seats && !validateSeats()">The Passenger Capacity Must Between 1 To 6</small>
-    </div>
-    <div class="form-group">
-        <label for="make">Make <small>*</small></label><br>
-        <input id="make" type="text" placeholder="Brand of the Car" [(ngModel)]="make" name="make" required><br>
-    </div>
-    <div class="form-group">
-        <label for="model">Model <small>*</small></label><br>
-        <input id="model" type="text" placeholder="Car Model" [(ngModel)]="model" name="model" required><br>
-    </div>
-    <div class="form-group">
-        <label for="year">Year <small>*</small></label><br>
-        <select id="year" (change)='changeYear($event)'>
-            <option *ngFor="let year of years" [value]="year">{{year}}</option>
-        </select>
-    </div>
-    <div class="form-group">
-        <button id="add-car-btn" class="btn btn-primary" type="button" (click)="addCar()" [disabled]="!(color && seats && make && model)">Add New Car</button>
-        <a routerLink="/home">Cancel</a>
-    </div>
+    <form>
+        <h3>Add Car To Become A Driver</h3>
+        <div class="form-group">
+            <label for="color">Color <small>*</small></label><br>
+            <input id="color" type="text" placeholder="Color of the Car" [(ngModel)]="color" name="color" required><br>
+        </div>
+        <div class="form-group">
+            <label for="seats">Seats <small>*</small></label><br>
+            <input id="seats" type="number" placeholder="Seats" [(ngModel)]="seats" name="seats" min="1" max="6" step="1" required><br>
+            <small *ngIf="(seats || seats===0) && !validateSeats()">The Passenger Capacity Must Between 1 To 6</small>
+        </div>
+        <div class="form-group">
+            <label for="make">Make <small>*</small></label><br>
+            <input id="make" type="text" placeholder="Brand of the Car" [(ngModel)]="make" name="make" required><br>
+        </div>
+        <div class="form-group">
+            <label for="model">Model <small>*</small></label><br>
+            <input id="model" type="text" placeholder="Car Model" [(ngModel)]="model" name="model" required><br>
+        </div>
+        <div class="form-group">
+            <label for="year">Year <small>*</small></label><br>
+            <select id="year" (change)='changeYear($event)'>
+                <option *ngFor="let year of years" [value]="year">{{year}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <button id="add-car-btn" class="btn btn-primary" type="submit" (click)="addCar()" (keyup.enter)="addCar()" [disabled]="!(color && seats && make && model)">Add New Car</button>
+            <a routerLink="/home">Cancel</a>
+        </div>
+    </form>
 </div>

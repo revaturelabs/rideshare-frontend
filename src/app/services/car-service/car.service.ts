@@ -20,7 +20,7 @@ export class CarService {
 		return this.http.get<Car[]>(this.url);
 	}
 
-	getCarByUserId(userId) {
+	getCarByUserId(userId: number) {
 		return this.http.get<Car>(`${this.url}users/${userId}`).toPromise();
 	}
 	
@@ -47,5 +47,9 @@ export class CarService {
 				alert("Server Error! Please Try Again Later.");
 			}
 		);
+	}
+
+	removeCar(carId: number) {
+		return this.http.delete<Car>(this.url+carId);
 	}
 }

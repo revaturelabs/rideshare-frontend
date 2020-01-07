@@ -3,16 +3,16 @@ h2 {
     font-weight: 400;
 }
 
+p {
+    font-size: 2em;
+}
+
 .car-info-form {
     border: 1px solid #dadce0;
     border-radius: 5px;
     padding: 1.5%;
     margin-left: 5%;
     margin-right: 5%;
-}
-
-button {
-    margin-left: 1%;
 }
 
 .table tr:hover {

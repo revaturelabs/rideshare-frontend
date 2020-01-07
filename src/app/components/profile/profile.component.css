@@ -1,0 +1,13 @@
+h2 {
+    font-size: 1.375rem;
+    font-weight: 400;
+}
+
+.table tr:hover {
+    background-color: whitesmoke;
+}
+
+#profile {
+    margin-left: 3%;
+    margin-right: 3%;
+}

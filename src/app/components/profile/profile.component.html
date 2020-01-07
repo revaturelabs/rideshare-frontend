@@ -1,0 +1,34 @@
+<div class="container">
+    <div id="profile">
+        <h2>Profile</h2>
+        <table class="table table-hover">
+            <tr>
+                <th scope="col">First Name</th>
+                <td>{{user.firstName}}</td>
+            </tr>
+            <tr>
+                <th scope="col">Last Name</th>
+                <td>{{user.lastName}}</td>
+            </tr>
+            <tr>
+                <th scope="col">User Name</th>
+                <td>{{user.userName}}</td>
+            </tr>
+            <tr>
+                <th scope="col">Email</th>
+                <td>{{user.email}}</td>
+            </tr>
+            <tr>
+                <th scope="col">Phone</th>
+                <td>{{user.phoneNumber}}</td>
+            </tr>
+            <tr>
+                <th scope="col">Location</th>
+                <td>{{user.batch.batchLocation}}</td>
+            </tr>
+        </table>
+        <div class="text-right">
+            <button type="button" class="btn btn-outline-secondary" (click)="updateProfile()">Update</button>
+        </div>
+    </div>
+</div>

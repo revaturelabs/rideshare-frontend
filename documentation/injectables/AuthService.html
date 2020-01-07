@@ -95,6 +95,9 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                <a href="#getEmitter">getEmitter</a>
+                            </li>
+                            <li>
                                 <a href="#login">login</a>
                             </li>
                         </ul>
@@ -134,7 +137,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/app/services/auth-service/auth.service.ts:10</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/app/services/auth-service/auth.service.ts:11</a></div>
                             </td>
                         </tr>
 
@@ -181,6 +184,45 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="getEmitter"></a>
+                    <span class="name">
+                        <b>
+                            getEmitter
+                        </b>
+                        <a href="#getEmitter"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getEmitter()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="33"
+                            class="link-to-prism">src/app/services/auth-service/auth.service.ts:33</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="login"></a>
                     <span class="name">
                         <b>
@@ -199,8 +241,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="20"
-                            class="link-to-prism">src/app/services/auth-service/auth.service.ts:20</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="21"
+                            class="link-to-prism">src/app/services/auth-service/auth.service.ts:21</a></div>
                 </td>
             </tr>
 
@@ -291,7 +333,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/app/services/auth-service/auth.service.ts:10</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/app/services/auth-service/auth.service.ts:11</a></div>
                             </td>
                         </tr>
 
@@ -319,7 +361,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/services/auth-service/auth.service.ts:14</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/services/auth-service/auth.service.ts:15</a></div>
                             </td>
                         </tr>
 
@@ -348,7 +390,7 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/services/auth-service/auth.service.ts:16</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/services/auth-service/auth.service.ts:17</a></div>
                                 </td>
                             </tr>
 
@@ -359,7 +401,7 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable, Output, EventEmitter } from &#x27;@angular/core&#x27;;
 import { User } from &#x27;src/app/models/user&#x27;;
 import { Router } from &#x27;@angular/router&#x27;;
 
@@ -368,6 +410,7 @@ import { Router } from &#x27;@angular/router&#x27;;
 })
 export class AuthService {
 
+	@Output() fireIsLoggedIn: EventEmitter&lt;any&gt; &#x3D; new EventEmitter&lt;any&gt;();
 	private loggedIn: boolean &#x3D; false;
 
 	constructor(private router: Router) { }
@@ -384,9 +427,14 @@ export class AuthService {
 			this.user &#x3D; user;
 			sessionStorage.setItem(&#x27;auth&#x27;, String(this.user.userId));
 			this.router.navigate([&#x27;/home&#x27;]);
+			this.fireIsLoggedIn.emit(this.user);
 		} else {
 			return false;
 		}
+	}
+
+	getEmitter() {
+		return this.fireIsLoggedIn;
 	}
 }
 </code></pre>

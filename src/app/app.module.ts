@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DriverRegisterComponent } from './components/driver-register/driver-register.component';
+import { RiderRegisterComponent } from './components/rider-register/rider-register.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { UserService } from './services/user-service/user.service';
 import { CarService } from './services/car-service/car.service';
@@ -19,6 +20,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
   declarations: [
     AppComponent,
     DriverRegisterComponent,
+    RiderRegisterComponent,
     AdminComponent,
     CarRegisterComponent,
     LoginComponent,

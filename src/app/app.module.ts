@@ -4,12 +4,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-
 import { AppComponent } from './app.component';
-import { AdminbanComponent } from './adminban/adminban.component';
 import { DriverComponent} from './components/driver/driver.component';
-
-
 import { DriverRegisterComponent } from './components/driver-register/driver-register.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { UserService } from './services/user-service/user.service';
@@ -25,7 +21,6 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 @NgModule({
   declarations: [
     AppComponent,
-    AdminbanComponent,
     DriverComponent,
     DriverRegisterComponent,
     AdminComponent,
@@ -38,7 +33,6 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     BrowserModule,
     HttpClientModule,
     FormsModule,
-  
     BrowserModule,
     AppRoutingModule,
     FormsModule,

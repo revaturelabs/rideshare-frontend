@@ -10,17 +10,16 @@
         </div>
         <div class="col">
             <button class="btn btn-danger float-right" type="button" (click)="logout()">Logout</button>
-        </div>
-
-    </div>
-    <br>
+     </div>
+</div>
+<br>
 
 </div>
 
 <div class="container-fluid">
     <div class="row" *ngIf="driver" >
         <div class="col">
-            <h2 >Location:  &nbsp;<span>{{driver?.batch.address}}</span></h2>
+            <h2 >Location:  &nbsp;<span>{{driver?.batch.batchLocation}}</span></h2>
             <button class="btn btn-primary">Change</button>
         </div>
         <div class="col">
@@ -42,7 +41,7 @@
 
 <div class="container-fluid">
 
-<table class="table">
+<table class="table" class="table text-center">
     <tr>
       <th> ID </th>
       <th> Rider's Name </th>
@@ -51,7 +50,7 @@
       <th> Batch Number</th>
       <th>Location</th>
       <th>Active</th>
-      <th>Driver</th>
+      <th>Role</th>
     </tr>
   
     <tr *ngFor="let get of riders" >
@@ -61,12 +60,13 @@
       <td>{{get.phoneNumber}}</td>
       <td *ngIf="get.batch">{{get.batch.batchNumber}}</td>
       <td>{{get.batch.batchLocation}}</td>
-      <td>{{get.active}}</td>
-      <td>{{get.driver}}</td>
+      <td *ngIf="get.active===true"><img src=".\assets\yesno.jpg" width="15" height="15" ></td>
+      <td *ngIf="get.active===false"><img src=".\assets\no.jpg" width="15" height="15"></td>
+      <td *ngIf="get.driver===false">Rider</td>
+      <td *ngIf="get.driver===true">Driver</td>
      
     </tr>
   
   </table>
-
 
 </div>

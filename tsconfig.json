@@ -14,7 +14,9 @@
     "types": [
       "jquery",
       "bootstrap",  
-      "node"
+      "node",
+      "jest",
+      "mocha"
 ],
     "typeRoots": [
       "node_modules/@types"

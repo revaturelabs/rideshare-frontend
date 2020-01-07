@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "sonar": "sudo npm run sonar"
+    "sonar": "sonar-scanner"
   },
   "private": true,
   "dependencies": {

@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MarkInactiveDriverService } from '../../services/mark-inactive-driver-service/mark-inactive-driver.service';
-import { ListUsers } from 'src/app/ListUsers';
-import { AdminService } from '../../admin.service';
 import { Router } from '@angular/router';
-import { User } from '../../models/user';
-import { Batch } from '../../models/batch';
-import { Car } from '../../models/car';
+import { User } from 'src/app/models/user';
+
 
 
 @Component({
@@ -19,9 +16,7 @@ export class DriverComponent implements OnInit {
 
   riders: User[];
 
-  batch: Batch[];
-
-  car: Car[];
+  
 
    token = parseInt(sessionStorage.getItem("auth"));
    
@@ -50,19 +45,10 @@ export class DriverComponent implements OnInit {
             });
             console.log ("Driver", this.driver);
         })
-
-    this._MarkInactiveDriverService_.getCarByUserId(this.token).
-    subscribe(
-      data => {
-        this.car = data;
-        console.log ("car object", this.car);
-      }
-    )
-
       };
 
  
-      
+
    
   
     changeAcceptingRides(driver){

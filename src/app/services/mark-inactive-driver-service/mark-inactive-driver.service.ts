@@ -9,8 +9,12 @@ export class MarkInactiveDriverService {
 
   // URL
   private url = "http://localhost:8080/users/"
-  private urlCar = "http://localhost:8080/cars/users/"
-
+  // private body: string;
+  // // Http options
+  //   private httpOptions = {
+  //     headers: new HttpHeaders({"Content-Type": "application/json"}),
+  //     observe: "response" as "body"
+  //   };
 
 
 
@@ -32,16 +36,9 @@ changeDriverIsAccepting(data) {
   
 }
 
-getRidersForLocation(location: string): Observable <any> {
+getRidersForLocation(location: string): Observable <any>{
   console.log("getRidersForLocation url ", this.url + '?is-driver=false&location='+ location);
   return this.httpClient.get(this.url + '?is-driver=false&location='+ location)
-}
-
-getCarByUserId(id:number): Observable <any> {
-  console.log("getCarByUserId url ", this.urlCar + id);
-  return this.httpClient.get(this.urlCar + id);
-  
-
 }
 
   showAllUser(): Observable<any>{

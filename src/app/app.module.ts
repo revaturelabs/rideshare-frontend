@@ -8,7 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { AdminbanComponent } from './adminban/adminban.component';
 import { DriverComponent} from './components/driver/driver.component';
-import { TableFilterPipe } from './table-filter-pipe';
+
 
 import { DriverRegisterComponent } from './components/driver-register/driver-register.component';
 import { AdminComponent } from './components/admin/admin.component';
@@ -27,7 +27,6 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     AppComponent,
     AdminbanComponent,
     DriverComponent,
-    TableFilterPipe,
     DriverRegisterComponent,
     AdminComponent,
     LoginComponent,

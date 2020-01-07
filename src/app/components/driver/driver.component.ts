@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { MarkInactiveDriverService } from '../mark-inactive-driver.service';
+import { MarkInactiveDriverService } from '../../services/mark-inactive-driver-service/mark-inactive-driver.service';
 import { ListUsers } from 'src/app/ListUsers';
-import { AdminService } from '../admin.service';
+import { AdminService } from '../../admin.service';
 import { Router } from '@angular/router';
-import { User } from '../models/user';
-import { Batch } from '../models/batch';
-import { Car } from '../models/car';
+import { User } from '../../models/user';
+import { Batch } from '../../models/batch';
+import { Car } from '../../models/car';
 
 
 @Component({

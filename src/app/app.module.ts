@@ -7,7 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { AdminbanComponent } from './adminban/adminban.component';
-import { DriverComponent} from './driver/driver.component';
+import { DriverComponent} from './components/driver/driver.component';
 import { TableFilterPipe } from './table-filter-pipe';
 
 import { DriverRegisterComponent } from './components/driver-register/driver-register.component';
@@ -15,6 +15,7 @@ import { AdminComponent } from './components/admin/admin.component';
 import { UserService } from './services/user-service/user.service';
 import { CarService } from './services/car-service/car.service';
 import { BatchService } from './services/batch-service/batch.service';
+import { MarkInactiveDriverService } from './services/mark-inactive-driver-service/mark-inactive-driver.service';
 import { CarRegisterComponent } from './components/car-register/car-register.component';
 import { LoginComponent } from './components/login/login.component';
 import { AuthService } from './services/auth-service/auth.service';
@@ -48,7 +49,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     UserService,
     CarService,
     BatchService,
-    AuthService
+    AuthService,
+    MarkInactiveDriverService
   ],
   bootstrap: [AppComponent]
 })

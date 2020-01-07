@@ -3,6 +3,8 @@ import { MarkInactiveDriverService } from '../mark-inactive-driver.service';
 import { ListUsers } from 'src/app/ListUsers';
 import { AdminService } from '../admin.service';
 import { Router } from '@angular/router';
+import { User } from '../models/user';
+import { Batch } from '../models/batch';
 
 
 @Component({
@@ -12,34 +14,44 @@ import { Router } from '@angular/router';
 })
 export class DriverComponent implements OnInit {
 
-  private driver : ListUsers [];
+  driver : User [];
 
-  private listofUsers: ListUsers[];
+  riders: User[];
+
+  batch: Batch[];
 
    token = parseInt(sessionStorage.getItem("auth"));
-
+   
+   location = '';
    
    
-  constructor(private _MarkInactiveDriverService_: MarkInactiveDriverService, private adminservice: AdminService, private router: Router) { }
+  constructor(private _MarkInactiveDriverService_: MarkInactiveDriverService,  private router: Router) { }
 
+  
   ngOnInit() {
-    console.log ("driver before ngOnit", this.driver);
+    
+    
+    
     this._MarkInactiveDriverService_.getDriverById(this.token).
       subscribe(
         data => {
-          console.log(data)
           this.driver = data;
-          console.log ("driver after ngOnit", this.driver);
-        });
-        this.adminservice.showAllUser()
-    .subscribe(
-      data=> {
-        this.listofUsers = data;
-      });
-        // console.log ("driver Name", this.driver.firstName);
-  }
+          console.log ("Driver", this.driver);
+          this.location = data.batch.batchLocation;
+          console.log ("location", this.location);
 
-    
+          this._MarkInactiveDriverService_.getRidersForLocation(this.location)
+          .subscribe(
+            data=> {
+              this.riders = data;
+            });
+            console.log ("Driver", this.driver);
+        })
+      };
+
+ 
+
+   
   
     changeAcceptingRides(driver){
        if(driver.acceptingRides == true){
@@ -56,6 +68,8 @@ export class DriverComponent implements OnInit {
       
     }
   }
+
+  
 
   logout() {
     sessionStorage.clear();

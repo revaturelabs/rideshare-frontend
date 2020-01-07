@@ -54,13 +54,13 @@
       <th>Driver</th>
     </tr>
   
-    <tr *ngFor="let get of listofUsers" >
+    <tr *ngFor="let get of riders" >
       <td>{{get.userId}}</td>
       <td>{{get.firstName}}</td>
       <td>{{get.email}}</td>
       <td>{{get.phoneNumber}}</td>
       <td *ngIf="get.batch">{{get.batch.batchNumber}}</td>
-      <td>{{get.batch.address}}</td>
+      <td>{{get.batch.batchLocation}}</td>
       <td>{{get.active}}</td>
       <td>{{get.driver}}</td>
      

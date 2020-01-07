@@ -29,10 +29,10 @@ export class NavbarComponent implements OnInit {
       this.name = user.firstName;
     });
 
-    this.userService.getEmitter().subscribe((user: User) => {
-      this.token = user.userId;
-      this.name = user.firstName;
-    });
+    // this.userService.getEmitter().subscribe((user: User) => {
+    //   this.token = user.userId;
+    //   this.name = user.firstName;
+    // });
   }
 
   logout() {

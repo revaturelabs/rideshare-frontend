@@ -13,7 +13,7 @@ export class AdminService {
   private url = "http://localhost:8080/users/"
 // body to send update data
   private body: string;
-// Http options
+//Http options
   private httpOptions = {
     headers: new HttpHeaders({"Content-Type": "application/json"}),
     observe: "response" as "body"

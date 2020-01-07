@@ -28,7 +28,7 @@
         </div>
         <div class="col">
             <h2 *ngIf="userdriver.acceptingRides===true">Accepting rides:  &nbsp;<span><img src=".\assets\yesno.jpg" width="25" height="25"></span> 
-                {{userDriver?.acceptingRides}}</h2>
+                {{userdriver?.acceptingRides}}</h2>
                 <h2 *ngIf="userdriver.acceptingRides===false">Accepting rides:  &nbsp;<span><img src=".\assets\no.jpg" width="25" height="25"></span>
                     {{userdriver?.acceptingRides}}</h2>
             <button class="btn btn-primary"   (click)="changeAcceptingRides(userdriver)" >Change</button>

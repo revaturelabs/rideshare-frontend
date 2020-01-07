@@ -19,6 +19,7 @@ import { CarRegisterComponent } from './components/car-register/car-register.com
 import { LoginComponent } from './components/login/login.component';
 import { AuthService } from './services/auth-service/auth.service';
 import { AppRoutingModule } from './app-routing.module';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -28,11 +29,11 @@ import { AppRoutingModule } from './app-routing.module';
     TableFilterPipe,
     DriverRegisterComponent,
     AdminComponent,
-    
     LoginComponent,
-      
     CarRegisterComponent,
-     ],
+    LoginComponent,
+    NavbarComponent
+  ],
   imports: [
     BrowserModule,
     HttpClientModule,

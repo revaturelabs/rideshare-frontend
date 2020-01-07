@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Output, EventEmitter } from '@angular/core';
 import { User } from 'src/app/models/user';
 import { Router } from '@angular/router';
 
@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
 
+	@Output() fireIsLoggedIn: EventEmitter<any> = new EventEmitter<any>();
 	private loggedIn: boolean = false;
 
 	constructor(private router: Router) { }
@@ -23,13 +24,20 @@ export class AuthService {
 			this.loggedIn = true;
 			this.user = user;
 			sessionStorage.setItem('auth', String(this.user.userId));
-			if (this.user.driver){
-			this.router.navigate(['/driver'])
-			} else {
+			if(this.user.driver){
+				this.router.navigate(['/driver']);
+			}
+			else{
 				this.router.navigate(['/home']);
 			}
-		 } else {
+			
+			this.fireIsLoggedIn.emit(this.user);
+		} else {
 			return false;
 		}
+	}
+
+	getEmitter() {
+		return this.fireIsLoggedIn;
 	}
 }

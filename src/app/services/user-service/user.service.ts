@@ -15,7 +15,7 @@ export class UserService {
 	batch: Batch = new Batch();
 
 	constructor(private http: HttpClient, private router: Router) { }
-
+	
 	getAllUsers() {
 		return this.http.get<User[]>(this.url);
 	}

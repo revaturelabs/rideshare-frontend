@@ -13,6 +13,7 @@ import { BatchService } from './services/batch-service/batch.service';
 import { CarRegisterComponent } from './components/car-register/car-register.component';
 import { LoginComponent } from './components/login/login.component';
 import { AuthService } from './services/auth-service/auth.service';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { AuthService } from './services/auth-service/auth.service';
     DriverRegisterComponent,
     AdminComponent,
     CarRegisterComponent,
-    LoginComponent
+    LoginComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

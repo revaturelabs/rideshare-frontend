@@ -1,5 +1,5 @@
 <div class="container">
-    <h3>Car Information</h3>
+    <h3>Add Car To Become A Driver</h3>
     <div class="form-group">
         <label for="color">Color <small>*</small></label><br>
         <input id="color" type="text" placeholder="Color of the Car" [(ngModel)]="color" name="color" required><br>
@@ -25,6 +25,6 @@
     </div>
     <div class="form-group">
         <button id="add-car-btn" class="btn btn-primary" type="button" (click)="addCar()" [disabled]="!(color && seats && make && model)">Add New Car</button>
-        <a routerLink="/home">Skip</a>
+        <a routerLink="/home">Cancel</a>
     </div>
 </div>

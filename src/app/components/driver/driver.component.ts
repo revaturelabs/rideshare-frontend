@@ -13,7 +13,7 @@ import { Batch } from 'src/app/models/batch';
 })
 export class DriverComponent implements OnInit {
 
-  userdiver : User [];
+  userdriver : User [];
 
   riders: User[];
 
@@ -44,8 +44,8 @@ export class DriverComponent implements OnInit {
     this._MarkInactiveDriverService_.getDriverById(this.token).
       subscribe(
         data => {
-          this.userdiver = data;
-          console.log ("Driver", this.userdiver);
+          this.userdriver = data;
+          console.log ("Driver", this.userdriver);
           this.location = data.batch.batchLocation;
           console.log ("location", this.location);
 
@@ -54,7 +54,7 @@ export class DriverComponent implements OnInit {
             data=> {
               this.riders = data;
             });
-            console.log ("Driver", this.userdiver);
+            console.log ("Driver", this.userdriver);
         })
       };
 
@@ -62,17 +62,17 @@ export class DriverComponent implements OnInit {
 
    
   
-    changeAcceptingRides(userdiver){
-       if(userdiver.acceptingRides == true){
-        userdiver.acceptingRides = false;
-      this._MarkInactiveDriverService_.changeDriverIsAccepting (this.userdiver);
+    changeAcceptingRides(userdriver){
+       if(userdriver.acceptingRides == true){
+        userdriver.acceptingRides = false;
+      this._MarkInactiveDriverService_.changeDriverIsAccepting (this.userdriver);
       
     }
     else {
-      console.log ("driver else before", this.userdiver);
-      userdiver.acceptingRides = true;
-      this._MarkInactiveDriverService_.changeDriverIsAccepting(this.userdiver);
-      console.log ("driver else after", this.userdiver);
+      console.log ("driver else before", this.userdriver);
+      userdriver.acceptingRides = true;
+      this._MarkInactiveDriverService_.changeDriverIsAccepting(this.userdriver);
+      console.log ("driver else after", this.userdriver);
       
       
     }

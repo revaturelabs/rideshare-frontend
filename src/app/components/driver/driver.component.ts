@@ -18,7 +18,7 @@ export class DriverComponent implements OnInit {
   riders: User[];
 
   userId = ''; 
-  userName = '';
+  userName: string = '';
   batch = ''; 
   firstName = '';
   lastName = '';

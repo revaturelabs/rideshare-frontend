@@ -13,7 +13,7 @@ import { Batch } from 'src/app/models/batch';
 })
 export class DriverComponent implements OnInit {
 
-  userdriver : User [];
+  userdriver : User ;
 
   riders: User[];
 
@@ -44,6 +44,7 @@ export class DriverComponent implements OnInit {
     this._MarkInactiveDriverService_.getDriverById(this.token).
       subscribe(
         data => {
+          console.log ("Data", data);
           this.userdriver = data;
           console.log ("Driver", this.userdriver);
           this.location = data.batch.batchLocation;

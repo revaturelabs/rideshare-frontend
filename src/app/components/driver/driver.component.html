@@ -6,7 +6,7 @@
             <img src='.\assets\logo.png' alt="logo">
         </div>
         <div class="col-md-auto">
-            <h2 class="align-bottom float-center">{{userDriver?.firstName}} &nbsp;<span>{{userDriver?.lastName}} &nbsp;</span>Driver Page</h2>
+            <h2 class="align-bottom float-center">{{userdriver?.firstName}} &nbsp;<span>{{userdriver?.lastName}} &nbsp;</span>Driver Page</h2>
         </div>
         <div class="col">
             <button class="btn btn-danger float-right" type="button" (click)="logout()">Logout</button>
@@ -17,21 +17,21 @@
 </div>
 
 <div class="container-fluid">
-    <div class="row" *ngIf="userDriver" >
+    <div class="row" *ngIf="userdriver" >
         <div class="col">
-            <h2 >Location:  &nbsp;<span>{{userDriver?.batch.batchLocation}}</span></h2>
+            <h2 >Location:  &nbsp;<span>{{userdriver?.batch.batchLocation}}</span></h2>
             <button class="btn btn-primary">Change</button>
         </div>
         <div class="col">
-            <h2>Number of seats offered:  &nbsp;<span>{{userDriver?.userId}}</span></h2>
+            <h2>Number of seats offered:  &nbsp;<span>{{userdriver?.userId}}</span></h2>
             <button class="btn btn-primary">Change</button>
         </div>
         <div class="col">
-            <h2 *ngIf="userDriver.acceptingRides===true">Accepting rides:  &nbsp;<span><img src=".\assets\yesno.jpg" width="25" height="25"></span> 
+            <h2 *ngIf="userdriver.acceptingRides===true">Accepting rides:  &nbsp;<span><img src=".\assets\yesno.jpg" width="25" height="25"></span> 
                 {{userDriver?.acceptingRides}}</h2>
-                <h2 *ngIf="userDriver.acceptingRides===false">Accepting rides:  &nbsp;<span><img src=".\assets\no.jpg" width="25" height="25"></span>
-                    {{userDriver?.acceptingRides}}</h2>
-            <button class="btn btn-primary"   (click)="changeAcceptingRides(userDriver)" >Change</button>
+                <h2 *ngIf="userdriver.acceptingRides===false">Accepting rides:  &nbsp;<span><img src=".\assets\no.jpg" width="25" height="25"></span>
+                    {{userdriver?.acceptingRides}}</h2>
+            <button class="btn btn-primary"   (click)="changeAcceptingRides(userdriver)" >Change</button>
         </div>
 
     </div>

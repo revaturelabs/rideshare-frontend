@@ -1,4 +1,4 @@
-version: 2
+version: 2.1
 jobs:
   build:
     docker:
@@ -14,9 +14,16 @@ jobs:
       - run:
           name: Build Angular Application
           command: ng build --prod
-      - run:
-          name: Run Sonar Analysis
-          command: sudo npm run sonar 
+      - sonarcloud/scan
+
+orbs:
+  sonarcloud: sonarsource/sonarcloud@1.0.1
+
+workflows:
+  main:
+    jobs:
+      - build:
+          context: SonarCloud
 
 
 

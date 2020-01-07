@@ -19,6 +19,10 @@ export class CarService {
 	getAllCars() {
 		return this.http.get<Car[]>(this.url);
 	}
+
+	getCarByUserId(userId) {
+		return this.http.get<Car>(`${this.url}users/${userId}`).toPromise();
+	}
 	
 	createCar(color, seats, make, model, year, userId) {
 
@@ -35,7 +39,7 @@ export class CarService {
 			(response) => {
 				if (response) {
 					this.userService.updateIsDriver(true, userId);
-					this.router.navigate(['home']);
+					this.router.navigate(['car']);
 				}
 			},
 			(error) => {

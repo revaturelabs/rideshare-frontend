@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Output, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from 'src/app/models/user';
 import { Batch } from 'src/app/models/batch';
@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
   	providedIn: 'root'
 })
 export class UserService {
+	@Output() fireIsLoggedIn: EventEmitter<any> = new EventEmitter<any>();
 
 	url: string = 'http://localhost:8080/users/';
 	user: User = new User();
@@ -41,6 +42,7 @@ export class UserService {
 			(response) => {
 				let userId = response.body[Object.keys(response.body)[0]];
 				sessionStorage.setItem('auth', userId);
+				this.fireIsLoggedIn.emit(response.body);
 				this.router.navigate(['new/car']);
 			},
 			(error) => {
@@ -49,6 +51,10 @@ export class UserService {
 			}
 		);
 
+	}
+
+	getEmitter() {
+		return this.fireIsLoggedIn;
 	}
 
 	updateIsDriver(isDriver, userId) {

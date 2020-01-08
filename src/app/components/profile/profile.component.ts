@@ -29,7 +29,7 @@ export class ProfileComponent implements OnInit {
           sessionStorage.clear();
           this.router.navigate(['']);
         }
-      })
+      }) 
     }
   }
 

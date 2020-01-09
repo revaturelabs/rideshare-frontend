@@ -27,14 +27,14 @@ export class DriverComponent implements OnInit {
    
    
    
-  constructor(private _markInactiveDriverService_: MarkInactiveDriverService,  private router: Router) { }
+  constructor(private markInactiveDriverService: MarkInactiveDriverService,  private router: Router) { }
 
   
   ngOnInit() {
     
     
     
-    this._markInactiveDriverService_.getDriverById(this.token).
+    this.markInactiveDriverService.getDriverById(this.token).
       subscribe(
         data => {
           console.log ("Data", data);
@@ -43,7 +43,7 @@ export class DriverComponent implements OnInit {
           this.location = data.batch.batchLocation;
           console.log ("location", this.location);
 
-          this._markInactiveDriverService_.getRidersForLocation(this.location)
+          this.markInactiveDriverService.getRidersForLocation(this.location)
           .subscribe(
             data=> {
               this.riders = data;
@@ -59,13 +59,13 @@ export class DriverComponent implements OnInit {
     changeAcceptingRides(userdriver){
        if(userdriver.acceptingRides == true){
         userdriver.acceptingRides = false;
-      this._markInactiveDriverService_.changeDriverIsAccepting (this.userDriver);
+      this.markInactiveDriverService.changeDriverIsAccepting (this.userDriver);
       
     }
     else {
       console.log ("driver else before", this.userDriver);
       userdriver.acceptingRides = true;
-      this._markInactiveDriverService_.changeDriverIsAccepting(this.userDriver);
+      this.markInactiveDriverService.changeDriverIsAccepting(this.userDriver);
       console.log ("driver else after", this.userDriver);
       
       

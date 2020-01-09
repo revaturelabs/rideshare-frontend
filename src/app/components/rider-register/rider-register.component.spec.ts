@@ -7,6 +7,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { FormsModule } from '@angular/forms';
 import { APP_BASE_HREF } from '@angular/common';
+import { CarRegisterComponent } from '../car-register/car-register.component';
+import { DriverRegisterComponent } from '../driver-register/driver-register.component';
+import { MyCarComponent } from '../my-car/my-car.component';
+import { NavbarComponent } from '../navbar/navbar.component';
+import { PreferenceComponent } from '../preference/preference.component';
+import { ProfileComponent } from '../profile/profile.component';
 
 describe('RiderRegisterComponent', () => {
   let component: RiderRegisterComponent;
@@ -14,7 +20,7 @@ describe('RiderRegisterComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [AdminComponent, RiderRegisterComponent, LoginComponent],
+      declarations: [AdminComponent, RiderRegisterComponent, LoginComponent, CarRegisterComponent, DriverRegisterComponent, MyCarComponent, NavbarComponent, PreferenceComponent, ProfileComponent],
       imports: [HttpClientModule, AppRoutingModule, FormsModule],
       providers: [{provide: APP_BASE_HREF, useValue: '/my/app'}]
     })

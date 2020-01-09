@@ -47,11 +47,11 @@ export class DriverRegisterComponent implements OnInit {
 	}
 
 	phoneFormat(phone: string) {
-		return phone.replace(/[^0-9]/g, '').replace(/(\d{3})(\d{3})(\d{3})/, "($1) $2-$3");
+		return phone.replace(/[^0-9]/g, '').replace(/(\d{3})(\d{3})(\d{4})/, "($1) $2-$3");
 	}
 
 	validateEmail() {
-		return /^[\.|\w]+@\w+\.\w{2,4}$/.test(this.email);
+		return /^\w+\.?\w+@\w+\.\w{2,4}$/.test(this.email);
 	}
 
 	validatePhone() {

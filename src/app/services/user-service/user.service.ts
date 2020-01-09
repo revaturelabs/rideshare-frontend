@@ -69,7 +69,7 @@ export class UserService {
 					(response) => {
 					  console.log(response);
 					},
-					  (error) => console.warn(error)
+					(error) => console.warn(error)
 				);
 			})
 			.catch(e => {
@@ -88,11 +88,15 @@ export class UserService {
 					(response) => {
 					  console.log(response);
 					},
-					  (error) => console.warn(error)
+					(error) => console.warn(error)
 				);
 			})
 			.catch(e => {
 				console.warn(e);
 			})
+	}
+
+	updateUserInfo(user: User) {
+		return this.http.put(this.url+user.userId, user).toPromise();
 	}
 }

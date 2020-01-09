@@ -3,11 +3,31 @@ h2 {
     font-weight: 400;
 }
 
-.table tr:hover {
-    background-color: whitesmoke;
+button {
+    margin-left: 1%;
+}
+
+small {
+    color: red;
+}
+
+.edit {
+    cursor: pointer;
 }
 
 #profile {
     margin-left: 3%;
     margin-right: 3%;
+}
+
+input {
+    background-color: white;
+    border: none;
+}
+
+.editField {
+    border: 0;
+    outline: 0;
+    background: transparent;
+    border-bottom: 1px solid black;
 }

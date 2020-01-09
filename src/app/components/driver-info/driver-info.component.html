@@ -1,0 +1,24 @@
+<p>Available Drivers</p>
+
+<table>
+    <tr>
+        <th> ID </th>
+        <th> Username </th>
+        <th> First Name </th>
+        <th> Last Name </th>
+        <th> Email </th>
+        <th> Phone Number </th>
+        <th> Batch </th>
+    </tr>
+    <tr *ngFor = "let driver of drivers">
+        <td>{{driver.userId}}</td>
+        <td>{{driver.userName}}</td>
+        <td>{{driver.firstName}}</td>
+        <td>{{driver.lastName}}</td>
+        <td>{{driver.email}}</td>
+        <td>{{driver.phoneNumber}}</td>
+        <td *ngIf="driver.batch">{{driver.batch.batchNumber}}</td>
+
+
+    </tr>
+</table>

@@ -159,7 +159,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">src/app/components/admin/admin.component.ts:9</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/components/admin/admin.component.ts:14</a></div>
                             </td>
                         </tr>
 
@@ -233,15 +233,16 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="28"
-                            class="link-to-prism">src/app/components/admin/admin.component.ts:28</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="33"
+                            class="link-to-prism">src/app/components/admin/admin.component.ts:33</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Function that takes no parameters.</p>
+                    <div class="io-description"><p>Function that takes no parameters. 
+It will clear the sesssion storage.</p>
 </div>
 
                     <div>
@@ -251,8 +252,7 @@
 
                     </div>
                     <div class="io-description">
-                        <p>Clears the session storage and logs out.</p>
-
+                        
                     </div>
                 </td>
             </tr>
@@ -280,8 +280,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="20"
-                            class="link-to-prism">src/app/components/admin/admin.component.ts:20</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="25"
+                            class="link-to-prism">src/app/components/admin/admin.component.ts:25</a></div>
                 </td>
             </tr>
 
@@ -313,6 +313,11 @@ import { Router } from &#x27;@angular/router&#x27;;
   templateUrl: &#x27;./admin.component.html&#x27;,
   styleUrls: [&#x27;./admin.component.css&#x27;]
 })
+
+/**
+ * The Admin component
+ */
+
 export class AdminComponent implements OnInit {
   /**
    * @constructor 
@@ -327,9 +332,9 @@ export class AdminComponent implements OnInit {
   ngOnInit() {
   }
   /**
-   * Function that takes no parameters.
-   * 
-   * @return {void} Clears the session storage and logs out.
+   * Function that takes no parameters. 
+   * It will clear the sesssion storage.
+   * @return {void} 
    * 
    */
   logout() {

@@ -35,7 +35,7 @@
 
 <ol class="breadcrumb">
   <li>Components</li>
-  <li>AdminComponent</li>
+  <li>ProfileComponent</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -61,7 +61,7 @@
     <h3>File</h3>
 </p>
 <p class="comment">
-    <code>src/app/components/admin/admin.component.ts</code>
+    <code>src/app/components/profile/profile.component.ts</code>
 </p>
 
 
@@ -91,19 +91,19 @@
 
             <tr>
                 <td class="col-md-3">selector</td>
-                <td class="col-md-9"><code>app-admin</code></td>
+                <td class="col-md-9"><code>app-profile</code></td>
             </tr>
 
             <tr>
                 <td class="col-md-3">styleUrls</td>
-                <td class="col-md-9"><code>./admin.component.css</code></td>
+                <td class="col-md-9"><code>./profile.component.css</code></td>
             </tr>
 
 
 
             <tr>
                 <td class="col-md-3">templateUrl</td>
-                <td class="col-md-9"><code>./admin.component.html</code></td>
+                <td class="col-md-9"><code>./profile.component.html</code></td>
             </tr>
 
 
@@ -121,6 +121,23 @@
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
         <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#batch">batch</a>
+                            </li>
+                            <li>
+                                <a href="#user">user</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
 
                 <tr>
                     <td class="col-md-4">
@@ -131,10 +148,10 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#logout">logout</a>
+                                <a href="#ngOnInit">ngOnInit</a>
                             </li>
                             <li>
-                                <a href="#ngOnInit">ngOnInit</a>
+                                <a href="#updateProfile">updateProfile</a>
                             </li>
                         </ul>
                     </td>
@@ -154,12 +171,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>)</code>
+<code>constructor(router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>, userService: <a href="../injectables/UserService.html">UserService</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">src/app/components/admin/admin.component.ts:9</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/components/profile/profile.component.ts:15</a></div>
                             </td>
                         </tr>
 
@@ -173,7 +190,6 @@
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
-                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -188,10 +204,18 @@
                                                             No
                                                     </td>
                                                     
+                                                </tr>
+                                                <tr>
+                                                        <td>userService</td>
+                                                  
                                                         <td>
-                                                                <code><p>Provides an instance of a router </p>
-</code>
+                                                                        <code><a href="../injectables/UserService.html" target="_self" >UserService</a></code>
                                                         </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -215,53 +239,6 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="logout"></a>
-                    <span class="name">
-                        <b>
-                            logout
-                        </b>
-                        <a href="#logout"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>logout()</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="28"
-                            class="link-to-prism">src/app/components/admin/admin.component.ts:28</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Function that takes no parameters.</p>
-</div>
-
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                    </div>
-                    <div class="io-description">
-                        <p>Clears the session storage and logs out.</p>
-
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
                     <a name="ngOnInit"></a>
                     <span class="name">
                         <b>
@@ -280,16 +257,53 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="20"
-                            class="link-to-prism">src/app/components/admin/admin.component.ts:20</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="19"
+                            class="link-to-prism">src/app/components/profile/profile.component.ts:19</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>This is an OnInit function that is evoked once.</p>
-</div>
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateProfile"></a>
+                    <span class="name">
+                        <b>
+                            updateProfile
+                        </b>
+                        <a href="#updateProfile"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>updateProfile()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="36"
+                            class="link-to-prism">src/app/components/profile/profile.component.ts:36</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
 
                     <div class="io-description">
                         <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -300,6 +314,76 @@
         </tbody>
     </table>
 </section>
+    <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="batch"></a>
+                        <span class="name">
+                            <b>
+                            batch</b>
+                            <a href="#batch"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../classes/Batch.html" target="_self" >Batch</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>new Batch()</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/components/profile/profile.component.ts:15</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="user"></a>
+                        <span class="name">
+                            <b>
+                            user</b>
+                            <a href="#user"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../classes/User.html" target="_self" >User</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>new User()</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/components/profile/profile.component.ts:14</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+</section>
 
 </div>
 
@@ -307,52 +391,101 @@
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
 import { Router } from &#x27;@angular/router&#x27;;
+import { UserService } from &#x27;src/app/services/user-service/user.service&#x27;;
+import { User } from &#x27;src/app/models/user&#x27;;
+import { Batch } from &#x27;src/app/models/batch&#x27;;
 
 @Component({
-  selector: &#x27;app-admin&#x27;,
-  templateUrl: &#x27;./admin.component.html&#x27;,
-  styleUrls: [&#x27;./admin.component.css&#x27;]
+  selector: &#x27;app-profile&#x27;,
+  templateUrl: &#x27;./profile.component.html&#x27;,
+  styleUrls: [&#x27;./profile.component.css&#x27;]
 })
-export class AdminComponent implements OnInit {
-  /**
-   * @constructor 
-   * @param router Provides an instance of a router 
-   */
-  constructor(private router: Router) { }
+export class ProfileComponent implements OnInit {
 
-  /**
-   * This is an OnInit function that is evoked once.
-   */
+  user: User &#x3D; new User();
+  batch: Batch &#x3D; new Batch();
+
+  constructor(private router: Router, private userService: UserService) { }
 
   ngOnInit() {
+    this.user.userId &#x3D; Number(sessionStorage.getItem(&#x27;auth&#x27;));
+    if (!this.user.userId) {
+      this.router.navigate([&#x27;&#x27;]);
+    } else {
+      this.user.batch &#x3D; this.batch;
+      this.userService.getUserById(this.user.userId).then(response &#x3D;&gt; {
+        if (response) {
+          this.user &#x3D; response;
+        } else {
+          sessionStorage.clear();
+          this.router.navigate([&#x27;&#x27;]);
+        }
+      })
+    }
   }
-  /**
-   * Function that takes no parameters.
-   * 
-   * @return {void} Clears the session storage and logs out.
-   * 
-   */
-  logout() {
-    sessionStorage.clear();
-    this.router.navigate([&#x27;&#x27;]);
+
+  updateProfile() {
+    console.log(this.user);
   }
 }
 </code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;div&gt;
-    &lt;p class&#x3D;&quot;text text-lg-center text-success&quot;&gt;Home&lt;/p&gt;
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;container&quot;&gt;
+    &lt;div id&#x3D;&quot;profile&quot;&gt;
+        &lt;h2&gt;Profile&lt;/h2&gt;
+        &lt;table class&#x3D;&quot;table table-hover&quot;&gt;
+            &lt;tr&gt;
+                &lt;th scope&#x3D;&quot;col&quot;&gt;First Name&lt;/th&gt;
+                &lt;td&gt;{{user.firstName}}&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;th scope&#x3D;&quot;col&quot;&gt;Last Name&lt;/th&gt;
+                &lt;td&gt;{{user.lastName}}&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;th scope&#x3D;&quot;col&quot;&gt;User Name&lt;/th&gt;
+                &lt;td&gt;{{user.userName}}&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;th scope&#x3D;&quot;col&quot;&gt;Email&lt;/th&gt;
+                &lt;td&gt;{{user.email}}&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;th scope&#x3D;&quot;col&quot;&gt;Phone&lt;/th&gt;
+                &lt;td&gt;{{user.phoneNumber}}&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;th scope&#x3D;&quot;col&quot;&gt;Location&lt;/th&gt;
+                &lt;td&gt;{{user.batch.batchLocation}}&lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/table&gt;
+        &lt;div class&#x3D;&quot;text-right&quot;&gt;
+            &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn btn-outline-secondary&quot; (click)&#x3D;&quot;updateProfile()&quot;&gt;Update&lt;/button&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
 &lt;/div&gt;</code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-styleData">
                 <p class="comment">
-                    <code>./admin.component.css</code>
+                    <code>./profile.component.css</code>
                 </p>
-                <pre class="line-numbers"><code class="language-scss">small {
-    color: yellow;
-}</code></pre>
+                <pre class="line-numbers"><code class="language-scss">h2 {
+    font-size: 1.375rem;
+    font-weight: 400;
+}
+
+.table tr:hover {
+    background-color: whitesmoke;
+}
+
+#profile {
+    margin-left: 3%;
+    margin-right: 3%;
+}
+</code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-tree">
@@ -380,10 +513,10 @@ export class AdminComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div>    <p class="text text-lg-center text-success">Home</p></div></div>'
+        var COMPONENT_TEMPLATE = '<div><div class="container">    <div id="profile">        <h2>Profile</h2>        <table class="table table-hover">            <tr>                <th scope="col">First Name</th>                <td>{{user.firstName}}</td>            </tr>            <tr>                <th scope="col">Last Name</th>                <td>{{user.lastName}}</td>            </tr>            <tr>                <th scope="col">User Name</th>                <td>{{user.userName}}</td>            </tr>            <tr>                <th scope="col">Email</th>                <td>{{user.email}}</td>            </tr>            <tr>                <th scope="col">Phone</th>                <td>{{user.phoneNumber}}</td>            </tr>            <tr>                <th scope="col">Location</th>                <td>{{user.batch.batchLocation}}</td>            </tr>        </table>        <div class="text-right">            <button type="button" class="btn btn-outline-secondary" (click)="updateProfile()">Update</button>        </div>    </div></div></div>'
     var COMPONENTS = [{'name': 'AdminComponent', 'selector': 'app-admin'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CarRegisterComponent', 'selector': 'app-car-register'},{'name': 'DriverRegisterComponent', 'selector': 'app-driver-register'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MyCarComponent', 'selector': 'app-my-car'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PreferenceComponent', 'selector': 'app-preference'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'RiderRegisterComponent', 'selector': 'app-rider-register'}];
     var DIRECTIVES = [];
-    var ACTUAL_COMPONENT = {'name': 'AdminComponent'};
+    var ACTUAL_COMPONENT = {'name': 'ProfileComponent'};
 </script>
 <script src="../js/tree.js"></script>
 
@@ -418,7 +551,7 @@ export class AdminComponent implements OnInit {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
-            var COMPODOC_CURRENT_PAGE_URL = 'AdminComponent.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'ProfileComponent.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

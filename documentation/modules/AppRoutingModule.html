@@ -78,6 +78,8 @@ import { DriverRegisterComponent } from &#x27;./components/driver-register/drive
 import { RiderRegisterComponent } from &#x27;./components/rider-register/rider-register.component&#x27;;
 import { LoginComponent } from &#x27;./components/login/login.component&#x27;;
 import { MyCarComponent } from &#x27;./components/my-car/my-car.component&#x27;;
+import { ProfileComponent } from &#x27;./components/profile/profile.component&#x27;;
+import { PreferenceComponent } from &#x27;./components/preference/preference.component&#x27;;
 
 
 const routes: Routes &#x3D; [{
@@ -99,6 +101,12 @@ const routes: Routes &#x3D; [{
   path: &#x27;car&#x27;,
   component: MyCarComponent
 }, {
+  path: &#x27;profile&#x27;,
+  component: ProfileComponent
+},  {
+  path: &#x27;preference&#x27;,
+  component: PreferenceComponent
+},{
   path: &#x27;**&#x27;,
   pathMatch: &#x27;full&#x27;,
   redirectTo: &#x27;&#x27;

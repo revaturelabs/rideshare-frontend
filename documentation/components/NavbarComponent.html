@@ -269,8 +269,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="38"
-                            class="link-to-prism">src/app/components/navbar/navbar.component.ts:38</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="40"
+                            class="link-to-prism">src/app/components/navbar/navbar.component.ts:40</a></div>
                 </td>
             </tr>
 
@@ -422,6 +422,8 @@ export class NavbarComponent implements OnInit {
       })
     }
 
+    // notify navbar component that the user state change
+    // navbar will change after user login or sign up
     this.authService.getEmitter().subscribe((user: User) &#x3D;&gt; {
       this.token &#x3D; user.userId;
       this.name &#x3D; user.firstName;
@@ -470,8 +472,8 @@ export class NavbarComponent implements OnInit {
                   {{name}}
                 &lt;/a&gt;
                 &lt;div class&#x3D;&quot;dropdown-menu&quot; aria-labelledby&#x3D;&quot;navbarDropdown&quot;&gt;
-                  &lt;a class&#x3D;&quot;dropdown-item&quot; routerLink&#x3D;&quot;/&quot;&gt;Profile&lt;/a&gt;
-                  &lt;a class&#x3D;&quot;dropdown-item&quot; routerLink&#x3D;&quot;/home&quot;&gt;Perference&lt;/a&gt;
+                  &lt;a class&#x3D;&quot;dropdown-item&quot; routerLink&#x3D;&quot;/profile&quot;&gt;Profile&lt;/a&gt;
+                  &lt;a class&#x3D;&quot;dropdown-item&quot; routerLink&#x3D;&quot;/preference&quot;&gt;Preference&lt;/a&gt;
                   &lt;div class&#x3D;&quot;dropdown-divider&quot;&gt;&lt;/div&gt;
                   &lt;a class&#x3D;&quot;dropdown-item&quot; (click)&#x3D;&quot;logout()&quot; id&#x3D;&quot;logout-btn&quot;&gt;Log Out&lt;/a&gt;
                 &lt;/div&gt;
@@ -526,8 +528,8 @@ div {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="container">	<nav class="navbar navbar-expand-lg navbar-light bg-white">		<img src="../assets/revature-logo-600x219.png" routerLink="/" />        <ul class="navbar-nav ml-auto" *ngIf="!token">            <li class="nav-item">              <a class="nav-link" routerLink="/login">Sign In <span class="sr-only">(current)</span></a>            </li>            <li class="nav-item">                <a class="nav-link" routerLink="/registerDriver">Sign Up As Driver<span class="sr-only">(current)</span></a>            </li>            <li class="nav-item">              <a class="nav-link" routerLink="/registerRider">Sign Up As Rider<span class="sr-only">(current)</span></a>          </li>        </ul>        <ul class="navbar-nav ml-auto" *ngIf="token">            <li class="nav-item">              <a class="nav-link" routerLink="/home">Home <span class="sr-only">(current)</span></a>            </li>            <li class="nav-item">                <a class="nav-link" routerLink="/car">My Car <span class="sr-only">(current)</span></a>            </li>            <li class="nav-item active dropdown">                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">                  {{name}}                </a>                <div class="dropdown-menu" aria-labelledby="navbarDropdown">                  <a class="dropdown-item" routerLink="/">Profile</a>                  <a class="dropdown-item" routerLink="/home">Perference</a>                  <div class="dropdown-divider"></div>                  <a class="dropdown-item" (click)="logout()" id="logout-btn">Log Out</a>                </div>            </li>        </ul>	</nav></div></div>'
-    var COMPONENTS = [{'name': 'AdminComponent', 'selector': 'app-admin'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CarRegisterComponent', 'selector': 'app-car-register'},{'name': 'DriverRegisterComponent', 'selector': 'app-driver-register'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MyCarComponent', 'selector': 'app-my-car'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'RiderRegisterComponent', 'selector': 'app-rider-register'}];
+        var COMPONENT_TEMPLATE = '<div><div class="container">	<nav class="navbar navbar-expand-lg navbar-light bg-white">		<img src="../assets/revature-logo-600x219.png" routerLink="/" />        <ul class="navbar-nav ml-auto" *ngIf="!token">            <li class="nav-item">              <a class="nav-link" routerLink="/login">Sign In <span class="sr-only">(current)</span></a>            </li>            <li class="nav-item">                <a class="nav-link" routerLink="/registerDriver">Sign Up As Driver<span class="sr-only">(current)</span></a>            </li>            <li class="nav-item">              <a class="nav-link" routerLink="/registerRider">Sign Up As Rider<span class="sr-only">(current)</span></a>          </li>        </ul>        <ul class="navbar-nav ml-auto" *ngIf="token">            <li class="nav-item">              <a class="nav-link" routerLink="/home">Home <span class="sr-only">(current)</span></a>            </li>            <li class="nav-item">                <a class="nav-link" routerLink="/car">My Car <span class="sr-only">(current)</span></a>            </li>            <li class="nav-item active dropdown">                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">                  {{name}}                </a>                <div class="dropdown-menu" aria-labelledby="navbarDropdown">                  <a class="dropdown-item" routerLink="/profile">Profile</a>                  <a class="dropdown-item" routerLink="/preference">Preference</a>                  <div class="dropdown-divider"></div>                  <a class="dropdown-item" (click)="logout()" id="logout-btn">Log Out</a>                </div>            </li>        </ul>	</nav></div></div>'
+    var COMPONENTS = [{'name': 'AdminComponent', 'selector': 'app-admin'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CarRegisterComponent', 'selector': 'app-car-register'},{'name': 'DriverRegisterComponent', 'selector': 'app-driver-register'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MyCarComponent', 'selector': 'app-my-car'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PreferenceComponent', 'selector': 'app-preference'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'RiderRegisterComponent', 'selector': 'app-rider-register'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'NavbarComponent'};
 </script>

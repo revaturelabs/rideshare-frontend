@@ -153,9 +153,6 @@
                             <li>
                                 <a href="#removeMyCar">removeMyCar</a>
                             </li>
-                            <li>
-                                <a href="#updateMyCar">updateMyCar</a>
-                            </li>
                         </ul>
                     </td>
                 </tr>
@@ -174,12 +171,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(carService: <a href="../injectables/CarService.html">CarService</a>, router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>)</code>
+<code>constructor(carService: <a href="../injectables/CarService.html">CarService</a>, router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>, userService: <a href="../injectables/UserService.html">UserService</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/components/my-car/my-car.component.ts:14</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/components/my-car/my-car.component.ts:15</a></div>
                             </td>
                         </tr>
 
@@ -213,6 +210,18 @@
                                                   
                                                         <td>
                                                                         <code><a href="https://angular.io/api/router/Router" target="_blank" >Router</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>userService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/UserService.html" target="_self" >UserService</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -260,8 +269,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="18"
-                            class="link-to-prism">src/app/components/my-car/my-car.component.ts:18</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="19"
+                            class="link-to-prism">src/app/components/my-car/my-car.component.ts:19</a></div>
                 </td>
             </tr>
 
@@ -293,45 +302,6 @@
             <tr>
                 <td class="col-md-4">
 <code>removeMyCar()</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="36"
-                            class="link-to-prism">src/app/components/my-car/my-car.component.ts:36</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="updateMyCar"></a>
-                    <span class="name">
-                        <b>
-                            updateMyCar
-                        </b>
-                        <a href="#updateMyCar"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>updateMyCar()</code>
                 </td>
             </tr>
 
@@ -386,7 +356,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/components/my-car/my-car.component.ts:14</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/components/my-car/my-car.component.ts:15</a></div>
                             </td>
                         </tr>
 
@@ -413,7 +383,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/components/my-car/my-car.component.ts:13</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/components/my-car/my-car.component.ts:14</a></div>
                             </td>
                         </tr>
 
@@ -430,6 +400,7 @@
 import { CarService } from &#x27;src/app/services/car-service/car.service&#x27;;
 import { Car } from &#x27;src/app/models/car&#x27;;
 import { Router } from &#x27;@angular/router&#x27;;
+import { UserService } from &#x27;src/app/services/user-service/user.service&#x27;;
 
 @Component({
   selector: &#x27;app-my-car&#x27;,
@@ -439,9 +410,9 @@ import { Router } from &#x27;@angular/router&#x27;;
 export class MyCarComponent implements OnInit {
 
   userId: number;
-  myCar: Car &#x3D; new Car(); 
+  myCar: Car &#x3D; new Car();
 
-  constructor(private carService: CarService, private router: Router) { }
+  constructor(private carService: CarService, private router: Router, private userService: UserService) { }
 
   ngOnInit() {
     this.userId &#x3D; Number(sessionStorage.getItem(&#x27;auth&#x27;));
@@ -451,20 +422,22 @@ export class MyCarComponent implements OnInit {
       this.carService.getCarByUserId(this.userId).then((response)&#x3D;&gt;{
         if (response) {
           this.myCar &#x3D; response;
-          console.log(response)
         }
       })
     }
   }
 
-  updateMyCar() {
-    console.log(&#x27;Update!&#x27;);
-  }
-
   removeMyCar() {
-    if (window.confirm(&#x27;Remove The Car&#x27;)) {
-      console.log(&#x27;Remove!&#x27;);
+    if (window.confirm(&#x27;The Car Will Be Removed&#x27;)) {
+      this.carService.removeCar(this.myCar.carId).subscribe(
+        Response &#x3D;&gt; {
+          console.log(Response);
+      }, error &#x3D;&gt; {
+        console.warn(error)
+      })
+
       this.myCar &#x3D; new Car();
+      this.userService.updateIsDriver(false, this.userId);
     }
   }
 }
@@ -482,7 +455,7 @@ export class MyCarComponent implements OnInit {
         &lt;table class&#x3D;&quot;table table-hover&quot;&gt;
             &lt;tr&gt;
                 &lt;th scope&#x3D;&quot;col&quot;&gt;Color&lt;/th&gt;
-                &lt;td&gt;{{myCar.color}}&lt;/td&gt;
+                &lt;td&gt;{{myCar.color | titlecase}}&lt;/td&gt;
             &lt;/tr&gt;
             &lt;tr&gt;
                 &lt;th scope&#x3D;&quot;col&quot;&gt;Seats&lt;/th&gt;
@@ -490,11 +463,11 @@ export class MyCarComponent implements OnInit {
             &lt;/tr&gt;
             &lt;tr&gt;
                 &lt;th scope&#x3D;&quot;col&quot;&gt;Make&lt;/th&gt;
-                &lt;td&gt;{{myCar.make}}&lt;/td&gt;
+                &lt;td&gt;{{myCar.make | titlecase}}&lt;/td&gt;
             &lt;/tr&gt;
             &lt;tr&gt;
                 &lt;th scope&#x3D;&quot;col&quot;&gt;Model&lt;/th&gt;
-                &lt;td&gt;{{myCar.model}}&lt;/td&gt;
+                &lt;td&gt;{{myCar.model | titlecase}}&lt;/td&gt;
             &lt;/tr&gt;
             &lt;tr&gt;
                 &lt;th scope&#x3D;&quot;col&quot;&gt;Year&lt;/th&gt;
@@ -502,7 +475,6 @@ export class MyCarComponent implements OnInit {
             &lt;/tr&gt;
         &lt;/table&gt;
         &lt;div class&#x3D;&quot;text-right&quot;&gt;
-            &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn btn-outline-secondary&quot; (click)&#x3D;&quot;updateMyCar()&quot;&gt;Update&lt;/button&gt;
             &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn btn-outline-secondary&quot; (click)&#x3D;&quot;removeMyCar()&quot;&gt;Remove&lt;/button&gt;
         &lt;/div&gt;
     &lt;/div&gt;
@@ -519,6 +491,10 @@ export class MyCarComponent implements OnInit {
     font-weight: 400;
 }
 
+p {
+    font-size: 2em;
+}
+
 .car-info-form {
     border: 1px solid #dadce0;
     border-radius: 5px;
@@ -527,13 +503,10 @@ export class MyCarComponent implements OnInit {
     margin-right: 5%;
 }
 
-button {
-    margin-left: 1%;
-}
-
 .table tr:hover {
     background-color: whitesmoke;
-}</code></pre>
+}
+</code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-tree">
@@ -561,8 +534,8 @@ button {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="container">    <div *ngIf="!myCar.carId" class="text text-center">        <p>You Don\'t Have A Car In Your Account</p>        <button type="button" class="btn btn-outline-primary" routerLink="/new/car">Add A Car</button>    </div>    <div *ngIf="myCar.carId" class="car-info-form">        <h2>My Car</h2>        <table class="table table-hover">            <tr>                <th scope="col">Color</th>                <td>{{myCar.color}}</td>            </tr>            <tr>                <th scope="col">Seats</th>                <td>{{myCar.seats}}</td>            </tr>            <tr>                <th scope="col">Make</th>                <td>{{myCar.make}}</td>            </tr>            <tr>                <th scope="col">Model</th>                <td>{{myCar.model}}</td>            </tr>            <tr>                <th scope="col">Year</th>                <td>{{myCar.year}}</td>            </tr>        </table>        <div class="text-right">            <button type="button" class="btn btn-outline-secondary" (click)="updateMyCar()">Update</button>            <button type="button" class="btn btn-outline-secondary" (click)="removeMyCar()">Remove</button>        </div>    </div></div></div>'
-    var COMPONENTS = [{'name': 'AdminComponent', 'selector': 'app-admin'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CarRegisterComponent', 'selector': 'app-car-register'},{'name': 'DriverRegisterComponent', 'selector': 'app-driver-register'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MyCarComponent', 'selector': 'app-my-car'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'RiderRegisterComponent', 'selector': 'app-rider-register'}];
+        var COMPONENT_TEMPLATE = '<div><div class="container">    <div *ngIf="!myCar.carId" class="text text-center">        <p>You Don\'t Have A Car In Your Account</p>        <button type="button" class="btn btn-outline-primary" routerLink="/new/car">Add A Car</button>    </div>    <div *ngIf="myCar.carId" class="car-info-form">        <h2>My Car</h2>        <table class="table table-hover">            <tr>                <th scope="col">Color</th>                <td>{{myCar.color | titlecase}}</td>            </tr>            <tr>                <th scope="col">Seats</th>                <td>{{myCar.seats}}</td>            </tr>            <tr>                <th scope="col">Make</th>                <td>{{myCar.make | titlecase}}</td>            </tr>            <tr>                <th scope="col">Model</th>                <td>{{myCar.model | titlecase}}</td>            </tr>            <tr>                <th scope="col">Year</th>                <td>{{myCar.year}}</td>            </tr>        </table>        <div class="text-right">            <button type="button" class="btn btn-outline-secondary" (click)="removeMyCar()">Remove</button>        </div>    </div></div></div>'
+    var COMPONENTS = [{'name': 'AdminComponent', 'selector': 'app-admin'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CarRegisterComponent', 'selector': 'app-car-register'},{'name': 'DriverRegisterComponent', 'selector': 'app-driver-register'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MyCarComponent', 'selector': 'app-my-car'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PreferenceComponent', 'selector': 'app-preference'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'RiderRegisterComponent', 'selector': 'app-rider-register'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'MyCarComponent'};
 </script>

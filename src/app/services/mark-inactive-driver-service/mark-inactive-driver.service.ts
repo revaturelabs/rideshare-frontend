@@ -9,16 +9,7 @@ export class MarkInactiveDriverService {
 
   // URL
   private url = "http://localhost:8080/users/"
-  // private body: string;
-  // // Http options
-  //   private httpOptions = {
-  //     headers: new HttpHeaders({"Content-Type": "application/json"}),
-  //     observe: "response" as "body"
-  //   };
-
-
-
-
+  
   constructor(private httpClient: HttpClient) { }
 
 

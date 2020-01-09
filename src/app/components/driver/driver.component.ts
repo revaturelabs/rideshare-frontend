@@ -13,49 +13,42 @@ import { Batch } from 'src/app/models/batch';
 })
 export class DriverComponent implements OnInit {
 
-  userdriver : User ;
+  userDriver : User ;
 
   riders: User[];
 
-  userId = ''; 
-  userName: string = '';
-  batch = ''; 
-  firstName = '';
-  lastName = '';
-  email = '';
-  phoneNumber = '';
-  active = '';
-  driver = '';
-  acceptingRides = '';
   location = '';
+
+
+
 
    token = parseInt(sessionStorage.getItem("auth"));
    
    
    
    
-  constructor(private _MarkInactiveDriverService_: MarkInactiveDriverService,  private router: Router) { }
+  constructor(private _markInactiveDriverService_: MarkInactiveDriverService,  private router: Router) { }
 
   
   ngOnInit() {
     
     
     
-    this._MarkInactiveDriverService_.getDriverById(this.token).
+    this._markInactiveDriverService_.getDriverById(this.token).
       subscribe(
         data => {
           console.log ("Data", data);
-          this.userdriver = data;
-          console.log ("Driver", this.userdriver);
+          this.userDriver = data;
+          console.log ("Driver", this.userDriver);
           this.location = data.batch.batchLocation;
           console.log ("location", this.location);
 
-          this._MarkInactiveDriverService_.getRidersForLocation(this.location)
+          this._markInactiveDriverService_.getRidersForLocation(this.location)
           .subscribe(
             data=> {
               this.riders = data;
             });
-            console.log ("Driver", this.userdriver);
+            console.log ("Driver", this.userDriver);
         })
       };
 
@@ -66,14 +59,14 @@ export class DriverComponent implements OnInit {
     changeAcceptingRides(userdriver){
        if(userdriver.acceptingRides == true){
         userdriver.acceptingRides = false;
-      this._MarkInactiveDriverService_.changeDriverIsAccepting (this.userdriver);
+      this._markInactiveDriverService_.changeDriverIsAccepting (this.userDriver);
       
     }
     else {
-      console.log ("driver else before", this.userdriver);
+      console.log ("driver else before", this.userDriver);
       userdriver.acceptingRides = true;
-      this._MarkInactiveDriverService_.changeDriverIsAccepting(this.userdriver);
-      console.log ("driver else after", this.userdriver);
+      this._markInactiveDriverService_.changeDriverIsAccepting(this.userDriver);
+      console.log ("driver else after", this.userDriver);
       
       
     }

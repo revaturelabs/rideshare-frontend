@@ -9,6 +9,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "compodoc": "compodoc -p tsconfig.app.json -s -w"
+    "sonar": "sonarcloud/scan"
   },
   "private": true,
   "dependencies": {

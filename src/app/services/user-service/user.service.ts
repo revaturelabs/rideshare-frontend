@@ -1,8 +1,8 @@
 import { Injectable, Output, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from 'src/app/models/user';
-import { Batch } from 'src/app/models/batch';
 import { Router } from '@angular/router';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   	providedIn: 'root'
@@ -10,9 +10,8 @@ import { Router } from '@angular/router';
 export class UserService {
 	@Output() fireIsLoggedIn: EventEmitter<any> = new EventEmitter<any>();
 
-	url: string = 'http://localhost:8080/users/';
+	url: string = environment.userUri;
 	user: User = new User();
-	batch: Batch = new Batch();
 
 	constructor(private http: HttpClient, private router: Router) { }
 	
@@ -24,21 +23,13 @@ export class UserService {
 		return this.http.get<User>(this.url+idParam).toPromise();
 	}
 
-	createDriver(userName, firstName, lastName, email, phone, batchNum, role: string = 'driver') {
+	createDriver(user: User, role: string = 'driver') {
 
-		this.batch.batchNumber = batchNum;
+		user.active = true;
+		user.driver = false;
+		user.acceptingRides = false;
 
-		this.user.userName = userName;
-		this.user.firstName = firstName;
-		this.user.lastName = lastName;
-		this.user.email = email;
-		this.user.phoneNumber = phone;
-		this.user.batch = this.batch;
-		this.user.driver = false;
-		this.user.active = true;
-		this.user.acceptingRides = false;
-
-		this.http.post(this.url, this.user, {observe: 'response'}).subscribe(
+		this.http.post(this.url, user, {observe: 'response'}).subscribe(
 			(response) => {
 				let userId = response.body[Object.keys(response.body)[0]];
 				sessionStorage.setItem('auth', userId);
@@ -67,7 +58,7 @@ export class UserService {
 			.then((response) => {
 				this.user = response;
 				this.user.driver = isDriver;
-				this.user.acceptingRides = isDriver === true;
+				this.user.acceptingRides = (this.user.active && isDriver);
 
 				this.http.put(this.url+userId, this.user).subscribe(
 					(response) => {
@@ -87,6 +78,9 @@ export class UserService {
 			.then((response) => {
 				this.user = response;
 				this.user[property] = bool;
+				if (property === 'active' && bool === false) {
+					this.user.acceptingRides = false;
+				}
 
 				this.http.put(this.url+userId, this.user).subscribe(
 					(response) => {

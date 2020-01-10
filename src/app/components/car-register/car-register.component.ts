@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CarService } from 'src/app/services/car-service/car.service';
+import { ValidationService } from 'src/app/services/validation-service/validation.service';
+import { Car } from 'src/app/models/car';
 
 @Component({
   selector: 'app-car-register',
@@ -16,12 +18,7 @@ export class CarRegisterComponent implements OnInit {
 
   years: number[] = [];
   userId: number;
-
-  color: string = '';
-	seats: number;
-	make: string = '';
-	model: string = '';
-  year: number;
+  car: Car = new Car();
   
   /**
    * @constructor
@@ -29,7 +26,7 @@ export class CarRegisterComponent implements OnInit {
    * @param router Provides an instance of a router.
    */
 
-  constructor(private carService: CarService, private router: Router) { }
+  constructor(private carService: CarService, private router: Router, private validationService: ValidationService) { }
 
   /**
    * This is an OnInit function that sets the user id as the parsed string in session storage.
@@ -45,7 +42,7 @@ export class CarRegisterComponent implements OnInit {
       let availableYear = currentYear - 15;
       for (let i = availableYear; i <= currentYear; i++) {
         this.years.push(i);
-        this.year = this.years[0];
+        this.car.year = this.years[0];
       }
     }
   }
@@ -57,28 +54,12 @@ export class CarRegisterComponent implements OnInit {
   */
   changeYear(event) {
 		let option = event.target.options.selectedIndex;
-		this.year = this.years[option];
+		this.car.year = this.years[option];
   }
-
- /** 
-  * this function validates the number of seats of the car.
-  * @function
-  * @returns {boolean}
-  */
-
-  validateSeats() {
-    return this.seats > 0 && this.seats <= 6 && this.seats % 1 === 0;
-  }
-
- /** 
-  * this function will create a car if validateSeats returns true.
-  * @function
-  * @returns {void}
-  */
   
   addCar() {
-    if (this.validateSeats()) {
-      this.carService.createCar(this.color, this.seats, this.make, this.model, this.year, this.userId);
+    if (this.validationService.validateSeats(this.car.seats)) {
+      this.carService.createCar(this.car, this.userId);
     }
   }
 

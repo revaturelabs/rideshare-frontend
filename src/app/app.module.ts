@@ -18,6 +18,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { MyCarComponent } from './components/my-car/my-car.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { PreferenceComponent } from './components/preference/preference.component';
+import { ValidationService } from './services/validation-service/validation.service';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { PreferenceComponent } from './components/preference/preference.componen
     UserService,
     CarService,
     BatchService,
-    AuthService
+    AuthService,
+    ValidationService
   ],
   bootstrap: [AppComponent]
 })

@@ -11,6 +11,10 @@ import { AuthService } from 'src/app/services/auth-service/auth.service';
 	templateUrl: './login.component.html',
 	styleUrls: ['./login.component.css']
 })
+
+/**
+ * This is the login component
+ */
 export class LoginComponent implements OnInit {
 
 	users: User[] = [];
@@ -26,8 +30,19 @@ export class LoginComponent implements OnInit {
 	showDropDown: boolean = false;
 	failed: boolean = false;
 
+	/**
+	 * @constructor
+	 * @param userService An user service is instantiated.
+	 * @param router A router service is injected.
+	 * @param http A HTTP Client is created.
+	 * @param authService An auth service is injected.
+	 * 
+	 */
 	constructor(private userService: UserService, private router: Router, private http: HttpClient, private authService: AuthService) { }
 
+	/**
+	 * When the component is initialized, the system checks for the session storage to validate. Once validated, the user service is called to retrieve all users.
+	 */
 	ngOnInit() {
 		if (sessionStorage.getItem('auth')) {
 				this.router.navigate(['home']);

@@ -1,10 +1,6 @@
 <div class="container">
     <form class="text-center" id="login-form">
         <div class="form-group">
-            <!-- <label for="users">Select Account: </label>
-            <select id="users" (change)='changeUser($event)'>
-                <option *ngFor="let user of users" [value]="user.userId" name="user">{{user.firstName}} {{user.lastName}}: {{user.driver? "Driver" : "Rider"}}</option>
-            </select> -->
             <div class="dropdown">
                 <label for="users">Select Account:</label><br>
                 <input type="text" placeholder="Select An Account" name="chosenUserFullName" [(ngModel)]="chosenUserFullName" (click)="toggleDropDown()" (ngModelChange)="searchAccount()" autocomplete="off"/>

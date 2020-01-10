@@ -110,6 +110,12 @@
                             <li>
                                 <a href="#updateIsDriver">updateIsDriver</a>
                             </li>
+                            <li>
+                                <a href="#updatePreference">updatePreference</a>
+                            </li>
+                            <li>
+                                <a href="#updateUserInfo">updateUserInfo</a>
+                            </li>
                         </ul>
                     </td>
                 </tr>
@@ -522,6 +528,160 @@
             </tr>
         </tbody>
     </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updatePreference"></a>
+                    <span class="name">
+                        <b>
+                            updatePreference
+                        </b>
+                        <a href="#updatePreference"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>updatePreference(property, bool, userId)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="80"
+                            class="link-to-prism">src/app/services/user-service/user.service.ts:80</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>property</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>bool</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>userId</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateUserInfo"></a>
+                    <span class="name">
+                        <b>
+                            updateUserInfo
+                        </b>
+                        <a href="#updateUserInfo"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>updateUserInfo(user: <a href="../classes/User.html">User</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="99"
+                            class="link-to-prism">src/app/services/user-service/user.service.ts:99</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>user</td>
+                                    <td>
+                                                <code><a href="../classes/User.html" target="_self" >User</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </section>
             <section>
     
@@ -701,12 +861,35 @@ export class UserService {
 					(response) &#x3D;&gt; {
 					  console.log(response);
 					},
-					  (error) &#x3D;&gt; console.warn(error)
+					(error) &#x3D;&gt; console.warn(error)
 				);
 			})
 			.catch(e &#x3D;&gt; {
 				console.warn(e);
 			})
+	}
+
+	updatePreference(property, bool, userId) {
+
+		this.getUserById(userId)
+			.then((response) &#x3D;&gt; {
+				this.user &#x3D; response;
+				this.user[property] &#x3D; bool;
+
+				this.http.put(this.url+userId, this.user).subscribe(
+					(response) &#x3D;&gt; {
+					  console.log(response);
+					},
+					(error) &#x3D;&gt; console.warn(error)
+				);
+			})
+			.catch(e &#x3D;&gt; {
+				console.warn(e);
+			})
+	}
+
+	updateUserInfo(user: User) {
+		return this.http.put(this.url+user.userId, user).toPromise();
 	}
 }
 </code></pre>

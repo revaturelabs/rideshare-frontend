@@ -7,6 +7,11 @@ import { CarService } from 'src/app/services/car-service/car.service';
   templateUrl: './car-register.component.html',
   styleUrls: ['./car-register.component.css']
 })
+
+  /**
+   * The Car Register component
+   */
+
 export class CarRegisterComponent implements OnInit {
 
   years: number[] = [];
@@ -16,10 +21,21 @@ export class CarRegisterComponent implements OnInit {
 	seats: number;
 	make: string = '';
 	model: string = '';
-	year: number;
+  year: number;
+  
+  /**
+   * @constructor
+   * @param carService A dependency of a car service is injected.
+   * @param router Provides an instance of a router.
+   */
 
   constructor(private carService: CarService, private router: Router) { }
 
+  /**
+   * This is an OnInit function that sets the user id as the parsed string in session storage.
+   * The system will check if the user id is valid.
+   * Once validated, it will initialize the fields. 
+   */
   ngOnInit() {
     this.userId = Number(sessionStorage.getItem('auth'));
     if (!this.userId) {
@@ -34,14 +50,31 @@ export class CarRegisterComponent implements OnInit {
     }
   }
 
+ /**
+  * @function
+  * @param event
+  * @returns {void}
+  */
   changeYear(event) {
 		let option = event.target.options.selectedIndex;
 		this.year = this.years[option];
   }
 
+ /** 
+  * this function validates the number of seats of the car.
+  * @function
+  * @returns {boolean}
+  */
+
   validateSeats() {
     return this.seats > 0 && this.seats <= 6 && this.seats % 1 === 0;
   }
+
+ /** 
+  * this function will create a car if validateSeats returns true.
+  * @function
+  * @returns {void}
+  */
   
   addCar() {
     if (this.validateSeats()) {

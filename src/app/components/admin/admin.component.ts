@@ -6,6 +6,11 @@ import { Router } from '@angular/router';
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.css']
 })
+
+/**
+ * The Admin component
+ */
+
 export class AdminComponent implements OnInit {
   /**
    * @constructor 
@@ -20,9 +25,9 @@ export class AdminComponent implements OnInit {
   ngOnInit() {
   }
   /**
-   * Function that takes no parameters.
-   * 
-   * @return {void} Clears the session storage and logs out.
+   * Function that takes no parameters. 
+   * It will clear the sesssion storage.
+   * @return {void} 
    * 
    */
   logout() {

@@ -176,7 +176,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/components/navbar/navbar.component.ts:15</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/components/navbar/navbar.component.ts:20</a></div>
                             </td>
                         </tr>
 
@@ -190,6 +190,7 @@
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -204,6 +205,10 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <code><p>Provides an instance of a router.</p>
+</code>
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>userService</td>
@@ -216,6 +221,10 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <code><p>A dependency of an user service is injected.</p>
+</code>
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>authService</td>
@@ -228,6 +237,10 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <code><p>A dependency of an auth service is injected.</p>
+</code>
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -269,18 +282,26 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="38"
-                            class="link-to-prism">src/app/components/navbar/navbar.component.ts:38</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="64"
+                            class="link-to-prism">src/app/components/navbar/navbar.component.ts:64</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Function that takes no parameters. 
+It will clear the sesssion storage.</p>
+</div>
 
+                    <div>
+                    </div>
                     <div class="io-description">
                         <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
+                    </div>
+                    <div class="io-description">
+                        
                     </div>
                 </td>
             </tr>
@@ -308,14 +329,19 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="19"
-                            class="link-to-prism">src/app/components/navbar/navbar.component.ts:19</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="38"
+                            class="link-to-prism">src/app/components/navbar/navbar.component.ts:38</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>This is an OnInit function that sets the token to the parsed token string.
+The system will check if the token is valid and send the token to the user service.
+An auth service is invoked and the Navbar will listen to the logged in event.
+The navbar will change after user login or sign up</p>
+</div>
 
                     <div class="io-description">
                         <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -356,7 +382,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/components/navbar/navbar.component.ts:15</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/components/navbar/navbar.component.ts:20</a></div>
                             </td>
                         </tr>
 
@@ -383,7 +409,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/components/navbar/navbar.component.ts:14</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/components/navbar/navbar.component.ts:19</a></div>
                             </td>
                         </tr>
 
@@ -407,12 +433,31 @@ import { User } from &#x27;src/app/models/user&#x27;;
   templateUrl: &#x27;./navbar.component.html&#x27;,
   styleUrls: [&#x27;./navbar.component.css&#x27;]
 })
+
+  /**
+   * The Navbar component
+   */
+
 export class NavbarComponent implements OnInit {
 
   token: number;
   name: string &#x3D; &#x27;&#x27;;
 
+  /**
+   * @constructor 
+   * @param router Provides an instance of a router.
+   * @param userService A dependency of an user service is injected.
+   * @param authService A dependency of an auth service is injected.
+   */
+
   constructor(private router: Router, private userService: UserService, private authService: AuthService) { }
+
+  /**
+   * This is an OnInit function that sets the token to the parsed token string.
+   * The system will check if the token is valid and send the token to the user service.
+   * An auth service is invoked and the Navbar will listen to the logged in event.
+   * The navbar will change after user login or sign up
+   */
 
   ngOnInit() {
     this.token &#x3D; Number(sessionStorage.getItem(&#x27;auth&#x27;));
@@ -432,6 +477,13 @@ export class NavbarComponent implements OnInit {
       this.name &#x3D; user.firstName;
     });
   }
+
+   /**
+   * Function that takes no parameters. 
+   * It will clear the sesssion storage.
+   * @return {void} 
+   * 
+   */
 
   logout() {
     sessionStorage.clear();
@@ -470,8 +522,8 @@ export class NavbarComponent implements OnInit {
                   {{name}}
                 &lt;/a&gt;
                 &lt;div class&#x3D;&quot;dropdown-menu&quot; aria-labelledby&#x3D;&quot;navbarDropdown&quot;&gt;
-                  &lt;a class&#x3D;&quot;dropdown-item&quot; routerLink&#x3D;&quot;/&quot;&gt;Profile&lt;/a&gt;
-                  &lt;a class&#x3D;&quot;dropdown-item&quot; routerLink&#x3D;&quot;/home&quot;&gt;Perference&lt;/a&gt;
+                  &lt;a class&#x3D;&quot;dropdown-item&quot; routerLink&#x3D;&quot;/profile&quot;&gt;Profile&lt;/a&gt;
+                  &lt;a class&#x3D;&quot;dropdown-item&quot; routerLink&#x3D;&quot;/preference&quot;&gt;Preference&lt;/a&gt;
                   &lt;div class&#x3D;&quot;dropdown-divider&quot;&gt;&lt;/div&gt;
                   &lt;a class&#x3D;&quot;dropdown-item&quot; (click)&#x3D;&quot;logout()&quot; id&#x3D;&quot;logout-btn&quot;&gt;Log Out&lt;/a&gt;
                 &lt;/div&gt;
@@ -526,8 +578,8 @@ div {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="container">	<nav class="navbar navbar-expand-lg navbar-light bg-white">		<img src="../assets/revature-logo-600x219.png" routerLink="/" />        <ul class="navbar-nav ml-auto" *ngIf="!token">            <li class="nav-item">              <a class="nav-link" routerLink="/login">Sign In <span class="sr-only">(current)</span></a>            </li>            <li class="nav-item">                <a class="nav-link" routerLink="/registerDriver">Sign Up As Driver<span class="sr-only">(current)</span></a>            </li>            <li class="nav-item">              <a class="nav-link" routerLink="/registerRider">Sign Up As Rider<span class="sr-only">(current)</span></a>          </li>        </ul>        <ul class="navbar-nav ml-auto" *ngIf="token">            <li class="nav-item">              <a class="nav-link" routerLink="/home">Home <span class="sr-only">(current)</span></a>            </li>            <li class="nav-item">                <a class="nav-link" routerLink="/car">My Car <span class="sr-only">(current)</span></a>            </li>            <li class="nav-item active dropdown">                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">                  {{name}}                </a>                <div class="dropdown-menu" aria-labelledby="navbarDropdown">                  <a class="dropdown-item" routerLink="/">Profile</a>                  <a class="dropdown-item" routerLink="/home">Perference</a>                  <div class="dropdown-divider"></div>                  <a class="dropdown-item" (click)="logout()" id="logout-btn">Log Out</a>                </div>            </li>        </ul>	</nav></div></div>'
-    var COMPONENTS = [{'name': 'AdminComponent', 'selector': 'app-admin'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CarRegisterComponent', 'selector': 'app-car-register'},{'name': 'DriverRegisterComponent', 'selector': 'app-driver-register'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MyCarComponent', 'selector': 'app-my-car'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'RiderRegisterComponent', 'selector': 'app-rider-register'}];
+        var COMPONENT_TEMPLATE = '<div><div class="container">	<nav class="navbar navbar-expand-lg navbar-light bg-white">		<img src="../assets/revature-logo-600x219.png" routerLink="/" />        <ul class="navbar-nav ml-auto" *ngIf="!token">            <li class="nav-item">              <a class="nav-link" routerLink="/login">Sign In <span class="sr-only">(current)</span></a>            </li>            <li class="nav-item">                <a class="nav-link" routerLink="/registerDriver">Sign Up As Driver<span class="sr-only">(current)</span></a>            </li>            <li class="nav-item">              <a class="nav-link" routerLink="/registerRider">Sign Up As Rider<span class="sr-only">(current)</span></a>          </li>        </ul>        <ul class="navbar-nav ml-auto" *ngIf="token">            <li class="nav-item">              <a class="nav-link" routerLink="/home">Home <span class="sr-only">(current)</span></a>            </li>            <li class="nav-item">                <a class="nav-link" routerLink="/car">My Car <span class="sr-only">(current)</span></a>            </li>            <li class="nav-item active dropdown">                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">                  {{name}}                </a>                <div class="dropdown-menu" aria-labelledby="navbarDropdown">                  <a class="dropdown-item" routerLink="/profile">Profile</a>                  <a class="dropdown-item" routerLink="/preference">Preference</a>                  <div class="dropdown-divider"></div>                  <a class="dropdown-item" (click)="logout()" id="logout-btn">Log Out</a>                </div>            </li>        </ul>	</nav></div></div>'
+    var COMPONENTS = [{'name': 'AdminComponent', 'selector': 'app-admin'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CarRegisterComponent', 'selector': 'app-car-register'},{'name': 'DriverRegisterComponent', 'selector': 'app-driver-register'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MyCarComponent', 'selector': 'app-my-car'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PreferenceComponent', 'selector': 'app-preference'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'RiderRegisterComponent', 'selector': 'app-rider-register'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'NavbarComponent'};
 </script>

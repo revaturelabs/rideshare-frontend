@@ -104,6 +104,9 @@
                             <li>
                                 <a href="#getCarByUserId">getCarByUserId</a>
                             </li>
+                            <li>
+                                <a href="#removeCar">removeCar</a>
+                            </li>
                         </ul>
                     </td>
                 </tr>
@@ -359,7 +362,7 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>getCarByUserId(userId)</code>
+<code>getCarByUserId(userId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
                 </td>
             </tr>
 
@@ -381,12 +384,86 @@
                             <thead>
                                 <tr>
                                     <td>Name</td>
+                                    <td>Type</td>
                                     <td>Optional</td>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td>userId</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="removeCar"></a>
+                    <span class="name">
+                        <b>
+                            removeCar
+                        </b>
+                        <a href="#removeCar"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>removeCar(carId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="52"
+                            class="link-to-prism">src/app/services/car-service/car.service.ts:52</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>carId</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
 
                                     <td>
                                         No
@@ -540,7 +617,7 @@ export class CarService {
 		return this.http.get&lt;Car[]&gt;(this.url);
 	}
 
-	getCarByUserId(userId) {
+	getCarByUserId(userId: number) {
 		return this.http.get&lt;Car&gt;(&#x60;${this.url}users/${userId}&#x60;).toPromise();
 	}
 	
@@ -567,6 +644,10 @@ export class CarService {
 				alert(&quot;Server Error! Please Try Again Later.&quot;);
 			}
 		);
+	}
+
+	removeCar(carId: number) {
+		return this.http.delete&lt;Car&gt;(this.url+carId);
 	}
 }
 </code></pre>

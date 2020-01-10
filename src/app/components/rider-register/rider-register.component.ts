@@ -26,6 +26,13 @@ export class RiderRegisterComponent implements OnInit {
    * @param batchService A dependency of a batch service is injected.
    */
 
+
+  /**
+   * @constructor 
+   * @param userService A dependency of an user service is injected.
+   * @param batchService A dependency of a batch service is injected.
+   */
+
 	constructor(private userService: UserService, private batchService: BatchService) { }
 
 	/**
@@ -57,6 +64,9 @@ export class RiderRegisterComponent implements OnInit {
 	nameFormat(name: string) {
 		return name[0].toUpperCase() + name.slice(1).toLowerCase();
 	}
+	/**
+	 * This function checks the email that the user entered.
+	 */
 
 	phoneFormat(phone: string) {
 		return phone.replace(/[^0-9]/g, '').replace(/(\d{3})(\d{3})(\d{4})/, "($1) $2-$3");
@@ -69,6 +79,7 @@ export class RiderRegisterComponent implements OnInit {
 	validateEmail() {
 		return /^\w+\.?\w+@\w+\.\w{2,4}$/.test(this.email);
 	}
+
 	/**
 	 * This function validates the phone number.
 	 */

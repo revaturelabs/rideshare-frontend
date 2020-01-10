@@ -20,8 +20,11 @@ export class RiderRegisterComponent implements OnInit {
 	phone: string = '';
 	batchNum: number;
 
-	enable: boolean = true;
-	failed: boolean = false;
+  /**
+   * @constructor 
+   * @param userService A dependency of an user service is injected.
+   * @param batchService A dependency of a batch service is injected.
+   */
 
 
   /**
@@ -39,6 +42,7 @@ export class RiderRegisterComponent implements OnInit {
 		this.batchService.getAllBatches()
 			.subscribe(allBatches => {
 				this.batches = allBatches;
+				this.batchNum = this.batches[0].batchNumber;
 		});
 	}
 	/**
@@ -64,9 +68,18 @@ export class RiderRegisterComponent implements OnInit {
 	 * This function checks the email that the user entered.
 	 */
 
-	validateEmail() {
-		return /^\w+@\w+\.\w{2,4}$/.test(this.email);
+	phoneFormat(phone: string) {
+		return phone.replace(/[^0-9]/g, '').replace(/(\d{3})(\d{3})(\d{4})/, "($1) $2-$3");
 	}
+
+	/**
+	 * This function checks the email that the user entered.
+	 */
+
+	validateEmail() {
+		return /^\w+\.?\w+@\w+\.\w{2,4}$/.test(this.email);
+	}
+
 	/**
 	 * This function validates the phone number.
 	 */
@@ -83,7 +96,9 @@ export class RiderRegisterComponent implements OnInit {
 	}
 
 	signUp() {
-		console.log(this.batchNum);
+		if (this.validateUserName() && this.validateName(this.firstName) && this.validateName(this.lastName) && this.validateEmail() && this.validatePhone()) {
+			this.userService.createDriver(this.userName, this.nameFormat(this.firstName), this.nameFormat(this.lastName), this.email, this.phoneFormat(this.phone), this.batchNum, 'rider')
+		}
 	}
 
 }

@@ -24,7 +24,7 @@ export class UserService {
 		return this.http.get<User>(this.url+idParam).toPromise();
 	}
 
-	createDriver(userName, firstName, lastName, email, phone, batchNum) {
+	createDriver(userName, firstName, lastName, email, phone, batchNum, role: string = 'driver') {
 
 		this.batch.batchNumber = batchNum;
 
@@ -43,7 +43,11 @@ export class UserService {
 				let userId = response.body[Object.keys(response.body)[0]];
 				sessionStorage.setItem('auth', userId);
 				this.fireIsLoggedIn.emit(response.body);
-				this.router.navigate(['new/car']);
+				if (role === 'driver') {
+					this.router.navigate(['new/car']);
+				} else {
+					this.router.navigate(['home']);
+				}
 			},
 			(error) => {
 				console.warn(error);

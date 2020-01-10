@@ -33,10 +33,8 @@
                     <option *ngFor="let batch of batches" [value]="batch.batchNumber">{{batch.batchLocation}}</option>
                 </select>
             </div>          
-            <div *ngIf="failed" class="alert alert-danger"><strong>Failed!</strong> Please Try Again</div>
             <div class="form-group">
-                <!-- <button id="sign-up-btn" class="btn btn-primary" type="button" (click)="signUp()" [disabled]="!(userName && firstName && lastName && email && phone && address && color && seats && make && model && enable)">Sign Up As Driver</button> -->
-                <button id="sign-up-btn" class="btn btn-primary" type="button" (click)="signUp()">Sign Up As Rider</button>
+                <button id="sign-up-btn" class="btn btn-primary" type="button" (click)="signUp()" [disabled]="!(userName && firstName && lastName && email && phone)">Sign Up As Rider</button>
             </div>
         </div>
     </form>

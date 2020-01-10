@@ -184,31 +184,13 @@
                                 <a href="#getUserInfo">getUserInfo</a>
                             </li>
                             <li>
-                                <a href="#nameFormat">nameFormat</a>
-                            </li>
-                            <li>
                                 <a href="#ngOnInit">ngOnInit</a>
-                            </li>
-                            <li>
-                                <a href="#phoneFormat">phoneFormat</a>
                             </li>
                             <li>
                                 <a href="#restoreChange">restoreChange</a>
                             </li>
                             <li>
                                 <a href="#updateProfile">updateProfile</a>
-                            </li>
-                            <li>
-                                <a href="#validateEmail">validateEmail</a>
-                            </li>
-                            <li>
-                                <a href="#validateName">validateName</a>
-                            </li>
-                            <li>
-                                <a href="#validatePhone">validatePhone</a>
-                            </li>
-                            <li>
-                                <a href="#validateUserName">validateUserName</a>
                             </li>
                         </ul>
                     </td>
@@ -228,12 +210,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>, userService: <a href="../injectables/UserService.html">UserService</a>, batchService: <a href="../injectables/BatchService.html">BatchService</a>)</code>
+<code>constructor(router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>, userService: <a href="../injectables/UserService.html">UserService</a>, batchService: <a href="../injectables/BatchService.html">BatchService</a>, validationService: ValidationService)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/components/profile/profile.component.ts:25</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/components/profile/profile.component.ts:26</a></div>
                             </td>
                         </tr>
 
@@ -286,6 +268,18 @@
                                                     </td>
                                                     
                                                 </tr>
+                                                <tr>
+                                                        <td>validationService</td>
+                                                  
+                                                        <td>
+                                                                    <code>ValidationService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
                                         </tbody>
                                     </table>
                             </div>
@@ -326,8 +320,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="88"
-                            class="link-to-prism">src/app/components/profile/profile.component.ts:88</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="65"
+                            class="link-to-prism">src/app/components/profile/profile.component.ts:65</a></div>
                 </td>
             </tr>
 
@@ -392,8 +386,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="60"
-                            class="link-to-prism">src/app/components/profile/profile.component.ts:60</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="61"
+                            class="link-to-prism">src/app/components/profile/profile.component.ts:61</a></div>
                 </td>
             </tr>
 
@@ -431,8 +425,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="120"
-                            class="link-to-prism">src/app/components/profile/profile.component.ts:120</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="97"
+                            class="link-to-prism">src/app/components/profile/profile.component.ts:97</a></div>
                 </td>
             </tr>
 
@@ -497,8 +491,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="38"
-                            class="link-to-prism">src/app/components/profile/profile.component.ts:38</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="39"
+                            class="link-to-prism">src/app/components/profile/profile.component.ts:39</a></div>
                 </td>
             </tr>
 
@@ -509,76 +503,6 @@
                     <div class="io-description">
                         <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="nameFormat"></a>
-                    <span class="name">
-                        <b>
-                            nameFormat
-                        </b>
-                        <a href="#nameFormat"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>nameFormat(name: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="72"
-                            class="link-to-prism">src/app/components/profile/profile.component.ts:72</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>name</td>
-                                    <td>
-                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-
-                    </div>
-                    <div class="io-description">
-                        
                     </div>
                 </td>
             </tr>
@@ -606,8 +530,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="29"
-                            class="link-to-prism">src/app/components/profile/profile.component.ts:29</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="30"
+                            class="link-to-prism">src/app/components/profile/profile.component.ts:30</a></div>
                 </td>
             </tr>
 
@@ -618,76 +542,6 @@
                     <div class="io-description">
                         <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="phoneFormat"></a>
-                    <span class="name">
-                        <b>
-                            phoneFormat
-                        </b>
-                        <a href="#phoneFormat"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>phoneFormat(phone: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="76"
-                            class="link-to-prism">src/app/components/profile/profile.component.ts:76</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>phone</td>
-                                    <td>
-                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-
-                    </div>
-                    <div class="io-description">
-                        
                     </div>
                 </td>
             </tr>
@@ -715,8 +569,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="128"
-                            class="link-to-prism">src/app/components/profile/profile.component.ts:128</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="105"
+                            class="link-to-prism">src/app/components/profile/profile.component.ts:105</a></div>
                 </td>
             </tr>
 
@@ -754,8 +608,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="94"
-                            class="link-to-prism">src/app/components/profile/profile.component.ts:94</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="71"
+                            class="link-to-prism">src/app/components/profile/profile.component.ts:71</a></div>
                 </td>
             </tr>
 
@@ -765,193 +619,6 @@
 
                     <div class="io-description">
                         <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="validateEmail"></a>
-                    <span class="name">
-                        <b>
-                            validateEmail
-                        </b>
-                        <a href="#validateEmail"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>validateEmail()</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="80"
-                            class="link-to-prism">src/app/components/profile/profile.component.ts:80</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="validateName"></a>
-                    <span class="name">
-                        <b>
-                            validateName
-                        </b>
-                        <a href="#validateName"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>validateName(name: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="68"
-                            class="link-to-prism">src/app/components/profile/profile.component.ts:68</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>name</td>
-                                    <td>
-                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
-
-                    </div>
-                    <div class="io-description">
-                        
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="validatePhone"></a>
-                    <span class="name">
-                        <b>
-                            validatePhone
-                        </b>
-                        <a href="#validatePhone"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>validatePhone()</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="84"
-                            class="link-to-prism">src/app/components/profile/profile.component.ts:84</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="validateUserName"></a>
-                    <span class="name">
-                        <b>
-                            validateUserName
-                        </b>
-                        <a href="#validateUserName"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>validateUserName()</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="64"
-                            class="link-to-prism">src/app/components/profile/profile.component.ts:64</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
 
                     </div>
                 </td>
@@ -989,7 +656,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/components/profile/profile.component.ts:17</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/components/profile/profile.component.ts:18</a></div>
                             </td>
                         </tr>
 
@@ -1021,7 +688,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/components/profile/profile.component.ts:18</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/components/profile/profile.component.ts:19</a></div>
                             </td>
                         </tr>
 
@@ -1053,7 +720,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/components/profile/profile.component.ts:22</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/components/profile/profile.component.ts:23</a></div>
                             </td>
                         </tr>
 
@@ -1085,7 +752,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/components/profile/profile.component.ts:16</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/components/profile/profile.component.ts:17</a></div>
                             </td>
                         </tr>
 
@@ -1117,7 +784,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/components/profile/profile.component.ts:23</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/components/profile/profile.component.ts:24</a></div>
                             </td>
                         </tr>
 
@@ -1144,7 +811,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/components/profile/profile.component.ts:20</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">src/app/components/profile/profile.component.ts:21</a></div>
                             </td>
                         </tr>
 
@@ -1171,7 +838,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/components/profile/profile.component.ts:19</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/components/profile/profile.component.ts:20</a></div>
                             </td>
                         </tr>
 
@@ -1203,7 +870,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/components/profile/profile.component.ts:25</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/components/profile/profile.component.ts:26</a></div>
                             </td>
                         </tr>
 
@@ -1235,7 +902,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/components/profile/profile.component.ts:24</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/components/profile/profile.component.ts:25</a></div>
                             </td>
                         </tr>
 
@@ -1267,7 +934,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/components/profile/profile.component.ts:15</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/components/profile/profile.component.ts:16</a></div>
                             </td>
                         </tr>
 
@@ -1286,6 +953,7 @@ import { UserService } from &#x27;src/app/services/user-service/user.service&#x2
 import { User } from &#x27;src/app/models/user&#x27;;
 import { Batch } from &#x27;src/app/models/batch&#x27;;
 import { BatchService } from &#x27;src/app/services/batch-service/batch.service&#x27;;
+import { ValidationService } from &#x27;src/app/services/validation-service/validation.service&#x27;;
 
 @Component({
   selector: &#x27;app-profile&#x27;,
@@ -1306,7 +974,7 @@ export class ProfileComponent implements OnInit {
   updateSuccess: boolean &#x3D; false;
   updateFailed: boolean &#x3D; false;
 
-  constructor(private router: Router, private userService: UserService, private batchService: BatchService) { }
+  constructor(private router: Router, private userService: UserService, private batchService: BatchService, private validationService: ValidationService) { }
 
   ngOnInit() {
     this.user.userId &#x3D; Number(sessionStorage.getItem(&#x27;auth&#x27;));
@@ -1340,33 +1008,9 @@ export class ProfileComponent implements OnInit {
   }
 
   compareUser() {
-    return this.user.firstName.toLowerCase() &#x3D;&#x3D;&#x3D; this.newUser.firstName.toLowerCase() &amp;&amp; this.user.lastName.toLowerCase() &#x3D;&#x3D;&#x3D; this.newUser.lastName.toLowerCase() &amp;&amp; this.user.userName &#x3D;&#x3D;&#x3D; this.newUser.userName &amp;&amp; this.user.email &#x3D;&#x3D;&#x3D; this.newUser.email &amp;&amp; this.phoneFormat(this.user.phoneNumber) &#x3D;&#x3D;&#x3D; this.phoneFormat(this.newUser.phoneNumber) &amp;&amp; this.user.batch.batchNumber &#x3D;&#x3D;&#x3D; this.oldBatchNumber;
+    return this.user.firstName.toLowerCase() &#x3D;&#x3D;&#x3D; this.newUser.firstName.toLowerCase() &amp;&amp; this.user.lastName.toLowerCase() &#x3D;&#x3D;&#x3D; this.newUser.lastName.toLowerCase() &amp;&amp; this.user.userName &#x3D;&#x3D;&#x3D; this.newUser.userName &amp;&amp; this.user.email &#x3D;&#x3D;&#x3D; this.newUser.email &amp;&amp; this.validationService.phoneFormat(this.user.phoneNumber) &#x3D;&#x3D;&#x3D; this.validationService.phoneFormat(this.newUser.phoneNumber) &amp;&amp; this.user.batch.batchNumber &#x3D;&#x3D;&#x3D; this.oldBatchNumber;
   }
 
-  validateUserName() {
-		return this.newUser.userName.length &gt;&#x3D; 3 &amp;&amp; this.newUser.userName.length &lt;&#x3D; 8;
-	}
-
-	validateName(name: string) {
-		return /^([a-zA-z]){1,20}$/.test(name) &amp;&amp; name.length &lt; 20;
-	}
-
-	nameFormat(name: string) {
-		return name[0].toUpperCase() + name.slice(1).toLowerCase();
-	}
-
-	phoneFormat(phone: string) {
-		return phone.replace(/[^0-9]/g, &#x27;&#x27;).replace(/(\d{3})(\d{3})(\d{4})/, &quot;($1) $2-$3&quot;);
-	}
-
-	validateEmail() {
-		return /^\w+\.?\w+@\w+\.\w{2,4}$/.test(this.newUser.email);
-	}
-
-	validatePhone() {
-		return /^\(?([0-9]{3})\)?[-.\s]?([0-9]{3})[-.\s]?([0-9]{4})$/.test(this.newUser.phoneNumber);
-  }
-  
   changeLocation(event) {
 		let option &#x3D; event.target.options.selectedIndex;
     this.newUser.batch.batchNumber &#x3D; this.batches[option].batchNumber;
@@ -1374,16 +1018,16 @@ export class ProfileComponent implements OnInit {
 	}
 
   updateProfile() {
-    if (this.validateUserName() &amp;&amp; this.validateName(this.newUser.firstName) &amp;&amp; this.validateName(this.newUser.lastName) &amp;&amp; this.validateEmail() &amp;&amp; this.validatePhone()) {
+    if (this.validationService.validateUserName(this.newUser.userName) &amp;&amp; this.validationService.validateName(this.newUser.firstName) &amp;&amp; this.validationService.validateName(this.newUser.lastName) &amp;&amp; this.validationService.validateEmail(this.newUser.email) &amp;&amp; this.validationService.validatePhone(this.newUser.phoneNumber)) {
       this.editable &#x3D; &#x27;&#x27;;
       if (this.compareUser()) {
         this.noChange &#x3D; true;
         this.newUser &#x3D; Object.assign({}, this.user);
         setTimeout(() &#x3D;&gt; this.noChange &#x3D; false, 3000);
       } else {
-        this.newUser.firstName &#x3D; this.nameFormat(this.newUser.firstName);
-        this.newUser.lastName &#x3D; this.nameFormat(this.newUser.lastName);
-        this.newUser.phoneNumber &#x3D; this.phoneFormat(this.newUser.phoneNumber);
+        this.newUser.firstName &#x3D; this.validationService.nameFormat(this.newUser.firstName);
+        this.newUser.lastName &#x3D; this.validationService.nameFormat(this.newUser.lastName);
+        this.newUser.phoneNumber &#x3D; this.validationService.phoneFormat(this.newUser.phoneNumber);
 
         this.userService.updateUserInfo(this.newUser).then(response &#x3D;&gt; {
           console.log(response);
@@ -1427,33 +1071,33 @@ export class ProfileComponent implements OnInit {
             &lt;tr&gt;
                 &lt;th scope&#x3D;&quot;col&quot;&gt;User Name&lt;/th&gt;
                 &lt;td&gt;&lt;input type&#x3D;&quot;text&quot; name&#x3D;&quot;userName&quot; [(ngModel)]&#x3D;&quot;newUser.userName&quot; [readonly]&#x3D;&quot;editable!&#x3D;&#x3D;&#x27;userName&#x27;&quot; [ngClass]&#x3D;&quot;editable&#x3D;&#x3D;&#x3D;&#x27;userName&#x27; ? &#x27;editField&#x27; : &#x27;&#x27;&quot;&gt;&lt;/td&gt;
-                &lt;td&gt;&lt;img class&#x3D;&quot;edit&quot; (click)&#x3D;&quot;edit(&#x27;userName&#x27;)&quot; src&#x3D;&quot;../../../assets/pencil.png&quot;/&gt;&lt;/td&gt;
+                &lt;td&gt;&lt;img class&#x3D;&quot;edit&quot; (click)&#x3D;&quot;edit(&#x27;userName&#x27;)&quot; src&#x3D;&quot;assets/pencil.png&quot;/&gt;&lt;/td&gt;
             &lt;/tr&gt;
-            &lt;small *ngIf&#x3D;&quot;newUser.userName &amp;&amp; !validateUserName()&quot;&gt;Invalid Username&lt;/small&gt;
+            &lt;small *ngIf&#x3D;&quot;newUser.userName &amp;&amp; !validationService.validateUserName(newUser.userName)&quot;&gt;Invalid Username&lt;/small&gt;
             &lt;tr&gt;
                 &lt;th scope&#x3D;&quot;col&quot;&gt;First Name&lt;/th&gt;
                 &lt;td&gt;&lt;input type&#x3D;&quot;text&quot; name&#x3D;&quot;firstName&quot; [(ngModel)]&#x3D;&quot;newUser.firstName&quot; [readonly]&#x3D;&quot;editable!&#x3D;&#x3D;&#x27;firstName&#x27;&quot; [ngClass]&#x3D;&quot;editable&#x3D;&#x3D;&#x3D;&#x27;firstName&#x27; ? &#x27;editField&#x27; : &#x27;&#x27;&quot;&gt;&lt;/td&gt;
-                &lt;td&gt;&lt;img class&#x3D;&quot;edit&quot; (click)&#x3D;&quot;edit(&#x27;firstName&#x27;)&quot; src&#x3D;&quot;../../../assets/pencil.png&quot;/&gt;&lt;/td&gt;
+                &lt;td&gt;&lt;img class&#x3D;&quot;edit&quot; (click)&#x3D;&quot;edit(&#x27;firstName&#x27;)&quot; src&#x3D;&quot;assets/pencil.png&quot;/&gt;&lt;/td&gt;
             &lt;/tr&gt;
-            &lt;small *ngIf&#x3D;&quot;newUser.firstName &amp;&amp; !validateName(newUser.firstName)&quot;&gt;Invalid Name&lt;/small&gt;
+            &lt;small *ngIf&#x3D;&quot;newUser.firstName &amp;&amp; !validationService.validateName(newUser.firstName)&quot;&gt;Invalid Name&lt;/small&gt;
             &lt;tr&gt;
                 &lt;th scope&#x3D;&quot;col&quot;&gt;Last Name&lt;/th&gt;
                 &lt;td&gt;&lt;input type&#x3D;&quot;text&quot; name&#x3D;&quot;lastName&quot; [(ngModel)]&#x3D;&quot;newUser.lastName&quot; [readonly]&#x3D;&quot;editable!&#x3D;&#x3D;&#x27;lastName&#x27;&quot; [ngClass]&#x3D;&quot;editable&#x3D;&#x3D;&#x3D;&#x27;lastName&#x27; ? &#x27;editField&#x27; : &#x27;&#x27;&quot;&gt;&lt;/td&gt;
-                &lt;td&gt;&lt;img class&#x3D;&quot;edit&quot; (click)&#x3D;&quot;edit(&#x27;lastName&#x27;)&quot; src&#x3D;&quot;../../../assets/pencil.png&quot;/&gt;&lt;/td&gt;
+                &lt;td&gt;&lt;img class&#x3D;&quot;edit&quot; (click)&#x3D;&quot;edit(&#x27;lastName&#x27;)&quot; src&#x3D;&quot;assets/pencil.png&quot;/&gt;&lt;/td&gt;
             &lt;/tr&gt;
-            &lt;small *ngIf&#x3D;&quot;newUser.lastName &amp;&amp; !validateName(newUser.lastName)&quot;&gt;Invalid Name&lt;/small&gt;
+            &lt;small *ngIf&#x3D;&quot;newUser.lastName &amp;&amp; !validationService.validateName(newUser.lastName)&quot;&gt;Invalid Name&lt;/small&gt;
             &lt;tr&gt;
                 &lt;th scope&#x3D;&quot;col&quot;&gt;Email&lt;/th&gt;
                 &lt;td&gt;&lt;input type&#x3D;&quot;text&quot; name&#x3D;&quot;email&quot; [(ngModel)]&#x3D;&quot;newUser.email&quot; [readonly]&#x3D;&quot;editable!&#x3D;&#x3D;&#x27;email&#x27;&quot; [ngClass]&#x3D;&quot;editable&#x3D;&#x3D;&#x3D;&#x27;email&#x27; ? &#x27;editField&#x27; : &#x27;&#x27;&quot;&gt;&lt;/td&gt;
-                &lt;td&gt;&lt;img class&#x3D;&quot;edit&quot; (click)&#x3D;&quot;edit(&#x27;email&#x27;)&quot; src&#x3D;&quot;../../../assets/pencil.png&quot;/&gt;&lt;/td&gt;
+                &lt;td&gt;&lt;img class&#x3D;&quot;edit&quot; (click)&#x3D;&quot;edit(&#x27;email&#x27;)&quot; src&#x3D;&quot;assets/pencil.png&quot;/&gt;&lt;/td&gt;
             &lt;/tr&gt;
-            &lt;small *ngIf&#x3D;&quot;newUser.email &amp;&amp; !validateEmail()&quot;&gt;Invalid Email&lt;/small&gt;
+            &lt;small *ngIf&#x3D;&quot;newUser.email &amp;&amp; !validationService.validateEmail(newUser.email)&quot;&gt;Invalid Email&lt;/small&gt;
             &lt;tr&gt;
                 &lt;th scope&#x3D;&quot;col&quot;&gt;Phone&lt;/th&gt;
                 &lt;td&gt;&lt;input type&#x3D;&quot;text&quot; name&#x3D;&quot;phoneNumber&quot; [(ngModel)]&#x3D;&quot;newUser.phoneNumber&quot; [readonly]&#x3D;&quot;editable!&#x3D;&#x3D;&#x27;phoneNumber&#x27;&quot; [ngClass]&#x3D;&quot;editable&#x3D;&#x3D;&#x3D;&#x27;phoneNumber&#x27; ? &#x27;editField&#x27; : &#x27;&#x27;&quot;&gt;&lt;/td&gt;
-                &lt;td&gt;&lt;img class&#x3D;&quot;edit&quot; (click)&#x3D;&quot;edit(&#x27;phoneNumber&#x27;)&quot; src&#x3D;&quot;../../../assets/pencil.png&quot;/&gt;&lt;/td&gt;
+                &lt;td&gt;&lt;img class&#x3D;&quot;edit&quot; (click)&#x3D;&quot;edit(&#x27;phoneNumber&#x27;)&quot; src&#x3D;&quot;assets/pencil.png&quot;/&gt;&lt;/td&gt;
             &lt;/tr&gt;
-            &lt;small *ngIf&#x3D;&quot;newUser.phoneNumber &amp;&amp; !validatePhone()&quot;&gt;Invalid Phone#&lt;/small&gt;
+            &lt;small *ngIf&#x3D;&quot;newUser.phoneNumber &amp;&amp; !validationService.validatePhone(newUser.phoneNumber)&quot;&gt;Invalid Phone#&lt;/small&gt;
             &lt;tr&gt;
                 &lt;th scope&#x3D;&quot;col&quot;&gt;Location&lt;/th&gt;
                 &lt;td *ngIf&#x3D;&quot;editable!&#x3D;&#x3D;&#x27;batch&#x27;&quot;&gt;{{newUser.batch.batchLocation}}&lt;/td&gt;
@@ -1462,7 +1106,7 @@ export class ProfileComponent implements OnInit {
                         &lt;option *ngFor&#x3D;&quot;let batch of batches&quot; [value]&#x3D;&quot;batch.batchNumber&quot;&gt;{{batch.batchLocation}}&lt;/option&gt;
                     &lt;/select&gt;
                 &lt;/td&gt;
-                &lt;td&gt;&lt;img class&#x3D;&quot;edit&quot; src&#x3D;&quot;../../../assets/pencil.png&quot; (click)&#x3D;&quot;edit(&#x27;batch&#x27;)&quot; /&gt;&lt;/td&gt;
+                &lt;td&gt;&lt;img class&#x3D;&quot;edit&quot; src&#x3D;&quot;assets/pencil.png&quot; (click)&#x3D;&quot;edit(&#x27;batch&#x27;)&quot; /&gt;&lt;/td&gt;
             &lt;/tr&gt;
         &lt;/table&gt;
         &lt;div class&#x3D;&quot;text-right&quot;&gt;
@@ -1541,7 +1185,7 @@ input {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="container">    <div id="profile" *ngIf="newUser.userId">        <h2>Profile</h2>        <table class="table table-hover">            <tr>                <th scope="col">User Name</th>                <td><input type="text" name="userName" [(ngModel)]="newUser.userName" [readonly]="editable!==\'userName\'" [ngClass]="editable===\'userName\' ? \'editField\' : \'\'"></td>                <td><img class="edit" (click)="edit(\'userName\')" src="../../../assets/pencil.png"/></td>            </tr>            <small *ngIf="newUser.userName && !validateUserName()">Invalid Username</small>            <tr>                <th scope="col">First Name</th>                <td><input type="text" name="firstName" [(ngModel)]="newUser.firstName" [readonly]="editable!==\'firstName\'" [ngClass]="editable===\'firstName\' ? \'editField\' : \'\'"></td>                <td><img class="edit" (click)="edit(\'firstName\')" src="../../../assets/pencil.png"/></td>            </tr>            <small *ngIf="newUser.firstName && !validateName(newUser.firstName)">Invalid Name</small>            <tr>                <th scope="col">Last Name</th>                <td><input type="text" name="lastName" [(ngModel)]="newUser.lastName" [readonly]="editable!==\'lastName\'" [ngClass]="editable===\'lastName\' ? \'editField\' : \'\'"></td>                <td><img class="edit" (click)="edit(\'lastName\')" src="../../../assets/pencil.png"/></td>            </tr>            <small *ngIf="newUser.lastName && !validateName(newUser.lastName)">Invalid Name</small>            <tr>                <th scope="col">Email</th>                <td><input type="text" name="email" [(ngModel)]="newUser.email" [readonly]="editable!==\'email\'" [ngClass]="editable===\'email\' ? \'editField\' : \'\'"></td>                <td><img class="edit" (click)="edit(\'email\')" src="../../../assets/pencil.png"/></td>            </tr>            <small *ngIf="newUser.email && !validateEmail()">Invalid Email</small>            <tr>                <th scope="col">Phone</th>                <td><input type="text" name="phoneNumber" [(ngModel)]="newUser.phoneNumber" [readonly]="editable!==\'phoneNumber\'" [ngClass]="editable===\'phoneNumber\' ? \'editField\' : \'\'"></td>                <td><img class="edit" (click)="edit(\'phoneNumber\')" src="../../../assets/pencil.png"/></td>            </tr>            <small *ngIf="newUser.phoneNumber && !validatePhone()">Invalid Phone#</small>            <tr>                <th scope="col">Location</th>                <td *ngIf="editable!==\'batch\'">{{newUser.batch.batchLocation}}</td>                <td *ngIf="editable===\'batch\'">                    <select id="location" (change)=\'changeLocation($event)\'>                        <option *ngFor="let batch of batches" [value]="batch.batchNumber">{{batch.batchLocation}}</option>                    </select>                </td>                <td><img class="edit" src="../../../assets/pencil.png" (click)="edit(\'batch\')" /></td>            </tr>        </table>        <div class="text-right">            <button type="button" class="btn btn-outline-secondary" (click)="restoreChange()" *ngIf="!compareUser()">Restore</button>            <button type="button" class="btn btn-outline-secondary" (click)="updateProfile()" [disabled]="!(newUser.userName && newUser.firstName && newUser.lastName && newUser.email && newUser.phoneNumber && newUser.batch.batchLocation)">Update</button>        </div><br>        <div class="alert alert-danger" *ngIf="noChange">No Change Has Been Made</div>        <div class="alert alert-success" *ngIf="updateSuccess">Update Success!</div>        <div class="alert alert-danger" *ngIf="updateFailed">Update Failed! Please Try Again Later</div>    </div></div></div>'
+        var COMPONENT_TEMPLATE = '<div><div class="container">    <div id="profile" *ngIf="newUser.userId">        <h2>Profile</h2>        <table class="table table-hover">            <tr>                <th scope="col">User Name</th>                <td><input type="text" name="userName" [(ngModel)]="newUser.userName" [readonly]="editable!==\'userName\'" [ngClass]="editable===\'userName\' ? \'editField\' : \'\'"></td>                <td><img class="edit" (click)="edit(\'userName\')" src="assets/pencil.png"/></td>            </tr>            <small *ngIf="newUser.userName && !validationService.validateUserName(newUser.userName)">Invalid Username</small>            <tr>                <th scope="col">First Name</th>                <td><input type="text" name="firstName" [(ngModel)]="newUser.firstName" [readonly]="editable!==\'firstName\'" [ngClass]="editable===\'firstName\' ? \'editField\' : \'\'"></td>                <td><img class="edit" (click)="edit(\'firstName\')" src="assets/pencil.png"/></td>            </tr>            <small *ngIf="newUser.firstName && !validationService.validateName(newUser.firstName)">Invalid Name</small>            <tr>                <th scope="col">Last Name</th>                <td><input type="text" name="lastName" [(ngModel)]="newUser.lastName" [readonly]="editable!==\'lastName\'" [ngClass]="editable===\'lastName\' ? \'editField\' : \'\'"></td>                <td><img class="edit" (click)="edit(\'lastName\')" src="assets/pencil.png"/></td>            </tr>            <small *ngIf="newUser.lastName && !validationService.validateName(newUser.lastName)">Invalid Name</small>            <tr>                <th scope="col">Email</th>                <td><input type="text" name="email" [(ngModel)]="newUser.email" [readonly]="editable!==\'email\'" [ngClass]="editable===\'email\' ? \'editField\' : \'\'"></td>                <td><img class="edit" (click)="edit(\'email\')" src="assets/pencil.png"/></td>            </tr>            <small *ngIf="newUser.email && !validationService.validateEmail(newUser.email)">Invalid Email</small>            <tr>                <th scope="col">Phone</th>                <td><input type="text" name="phoneNumber" [(ngModel)]="newUser.phoneNumber" [readonly]="editable!==\'phoneNumber\'" [ngClass]="editable===\'phoneNumber\' ? \'editField\' : \'\'"></td>                <td><img class="edit" (click)="edit(\'phoneNumber\')" src="assets/pencil.png"/></td>            </tr>            <small *ngIf="newUser.phoneNumber && !validationService.validatePhone(newUser.phoneNumber)">Invalid Phone#</small>            <tr>                <th scope="col">Location</th>                <td *ngIf="editable!==\'batch\'">{{newUser.batch.batchLocation}}</td>                <td *ngIf="editable===\'batch\'">                    <select id="location" (change)=\'changeLocation($event)\'>                        <option *ngFor="let batch of batches" [value]="batch.batchNumber">{{batch.batchLocation}}</option>                    </select>                </td>                <td><img class="edit" src="assets/pencil.png" (click)="edit(\'batch\')" /></td>            </tr>        </table>        <div class="text-right">            <button type="button" class="btn btn-outline-secondary" (click)="restoreChange()" *ngIf="!compareUser()">Restore</button>            <button type="button" class="btn btn-outline-secondary" (click)="updateProfile()" [disabled]="!(newUser.userName && newUser.firstName && newUser.lastName && newUser.email && newUser.phoneNumber && newUser.batch.batchLocation)">Update</button>        </div><br>        <div class="alert alert-danger" *ngIf="noChange">No Change Has Been Made</div>        <div class="alert alert-success" *ngIf="updateSuccess">Update Success!</div>        <div class="alert alert-danger" *ngIf="updateFailed">Update Failed! Please Try Again Later</div>    </div></div></div>'
     var COMPONENTS = [{'name': 'AdminComponent', 'selector': 'app-admin'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CarRegisterComponent', 'selector': 'app-car-register'},{'name': 'DriverRegisterComponent', 'selector': 'app-driver-register'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MyCarComponent', 'selector': 'app-my-car'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PreferenceComponent', 'selector': 'app-preference'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'RiderRegisterComponent', 'selector': 'app-rider-register'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'ProfileComponent'};

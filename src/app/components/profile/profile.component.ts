@@ -4,6 +4,7 @@ import { UserService } from 'src/app/services/user-service/user.service';
 import { User } from 'src/app/models/user';
 import { Batch } from 'src/app/models/batch';
 import { BatchService } from 'src/app/services/batch-service/batch.service';
+import { ValidationService } from 'src/app/services/validation-service/validation.service';
 
 @Component({
   selector: 'app-profile',
@@ -24,7 +25,7 @@ export class ProfileComponent implements OnInit {
   updateSuccess: boolean = false;
   updateFailed: boolean = false;
 
-  constructor(private router: Router, private userService: UserService, private batchService: BatchService) { }
+  constructor(private router: Router, private userService: UserService, private batchService: BatchService, private validationService: ValidationService) { }
 
   ngOnInit() {
     this.user.userId = Number(sessionStorage.getItem('auth'));
@@ -58,33 +59,9 @@ export class ProfileComponent implements OnInit {
   }
 
   compareUser() {
-    return this.user.firstName.toLowerCase() === this.newUser.firstName.toLowerCase() && this.user.lastName.toLowerCase() === this.newUser.lastName.toLowerCase() && this.user.userName === this.newUser.userName && this.user.email === this.newUser.email && this.phoneFormat(this.user.phoneNumber) === this.phoneFormat(this.newUser.phoneNumber) && this.user.batch.batchNumber === this.oldBatchNumber;
+    return this.user.firstName.toLowerCase() === this.newUser.firstName.toLowerCase() && this.user.lastName.toLowerCase() === this.newUser.lastName.toLowerCase() && this.user.userName === this.newUser.userName && this.user.email === this.newUser.email && this.validationService.phoneFormat(this.user.phoneNumber) === this.validationService.phoneFormat(this.newUser.phoneNumber) && this.user.batch.batchNumber === this.oldBatchNumber;
   }
 
-  validateUserName() {
-		return this.newUser.userName.length >= 3 && this.newUser.userName.length <= 8;
-	}
-
-	validateName(name: string) {
-		return /^([a-zA-z]){1,20}$/.test(name) && name.length < 20;
-	}
-
-	nameFormat(name: string) {
-		return name[0].toUpperCase() + name.slice(1).toLowerCase();
-	}
-
-	phoneFormat(phone: string) {
-		return phone.replace(/[^0-9]/g, '').replace(/(\d{3})(\d{3})(\d{4})/, "($1) $2-$3");
-	}
-
-	validateEmail() {
-		return /^\w+\.?\w+@\w+\.\w{2,4}$/.test(this.newUser.email);
-	}
-
-	validatePhone() {
-		return /^\(?([0-9]{3})\)?[-.\s]?([0-9]{3})[-.\s]?([0-9]{4})$/.test(this.newUser.phoneNumber);
-  }
-  
   changeLocation(event) {
 		let option = event.target.options.selectedIndex;
     this.newUser.batch.batchNumber = this.batches[option].batchNumber;
@@ -92,16 +69,16 @@ export class ProfileComponent implements OnInit {
 	}
 
   updateProfile() {
-    if (this.validateUserName() && this.validateName(this.newUser.firstName) && this.validateName(this.newUser.lastName) && this.validateEmail() && this.validatePhone()) {
+    if (this.validationService.validateUserName(this.newUser.userName) && this.validationService.validateName(this.newUser.firstName) && this.validationService.validateName(this.newUser.lastName) && this.validationService.validateEmail(this.newUser.email) && this.validationService.validatePhone(this.newUser.phoneNumber)) {
       this.editable = '';
       if (this.compareUser()) {
         this.noChange = true;
         this.newUser = Object.assign({}, this.user);
         setTimeout(() => this.noChange = false, 3000);
       } else {
-        this.newUser.firstName = this.nameFormat(this.newUser.firstName);
-        this.newUser.lastName = this.nameFormat(this.newUser.lastName);
-        this.newUser.phoneNumber = this.phoneFormat(this.newUser.phoneNumber);
+        this.newUser.firstName = this.validationService.nameFormat(this.newUser.firstName);
+        this.newUser.lastName = this.validationService.nameFormat(this.newUser.lastName);
+        this.newUser.phoneNumber = this.validationService.phoneFormat(this.newUser.phoneNumber);
 
         this.userService.updateUserInfo(this.newUser).then(response => {
           console.log(response);

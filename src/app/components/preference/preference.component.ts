@@ -12,10 +12,6 @@ export class PreferenceComponent implements OnInit {
 
   user: User = new User();
 
-  isActive: boolean;
-  isDriver: boolean;
-  isAcceptingRides: boolean;
-
   truthy: string = 'btn btn-success';
   falsy: string = 'btn btn-danger';
 
@@ -34,9 +30,6 @@ export class PreferenceComponent implements OnInit {
     this.userService.getUserById(this.user.userId).then(response => {
       if (response) {
         this.user = response;
-        this.isActive = this.user.active;
-        this.isDriver = this.user.driver;
-        this.isAcceptingRides = this.user.acceptingRides;
       } else {
         sessionStorage.clear();
         this.router.navigate(['']);
@@ -45,12 +38,15 @@ export class PreferenceComponent implements OnInit {
   }
 
   toggleActive() {
-    this.isActive = !this.isActive;
-    this.userService.updatePreference('active', this.isActive, this.user.userId);
+    this.user.active = !this.user.active;
+    if (!this.user.active) {
+      this.user.acceptingRides = false;
+    }
+    this.userService.updatePreference('active', this.user.active, this.user.userId);
   }
 
   toggleAcceptRider() {
-    this.isAcceptingRides = !this.isAcceptingRides;
-    this.userService.updatePreference('acceptingRides', this.isAcceptingRides, this.user.userId);
+    this.user.acceptingRides = !this.user.acceptingRides;
+    this.userService.updatePreference('acceptingRides', this.user.acceptingRides, this.user.userId);
   }
 }

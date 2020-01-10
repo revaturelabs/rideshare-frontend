@@ -130,25 +130,13 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                <a href="#batch">batch</a>
+                            </li>
+                            <li>
                                 <a href="#batches">batches</a>
                             </li>
                             <li>
-                                <a href="#batchNum">batchNum</a>
-                            </li>
-                            <li>
-                                <a href="#email">email</a>
-                            </li>
-                            <li>
-                                <a href="#firstName">firstName</a>
-                            </li>
-                            <li>
-                                <a href="#lastName">lastName</a>
-                            </li>
-                            <li>
-                                <a href="#phone">phone</a>
-                            </li>
-                            <li>
-                                <a href="#userName">userName</a>
+                                <a href="#user">user</a>
                             </li>
                         </ul>
                     </td>
@@ -166,28 +154,10 @@
                                 <a href="#changeLocation">changeLocation</a>
                             </li>
                             <li>
-                                <a href="#nameFormat">nameFormat</a>
-                            </li>
-                            <li>
                                 <a href="#ngOnInit">ngOnInit</a>
                             </li>
                             <li>
-                                <a href="#phoneFormat">phoneFormat</a>
-                            </li>
-                            <li>
                                 <a href="#signUp">signUp</a>
-                            </li>
-                            <li>
-                                <a href="#validateEmail">validateEmail</a>
-                            </li>
-                            <li>
-                                <a href="#validateName">validateName</a>
-                            </li>
-                            <li>
-                                <a href="#validatePhone">validatePhone</a>
-                            </li>
-                            <li>
-                                <a href="#validateUserName">validateUserName</a>
                             </li>
                         </ul>
                     </td>
@@ -207,12 +177,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(userService: <a href="../injectables/UserService.html">UserService</a>, batchService: <a href="../injectables/BatchService.html">BatchService</a>, router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>)</code>
+<code>constructor(userService: <a href="../injectables/UserService.html">UserService</a>, batchService: <a href="../injectables/BatchService.html">BatchService</a>, router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>, validationService: ValidationService)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">src/app/components/driver-register/driver-register.component.ts:21</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/components/driver-register/driver-register.component.ts:23</a></div>
                             </td>
                         </tr>
 
@@ -226,6 +196,7 @@
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -240,6 +211,10 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <code><p>A dependency of an user service is injected.</p>
+</code>
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>batchService</td>
@@ -252,6 +227,10 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <code><p>A dependency of a batch service is injected.</p>
+</code>
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>router</td>
@@ -264,6 +243,24 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <code><p>Provides an instance of a router.</p>
+</code>
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>validationService</td>
+                                                  
+                                                        <td>
+                                                                    <code>ValidationService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -305,14 +302,16 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="61"
-                            class="link-to-prism">src/app/components/driver-register/driver-register.component.ts:61</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="55"
+                            class="link-to-prism">src/app/components/driver-register/driver-register.component.ts:55</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>This function allows the user to select the batch location.</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -353,76 +352,6 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="nameFormat"></a>
-                    <span class="name">
-                        <b>
-                            nameFormat
-                        </b>
-                        <a href="#nameFormat"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>nameFormat(name: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="45"
-                            class="link-to-prism">src/app/components/driver-register/driver-register.component.ts:45</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>name</td>
-                                    <td>
-                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-
-                    </div>
-                    <div class="io-description">
-                        
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
                     <a name="ngOnInit"></a>
                     <span class="name">
                         <b>
@@ -441,88 +370,21 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="25"
-                            class="link-to-prism">src/app/components/driver-register/driver-register.component.ts:25</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="39"
+                            class="link-to-prism">src/app/components/driver-register/driver-register.component.ts:39</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>This is an OnInit function that sets the token to the parsed token string.
+The system will check if the token is valid; once validated a batch service is called.</p>
+</div>
 
                     <div class="io-description">
                         <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="phoneFormat"></a>
-                    <span class="name">
-                        <b>
-                            phoneFormat
-                        </b>
-                        <a href="#phoneFormat"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>phoneFormat(phone: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="49"
-                            class="link-to-prism">src/app/components/driver-register/driver-register.component.ts:49</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>phone</td>
-                                    <td>
-                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-
-                    </div>
-                    <div class="io-description">
-                        
                     </div>
                 </td>
             </tr>
@@ -550,204 +412,19 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="66"
-                            class="link-to-prism">src/app/components/driver-register/driver-register.component.ts:66</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="63"
+                            class="link-to-prism">src/app/components/driver-register/driver-register.component.ts:63</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>This function creates a driver if all the validations are true.</p>
+</div>
 
                     <div class="io-description">
                         <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="validateEmail"></a>
-                    <span class="name">
-                        <b>
-                            validateEmail
-                        </b>
-                        <a href="#validateEmail"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>validateEmail()</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="53"
-                            class="link-to-prism">src/app/components/driver-register/driver-register.component.ts:53</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="validateName"></a>
-                    <span class="name">
-                        <b>
-                            validateName
-                        </b>
-                        <a href="#validateName"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>validateName(name: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="41"
-                            class="link-to-prism">src/app/components/driver-register/driver-register.component.ts:41</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>name</td>
-                                    <td>
-                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
-
-                    </div>
-                    <div class="io-description">
-                        
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="validatePhone"></a>
-                    <span class="name">
-                        <b>
-                            validatePhone
-                        </b>
-                        <a href="#validatePhone"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>validatePhone()</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="57"
-                            class="link-to-prism">src/app/components/driver-register/driver-register.component.ts:57</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="validateUserName"></a>
-                    <span class="name">
-                        <b>
-                            validateUserName
-                        </b>
-                        <a href="#validateUserName"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>validateUserName()</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="37"
-                            class="link-to-prism">src/app/components/driver-register/driver-register.component.ts:37</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
 
                     </div>
                 </td>
@@ -760,6 +437,38 @@
         <h3 id="inputs">
             Properties
         </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="batch"></a>
+                        <span class="name">
+                            <b>
+                            batch</b>
+                            <a href="#batch"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../classes/Batch.html" target="_self" >Batch</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>new Batch()</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/components/driver-register/driver-register.component.ts:22</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
         <table class="table table-sm table-bordered">
             <tbody>
                 <tr>
@@ -785,33 +494,6 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/components/driver-register/driver-register.component.ts:14</a></div>
-                            </td>
-                        </tr>
-
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="batchNum"></a>
-                        <span class="name">
-                            <b>
-                            batchNum</b>
-                            <a href="#batchNum"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
-
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
                                     <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">src/app/components/driver-register/driver-register.component.ts:21</a></div>
                             </td>
                         </tr>
@@ -823,156 +505,28 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="email"></a>
+                        <a name="user"></a>
                         <span class="name">
                             <b>
-                            email</b>
-                            <a href="#email"><span class="icon ion-ios-link"></span></a>
+                            user</b>
+                            <a href="#user"><span class="icon ion-ios-link"></span></a>
                         </span>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                            <i>Type : </i>        <code><a href="../classes/User.html" target="_self" >User</a></code>
 
                         </td>
                     </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Default value : </i><code>&#x27;&#x27;</code>
+                            <i>Default value : </i><code>new User()</code>
                         </td>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/components/driver-register/driver-register.component.ts:19</a></div>
-                            </td>
-                        </tr>
-
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="firstName"></a>
-                        <span class="name">
-                            <b>
-                            firstName</b>
-                            <a href="#firstName"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>&#x27;&#x27;</code>
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/components/driver-register/driver-register.component.ts:17</a></div>
-                            </td>
-                        </tr>
-
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="lastName"></a>
-                        <span class="name">
-                            <b>
-                            lastName</b>
-                            <a href="#lastName"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>&#x27;&#x27;</code>
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/components/driver-register/driver-register.component.ts:18</a></div>
-                            </td>
-                        </tr>
-
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="phone"></a>
-                        <span class="name">
-                            <b>
-                            phone</b>
-                            <a href="#phone"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>&#x27;&#x27;</code>
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/components/driver-register/driver-register.component.ts:20</a></div>
-                            </td>
-                        </tr>
-
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="userName"></a>
-                        <span class="name">
-                            <b>
-                            userName</b>
-                            <a href="#userName"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>&#x27;&#x27;</code>
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/components/driver-register/driver-register.component.ts:16</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/components/driver-register/driver-register.component.ts:23</a></div>
                             </td>
                         </tr>
 
@@ -990,69 +544,66 @@ import { UserService } from &#x27;src/app/services/user-service/user.service&#x2
 import { BatchService } from &#x27;src/app/services/batch-service/batch.service&#x27;;
 import { Batch } from &#x27;src/app/models/batch&#x27;;
 import { Router } from &#x27;@angular/router&#x27;;
+import { ValidationService } from &#x27;src/app/services/validation-service/validation.service&#x27;;
+import { User } from &#x27;src/app/models/user&#x27;;
 
 @Component({
 	selector: &#x27;app-driver-register&#x27;,
 	templateUrl: &#x27;./driver-register.component.html&#x27;,
 	styleUrls: [&#x27;./driver-register.component.css&#x27;]
 })
+
+/**
+ * This is the Driver Register
+ */
+
 export class DriverRegisterComponent implements OnInit {
 
 	batches: Batch[] &#x3D; [];
+	batch: Batch &#x3D; new Batch();
+	user: User &#x3D; new User();
 
-	userName: string &#x3D; &#x27;&#x27;;
-	firstName: string &#x3D; &#x27;&#x27;;
-	lastName: string &#x3D; &#x27;&#x27;;
-	email: string &#x3D; &#x27;&#x27;;
-	phone: string &#x3D; &#x27;&#x27;;
-	batchNum: number;
+  /**
+   * @constructor 
+   * @param router Provides an instance of a router.
+   * @param userService A dependency of an user service is injected.
+   * @param batchService A dependency of a batch service is injected.
+   */
 
-	constructor(private userService: UserService, private batchService: BatchService, private router: Router) { }
+	constructor(private userService: UserService, private batchService: BatchService, private router: Router, private validationService: ValidationService) { }
 
+
+  /**
+   * This is an OnInit function that sets the token to the parsed token string.
+   * The system will check if the token is valid; once validated a batch service is called.
+   */
 	ngOnInit() {
 		if (sessionStorage.getItem(&#x27;auth&#x27;)) {
 			this.router.navigate([&#x27;home&#x27;]);
 		} else {
+			this.user.batch &#x3D; this.batch;
 			this.batchService.getAllBatches()
 				.subscribe(allBatches &#x3D;&gt; {
 					this.batches &#x3D; allBatches;
-					this.batchNum &#x3D; this.batches[0].batchNumber;
+					this.user.batch.batchNumber &#x3D; this.batches[0].batchNumber;
 			});
 		}
 	}
 
-	validateUserName() {
-		return this.userName.length &gt;&#x3D; 3 &amp;&amp; this.userName.length &lt;&#x3D; 8;
-	}
-
-	validateName(name: string) {
-		return /^([a-zA-z]){1,20}$/.test(name) &amp;&amp; name.length &lt; 20;
-	}
-
-	nameFormat(name: string) {
-		return name[0].toUpperCase() + name.slice(1).toLowerCase();
-	}
-
-	phoneFormat(phone: string) {
-		return phone.replace(/[^0-9]/g, &#x27;&#x27;).replace(/(\d{3})(\d{3})(\d{4})/, &quot;($1) $2-$3&quot;);
-	}
-
-	validateEmail() {
-		return /^\w+\.?\w+@\w+\.\w{2,4}$/.test(this.email);
-	}
-
-	validatePhone() {
-		return /^\(?([0-9]{3})\)?[-.\s]?([0-9]{3})[-.\s]?([0-9]{4})$/.test(this.phone);
-	}
-
+	/**
+	 * This function allows the user to select the batch location.
+	 */
 	changeLocation(event) {
 		let option &#x3D; event.target.options.selectedIndex;
-		this.batchNum &#x3D; this.batches[option].batchNumber;
+		this.user.batch.batchNumber &#x3D; this.batches[option].batchNumber;
 	}
 
+	/**
+	 * This function creates a driver if all the validations are true.
+	 */
 	signUp() {
-		if (this.validateUserName() &amp;&amp; this.validateName(this.firstName) &amp;&amp; this.validateName(this.lastName) &amp;&amp; this.validateEmail() &amp;&amp; this.validatePhone()) {
-			this.userService.createDriver(this.userName, this.nameFormat(this.firstName), this.nameFormat(this.lastName), this.email, this.phoneFormat(this.phone), this.batchNum)
+		if (this.validationService.validateUserName(this.user.userName) &amp;&amp; this.validationService.validateName(this.user.firstName) &amp;&amp; this.validationService.validateName(this.user.lastName) &amp;&amp; this.validationService.validateEmail(this.user.email) &amp;&amp; this.validationService.validatePhone(this.user.phoneNumber)) {
+			this.userService.createDriver(this.user);
 		}
 	}
 
@@ -1066,28 +617,28 @@ export class DriverRegisterComponent implements OnInit {
         &lt;h3&gt;Your Information&lt;/h3&gt;
         &lt;div class&#x3D;&quot;form-group&quot;&gt;
             &lt;label for&#x3D;&quot;userName&quot;&gt;User Name &lt;small&gt;*&lt;/small&gt;&lt;/label&gt;&lt;br&gt;
-            &lt;input id&#x3D;&quot;userName&quot; type&#x3D;&quot;text&quot; placeholder&#x3D;&quot;User Name&quot; [(ngModel)]&#x3D;&quot;userName&quot; name&#x3D;&quot;userName&quot; required autocomplete&#x3D;&quot;off&quot;&gt;&lt;br&gt;
-            &lt;small *ngIf&#x3D;&quot;userName &amp;&amp; !validateUserName()&quot;&gt;User Name Should Be 3 to 8 Characters&lt;/small&gt;
+            &lt;input id&#x3D;&quot;userName&quot; type&#x3D;&quot;text&quot; placeholder&#x3D;&quot;User Name&quot; [(ngModel)]&#x3D;&quot;user.userName&quot; name&#x3D;&quot;userName&quot; required autocomplete&#x3D;&quot;off&quot;&gt;&lt;br&gt;
+            &lt;small *ngIf&#x3D;&quot;user.userName &amp;&amp; !validationService.validateUserName(user.userName)&quot;&gt;User Name Should Be 3 to 8 Characters&lt;/small&gt;
         &lt;/div&gt;
         &lt;div class&#x3D;&quot;form-group&quot;&gt;
             &lt;label for&#x3D;&quot;firstName&quot;&gt;First Name &lt;small&gt;*&lt;/small&gt;&lt;/label&gt;&lt;br&gt;
-            &lt;input id&#x3D;&quot;firstName&quot; type&#x3D;&quot;text&quot; placeholder&#x3D;&quot;First Name&quot; [(ngModel)]&#x3D;&quot;firstName&quot; name&#x3D;&quot;firstName&quot; required&gt;&lt;br&gt;
-            &lt;small *ngIf&#x3D;&quot;firstName.length &amp;&amp; !validateName(firstName)&quot;&gt;Invalid Name&lt;/small&gt;
+            &lt;input id&#x3D;&quot;firstName&quot; type&#x3D;&quot;text&quot; placeholder&#x3D;&quot;First Name&quot; [(ngModel)]&#x3D;&quot;user.firstName&quot; name&#x3D;&quot;firstName&quot; required&gt;&lt;br&gt;
+            &lt;small *ngIf&#x3D;&quot;user.firstName &amp;&amp; !validationService.validateName(user.firstName)&quot;&gt;Invalid Name&lt;/small&gt;
         &lt;/div&gt;
         &lt;div class&#x3D;&quot;form-group&quot;&gt;
             &lt;label for&#x3D;&quot;lastName&quot;&gt;Last Name &lt;small&gt;*&lt;/small&gt;&lt;/label&gt;&lt;br&gt;
-            &lt;input id&#x3D;&quot;lastName&quot; type&#x3D;&quot;text&quot; placeholder&#x3D;&quot;Last Name&quot; [(ngModel)]&#x3D;&quot;lastName&quot; name&#x3D;&quot;lastName&quot; required&gt;&lt;br&gt;
-            &lt;small *ngIf&#x3D;&quot;lastName.length &amp;&amp; !validateName(lastName)&quot;&gt;Invalid Name&lt;/small&gt;
+            &lt;input id&#x3D;&quot;lastName&quot; type&#x3D;&quot;text&quot; placeholder&#x3D;&quot;Last Name&quot; [(ngModel)]&#x3D;&quot;user.lastName&quot; name&#x3D;&quot;lastName&quot; required&gt;&lt;br&gt;
+            &lt;small *ngIf&#x3D;&quot;user.lastName &amp;&amp; !validationService.validateName(user.lastName)&quot;&gt;Invalid Name&lt;/small&gt;
         &lt;/div&gt;
         &lt;div class&#x3D;&quot;form-group&quot;&gt;
             &lt;label for&#x3D;&quot;email&quot;&gt;Email &lt;small&gt;*&lt;/small&gt;&lt;/label&gt;&lt;br&gt;
-            &lt;input id&#x3D;&quot;email&quot; type&#x3D;&quot;email&quot; placeholder&#x3D;&quot;Email&quot; [(ngModel)]&#x3D;&quot;email&quot; name&#x3D;&quot;email&quot; required&gt;&lt;br&gt;
-            &lt;small *ngIf&#x3D;&quot;email.length &amp;&amp; !validateEmail()&quot;&gt;Invalid Email&lt;/small&gt;
+            &lt;input id&#x3D;&quot;email&quot; type&#x3D;&quot;email&quot; placeholder&#x3D;&quot;Email&quot; [(ngModel)]&#x3D;&quot;user.email&quot; name&#x3D;&quot;email&quot; required&gt;&lt;br&gt;
+            &lt;small *ngIf&#x3D;&quot;user.email &amp;&amp; !validationService.validateEmail(user.email)&quot;&gt;Invalid Email&lt;/small&gt;
         &lt;/div&gt;
         &lt;div class&#x3D;&quot;form-group&quot;&gt;
             &lt;label for&#x3D;&quot;phone&quot;&gt;Phone &lt;small&gt;*&lt;/small&gt;&lt;/label&gt;&lt;br&gt;
-            &lt;input id&#x3D;&quot;phone&quot; type&#x3D;&quot;tel&quot; placeholder&#x3D;&quot;Phone #&quot; [(ngModel)]&#x3D;&quot;phone&quot; name&#x3D;&quot;phone&quot; required&gt;&lt;br&gt;
-            &lt;small *ngIf&#x3D;&quot;phone.length &amp;&amp; !validatePhone()&quot;&gt;Invalid Phone Number&lt;/small&gt;
+            &lt;input id&#x3D;&quot;phone&quot; type&#x3D;&quot;tel&quot; placeholder&#x3D;&quot;Phone #&quot; [(ngModel)]&#x3D;&quot;user.phoneNumber&quot; name&#x3D;&quot;phone&quot; required&gt;&lt;br&gt;
+            &lt;small *ngIf&#x3D;&quot;user.phoneNumber &amp;&amp; !validationService.validatePhone(user.phoneNumber)&quot;&gt;Invalid Phone Number&lt;/small&gt;
         &lt;/div&gt;
         &lt;div class&#x3D;&quot;form-group&quot;&gt;
             &lt;label for&#x3D;&quot;location&quot;&gt;Location &lt;small&gt;*&lt;/small&gt;&lt;/label&gt;&lt;br&gt;
@@ -1096,7 +647,7 @@ export class DriverRegisterComponent implements OnInit {
             &lt;/select&gt;
         &lt;/div&gt;
         &lt;div class&#x3D;&quot;form-group&quot;&gt;
-            &lt;button id&#x3D;&quot;sign-up-btn&quot; class&#x3D;&quot;btn btn-primary&quot; type&#x3D;&quot;submit&quot; (click)&#x3D;&quot;signUp()&quot; (keyup.enter)&#x3D;&quot;signUp()&quot; [disabled]&#x3D;&quot;!(userName &amp;&amp; firstName &amp;&amp; lastName &amp;&amp; email &amp;&amp; phone)&quot;&gt;Sign Up&lt;/button&gt;
+            &lt;button id&#x3D;&quot;sign-up-btn&quot; class&#x3D;&quot;btn btn-primary&quot; type&#x3D;&quot;submit&quot; (click)&#x3D;&quot;signUp()&quot; (keyup.enter)&#x3D;&quot;signUp()&quot; [disabled]&#x3D;&quot;!(user.userName &amp;&amp; user.firstName &amp;&amp; user.lastName &amp;&amp; user.email &amp;&amp; user.phoneNumber)&quot;&gt;Sign Up As Driver&lt;/button&gt;
         &lt;/div&gt;
     &lt;/form&gt;
 &lt;/div&gt;</code></pre>
@@ -1136,7 +687,7 @@ export class DriverRegisterComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="container">    <form class="form-group" id="sign-up-form">        <h3>Your Information</h3>        <div class="form-group">            <label for="userName">User Name <small>*</small></label><br>            <input id="userName" type="text" placeholder="User Name" [(ngModel)]="userName" name="userName" required autocomplete="off"><br>            <small *ngIf="userName && !validateUserName()">User Name Should Be 3 to 8 Characters</small>        </div>        <div class="form-group">            <label for="firstName">First Name <small>*</small></label><br>            <input id="firstName" type="text" placeholder="First Name" [(ngModel)]="firstName" name="firstName" required><br>            <small *ngIf="firstName.length && !validateName(firstName)">Invalid Name</small>        </div>        <div class="form-group">            <label for="lastName">Last Name <small>*</small></label><br>            <input id="lastName" type="text" placeholder="Last Name" [(ngModel)]="lastName" name="lastName" required><br>            <small *ngIf="lastName.length && !validateName(lastName)">Invalid Name</small>        </div>        <div class="form-group">            <label for="email">Email <small>*</small></label><br>            <input id="email" type="email" placeholder="Email" [(ngModel)]="email" name="email" required><br>            <small *ngIf="email.length && !validateEmail()">Invalid Email</small>        </div>        <div class="form-group">            <label for="phone">Phone <small>*</small></label><br>            <input id="phone" type="tel" placeholder="Phone #" [(ngModel)]="phone" name="phone" required><br>            <small *ngIf="phone.length && !validatePhone()">Invalid Phone Number</small>        </div>        <div class="form-group">            <label for="location">Location <small>*</small></label><br>            <select id="location" (change)=\'changeLocation($event)\'>                <option *ngFor="let batch of batches" [value]="batch.batchNumber">{{batch.batchLocation}}</option>            </select>        </div>        <div class="form-group">            <button id="sign-up-btn" class="btn btn-primary" type="submit" (click)="signUp()" (keyup.enter)="signUp()" [disabled]="!(userName && firstName && lastName && email && phone)">Sign Up</button>        </div>    </form></div></div>'
+        var COMPONENT_TEMPLATE = '<div><div class="container">    <form class="form-group" id="sign-up-form">        <h3>Your Information</h3>        <div class="form-group">            <label for="userName">User Name <small>*</small></label><br>            <input id="userName" type="text" placeholder="User Name" [(ngModel)]="user.userName" name="userName" required autocomplete="off"><br>            <small *ngIf="user.userName && !validationService.validateUserName(user.userName)">User Name Should Be 3 to 8 Characters</small>        </div>        <div class="form-group">            <label for="firstName">First Name <small>*</small></label><br>            <input id="firstName" type="text" placeholder="First Name" [(ngModel)]="user.firstName" name="firstName" required><br>            <small *ngIf="user.firstName && !validationService.validateName(user.firstName)">Invalid Name</small>        </div>        <div class="form-group">            <label for="lastName">Last Name <small>*</small></label><br>            <input id="lastName" type="text" placeholder="Last Name" [(ngModel)]="user.lastName" name="lastName" required><br>            <small *ngIf="user.lastName && !validationService.validateName(user.lastName)">Invalid Name</small>        </div>        <div class="form-group">            <label for="email">Email <small>*</small></label><br>            <input id="email" type="email" placeholder="Email" [(ngModel)]="user.email" name="email" required><br>            <small *ngIf="user.email && !validationService.validateEmail(user.email)">Invalid Email</small>        </div>        <div class="form-group">            <label for="phone">Phone <small>*</small></label><br>            <input id="phone" type="tel" placeholder="Phone #" [(ngModel)]="user.phoneNumber" name="phone" required><br>            <small *ngIf="user.phoneNumber && !validationService.validatePhone(user.phoneNumber)">Invalid Phone Number</small>        </div>        <div class="form-group">            <label for="location">Location <small>*</small></label><br>            <select id="location" (change)=\'changeLocation($event)\'>                <option *ngFor="let batch of batches" [value]="batch.batchNumber">{{batch.batchLocation}}</option>            </select>        </div>        <div class="form-group">            <button id="sign-up-btn" class="btn btn-primary" type="submit" (click)="signUp()" (keyup.enter)="signUp()" [disabled]="!(user.userName && user.firstName && user.lastName && user.email && user.phoneNumber)">Sign Up As Driver</button>        </div>    </form></div></div>'
     var COMPONENTS = [{'name': 'AdminComponent', 'selector': 'app-admin'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CarRegisterComponent', 'selector': 'app-car-register'},{'name': 'DriverRegisterComponent', 'selector': 'app-driver-register'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MyCarComponent', 'selector': 'app-my-car'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PreferenceComponent', 'selector': 'app-preference'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'RiderRegisterComponent', 'selector': 'app-rider-register'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'DriverRegisterComponent'};

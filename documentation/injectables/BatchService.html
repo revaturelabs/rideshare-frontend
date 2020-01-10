@@ -115,7 +115,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/app/services/batch-service/batch.service.ts:10</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/app/services/batch-service/batch.service.ts:11</a></div>
                             </td>
                         </tr>
 
@@ -180,8 +180,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="14"
-                            class="link-to-prism">src/app/services/batch-service/batch.service.ts:14</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="15"
+                            class="link-to-prism">src/app/services/batch-service/batch.service.ts:15</a></div>
                 </td>
             </tr>
 
@@ -223,12 +223,12 @@
                     </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Default value : </i><code>&#x27;http://localhost:8080/batches&#x27;</code>
+                            <i>Default value : </i><code>environment.batchesUri</code>
                         </td>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/app/services/batch-service/batch.service.ts:10</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/app/services/batch-service/batch.service.ts:11</a></div>
                             </td>
                         </tr>
 
@@ -244,13 +244,14 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
 import { HttpClient } from &#x27;@angular/common/http&#x27;;
 import { Batch } from &#x27;src/app/models/batch&#x27;;
+import { environment } from &#x27;../../../environments/environment&#x27;;
 
 @Injectable({
     providedIn: &#x27;root&#x27;
 })
 export class BatchService {
 
-	url: string &#x3D; &#x27;http://localhost:8080/batches&#x27;; 
+	url: string &#x3D; environment.batchesUri; 
 
 	constructor(private http: HttpClient) { }
 

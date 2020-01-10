@@ -417,6 +417,7 @@ import { NavbarComponent } from &#x27;./components/navbar/navbar.component&#x27;
 import { MyCarComponent } from &#x27;./components/my-car/my-car.component&#x27;;
 import { ProfileComponent } from &#x27;./components/profile/profile.component&#x27;;
 import { PreferenceComponent } from &#x27;./components/preference/preference.component&#x27;;
+import { ValidationService } from &#x27;./services/validation-service/validation.service&#x27;;
 
 @NgModule({
   declarations: [
@@ -441,7 +442,8 @@ import { PreferenceComponent } from &#x27;./components/preference/preference.com
     UserService,
     CarService,
     BatchService,
-    AuthService
+    AuthService,
+    ValidationService
   ],
   bootstrap: [AppComponent]
 })

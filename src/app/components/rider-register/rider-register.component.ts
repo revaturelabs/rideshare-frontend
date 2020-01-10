@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user-service/user.service';
 import { BatchService } from 'src/app/services/batch-service/batch.service';
 import { Batch } from 'src/app/models/batch';
-import { Router } from '@angular/router';
+import { User } from 'src/app/models/user';
+import { ValidationService } from 'src/app/services/validation-service/validation.service';
 
 @Component({
 	selector: 'app-rider-register',
@@ -12,53 +13,48 @@ import { Router } from '@angular/router';
 export class RiderRegisterComponent implements OnInit {
 
 	batches: Batch[] = [];
+	batch: Batch = new Batch();
+	user: User = new User();
 
-	userName: string = '';
-	firstName: string = '';
-	lastName: string = '';
-	email: string = '';
-	phone: string = '';
-	batchNum: number;
+  /**
+   * @constructor 
+   * @param userService A dependency of an user service is injected.
+   * @param batchService A dependency of a batch service is injected.
+   */
 
-	enable: boolean = true;
-	failed: boolean = false;
 
-	constructor(private userService: UserService, private batchService: BatchService) { }
+  /**
+   * @constructor 
+   * @param userService A dependency of an user service is injected.
+   * @param batchService A dependency of a batch service is injected.
+   */
 
+	constructor(private userService: UserService, private batchService: BatchService, private validationService: ValidationService) { }
+
+	/**
+	 * When the component is initialized, batch service is invoked to retrieve all the batches.
+	 */
 	ngOnInit() {
+		this.user.batch = this.batch;
 		this.batchService.getAllBatches()
 			.subscribe(allBatches => {
 				this.batches = allBatches;
+				this.user.batch.batchNumber = this.batches[0].batchNumber;
 		});
 	}
-
-	validateUserName() {
-		return this.userName.length >= 3 && this.userName.length <= 8;
-	}
-
-	validateName(name: string) {
-		return /^([a-zA-z]){1,20}$/.test(name);
-	}
-
-	nameFormat(name: string) {
-		return name[0].toUpperCase() + name.slice(1).toLowerCase();
-	}
-
-	validateEmail() {
-		return /^\w+@\w+\.\w{2,4}$/.test(this.email);
-	}
-
-	validatePhone() {
-		return /^\(?([0-9]{3})\)?[-.\s]?([0-9]{3})[-.\s]?([0-9]{4})$/.test(this.phone);
-	}
 	
+	/**
+	 * This function allows the user to select the batch location.
+	 */
 	changeLocation(event) {
 		let option = event.target.options.selectedIndex;
-		this.batchNum = this.batches[option].batchNumber;
+		this.user.batch.batchNumber = this.batches[option].batchNumber;
 	}
 
 	signUp() {
-		console.log(this.batchNum);
+		if (this.validationService.validateUserName(this.user.userName) && this.validationService.validateName(this.user.firstName) && this.validationService.validateName(this.user.lastName) && this.validationService.validateEmail(this.user.email) && this.validationService.validatePhone(this.user.phoneNumber)) {
+			this.userService.createDriver(this.user, 'rider');
+		}
 	}
 
 }

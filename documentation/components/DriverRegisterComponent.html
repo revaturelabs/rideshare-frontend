@@ -1034,11 +1034,11 @@ export class DriverRegisterComponent implements OnInit {
 	}
 
 	phoneFormat(phone: string) {
-		return phone.replace(/[^0-9]/g, &#x27;&#x27;).replace(/(\d{3})(\d{3})(\d{3})/, &quot;($1) $2-$3&quot;);
+		return phone.replace(/[^0-9]/g, &#x27;&#x27;).replace(/(\d{3})(\d{3})(\d{4})/, &quot;($1) $2-$3&quot;);
 	}
 
 	validateEmail() {
-		return /^[\.|\w]+@\w+\.\w{2,4}$/.test(this.email);
+		return /^\w+\.?\w+@\w+\.\w{2,4}$/.test(this.email);
 	}
 
 	validatePhone() {

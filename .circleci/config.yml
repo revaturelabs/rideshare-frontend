@@ -21,7 +21,7 @@ jobs:
           root: ~/
           # Must be relative path from root
           paths: 
-            - dist
+            - project/dist
 
   deploy:
     docker:
@@ -31,13 +31,13 @@ jobs:
       - checkout
       - attach_workspace:
           # Must be absolute path or relative path from working_directory
-          at: dist
+          at: ~/project
       - run:
           name: Install awscli
           command: sudo pip install awscli
       - run:
           name: Deploy to S3
-          command: aws s3 sync ~/project/dist s3://rideshare-frontend --delete
+          command: aws s3 sync dist s3://rideshare-frontend --delete
 
 orbs:
   sonarcloud: sonarsource/sonarcloud@1.0.1

@@ -5,6 +5,7 @@ import { CarRegisterComponent } from './components/car-register/car-register.com
 import { DriverRegisterComponent } from './components/driver-register/driver-register.component';
 import { RiderRegisterComponent } from './components/rider-register/rider-register.component';
 import { LoginComponent } from './components/login/login.component';
+import { DriverComponent } from './components/driver/driver.component';
 import { MyCarComponent } from './components/my-car/my-car.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { PreferenceComponent } from './components/preference/preference.component';
@@ -26,6 +27,9 @@ const routes: Routes = [{
   path: 'new/car',
   component: CarRegisterComponent
 }, {
+  path: 'driver',
+  component: DriverComponent
+},{
   path: 'car',
   component: MyCarComponent
 }, {

@@ -2,6 +2,7 @@ import { Injectable, Output, EventEmitter } from '@angular/core';
 import { User } from 'src/app/models/user';
 import { Router } from '@angular/router';
 
+
 @Injectable({
   	providedIn: 'root'
 })
@@ -23,7 +24,13 @@ export class AuthService {
 			this.loggedIn = true;
 			this.user = user;
 			sessionStorage.setItem('auth', String(this.user.userId));
-			this.router.navigate(['/home']);
+			if(this.user.driver){
+				this.router.navigate(['/driver']);
+			}
+			else{
+				this.router.navigate(['/home']);
+			}
+			
 			this.fireIsLoggedIn.emit(this.user);
 		} else {
 			return false;

@@ -3,8 +3,12 @@ import { Routes, RouterModule } from '@angular/router';
 import { AdminComponent } from './components/admin/admin.component';
 import { CarRegisterComponent } from './components/car-register/car-register.component';
 import { DriverRegisterComponent } from './components/driver-register/driver-register.component';
+import { RiderRegisterComponent } from './components/rider-register/rider-register.component';
 import { LoginComponent } from './components/login/login.component';
 import { DriverComponent } from './components/driver/driver.component';
+import { MyCarComponent } from './components/my-car/my-car.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { PreferenceComponent } from './components/preference/preference.component';
 
 
 const routes: Routes = [{
@@ -14,14 +18,30 @@ const routes: Routes = [{
   path: 'login',
   component: LoginComponent
 }, {
-  path: 'register',
+  path: 'registerDriver',
   component: DriverRegisterComponent
+}, {
+  path: 'registerRider',
+  component: RiderRegisterComponent
 }, {
   path: 'new/car',
   component: CarRegisterComponent
 }, {
   path: 'driver',
   component: DriverComponent
+},{
+  path: 'car',
+  component: MyCarComponent
+}, {
+  path: 'profile',
+  component: ProfileComponent
+},  {
+  path: 'preference',
+  component: PreferenceComponent
+},{
+  path: '**',
+  pathMatch: 'full',
+  redirectTo: ''
 }];
 
 @NgModule({

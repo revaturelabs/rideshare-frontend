@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,7 @@ import { Observable } from 'rxjs';
 export class MarkInactiveDriverService {
 
   // URL
-  private url = "http://localhost:8080/users/"
+  url: string = environment.userUri;
   
   constructor(private httpClient: HttpClient) { }
 

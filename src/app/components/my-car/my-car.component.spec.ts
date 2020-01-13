@@ -1,26 +1,27 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LoginComponent } from './login.component';
-import { APP_BASE_HREF } from '@angular/common';
+import { MyCarComponent } from './my-car.component';
 import { AdminComponent } from '../admin/admin.component';
 import { CarRegisterComponent } from '../car-register/car-register.component';
+import { DriverProvider } from 'protractor/built/driverProviders';
 import { DriverRegisterComponent } from '../driver-register/driver-register.component';
+import { LoginComponent } from '../login/login.component';
+import { NavbarComponent } from '../navbar/navbar.component';
+import { PreferenceComponent } from '../preference/preference.component';
+import { ProfileComponent } from '../profile/profile.component';
 import { RiderRegisterComponent } from '../rider-register/rider-register.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { FormsModule } from '@angular/forms';
-import { MyCarComponent } from '../my-car/my-car.component';
-import { NavbarComponent } from '../navbar/navbar.component';
-import { PreferenceComponent } from '../preference/preference.component';
-import { ProfileComponent } from '../profile/profile.component';
+import { APP_BASE_HREF } from '@angular/common';
 
-describe('LoginComponent', () => {
-  let component: LoginComponent;
-  let fixture: ComponentFixture<LoginComponent>;
+describe('MyCarComponent', () => {
+  let component: MyCarComponent;
+  let fixture: ComponentFixture<MyCarComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [AdminComponent, CarRegisterComponent, DriverRegisterComponent, RiderRegisterComponent, LoginComponent, MyCarComponent, NavbarComponent, PreferenceComponent, ProfileComponent, RiderRegisterComponent],
+      declarations: [ MyCarComponent, AdminComponent, CarRegisterComponent, DriverRegisterComponent, LoginComponent, NavbarComponent, PreferenceComponent, ProfileComponent, RiderRegisterComponent ],
       imports: [HttpClientModule, AppRoutingModule, FormsModule],
       providers: [{provide: APP_BASE_HREF, useValue: '/my/app'}]
     })
@@ -28,7 +29,7 @@ describe('LoginComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LoginComponent);
+    fixture = TestBed.createComponent(MyCarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

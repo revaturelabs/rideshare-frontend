@@ -4,14 +4,14 @@ import { Car } from 'src/app/models/car';
 import { User } from 'src/app/models/user';
 import { Router } from '@angular/router';
 import { UserService } from '../user-service/user.service';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
     providedIn: 'root'
 })
 export class CarService {
 
-    url: string = 'http://localhost:8080/cars/';
-	car: Car = new Car();
+    url: string = environment.carUri;
 	user: User = new User();
 
 	constructor(private http: HttpClient, private router: Router, private userService: UserService) { }
@@ -19,23 +19,21 @@ export class CarService {
 	getAllCars() {
 		return this.http.get<Car[]>(this.url);
 	}
+
+	getCarByUserId(userId: number) {
+		return this.http.get<Car>(`${this.url}users/${userId}`).toPromise();
+	}
 	
-	createCar(color, seats, make, model, year, userId) {
+	createCar(car, userId) {
 
 		this.user.userId = userId;
+		car.user = this.user;
 
-		this.car.color = color;
-		this.car.seats = seats;
-		this.car.make = make;
-		this.car.model = model;
-		this.car.year = year;
-		this.car.user = this.user;
-
-		this.http.post(this.url, this.car, {observe: 'response'}).subscribe(
+		this.http.post(this.url, car, {observe: 'response'}).subscribe(
 			(response) => {
 				if (response) {
 					this.userService.updateIsDriver(true, userId);
-					this.router.navigate(['home']);
+					this.router.navigate(['car']);
 				}
 			},
 			(error) => {
@@ -43,5 +41,9 @@ export class CarService {
 				alert("Server Error! Please Try Again Later.");
 			}
 		);
+	}
+
+	removeCar(carId: number) {
+		return this.http.delete<Car>(this.url+carId);
 	}
 }

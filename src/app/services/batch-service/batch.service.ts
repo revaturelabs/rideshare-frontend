@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Batch } from 'src/app/models/batch';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
     providedIn: 'root'
 })
 export class BatchService {
 
-	url: string = 'http://localhost:8080/batches'; 
+	url: string = environment.batchesUri; 
 
 	constructor(private http: HttpClient) { }
 

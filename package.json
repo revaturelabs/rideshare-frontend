@@ -8,7 +8,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "sonar": "sonarcloud/scan"
+    "sonar": "sonarcloud/scan",
+    "Install awscli": "sudo pip install awscli"
   },
   "private": true,
   "dependencies": {

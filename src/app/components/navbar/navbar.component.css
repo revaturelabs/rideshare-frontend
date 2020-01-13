@@ -1,0 +1,13 @@
+img {
+    width: 13%;
+    height: 13%;
+    cursor: pointer;
+}
+
+div {
+    margin-bottom: 3%;
+}
+
+#logout-btn {
+    cursor: pointer;
+}

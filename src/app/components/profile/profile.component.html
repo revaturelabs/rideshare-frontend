@@ -1,0 +1,54 @@
+<div class="container">
+    <div id="profile" *ngIf="newUser.userId">
+        <h2>Profile</h2>
+        <table class="table table-hover">
+            <tr>
+                <th scope="col">User Name</th>
+                <td><input type="text" name="userName" [(ngModel)]="newUser.userName" [readonly]="editable!=='userName'" [ngClass]="editable==='userName' ? 'editField' : ''"></td>
+                <td><img class="edit" (click)="edit('userName')" src="assets/pencil.png"/></td>
+            </tr>
+            <small *ngIf="newUser.userName && !validationService.validateUserName(newUser.userName)">Invalid Username</small>
+            <tr>
+                <th scope="col">First Name</th>
+                <td><input type="text" name="firstName" [(ngModel)]="newUser.firstName" [readonly]="editable!=='firstName'" [ngClass]="editable==='firstName' ? 'editField' : ''"></td>
+                <td><img class="edit" (click)="edit('firstName')" src="assets/pencil.png"/></td>
+            </tr>
+            <small *ngIf="newUser.firstName && !validationService.validateName(newUser.firstName)">Invalid Name</small>
+            <tr>
+                <th scope="col">Last Name</th>
+                <td><input type="text" name="lastName" [(ngModel)]="newUser.lastName" [readonly]="editable!=='lastName'" [ngClass]="editable==='lastName' ? 'editField' : ''"></td>
+                <td><img class="edit" (click)="edit('lastName')" src="assets/pencil.png"/></td>
+            </tr>
+            <small *ngIf="newUser.lastName && !validationService.validateName(newUser.lastName)">Invalid Name</small>
+            <tr>
+                <th scope="col">Email</th>
+                <td><input type="text" name="email" [(ngModel)]="newUser.email" [readonly]="editable!=='email'" [ngClass]="editable==='email' ? 'editField' : ''"></td>
+                <td><img class="edit" (click)="edit('email')" src="assets/pencil.png"/></td>
+            </tr>
+            <small *ngIf="newUser.email && !validationService.validateEmail(newUser.email)">Invalid Email</small>
+            <tr>
+                <th scope="col">Phone</th>
+                <td><input type="text" name="phoneNumber" [(ngModel)]="newUser.phoneNumber" [readonly]="editable!=='phoneNumber'" [ngClass]="editable==='phoneNumber' ? 'editField' : ''"></td>
+                <td><img class="edit" (click)="edit('phoneNumber')" src="assets/pencil.png"/></td>
+            </tr>
+            <small *ngIf="newUser.phoneNumber && !validationService.validatePhone(newUser.phoneNumber)">Invalid Phone#</small>
+            <tr>
+                <th scope="col">Location</th>
+                <td *ngIf="editable!=='batch'">{{newUser.batch.batchLocation}}</td>
+                <td *ngIf="editable==='batch'">
+                    <select id="location" (change)='changeLocation($event)'>
+                        <option *ngFor="let batch of batches" [value]="batch.batchNumber">{{batch.batchLocation}}</option>
+                    </select>
+                </td>
+                <td><img class="edit" src="assets/pencil.png" (click)="edit('batch')" /></td>
+            </tr>
+        </table>
+        <div class="text-right">
+            <button type="button" class="btn btn-outline-secondary" (click)="restoreChange()" *ngIf="!compareUser()">Restore</button>
+            <button type="button" class="btn btn-outline-secondary" (click)="updateProfile()" [disabled]="!(newUser.userName && newUser.firstName && newUser.lastName && newUser.email && newUser.phoneNumber && newUser.batch.batchLocation)">Update</button>
+        </div><br>
+        <div class="alert alert-danger" *ngIf="noChange">No Change Has Been Made</div>
+        <div class="alert alert-success" *ngIf="updateSuccess">Update Success!</div>
+        <div class="alert alert-danger" *ngIf="updateFailed">Update Failed! Please Try Again Later</div>
+    </div>
+</div>

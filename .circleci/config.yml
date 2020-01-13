@@ -48,8 +48,8 @@ workflows:
       - build:
           context: SonarCloud
       - deploy:
-          # requires:
-          #   - build
+          requires:
+            - build
           filters:
             branches:
               only: circleci-integration

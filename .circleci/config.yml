@@ -40,8 +40,8 @@ jobs:
           command: sudo pip install awscli
       - run: 
           name: Deploy Compodoc
-          command: 
-      - run: aws s3 sync ~/project/documentation s3://rideshare-frontend-compodoc --delete
+          command: aws s3 sync ~/project/documentation s3://rideshare-frontend-compodoc --delete
+      - run: 
           name: Deploy to S3
           command: aws s3 sync ~/project/dist/rideshare-frontend s3://rideshare-frontend --delete
 

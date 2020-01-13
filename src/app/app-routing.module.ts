@@ -8,6 +8,7 @@ import { LoginComponent } from './components/login/login.component';
 import { MyCarComponent } from './components/my-car/my-car.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { PreferenceComponent } from './components/preference/preference.component';
+import { AdminLoginComponent } from './components/admin-login/admin-login.component';
 
 
 const routes: Routes = [{
@@ -16,6 +17,9 @@ const routes: Routes = [{
 }, {
   path: 'login',
   component: LoginComponent
+}, {
+  path: 'login/admin',
+  component: AdminLoginComponent
 }, {
   path: 'registerDriver',
   component: DriverRegisterComponent

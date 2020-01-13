@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user-service/user.service';
 import { AuthService } from 'src/app/services/auth-service/auth.service';
 import { User } from 'src/app/models/user';
+import { Admin } from 'src/app/models/admin';
 
 @Component({
   selector: 'app-navbar',
@@ -16,7 +17,7 @@ import { User } from 'src/app/models/user';
 
 export class NavbarComponent implements OnInit {
 
-  token: number;
+  token: string;
   name: string = '';
 
   /**
@@ -36,20 +37,21 @@ export class NavbarComponent implements OnInit {
    */
 
   ngOnInit() {
-    this.token = Number(sessionStorage.getItem('auth'));
-    if (this.token) {
-      this.userService.getUserById(this.token).then((response)=>{
+    this.token = sessionStorage.getItem('auth');
+
+    if (this.token && this.token !== 'admin') {
+      this.userService.getUserById(Number(this.token)).then((response)=>{
         this.name = response.firstName;
       })
     }
 
-    this.authService.getEmitter().subscribe((user: User) => {
-      this.token = user.userId;
-      this.name = user.firstName;
+    this.authService.getEmitter().subscribe((user) => {
+      this.token = sessionStorage.getItem('auth');
+      this.name = user.firstName ? user.firstName : user.userName;
     });
 
     this.userService.getEmitter().subscribe((user: User) => {
-      this.token = user.userId;
+      this.token = String(user.userId);
       this.name = user.firstName;
     });
   }

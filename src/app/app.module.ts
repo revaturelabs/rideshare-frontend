@@ -19,6 +19,7 @@ import { MyCarComponent } from './components/my-car/my-car.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { PreferenceComponent } from './components/preference/preference.component';
 import { ValidationService } from './services/validation-service/validation.service';
+import { AdminLoginComponent } from './components/admin-login/admin-login.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { ValidationService } from './services/validation-service/validation.serv
     NavbarComponent,
     MyCarComponent,
     ProfileComponent,
-    PreferenceComponent
+    PreferenceComponent,
+    AdminLoginComponent
   ],
   imports: [
     BrowserModule,

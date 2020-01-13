@@ -26,7 +26,7 @@ export class CarRegisterComponent implements OnInit {
    * @param router Provides an instance of a router.
    */
 
-  constructor(private carService: CarService, private router: Router, private validationService: ValidationService) { }
+  constructor(private carService: CarService, private router: Router, public validationService: ValidationService) { }
 
   /**
    * This is an OnInit function that sets the user id as the parsed string in session storage.

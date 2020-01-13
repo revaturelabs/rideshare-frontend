@@ -28,7 +28,7 @@ export class DriverRegisterComponent implements OnInit {
    * @param batchService A dependency of a batch service is injected.
    */
 
-	constructor(private userService: UserService, private batchService: BatchService, private router: Router, private validationService: ValidationService) { }
+	constructor(private userService: UserService, private batchService: BatchService, private router: Router, public validationService: ValidationService) { }
 
 
   /**
@@ -60,6 +60,9 @@ export class DriverRegisterComponent implements OnInit {
 	 */
 	signUp(role) {
 		if (this.validationService.validateUserName(this.user.userName) && this.validationService.validateName(this.user.firstName) && this.validationService.validateName(this.user.lastName) && this.validationService.validateEmail(this.user.email) && this.validationService.validatePhone(this.user.phoneNumber)) {
+			this.user.firstName = this.validationService.nameFormat(this.user.firstName);
+			this.user.lastName = this.validationService.nameFormat(this.user.lastName);
+			this.user.phoneNumber = this.validationService.phoneFormat(this.user.phoneNumber);
 			this.userService.createDriver(this.user, role);
 		}
 	}

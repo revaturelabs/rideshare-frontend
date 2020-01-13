@@ -25,7 +25,7 @@ export class ProfileComponent implements OnInit {
   updateSuccess: boolean = false;
   updateFailed: boolean = false;
 
-  constructor(private router: Router, private userService: UserService, private batchService: BatchService, private validationService: ValidationService) { }
+  constructor(private router: Router, private userService: UserService, private batchService: BatchService, public validationService: ValidationService) { }
 
   ngOnInit() {
     this.user.userId = Number(sessionStorage.getItem('auth'));

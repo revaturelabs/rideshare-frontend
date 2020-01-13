@@ -15,18 +15,29 @@ jobs:
           name: Build Angular Application
           command: ng build --prod
       - sonarcloud/scan
+      - persist_to_workspace:
+          # Must be an absolute path, or relative path from working_directory. This is a directory on the container which is 
+          # taken to be the root directory of the workspace.
+          root: ~/
+          # Must be relative path from root
+          paths:
+            - echo-output
+
   deploy:
     docker:
       - image: circleci/python:3.7-stretch
     working_directory: ~/circleci-docs
     steps:
       - checkout
+      - attach_workspace:
+          # Must be absolute path or relative path from working_directory
+          at: ~/
       - run:
           name: Install awscli
           command: sudo pip install awscli
       - run:
           name: Deploy to S3
-          command: aws s3 sync dist/rideshare-frontend s3://rideshare-frontend --delete
+          command: aws s3 sync dist s3://rideshare-frontend --delete
 
 orbs:
   sonarcloud: sonarsource/sonarcloud@1.0.1

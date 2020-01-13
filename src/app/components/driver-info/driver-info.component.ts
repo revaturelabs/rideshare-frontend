@@ -10,7 +10,7 @@ import { Car } from 'src/app/models/car';
 })
 export class DriverInfoComponent implements OnInit {
 
-  private availableCars: Car[] = [];
+  availableCars: Car[] = [];
 
   orderYear: boolean = false;
   orderFirstName: boolean = false;

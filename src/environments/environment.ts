@@ -2,9 +2,14 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+const baseUrl = `http://localhost`; 
+const port = '8080';
+
 export const environment = {
-  production: false
-};
+  production: false, 
+  environmentName: 'Default Environment',
+  userUrl: `${baseUrl}:${port}/users`,
+}
 
 /*
  * For easier debugging in development mode, you can import the following file

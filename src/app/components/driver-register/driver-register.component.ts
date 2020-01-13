@@ -58,9 +58,9 @@ export class DriverRegisterComponent implements OnInit {
 	/**
 	 * This function creates a driver if all the validations are true.
 	 */
-	signUp() {
+	signUp(role) {
 		if (this.validationService.validateUserName(this.user.userName) && this.validationService.validateName(this.user.firstName) && this.validationService.validateName(this.user.lastName) && this.validationService.validateEmail(this.user.email) && this.validationService.validatePhone(this.user.phoneNumber)) {
-			this.userService.createDriver(this.user);
+			this.userService.createDriver(this.user, role);
 		}
 	}
 

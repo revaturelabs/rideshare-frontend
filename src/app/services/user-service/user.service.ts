@@ -23,7 +23,7 @@ export class UserService {
 		return this.http.get<User>(this.url+idParam).toPromise();
 	}
 
-	createDriver(user: User, role: string = 'driver') {
+	createDriver(user: User, role) {
 
 		user.active = true;
 		user.driver = false;

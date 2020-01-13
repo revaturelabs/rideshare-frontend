@@ -33,7 +33,8 @@
             </select>
         </div>
         <div class="form-group">
-            <button id="sign-up-btn" class="btn btn-primary" type="submit" (click)="signUp()" (keyup.enter)="signUp()" [disabled]="!(user.userName && user.firstName && user.lastName && user.email && user.phoneNumber)">Sign Up As Driver</button>
+            <button id="sign-up-btn" class="btn btn-primary" type="submit" (click)="signUp('driver')" [disabled]="!(user.userName && user.firstName && user.lastName && user.email && user.phoneNumber)">Sign Up As Driver</button>
+            <button id="sign-up-btn" class="btn btn-primary" type="submit" (click)="signUp('rider')" [disabled]="!(user.userName && user.firstName && user.lastName && user.email && user.phoneNumber)">Sign Up As Rider</button>
         </div>
     </form>
 </div>

@@ -31,7 +31,7 @@ jobs:
       - checkout
       - attach_workspace:
           # Must be absolute path or relative path from working_directory
-          at: ~/
+          at: project/dist
       - run:
           name: Install awscli
           command: sudo pip install awscli

@@ -13,7 +13,6 @@ import { ValidationService } from 'src/app/services/validation-service/validatio
 export class RiderRegisterComponent implements OnInit {
 
 	batches: Batch[] = [];
-	batch: Batch = new Batch();
 	user: User = new User();
 
   /**
@@ -35,7 +34,6 @@ export class RiderRegisterComponent implements OnInit {
 	 * When the component is initialized, batch service is invoked to retrieve all the batches.
 	 */
 	ngOnInit() {
-		this.user.batch = this.batch;
 		this.batchService.getAllBatches()
 			.subscribe(allBatches => {
 				this.batches = allBatches;

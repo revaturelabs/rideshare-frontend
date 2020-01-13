@@ -19,7 +19,6 @@ import { User } from 'src/app/models/user';
 export class DriverRegisterComponent implements OnInit {
 
 	batches: Batch[] = [];
-	batch: Batch = new Batch();
 	user: User = new User();
 
   /**
@@ -40,7 +39,6 @@ export class DriverRegisterComponent implements OnInit {
 		if (sessionStorage.getItem('auth')) {
 			this.router.navigate(['home']);
 		} else {
-			this.user.batch = this.batch;
 			this.batchService.getAllBatches()
 				.subscribe(allBatches => {
 					this.batches = allBatches;

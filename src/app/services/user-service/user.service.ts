@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { User } from 'src/app/models/user';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
+import { Observable } from 'rxjs';
 
 @Injectable({
   	providedIn: 'root'
@@ -97,4 +98,25 @@ export class UserService {
 	updateUserInfo(user: User) {
 		return this.http.put(this.url+user.userId, user).toPromise();
 	}
+
+	getDriverById(id: number): Observable <any>{
+		return this.http.get(this.url + id);
+	  
+	  }
+
+	changeDriverIsAccepting(data) {
+		console.log("put method", data);
+		let id=data.userId;
+		return this.http.put(this.url+id, data)
+		
+	  }
+	  
+	  getRidersForLocation(location: string): Observable <any>{
+		console.log("getRidersForLocation url ", this.url + '?is-driver=false&location='+ location);
+		return this.http.get(this.url + '?is-driver=false&location='+ location)
+	  }
+	  
+		showAllUser(): Observable<any>{
+		  return this.http.get(this.url);
+		}
 }

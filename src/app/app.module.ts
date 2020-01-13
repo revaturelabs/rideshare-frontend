@@ -12,7 +12,6 @@ import { AdminComponent } from './components/admin/admin.component';
 import { UserService } from './services/user-service/user.service';
 import { CarService } from './services/car-service/car.service';
 import { BatchService } from './services/batch-service/batch.service';
-import { MarkInactiveDriverService } from './services/mark-inactive-driver-service/mark-inactive-driver.service';
 import { CarRegisterComponent } from './components/car-register/car-register.component';
 import { LoginComponent } from './components/login/login.component';
 import { AuthService } from './services/auth-service/auth.service';
@@ -52,7 +51,6 @@ import { ValidationService } from './services/validation-service/validation.serv
     CarService,
     BatchService,
     AuthService,
-    MarkInactiveDriverService,
     ValidationService
   ],
   bootstrap: [AppComponent]

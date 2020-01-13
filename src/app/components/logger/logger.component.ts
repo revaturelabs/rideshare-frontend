@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { log } from '../services/log.service'; 
+import { LogService } from '../../services/log.service'; 
 
 @Component({
   selector: 'app-logger',
@@ -8,7 +8,7 @@ import { log } from '../services/log.service';
 })
 export class LoggerComponent implements OnInit {
   logStatement  = "no logs";
-  constructor(private logService: log) { }
+  constructor(private logService: LogService) { }
 
   debugClicked(message) {
     this.logStatement = this.logService.debug(message);

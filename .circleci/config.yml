@@ -37,7 +37,7 @@ jobs:
           command: sudo pip install awscli
       - run:
           name: Deploy to S3
-          command: aws s3 sync dist s3://rideshare-frontend --delete
+          command: aws s3 sync ~/circleci-docs s3://rideshare-frontend --delete
 
 orbs:
   sonarcloud: sonarsource/sonarcloud@1.0.1

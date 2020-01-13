@@ -8,11 +8,12 @@ import { LoginComponent } from './components/login/login.component';
 import { MyCarComponent } from './components/my-car/my-car.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { PreferenceComponent } from './components/preference/preference.component';
+import { DriverInfoComponent } from './components/driver-info/driver-info.component';
 
 
 const routes: Routes = [{
   path: 'home',
-  component: AdminComponent
+  component: DriverInfoComponent
 }, {
   path: 'login',
   component: LoginComponent

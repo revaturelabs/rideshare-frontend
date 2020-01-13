@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { RiderService } from 'src/app/services/rider.service';
-//import { Driver } from 'src/app/models/driver.model'; 
-import { User } from 'src/app/models/user.model';
+import { CarService } from 'src/app/services/car-service/car.service';
+import { Car } from 'src/app/models/car';
 
 
 @Component({
@@ -11,22 +10,37 @@ import { User } from 'src/app/models/user.model';
 })
 export class DriverInfoComponent implements OnInit {
 
-  private drivers: User[] = []; 
+  private availableCars: Car[] = [];
 
-  constructor(private riderService: RiderService) { }
+  orderYear: boolean = false;
+  orderFirstName: boolean = false;
+
+  constructor(private carService: CarService) { }
 
   ngOnInit() {
-    this.riderService.showAllDrivers().subscribe(
+    this.carService.getAllCars().subscribe(
       data => {
-        this.drivers = data.filter(driver => driver.acceptingRides);
-      })
+        this.availableCars = data.filter(car => car.user.acceptingRides);
+      }
+    )
   }
 
-  // displayContactInformation(data) {
-    
-    
-  // }
+  orderByYear() {
+    if (!this.orderYear) {
+      this.availableCars.sort((a, b) => b.year - a.year);
+    } else {
+      this.availableCars.sort((a, b) => a.year - b.year);
+    }
+    this.orderYear = !this.orderYear;
+  }
 
-
-
+  orderByFullName() {
+    if (!this.orderFirstName) {
+      this.availableCars.sort((a, b) => a.user.firstName > b.user.firstName ? 1 : -1);
+    } else {
+      this.availableCars.sort((a, b) => a.user.firstName > b.user.firstName ? -1 : 1);
+    }
+    this.orderFirstName = !this.orderFirstName;
+  }
+  
 }

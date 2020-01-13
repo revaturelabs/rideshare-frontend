@@ -23,19 +23,5 @@ export class UserService {
     return this.httpClient.get<User>(this.url); 
   }
 
-  /*
-  getDriverContactInformation(userid: number, userName: string, firstName: string, 
-                              lastName: string, email: string, phoneNumber: string,
-                              batch: object, isDriver: boolean) {
-    this.body = JSON.stringify({userId: userid, userName: userName, 
-                               firstName: firstName, lastName: lastName, 
-                               email: email, phoneNumber: phoneNumber, batch: batch, 
-                               isDriver: isDriver}); 
-    this.httpClient.put(`${this.url + userid}`, this.body, this.httpOptions).subscribe();
- }
-*/
-
-
-
 
 }

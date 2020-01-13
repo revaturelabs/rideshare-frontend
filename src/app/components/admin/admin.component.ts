@@ -28,7 +28,7 @@ export class AdminComponent implements OnInit {
 
    truthy: string = 'btn btn-success';
    falsy: string = 'btn btn-danger';
-
+   searchText;
   ngOnInit() {
 
     this.adminservice.showAllUser()

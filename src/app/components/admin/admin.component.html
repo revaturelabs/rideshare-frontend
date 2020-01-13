@@ -1,6 +1,9 @@
 <h1 class="text-center"> Admin Portal</h1>
 
 <div class="container">
+
+ <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Search by Username">
+<br>
   <table class="table table-bordered">
     <tr>
       <th> ID </th>
@@ -14,7 +17,7 @@
       <th> Ban </th>
     </tr>
 
-    <tr *ngFor="let get of listofUsers">
+    <tr *ngFor="let get of listofUsers | adminfilter:searchText">
       <td>{{get.userId}}</td>
       <td>{{get.userName}}</td>
       <td>{{get.firstName}}</td>
@@ -28,4 +31,3 @@
 
   </table>
 </div>
-  

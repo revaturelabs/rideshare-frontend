@@ -18,11 +18,11 @@ jobs:
   deploy:
     docker:
       - image: circleci/node:12.13.1
-    working_directory: ~/rideshare-frontend
+    # working_directory: ~/circleci-docs
     steps:
       - run:
           name: Install awscli
-          command: sudo pip install awscli
+          command: sudo npm install awscli
       - run:
           name: Deploy to S3
           command: aws s3 sync dist/rideshare-frontend s3://rideshare-frontend --delete

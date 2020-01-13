@@ -20,8 +20,8 @@ jobs:
           # taken to be the root directory of the workspace.
           root: ~/
           # Must be relative path from root
-          paths:
-            - echo-output
+          paths: 
+            - ~/circleci-docs
 
   deploy:
     docker:

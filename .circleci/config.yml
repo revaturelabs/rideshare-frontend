@@ -18,7 +18,7 @@ jobs:
   deploy:
     docker:
       - image: circleci/node:12.13.1
-    # working_directory: ~/circleci-docs
+    working_directory: ~/rideshare-frontend
     steps:
       - run:
           name: Install awscli

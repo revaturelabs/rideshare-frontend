@@ -17,12 +17,12 @@ jobs:
       - sonarcloud/scan
   deploy:
     docker:
-      - image: circleci/node:12.13.1
+      - image: circleci/python:3.7-stretch
     # working_directory: ~/circleci-docs
     steps:
       - run:
           name: Install awscli
-          command: sudo npm install awscli
+          command: sudo pip install awscli
       - run:
           name: Deploy to S3
           command: aws s3 sync dist/rideshare-frontend s3://rideshare-frontend --delete

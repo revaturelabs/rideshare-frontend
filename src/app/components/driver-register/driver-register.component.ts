@@ -28,7 +28,7 @@ export class DriverRegisterComponent implements OnInit {
    * @param batchService A dependency of a batch service is injected.
    */
 
-	constructor(private userService: UserService, private batchService: BatchService, private router: Router, private validationService: ValidationService) { }
+	constructor(private userService: UserService, private batchService: BatchService, private router: Router, public validationService: ValidationService) { }
 
 
   /**

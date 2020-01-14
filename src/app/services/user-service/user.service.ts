@@ -64,7 +64,7 @@ export class UserService {
 
 				this.http.put(this.url+userId, this.user).subscribe(
 					(response) => {
-					  console.log(response);
+						this.authService.user = response;
 					},
 					(error) => console.warn(error)
 				);
@@ -86,7 +86,7 @@ export class UserService {
 
 				this.http.put(this.url+userId, this.user).subscribe(
 					(response) => {
-					  console.log(response);
+						this.authService.user = response;
 					},
 					(error) => console.warn(error)
 				);

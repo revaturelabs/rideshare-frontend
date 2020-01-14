@@ -82,7 +82,7 @@ export class ProfileComponent implements OnInit {
         this.newUser.phoneNumber = this.validationService.phoneFormat(this.newUser.phoneNumber);
 
         this.userService.updateUserInfo(this.newUser).then(response => {
-          console.log(response);
+          this.authService.user = response;
           this.getUserInfo();
           this.updateSuccess = true;
           setTimeout(() => this.updateSuccess = false, 5000);

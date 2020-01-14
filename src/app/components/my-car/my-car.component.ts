@@ -3,6 +3,7 @@ import { CarService } from 'src/app/services/car-service/car.service';
 import { Car } from 'src/app/models/car';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user-service/user.service';
+import { LogService } from 'src/app/services/log.service';
 
 @Component({
   selector: 'app-my-car',
@@ -14,7 +15,7 @@ export class MyCarComponent implements OnInit {
   userId: number;
   myCar: Car = new Car();
 
-  constructor(private carService: CarService, private router: Router, private userService: UserService) { }
+  constructor(private carService: CarService, private router: Router, private userService: UserService, private logService: LogService) { }
 
   ngOnInit() {
     this.userId = Number(sessionStorage.getItem('auth'));
@@ -33,9 +34,9 @@ export class MyCarComponent implements OnInit {
     if (window.confirm('The Car Will Be Removed')) {
       this.carService.removeCar(this.myCar.carId).subscribe(
         Response => {
-          console.log(Response);
+        this.logService.info("updated user info: " + '\n' + JSON.stringify(Response));  
       }, error => {
-        console.warn(error)
+        this.logService.error(error)
       })
 
       this.myCar = new Car();

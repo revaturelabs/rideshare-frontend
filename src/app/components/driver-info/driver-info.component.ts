@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CarService } from 'src/app/services/car-service/car.service';
 import { Car } from 'src/app/models/car';
+import { AuthService } from 'src/app/services/auth-service/auth.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -19,15 +21,28 @@ export class DriverInfoComponent implements OnInit {
   searchName: string = '';
   searchLocation: string = '';
 
-  constructor(private carService: CarService) { }
+  constructor(private carService: CarService, private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
-    this.carService.getAllCars().subscribe(
-      data => {
-        this.allAvailableCars = data.filter(car => car.user.acceptingRides);
-        this.availableCars = this.allAvailableCars;
-      }
-    )
+    let userId = this.authService.user.userId;
+    if (!userId) {
+      this.router.navigate(['']);
+    } else {
+      this.carService.getAllCars().subscribe(
+        data => {
+          this.allAvailableCars = data.filter(car => car.user.acceptingRides);
+          this.orderByLocation();
+        }
+      )
+    }
+  }
+
+  orderByLocation() {
+    let userLocation = this.authService.user.batch.batchLocation;
+
+    this.allAvailableCars.sort((a, b) => a.user.batch.batchLocation > b.user.batch.batchLocation ? 1 : -1);
+    this.allAvailableCars = this.allAvailableCars.filter(car => car.user.batch.batchLocation === userLocation).concat(this.allAvailableCars.filter(car => car.user.batch.batchLocation !== userLocation));
+    this.availableCars = this.allAvailableCars;
   }
 
   orderByYear() {
@@ -59,7 +74,7 @@ export class DriverInfoComponent implements OnInit {
   showAllDrivers() {
     this.searchName = '';
     this.searchLocation = '';
-    this.availableCars = this.allAvailableCars;
+    this.orderByLocation();
   }
   
 }

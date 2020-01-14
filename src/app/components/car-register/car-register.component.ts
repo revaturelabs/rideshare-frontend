@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { CarService } from 'src/app/services/car-service/car.service';
 import { ValidationService } from 'src/app/services/validation-service/validation.service';
 import { Car } from 'src/app/models/car';
+import { AuthService } from 'src/app/services/auth-service/auth.service';
 
 @Component({
   selector: 'app-car-register',
@@ -26,7 +27,7 @@ export class CarRegisterComponent implements OnInit {
    * @param router Provides an instance of a router.
    */
 
-  constructor(private carService: CarService, private router: Router, public validationService: ValidationService) { }
+  constructor(private carService: CarService, private router: Router, public validationService: ValidationService, private authService: AuthService) { }
 
   /**
    * This is an OnInit function that sets the user id as the parsed string in session storage.
@@ -34,7 +35,8 @@ export class CarRegisterComponent implements OnInit {
    * Once validated, it will initialize the fields. 
    */
   ngOnInit() {
-    this.userId = Number(sessionStorage.getItem('auth'));
+    this.userId = this.authService.user.userId;
+
     if (!this.userId) {
       this.router.navigate(['']);
     } else {

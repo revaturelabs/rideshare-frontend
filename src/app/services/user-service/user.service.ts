@@ -4,6 +4,7 @@ import { User } from 'src/app/models/user';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
+import { AuthService } from '../auth-service/auth.service';
 import { LogService } from "../log.service"
 
 @Injectable({
@@ -15,7 +16,7 @@ export class UserService {
 	url: string = environment.userUri;
 	user: User = new User();
 
-	constructor(private http: HttpClient, private router: Router, private log: LogService) { }
+	constructor(private http: HttpClient, private router: Router, private log: LogService, private authService: AuthService) { }
 	
 	getAllUsers() {
 		return this.http.get<User[]>(this.url);
@@ -33,9 +34,9 @@ export class UserService {
 
 		this.http.post(this.url, user, {observe: 'response'}).subscribe(
 			(response) => {
-				let userId = response.body[Object.keys(response.body)[0]];
-				sessionStorage.setItem('auth', userId);
+				this.authService.user = response.body;
 				this.fireIsLoggedIn.emit(response.body);
+
 				if (role === 'driver') {
 					this.router.navigate(['new/car']);
 				} else {
@@ -64,6 +65,7 @@ export class UserService {
 
 				this.http.put(this.url+userId, this.user).subscribe(
 					(response) => {
+						this.authService.user = response;
 					  this.log.info(JSON.stringify(response));
 					},
 					(error) => this.log.error(error)
@@ -84,7 +86,12 @@ export class UserService {
 					this.user.acceptingRides = false;
 				}
 
-				this.http.put(this.url+userId, this.user).subscribe()
+				this.http.put(this.url+userId, this.user).subscribe(
+					(response) => {
+						this.authService.user = response;
+					},
+					(error) => console.warn(error)
+				);
 			})
 			.catch(e => {
 				this.log.error(e);

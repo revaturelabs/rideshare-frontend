@@ -3,6 +3,7 @@ import { CarService } from 'src/app/services/car-service/car.service';
 import { Car } from 'src/app/models/car';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user-service/user.service';
+import { AuthService } from 'src/app/services/auth-service/auth.service';
 import { LogService } from 'src/app/services/log.service';
 
 @Component({
@@ -15,10 +16,10 @@ export class MyCarComponent implements OnInit {
   userId: number;
   myCar: Car = new Car();
 
-  constructor(private carService: CarService, private router: Router, private userService: UserService, private logService: LogService) { }
+  constructor(private carService: CarService, private router: Router, private userService: UserService, private logService: LogService, private authService: AuthService) { }
 
   ngOnInit() {
-    this.userId = Number(sessionStorage.getItem('auth'));
+    this.userId = this.authService.user.userId;
     if (!this.userId) {
       this.router.navigate(['']);
     } else {

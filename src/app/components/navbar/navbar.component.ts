@@ -16,7 +16,6 @@ import { User } from 'src/app/models/user';
 
 export class NavbarComponent implements OnInit {
 
-  token: number;
   name: string = '';
 
   /**
@@ -36,20 +35,17 @@ export class NavbarComponent implements OnInit {
    */
 
   ngOnInit() {
-    this.token = Number(sessionStorage.getItem('auth'));
-    if (this.token) {
-      this.userService.getUserById(this.token).then((response)=>{
+    if (this.authService.user.userId) {
+      this.userService.getUserById(this.authService.user.userId).then((response)=>{
         this.name = response.firstName;
       })
     }
 
     this.authService.getEmitter().subscribe((user: User) => {
-      this.token = user.userId;
       this.name = user.firstName;
     });
 
     this.userService.getEmitter().subscribe((user: User) => {
-      this.token = user.userId;
       this.name = user.firstName;
     });
   }
@@ -62,8 +58,7 @@ export class NavbarComponent implements OnInit {
    */
 
   logout() {
-    sessionStorage.clear();
-    this.token = null;
+    this.authService.user = {};
     this.name = '';
     this.router.navigate(['']);
   }

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user-service/user.service';
 import { User } from 'src/app/models/user';
-import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from 'src/app/services/auth-service/auth.service';
@@ -38,22 +37,18 @@ export class LoginComponent implements OnInit {
 	 * @param authService An auth service is injected.
 	 * 
 	 */
-	constructor(private userService: UserService, private router: Router, private http: HttpClient, private authService: AuthService) { }
+	constructor(private userService: UserService, private http: HttpClient, private authService: AuthService) { }
 
 	/**
 	 * When the component is initialized, the system checks for the session storage to validate. Once validated, the user service is called to retrieve all users.
 	 */
 	ngOnInit() {
-		if (sessionStorage.getItem('auth')) {
-				this.router.navigate(['home']);
-		} else {
-			this.userService.getAllUsers()
-				.subscribe(allUsers => {
-					this.allUsers = allUsers;
-					this.totalPage = Math.ceil(this.allUsers.length / 5);
-					this.users = this.allUsers.slice(0, 5);
-			});
-		}
+		this.userService.getAllUsers()
+			.subscribe(allUsers => {
+				this.allUsers = allUsers;
+				this.totalPage = Math.ceil(this.allUsers.length / 5);
+				this.users = this.allUsers.slice(0, 5);
+		});
 	}
 
 	changeUser(user) {

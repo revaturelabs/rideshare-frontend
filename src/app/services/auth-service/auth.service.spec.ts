@@ -7,8 +7,7 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
 import { FormsModule } from '@angular/forms';
 import { AdminComponent } from 'src/app/components/admin/admin.component';
 import { CarRegisterComponent } from 'src/app/components/car-register/car-register.component';
-import { DriverRegisterComponent } from 'src/app/components/driver-register/driver-register.component';
-import { RiderRegisterComponent } from 'src/app/components/rider-register/rider-register.component';
+import { RegisterComponent } from 'src/app/components/register/register.component';
 import { LoginComponent } from 'src/app/components/login/login.component';
 import { MyCarComponent } from 'src/app/components/my-car/my-car.component';
 import { NavbarComponent } from 'src/app/components/navbar/navbar.component';
@@ -17,7 +16,7 @@ import { ProfileComponent } from 'src/app/components/profile/profile.component';
 
 describe('AuthService', () => {
   beforeEach(() => TestBed.configureTestingModule({
-    declarations: [AdminComponent, CarRegisterComponent, DriverRegisterComponent, RiderRegisterComponent, LoginComponent, MyCarComponent, NavbarComponent, PreferenceComponent, ProfileComponent],
+    declarations: [AdminComponent, CarRegisterComponent, RegisterComponent, LoginComponent, MyCarComponent, NavbarComponent, PreferenceComponent, ProfileComponent],
     imports: [HttpClientModule, AppRoutingModule, FormsModule],
     providers: [{provide: APP_BASE_HREF, useValue: '/my/app'}]
   }));

@@ -5,6 +5,8 @@ import { User } from 'src/app/models/user';
 import { Batch } from 'src/app/models/batch';
 import { BatchService } from 'src/app/services/batch-service/batch.service';
 import { ValidationService } from 'src/app/services/validation-service/validation.service';
+import { AuthService } from 'src/app/services/auth-service/auth.service';
+import { LogService } from 'src/app/services/log.service';
 
 @Component({
   selector: 'app-profile',
@@ -25,10 +27,10 @@ export class ProfileComponent implements OnInit {
   updateSuccess: boolean = false;
   updateFailed: boolean = false;
 
-  constructor(private router: Router, private userService: UserService, private batchService: BatchService, private validationService: ValidationService) { }
+  constructor(private log: LogService, private router: Router, private userService: UserService, private batchService: BatchService, public validationService: ValidationService, private authService: AuthService) { }
 
   ngOnInit() {
-    this.user.userId = Number(sessionStorage.getItem('auth'));
+    this.user.userId = this.authService.user.userId;;
     if (!this.user.userId) {
       this.router.navigate(['']);
     } else {
@@ -81,12 +83,13 @@ export class ProfileComponent implements OnInit {
         this.newUser.phoneNumber = this.validationService.phoneFormat(this.newUser.phoneNumber);
 
         this.userService.updateUserInfo(this.newUser).then(response => {
-          console.log(response);
+          this.authService.user = response;
+          this.log.info("updated user info: " + '\n' + JSON.stringify(response));          
           this.getUserInfo();
           this.updateSuccess = true;
           setTimeout(() => this.updateSuccess = false, 5000);
         }, error => {
-          console.warn(error);
+          this.log.error(error);
           this.updateFailed = true;
           setTimeout(() => this.updateFailed = false, 5000);
         })

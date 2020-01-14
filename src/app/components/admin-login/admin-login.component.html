@@ -1,18 +1,6 @@
 <div class="container">
     <form class="text-center" id="login-form">
         <div class="form-group">
-            <!-- <div class="dropdown">
-                <label for="admins">Select Account:</label><br>
-                <input type="text" placeholder="Select An Account" name="chosenAdminId" [(ngModel)]="chosenAdminId" (click)="toggleDropDown()" (ngModelChange)="searchAccount()" autocomplete="off" readonly/>
-                <button type="button" class="dropbtn" (click)="toggleDropDown()"><small>▼</small></button>
-                <div class="dropdown-content" [ngStyle]="showDropDown? {'display': 'block'} : {'display': 'none'}">
-                    <button type="button" id="prev-btn" *ngIf="curPage>1" (click)="prevPage()">^</button>
-                    <div *ngFor="let admin of admins">
-                        <p (click)="changeUser(admin)">{{admin.adminId}}</p>
-                    </div>
-                    <button type="button" id="next-btn" *ngIf="curPage<totalPage" (click)="nextPage()">v</button>
-                </div>
-            </div> -->
             <label for="admins">Admin Account: </label>
             <select (change)="changeAdmin($event)" id="admins">
                 <option *ngFor="let admin of admins" value="admin.adminId">{{admin.adminId}}</option>
@@ -23,7 +11,7 @@
             <input type="text" id="userName" [(ngModel)]="userName" name="userName" placeholder="Admin User Name" autocomplete="off"/><br>
         </div>
         <p class="alert alert-danger" *ngIf="failed"><strong>Login Failed!</strong></p>
-        <button class="btn btn-primary" type="submit" id="sign-in-btn" (click)="login()" (keyup.enter)="login()" [disabled]="!(userName && chosenAdmin)">Login</button>
+        <button class="btn btn-primary" type="submit" id="sign-in-btn" (click)="login()" (keyup.enter)="login()" [disabled]="!(userName && chosenAdmin)">Login As Admin</button>
         <br><br>
         <p><a routerLink="/login">Sign In</a> As User</p>
     </form>

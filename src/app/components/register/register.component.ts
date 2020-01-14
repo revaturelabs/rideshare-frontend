@@ -2,21 +2,20 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user-service/user.service';
 import { BatchService } from 'src/app/services/batch-service/batch.service';
 import { Batch } from 'src/app/models/batch';
-import { Router } from '@angular/router';
 import { ValidationService } from 'src/app/services/validation-service/validation.service';
 import { User } from 'src/app/models/user';
 
 @Component({
-	selector: 'app-driver-register',
-	templateUrl: './driver-register.component.html',
-	styleUrls: ['./driver-register.component.css']
+	selector: 'app-register',
+	templateUrl: './register.component.html',
+	styleUrls: ['./register.component.css']
 })
 
 /**
- * This is the Driver Register
+ * This is the Register
  */
 
-export class DriverRegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit {
 
 	batches: Batch[] = [];
 	user: User = new User();
@@ -28,7 +27,7 @@ export class DriverRegisterComponent implements OnInit {
    * @param batchService A dependency of a batch service is injected.
    */
 
-	constructor(private userService: UserService, private batchService: BatchService, private router: Router, private validationService: ValidationService) { }
+	constructor(private userService: UserService, private batchService: BatchService, public validationService: ValidationService) { }
 
 
   /**
@@ -36,15 +35,11 @@ export class DriverRegisterComponent implements OnInit {
    * The system will check if the token is valid; once validated a batch service is called.
    */
 	ngOnInit() {
-		if (sessionStorage.getItem('auth')) {
-			this.router.navigate(['home']);
-		} else {
-			this.batchService.getAllBatches()
-				.subscribe(allBatches => {
-					this.batches = allBatches;
-					this.user.batch.batchNumber = this.batches[0].batchNumber;
-			});
-		}
+		this.batchService.getAllBatches()
+			.subscribe(allBatches => {
+				this.batches = allBatches;
+				this.user.batch.batchNumber = this.batches[0].batchNumber;
+		});
 	}
 
 	/**
@@ -58,9 +53,12 @@ export class DriverRegisterComponent implements OnInit {
 	/**
 	 * This function creates a driver if all the validations are true.
 	 */
-	signUp() {
+	signUp(role) {
 		if (this.validationService.validateUserName(this.user.userName) && this.validationService.validateName(this.user.firstName) && this.validationService.validateName(this.user.lastName) && this.validationService.validateEmail(this.user.email) && this.validationService.validatePhone(this.user.phoneNumber)) {
-			this.userService.createDriver(this.user);
+			this.user.firstName = this.validationService.nameFormat(this.user.firstName);
+			this.user.lastName = this.validationService.nameFormat(this.user.lastName);
+			this.user.phoneNumber = this.validationService.phoneFormat(this.user.phoneNumber);
+			this.userService.createDriver(this.user, role);
 		}
 	}
 

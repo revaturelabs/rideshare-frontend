@@ -17,8 +17,8 @@ import { Admin } from 'src/app/models/admin';
 
 export class NavbarComponent implements OnInit {
 
-  token: string;
   name: string = '';
+  admin: string = '';
 
   /**
    * @constructor 
@@ -37,21 +37,21 @@ export class NavbarComponent implements OnInit {
    */
 
   ngOnInit() {
-    this.token = sessionStorage.getItem('auth');
-
-    if (this.token && this.token !== 'admin') {
-      this.userService.getUserById(Number(this.token)).then((response)=>{
+    if (this.authService.user.userId) {
+      this.userService.getUserById(this.authService.user.userId).then((response)=>{
         this.name = response.firstName;
       })
     }
 
-    this.authService.getEmitter().subscribe((user) => {
-      this.token = sessionStorage.getItem('auth');
-      this.name = user.firstName ? user.firstName : user.userName;
+    this.authService.getEmitter().subscribe((user: any) => {
+      if (user.userId) {
+        this.name = user.firstName;
+      } else if (user.adminId) {
+        this.admin = user.userName;
+      }
     });
 
     this.userService.getEmitter().subscribe((user: User) => {
-      this.token = String(user.userId);
       this.name = user.firstName;
     });
   }
@@ -64,9 +64,9 @@ export class NavbarComponent implements OnInit {
    */
 
   logout() {
-    sessionStorage.clear();
-    this.token = null;
+    this.authService.user = {};
     this.name = '';
+    this.admin = '';
     this.router.navigate(['']);
   }
 }

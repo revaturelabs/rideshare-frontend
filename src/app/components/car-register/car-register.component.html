@@ -8,7 +8,7 @@
         <div class="form-group">
             <label for="seats">Seats <small>*</small></label><br>
             <input id="seats" type="number" placeholder="Seats" [(ngModel)]="car.seats" name="seats" min="1" max="6" step="1" required><br>
-            <small *ngIf="(seats || seats===0) && !validationService.validateSeats(seats)">The Passenger Capacity Must Between 1 To 6</small>
+            <small *ngIf="(car.seats || car.seats===0) && !validationService.validateSeats(car.seats)">The Passenger Capacity Must Between 1 To 6</small>
         </div>
         <div class="form-group">
             <label for="make">Make <small>*</small></label><br>

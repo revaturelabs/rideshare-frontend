@@ -1,0 +1,28 @@
+h2 {
+    font-size: 1.375rem;
+    font-weight: 400;
+}
+
+.car-info:hover {
+    background-color: whitesmoke;
+}
+
+#year, #fullName {
+    cursor: pointer;
+}
+
+#year:hover, #fullName:hover {
+    background-color: whitesmoke;
+}
+
+#input-field {
+    margin: 1%;
+}
+
+#input-field input:first-child {
+    margin-left: 50%;
+}
+
+#input-field button{
+    margin-right: 3%;
+}

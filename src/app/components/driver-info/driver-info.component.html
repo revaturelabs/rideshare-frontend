@@ -1,0 +1,35 @@
+<div class="container">
+    <div *ngIf="!availableCars.length" class="text text-center"><h2>No Matched Driver Found</h2></div>
+    <div *ngIf="availableCars.length">
+        <h2>Available Drivers</h2>
+        <div id="input-field" class="input-group">
+            <input type="text" name="searchByName" placeholder="Search Driver By Name" [(ngModel)]="searchName"/>
+            <button class="btn btn-outline-secondary btn-sm" type="button" (click)="searchDriverByName()">Search</button>
+            <input type="text" name="filterByLocation" placeholder="Filter Driver By Location" [(ngModel)]="searchLocation"/>
+            <button class="btn btn-outline-secondary btn-sm" type="button" (click)="searchDriverByLocation()">Filter</button>
+        </div>
+        <table class="table table-hover">
+            <tr>
+                <th id="fullName" (click)="orderByFullName()"> Driver ⇳</th>
+                <th> Email </th>
+                <th> Phone Number </th>
+                <th> Location </th>
+                <th> Car Make </th>
+                <th> Car Model </th>
+                <th> Car Color </th>
+                <th id="year" (click)="orderByYear()"> Car Year ⇳</th>
+            </tr>
+            <tr *ngFor = "let car of availableCars" class="car-info">
+                <td>{{car.user.firstName}} {{car.user.lastName}}</td>
+                <td>{{car.user.email}}</td>
+                <td>{{car.user.phoneNumber}}</td>
+                <td>{{car.user.batch.batchLocation}}</td>
+                <td>{{car.make | titlecase}}</td>
+                <td>{{car.model | titlecase}}</td>
+                <td>{{car.color | titlecase}}</td>
+                <td>{{car.year}}</td>
+            </tr>
+        </table>
+    </div>
+    <button class="btn btn-outline-secondary" type="button" (click)="showAllDrivers()" *ngIf="availableCars.length !== allAvailableCars.length">Show All Drivers</button>
+</div>

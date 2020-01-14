@@ -7,5 +7,5 @@ export class Car {
     make: string;
     model: string;
     year: number;
-    user: User;
+    user: User = new User();
 }

@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CarRegisterComponent } from './car-register.component';
 import { AdminComponent } from '../admin/admin.component';
-import { DriverRegisterComponent } from '../driver-register/driver-register.component';
+import { RegisterComponent } from '../register/register.component';
 import { LoginComponent } from '../login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from 'src/app/app-routing.module';
@@ -12,7 +12,6 @@ import { MyCarComponent } from '../my-car/my-car.component';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { PreferenceComponent } from '../preference/preference.component';
 import { ProfileComponent } from '../profile/profile.component';
-import { RiderRegisterComponent } from '../rider-register/rider-register.component';
 
 describe('CarRegisterComponent', () => {
   let component: CarRegisterComponent;
@@ -20,7 +19,7 @@ describe('CarRegisterComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [AdminComponent, CarRegisterComponent, DriverRegisterComponent, LoginComponent, MyCarComponent, NavbarComponent, PreferenceComponent, ProfileComponent, RiderRegisterComponent],
+      declarations: [AdminComponent, CarRegisterComponent, RegisterComponent, LoginComponent, MyCarComponent, NavbarComponent, PreferenceComponent, ProfileComponent],
       imports: [HttpClientModule, AppRoutingModule, FormsModule],
       providers: [{provide: APP_BASE_HREF, useValue: '/my/app'}]
     })

@@ -4,6 +4,7 @@ import { User } from 'src/app/models/user';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
+import { LogService } from "../log.service"
 
 @Injectable({
   	providedIn: 'root'
@@ -14,7 +15,7 @@ export class UserService {
 	url: string = environment.userUri;
 	user: User = new User();
 
-	constructor(private http: HttpClient, private router: Router) { }
+	constructor(private http: HttpClient, private router: Router, private log: LogService) { }
 	
 	getAllUsers() {
 		return this.http.get<User[]>(this.url);
@@ -42,7 +43,7 @@ export class UserService {
 				}
 			},
 			(error) => {
-				console.warn(error);
+				this.log.error(error)
 				alert("Server Error! Please Try Again Later.");
 			}
 		);
@@ -63,13 +64,13 @@ export class UserService {
 
 				this.http.put(this.url+userId, this.user).subscribe(
 					(response) => {
-					  console.log(response);
+					  this.log.info(JSON.stringify(response));
 					},
-					(error) => console.warn(error)
+					(error) => this.log.error(error)
 				);
 			})
 			.catch(e => {
-				console.warn(e);
+				this.log.error(e)
 			})
 	}
 
@@ -83,15 +84,10 @@ export class UserService {
 					this.user.acceptingRides = false;
 				}
 
-				this.http.put(this.url+userId, this.user).subscribe(
-					(response) => {
-					  console.log(response);
-					},
-					(error) => console.warn(error)
-				);
+				this.http.put(this.url+userId, this.user).subscribe()
 			})
 			.catch(e => {
-				console.warn(e);
+				this.log.error(e);
 			})
 	}
 
@@ -105,14 +101,12 @@ export class UserService {
 	  }
 
 	changeDriverIsAccepting(data) {
-		console.log("put method", data);
 		let id=data.userId;
 		return this.http.put(this.url+id, data)
 		
 	  }
 	  
 	  getRidersForLocation(location: string): Observable <any>{
-		console.log("getRidersForLocation url ", this.url + '?is-driver=false&location='+ location);
 		return this.http.get(this.url + '?is-driver=false&location='+ location)
 	  }
 	  

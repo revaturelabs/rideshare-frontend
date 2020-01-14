@@ -21,6 +21,8 @@ export class AdminComponent implements OnInit {
   constructor(private router: Router, private adminservice: UserService) { }
 
    listofUsers: User[];
+   searchListofUsers: User[];
+   isBanned: boolean = false
 
    truthy: string = 'btn btn-success';
    falsy: string = 'btn btn-danger';
@@ -45,26 +47,16 @@ export class AdminComponent implements OnInit {
     this.router.navigate(['']);
   }
 
-  banningUser($event:Object, userid: number, userName: string, firstName: string, lastName: string, email: string, phoneNumber:string, batch: object, active: boolean){
-    this.refreshData();
-    if(active === true){
-      active = false;
-      this.adminservice.banUser(userid, userName, firstName, lastName, email, phoneNumber, batch, active);
-    }
-    else {
-      active = true;
-      this.adminservice.banUser(userid, userName, firstName, lastName, email, phoneNumber, batch, active);
-    }
-    this.refreshData();
+  searchUser(){
+    this.searchListofUsers = this.listofUsers.filter(item => item.userName.toLowerCase().includes(this.searchText.toLowerCase()));
+    this.listofUsers = this.searchListofUsers;
   }
 
-  private refreshData(){
-    this.adminservice.showAllUser()
-    .subscribe(
-      data=> {
-        this.listofUsers = data;
-      }
-    )
+  banning(obj: User, userid: number, userName: string, firstName: string, lastName: string, email: string, phoneNumber:string, batch: object, active: boolean) {
+    console.log(obj);
+    obj.active = !obj.active;
+    active = !active;
+    this.adminservice.banUser(userid, userName, firstName, lastName, email, phoneNumber, batch, active);
   }
 
 }

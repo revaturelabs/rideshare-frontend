@@ -3,6 +3,7 @@
 <div class="container">
 
  <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Search by Username">
+ <button class="btn btn-primary" type="button" (click)="searchUser()">search</button>
 <br>
   <table class="table table-bordered">
     <tr>
@@ -17,7 +18,7 @@
       <th> Ban </th>
     </tr>
 
-    <tr *ngFor="let get of listofUsers | adminfilter:searchText">
+    <tr *ngFor="let get of listofUsers">
       <td>{{get.userId}}</td>
       <td>{{get.userName}}</td>
       <td>{{get.firstName}}</td>
@@ -25,8 +26,8 @@
       <td>{{get.email}}</td>
       <td>{{get.phoneNumber}}</td>
       <td *ngIf="get.batch">{{get.batch.batchNumber}}</td>
-      <td (change)="get.active">{{get.active}}</td>
-      <td><button [ngClass]="get.active? falsy : truthy" (click)="banningUser(e, get.userId, get.userName, get.firstName, get.lastName, get.email, get.phoneNumber, get.batch, get.active)">{{get.active? "Ban" : "UnBan"}}</button></td>
+      <td>{{!isBanned ? get.active: isBanned}}</td>
+      <td><button [ngClass]="get.active? falsy : truthy" (click)="banning(get, get.userId, get.userName, get.firstName, get.lastName, get.email, get.phoneNumber, get.batch, get.active)">{{get.active? "Ban" : "UnBan"}}</button></td>
     </tr>
 
   </table>

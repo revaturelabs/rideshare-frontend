@@ -14,3 +14,15 @@ h2 {
 #year:hover, #fullName:hover {
     background-color: whitesmoke;
 }
+
+#input-field {
+    margin: 1%;
+}
+
+#input-field input:first-child {
+    margin-left: 50%;
+}
+
+#input-field button{
+    margin-right: 3%;
+}

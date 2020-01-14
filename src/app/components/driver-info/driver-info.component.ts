@@ -10,17 +10,22 @@ import { Car } from 'src/app/models/car';
 })
 export class DriverInfoComponent implements OnInit {
 
+  allAvailableCars: Car[] = [];
   availableCars: Car[] = [];
 
   orderYear: boolean = false;
   orderFirstName: boolean = false;
+
+  searchName: string = '';
+  searchLocation: string = '';
 
   constructor(private carService: CarService) { }
 
   ngOnInit() {
     this.carService.getAllCars().subscribe(
       data => {
-        this.availableCars = data.filter(car => car.user.acceptingRides);
+        this.allAvailableCars = data.filter(car => car.user.acceptingRides);
+        this.availableCars = this.allAvailableCars;
       }
     )
   }
@@ -41,6 +46,20 @@ export class DriverInfoComponent implements OnInit {
       this.availableCars.sort((a, b) => a.user.firstName > b.user.firstName ? -1 : 1);
     }
     this.orderFirstName = !this.orderFirstName;
+  }
+
+  searchDriverByName() {
+    this.availableCars = this.allAvailableCars.filter(car => `${car.user.firstName} ${car.user.lastName}`.toLowerCase().includes(this.searchName.toLowerCase()));
+  }
+
+  searchDriverByLocation() {
+    this.availableCars = this.allAvailableCars.filter(car => car.user.batch.batchLocation.toLowerCase().includes(this.searchLocation.toLowerCase()));
+  }
+
+  showAllDrivers() {
+    this.searchName = '';
+    this.searchLocation = '';
+    this.availableCars = this.allAvailableCars;
   }
   
 }

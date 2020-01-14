@@ -38,11 +38,17 @@ export class PreferenceComponent implements OnInit {
   }
 
   toggleActive() {
-    this.user.active = !this.user.active;
-    if (!this.user.active) {
-      this.user.acceptingRides = false;
+    if (this.user.active) {
+      if (window.confirm('Do you really want to deactive your account?')) {
+        this.user.active = !this.user.active;
+        this.user.acceptingRides = false;
+        this.userService.updatePreference('active', this.user.active, this.user.userId);
+      }
+    } else {
+      this.user.active = !this.user.active;
+      this.userService.updatePreference('active', this.user.active, this.user.userId);
     }
-    this.userService.updatePreference('active', this.user.active, this.user.userId);
+    
   }
 
   toggleAcceptRider() {

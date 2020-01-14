@@ -1,0 +1,6 @@
+.jumbotron {
+    background: url('src/assets/driving.jpeg') no-repeat center center; 
+    background-size: cover;
+    height: 50rem;
+}
+

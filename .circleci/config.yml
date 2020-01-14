@@ -16,7 +16,7 @@ jobs:
           command: npm install @compodoc/compodoc
       - run:
           name: Build Angular Application
-          command: npm run compodoc && ng build --prod
+          command: npm run compodoc && ng build --configuration=dev
       - sonarcloud/scan
       - persist_to_workspace:
           # Must be an absolute path, or relative path from working_directory. This is a directory on the container which is 

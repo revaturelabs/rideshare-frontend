@@ -15,6 +15,7 @@ import { MyCarComponent } from 'src/app/components/my-car/my-car.component';
 import { NavbarComponent } from 'src/app/components/navbar/navbar.component';
 import { PreferenceComponent } from 'src/app/components/preference/preference.component';
 import { ProfileComponent } from 'src/app/components/profile/profile.component';
+import { HttpClientTestingModule, HttpTestingController } from '../../../../node_modules/@angular/common/http/testing';
 
 describe('UserService', () => {
   beforeEach(() => TestBed.configureTestingModule({
@@ -33,13 +34,13 @@ describe('UserService', () => {
   let userService: UserService;
 
   // Adding injection here instead of it() method to reduce redundancy
-  beforeEach(() => { 
+  beforeEach(async() => { 
    TestBed.configureTestingModule({
     declarations: [AdminComponent, CarRegisterComponent, DriverRegisterComponent, RiderRegisterComponent, LoginComponent, MyCarComponent, NavbarComponent, PreferenceComponent, ProfileComponent],
-    imports: [HttpClientModule, AppRoutingModule, FormsModule],
+    imports: [HttpClientTestingModule, HttpClientModule, AppRoutingModule, FormsModule],
     providers: [{provide: APP_BASE_HREF, useValue: '/my/app'}]
    }); 
-
+    
     userService = TestBed.get(UserService);
   });
 

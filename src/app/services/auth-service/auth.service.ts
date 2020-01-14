@@ -9,21 +9,20 @@ import { Router } from '@angular/router';
 export class AuthService {
 
 	@Output() fireIsLoggedIn: EventEmitter<any> = new EventEmitter<any>();
-	private loggedIn: boolean = false;
+	// private loggedIn: boolean = false;
 
 	constructor(private router: Router) { }
 
-	public user: User;
+	public user: any = {};
 
-	get isLoggedIn() {
-		return this.loggedIn;
-	}
+	// get isLoggedIn() {
+	// 	return this.loggedIn;
+	// }
 
 	login(user: User, chosenUserName: string) {
 		if (user.userName === chosenUserName) {
-			this.loggedIn = true;
+			// this.loggedIn = true;
 			this.user = user;
-			sessionStorage.setItem('auth', String(this.user.userId));
 			if(this.user.driver){
 				this.router.navigate(['/driver']);
 			}

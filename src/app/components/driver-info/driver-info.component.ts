@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CarService } from 'src/app/services/car-service/car.service';
 import { Car } from 'src/app/models/car';
+import { AuthService } from 'src/app/services/auth-service/auth.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -15,14 +17,19 @@ export class DriverInfoComponent implements OnInit {
   orderYear: boolean = false;
   orderFirstName: boolean = false;
 
-  constructor(private carService: CarService) { }
+  constructor(private carService: CarService, private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
-    this.carService.getAllCars().subscribe(
-      data => {
-        this.availableCars = data.filter(car => car.user.acceptingRides);
-      }
-    )
+    let userId = this.authService.user.userId;
+    if (!userId) {
+      this.router.navigate(['']);
+    } else {
+      this.carService.getAllCars().subscribe(
+        data => {
+          this.availableCars = data.filter(car => car.user.acceptingRides);
+        }
+      )
+    }
   }
 
   orderByYear() {

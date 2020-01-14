@@ -5,6 +5,7 @@ import { User } from 'src/app/models/user';
 import { Batch } from 'src/app/models/batch';
 import { BatchService } from 'src/app/services/batch-service/batch.service';
 import { ValidationService } from 'src/app/services/validation-service/validation.service';
+import { AuthService } from 'src/app/services/auth-service/auth.service';
 
 @Component({
   selector: 'app-profile',
@@ -25,10 +26,10 @@ export class ProfileComponent implements OnInit {
   updateSuccess: boolean = false;
   updateFailed: boolean = false;
 
-  constructor(private router: Router, private userService: UserService, private batchService: BatchService, public validationService: ValidationService) { }
+  constructor(private router: Router, private userService: UserService, private batchService: BatchService, public validationService: ValidationService, private authService: AuthService) { }
 
   ngOnInit() {
-    this.user.userId = Number(sessionStorage.getItem('auth'));
+    this.user.userId = this.authService.user.userId;;
     if (!this.user.userId) {
       this.router.navigate(['']);
     } else {

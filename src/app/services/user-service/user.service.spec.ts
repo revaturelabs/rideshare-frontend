@@ -3,7 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { UserService } from './user.service';
 import { AdminComponent } from 'src/app/components/admin/admin.component';
 import { CarRegisterComponent } from 'src/app/components/car-register/car-register.component';
-import { RegisterComponent } from 'src/app/components/register/register.component';
+
 import { LoginComponent } from 'src/app/components/login/login.component';
 import { HttpClientModule} from '@angular/common/http';
 import { AppRoutingModule } from 'src/app/app-routing.module';
@@ -14,7 +14,7 @@ import { MyCarComponent } from 'src/app/components/my-car/my-car.component';
 import { NavbarComponent } from 'src/app/components/navbar/navbar.component';
 import { PreferenceComponent } from 'src/app/components/preference/preference.component';
 import { ProfileComponent } from 'src/app/components/profile/profile.component';
-import { HttpClientTestingModule, HttpTestingController } from '../../../../node_modules/@angular/common/http/testing';
+import { RegisterComponent } from 'src/app/components/register/register.component';
 
 describe('UserService', () => {
   beforeEach(() => TestBed.configureTestingModule({
@@ -33,10 +33,10 @@ describe('UserService', () => {
   let userService: UserService;
 
   // Adding injection here instead of it() method to reduce redundancy
-  beforeEach(async() => { 
+  beforeEach(() => { 
    TestBed.configureTestingModule({
-    declarations: [AdminComponent, CarRegisterComponent, DriverRegisterComponent, RiderRegisterComponent, LoginComponent, MyCarComponent, NavbarComponent, PreferenceComponent, ProfileComponent],
-    imports: [HttpClientTestingModule, HttpClientModule, AppRoutingModule, FormsModule],
+    declarations: [AdminComponent, CarRegisterComponent, RegisterComponent, LoginComponent, MyCarComponent, NavbarComponent, PreferenceComponent, ProfileComponent],
+    imports: [HttpClientModule, AppRoutingModule, FormsModule],
     providers: [{provide: APP_BASE_HREF, useValue: '/my/app'}]
    }); 
     

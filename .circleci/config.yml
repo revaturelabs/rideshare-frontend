@@ -58,7 +58,7 @@ workflows:
             - build
           filters:
             branches:
-              only: circleci-integration
+              only: dev
 
 
 

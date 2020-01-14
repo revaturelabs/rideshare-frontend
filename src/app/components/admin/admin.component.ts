@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AdminService } from 'src/app/services/admin-service/admin.service';
 import { User } from 'src/app/models/user';
+import { UserService } from 'src/app/services/user-service/user.service';
 
 @Component({
   selector: 'app-admin',
@@ -18,9 +18,7 @@ export class AdminComponent implements OnInit {
    * @constructor
    * @param router Provides an instance of a router
    */
-  constructor(private router: Router, private adminservice: AdminService) { }
-
-
+  constructor(private router: Router, private adminservice: UserService) { }
 
    listofUsers: User[];
 
@@ -35,8 +33,7 @@ export class AdminComponent implements OnInit {
         this.listofUsers = data;
       }
     )
-
-  }
+}
   /**
    * Function that takes no parameters.
    * It will clear the sesssion storage.
@@ -48,7 +45,7 @@ export class AdminComponent implements OnInit {
     this.router.navigate(['']);
   }
 
-  banningUser(userid: number, userName: string, firstName: string, lastName: string, email: string, phoneNumber:string, batch: object, active: boolean){
+  banningUser($event:Object, userid: number, userName: string, firstName: string, lastName: string, email: string, phoneNumber:string, batch: object, active: boolean){
     this.refreshData();
     if(active === true){
       active = false;

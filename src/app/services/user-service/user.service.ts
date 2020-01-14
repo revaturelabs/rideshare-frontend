@@ -1,5 +1,5 @@
 import { Injectable, Output, EventEmitter } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from 'src/app/models/user';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
@@ -15,7 +15,7 @@ export class UserService {
 	user: User = new User();
 
 	constructor(private http: HttpClient, private router: Router) { }
-	
+
 	getAllUsers() {
 		return this.http.get<User[]>(this.url);
 	}
@@ -101,22 +101,35 @@ export class UserService {
 
 	getDriverById(id: number): Observable <any>{
 		return this.http.get(this.url + id);
-	  
+
 	  }
 
 	changeDriverIsAccepting(data) {
 		console.log("put method", data);
 		let id=data.userId;
 		return this.http.put(this.url+id, data)
-		
+
 	  }
-	  
+
 	  getRidersForLocation(location: string): Observable <any>{
 		console.log("getRidersForLocation url ", this.url + '?is-driver=false&location='+ location);
 		return this.http.get(this.url + '?is-driver=false&location='+ location)
 	  }
-	  
+
 		showAllUser(): Observable<any>{
 		  return this.http.get(this.url);
 		}
+
+    // body to send update data
+      private body: string;
+    // Http options
+      private httpOptions = {
+        headers: new HttpHeaders({"Content-Type": "application/json"}),
+        observe: "response" as "body"
+      };
+
+    banUser(userid: number, userName: string, firstName: string, lastName: string, email: string, phoneNumber: string, batch: object, active: boolean){
+      this.body = JSON.stringify({userId:userid, userName:userName, firstName:firstName, lastName:lastName, email:email, phoneNumber:phoneNumber, batch:batch, active:active});
+      this.http.put(`${this.url + userid}`,this.body,this.httpOptions).subscribe();
+    }
 }

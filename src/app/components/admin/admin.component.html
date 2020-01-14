@@ -25,8 +25,8 @@
       <td>{{get.email}}</td>
       <td>{{get.phoneNumber}}</td>
       <td *ngIf="get.batch">{{get.batch.batchNumber}}</td>
-      <td>{{get.active}}</td>
-      <td><button [ngClass]="get.active? falsy : truthy" (click)="banningUser(get.userId, get.userName, get.firstName, get.lastName, get.email, get.phoneNumber, get.batch, get.active)">{{get.active? "Ban" : "UnBan"}}</button></td>
+      <td (change)="get.active">{{get.active}}</td>
+      <td><button [ngClass]="get.active? falsy : truthy" (click)="banningUser(e, get.userId, get.userName, get.firstName, get.lastName, get.email, get.phoneNumber, get.batch, get.active)">{{get.active? "Ban" : "UnBan"}}</button></td>
     </tr>
 
   </table>

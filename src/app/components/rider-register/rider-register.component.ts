@@ -29,13 +29,12 @@ export class RiderRegisterComponent implements OnInit {
    * @param batchService A dependency of a batch service is injected.
    */
 
-	constructor(private userService: UserService, private batchService: BatchService, private validationService: ValidationService) { }
+	constructor(private userService: UserService, private batchService: BatchService, public validationService: ValidationService) { }
 
 	/**
 	 * When the component is initialized, batch service is invoked to retrieve all the batches.
 	 */
 	ngOnInit() {
-		this.user.batch = this.batch;
 		this.batchService.getAllBatches()
 			.subscribe(allBatches => {
 				this.batches = allBatches;

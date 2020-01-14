@@ -59,6 +59,7 @@ export class LoginComponent implements OnInit {
 	changeUser(user) {
 		this.showDropDown = false;
 		this.curPage = 1;
+		this.totalPage = Math.ceil(this.allUsers.length / 5);
 		this.users = this.allUsers.slice(this.curPage * 5 - 5, this.curPage * 5);
 		this.chosenUserFullName = `${user.firstName} ${user.lastName}: ${user.driver ? 'Driver' : 'Rider'}`;
 		this.chosenUser = user;
@@ -71,7 +72,8 @@ export class LoginComponent implements OnInit {
 				return (
 					user.firstName.toLowerCase().startsWith(this.chosenUserFullName.toLowerCase()) ||
 					user.lastName.toLowerCase().startsWith(this.chosenUserFullName.toLowerCase()) ||
-					(`${user.firstName} ${user.lastName}`).toLowerCase().startsWith(this.chosenUserFullName.toLowerCase())
+					`${user.firstName} ${user.lastName}`.toLowerCase().startsWith(this.chosenUserFullName.toLowerCase()) ||
+					`${user.firstName} ${user.lastName}: ${user.driver ? 'Driver' : 'Rider'}`.toLowerCase().startsWith(this.chosenUserFullName.toLowerCase())
 				);
 			});
 			this.totalPage = Math.ceil(this.users.length / 5);

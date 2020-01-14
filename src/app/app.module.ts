@@ -21,7 +21,6 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { PreferenceComponent } from './components/preference/preference.component';
 import { ValidationService } from './services/validation-service/validation.service';
 import { DriverInfoComponent } from './components/driver-info/driver-info.component';
-import { LoggerComponent } from './components/logger/logger.component';
 
 @NgModule({
   declarations: [
@@ -36,8 +35,7 @@ import { LoggerComponent } from './components/logger/logger.component';
     MyCarComponent,
     ProfileComponent,
     PreferenceComponent,
-    DriverInfoComponent,
-    LoggerComponent
+    DriverInfoComponent
   ],
   imports: [
     BrowserModule,

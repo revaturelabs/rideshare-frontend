@@ -1,7 +1,13 @@
 <div class="container">
-    <div *ngIf="!availableCars.length">No Available Driver Currently</div>
+    <div *ngIf="!availableCars.length" class="text text-center"><h2>No Matched Driver Found</h2></div>
     <div *ngIf="availableCars.length">
         <h2>Available Drivers</h2>
+        <div id="input-field" class="input-group">
+            <input type="text" name="searchByName" placeholder="Search Driver By Name" [(ngModel)]="searchName"/>
+            <button class="btn btn-outline-secondary btn-sm" type="button" (click)="searchDriverByName()">Search</button>
+            <input type="text" name="filterByLocation" placeholder="Filter Driver By Location" [(ngModel)]="searchLocation"/>
+            <button class="btn btn-outline-secondary btn-sm" type="button" (click)="searchDriverByLocation()">Filter</button>
+        </div>
         <table class="table table-hover">
             <tr>
                 <th id="fullName" (click)="orderByFullName()"> Driver ⇳</th>
@@ -25,4 +31,5 @@
             </tr>
         </table>
     </div>
+    <button class="btn btn-outline-secondary" type="button" (click)="showAllDrivers()" *ngIf="availableCars.length !== allAvailableCars.length">Show All Drivers</button>
 </div>

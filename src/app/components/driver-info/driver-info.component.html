@@ -1,0 +1,28 @@
+<div class="container">
+    <div *ngIf="!availableCars.length">No Available Driver Currently</div>
+    <div *ngIf="availableCars.length">
+        <h2>Available Drivers</h2>
+        <table class="table table-hover">
+            <tr>
+                <th id="fullName" (click)="orderByFullName()"> Driver ⇳</th>
+                <th> Email </th>
+                <th> Phone Number </th>
+                <th> Location </th>
+                <th> Car Make </th>
+                <th> Car Model </th>
+                <th> Car Color </th>
+                <th id="year" (click)="orderByYear()"> Car Year ⇳</th>
+            </tr>
+            <tr *ngFor = "let car of availableCars" class="car-info">
+                <td>{{car.user.firstName}} {{car.user.lastName}}</td>
+                <td>{{car.user.email}}</td>
+                <td>{{car.user.phoneNumber}}</td>
+                <td>{{car.user.batch.batchLocation}}</td>
+                <td>{{car.make | titlecase}}</td>
+                <td>{{car.model | titlecase}}</td>
+                <td>{{car.color | titlecase}}</td>
+                <td>{{car.year}}</td>
+            </tr>
+        </table>
+    </div>
+</div>

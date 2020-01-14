@@ -75,7 +75,7 @@ export class RiderRegisterComponent implements OnInit {
 	}
 
 	signUp() {
-		console.log(this.batchNum);
+		this.logService.info(String(this.batchNum))
 	}
 
 }

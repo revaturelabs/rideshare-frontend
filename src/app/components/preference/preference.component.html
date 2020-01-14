@@ -1,0 +1,13 @@
+<div class="container">
+    <h2>My Preference</h2>
+    <hr class="my-4">
+    <div>
+        Active: <button type="button" [ngClass]="user.active? truthy : falsy" (click)="toggleActive()">{{user.active? "On" : "Off"}}</button>
+    </div><br>
+    <div>
+        Driver: <button type="button" [ngClass]="user.driver? truthy : falsy" disabled>{{user.driver? "Yes" : "No"}}</button>
+    </div><br>
+    <div>
+        Accept Riders: <button type="button" [ngClass]="user.acceptingRides? truthy : falsy" (click)="toggleAcceptRider()" [disabled]="!(user.driver && user.active)">{{user.acceptingRides? "On" : "Off"}}</button>
+    </div>
+</div>

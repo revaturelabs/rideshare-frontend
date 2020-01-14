@@ -20,6 +20,7 @@ import { MyCarComponent } from './components/my-car/my-car.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { PreferenceComponent } from './components/preference/preference.component';
 import { ValidationService } from './services/validation-service/validation.service';
+import { DriverInfoComponent } from './components/driver-info/driver-info.component';
 import { AdminfilterPipe } from './pipes/adminfilter.pipe';
 
 @NgModule({
@@ -35,6 +36,7 @@ import { AdminfilterPipe } from './pipes/adminfilter.pipe';
     MyCarComponent,
     ProfileComponent,
     PreferenceComponent,
+    DriverInfoComponent,
     AdminfilterPipe
   ],
   imports: [
@@ -56,4 +58,3 @@ import { AdminfilterPipe } from './pipes/adminfilter.pipe';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
-

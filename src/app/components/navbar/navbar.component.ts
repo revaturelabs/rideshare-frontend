@@ -67,6 +67,4 @@ export class NavbarComponent implements OnInit {
     this.name = '';
     this.router.navigate(['']);
   }
-
-  
 }

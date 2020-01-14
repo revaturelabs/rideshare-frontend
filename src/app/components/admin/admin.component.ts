@@ -22,11 +22,11 @@ export class AdminComponent implements OnInit {
 
 
 
-   private listofUsers: User[];
+   listofUsers: User[];
 
    truthy: string = 'btn btn-success';
    falsy: string = 'btn btn-danger';
-
+   searchText;
   ngOnInit() {
 
     this.adminservice.showAllUser()

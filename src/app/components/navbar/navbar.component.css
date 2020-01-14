@@ -4,14 +4,10 @@ img {
     cursor: pointer;
 }
 
-nav {
-    background-color:#FCB414;
-
+div {
+    margin-bottom: 3%;
 }
 
 #logout-btn {
     cursor: pointer;
 }
-
-
-

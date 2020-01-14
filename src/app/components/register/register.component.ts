@@ -7,16 +7,16 @@ import { ValidationService } from 'src/app/services/validation-service/validatio
 import { User } from 'src/app/models/user';
 
 @Component({
-	selector: 'app-driver-register',
-	templateUrl: './driver-register.component.html',
-	styleUrls: ['./driver-register.component.css']
+	selector: 'app-register',
+	templateUrl: './register.component.html',
+	styleUrls: ['./register.component.css']
 })
 
 /**
- * This is the Driver Register
+ * This is the Register
  */
 
-export class DriverRegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit {
 
 	batches: Batch[] = [];
 	user: User = new User();

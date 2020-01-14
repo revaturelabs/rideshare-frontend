@@ -56,6 +56,11 @@ export class CarRegisterComponent implements OnInit {
 		let option = event.target.options.selectedIndex;
 		this.car.year = this.years[option];
   }
+
+  /**
+   * @function
+   * this function will check the number of seats and if it is valide than a Car Service is called.
+   */
   
   addCar() {
     if (this.validationService.validateSeats(this.car.seats)) {

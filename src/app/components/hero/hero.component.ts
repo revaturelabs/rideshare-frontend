@@ -5,9 +5,16 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './hero.component.html',
   styleUrls: ['./hero.component.css']
 })
+
+/**
+ * This is a Hero Component
+ */
 export class HeroComponent implements OnInit {
 
-  imageURL: string = 'https://github.com/revaturelabs/rideshare-frontend/blob/Jia_Li/src/assets/carsharing.jpeg'
+  /**
+   * this will provide a Hero.
+   */
+
   constructor() { }
 
   ngOnInit() {

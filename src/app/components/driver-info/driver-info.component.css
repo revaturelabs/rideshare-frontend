@@ -1,0 +1,16 @@
+h2 {
+    font-size: 1.375rem;
+    font-weight: 400;
+}
+
+.car-info:hover {
+    background-color: whitesmoke;
+}
+
+#year, #fullName {
+    cursor: pointer;
+}
+
+#year:hover, #fullName:hover {
+    background-color: whitesmoke;
+}

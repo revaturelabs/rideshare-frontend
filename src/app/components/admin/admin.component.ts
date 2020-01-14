@@ -25,8 +25,8 @@ export class AdminComponent implements OnInit {
   ngOnInit() {
   }
   /**
-   * Function that takes no parameters. 
-   * It will clear the sesssion storage.
+   * @function
+   * This function will clear the session storage.
    * @return {void} 
    * 
    */

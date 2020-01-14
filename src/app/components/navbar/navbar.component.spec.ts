@@ -4,11 +4,10 @@ import { NavbarComponent } from './navbar.component';
 import { AdminComponent } from '../admin/admin.component';
 import { CarRegisterComponent } from '../car-register/car-register.component';
 import { DriverProvider } from 'protractor/built/driverProviders';
-import { DriverRegisterComponent } from '../driver-register/driver-register.component';
+import { UserRegisterComponent } from '../user-register/user-register.component';
 import { LoginComponent } from '../login/login.component';
 import { MyCarComponent } from '../my-car/my-car.component';
 import { PreferenceComponent } from '../preference/preference.component';
-import { RiderRegisterComponent } from '../rider-register/rider-register.component';
 import { ProfileComponent } from '../profile/profile.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from 'src/app/app-routing.module';
@@ -21,7 +20,7 @@ describe('NavbarComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ NavbarComponent, AdminComponent, CarRegisterComponent, DriverRegisterComponent, LoginComponent, MyCarComponent, PreferenceComponent, ProfileComponent, RiderRegisterComponent ],
+      declarations: [ NavbarComponent, AdminComponent, CarRegisterComponent, UserRegisterComponent, LoginComponent, MyCarComponent, PreferenceComponent, ProfileComponent ],
       imports: [HttpClientModule, AppRoutingModule, FormsModule],
       providers: [{provide: APP_BASE_HREF, useValue: '/my/app'}]
     })

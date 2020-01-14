@@ -51,12 +51,12 @@ export class DriverComponent implements OnInit {
     changeAcceptingRides(userdriver){
        if(userdriver.acceptingRides == true){
         userdriver.acceptingRides = false;
-      this.userService.changeDriverIsAccepting (this.userDriver);
+      this.userService.updateUserInfo(this.userDriver);
       
     }
     else {
       userdriver.acceptingRides = true;
-      this.userService.changeDriverIsAccepting(this.userDriver);
+      this.userService.updateUserInfo(this.userDriver);
             
     }
   }

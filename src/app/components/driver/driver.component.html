@@ -2,15 +2,10 @@
 
 <div class="container-fluid">
     <div class="row" >
-        <div class="col">
-            <img src='.\assets\logo.png' alt="logo">
-        </div>
         <div class="col-md-auto">
             <h2 class="align-bottom float-center">{{userDriver?.firstName}} &nbsp;<span>{{userDriver?.lastName}} &nbsp;</span>Driver Page</h2>
         </div>
-        <div class="col">
-            <button class="btn btn-danger float-right" type="button" (click)="logout()">Logout</button>
-     </div>
+
 </div>
 <br>
 
@@ -20,12 +15,11 @@
     <div class="row" *ngIf="userDriver" >
         <div class="col">
             <h2 >Location:  &nbsp;<span>{{userDriver?.batch.batchLocation}}</span></h2>
-            <button class="btn btn-primary">Change</button>
+            
         </div>
         <div class="col">
             <h2>Number of seats offered:  &nbsp;<span>{{userDriver?.userId}}</span></h2>
-            <button class="btn btn-primary">Change</button>
-        </div>
+                </div>
         <div class="col">
             <h2 *ngIf="userDriver.acceptingRides===true">Accepting rides:  &nbsp;<span><img src=".\assets\yesno.jpg" width="25" height="25"></span> 
                 {{userDriver?.acceptingRides}}</h2>

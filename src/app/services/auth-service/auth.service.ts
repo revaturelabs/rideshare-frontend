@@ -19,7 +19,7 @@ export class AuthService {
 	 * This is the constructor
 	 * @param router Creates a router instance
 	 */
-	constructor(private router: Router) { }
+	constructor(public router: Router) { }
 
 	/**
 	 * An user object is created

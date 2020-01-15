@@ -28,7 +28,7 @@ export class CarService {
 	 * @param userService An user service
 	 */
 
-	constructor(private http: HttpClient, private router: Router, private userService: UserService) { }
+	constructor(private http: HttpClient, public router: Router, private userService: UserService) { }
 
 	/**
 	 * This function fetches all cars from the database.

@@ -15,6 +15,8 @@ import { AuthService } from 'src/app/services/auth-service/auth.service';
  */
 
 export class AdminComponent implements OnInit {
+  authService: any;
+  adminservice: any;
   /**
    * This is the constructor
    * @param router Provides an instance of a router 

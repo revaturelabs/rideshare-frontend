@@ -32,7 +32,7 @@ export class UserService {
 	 * @param authService An authorization service
 	 */
 
-	constructor(private http: HttpClient, private router: Router, private log: LogService, private authService: AuthService) { }
+	constructor(private http: HttpClient, public router: Router, private log: LogService, private authService: AuthService) { }
   
 	/**
 	 * A GET method for all users

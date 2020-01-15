@@ -102,7 +102,6 @@ export class LoginComponent implements OnInit {
 	login() {
 		this.http.get<User[]>(`${environment.userUri}?username=${this.userName}`)
 			.subscribe((user: User[]) => {
-				console.log(this.chosenUser.active);
 				if (!user.length || this.chosenUser.active == false) {
 					this.loginFailed();
 				} else {

@@ -58,7 +58,7 @@ export class AuthService {
 			this.admin = admin;
 			this.router.navigate(['/admin']);
 			this.fireIsLoggedIn.emit(this.admin);
-			this.router.navigate(['admin-home']);
+			this.router.navigate(['admin']);
 		} else {
 			return false;
 		}

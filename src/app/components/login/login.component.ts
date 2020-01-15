@@ -36,6 +36,7 @@ export class LoginComponent implements OnInit {
 
 	showDropDown: boolean = false;
 	failed: boolean = false;
+	banned: boolean = false;
 
 	/**
 	 * This is a constructor
@@ -43,7 +44,7 @@ export class LoginComponent implements OnInit {
 	 * @param router A router service is injected.
 	 * @param http A HTTP Client is created.
 	 * @param authService An auth service is injected.
-	 * 
+	 *
 	 */
 	constructor(private userService: UserService, private http: HttpClient, private authService: AuthService) { }
 
@@ -61,7 +62,7 @@ export class LoginComponent implements OnInit {
 
 	/**
 	 * A function that allows the user to choose an account to log in as
-	 * @param user 
+	 * @param user
 	 */
 
 	changeUser(user) {
@@ -97,7 +98,7 @@ export class LoginComponent implements OnInit {
 	}
 
 	/**
-	 * A toggle function 
+	 * A toggle function
 	 */
 
 	toggleDropDown() {
@@ -111,7 +112,7 @@ export class LoginComponent implements OnInit {
 		this.curPage++;
 		this.users = this.allUsers.slice(this.curPage * 5 - 5, this.curPage * 5);
 	}
-	
+
 	/**
 	 * Set prev page
 	 */
@@ -120,14 +121,20 @@ export class LoginComponent implements OnInit {
 		this.curPage--;
 		this.users = this.allUsers.slice(this.curPage * 5 - 5, this.curPage * 5);
 	}
-	
+
 	/**
 	 * A function that indicate a fail to login
 	 */
 
+
 	loginFailed() {
 		this.userName = '';
 		this.failed = true;
+	}
+
+	loginBanned(){
+		this.userName = '';
+		this.banned = true;
 	}
 
 	/**
@@ -139,7 +146,11 @@ export class LoginComponent implements OnInit {
 			.subscribe((user: User[]) => {
 				if (!user.length) {
 					this.loginFailed();
-				} else {
+				}
+				else if(this.chosenUser.active == false){
+					this.loginBanned();
+				}
+				else {
 					if (!this.authService.login(user[0], this.chosenUser.userName)) {
 						this.loginFailed();
 					}

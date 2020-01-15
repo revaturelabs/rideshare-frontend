@@ -4,6 +4,7 @@ import { BatchService } from 'src/app/services/batch-service/batch.service';
 import { Batch } from 'src/app/models/batch';
 import { ValidationService } from 'src/app/services/validation-service/validation.service';
 import { User } from 'src/app/models/user';
+import { Observable } from 'rxjs';
 
 @Component({
 	selector: 'app-register',
@@ -37,18 +38,22 @@ export class RegisterComponent implements OnInit {
    * This is an OnInit function that sets the token to the parsed token string.
    * The system will check if the token is valid; once validated a batch service is called.
    */
-	ngOnInit() {
-		this.batches = this.batchService.getAllBatches();
-		this.user.batch.batchNumber = this.batches[0].batchNumber;
-	}
+	ngOnInit() { }
 
 	/**
 	 * This function allows the user to select the batch location.
 	 * @param event
 	 */
 	changeLocation(event) {
-		let option = event.target.options.selectedIndex;
-		this.user.batch.batchNumber = this.batches[option].batchNumber;
+		let location = event.target.value;
+		this.user.batch.batchLocation = location;
+		this.batchService.getAllBatchesByLocation(location).subscribe(data => {
+			this.batches = data;
+		});
+	}
+
+	changeBatchNumber(event) {
+		this.user.batch.batchNumber = event.target.value;
 	}
 
 	/**

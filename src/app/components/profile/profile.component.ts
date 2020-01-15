@@ -99,6 +99,7 @@ export class ProfileComponent implements OnInit {
   /**
    * A function that update the profile
    */
+  
   updateProfile() {
     if (this.validationService.validateUserName(this.newUser.userName) && this.validationService.validateName(this.newUser.firstName) && this.validationService.validateName(this.newUser.lastName) && this.validationService.validateEmail(this.newUser.email) && this.validationService.validatePhone(this.newUser.phoneNumber)) {
       this.editable = '';
@@ -110,6 +111,8 @@ export class ProfileComponent implements OnInit {
         this.newUser.firstName = this.validationService.nameFormat(this.newUser.firstName);
         this.newUser.lastName = this.validationService.nameFormat(this.newUser.lastName);
         this.newUser.phoneNumber = this.validationService.phoneFormat(this.newUser.phoneNumber);
+        this.newUser.batch.batchLocation = this.user.batch.batchLocation;
+        this.newUser.batch.batchNumber = this.user.batch.batchNumber;
 
         this.userService.updateUserInfo(this.newUser).then(response => {
           this.authService.user = response;

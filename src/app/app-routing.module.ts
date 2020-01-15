@@ -13,7 +13,13 @@ import { DriverInfoComponent } from './components/driver-info/driver-info.compon
 
 
 const routes: Routes = [{
-  path: 'home',
+  path: 'home/drivers',
+  component: DriverInfoComponent
+}, {
+  path: 'home/riders',
+  component: DriverComponent
+}, {
+  path: 'all-drivers',
   component: DriverInfoComponent
 }, {
   path: 'login',
@@ -31,9 +37,6 @@ const routes: Routes = [{
   path: 'new/car',
   component: CarRegisterComponent
 }, {
-  path: 'driver',
-  component: DriverComponent
-},{
   path: 'car',
   component: MyCarComponent
 }, {

@@ -36,11 +36,21 @@
                 <th scope="col">Location</th>
                 <td *ngIf="editable!=='batch'">{{newUser.batch.batchLocation}}</td>
                 <td *ngIf="editable==='batch'">
-                    <select id="location" (change)='changeLocation($event)'>
-                        <option *ngFor="let batch of batches" [value]="batch.batchNumber">{{batch.batchLocation}}</option>
+                    <select>
+                        <option *ngFor="let batch of batches">{{batch.batchLocation}}</option>
                     </select>
                 </td>
-                <td><img class="edit" src="assets/pencil.png" (click)="edit('batch')" /></td>
+                <td></td>
+            </tr>
+            <tr>
+                <th scope="col">Batch</th>
+                <td *ngIf="editable!=='batch'">{{newUser.batch.batchNumber}}</td>
+                <td *ngIf="editable==='batch'">
+                    <select>
+                        <option *ngFor="let batch of batches">{{batch.batchLocation}}</option>
+                    </select>
+                </td>
+                <td></td>
             </tr>
         </table>
         <div class="text-right">

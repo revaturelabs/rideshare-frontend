@@ -20,6 +20,7 @@ import { MyCarComponent } from './components/my-car/my-car.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { PreferenceComponent } from './components/preference/preference.component';
 import { ValidationService } from './services/validation-service/validation.service';
+import { AdminLoginComponent } from './components/admin-login/admin-login.component';
 import { DriverInfoComponent } from './components/driver-info/driver-info.component';
 
 @NgModule({
@@ -35,6 +36,7 @@ import { DriverInfoComponent } from './components/driver-info/driver-info.compon
     MyCarComponent,
     ProfileComponent,
     PreferenceComponent,
+    AdminLoginComponent,
     DriverInfoComponent
   ],
   imports: [

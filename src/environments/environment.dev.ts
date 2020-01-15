@@ -3,10 +3,11 @@
  */
 const baseUri = `http://54.172.17.158`;
 
-export const environment = {
   /**
    * These are the dev environment variables
    */
+export const environment = {
+
   production: false,
   environmentName: 'Default Dev Environment',
   userUri: `${baseUri}/users/`,

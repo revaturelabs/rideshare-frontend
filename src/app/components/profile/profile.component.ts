@@ -15,6 +15,10 @@ import { LogService } from 'src/app/services/log.service';
 })
 export class ProfileComponent implements OnInit {
 
+  /**
+   * Instantiates user, newUser, batches, oldBatchNumber and oldBatchLocation
+   */
+
   user: User = new User();
   newUser: User = new User();
   batch: Batch = new Batch();
@@ -22,11 +26,24 @@ export class ProfileComponent implements OnInit {
   oldBatchNumber: number;
   oldBatchLocation: string;
 
+  /**
+   * Set fields property
+   */
+
   editable: string = '';
   noChange: boolean = false;
   updateSuccess: boolean = false;
   updateFailed: boolean = false;
 
+  /**
+   * Constructor
+   * @param log A log service
+   * @param router Provides an instance of a router.
+   * @param userService An user service is instantiated.
+   * @param batchService A batch service is instantiated
+   * @param validationService A validation service is instantiated
+   * @param authService An authorization service is instantiated
+   */
   constructor(private log: LogService, private router: Router, private userService: UserService, private batchService: BatchService, public validationService: ValidationService, private authService: AuthService) { }
 
   ngOnInit() {
@@ -37,6 +54,10 @@ export class ProfileComponent implements OnInit {
       this.getUserInfo();
     }
   }
+
+  /**
+   * A GET method that retrieves user's information
+   */
 
   getUserInfo() {
     this.user.batch = this.batch;
@@ -60,9 +81,18 @@ export class ProfileComponent implements OnInit {
       })
   }
 
+  /**
+   * A method that compares two users
+   */
+
   compareUser() {
     return this.user.firstName.toLowerCase() === this.newUser.firstName.toLowerCase() && this.user.lastName.toLowerCase() === this.newUser.lastName.toLowerCase() && this.user.userName === this.newUser.userName && this.user.email === this.newUser.email && this.validationService.phoneFormat(this.user.phoneNumber) === this.validationService.phoneFormat(this.newUser.phoneNumber) && this.user.batch.batchNumber === this.oldBatchNumber;
   }
+
+  /**
+   * A function that changes the batch location
+   * @param event 
+   */
 
   changeLocation(event) {
 		let option = event.target.options.selectedIndex;
@@ -70,6 +100,9 @@ export class ProfileComponent implements OnInit {
     this.newUser.batch.batchLocation = this.batches[option].batchLocation;
 	}
 
+  /**
+   * A function that update the profile
+   */
   updateProfile() {
     if (this.validationService.validateUserName(this.newUser.userName) && this.validationService.validateName(this.newUser.firstName) && this.validationService.validateName(this.newUser.lastName) && this.validationService.validateEmail(this.newUser.email) && this.validationService.validatePhone(this.newUser.phoneNumber)) {
       this.editable = '';
@@ -97,6 +130,11 @@ export class ProfileComponent implements OnInit {
     }
   }
 
+  /**
+   * A method that allow edits on the attribute
+   * @param attribute 
+   */
+
   edit(attribute) {
     if (this.editable === attribute) {
       this.editable = '';
@@ -105,6 +143,9 @@ export class ProfileComponent implements OnInit {
     }
   }
 
+  /**
+   * A function that restore changes to the batch object.
+   */
   restoreChange() {
     if (window.confirm('Restore All Changes?')) {
       this.editable = '';

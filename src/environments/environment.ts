@@ -6,12 +6,17 @@
 
 
 const baseUri = `http://localhost`;
+/**
+ * Set the port to 8080
+ */
 const port = '8080';
 
-export const environment = {
-  /**
+ /**
    * This is the environment config.
    */
+
+export const environment = {
+ 
   production: false,
   environmentName: 'Default Environment',
   userUri: `${baseUri}:${port}/users/`,

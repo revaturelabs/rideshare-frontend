@@ -24,7 +24,7 @@ export class RegisterComponent implements OnInit {
 	user: User = new User();
 
   /**
-   * @constructor 
+   * This is a constructor
    * @param router Provides an instance of a router.
    * @param userService A dependency of an user service is injected.
    * @param batchService A dependency of a batch service is injected.
@@ -46,7 +46,6 @@ export class RegisterComponent implements OnInit {
 	}
 
 	/**
-	 * @function
 	 * This function allows the user to select the batch location.
 	 * @param event
 	 */
@@ -56,7 +55,6 @@ export class RegisterComponent implements OnInit {
 	}
 
 	/**
-	 * @function
 	 * This function creates a driver if all the validations are true.
 	 * @param role
 	 */

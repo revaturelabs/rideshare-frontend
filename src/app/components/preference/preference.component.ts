@@ -32,7 +32,7 @@ export class PreferenceComponent implements OnInit {
       if (response) {
         this.user = response;
       } else {
-        sessionStorage.clear();
+        this.authService.user = {};
         this.router.navigate(['']);
       }
     })
@@ -40,11 +40,9 @@ export class PreferenceComponent implements OnInit {
 
   toggleActive() {
     if (this.user.active) {
-      if (window.confirm('Do you really want to deactive your account?')) {
-        this.user.active = !this.user.active;
-        this.user.acceptingRides = false;
-        this.userService.updatePreference('active', this.user.active, this.user.userId);
-      }
+      this.user.active = !this.user.active;
+      this.user.acceptingRides = false;
+      this.userService.updatePreference('active', this.user.active, this.user.userId);
     } else {
       this.user.active = !this.user.active;
       this.userService.updatePreference('active', this.user.active, this.user.userId);

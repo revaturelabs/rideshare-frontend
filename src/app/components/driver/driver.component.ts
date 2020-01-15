@@ -21,11 +21,6 @@ export class DriverComponent implements OnInit {
   userDriver : User ;
 
   riders: User[];
-
-
-
-
-
   location = '';   
    
   /**

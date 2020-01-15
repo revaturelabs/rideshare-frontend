@@ -15,8 +15,9 @@ import { UserService } from 'src/app/services/user-service/user.service';
 
 export class AdminComponent implements OnInit {
   /**
-   * @constructor
-   * @param router Provides an instance of a router
+   * This is the constructor
+   * @param router Provides an instance of a router 
+   * @param adminservice Provides an instance of an admin.
    */
   constructor(private router: Router, private adminservice: UserService) { }
 

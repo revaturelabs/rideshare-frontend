@@ -130,7 +130,8 @@ export class DriverInfoComponent implements OnInit {
 
   searchDriverByLocation() {
     this.availableCars = this.allAvailableCars.filter(car => 
-     car.user.batch.batchLocation.toLowerCase().includes(this.searchLocation.toLowerCase()))};
+     car.user.batch.batchLocation.toLowerCase().includes(this.searchLocation.toLowerCase()))
+    }
   /**
    * A function that filters by location
    *

@@ -194,7 +194,7 @@ export class UserService {
       private httpOptions = {
         headers: new HttpHeaders({"Content-Type": "application/json"}),
         observe: "response" as "body"
-      };
+      }
   
     /**
      * A function that bans users.

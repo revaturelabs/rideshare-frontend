@@ -7,4 +7,5 @@ export const environment = {
   userUri: `${baseUri}:${port}/users/`,
   batchesUri: `${baseUri}:${port}/batches/`,
   carUri: `${baseUri}:${port}/cars/`,
+  adminUri: `${baseUri}:${port}/admins/`
 };

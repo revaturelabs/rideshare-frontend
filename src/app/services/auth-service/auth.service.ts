@@ -1,6 +1,7 @@
 import { Injectable, Output, EventEmitter } from '@angular/core';
 import { User } from 'src/app/models/user';
 import { Router } from '@angular/router';
+import { Admin } from 'src/app/models/admin';
 
 
 @Injectable({
@@ -13,6 +14,7 @@ export class AuthService {
 	constructor(private router: Router) { }
 
 	public user: any = {};
+	public admin: Admin = new Admin();
 
 	login(user: User, chosenUserName: string) {
 		if (user.userName === chosenUserName) {
@@ -25,6 +27,16 @@ export class AuthService {
 			}
 			
 			this.fireIsLoggedIn.emit(this.user);
+		} else {
+			return false;
+		}
+	}
+
+	loginAsAdmin(admin: Admin, userName: string) {
+		if (admin.userName === userName) {
+			this.admin = admin;
+			this.router.navigate(['/admin']);
+			this.fireIsLoggedIn.emit(this.admin);
 		} else {
 			return false;
 		}

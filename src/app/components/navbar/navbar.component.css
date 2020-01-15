@@ -11,3 +11,7 @@ div {
 #logout-btn {
     cursor: pointer;
 }
+
+a {
+    cursor: pointer;
+}

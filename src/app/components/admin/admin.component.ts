@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 
 export class AdminComponent implements OnInit {
   /**
-   * @constructor 
+   * This is the constructor
    * @param router Provides an instance of a router 
    */
   constructor(private router: Router) { }
@@ -28,7 +28,6 @@ export class AdminComponent implements OnInit {
    * @function
    * This function will clear the session storage.
    * @return {void} 
-   * 
    */
   logout() {
     sessionStorage.clear();

@@ -7,12 +7,29 @@ import { Router } from '@angular/router';
   	providedIn: 'root'
 })
 export class AuthService {
+	/**
+	 * This is the Authorization Service
+	 */
+
 
 	@Output() fireIsLoggedIn: EventEmitter<any> = new EventEmitter<any>();
 
+	/**
+	 * This is the constructor
+	 * @param router Creates a router instance
+	 */
 	constructor(private router: Router) { }
 
+	/**
+	 * An user object is created
+	 */
 	public user: any = {};
+
+	/**
+	 * This function logs the user into the application
+	 * @param user 
+	 * @param chosenUserName 
+	 */
 
 	login(user: User, chosenUserName: string) {
 		if (user.userName === chosenUserName) {
@@ -29,6 +46,10 @@ export class AuthService {
 			return false;
 		}
 	}
+
+	/**
+	 * This function returns an emitter.
+	 */
 
 	getEmitter() {
 		return this.fireIsLoggedIn;

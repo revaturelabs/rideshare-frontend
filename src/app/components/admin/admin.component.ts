@@ -20,8 +20,8 @@ export class AdminComponent implements OnInit {
    */
   constructor(private router: Router, private adminservice: UserService) { }
 
+   users: User[];
    listofUsers: User[];
-   allListofUsers: User[];
 
    truthy: string = 'btn btn-success';
    falsy: string = 'btn btn-danger';
@@ -31,8 +31,8 @@ export class AdminComponent implements OnInit {
     this.adminservice.showAllUser()
     .subscribe(
       data=> {
+        this.users = data;
         this.listofUsers = data;
-        this.allListofUsers = data;
       }
     )
 }
@@ -48,7 +48,8 @@ export class AdminComponent implements OnInit {
   }
 
   searchUser(){
-    this.listofUsers = this.allListofUsers.filter(item => item.userName.toLowerCase().includes(this.searchText.toLowerCase()));
+    this.users = this.listofUsers.filter(user =>
+      user.userName.toLowerCase().includes(this.searchText.toLowerCase()))
   }
 
   banning(user: User) {

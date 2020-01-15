@@ -9,7 +9,7 @@
  </div>
   <div class="col-lg-2 col-sm-1">
      <button class="btn btn-primary" type="button" (click)="searchUser()">search</button>
-    </div>
+  </div>
 </div>
 
 <br>
@@ -27,17 +27,17 @@
       <th> Ban </th>
     </tr>
 
-    <tr *ngFor="let get of listofUsers">
-      <td>{{get.userId}}</td>
-      <td>{{get.userName}}</td>
-      <td>{{get.firstName}}</td>
-      <td>{{get.lastName}}</td>
-      <td>{{get.email}}</td>
-      <td>{{get.phoneNumber}}</td>
-      <td *ngIf="get.batch">{{get.batch.batchNumber}}</td>
-      <td *ngIf="!get.batch">N/A</td>
-      <td>{{get.active}}</td>
-      <td><button [ngClass]="get.active? falsy : truthy" (click)="banning(get)">{{get.active? "Ban" : "UnBan"}}</button></td>
+    <tr *ngFor="let user of users">
+      <td>{{user.userId}}</td>
+      <td>{{user.userName}}</td>
+      <td>{{user.firstName}}</td>
+      <td>{{user.lastName}}</td>
+      <td>{{user.email}}</td>
+      <td>{{user.phoneNumber}}</td>
+      <td *ngIf="user.batch">{{user.batch.batchNumber}}</td>
+      <td *ngIf="!user.batch">N/A</td>
+      <td>{{user.active}}</td>
+      <td><button [ngClass]="user.active? falsy : truthy" (click)="banning(user)">{{user.active? "Ban" : "UnBan"}}</button></td>
     </tr>
 
   </table>

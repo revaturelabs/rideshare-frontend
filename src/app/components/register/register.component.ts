@@ -12,16 +12,19 @@ import { User } from 'src/app/models/user';
 })
 
 /**
- * This is the Register
+ * This is the Register Component
  */
 
 export class RegisterComponent implements OnInit {
 
+/**
+ * An array of batches 
+ */
 	batches: Batch[] = [];
 	user: User = new User();
 
   /**
-   * @constructor 
+   * This is a constructor
    * @param router Provides an instance of a router.
    * @param userService A dependency of an user service is injected.
    * @param batchService A dependency of a batch service is injected.
@@ -41,6 +44,7 @@ export class RegisterComponent implements OnInit {
 
 	/**
 	 * This function allows the user to select the batch location.
+	 * @param event
 	 */
 	changeLocation(event) {
 		let option = event.target.options.selectedIndex;
@@ -49,6 +53,7 @@ export class RegisterComponent implements OnInit {
 
 	/**
 	 * This function creates a driver if all the validations are true.
+	 * @param role
 	 */
 	signUp(role) {
 		if (this.validationService.validateUserName(this.user.userName) && this.validationService.validateName(this.user.firstName) && this.validationService.validateName(this.user.lastName) && this.validationService.validateEmail(this.user.email) && this.validationService.validatePhone(this.user.phoneNumber)) {

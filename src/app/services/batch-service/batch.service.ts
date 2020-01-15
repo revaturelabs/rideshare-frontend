@@ -4,7 +4,11 @@ import { Batch } from 'src/app/models/batch';
 @Injectable({
     providedIn: 'root'
 })
+/**
+ * This is the batch service
+ */
 export class BatchService {
+
 
 	batches: Batch[] = [
 		{batchNumber: 1, batchLocation: 'VWU - Morgantown, WV'},
@@ -15,8 +19,9 @@ export class BatchService {
 		{batchNumber: 6, batchLocation: 'CUNY Queens College - Flushing, NY'}
 	];
 
-	constructor() { }
-
+	/**
+	 * This function fetches all the batches.
+	 */
 	getAllBatches() {
 		return this.batches;
 	}

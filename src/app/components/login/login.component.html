@@ -19,8 +19,9 @@
             <input type="text" id="userName" [(ngModel)]="userName" name="userName" placeholder="User Name" autocomplete="off"/><br>
         </div>
         <p class="alert alert-danger" *ngIf="failed"><strong>Login Failed!</strong></p>
+        <p class="alert alert-danger" *ngIf="banned"><strong>You are banned</strong></p>
         <button class="btn btn-primary" type="submit" id="sign-in-btn" (click)="login()" (keyup.enter)="login()" [disabled]="!(userName && chosenUserFullName)">Login</button>
         <br><br>
-        <p>Need An Account? <a routerLink="/registerDriver">Sign Up</a></p>
+        <p>Need An Account? <a routerLink="/register">Sign Up</a></p>
     </form>
 </div>

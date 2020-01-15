@@ -128,8 +128,8 @@ export class UserService {
         observe: "response" as "body"
       };
 
-    banUser(userid: number, userName: string, firstName: string, lastName: string, email: string, phoneNumber: string, batch: object, active: boolean){
-      this.body = JSON.stringify({userId:userid, userName:userName, firstName:firstName, lastName:lastName, email:email, phoneNumber:phoneNumber, batch:batch, active:active});
-      this.http.put(`${this.url + userid}`,this.body,this.httpOptions).subscribe();
+    banUser(user: User){
+      this.body = JSON.stringify(user);
+      this.http.put(`${this.url + user.userId}`,this.body,this.httpOptions).subscribe();
     }
 }

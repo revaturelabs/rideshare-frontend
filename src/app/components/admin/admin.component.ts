@@ -51,10 +51,9 @@ export class AdminComponent implements OnInit {
     this.listofUsers = this.allListofUsers.filter(item => item.userName.toLowerCase().includes(this.searchText.toLowerCase()));
   }
 
-  banning(obj: User, userid: number, userName: string, firstName: string, lastName: string, email: string, phoneNumber:string, batch: object, active: boolean) {
-    obj.active = !obj.active;
-    active = !active;
-    this.adminservice.banUser(userid, userName, firstName, lastName, email, phoneNumber, batch, active);
+  banning(user: User) {
+    user.active = !user.active;
+    this.adminservice.banUser(user);
   }
 
 }

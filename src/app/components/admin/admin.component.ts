@@ -52,7 +52,6 @@ export class AdminComponent implements OnInit {
   }
 
   banning(obj: User, userid: number, userName: string, firstName: string, lastName: string, email: string, phoneNumber:string, batch: object, active: boolean) {
-    console.log(obj);
     obj.active = !obj.active;
     active = !active;
     this.adminservice.banUser(userid, userName, firstName, lastName, email, phoneNumber, batch, active);

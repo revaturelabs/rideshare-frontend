@@ -37,10 +37,10 @@ export class AuthService {
 		if (user.userName === chosenUserName) {
 			this.user = user;
 			if(this.user.driver){
-				this.router.navigate(['/driver']);
+				this.router.navigate(['/home/riders']);
 			}
 			else{
-				this.router.navigate(['/home']);
+				this.router.navigate(['/home/drivers']);
 			}
 			
 			this.fireIsLoggedIn.emit(this.user);

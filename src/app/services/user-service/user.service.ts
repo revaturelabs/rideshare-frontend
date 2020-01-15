@@ -185,7 +185,7 @@ export class UserService {
 	/**
 	 * A GET method that shows all users.
 	 */
-	  
+	
 	showAllUser(): Observable<any>{
 		return this.http.get(this.url);
 	}

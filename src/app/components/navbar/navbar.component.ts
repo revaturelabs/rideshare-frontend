@@ -27,7 +27,7 @@ export class NavbarComponent implements OnInit {
    * @param authService A dependency of an auth service is injected.
    */
 
-  constructor(private router: Router, private userService: UserService, private authService: AuthService) { }
+  constructor(private router: Router, private userService: UserService, public authService: AuthService) { }
 
   /**
    * This is an OnInit function that sets the token to the parsed token string.

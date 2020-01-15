@@ -28,7 +28,7 @@ const routes: Routes = [{
   path: 'login/admin',
   component: AdminLoginComponent
 }, {
-  path: 'login/adminhome',
+  path: 'admin-home',
   component: AdminComponent
 }, {
   path: 'register',

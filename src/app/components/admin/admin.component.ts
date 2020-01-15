@@ -35,16 +35,6 @@ export class AdminComponent implements OnInit {
         this.listofUsers = data;
       }
     )
-}
-  /**
-   * Function that takes no parameters.
-   * It will clear the sesssion storage.
-   * @return {void}
-   *
-   */
-  logout() {
-    sessionStorage.clear();
-    this.router.navigate(['']);
   }
 
   searchUser(){

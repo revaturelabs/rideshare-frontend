@@ -16,13 +16,19 @@ import { AuthService } from 'src/app/services/auth-service/auth.service';
    */
 
 export class CarRegisterComponent implements OnInit {
+ 
+  /**
+   * Set years as an array of numbers
+   * Set userId
+   * Instantiates a car
+   */
 
   years: number[] = [];
   userId: number;
   car: Car = new Car();
   
   /**
-   * @constructor
+   * This is constructor
    * @param carService A dependency of a car service is injected.
    * @param router Provides an instance of a router.
    */
@@ -50,7 +56,6 @@ export class CarRegisterComponent implements OnInit {
   }
 
  /**
-  * @function
   * @param event
   * @returns {void}
   */
@@ -59,6 +64,9 @@ export class CarRegisterComponent implements OnInit {
 		this.car.year = this.years[option];
   }
   
+  /**
+   * A POST method that adds a car object to the user
+   */
   addCar() {
     if (this.validationService.validateSeats(this.car.seats)) {
       this.carService.createCar(this.car, this.userId);

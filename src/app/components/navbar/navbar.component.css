@@ -13,3 +13,7 @@ nav {
 #logout-btn {
     cursor: pointer;
 }
+
+a {
+    cursor: pointer;
+}

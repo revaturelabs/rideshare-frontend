@@ -13,10 +13,23 @@ import { MyCarComponent } from 'src/app/components/my-car/my-car.component';
 import { NavbarComponent } from 'src/app/components/navbar/navbar.component';
 import { PreferenceComponent } from 'src/app/components/preference/preference.component';
 import { ProfileComponent } from 'src/app/components/profile/profile.component';
+import { DriverInfoComponent } from 'src/app/components/driver-info/driver-info.component';
+import { DriverComponent } from 'src/app/components/driver/driver.component';
 
 describe('AuthService', () => {
   beforeEach(() => TestBed.configureTestingModule({
-    declarations: [AdminComponent, CarRegisterComponent, RegisterComponent, LoginComponent, MyCarComponent, NavbarComponent, PreferenceComponent, ProfileComponent],
+    declarations: 
+    [AdminComponent, 
+      CarRegisterComponent, 
+      RegisterComponent, 
+      LoginComponent, 
+      MyCarComponent, 
+      NavbarComponent, 
+      PreferenceComponent, 
+      ProfileComponent, 
+      DriverInfoComponent, 
+      DriverComponent
+    ],
     imports: [HttpClientModule, AppRoutingModule, FormsModule],
     providers: [{provide: APP_BASE_HREF, useValue: '/my/app'}]
   }));

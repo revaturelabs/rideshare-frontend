@@ -22,7 +22,7 @@ export class DriverComponent implements OnInit {
    
    
    
-  constructor(private userService: UserService, private router: Router, private authService: AuthService) { }
+  constructor(private userService: UserService, public router: Router, private authService: AuthService) { }
 
   
   ngOnInit() {

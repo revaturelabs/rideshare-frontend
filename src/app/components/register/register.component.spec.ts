@@ -12,6 +12,8 @@ import { MyCarComponent } from '../my-car/my-car.component';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { PreferenceComponent } from '../preference/preference.component';
 import { ProfileComponent } from '../profile/profile.component';
+import { DriverInfoComponent } from '../driver-info/driver-info.component';
+import { DriverComponent } from '../driver/driver.component';
 
 describe('DriverRegisterComponent', () => {
   let component: RegisterComponent;
@@ -19,9 +21,20 @@ describe('DriverRegisterComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [AdminComponent, CarRegisterComponent, RegisterComponent, LoginComponent, MyCarComponent, NavbarComponent, PreferenceComponent, ProfileComponent],
-      imports: [HttpClientModule, AppRoutingModule, FormsModule],
-      providers: [{provide: APP_BASE_HREF, useValue: '/my/app'}]
+      declarations: 
+    [AdminComponent, 
+      CarRegisterComponent, 
+      RegisterComponent, 
+      LoginComponent, 
+      MyCarComponent, 
+      NavbarComponent, 
+      PreferenceComponent, 
+      ProfileComponent, 
+      DriverInfoComponent, 
+      DriverComponent
+    ],
+    imports: [HttpClientModule, AppRoutingModule, FormsModule],
+    providers: [{provide: APP_BASE_HREF, useValue: '/my/app'}]
     })
     .compileComponents();
   }));

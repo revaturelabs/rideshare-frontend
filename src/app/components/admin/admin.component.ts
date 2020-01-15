@@ -16,7 +16,7 @@ export class AdminComponent implements OnInit {
    * @constructor 
    * @param router Provides an instance of a router 
    */
-  constructor(private router: Router) { }
+  constructor(public router: Router) { }
 
   /**
    * This is an OnInit function that is evoked once.

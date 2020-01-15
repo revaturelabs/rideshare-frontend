@@ -12,6 +12,8 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
 import { FormsModule } from '@angular/forms';
 import { APP_BASE_HREF } from '@angular/common';
 import { CarRegisterComponent } from '../car-register/car-register.component';
+import { DriverInfoComponent } from '../driver-info/driver-info.component';
+import { DriverComponent } from '../driver/driver.component';
 
 describe('ProfileComponent', () => {
   let component: ProfileComponent;
@@ -19,9 +21,20 @@ describe('ProfileComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProfileComponent, AdminComponent, CarRegisterComponent, RegisterComponent, LoginComponent, MyCarComponent, NavbarComponent, PreferenceComponent ],
-      imports: [HttpClientModule, AppRoutingModule, FormsModule],
-      providers: [{provide: APP_BASE_HREF, useValue: '/my/app'}]
+      declarations: 
+    [AdminComponent, 
+      CarRegisterComponent, 
+      RegisterComponent, 
+      LoginComponent, 
+      MyCarComponent, 
+      NavbarComponent, 
+      PreferenceComponent, 
+      ProfileComponent, 
+      DriverInfoComponent, 
+      DriverComponent
+    ],
+    imports: [HttpClientModule, AppRoutingModule, FormsModule],
+    providers: [{provide: APP_BASE_HREF, useValue: '/my/app'}]
     })
     .compileComponents();
   }));

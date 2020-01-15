@@ -1,6 +1,7 @@
 import { Injectable, Output, EventEmitter } from '@angular/core';
 import { User } from 'src/app/models/user';
 import { Router } from '@angular/router';
+import { Admin } from 'src/app/models/admin';
 
 
 @Injectable({
@@ -24,6 +25,7 @@ export class AuthService {
 	 * An user object is created
 	 */
 	public user: any = {};
+	public admin: Admin = new Admin();
 
 	/**
 	 * This function logs the user into the application
@@ -50,6 +52,17 @@ export class AuthService {
 	/**
 	 * This function returns an emitter.
 	 */
+
+	loginAsAdmin(admin: Admin, userName: string) {
+		if (admin.userName === userName) {
+			this.admin = admin;
+			this.router.navigate(['/admin']);
+			this.fireIsLoggedIn.emit(this.admin);
+		} else {
+			return false;
+		}
+	}
+
 
 	getEmitter() {
 		return this.fireIsLoggedIn;

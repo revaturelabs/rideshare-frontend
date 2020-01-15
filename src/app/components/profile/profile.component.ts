@@ -68,14 +68,10 @@ export class ProfileComponent implements OnInit {
           this.oldBatchLocation = this.user.batch.batchLocation;
           this.newUser = Object.assign({}, this.user);
 
-          this.batchService.getAllBatches()
-            .subscribe(allBatches => {
-              this.batches = allBatches;
-              let idx = this.batches.findIndex(batch => batch.batchNumber === this.user.batch.batchNumber);
-              this.batches = this.batches.splice(idx, 1).concat(this.batches);
-          });
+          this.batches = this.batchService.getAllBatches();
+          this.batches = this.batches.filter(batch => batch.batchNumber === this.user.batch.batchNumber).concat(this.batches.filter(batch => batch.batchNumber !== this.user.batch.batchNumber))
         } else {
-          sessionStorage.clear();
+          this.authService.user = {};
           this.router.navigate(['']);
         }
       })
@@ -147,11 +143,9 @@ export class ProfileComponent implements OnInit {
    * A function that restore changes to the batch object.
    */
   restoreChange() {
-    if (window.confirm('Restore All Changes?')) {
-      this.editable = '';
-      this.newUser = Object.assign({}, this.user);
-      this.newUser.batch.batchNumber = this.oldBatchNumber;
-      this.newUser.batch.batchLocation = this.oldBatchLocation;
-    }
+    this.editable = '';
+    this.newUser = Object.assign({}, this.user);
+    this.newUser.batch.batchNumber = this.oldBatchNumber;
+    this.newUser.batch.batchLocation = this.oldBatchLocation;
   }
 }

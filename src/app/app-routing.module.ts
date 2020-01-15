@@ -8,6 +8,7 @@ import { DriverComponent } from './components/driver/driver.component';
 import { MyCarComponent } from './components/my-car/my-car.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { PreferenceComponent } from './components/preference/preference.component';
+import { AdminLoginComponent } from './components/admin-login/admin-login.component';
 import { DriverInfoComponent } from './components/driver-info/driver-info.component';
 
 
@@ -17,6 +18,9 @@ const routes: Routes = [{
 }, {
   path: 'login',
   component: LoginComponent
+}, {
+  path: 'login/admin',
+  component: AdminLoginComponent
 }, {
   path: 'register',
   component: RegisterComponent

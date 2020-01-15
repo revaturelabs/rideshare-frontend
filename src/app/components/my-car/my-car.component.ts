@@ -52,16 +52,14 @@ export class MyCarComponent implements OnInit {
    */
 
   removeMyCar() {
-    if (window.confirm('The Car Will Be Removed')) {
-      this.carService.removeCar(this.myCar.carId).subscribe(
-        Response => {
-        this.logService.info("updated user info: " + '\n' + JSON.stringify(Response));  
-      }, error => {
-        this.logService.error(error)
-      })
+    this.carService.removeCar(this.myCar.carId).subscribe(
+      Response => {
+      this.logService.info("updated user info: " + '\n' + JSON.stringify(Response));  
+    }, error => {
+      this.logService.error(error)
+    })
 
-      this.myCar = new Car();
-      this.userService.updateIsDriver(false, this.userId);
-    }
+    this.myCar = new Car();
+    this.userService.updateIsDriver(false, this.userId);
   }
 }

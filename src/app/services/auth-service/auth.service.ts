@@ -49,6 +49,10 @@ export class AuthService {
 		}
 	}
 
+	/**
+	 * This function returns an emitter.
+	 */
+
 	loginAsAdmin(admin: Admin, userName: string) {
 		if (admin.userName === userName) {
 			this.admin = admin;

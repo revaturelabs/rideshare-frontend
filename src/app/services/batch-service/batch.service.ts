@@ -9,6 +9,7 @@ import { Batch } from 'src/app/models/batch';
  */
 export class BatchService {
 
+
 	batches: Batch[] = [
 		{batchNumber: 1, batchLocation: 'VWU - Morgantown, WV'},
 		{batchNumber: 2, batchLocation: 'UTA - Arlington, TX'},
@@ -17,8 +18,6 @@ export class BatchService {
 		{batchNumber: 5, batchLocation: 'CUNY SPS - New York, NY'},
 		{batchNumber: 6, batchLocation: 'CUNY Queens College - Flushing, NY'}
 	];
-
-	constructor() { }
 
 	/**
 	 * This function fetches all the batches.

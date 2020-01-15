@@ -67,7 +67,6 @@ export class CarService {
 			},
 			(error) => {
 				console.warn(error);
-				alert("Server Error! Please Try Again Later.");
 			}
 		);
 	}

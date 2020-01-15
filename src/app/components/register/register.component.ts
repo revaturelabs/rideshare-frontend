@@ -38,11 +38,8 @@ export class RegisterComponent implements OnInit {
    * The system will check if the token is valid; once validated a batch service is called.
    */
 	ngOnInit() {
-		this.batchService.getAllBatches()
-			.subscribe(allBatches => {
-				this.batches = allBatches;
-				this.user.batch.batchNumber = this.batches[0].batchNumber;
-		});
+		this.batches = this.batchService.getAllBatches();
+		this.user.batch.batchNumber = this.batches[0].batchNumber;
 	}
 
 	/**

@@ -45,7 +45,6 @@ export class UserService {
 			},
 			(error) => {
 				this.log.error(error)
-				alert("Server Error! Please Try Again Later.");
 			}
 		);
 

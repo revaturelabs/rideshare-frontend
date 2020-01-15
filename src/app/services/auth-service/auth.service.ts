@@ -32,10 +32,10 @@ export class AuthService {
 		}
 	}
 
-	LoginAsAdmin(admin: Admin, userName: string) {
+	loginAsAdmin(admin: Admin, userName: string) {
 		if (admin.userName === userName) {
 			this.admin = admin;
-			this.router.navigate(['/home']);
+			this.router.navigate(['/admin']);
 			this.fireIsLoggedIn.emit(this.admin);
 		} else {
 			return false;

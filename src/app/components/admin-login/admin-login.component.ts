@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Admin } from 'src/app/models/admin';
-import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from 'src/app/services/auth-service/auth.service';
@@ -20,18 +19,14 @@ export class AdminLoginComponent implements OnInit {
 
 	failed: boolean = false;
 
-  constructor(private router: Router, private http: HttpClient, private authService: AuthService, private adminService: AdminService) { }
+  constructor(private http: HttpClient, private authService: AuthService, private adminService: AdminService) { }
 
   ngOnInit() {
-    if (sessionStorage.getItem('auth')) {
-      this.router.navigate(['home']);
-    } else {
-      this.adminService.getAllAdmins()
+    this.adminService.getAllAdmins()
         .subscribe(allAdmins => {
           this.admins = allAdmins;
           this.chosenAdmin = this.admins[0];
       });
-    }
   }
   
   changeAdmin(event) {
@@ -49,7 +44,7 @@ export class AdminLoginComponent implements OnInit {
 				if (!admin.adminId) {
 					this.loginFailed();
 				} else {
-					if (!this.authService.LoginAsAdmin(admin, this.userName)) {
+					if (!this.authService.loginAsAdmin(admin, this.userName)) {
 						this.loginFailed();
 					}
 				}

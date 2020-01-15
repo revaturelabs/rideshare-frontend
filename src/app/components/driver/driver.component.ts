@@ -30,13 +30,11 @@ export class DriverComponent implements OnInit {
    * @param authService An auth service is injected.
    */
 
+  
   constructor(private userService: UserService, private router: Router, private authService: AuthService) { }
 
-
   ngOnInit() {
-
     let userId = this.authService.user.userId;
-    
     if (userId) {
       this.userService.getDriverById(userId).
         subscribe(
@@ -55,7 +53,6 @@ export class DriverComponent implements OnInit {
       }
     }
 
-
   /**
    * A PUT method that changes accepting ride status
    * @param userdriver 
@@ -73,7 +70,6 @@ export class DriverComponent implements OnInit {
 
     }
   }
-
 
   /**
    * Logs out the user

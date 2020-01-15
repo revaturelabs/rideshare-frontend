@@ -35,9 +35,7 @@ export class RegisterComponent implements OnInit {
    * This is an OnInit function that sets the token to the parsed token string.
    * The system will check if the token is valid; once validated a batch service is called.
    */
-	ngOnInit() {
-		// this.user.batch.batchNumber = this.batches[0].batchNumber;
-	}
+	ngOnInit() { }
 
 	/**
 	 * This function allows the user to select the batch location.
@@ -48,7 +46,6 @@ export class RegisterComponent implements OnInit {
 		this.batchService.getAllBatchesByLocation(location).subscribe(data => {
 			this.batches = data;
 		});
-		// this.user.batch.batchNumber = this.batches[option].batchNumber;
 	}
 
 	changeBatchNumber(event) {
@@ -64,7 +61,6 @@ export class RegisterComponent implements OnInit {
 			this.user.lastName = this.validationService.nameFormat(this.user.lastName);
 			this.user.phoneNumber = this.validationService.phoneFormat(this.user.phoneNumber);
 			this.userService.createDriver(this.user, role);
-			console.log(this.user);
 		}
 	}
 

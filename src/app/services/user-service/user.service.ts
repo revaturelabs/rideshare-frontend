@@ -1,5 +1,5 @@
 import { Injectable, Output, EventEmitter } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from 'src/app/models/user';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
@@ -17,7 +17,7 @@ export class UserService {
 	user: User = new User();
 
 	constructor(private http: HttpClient, private router: Router, private log: LogService, private authService: AuthService) { }
-	
+
 	getAllUsers() {
 		return this.http.get<User[]>(this.url);
 	}
@@ -103,20 +103,33 @@ export class UserService {
 
 	getDriverById(id: number): Observable <any>{
 		return this.http.get(this.url + id);
-	  
+
 	  }
 
 	changeDriverIsAccepting(data) {
 		let id=data.userId;
 		return this.http.put(this.url+id, data)
-		
+
 	  }
-	  
+
 	  getRidersForLocation(location: string): Observable <any>{
 		return this.http.get(this.url + '?is-driver=false&location='+ location)
 	  }
-	  
+
 		showAllUser(): Observable<any>{
 		  return this.http.get(this.url);
 		}
+
+    // body to send update data
+      private body: string;
+    // Http options
+      private httpOptions = {
+        headers: new HttpHeaders({"Content-Type": "application/json"}),
+        observe: "response" as "body"
+      };
+
+    banUser(user: User){
+      this.body = JSON.stringify(user);
+      this.http.put(`${this.url + user.userId}`,this.body,this.httpOptions).subscribe();
+    }
 }

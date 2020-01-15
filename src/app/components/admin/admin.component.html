@@ -15,16 +15,17 @@
 <br>
 
   <table class="table table-bordered">
+    <caption hidden>Admin Portal</caption>
     <tr>
-      <th> ID </th>
-      <th> UserName </th>
-      <th> First Name </th>
-      <th> Last Name </th>
-      <th> Email </th>
-      <th> Phone Number </th>
-      <th> Batch Number</th>
-      <th> is Active </th>
-      <th> Ban </th>
+      <th scope="ID"> ID </th>
+      <th scope="UserName"> UserName </th>
+      <th scope="FirstName"> First Name </th>
+      <th scope="LastName"> Last Name </th>
+      <th scope="email"> Email </th>
+      <th scope="PhoneNumber"> Phone Number </th>
+      <th scope="BatchNumber"> Batch Number</th>
+      <th scope="isActive"> is Active </th>
+      <th scope="Ban"> Ban </th>
     </tr>
 
     <tr *ngFor="let user of users">

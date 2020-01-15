@@ -172,22 +172,6 @@ export class UserService {
 		return this.http.put(this.url+id, data)
 	}
 
-	/**
- 	* A GET method that fetches all Riders
- 	* @param location 
- 	*/
-	  getRidersForLocation(location: string): Observable <any>{
-		return this.http.get(this.url + '?is-driver=false&location='+ location)
-	}
-
-	/**
-	 * A GET method that shows all users.
-	 */
-	
-	showAllUser(): Observable<any>{
-		return this.http.get(this.url);
-	}
-
   /**
    * A GET method that fetches riders from a location
    */

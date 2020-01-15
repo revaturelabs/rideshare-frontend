@@ -36,6 +36,7 @@ export class LoginComponent implements OnInit {
 
 	showDropDown: boolean = false;
 	failed: boolean = false;
+	banned: boolean = false;
 
 	/**
 	 * This is a constructor
@@ -61,7 +62,7 @@ export class LoginComponent implements OnInit {
 
 	/**
 	 * A function that allows the user to choose an account to log in as
-	 * @param user 
+	 * @param user
 	 */
 
 	changeUser(user) {
@@ -97,7 +98,7 @@ export class LoginComponent implements OnInit {
 	}
 
 	/**
-	 * A toggle function 
+	 * A toggle function
 	 */
 
 	toggleDropDown() {
@@ -111,7 +112,7 @@ export class LoginComponent implements OnInit {
 		this.curPage++;
 		this.users = this.allUsers.slice(this.curPage * 5 - 5, this.curPage * 5);
 	}
-	
+
 	/**
 	 * Set prev page
 	 */
@@ -131,6 +132,11 @@ export class LoginComponent implements OnInit {
 		this.failed = true;
 	}
 
+	loginBanned(){
+		this.userName = '';
+		this.banned = true;
+	}
+
 	/**
 	 * A login function
 	 */
@@ -138,9 +144,13 @@ export class LoginComponent implements OnInit {
 	login() {
 		this.http.get<User[]>(`${environment.userUri}?username=${this.userName}`)
 			.subscribe((user: User[]) => {
-				if (!user.length || this.chosenUser.active == false) {
+				if (!user.length) {
 					this.loginFailed();
-				} else {
+				}
+				else if(!user.length || this.chosenUser.active == false){
+					this.loginBanned();
+				}
+				else {
 					if (!this.authService.login(user[0], this.chosenUser.userName)) {
 						this.loginFailed();
 					}

@@ -4,6 +4,7 @@ import { BatchService } from 'src/app/services/batch-service/batch.service';
 import { Batch } from 'src/app/models/batch';
 import { ValidationService } from 'src/app/services/validation-service/validation.service';
 import { User } from 'src/app/models/user';
+import { Observable } from 'rxjs';
 
 @Component({
 	selector: 'app-register',
@@ -17,7 +18,7 @@ import { User } from 'src/app/models/user';
 
 export class RegisterComponent implements OnInit {
 
-	batches: Batch[] = [];
+	batches: Batch;
 	user: User = new User();
 
   /**
@@ -35,16 +36,23 @@ export class RegisterComponent implements OnInit {
    * The system will check if the token is valid; once validated a batch service is called.
    */
 	ngOnInit() {
-		this.batches = this.batchService.getAllBatches();
-		this.user.batch.batchNumber = this.batches[0].batchNumber;
+		// this.user.batch.batchNumber = this.batches[0].batchNumber;
 	}
 
 	/**
 	 * This function allows the user to select the batch location.
 	 */
 	changeLocation(event) {
-		let option = event.target.options.selectedIndex;
-		this.user.batch.batchNumber = this.batches[option].batchNumber;
+		let location = event.target.value;
+		this.user.batch.batchLocation = location;
+		this.batchService.getAllBatchesByLocation(location).subscribe(data => {
+			this.batches = data;
+		});
+		// this.user.batch.batchNumber = this.batches[option].batchNumber;
+	}
+
+	changeBatchNumber(event) {
+		this.user.batch.batchNumber = event.target.value;
 	}
 
 	/**
@@ -56,6 +64,7 @@ export class RegisterComponent implements OnInit {
 			this.user.lastName = this.validationService.nameFormat(this.user.lastName);
 			this.user.phoneNumber = this.validationService.phoneFormat(this.user.phoneNumber);
 			this.userService.createDriver(this.user, role);
+			console.log(this.user);
 		}
 	}
 

@@ -37,7 +37,6 @@ export class DriverInfoComponent implements OnInit {
           this.orderByLocation();
         }
       )
-      this.batches = this.batchService.getAllBatches();
     }
   }
 

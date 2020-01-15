@@ -1,39 +1,60 @@
-<div class="container">
-    <form class="form-group" id="sign-up-form">
-        <h3>Your Information</h3>
-        <div class="form-group">
-            <label for="userName">User Name <small>*</small></label><br>
-            <input id="userName" type="text" placeholder="User Name" [(ngModel)]="user.userName" name="userName" required autocomplete="off"><br>
-            <small *ngIf="user.userName && !validationService.validateUserName(user.userName)">User Name Should Be 3 to 8 Characters</small>
+<div class="d-flex justify-content-center">
+    <form class="form-group text-center col-sm-7" id="sign-up-form">
+        <h3 class="mb-5">Your Information</h3>
+        <div class="form-row justify-content-around mb-3">
+            <div class="form-group mr-2">
+                <label for="userName">User Name <small>*</small></label><br>
+                <input class="form-control" id="userName" type="text" placeholder="User Name" [(ngModel)]="user.userName" name="userName" autocomplete="off" required><br>
+                <small *ngIf="user.userName && !validationService.validateUserName(user.userName)">User Name Should Be 3 to 8 Characters</small>
+            </div>
+            <div class="form-group mr-2">
+                <label for="firstName">First Name <small>*</small></label><br>
+                <input class="form-control" id="firstName" type="text" placeholder="First Name" [(ngModel)]="user.firstName" name="firstName" autocomplete="off" required><br>
+                <small *ngIf="user.firstName && !validationService.validateName(user.firstName)">Invalid Name</small>
+            </div>
+            <div class="form-group">
+                <label for="lastName">Last Name <small>*</small></label><br>
+                <input class="form-control" id="lastName" type="text" placeholder="Last Name" [(ngModel)]="user.lastName" name="lastName" autocomplete="off" required><br>
+                <small *ngIf="user.lastName && !validationService.validateName(user.lastName)">Invalid Name</small>
+            </div>
+        </div>
+        <div class="form-row justify-content-around mb-3">
+            <div class="form-group">
+                <label for="email">Email <small>*</small></label><br>
+                <input class="form-control" id="email" type="email" placeholder="Email" [(ngModel)]="user.email" name="email" autocomplete="off" required><br>
+                <small *ngIf="user.email && !validationService.validateEmail(user.email)">Invalid Email</small>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone <small>*</small></label><br>
+                <input class="form-control" id="phone" type="tel" placeholder="Phone #" [(ngModel)]="user.phoneNumber" name="phone" autocomplete="off" required><br>
+                <small *ngIf="user.phoneNumber && !validationService.validatePhone(user.phoneNumber)">Invalid Phone Number</small>
+            </div>
+        </div>
+        <div class="form-row justify-content-center">
+            <div class="form-group">
+                <label for="location">Location <small>*</small></label><br>
+                <select id="location" (change)='changeLocation($event)' class="form-control">
+                    <option></option>
+                    <option>VWU - Morgantown, WV</option>
+                    <option>UTA - Arlington, TX</option>
+                    <option>USF - Tampa, FL</option>
+                    <option>Revature HQ - Reston, VA</option>
+                    <option>CUNY SPS - New York, NY</option>
+                    <option>CUNY Queens College - Flushing, NY</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row justify-content-center">
+            <div class="form-group" *ngIf=batches>
+                <label for="batch number">Batch Number <small>*</small></label><br>
+                <select id="batch number" (change)='changeBatchNumber($event)' class="form-control">
+                    <option></option>
+                    <option *ngFor="let batch of batches">{{batch.batchNumber}}</option>
+                </select>
+            </div>
         </div>
         <div class="form-group">
-            <label for="firstName">First Name <small>*</small></label><br>
-            <input id="firstName" type="text" placeholder="First Name" [(ngModel)]="user.firstName" name="firstName" required><br>
-            <small *ngIf="user.firstName && !validationService.validateName(user.firstName)">Invalid Name</small>
-        </div>
-        <div class="form-group">
-            <label for="lastName">Last Name <small>*</small></label><br>
-            <input id="lastName" type="text" placeholder="Last Name" [(ngModel)]="user.lastName" name="lastName" required><br>
-            <small *ngIf="user.lastName && !validationService.validateName(user.lastName)">Invalid Name</small>
-        </div>
-        <div class="form-group">
-            <label for="email">Email <small>*</small></label><br>
-            <input id="email" type="email" placeholder="Email" [(ngModel)]="user.email" name="email" required><br>
-            <small *ngIf="user.email && !validationService.validateEmail(user.email)">Invalid Email</small>
-        </div>
-        <div class="form-group">
-            <label for="phone">Phone <small>*</small></label><br>
-            <input id="phone" type="tel" placeholder="Phone #" [(ngModel)]="user.phoneNumber" name="phone" required><br>
-            <small *ngIf="user.phoneNumber && !validationService.validatePhone(user.phoneNumber)">Invalid Phone Number</small>
-        </div>
-        <div class="form-group">
-            <label for="location">Location <small>*</small></label><br>
-            <select id="location" (change)='changeLocation($event)'>
-                <option *ngFor="let batch of batches" [value]="batch.batchNumber">{{batch.batchLocation}}</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <button id="sign-up-as-driver-btn" class="btn btn-primary" type="submit" (click)="signUp('driver')" [disabled]="!(user.userName && user.firstName && user.lastName && user.email && user.phoneNumber)">Sign Up As Driver</button>
+            <button id="sign-up-as-driver-btn" class="btn btn-primary m-2" type="submit" (click)="signUp('driver')" [disabled]="!(user.userName && user.firstName && user.lastName && user.email && user.phoneNumber)">Sign Up As Driver</button>
             <button id="sign-up-as-rider-btn" class="btn btn-primary" type="submit" (click)="signUp('rider')" [disabled]="!(user.userName && user.firstName && user.lastName && user.email && user.phoneNumber)">Sign Up As Rider</button>
         </div>
     </form>

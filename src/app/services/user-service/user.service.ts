@@ -109,8 +109,6 @@ export class UserService {
 
 	changeDriverIsAccepting(data) {
 		let id=data.userId;
-		console.log("Driver change url", this.url + id);
-		console.log("Driver data", data);
 		return this.http.put(this.url+id, data).toPromise()
 		
 	  }

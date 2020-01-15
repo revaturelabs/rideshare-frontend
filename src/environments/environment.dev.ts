@@ -4,6 +4,6 @@ export const environment = {
   production: false,
   environmentName: 'Default Dev Environment',
   userUri: `${baseUri}/users/`,
-  batchesUri: `${baseUri}/batches/`,
+  batchesUri: `${baseUri}/batches`,
   carUri: `${baseUri}/cars/`,
 };

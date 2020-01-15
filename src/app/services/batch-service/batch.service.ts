@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Batch } from 'src/app/models/batch';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment.dev';
 
 @Injectable({
     providedIn: 'root'
 })
 export class BatchService {
 
+	url: string = environment.batchesUri;
+	
 	batches: Batch[] = [
 		{batchNumber: 1, batchLocation: 'VWU - Morgantown, WV'},
 		{batchNumber: 2, batchLocation: 'UTA - Arlington, TX'},
@@ -21,7 +24,7 @@ export class BatchService {
 		return this.batches;
 	}
 
-	getAllBatchesByLocation(location) {
-		return this.http.get<Batch>(`http://localhost:8080/batches?location=${location}`);
+	getAllBatchesByLocation(location: string) {
+		return this.http.get<Batch>(`${this.url}?location=${location}`);
 	}
 }

@@ -20,7 +20,7 @@ export class ValidationService {
 	 * This function is validates the length of the username
 	 */
   validateUserName(userName: string) {
-		return userName.length >= 3 && userName.length <= 8;
+		return userName.length >= 3 && userName.length <= 12;
 	}
 
   /**

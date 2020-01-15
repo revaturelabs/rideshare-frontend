@@ -14,12 +14,22 @@ import { AuthService } from 'src/app/services/auth-service/auth.service';
 })
 export class DriverComponent implements OnInit {
 
+  /**
+   * Initializing userDriver as an User object and set riders array
+   */
+
   userDriver : User ;
 
   riders: User[];
 
   location = '';   
    
+  /**
+   * Constructor 
+   * @param userService An user service is instantiated.
+   * @param router Provides an instance of a router.
+   * @param authService An auth service is injected.
+   */
    
    
   constructor(private userService: UserService, private router: Router, private authService: AuthService) { }
@@ -47,6 +57,11 @@ export class DriverComponent implements OnInit {
       }
     }
 
+  /**
+   * A PUT method that changes accepting ride status
+   * @param userdriver 
+   */
+
    
     changeAcceptingRides(userdriver){
        if(userdriver.acceptingRides == true){
@@ -61,6 +76,9 @@ export class DriverComponent implements OnInit {
     }
   }
 
+  /**
+   * Logs out the user
+   */
   
 
   logout() {

@@ -16,6 +16,14 @@ import { AuthService } from 'src/app/services/auth-service/auth.service';
  */
 export class LoginComponent implements OnInit {
 
+	/**
+	 * Creates an array of Users
+	 * Creates an array of all Users
+	 * Sets a chosen user object
+	 * Sets name string variable to the chosen user
+	 * Sets pagination
+	 */
+
 	users: User[] = [];
 	allUsers: User[] = [];
 
@@ -30,7 +38,7 @@ export class LoginComponent implements OnInit {
 	failed: boolean = false;
 
 	/**
-	 * @constructor
+	 * This is a constructor
 	 * @param userService An user service is instantiated.
 	 * @param router A router service is injected.
 	 * @param http A HTTP Client is created.
@@ -51,6 +59,11 @@ export class LoginComponent implements OnInit {
 		});
 	}
 
+	/**
+	 * A function that allows the user to choose an account to log in as
+	 * @param user 
+	 */
+
 	changeUser(user) {
 		this.showDropDown = false;
 		this.curPage = 1;
@@ -59,6 +72,10 @@ export class LoginComponent implements OnInit {
 		this.chosenUserFullName = `${user.firstName} ${user.lastName}: ${user.driver ? 'Driver' : 'Rider'}`;
 		this.chosenUser = user;
 	}
+
+	/**
+	 * A GET method the fetches all the users
+	 */
 
 	searchAccount() {
 		this.showDropDown = true;
@@ -79,25 +96,43 @@ export class LoginComponent implements OnInit {
 		}
 	}
 
+	/**
+	 * A toggle function 
+	 */
+
 	toggleDropDown() {
 		this.showDropDown = !this.showDropDown;
 	}
 
+	/**
+	 * Set next page
+	 */
 	nextPage() {
 		this.curPage++;
 		this.users = this.allUsers.slice(this.curPage * 5 - 5, this.curPage * 5);
 	}
+	
+	/**
+	 * Set prev page
+	 */
 
 	prevPage() {
 		this.curPage--;
 		this.users = this.allUsers.slice(this.curPage * 5 - 5, this.curPage * 5);
 	}
 	
+	/**
+	 * A function that indicate a fail to login
+	 */
 
 	loginFailed() {
 		this.userName = '';
 		this.failed = true;
 	}
+
+	/**
+	 * A login function
+	 */
 
 	login() {
 		this.http.get<User[]>(`${environment.userUri}?username=${this.userName}`)

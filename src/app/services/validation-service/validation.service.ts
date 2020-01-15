@@ -4,7 +4,9 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class ValidationService {
-
+   /**
+    * This is the contructor for the validation service.
+	*/
   constructor() { }
   
    /** 
@@ -20,7 +22,7 @@ export class ValidationService {
 	 * This function is validates the length of the username
 	 */
   validateUserName(userName: string) {
-		return userName.length >= 3 && userName.length <= 8;
+		return userName.length >= 3 && userName.length <= 12;
 	}
 
   /**

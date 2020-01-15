@@ -19,7 +19,7 @@ describe('DriverRegisterComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [AdminComponent, CarRegisterComponent, UserRegisterComponent, LoginComponent, MyCarComponent, NavbarComponent, PreferenceComponent, ProfileComponent],
+      declarations: [UserRegisterComponent, AdminComponent, CarRegisterComponent, LoginComponent, MyCarComponent, NavbarComponent, PreferenceComponent, ProfileComponent],
       imports: [HttpClientModule, AppRoutingModule, FormsModule],
       providers: [{provide: APP_BASE_HREF, useValue: '/my/app'}]
     })

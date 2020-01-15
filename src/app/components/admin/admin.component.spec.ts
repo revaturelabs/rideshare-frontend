@@ -19,7 +19,7 @@ describe('AdminComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [AdminComponent, CarRegisterComponent, UserRegisterComponent, LoginComponent, MyCarComponent, NavbarComponent, PreferenceComponent, ProfileComponent],
+      declarations: [AdminComponent, MyCarComponent, NavbarComponent, PreferenceComponent, ProfileComponent, CarRegisterComponent, UserRegisterComponent, LoginComponent],
       imports: [HttpClientModule, AppRoutingModule, FormsModule],
       providers: [{provide: APP_BASE_HREF, useValue: '/my/app'}]
     })
@@ -34,5 +34,11 @@ describe('AdminComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('logout()', () => {
+    component.router.navigate(['']);
+    component.logout();
+    expect(component.router.navigate).toHaveBeenCalled;
   });
 });

@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 export class AuthService {
 
 	@Output() fireIsLoggedIn: EventEmitter<any> = new EventEmitter<any>();
-	private loggedIn: boolean = false;
+	 loggedIn: boolean = false;
 
 	constructor(private router: Router) { }
 

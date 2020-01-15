@@ -14,15 +14,28 @@ import { NavbarComponent } from 'src/app/components/navbar/navbar.component';
 import { PreferenceComponent } from 'src/app/components/preference/preference.component';
 import { ProfileComponent } from 'src/app/components/profile/profile.component';
 
+
 describe('AuthService', () => {
   beforeEach(() => TestBed.configureTestingModule({
     declarations: [AdminComponent, CarRegisterComponent, UserRegisterComponent, LoginComponent, MyCarComponent, NavbarComponent, PreferenceComponent, ProfileComponent],
-    imports: [HttpClientModule, AppRoutingModule, FormsModule],
+    imports: [AppRoutingModule, FormsModule, HttpClientModule],
     providers: [{provide: APP_BASE_HREF, useValue: '/my/app'}]
   }));
+   let service: AuthService;
+   
+  beforeEach(() => {
+    service = TestBed.get(AuthService);
+    service.loggedIn = false;
+  });
 
   it('should be created', () => {
-    const service: AuthService = TestBed.get(AuthService);
+    // const service: AuthService = TestBed.get(AuthService);
     expect(service).toBeTruthy();
   });
+
+  it('#isLoggedIn() should confirm if logged in', () => {
+    // const isLoggedIn = false;
+    service.loggedIn = false;
+    expect(service.loggedIn).toBe(false);
+  })
 });

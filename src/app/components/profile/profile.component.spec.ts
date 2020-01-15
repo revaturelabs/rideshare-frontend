@@ -12,6 +12,7 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
 import { FormsModule } from '@angular/forms';
 import { APP_BASE_HREF } from '@angular/common';
 import { CarRegisterComponent } from '../car-register/car-register.component';
+import { userInfo } from 'os';
 
 describe('ProfileComponent', () => {
   let component: ProfileComponent;
@@ -19,7 +20,7 @@ describe('ProfileComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProfileComponent, AdminComponent, CarRegisterComponent, UserRegisterComponent, LoginComponent, MyCarComponent, NavbarComponent, PreferenceComponent ],
+      declarations: [ ProfileComponent, AdminComponent, UserRegisterComponent, LoginComponent, MyCarComponent, NavbarComponent, PreferenceComponent, CarRegisterComponent ],
       imports: [HttpClientModule, AppRoutingModule, FormsModule],
       providers: [{provide: APP_BASE_HREF, useValue: '/my/app'}]
     })

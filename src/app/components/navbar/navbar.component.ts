@@ -62,4 +62,8 @@ export class NavbarComponent implements OnInit {
     this.name = '';
     this.router.navigate(['']);
   }
+
+  redirectToHome() {
+    this.authService.user.driver ? this.router.navigate(['home/riders']) : this.router.navigate(['home/drivers']);
+  }
 }

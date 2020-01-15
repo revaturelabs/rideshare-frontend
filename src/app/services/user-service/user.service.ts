@@ -40,7 +40,7 @@ export class UserService {
 				if (role === 'driver') {
 					this.router.navigate(['new/car']);
 				} else {
-					this.router.navigate(['home']);
+					this.router.navigate(['home/drivers']);
 				}
 			},
 			(error) => {
@@ -65,7 +65,7 @@ export class UserService {
 				this.http.put(this.url+userId, this.user).subscribe(
 					(response) => {
 						this.authService.user = response;
-					  this.log.info(JSON.stringify(response));
+						this.log.info(JSON.stringify(response));
 					},
 					(error) => this.log.error(error)
 				);

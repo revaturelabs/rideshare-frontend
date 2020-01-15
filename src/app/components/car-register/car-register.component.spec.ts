@@ -78,33 +78,4 @@ describe('CarRegisterComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-  
-  // it('should add car', () => {
-  //   component.validationService.validateSeats(4);
-  //   carService.createCar( 
-    //   {
-    //     carId: 1,
-    //   color: 'white',
-    //   seats: 4,
-    //   make: 'Toyota',
-    //   model: 'Corolla',
-    //   year: 2015,
-    //   user: {
-    //     userId: 1,
-    //     userName: 'username',
-    //     batch: {
-    //       batchLocation: 'NYC',
-    //       batchNumber: 123
-    //     },
-    //     firstName: 'John',
-    //     lastName: 'Smith',
-    //     email: 'john.smith@gmail.com',
-    //     phoneNumber: '9171234567',
-    //     active: true,
-    //     driver: true,
-    //     acceptingRides: true
-    //   }
-    // }   
-//  this.car , this.userId);
-//   });
 });

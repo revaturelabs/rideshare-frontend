@@ -14,7 +14,6 @@ export class DriverInfoComponent implements OnInit {
 
   allAvailableCars: Car[] = [];
   availableCars: Car[] = [];
-  cars: Car[]
 
   orderYear: boolean = false;
   orderFirstName: boolean = false;

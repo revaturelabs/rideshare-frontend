@@ -19,7 +19,6 @@ import { DriverInfoComponent } from '../driver-info/driver-info.component';
 
 describe('DriverComponent', () => {
   let component: DriverComponent;
-  // let fixture: ComponentFixture<DriverComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({

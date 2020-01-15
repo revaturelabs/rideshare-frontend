@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user-service/user.service';
+import { AuthService } from 'src/app/services/auth-service/auth.service';
 
 @Component({
   selector: 'app-admin',
@@ -18,7 +19,7 @@ export class AdminComponent implements OnInit {
    * @constructor
    * @param router Provides an instance of a router
    */
-  constructor(private router: Router, private adminservice: UserService) { }
+  constructor(private router: Router, private adminservice: UserService, private authService: AuthService) { }
 
    users: User[];
    listofUsers: User[];
@@ -27,14 +28,20 @@ export class AdminComponent implements OnInit {
    falsy: string = 'btn btn-danger';
    searchText;
   ngOnInit() {
+    let adminId = this.authService.admin.adminId;
 
-    this.adminservice.showAllUser()
-    .subscribe(
-      data=> {
-        this.users = data;
-        this.listofUsers = data;
+    if(adminId){
+        this.adminservice.showAllUser()
+        .subscribe(
+          data=> {
+            this.users = data;
+            this.listofUsers = data;
+          }
+        )
       }
-    )
+      else{
+        this.router.navigate(['/']);
+      }
 }
   /**
    * Function that takes no parameters.

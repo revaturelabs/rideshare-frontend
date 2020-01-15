@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
 	 * @param router A router service is injected.
 	 * @param http A HTTP Client is created.
 	 * @param authService An auth service is injected.
-	 * 
+	 *
 	 */
 	constructor(private userService: UserService, private http: HttpClient, private authService: AuthService) { }
 
@@ -92,7 +92,7 @@ export class LoginComponent implements OnInit {
 		this.curPage--;
 		this.users = this.allUsers.slice(this.curPage * 5 - 5, this.curPage * 5);
 	}
-	
+
 
 	loginFailed() {
 		this.userName = '';
@@ -102,7 +102,8 @@ export class LoginComponent implements OnInit {
 	login() {
 		this.http.get<User[]>(`${environment.userUri}?username=${this.userName}`)
 			.subscribe((user: User[]) => {
-				if (!user.length) {
+				console.log(this.chosenUser.active);
+				if (!user.length || this.chosenUser.active == false) {
 					this.loginFailed();
 				} else {
 					if (!this.authService.login(user[0], this.chosenUser.userName)) {

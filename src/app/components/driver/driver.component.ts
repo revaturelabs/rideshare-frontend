@@ -18,15 +18,15 @@ export class DriverComponent implements OnInit {
 
   riders: User[];
 
-  location = '';   
-   
-   
-   
+  location = '';
+
+
+
   constructor(private userService: UserService, private router: Router, private authService: AuthService) { }
 
-  
+
   ngOnInit() {
-    
+
     let userId = this.authService.user.userId;
     
     if (userId) {
@@ -47,25 +47,23 @@ export class DriverComponent implements OnInit {
       }
     }
 
-   
+
     changeAcceptingRides(userdriver){
        if(userdriver.acceptingRides == true){
         userdriver.acceptingRides = false;
       this.userService.changeDriverIsAccepting (this.userDriver);
-      
+
     }
     else {
       userdriver.acceptingRides = true;
       this.userService.changeDriverIsAccepting(this.userDriver);
-            
+
     }
   }
 
-  
+
 
   logout() {
     this.router.navigate(['']);
   }
 }
-
-

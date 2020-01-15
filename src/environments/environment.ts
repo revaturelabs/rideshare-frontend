@@ -4,7 +4,6 @@
  * `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
  */
 
-
 const baseUri = `http://localhost`;
 /**
  * Set the port to 8080

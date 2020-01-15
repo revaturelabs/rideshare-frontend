@@ -37,6 +37,7 @@ export class DriverInfoComponent implements OnInit {
           this.orderByLocation();
         }
       )
+      this.batches = this.batchService.getAllBatches();
     }
   }
 
@@ -77,7 +78,7 @@ export class DriverInfoComponent implements OnInit {
 
   filterDriverByLocation(event) {
     this.noUserFound = false;
-    this.availableCars = this.allAvailableCars.filter(car => car.user.batch.batchNumber == event.target.value);
+    this.availableCars = this.allAvailableCars.filter(car => car.user.batch.batchLocation == event.target.value);
     if (this.availableCars.length === 0) {
       this.availableCars = this.allAvailableCars;
       this.noUserFound = true;

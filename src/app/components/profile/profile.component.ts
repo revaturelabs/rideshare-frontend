@@ -60,12 +60,6 @@ export class ProfileComponent implements OnInit {
     return this.user.firstName.toLowerCase() === this.newUser.firstName.toLowerCase() && this.user.lastName.toLowerCase() === this.newUser.lastName.toLowerCase() && this.user.userName === this.newUser.userName && this.user.email === this.newUser.email && this.validationService.phoneFormat(this.user.phoneNumber) === this.validationService.phoneFormat(this.newUser.phoneNumber) && this.user.batch.batchNumber === this.oldBatchNumber;
   }
 
-  changeLocation(event) {
-		let option = event.target.options.selectedIndex;
-    this.newUser.batch.batchNumber = this.batches[option].batchNumber;
-    this.newUser.batch.batchLocation = this.batches[option].batchLocation;
-	}
-
   updateProfile() {
     if (this.validationService.validateUserName(this.newUser.userName) && this.validationService.validateName(this.newUser.firstName) && this.validationService.validateName(this.newUser.lastName) && this.validationService.validateEmail(this.newUser.email) && this.validationService.validatePhone(this.newUser.phoneNumber)) {
       this.editable = '';
@@ -77,6 +71,8 @@ export class ProfileComponent implements OnInit {
         this.newUser.firstName = this.validationService.nameFormat(this.newUser.firstName);
         this.newUser.lastName = this.validationService.nameFormat(this.newUser.lastName);
         this.newUser.phoneNumber = this.validationService.phoneFormat(this.newUser.phoneNumber);
+        this.newUser.batch.batchLocation = this.user.batch.batchLocation;
+        this.newUser.batch.batchNumber = this.user.batch.batchNumber;
 
         this.userService.updateUserInfo(this.newUser).then(response => {
           this.authService.user = response;

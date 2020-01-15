@@ -9,20 +9,49 @@ import { environment } from 'src/environments/environment.dev';
 @Injectable({
     providedIn: 'root'
 })
+/**
+ * This is a car service
+ */
 export class CarService {
+	/**
+	 * Set the url string to the env var
+	 * An user is created.
+	 */
 
     url: string = environment.carUri;
 	user: User = new User();
 
+	/**
+	 * This constructor injects a HTTP client, a router and an user service
+	 * @param http An HTTP client
+	 * @param router A router
+	 * @param userService An user service
+	 */
+
 	constructor(private http: HttpClient, private router: Router, private userService: UserService) { }
+
+	/**
+	 * This function fetches all cars from the database.
+	 */
 
 	getAllCars() {
 		return this.http.get<Car[]>(this.url);
 	}
 
+	/**
+	 * This function returns an car by user ID.
+	 * @param userId 
+	 */
+
 	getCarByUserId(userId: number) {
 		return this.http.get<Car>(`${this.url}users/${userId}`).toPromise();
 	}
+
+	/**
+	 * This function creates a car.
+	 * @param car 
+	 * @param userId 
+	 */
 	
 	createCar(car, userId) {
 
@@ -41,6 +70,11 @@ export class CarService {
 			}
 		);
 	}
+
+	/**
+	 * This function removes a Car.
+	 * @param carId 
+	 */
 
 	removeCar(carId: number) {
 		return this.http.delete<Car>(this.url+carId);

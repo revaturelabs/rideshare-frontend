@@ -7,6 +7,9 @@ import { Observable } from 'rxjs';
 @Injectable({
     providedIn: 'root'
 })
+/**
+ * This is the batch service
+ */
 export class BatchService {
 
 	url: string = environment.batchesUri;
@@ -21,6 +24,9 @@ export class BatchService {
 	];
 	constructor(private http: HttpClient) { }
 
+	/**
+	 * This function fetches all the batches.
+	 */
 	getAllBatches() {
 		return this.batches;
 	}

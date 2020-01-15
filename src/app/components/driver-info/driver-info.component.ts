@@ -157,5 +157,4 @@ export class DriverInfoComponent implements OnInit {
   hideMessage() {
     this.noUserFound = false;
   }
-  
 }

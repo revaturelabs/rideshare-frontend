@@ -18,7 +18,7 @@ import { Observable } from 'rxjs';
 
 export class RegisterComponent implements OnInit {
 
-	batches: Batch;
+	batches: Batch[] = [];
 	user: User = new User();
 
   /**

@@ -36,8 +36,8 @@
                 <th scope="col">Location</th>
                 <td *ngIf="editable!=='batch'">{{newUser.batch.batchLocation}}</td>
                 <td *ngIf="editable==='batch'">
-                    <select id="location" (change)='changeLocation($event)'>
-                        <option *ngFor="let batch of batches" [value]="batch.batchNumber">{{batch.batchLocation}}</option>
+                    <select>
+                        <option *ngFor="let batch of batches">{{batch.batchLocation}}</option>
                     </select>
                 </td>
                 <td></td>
@@ -46,8 +46,8 @@
                 <th scope="col">Batch</th>
                 <td *ngIf="editable!=='batch'">{{newUser.batch.batchNumber}}</td>
                 <td *ngIf="editable==='batch'">
-                    <select id="location" (change)='changeLocation($event)'>
-                        <option *ngFor="let batch of batches" [value]="batch.batchNumber">{{batch.batchLocation}}</option>
+                    <select>
+                        <option *ngFor="let batch of batches">{{batch.batchLocation}}</option>
                     </select>
                 </td>
                 <td></td>

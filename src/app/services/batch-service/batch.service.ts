@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Batch } from 'src/app/models/batch';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment.dev';
+import { Observable } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -24,7 +25,7 @@ export class BatchService {
 		return this.batches;
 	}
 
-	getAllBatchesByLocation(location: string) {
-		return this.http.get<Batch>(`${this.url}?location=${location}`);
+	getAllBatchesByLocation(location: string): Observable<Batch[]> {
+		return this.http.get<Batch[]>(`${this.url}?location=${location}`);
 	}
 }

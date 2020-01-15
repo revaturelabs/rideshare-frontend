@@ -1,6 +1,6 @@
 # RideshareFrontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.21. 
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.23. 
 Click here for [Documentation with Compodoc](http://rideshare-frontend-compodoc.s3-website-us-east-1.amazonaws.com/) on the frontend.
 Click here for [Documentation with JavaDoc](http://user-service-javadoc.s3-website-us-east-1.amazonaws.com/) on the backend.
 

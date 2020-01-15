@@ -22,6 +22,7 @@ import { PreferenceComponent } from './components/preference/preference.componen
 import { ValidationService } from './services/validation-service/validation.service';
 import { AdminLoginComponent } from './components/admin-login/admin-login.component';
 import { DriverInfoComponent } from './components/driver-info/driver-info.component';
+import { LandingComponent } from './components/landing/landing.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { DriverInfoComponent } from './components/driver-info/driver-info.compon
     ProfileComponent,
     PreferenceComponent,
     AdminLoginComponent,
-    DriverInfoComponent
+    DriverInfoComponent,
+    LandingComponent
   ],
   imports: [
     BrowserModule,

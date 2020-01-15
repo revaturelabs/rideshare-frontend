@@ -10,9 +10,13 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { PreferenceComponent } from './components/preference/preference.component';
 import { AdminLoginComponent } from './components/admin-login/admin-login.component';
 import { DriverInfoComponent } from './components/driver-info/driver-info.component';
+import { LandingComponent } from './components/landing/landing.component';
 
 
 const routes: Routes = [{
+  path: '',
+  component: LandingComponent
+}, {
   path: 'home/drivers',
   component: DriverInfoComponent
 }, {

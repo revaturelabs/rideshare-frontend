@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CarService } from 'src/app/services/car-service/car.service';
 import { Car } from 'src/app/models/car';
+import { AuthService } from 'src/app/services/auth-service/auth.service';
+import { Router } from '@angular/router';
+import { BatchService } from 'src/app/services/batch-service/batch.service';
+import { Batch } from 'src/app/models/batch';
 
 
 @Component({
@@ -10,6 +14,7 @@ import { Car } from 'src/app/models/car';
 })
 export class DriverInfoComponent implements OnInit {
 
+  batches: Batch[] = [];
   allAvailableCars: Car[] = [];
   availableCars: Car[] = [];
 
@@ -17,17 +22,31 @@ export class DriverInfoComponent implements OnInit {
   orderFirstName: boolean = false;
 
   searchName: string = '';
-  searchLocation: string = '';
+  noUserFound: boolean = false;
 
-  constructor(private carService: CarService) { }
+  constructor(private carService: CarService, private authService: AuthService, private router: Router, private batchService: BatchService) { }
 
   ngOnInit() {
-    this.carService.getAllCars().subscribe(
-      data => {
-        this.allAvailableCars = data.filter(car => car.user.acceptingRides);
-        this.availableCars = this.allAvailableCars;
-      }
-    )
+    let userId = this.authService.user.userId;
+    if (!userId) {
+      this.router.navigate(['']);
+    } else {
+      this.carService.getAllCars().subscribe(
+        data => {
+          this.allAvailableCars = data.filter(car => car.user.acceptingRides);
+          this.orderByLocation();
+        }
+      )
+      this.batches = this.batchService.getAllBatches();
+    }
+  }
+
+  orderByLocation() {
+    let userLocation = this.authService.user.batch.batchLocation;
+
+    this.allAvailableCars.sort((a, b) => a.user.batch.batchLocation > b.user.batch.batchLocation ? 1 : -1);
+    this.allAvailableCars = this.allAvailableCars.filter(car => car.user.batch.batchLocation === userLocation).concat(this.allAvailableCars.filter(car => car.user.batch.batchLocation !== userLocation));
+    this.availableCars = this.allAvailableCars;
   }
 
   orderByYear() {
@@ -49,17 +68,30 @@ export class DriverInfoComponent implements OnInit {
   }
 
   searchDriverByName() {
+    this.noUserFound = false;
     this.availableCars = this.allAvailableCars.filter(car => `${car.user.firstName} ${car.user.lastName}`.toLowerCase().includes(this.searchName.toLowerCase()));
+    if (this.availableCars.length === 0) {
+      this.availableCars = this.allAvailableCars;
+      this.noUserFound = true;
+    }
   }
 
-  searchDriverByLocation() {
-    this.availableCars = this.allAvailableCars.filter(car => car.user.batch.batchLocation.toLowerCase().includes(this.searchLocation.toLowerCase()));
+  filterDriverByLocation(event) {
+    this.noUserFound = false;
+    this.availableCars = this.allAvailableCars.filter(car => car.user.batch.batchNumber == event.target.value);
+    if (this.availableCars.length === 0) {
+      this.availableCars = this.allAvailableCars;
+      this.noUserFound = true;
+    }
   }
 
   showAllDrivers() {
     this.searchName = '';
-    this.searchLocation = '';
-    this.availableCars = this.allAvailableCars;
+    this.orderByLocation();
+  }
+
+  hideMessage() {
+    this.noUserFound = false;
   }
   
 }

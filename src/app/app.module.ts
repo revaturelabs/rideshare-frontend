@@ -56,3 +56,4 @@ import { DriverInfoComponent } from './components/driver-info/driver-info.compon
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+

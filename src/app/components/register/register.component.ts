@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user-service/user.service';
 import { BatchService } from 'src/app/services/batch-service/batch.service';
 import { Batch } from 'src/app/models/batch';
-import { Router } from '@angular/router';
 import { ValidationService } from 'src/app/services/validation-service/validation.service';
 import { User } from 'src/app/models/user';
 
@@ -28,7 +27,7 @@ export class RegisterComponent implements OnInit {
    * @param batchService A dependency of a batch service is injected.
    */
 
-	constructor(private userService: UserService, private batchService: BatchService, private router: Router, public validationService: ValidationService) { }
+	constructor(private userService: UserService, private batchService: BatchService, public validationService: ValidationService) { }
 
 
   /**
@@ -36,15 +35,8 @@ export class RegisterComponent implements OnInit {
    * The system will check if the token is valid; once validated a batch service is called.
    */
 	ngOnInit() {
-		if (sessionStorage.getItem('auth')) {
-			this.router.navigate(['home']);
-		} else {
-			this.batchService.getAllBatches()
-				.subscribe(allBatches => {
-					this.batches = allBatches;
-					this.user.batch.batchNumber = this.batches[0].batchNumber;
-			});
-		}
+		this.batches = this.batchService.getAllBatches();
+		this.user.batch.batchNumber = this.batches[0].batchNumber;
 	}
 
 	/**

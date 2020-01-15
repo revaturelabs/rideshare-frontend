@@ -2,9 +2,18 @@
 
 <div class="container">
 
- <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Search by Username">
- <button class="btn btn-primary" type="button" (click)="searchUser()">search</button>
+<div class="row">
+  <div class="offset-lg-1 offset-sm-1 col-lg-9 col-sm-10">
+   <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Search by Username">
+
+ </div>
+  <div class="col-lg-2 col-sm-1">
+     <button class="btn btn-primary" type="button" (click)="searchUser()">search</button>
+    </div>
+</div>
+
 <br>
+
   <table class="table table-bordered">
     <tr>
       <th> ID </th>
@@ -26,7 +35,7 @@
       <td>{{get.email}}</td>
       <td>{{get.phoneNumber}}</td>
       <td *ngIf="get.batch">{{get.batch.batchNumber}}</td>
-      <td>{{!isBanned ? get.active: isBanned}}</td>
+      <td>{{get.active}}</td>
       <td><button [ngClass]="get.active? falsy : truthy" (click)="banning(get, get.userId, get.userName, get.firstName, get.lastName, get.email, get.phoneNumber, get.batch, get.active)">{{get.active? "Ban" : "UnBan"}}</button></td>
     </tr>
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user-service/user.service';
+import { AuthService } from 'src/app/services/auth-service/auth.service';
 
 
 
@@ -17,35 +18,34 @@ export class DriverComponent implements OnInit {
 
   riders: User[];
 
-  location = '';
-
-
-
-
-   token = parseInt(sessionStorage.getItem("auth"));
+  location = '';   
    
    
    
-   
-  constructor(private userService: UserService,  private router: Router) { }
+  constructor(private userService: UserService, private router: Router, private authService: AuthService) { }
 
   
   ngOnInit() {
     
+    let userId = this.authService.user.userId;
     
-    
-    this.userService.getDriverById(this.token).
-      subscribe(
-        data => {
-          this.userDriver = data;
-          this.location = data.batch.batchLocation;
-          this.userService.getRidersForLocation(this.location)
-          .subscribe(
-            data=> {
-              this.riders = data;
-            });
-         })
-      };
+    if (userId) {
+      this.userService.getDriverById(userId).
+        subscribe(
+          data => {
+            this.userDriver = data;
+            this.location = data.batch.batchLocation;
+            this.userService.getRidersForLocation(this.location)
+            .subscribe(
+              data=> {
+                this.riders = data;
+              });
+          })
+        }
+      else {
+        this.router.navigate(['']);
+      }
+    }
 
    
     changeAcceptingRides(userdriver){
@@ -64,7 +64,6 @@ export class DriverComponent implements OnInit {
   
 
   logout() {
-    sessionStorage.clear();
     this.router.navigate(['']);
   }
 }

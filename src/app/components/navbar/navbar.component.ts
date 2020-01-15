@@ -17,11 +17,15 @@ import { Admin } from 'src/app/models/admin';
 
 export class NavbarComponent implements OnInit {
 
+  /**
+   * This is a name string.
+   */
+
   name: string = '';
   admin: string = '';
 
   /**
-   * @constructor 
+   * This is a constructor
    * @param router Provides an instance of a router.
    * @param userService A dependency of an user service is injected.
    * @param authService A dependency of an auth service is injected.

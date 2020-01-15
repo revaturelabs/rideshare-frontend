@@ -15,8 +15,9 @@ import { UserService } from 'src/app/services/user-service/user.service';
 
 export class AdminComponent implements OnInit {
   /**
-   * @constructor
-   * @param router Provides an instance of a router
+   * This is the constructor
+   * @param router Provides an instance of a router 
+   * @param adminservice Provides an instance of an admin.
    */
   constructor(private router: Router, private adminservice: UserService) { }
 
@@ -37,10 +38,10 @@ export class AdminComponent implements OnInit {
     )
 }
   /**
-   * Function that takes no parameters.
-   * It will clear the sesssion storage.
+   * A function that takes logs the user off the application.
    * @return {void}
    *
+
    */
   logout() {
     sessionStorage.clear();

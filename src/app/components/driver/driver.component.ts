@@ -14,21 +14,31 @@ import { AuthService } from 'src/app/services/auth-service/auth.service';
 })
 export class DriverComponent implements OnInit {
 
+  /**
+   * Initializing userDriver as an User object and set riders array
+   */
+
   userDriver : User ;
 
   riders: User[];
-
   location = '';   
    
-   
-   
+
   constructor(private userService: UserService, public router: Router, private authService: AuthService) { }
 
+  /**
+   * Constructor 
+   * @param userService An user service is instantiated.
+   * @param router Provides an instance of a router.
+   * @param authService An auth service is injected.
+   */
+
+
   
+  constructor(private userService: UserService, private router: Router, private authService: AuthService) { }
+
   ngOnInit() {
-    
     let userId = this.authService.user.userId;
-    
     if (userId) {
       this.userService.getDriverById(userId).
         subscribe(
@@ -47,25 +57,30 @@ export class DriverComponent implements OnInit {
       }
     }
 
-   
+  /**
+   * A PUT method that changes accepting ride status
+   * @param userdriver 
+   */
+
     changeAcceptingRides(userdriver){
        if(userdriver.acceptingRides == true){
         userdriver.acceptingRides = false;
       this.userService.changeDriverIsAccepting (this.userDriver);
-      
+
     }
     else {
       userdriver.acceptingRides = true;
       this.userService.changeDriverIsAccepting(this.userDriver);
-            
+
     }
   }
 
-  
+  /**
+   * Logs out the user
+   */
+
 
   logout() {
     this.router.navigate(['']);
   }
 }
-
-

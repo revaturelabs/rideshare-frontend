@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { User } from 'src/app/models/user';
+import { UserService } from 'src/app/services/user-service/user.service';
+import { AuthService } from 'src/app/services/auth-service/auth.service';
 
 @Component({
   selector: 'app-admin',
@@ -13,25 +16,54 @@ import { Router } from '@angular/router';
 
 export class AdminComponent implements OnInit {
   /**
-   * @constructor 
+   * This is the constructor
    * @param router Provides an instance of a router 
+   * @param adminservice Provides an instance of an admin.
    */
+
   constructor(public router: Router) { }
 
-  /**
-   * This is an OnInit function that is evoked once.
-   */
+   users: User[];
+   listofUsers: User[];
 
+   truthy: string = 'btn btn-success';
+   falsy: string = 'btn btn-danger';
+   searchText;
   ngOnInit() {
-  }
+    let adminId = this.authService.admin.adminId;
+
+    if(adminId){
+        this.adminservice.showAllUser()
+        .subscribe(
+          data=> {
+            this.users = data;
+            this.listofUsers = data;
+          }
+        )
+      }
+      else{
+        this.router.navigate(['/']);
+      }
+}
   /**
-   * Function that takes no parameters. 
-   * It will clear the sesssion storage.
-   * @return {void} 
-   * 
+   * A function that takes logs the user off the application.
+   * @return {void}
+   *
+
    */
   logout() {
     sessionStorage.clear();
     this.router.navigate(['']);
   }
+
+  searchUser(){
+    this.users = this.listofUsers.filter(user =>
+      user.userName.toLowerCase().includes(this.searchText.toLowerCase()))
+  }
+
+  banning(user: User) {
+    user.active = !user.active;
+    this.adminservice.banUser(user);
+  }
+
 }

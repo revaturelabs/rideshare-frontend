@@ -15,13 +15,10 @@ export class AuthService {
 
 	@Output() fireIsLoggedIn: EventEmitter<any> = new EventEmitter<any>();
 
-<<<<<<< HEAD
-=======
 	/**
 	 * This is the constructor
 	 * @param router Creates a router instance
 	 */
->>>>>>> 3cb35062da94d728e3a35f1ec6867dc8eb357459
 	constructor(public router: Router) { }
 
 	/**

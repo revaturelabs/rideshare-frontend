@@ -24,10 +24,6 @@ export class UserService {
 	url: string = environment.userUri;
 	user: User = new User();
 
-<<<<<<< HEAD
-	constructor(private http: HttpClient, public router: Router, private log: LogService, private authService: AuthService) { }
-	
-=======
 	/**
 	 * Constructor
 	 * @param http An HTTP client object
@@ -42,7 +38,6 @@ export class UserService {
 	 * A GET method for all users
 	 */
 
->>>>>>> 3cb35062da94d728e3a35f1ec6867dc8eb357459
 	getAllUsers() {
 		return this.http.get<User[]>(this.url);
 	}
@@ -54,7 +49,7 @@ export class UserService {
 	getUserById(idParam: number){
 		return this.http.get<User>(this.url+idParam).toPromise();
 	}
-
+	
 	/**
 	 * A POST method that switch an Rider to a Driver
 	 * @param user 

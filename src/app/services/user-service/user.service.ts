@@ -16,7 +16,7 @@ export class UserService {
 	url: string = environment.userUri;
 	user: User = new User();
 
-	constructor(private http: HttpClient, private router: Router, private log: LogService, private authService: AuthService) { }
+	constructor(private http: HttpClient, public router: Router, private log: LogService, private authService: AuthService) { }
 	
 	getAllUsers() {
 		return this.http.get<User[]>(this.url);

@@ -10,7 +10,7 @@ export class AuthService {
 
 	@Output() fireIsLoggedIn: EventEmitter<any> = new EventEmitter<any>();
 
-	constructor(private router: Router) { }
+	constructor(public router: Router) { }
 
 	public user: any = {};
 

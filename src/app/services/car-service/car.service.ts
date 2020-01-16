@@ -14,7 +14,7 @@ export class CarService {
     url: string = environment.carUri;
 	user: User = new User();
 
-	constructor(private http: HttpClient, private router: Router, private userService: UserService) { }
+	constructor(private http: HttpClient, public router: Router, private userService: UserService) { }
 
 	getAllCars() {
 		return this.http.get<Car[]>(this.url);

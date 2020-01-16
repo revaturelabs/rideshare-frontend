@@ -9,7 +9,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "sonar": "sonarcloud/scan",
-    "compodoc": "./node_modules/.bin/compodoc -p tsconfig.app.json"
+    "compodoc": "./node_modules/.bin/compodoc -p tsconfig.app.json --theme vagrant"
   },
   "private": true,
   "dependencies": {
@@ -33,8 +33,8 @@
     "zone.js": "~0.9.1"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.803.21",
-    "@angular/cli": "^8.3.21",
+    "@angular-devkit/build-angular": "~0.803.23",
+    "@angular/cli": "^8.3.23",
     "@angular/compiler-cli": "~8.2.14",
     "@angular/language-service": "~8.2.14",
     "@compodoc/compodoc": "^1.1.11",

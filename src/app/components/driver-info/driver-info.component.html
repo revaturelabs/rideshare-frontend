@@ -1,13 +1,16 @@
 <div class="container">
-    <div *ngIf="!availableCars.length" class="text text-center"><h2>No Matched Driver Found</h2></div>
+    <div *ngIf="!allAvailableCars.length" class="text text-center"><h2>No Available Driver Found</h2></div>
     <div *ngIf="availableCars.length">
         <h2>Available Drivers</h2>
-        <div id="input-field" class="input-group">
+        <div id="input-field" class="input-group text text-right">
             <input type="text" name="searchByName" placeholder="Search Driver By Name" [(ngModel)]="searchName"/>
             <button class="btn btn-outline-secondary btn-sm" type="button" (click)="searchDriverByName()">Search</button>
-            <input type="text" name="filterByLocation" placeholder="Filter Driver By Location" [(ngModel)]="searchLocation"/>
-            <button class="btn btn-outline-secondary btn-sm" type="button" (click)="searchDriverByLocation()">Filter</button>
+            <select (change)="filterDriverByLocation($event)">
+                <option disabled hidden selected value> -- Filter By Location -- </option>
+                <option *ngFor="let batch of batches" [value]="batch.batchLocation">{{batch.batchLocation}}</option>
+            </select>
         </div>
+        <div *ngIf="noUserFound" class="alert alert-danger">No Matched Driver Found<strong (click)="hideMessage()">X</strong></div>
         <table class="table table-hover">
             <tr>
                 <th id="fullName" (click)="orderByFullName()"> Driver ⇳</th>

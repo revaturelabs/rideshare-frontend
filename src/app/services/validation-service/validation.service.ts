@@ -29,14 +29,14 @@ export class ValidationService {
 	 * This function is validates the length of the name and checks if there is any numeric values in the name string.
 	 */
 	validateName(name: string) {
-		return /^([a-zA-z]){1,20}$/.test(name) && name.length < 20;
+		return /^[a-zA-z]+-?[a-zA-z]+ ?[a-zA-z]+-?[a-zA-z]+$/.test(name) && name.length < 30;
 	}
 
   /**
 	 * This function checks the email that the user entered.
 	 */
 	validateEmail(email: string) {
-		return /^\w+\.?\w+@\w+\.\w{2,4}$/.test(email);
+		return /^\w+\.?\w+@\w+\.[a-zA-z]{2,4}$/.test(email);
 	}
 
   /**

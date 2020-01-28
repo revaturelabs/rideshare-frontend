@@ -4,12 +4,13 @@ p {
 }
 
 #login-form {
-    border: 1px solid #dddddd;
-    border-radius: 7px;
+    border: 2px solid #e75c0c;
+    border-radius: 10px;
     padding: 3%;
     margin-top: 8%;
-    margin-left: 30%;
-    margin-right: 30%;
+    margin-left: 15%;
+    margin-right: 15%;
+    text-align: center;
 }
 
 #next-btn, #prev-btn {

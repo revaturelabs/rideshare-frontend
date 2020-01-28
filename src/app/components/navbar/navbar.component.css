@@ -1,0 +1,19 @@
+img {
+    width: 13%;
+    height: 13%;
+    cursor: pointer;
+}
+
+nav {
+    background-color: #FCB414;
+}
+
+
+
+#logout-btn {
+    cursor: pointer;
+}
+
+a {
+    cursor: pointer;
+}

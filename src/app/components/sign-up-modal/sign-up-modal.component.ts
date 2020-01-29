@@ -15,6 +15,7 @@ export class SignupModalComponent implements OnInit {
   address :string;
   city :string;
   state :string;
+  zipcode :number;
   accountType :string;
   //Store the retrieved template from the 'openModal' method for future use cases.
   modalRef :BsModalRef;

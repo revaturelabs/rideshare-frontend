@@ -66,7 +66,8 @@ h3{
     width:195px;
 }
 .zip{
-    width:115px;
+    max-width:115px;
+    width: 20%;
 }
 .radiobody{
     text-align:center;

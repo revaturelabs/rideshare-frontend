@@ -68,9 +68,7 @@ export class NavbarComponent implements OnInit {
    * 
    */
 
-   signup(){
-     this.modal.openModal
-   }
+   
   logout() {
     this.authService.user = {};
     this.name = '';

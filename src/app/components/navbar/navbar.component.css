@@ -5,7 +5,7 @@ img {
 }
 
 nav {
-    background-color: #FCB414;
+    background-color: rgb(255, 255, 255);
 }
 
 
@@ -14,6 +14,53 @@ nav {
     cursor: pointer;
 }
 
-a {
+a{
     cursor: pointer;
 }
+
+.navbar-nav .nav-link {
+    /*padding-right: 6.5rem;*/
+    padding-left: 4.5rem;
+}
+
+
+.navbar {
+    padding: 0.5rem 12rem;
+    left: 50px;
+    line-height: 80px;
+    font-size: -2.7rem;
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+
+.mt-lg-0, .my-lg-0 {
+    margin-left: 100px;
+}
+
+.loginbutton{
+    margin-top:10px;
+    background-color: #F26925;
+    color:white;
+    width:150px;
+    font-family:"Overpass";
+    font-weight:bold;
+    font-size:22px;
+    border-radius:27px;
+    letter-spacing:1px;
+    height:45px;
+    display:inline-block;
+}
+ 
+.loginbutton:hover{
+    background-color:white;
+    color:#F26925;
+    border: 2px solid #F26925;
+    border-radius: 22px ;
+    font-family:"Overpass";
+    font-size:23px;
+}
+
+.dropdown-item {
+    padding: 0.25rem 4.5rem;
+}
+

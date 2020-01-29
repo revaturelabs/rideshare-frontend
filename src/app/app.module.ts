@@ -22,7 +22,7 @@ import { PreferenceComponent } from './components/preference/preference.componen
 import { ValidationService } from './services/validation-service/validation.service';
 import { AdminLoginComponent } from './components/admin-login/admin-login.component';
 import { DriverInfoComponent } from './components/driver-info/driver-info.component';
-import { SignUpModalComponent } from './components/sign-up-modal/sign-up-modal.component';
+import { SignupModalComponent } from './components/sign-up-modal/sign-up-modal.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { ProfileContactComponent } from './components/profile-contact/profile-contact.component';
 import { ProfileCarComponent } from './components/profile-car/profile-car.component';
@@ -46,7 +46,7 @@ import { DriverListComponent } from './components/driver-list/driver-list.compon
     PreferenceComponent,
     AdminLoginComponent,
     DriverInfoComponent,
-    SignUpModalComponent,
+    SignupModalComponent,
     LandingPageComponent,
     ProfileContactComponent,
     ProfileCarComponent,

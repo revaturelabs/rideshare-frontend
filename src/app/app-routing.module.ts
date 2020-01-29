@@ -10,7 +10,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { PreferenceComponent } from './components/preference/preference.component';
 import { AdminLoginComponent } from './components/admin-login/admin-login.component';
 import { DriverInfoComponent } from './components/driver-info/driver-info.component';
-import { SignUpModalComponent } from './components/sign-up-modal/sign-up-modal.component';
+import { SignupModalComponent } from './components/sign-up-modal/sign-up-modal.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { ProfileContactComponent } from './components/profile-contact/profile-contact.component';
 import { ProfileCarComponent } from './components/profile-car/profile-car.component';
@@ -56,7 +56,7 @@ const routes: Routes = [{
 },{
 },  {
   path: 'signup',
-  component: SignUpModalComponent
+  component: SignupModalComponent
 },{
 },  {
   path: 'landingPage',

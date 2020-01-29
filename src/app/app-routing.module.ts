@@ -10,6 +10,14 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { PreferenceComponent } from './components/preference/preference.component';
 import { AdminLoginComponent } from './components/admin-login/admin-login.component';
 import { DriverInfoComponent } from './components/driver-info/driver-info.component';
+import { SignUpModalComponent } from './components/sign-up-modal/sign-up-modal.component';
+import { LandingPageComponent } from './components/landing-page/landing-page.component';
+import { ProfileContactComponent } from './components/profile-contact/profile-contact.component';
+import { ProfileCarComponent } from './components/profile-car/profile-car.component';
+import { ProfileMembershipComponent } from './components/profile-membership/profile-membership.component';
+import { ProfileLocationComponent } from './components/profile-location/profile-location.component';
+import { DriverContactModalComponent } from './components/driver-contact-modal/driver-contact-modal.component';
+import { DriverListComponent } from './components/driver-list/driver-list.component';
 
 
 const routes: Routes = [{
@@ -45,6 +53,36 @@ const routes: Routes = [{
 },  {
   path: 'preference',
   component: PreferenceComponent
+},{
+},  {
+  path: 'signup',
+  component: SignUpModalComponent
+},{
+},  {
+  path: 'landingPage',
+  component: LandingPageComponent
+}, {
+  path: 'drivers',
+  component: DriverListComponent
+},{
+}, 
+// FOR DEVELOPMENT - TO BE DELETED LATER
+
+{
+  path: 'profile/contact',
+  component: ProfileContactComponent
+},{
+  path: 'profile/car',
+  component: ProfileCarComponent
+},{
+  path: 'profile/membership',
+  component: ProfileMembershipComponent
+},{
+  path: 'profile/location',
+  component: ProfileLocationComponent
+},{
+  path: 'driver',
+  component: DriverContactModalComponent
 },{
   path: '**',
   pathMatch: 'full',

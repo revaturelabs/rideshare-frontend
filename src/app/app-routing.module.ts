@@ -10,7 +10,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { PreferenceComponent } from './components/preference/preference.component';
 import { AdminLoginComponent } from './components/admin-login/admin-login.component';
 import { DriverInfoComponent } from './components/driver-info/driver-info.component';
-import { SignUpModalComponent } from './components/sign-up-modal/sign-up-modal.component';
+import { SignupModalComponent } from './components/sign-up-modal/sign-up-modal.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { ProfileContactComponent } from './components/profile-contact/profile-contact.component';
 import { ProfileCarComponent } from './components/profile-car/profile-car.component';
@@ -32,10 +32,9 @@ const routes: Routes = [
   {path: 'car', component: MyCarComponent},
   {path: 'profile', component: ProfileComponent},
   {path: 'preference', component: PreferenceComponent},
-  {path: 'signup', component: SignUpModalComponent},
+  {path: 'signup', component: SignupModalComponent},
   {path: 'landingPage', component: LandingPageComponent},
-  {path: 'drivers', component: DriverListComponent}, 
-// FOR DEVELOPMENT - TO BE DELETED LATER
+  {path: 'drivers', component: DriverListComponent},
 {path: 'profile/contact', component: ProfileContactComponent},
 {path: 'profile/car', component: ProfileCarComponent},
 {path: 'profile/membership', component: ProfileMembershipComponent},

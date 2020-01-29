@@ -4,6 +4,7 @@ import { UserService } from 'src/app/services/user-service/user.service';
 import { AuthService } from 'src/app/services/auth-service/auth.service';
 import { User } from 'src/app/models/user';
 import { Admin } from 'src/app/models/admin';
+import {SignupModalComponent} from '../sign-up-modal/sign-up-modal.component';
 
 @Component({
   selector: 'app-navbar',
@@ -16,7 +17,7 @@ import { Admin } from 'src/app/models/admin';
    */
 
 export class NavbarComponent implements OnInit {
-
+  modal :SignupModalComponent;
   /**
    * This is a name string.
    */
@@ -67,6 +68,9 @@ export class NavbarComponent implements OnInit {
    * 
    */
 
+   signup(){
+     this.modal.openModal
+   }
   logout() {
     this.authService.user = {};
     this.name = '';

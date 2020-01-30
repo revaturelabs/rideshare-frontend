@@ -29,6 +29,6 @@
         <p class="alert alert-danger" *ngIf="banned"><strong>You are banned</strong></p>
         <button class="btn btn-primary" type="submit" id="sign-in-btn" (click)="login()" (keyup.enter)="login()" [disabled]="!(userName && chosenUserFullName)">Login</button>
         <br><br>
-        <p>Need An Account? <a style="color:blue;"><signupmodal></signupmodal></a></p>
+        <p>Need An Account? <a style="color:blue;cursor:pointer;"><signupmodal></signupmodal></a></p>
     </div>
 </div>

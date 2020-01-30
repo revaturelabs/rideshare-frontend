@@ -1,7 +1,7 @@
-*{
+/* *{
     font-family: "Overpass",sans-serif;
     font-style: normal;
-}
+} */
 .signup{
     cursor:pointer;
     display:inline-block;
@@ -35,7 +35,7 @@ h3{
     background-color: #F26925;
     color:white;
     width:300px;
-    font-family:"Overpass";
+    font-family:"Overpass",sans-serif;
     font-weight:bold;
     font-size:22px;
     border-radius:27px;
@@ -50,7 +50,7 @@ h3{
     color:#F26925;
     border: 2px solid #F26925;
     border-radius: 22px ;
-    font-family:"Overpass";
+    font-family:"Overpass",sans-serif;
     font-size:23px;
 }
 
@@ -98,6 +98,9 @@ h3{
     margin-left:10px;
 }
 
+.borderbottom:hover{
+    border-bottom:2px solid #F26925;
+}
 
 /*----------------Removes up/down input arrows for zipcode input field--------------*/
 

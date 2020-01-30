@@ -34,6 +34,7 @@ import { DriverContactModalComponent } from './components/driver-contact-modal/d
 import { DriverListComponent } from './components/driver-list/driver-list.component';
 
 import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
 
 
 
@@ -60,6 +61,7 @@ import { BsModalService } from 'ngx-bootstrap/modal';
     ProfileMembershipComponent,
     DriverContactModalComponent,
     DriverListComponent,
+    BsNavbarComponent,
   
     
   ],

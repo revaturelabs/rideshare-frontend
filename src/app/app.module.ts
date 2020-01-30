@@ -5,7 +5,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ModalModule } from 'node_modules/ngx-bootstrap';
-
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { AppComponent } from './app.component';
 import { RegisterComponent } from './components/register/register.component';
 import { DriverComponent} from './components/driver/driver.component';
@@ -72,7 +72,8 @@ import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    NgbModule
   ],
   providers: [
     UserService,

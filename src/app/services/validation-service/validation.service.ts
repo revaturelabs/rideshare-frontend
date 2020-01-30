@@ -17,26 +17,25 @@ export class ValidationService {
   validateSeats(seats: number) {
     return seats > 0 && seats <= 6 && seats % 1 === 0;
   }
-  
-  /**
-	 * This function is validates the length of the username
-	 */
+
+
+//   this function checks for special characters in the username and validates the length
   validateUserName(userName: string) {
-		return userName.length >= 3 && userName.length <= 12;
+		return /^\w+\.?\w+$/.test(userName) && userName.length >= 3 && userName.length <= 12;
 	}
 
   /**
 	 * This function is validates the length of the name and checks if there is any numeric values in the name string.
 	 */
 	validateName(name: string) {
-		return /^[a-zA-z]+-?[a-zA-z]+ ?[a-zA-z]+-?[a-zA-z]+$/.test(name) && name.length < 30;
+		return /^[a-zA-Z]+-?[a-zA-Z]+ ?[a-zA-Z]+-?[a-zA-Z]+$/.test(name) && name.length < 30;
 	}
 
   /**
 	 * This function checks the email that the user entered.
 	 */
 	validateEmail(email: string) {
-		return /^\w+\.?\w+@\w+\.[a-zA-z]{2,4}$/.test(email);
+		return /^\w+\.?\w+@\w+\.[a-zA-Z]{2,4}$/.test(email);
 	}
 
   /**
@@ -50,7 +49,22 @@ export class ValidationService {
 	 * This function formats the name string.
 	 */
 	nameFormat(name: string) {
-		return name[0].toUpperCase() + name.slice(1).toLowerCase();
+
+		let newName: string = "";
+		
+		newName += name[0].toUpperCase();
+
+		for (let i = 1; i < name.length; i++) {
+			if (name.charAt(i) === " " || name.charAt(i) === "-") {
+				newName += name[i];
+				newName += name[i+1].toUpperCase();
+				i++;
+			} else {
+				newName += name[i].toLowerCase();
+			}
+		}
+
+		return newName;
 	}
 
   /**

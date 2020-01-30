@@ -2,7 +2,9 @@
     font-family: "Overpass",sans-serif;
     font-style: normal;
 }
-
+.signup{
+    cursor:pointer;
+}
 label{
     margin-left:10px;
     font-size:25px;

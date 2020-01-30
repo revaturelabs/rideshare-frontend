@@ -6,6 +6,7 @@ img {
 
 nav {
     background-color: rgb(255, 255, 255);
+    
 }
 
 
@@ -29,10 +30,23 @@ a{
     left: 50px;
     line-height: 42px;
     font-size: -2.7rem;
-    font-weight: 400;
+    font-weight: 800;
     margin-bottom: 20px;
+
+  
 }
 
+a.nav-link{
+    color:black !important;
+}
+
+.borderbottom:hover{
+    border-bottom: 2px solid #F26925;
+}
+.mainnav{
+    border-bottom: 1px inset rgb(214, 214, 214);
+    font-size:17px;
+}
 .mt-lg-0, .my-lg-0 {
     margin-left: 100px;
 }
@@ -64,3 +78,13 @@ a{
     padding: 0.25rem 4.5rem;
 }
 
+.dropdown-item:hover{
+    border: 3px solid #F26925;
+    background-color: rgb(212, 113, 64);
+    color:white;
+    font-weight:bold;
+}
+
+#user-dropa{
+    padding-left:10px;
+}

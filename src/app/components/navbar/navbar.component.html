@@ -1,27 +1,27 @@
-<nav class="navbar navbar-expand-lg navbar-light">
+<nav class="navbar navbar-expand-lg navbar-light mainnav">
   <img src="../assets/revature-logo-600x219.png" routerLink="/" />
    <nav *ngIf="!name && !admin" class="navbar navbar-expand-lg navbar-light ">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-              <a class="nav-link" (click)="redirectToHome()">Home </a>
+              <a class="nav-link" (click)="redirectToHome()"><span class="borderbottom">Home</span></a>
             </li>
             <li class="nav-item" *ngIf="authService.user.driver">
-              <a class="nav-link" routerLink="/all-drivers">Drivers </a>
+              <a class="nav-link" routerLink="/all-drivers"><span class="borderbottom">Drivers</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" routerLink="/drivers">Drivers </a>
+              <a class="nav-link" routerLink="/drivers"><span class="borderbottom">Drivers</span></a>
             </li>
             <li class="nav-item active dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Bertrick Lappa<!--{{name}}-->
+              <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               <span class="borderbottom nameplaceholder">Bertrick Lappa</span><!--{{name placeholder}}-->
                 <img ng-if="internImageUrl" src="https://app.revature.com/core/resources/download/default/interns/image?t=1580327501130" alt="" id="user-dropa" class="img-circle profileUpdate ng-scope"/>
                 
               </a>
                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                       <a class="dropdown-item" routerLink="/profile">Profile</a>
                       <a class="dropdown-item" routerLink="/preference">Preference</a>
-                      <a class="nav-link" routerLink="/login/admin">Admin</a>
+                      <a class="dropdown-item" routerLink="/login/admin">Admin</a>
                       <div class="dropdown-divider"></div>
                       <a class="dropdown-item" (click)="logout()" id="logout-btn">Log Out</a>
                     </div>

@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
 	chosenUser: User;
 	chosenUserFullName: string = '';
 	userName: string = '';
-
+	passWord: string = '';
 	totalPage: number = 1;
   	curPage: number = 1;
 

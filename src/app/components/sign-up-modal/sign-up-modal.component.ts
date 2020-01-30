@@ -7,7 +7,6 @@ import { BsModalService, BsModalRef} from 'ngx-bootstrap';
   styleUrls: ['./sign-up-modal.component.css']
 })
 export class SignupModalComponent implements OnInit {
-
   fname :string;
   lname :string;
   email :string;
@@ -28,6 +27,7 @@ export class SignupModalComponent implements OnInit {
   ngOnInit() {
   }
   //Opens 'sign up' modal that takes in a template of type 'ng-template'.
+
   openModal(template :TemplateRef<any>){
     this.modalRef = this.modalService.show(template);
   }

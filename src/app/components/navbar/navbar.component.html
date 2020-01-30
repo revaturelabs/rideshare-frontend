@@ -7,7 +7,7 @@
               <a class="nav-link" (click)="redirectToHome()"><span class="borderbottom">Home</span></a>
             </li>
             <li class="nav-item">
-              <span class="borderbottom"><signupmodal></signupmodal></span>
+              <a class="nav-link"><span class="borderbottom"><signupmodal></signupmodal></span></a>
             </li>
             <li class="nav-item" *ngIf="authService.user.driver">
               <a class="nav-link" routerLink="/all-drivers"><span class="borderbottom">Drivers</span></a>

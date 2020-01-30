@@ -4,6 +4,8 @@
 }
 .signup{
     cursor:pointer;
+    display:inline-block;
+    width: 70px;
 }
 label{
     margin-left:10px;

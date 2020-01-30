@@ -1,33 +1,23 @@
-h2 {
-    font-size: 1.375rem;
-    font-weight: 400;
+.btn-group-vertical{
+    margin-top: 5%;
+    color: black;
+    margin-left:5%
+}
+.btn  {
+    color:black;
 }
 
-button {
-    margin-left: 1%;
+.profile-container {
+    margin: 5% auto;
+    width: 65%;
+    position: relative;
+} 
+
+/* media queries */
+@media(min-width: 768px){
+    .profile-container {
+        margin-left: 5%;
+    }
 }
 
-small {
-    color: red;
-}
 
-.edit {
-    cursor: pointer;
-}
-
-#profile {
-    margin-left: 3%;
-    margin-right: 3%;
-}
-
-input {
-    background-color: white;
-    border: none;
-}
-
-.editField {
-    border: 0;
-    outline: 0;
-    background: transparent;
-    border-bottom: 1px solid black;
-}

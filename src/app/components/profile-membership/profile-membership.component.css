@@ -1,0 +1,54 @@
+.mainContainer {
+    margin: 5% auto;
+    width: 61%;  
+}
+
+
+.form-control {
+    width: 230px;
+}
+
+.myBtn {
+    margin-left: 29%;
+
+    margin-top:10px;
+    background-color: #F26925;
+    color:white;
+    width:150px;
+    font-family:"Overpass";
+    font-weight:bold;
+    font-size:22px;
+    border-radius:27px;
+    letter-spacing:1px;
+    height:45px;
+    display:inline-block;
+}
+ 
+.myBtn:hover{
+    background-color:white;
+    color:#F26925;
+    border: 2px solid #F26925;
+    border-radius: 22px ;
+    font-family:"Overpass";
+    font-size:23px;
+}
+
+@media(min-width: 768px){
+    .mainContainer {
+        width: 55%;
+        position: absolute;
+        top: 22%;
+         left: 45%;
+    }
+}
+
+@media(min-width: 991px){
+    .mainContainer {
+        width: 55%;
+        position: absolute;
+        top: 15%;
+        left: 35%;
+    }
+}
+
+

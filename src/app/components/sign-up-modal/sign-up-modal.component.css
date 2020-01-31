@@ -116,3 +116,29 @@ input[type=number] {
 }
 
 /*---------------------------------------------------------------------------------*/
+
+/*---------------------Media Queries-----------------------------------------------*/
+
+
+@media only screen and (max-width:574px){
+    label{
+        font-size:20px;
+    }
+    .city{
+        width:100%;        
+    }
+    .state{
+        width:100%;
+    }
+    .zip{
+        width:100%;
+    }
+    .register{
+        border:1px solid black;
+        text-align:center;
+        width:70%;
+    }
+    .modal-title{
+        font-size:40px;
+    }
+}

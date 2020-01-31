@@ -9,8 +9,6 @@ nav {
     
 }
 
-
-
 #logout-btn {
     cursor: pointer;
 }
@@ -46,6 +44,7 @@ a.nav-link{
 .mainnav{
     border-bottom: 1px inset rgb(214, 214, 214);
     font-size:17px;
+    padding:20px 0;
 }
 .mt-lg-0, .my-lg-0 {
     margin-left: 100px;

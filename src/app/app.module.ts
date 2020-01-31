@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ModalModule } from 'node_modules/ngx-bootstrap';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
 import { AppComponent } from './app.component';
 import { RegisterComponent } from './components/register/register.component';
 import { DriverComponent} from './components/driver/driver.component';
@@ -34,7 +35,10 @@ import { DriverContactModalComponent } from './components/driver-contact-modal/d
 import { DriverListComponent } from './components/driver-list/driver-list.component';
 
 import { BsModalService } from 'ngx-bootstrap/modal';
+
 import { HomePageComponent } from './components/home-page/home-page.component';
+
+import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
 
 
 
@@ -63,7 +67,7 @@ import { HomePageComponent } from './components/home-page/home-page.component';
     DriverContactModalComponent,
     DriverListComponent,
     HomePageComponent,
-
+    BsNavbarComponent,
     
   ],
   imports: [
@@ -83,7 +87,7 @@ import { HomePageComponent } from './components/home-page/home-page.component';
     AuthService,
     ValidationService,
     BsModalService,
-   
+    
    
   ],
   bootstrap: [AppComponent]

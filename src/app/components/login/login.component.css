@@ -51,9 +51,33 @@ img {
     height: 80%;
 }
 
-.text-center{
+.form-control{
     width: 60%;
-    text-align: center;
+    margin:auto;
+}
+
+.btn{
+    margin-top:10px;
+    background-color: #F26925;
+    color:white;
+    width:300px;
+    font-family:"Overpass",sans-serif;
+    font-weight:bold;
+    font-size:22px;
+    border-radius:27px;
+    letter-spacing:1px;
+    height:45px;
+    display:inline-block;
+    
+}
+ 
+.btn:hover{
+    background-color:white;
+    color:#F26925;
+    border: 2px solid #F26925;
+    border-radius: 22px ;
+    font-family:"Overpass",sans-serif;
+    font-size:23px;
 }
 
 

@@ -41,7 +41,7 @@ const routes: Routes = [
 {path: 'profile/membership', component: ProfileMembershipComponent},
 {path: 'profile/location', component: ProfileLocationComponent},
 {path: 'driver', component: DriverContactModalComponent},
-{path: 'homepage', component: HomePageComponent},
+{path: '', component: HomePageComponent},
 {path: '**', pathMatch: 'full', redirectTo: ''}];
 
 @NgModule({

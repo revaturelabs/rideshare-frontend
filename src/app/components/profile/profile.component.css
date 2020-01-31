@@ -16,7 +16,33 @@
 /* media queries */
 @media(min-width: 768px){
     .profile-container {
-        margin-left: 5%;
+        display:inline-block;
+        text-align:center;
+    }
+}
+
+
+@media(min-width:568px){
+    .profile-container{
+        text-align: center;
+    }
+}
+@media(max-width:868px){
+    .profile-container{
+        margin-left:2%;
+        width:100%;
+    }
+}
+@media(max-width:560px){
+    .profile-container{
+        display:inline-block;
+        text-align: center;
+        }
+}
+
+@media(min-width:992px){
+    .profile-container{
+        position: relative;
     }
 }
 

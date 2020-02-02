@@ -5,6 +5,7 @@ import { AdminComponent } from '../admin/admin.component';
 import { CarRegisterComponent } from '../car-register/car-register.component';
 import { DriverProvider } from 'protractor/built/driverProviders';
 import { UserRegisterComponent } from '../user-register/user-register.component';
+import { RegisterComponent } from '../register/register.component';
 import { LoginComponent } from '../login/login.component';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { PreferenceComponent } from '../preference/preference.component';

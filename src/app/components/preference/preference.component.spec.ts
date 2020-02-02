@@ -4,6 +4,7 @@ import { PreferenceComponent } from './preference.component';
 import { AdminComponent } from '../admin/admin.component';
 import { CarRegisterComponent } from '../car-register/car-register.component';
 import { UserRegisterComponent } from '../user-register/user-register.component';
+import { RegisterComponent } from '../register/register.component';
 import { LoginComponent } from '../login/login.component';
 import { MyCarComponent } from '../my-car/my-car.component';
 import { NavbarComponent } from '../navbar/navbar.component';

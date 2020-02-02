@@ -5,6 +5,7 @@ import { APP_BASE_HREF } from '@angular/common';
 import { AdminComponent } from '../admin/admin.component';
 import { CarRegisterComponent } from '../car-register/car-register.component';
 import { UserRegisterComponent } from '../user-register/user-register.component';
+import { RegisterComponent } from '../register/register.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { FormsModule } from '@angular/forms';
@@ -24,7 +25,9 @@ describe('LoginComponent', () => {
     TestBed.configureTestingModule({
       declarations: [LoginComponent, UserRegisterComponent, MyCarComponent, NavbarComponent, PreferenceComponent, ProfileComponent, AdminComponent, CarRegisterComponent],
       imports: [HttpClientModule, AppRoutingModule, FormsModule, RouterTestingModule,],
-      schemas: [NO_ERRORS_SCHEMA]
+      schemas: [NO_ERRORS_SCHEMA],
+      imports: [HttpClientModule, AppRoutingModule, FormsModule],
+      providers: [{provide: APP_BASE_HREF, useValue: '/my/app'}]
     })
     .compileComponents();
   }));

@@ -14,6 +14,7 @@ import { MyCarComponent } from 'src/app/components/my-car/my-car.component';
 import { NavbarComponent } from 'src/app/components/navbar/navbar.component';
 import { PreferenceComponent } from 'src/app/components/preference/preference.component';
 import { ProfileComponent } from 'src/app/components/profile/profile.component';
+import { RegisterComponent } from 'src/app/components/register/register.component';
 
 describe('UserService', () => {
   beforeEach(() => TestBed.configureTestingModule({
@@ -38,7 +39,7 @@ describe('UserService', () => {
     imports: [HttpClientModule, AppRoutingModule, FormsModule],
     providers: [{provide: APP_BASE_HREF, useValue: '/my/app'}]
    }); 
-
+    
     userService = TestBed.get(UserService);
   });
 

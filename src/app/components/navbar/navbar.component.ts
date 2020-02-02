@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user-service/user.service';
 import { AuthService } from 'src/app/services/auth-service/auth.service';
 import { User } from 'src/app/models/user';
+import { Admin } from 'src/app/models/admin';
 
 @Component({
   selector: 'app-navbar',
@@ -16,17 +17,21 @@ import { User } from 'src/app/models/user';
 
 export class NavbarComponent implements OnInit {
 
-  token: number;
+  /**
+   * This is a name string.
+   */
+
   name: string = '';
+  admin: string = '';
 
   /**
-   * @constructor 
+   * This is a constructor
    * @param router Provides an instance of a router.
    * @param userService A dependency of an user service is injected.
    * @param authService A dependency of an auth service is injected.
    */
 
-  constructor(private router: Router, private userService: UserService, private authService: AuthService) { }
+  constructor(private router: Router, private userService: UserService, public authService: AuthService) { }
 
   /**
    * This is an OnInit function that sets the token to the parsed token string.
@@ -36,20 +41,21 @@ export class NavbarComponent implements OnInit {
    */
 
   ngOnInit() {
-    this.token = Number(sessionStorage.getItem('auth'));
-    if (this.token) {
-      this.userService.getUserById(this.token).then((response)=>{
+    if (this.authService.user.userId) {
+      this.userService.getUserById(this.authService.user.userId).then((response)=>{
         this.name = response.firstName;
       })
     }
 
-    this.authService.getEmitter().subscribe((user: User) => {
-      this.token = user.userId;
-      this.name = user.firstName;
+    this.authService.getEmitter().subscribe((user: any) => {
+      if (user.userId) {
+        this.name = user.firstName;
+      } else if (user.adminId) {
+        this.admin = user.userName;
+      }
     });
 
     this.userService.getEmitter().subscribe((user: User) => {
-      this.token = user.userId;
       this.name = user.firstName;
     });
   }
@@ -62,11 +68,13 @@ export class NavbarComponent implements OnInit {
    */
 
   logout() {
-    sessionStorage.clear();
-    this.token = null;
+    this.authService.user = {};
     this.name = '';
+    this.admin = '';
     this.router.navigate(['']);
   }
 
-  
+  redirectToHome() {
+    this.authService.user.driver ? this.router.navigate(['home/riders']) : this.router.navigate(['home/drivers']);
+  }
 }

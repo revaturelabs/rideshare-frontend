@@ -1,23 +1,16 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from '../models/user';
+import { UserService } from '../services/user-service/user.service';
 import { Router } from '@angular/router';
-import { UserService } from 'src/app/services/user-service/user.service';
-import { AuthService } from 'src/app/services/auth-service/auth.service';
-import { User } from 'src/app/models/user';
-import { Admin } from 'src/app/models/admin';
-import {SignupModalComponent} from '../sign-up-modal/sign-up-modal.component';
+import { AuthService } from '../services/auth-service/auth.service';
 
 @Component({
-  selector: 'app-navbar',
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  selector: 'app-bs-navbar',
+  templateUrl: './bs-navbar.component.html',
+  styleUrls: ['./bs-navbar.component.css']
 })
+export class BsNavbarComponent implements OnInit {
 
-  /**
-   * The Navbar component
-   */
-
-export class NavbarComponent implements OnInit {
-  modal :SignupModalComponent;
   /**
    * This is a name string.
    */

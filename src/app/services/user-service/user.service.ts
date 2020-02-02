@@ -2,10 +2,10 @@ import { Injectable, Output, EventEmitter } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from 'src/app/models/user';
 import { Router } from '@angular/router';
-import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
 import { AuthService } from '../auth-service/auth.service';
 import { LogService } from "../log.service"
+import { environment } from 'src/environments/environment.dev';
 
 @Injectable({
   	providedIn: 'root'

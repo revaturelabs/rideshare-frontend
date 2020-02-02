@@ -45,16 +45,6 @@ export class AdminComponent implements OnInit {
       else{
         this.router.navigate(['/']);
       }
-}
-  /**
-   * A function that takes logs the user off the application.
-   * @return {void}
-   *
-
-   */
-  logout() {
-    sessionStorage.clear();
-    this.router.navigate(['']);
   }
 
   searchUser(){

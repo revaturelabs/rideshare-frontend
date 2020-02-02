@@ -1,0 +1,58 @@
+<a (click)="openModal(template)">Sign up</a >
+
+<ng-template #template >
+  <div class="modal-header">
+    <h4 class="modal-title">Sign Up</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <label id="firstname">First Name</label>
+    <input type="text" [(ngModel)]="fname" class="form-control" required/>
+
+    <label id="lastname">Last Name</label>
+    <input type="text" [(ngModel)]="lname" class="form-control" required/>
+
+    <label id="email">Email</label>
+    <input type="email" [(ngModel)]="email" class="form-control" required/>
+
+    <label id="password">Password</label>
+    <input type="password" [(ngModel)]="password" class="form-control" required/>
+
+    <label id="address">Address</label>
+    <input type="text" [(ngModel)]="address" class="form-control" required/>
+
+    <div class="city">
+        <label id="city">City</label>
+        <input type="city" [(ngModel)]="city" class="form-control" required/>
+    </div>
+
+    <div class="state">
+        <label id="state">State</label>
+        <select class="form-control" name="states" id="states" required>
+            <option value="none" selected disabled hidden>  
+            </option>
+            <option *ngFor="let state of states" value="{{state}}">{{state}}</option>
+          </select>
+    </div>
+
+    <div class="zip">
+        <label id="zip">Zip Code</label>
+        <input type="number" [(ngModel)]="zipcode" class="form-control" required/>
+    </div>
+    <div class="radiobody">
+    <div class="btn-group" data-toggle="buttons">
+        <label class="btn btn-primary">
+          <input type="radio" name="options" id="driver" [(ngModel)]="accountType" required/> Driver
+        </label>
+        <label class="btn btn-primary">
+          <input type="radio" name="options" id="rider"/> Rider
+        </label>
+  </div>
+    </div>
+    <div class="btn-container">
+    <button type="submit" class="btn btn-primary register">Submit</button>
+    </div>
+  </div>
+</ng-template> 

@@ -15,14 +15,6 @@
         <div class="col">
             <h2 >Location:  &nbsp;<span>{{userDriver?.batch.batchLocation}}</span></h2>
         </div>
-        <div class="col">
-            <h2 *ngIf="userDriver.acceptingRides===true">Accepting rides:  &nbsp;<span><img src=".\assets\yesno.jpg" width="25" height="25"></span> 
-                {{userDriver?.acceptingRides}}</h2>
-                <h2 *ngIf="userDriver.acceptingRides===false">Accepting rides:  &nbsp;<span><img src=".\assets\no.jpg" width="25" height="25"></span>
-                    {{userDriver?.acceptingRides}}</h2>
-            <button class="btn btn-primary"   (click)="changeAcceptingRides(userDriver)" >Change</button>
-        </div>
-
     </div>
 
 </div>

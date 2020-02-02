@@ -25,6 +25,7 @@ import { PreferenceComponent } from './components/preference/preference.componen
 import { ValidationService } from './services/validation-service/validation.service';
 import { AdminLoginComponent } from './components/admin-login/admin-login.component';
 import { DriverInfoComponent } from './components/driver-info/driver-info.component';
+import { LandingComponent } from './components/landing/landing.component';
 import { SignupModalComponent } from './components/sign-up-modal/sign-up-modal.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { ProfileContactComponent } from './components/profile-contact/profile-contact.component';
@@ -39,7 +40,6 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { HomePageComponent } from './components/home-page/home-page.component';
 
 import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
-
 
 
 
@@ -58,6 +58,7 @@ import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
     PreferenceComponent,
     AdminLoginComponent,
     DriverInfoComponent,
+    LandingComponent,
     SignupModalComponent,
     LandingPageComponent,
     ProfileContactComponent,
@@ -67,8 +68,7 @@ import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
     DriverContactModalComponent,
     DriverListComponent,
     HomePageComponent,
-    BsNavbarComponent,
-    
+    BsNavbarComponent
   ],
   imports: [
     BrowserModule,

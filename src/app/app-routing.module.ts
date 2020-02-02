@@ -44,6 +44,7 @@ const routes: Routes = [
 {path: '', component: HomePageComponent},
 {path: '**', pathMatch: 'full', redirectTo: ''}];
 
+
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]

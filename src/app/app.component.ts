@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {} from 'googlemaps';
 
 /**
  * This is the App Component.
@@ -13,4 +14,16 @@ export class AppComponent {
    * This is the title of the Application.
    */
   title = 'rideshare-frontend';
+
+
+  ngOnInit() {
+   if (navigator.geolocation) {
+       navigator.geolocation.getCurrentPosition(function(position) {
+        sessionStorage.setItem("lat", position.coords.latitude+""),
+        sessionStorage.setItem("lng", position.coords.longitude+"")
+     });
+  }
+ } 
+
+
 }

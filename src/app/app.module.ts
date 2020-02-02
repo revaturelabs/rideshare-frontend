@@ -32,7 +32,6 @@ import { ProfileLocationComponent } from './components/profile-location/profile-
 import { ProfileMembershipComponent } from './components/profile-membership/profile-membership.component';
 import { DriverContactModalComponent } from './components/driver-contact-modal/driver-contact-modal.component';
 import { DriverListComponent } from './components/driver-list/driver-list.component';
-
 import { BsModalService } from 'ngx-bootstrap/modal';
 
 
@@ -59,8 +58,7 @@ import { BsModalService } from 'ngx-bootstrap/modal';
     ProfileLocationComponent,
     ProfileMembershipComponent,
     DriverContactModalComponent,
-    DriverListComponent,
-  
+    DriverListComponent
     
   ],
   imports: [

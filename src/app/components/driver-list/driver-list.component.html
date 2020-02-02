@@ -9,10 +9,10 @@
         </tr>
       </thead>
       <tbody>  
-           <tr *ngFor="let item of items | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
-              <td>{{item.Name}}</td>
-              <td>{{item.Distance}}</td>
-              <td>{{item.Time}}</td>
+           <tr *ngFor="let car of availableCars | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+              <td>{{car.user.firstName}} {{car.user.lastName}}</td>
+              <td>{{car.user.batch.batchLocation}}</td>
+              <td>{{car.user.phoneNumber}}</td>
             </tr>
       </tbody>
     </table>

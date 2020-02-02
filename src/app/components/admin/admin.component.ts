@@ -20,7 +20,9 @@ export class AdminComponent implements OnInit {
    * @param router Provides an instance of a router 
    * @param adminservice Provides an instance of an admin.
    */
+
   constructor(private router: Router, private adminservice: UserService, private authService: AuthService) { }
+
 
    users: User[];
    listofUsers: User[];

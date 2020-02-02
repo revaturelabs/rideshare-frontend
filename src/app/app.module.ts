@@ -4,6 +4,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { ModalModule } from 'node_modules/ngx-bootstrap';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
 import { AppComponent } from './app.component';
 import { RegisterComponent } from './components/register/register.component';
 import { DriverComponent} from './components/driver/driver.component';
@@ -22,6 +25,23 @@ import { PreferenceComponent } from './components/preference/preference.componen
 import { ValidationService } from './services/validation-service/validation.service';
 import { AdminLoginComponent } from './components/admin-login/admin-login.component';
 import { DriverInfoComponent } from './components/driver-info/driver-info.component';
+import { LandingComponent } from './components/landing/landing.component';
+import { SignupModalComponent } from './components/sign-up-modal/sign-up-modal.component';
+import { LandingPageComponent } from './components/landing-page/landing-page.component';
+import { ProfileContactComponent } from './components/profile-contact/profile-contact.component';
+import { ProfileCarComponent } from './components/profile-car/profile-car.component';
+import { ProfileLocationComponent } from './components/profile-location/profile-location.component';
+import { ProfileMembershipComponent } from './components/profile-membership/profile-membership.component';
+import { DriverContactModalComponent } from './components/driver-contact-modal/driver-contact-modal.component';
+import { DriverListComponent } from './components/driver-list/driver-list.component';
+
+import { BsModalService } from 'ngx-bootstrap/modal';
+
+import { HomePageComponent } from './components/home-page/home-page.component';
+
+import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
+
+
 
 @NgModule({
   declarations: [
@@ -37,7 +57,18 @@ import { DriverInfoComponent } from './components/driver-info/driver-info.compon
     ProfileComponent,
     PreferenceComponent,
     AdminLoginComponent,
-    DriverInfoComponent
+    DriverInfoComponent,
+    LandingComponent,
+    SignupModalComponent,
+    LandingPageComponent,
+    ProfileContactComponent,
+    ProfileCarComponent,
+    ProfileLocationComponent,
+    ProfileMembershipComponent,
+    DriverContactModalComponent,
+    DriverListComponent,
+    HomePageComponent,
+    BsNavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -46,14 +77,18 @@ import { DriverInfoComponent } from './components/driver-info/driver-info.compon
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    ModalModule.forRoot(),
+    NgbModule
   ],
   providers: [
     UserService,
     CarService,
     BatchService,
     AuthService,
-    ValidationService
+    ValidationService,
+    BsModalService,
+    
+   
   ],
   bootstrap: [AppComponent]
 })

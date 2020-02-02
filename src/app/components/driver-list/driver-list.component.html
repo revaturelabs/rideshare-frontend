@@ -1,0 +1,43 @@
+<div class="container">
+    <h4>Driver's List</h4>
+    <table id="t01" class="table table-striped">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Distance</th>
+          <th scope="col">Time</th>
+        </tr>
+      </thead>
+      <tbody>  
+           <tr *ngFor="let item of items | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+              <td>{{item.Name}}</td>
+              <td>{{item.Distance}}</td>
+              <td>{{item.Time}}</td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>2</td>
+              <td>3</td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>2</td>
+              <td>3</td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>2</td>
+              <td>3</td>
+            </tr>
+      </tbody>
+    </table>
+    <ngb-pagination 
+     [collectionSize]="items.length" 
+     [(page)]="page" 
+     [maxSize]="5" 
+     [rotate]="true" 
+     [ellipses]="false" 
+     [boundaryLinks]="true">
+    </ngb-pagination>
+  </div>
+   

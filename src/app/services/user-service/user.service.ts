@@ -169,13 +169,10 @@ export class UserService {
 
 	changeDriverIsAccepting(data) {
 		let id=data.userId;
-		return this.http.put(this.url+id, data)
-	}
-
-  /**
-   * A GET method that fetches riders from a location
-   */
-  
+		return this.http.put(this.url+id, data).toPromise()
+		
+	  }
+	  
 	  getRidersForLocation(location: string): Observable <any>{
 		return this.http.get(this.url + '?is-driver=false&location='+ location)
 	  }

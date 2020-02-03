@@ -12,6 +12,10 @@
     width: 65%;
     position: relative;
 } 
+.btn-group-vertical{
+    text-align:center;
+
+}
 
 /* media queries */
 @media(min-width: 768px){
@@ -22,10 +26,15 @@
 }
 
 
-@media(min-width:568px){
+@media(min-width:200px){
     .profile-container{
         text-align: center;
+        margin:auto;
     }
+    .btn{
+        align-items: center;
+    }
+   
 }
 @media(max-width:868px){
     .profile-container{
@@ -33,12 +42,7 @@
         width:100%;
     }
 }
-@media(max-width:560px){
-    .profile-container{
-        display:inline-block;
-        text-align: center;
-        }
-}
+
 
 @media(min-width:992px){
     .profile-container{

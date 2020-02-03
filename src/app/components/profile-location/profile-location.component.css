@@ -1,8 +1,17 @@
+*{
+    font-family:"Overpass",sans-serif;
+}
+
+h4{
+    margin-bottom:20px;
+    text-align:left;
+}
+
 .mainContainer {
     margin: 5% auto;
     width: 61%;  
+   
 }
-
 
 .form-control {
     width: 230px;
@@ -10,7 +19,7 @@
 
 .myBtn {
 
-    margin-top:10px;
+    margin-top:15px;
     background-color: #F26925;
     color:white;
     width:150px;
@@ -40,6 +49,7 @@
          top: 15%;
          left: 50%;
     }
+    
 }
 
 @media(min-width: 992px){
@@ -49,15 +59,32 @@
         margin-top:0%;
          left: 80%;
     }
+    
 }
-@media(max-width:560px){
+@media(max-width:580px){
     .mainContainer{
         width:80%;
         position:inherit;
         left:0%;
     }
     .form-control{
-        width:100%;
+        width:200%
     }
+ 
+}
+
+@media(max-width:576px){
+    .mainContainer{
+        width:50%;
+        position:inherit;
+        left:80%;
+    }
+    .form-control{
+        width:100%
+    }
+}
+
+@media(max-width:459px){
+    .myBtn{width:110px;}
 }
 

@@ -1,6 +1,7 @@
 .mainContainer {
     margin: 5% auto;
     width: 61%;  
+
 }
 
 .form-control {
@@ -9,8 +10,15 @@
 .row{
     text-align:center;
 }
+label{
+    font-size:12px;
+}
+
+h4{
+    text-align:left;
+}
 .myBtn {
-    margin-top:10px;
+    margin-top:15px;
     background-color: #F26925;
     color:white;
     width:150px;
@@ -41,22 +49,44 @@
     }
 }
 
-@media(min-width: 992px){
+@media(min-width: 1068px){
     .mainContainer {
         width: 50%;
         position: absolute;
         margin-top:0%;
-         left: 80%;
+        left: 80%;
+    }
+    label{
+        font-size:17px;
     }
 }
-@media(max-width:560px){
+@media(max-width:580px){
     .mainContainer{
         width:80%;
         position:inherit;
         left:0%;
+        
     }
     .form-control{
-        width:100%;
+        width:200%
+    }
+    label{
+        font-size:15px;
+    }
+}
+
+@media(max-width:576px){
+    .mainContainer{
+        width:80%;
+        position:inherit;
+        left:0%;
+        
+    }
+    .form-control{
+        width:100%
+    }
+    label{
+        font-size:15px;
     }
 }
 

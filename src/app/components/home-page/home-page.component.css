@@ -1,3 +1,4 @@
+
 /* Container holding the image and the text */
 .centerMe {
     position: relative;
@@ -5,6 +6,10 @@
     color: white;
   } 
   
+i{
+  padding-top:5px;
+}
+
   /* Bottom left text */
   .bottom-left {
     position: absolute;
@@ -39,6 +44,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    font-family: "Overpass",sans-serif;
   }
 /* 
   .orangeText {
@@ -47,6 +53,7 @@
 
 .blackFade{
     background-color: rgba(0, 0, 0, 1);
+    border:1px outset black;
 }
 
 #loginbutton{
@@ -83,4 +90,36 @@ margin: 0 auto;
   margin-bottom: 15px;
 }
 
+.card{
+  box-shadow: 2px 2px 5px black;
+}
 
+.card-body{
+  font-family: "Overpass",sans-serif;
+}
+
+@media(max-width:767px){
+  .card{
+    max-height:200px;
+  }
+  .card-title{
+    font-size:17px;
+  }
+  .card-text{
+    font-size:15px;
+  }
+}
+
+@media(max-width:574px){
+  .card-title{
+    font-size:20px;
+  }
+  .card-text{
+    font-size:17px;
+  }
+}
+
+@media(max-width:232px){
+
+  .card{height:210px;}
+}

@@ -1,16 +1,22 @@
 .mainContainer {
     margin: 5% auto;
     width: 61%;  
+    text-align:center;
 }
 
+#Nrseats{
+    font-size:10px;
+}
 
 .form-control {
     width: 230px;
 }
 
-
+h4{
+    text-align:left;
+}
 .myBtn {
-    margin-top:10px;
+    margin-top:15px;
     background-color: #F26925;
     color:white;
     width:150px;

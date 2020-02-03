@@ -4,14 +4,14 @@
 
 .form-control{
     margin:auto;
-    width: 75%;
+    width: 30%;
 }
 
 #search{
     margin-top:10px;
     background-color: #F26925;
     color:white;
-    width:300px;
+    width:30%;
     font-family:"Overpass",sans-serif;
     font-weight:bold;
     font-size:22px;
@@ -29,4 +29,12 @@
     border-radius: 22px ;
     font-family:"Overpass",sans-serif;
     font-size:23px;
+}
+
+.googleapi {
+    margin-top: 25px;
+}
+
+#map{
+    margin: auto;
 }

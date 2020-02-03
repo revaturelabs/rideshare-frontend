@@ -17,6 +17,10 @@ export class UserService {
 	 */
 	@Output() fireIsLoggedIn: EventEmitter<any> = new EventEmitter<any>();
 
+	// http headers
+	private headers = new HttpHeaders({'Content-Type': 'application/json'});
+
+
 	/**
 	 * Set up the url string to the env var
 	 * Creates a new user object
@@ -61,6 +65,7 @@ export class UserService {
 		user.active = true;
 		user.driver = false;
 		user.acceptingRides = false;
+		console.log(user);
 
 		this.http.post(this.url, user, {observe: 'response'}).subscribe(
 			(response) => {
@@ -78,6 +83,11 @@ export class UserService {
 			}
 		);
 
+	}
+
+	// add user method
+	addUser(user :User) :Observable<User> {
+		return this.http.post<User>(this.url, user, {headers: this.headers});
 	}
 
 	/**

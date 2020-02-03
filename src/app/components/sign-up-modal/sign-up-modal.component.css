@@ -102,6 +102,13 @@ h3{
     border-bottom:2px solid #F26925;
 }
 
+/* error */
+.error {
+    border-radius: 5px;
+    color: red;
+    font-size: 16px;
+}
+
 /*----------------Removes up/down input arrows for zipcode input field--------------*/
 
 /* Chrome, Safari, Edge, Opera */

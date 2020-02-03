@@ -1,7 +1,7 @@
 /**
  * This is the base URI
  */
-const baseUri = `http://54.172.17.158`;
+const baseUri = `http://localhost:8080`;
 
   /**
    * These are the dev environment variables

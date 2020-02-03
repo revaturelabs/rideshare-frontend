@@ -1,6 +1,7 @@
 .mainContainer {
     margin: 5% auto;
     width: 61%;  
+    text-align:center;
 }
 
 
@@ -8,7 +9,9 @@
     width: 230px;
 }
 
-
+h4{
+    text-align:center;
+}
 .myBtn {
     margin-top:10px;
     background-color: #F26925;

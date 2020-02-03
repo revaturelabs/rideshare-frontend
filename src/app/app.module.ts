@@ -35,9 +35,9 @@ import { DriverContactModalComponent } from './components/driver-contact-modal/d
 import { DriverListComponent } from './components/driver-list/driver-list.component';
 
 import { BsModalService } from 'ngx-bootstrap/modal';
-import { BsModalService } from 'ngx-bootstrap/modal';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
+import { UserRegisterComponent } from './components/user-register/user-register.component';
 
 
 @NgModule({
@@ -66,7 +66,8 @@ import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
     DriverListComponent,
     DriverListComponent,
     HomePageComponent,
-    BsNavbarComponent
+    BsNavbarComponent,
+    UserRegisterComponent
   ],
   imports: [
     BrowserModule,

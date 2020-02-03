@@ -1,7 +1,7 @@
 .mainContainer {
     margin: 5% auto;
     width: 61%;  
-    border:1px solid red;
+
 }
 
 .form-control {
@@ -15,10 +15,10 @@ label{
 }
 
 h4{
-    text-align:center;
+    text-align:left;
 }
 .myBtn {
-    margin-top:10px;
+    margin-top:15px;
     background-color: #F26925;
     color:white;
     width:150px;
@@ -49,7 +49,7 @@ h4{
     }
 }
 
-@media(min-width: 992px){
+@media(min-width: 1068px){
     .mainContainer {
         width: 50%;
         position: absolute;

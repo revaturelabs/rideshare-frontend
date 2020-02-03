@@ -4,7 +4,7 @@
 
 h4{
     margin-bottom:20px;
-    text-align:center;
+    text-align:left;
 }
 
 .mainContainer {
@@ -13,15 +13,13 @@ h4{
    
 }
 
-
-
 .form-control {
     width: 230px;
 }
 
 .myBtn {
 
-    margin-top:10px;
+    margin-top:15px;
     background-color: #F26925;
     color:white;
     width:150px;
@@ -84,8 +82,9 @@ h4{
     .form-control{
         width:100%
     }
+}
 
-   
- 
+@media(max-width:459px){
+    .myBtn{width:110px;}
 }
 

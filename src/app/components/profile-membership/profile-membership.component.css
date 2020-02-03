@@ -2,16 +2,19 @@
     font-family:"Overpass",sans-serif;
 }
 
-
 .mainContainer {
     margin: 5% auto;
     width: 61%;  
-    border:1px solid black;
-    
+
+    text-align:center;
 }
 
-.title{
+.row{
     text-align:center;
+    
+}
+.title{
+    text-align:left;
 }
 
 .form-control {
@@ -20,7 +23,7 @@
 
 .myBtn {
 
-    margin-top:10px;
+    margin-top:15px;
     background-color: #F26925;
     color:white;
     width:150px;
@@ -51,7 +54,7 @@
          left: 50%;
          
     }
-    .row{text-align:center;}
+
 }
 
 @media(min-width: 992px){

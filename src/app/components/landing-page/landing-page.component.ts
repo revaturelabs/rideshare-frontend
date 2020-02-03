@@ -10,7 +10,7 @@ import { ViewChild } from '@angular/core';
 export class LandingPageComponent implements OnInit {
 
 
-  @ViewChild('map', {static: false}) mapElement: any;
+  @ViewChild('map', {static: true}) mapElement: any;
     map: google.maps.Map;
   constructor() { }
 
@@ -19,7 +19,7 @@ export class LandingPageComponent implements OnInit {
   ngOnInit(): void {
     const mapProperties = {
          center: new google.maps.LatLng(35.2271, -80.8431),
-         zoom: 15,
+         zoom: 12,
          mapTypeId: google.maps.MapTypeId.ROADMAP
     };
     this.map = new google.maps.Map(this.mapElement.nativeElement, mapProperties);

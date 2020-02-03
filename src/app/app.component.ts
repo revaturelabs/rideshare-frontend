@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import {} from 'googlemaps';
 /**
  * This is the App Component.
  */

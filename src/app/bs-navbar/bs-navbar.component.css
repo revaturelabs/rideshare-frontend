@@ -3,17 +3,17 @@
     
 }
 
-
+nav {
+    background-color: rgb(255, 255, 255);
+    
+}
 img{
     width:35%;
     height:30%;
     margin-left:10%;
     position:relative;
 }
-.main-nav{
-    border-bottom:1px inset rgb(214, 214, 214);
-   
-}
+
 .nav-link{
     color:black !important;
     font-weight:600;
@@ -28,6 +28,7 @@ img{
     width:100%;
     border-bottom: 1px inset rgb(214, 214, 214);
     margin-bottom:20px;
+    
 }
 .navbar-nav{
     float:right;

@@ -10,7 +10,7 @@ import { ViewChild } from '@angular/core';
 export class LandingPageComponent implements OnInit {
 
 
-  @ViewChild('map', {static: false}) mapElement: any;
+  @ViewChild('map', {static: true}) mapElement: any;
     map: google.maps.Map;
   constructor() { }
 

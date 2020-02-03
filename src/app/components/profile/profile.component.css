@@ -14,7 +14,7 @@
 } 
 .btn-group-vertical{
     text-align:center;
-    border:1px solid red;
+
 }
 
 /* media queries */
@@ -26,9 +26,10 @@
 }
 
 
-@media(min-width:580px){
+@media(min-width:200px){
     .profile-container{
         text-align: center;
+        margin:auto;
     }
     .btn{
         align-items: center;
@@ -41,13 +42,7 @@
         width:100%;
     }
 }
-@media(max-width:560px){
-    .profile-container{
-        display:inline-block;
-        text-align: center;
-        }
-        
-}
+
 
 @media(min-width:992px){
     .profile-container{

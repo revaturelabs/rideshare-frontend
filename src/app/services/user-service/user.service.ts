@@ -2,10 +2,10 @@ import { Injectable, Output, EventEmitter } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from 'src/app/models/user';
 import { Router } from '@angular/router';
-import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
 import { AuthService } from '../auth-service/auth.service';
 import { LogService } from "../log.service"
+import { environment } from 'src/environments/environment.dev';
 
 @Injectable({
   	providedIn: 'root'
@@ -169,13 +169,10 @@ export class UserService {
 
 	changeDriverIsAccepting(data) {
 		let id=data.userId;
-		return this.http.put(this.url+id, data)
-	}
-
-  /**
-   * A GET method that fetches riders from a location
-   */
-  
+		return this.http.put(this.url+id, data).toPromise()
+		
+	  }
+	  
 	  getRidersForLocation(location: string): Observable <any>{
 		return this.http.get(this.url + '?is-driver=false&location='+ location)
 	  }

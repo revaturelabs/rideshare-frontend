@@ -24,6 +24,7 @@ import { PreferenceComponent } from './components/preference/preference.componen
 import { ValidationService } from './services/validation-service/validation.service';
 import { AdminLoginComponent } from './components/admin-login/admin-login.component';
 import { DriverInfoComponent } from './components/driver-info/driver-info.component';
+import { LandingComponent } from './components/landing/landing.component';
 import { SignupModalComponent } from './components/sign-up-modal/sign-up-modal.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { ProfileContactComponent } from './components/profile-contact/profile-contact.component';
@@ -34,7 +35,9 @@ import { DriverContactModalComponent } from './components/driver-contact-modal/d
 import { DriverListComponent } from './components/driver-list/driver-list.component';
 
 import { BsModalService } from 'ngx-bootstrap/modal';
-
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { HomePageComponent } from './components/home-page/home-page.component';
+import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
 
 
 @NgModule({
@@ -52,6 +55,7 @@ import { BsModalService } from 'ngx-bootstrap/modal';
     PreferenceComponent,
     AdminLoginComponent,
     DriverInfoComponent,
+    LandingComponent,
     SignupModalComponent,
     LandingPageComponent,
     ProfileContactComponent,
@@ -60,8 +64,9 @@ import { BsModalService } from 'ngx-bootstrap/modal';
     ProfileMembershipComponent,
     DriverContactModalComponent,
     DriverListComponent,
-  
-    
+    DriverListComponent,
+    HomePageComponent,
+    BsNavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -79,9 +84,7 @@ import { BsModalService } from 'ngx-bootstrap/modal';
     BatchService,
     AuthService,
     ValidationService,
-    BsModalService,
-   
-   
+    BsModalService
   ],
   bootstrap: [AppComponent]
 })

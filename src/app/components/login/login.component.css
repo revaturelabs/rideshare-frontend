@@ -4,13 +4,15 @@ p {
 }
 
 #login-form {
-    border: 2px solid #e75c0c;
+    /* border: 2px solid #e75c0c; */
+    border: 2px solid rgb(253, 111, 39)(173, 173, 173);
     border-radius: 100px;
     padding: 3%;
     margin-top: 8%;
     margin-left: 15%;
     margin-right: 15%;
     text-align: center;
+    box-shadow: 6px 6px 10px rgb(255, 117, 48);
 }
 
 #next-btn, #prev-btn {
@@ -46,21 +48,24 @@ p {
     z-index: 1;
 }  
 
+
 img {
-    width: 80%;
-    height: 80%;
+    width: 50%;
+    height: 50%;
+    margin-bottom:30px;
 }
 
 .form-control{
     width: 60%;
     margin:auto;
+    border-radius: 20px;
 }
 
 .btn{
-    margin-top:10px;
+    margin-top:20px;
     background-color: #F26925;
     color:white;
-    width:300px;
+    width:200px;
     font-family:"Overpass",sans-serif;
     font-weight:bold;
     font-size:22px;
@@ -81,4 +86,64 @@ img {
 }
 
 
+/*-------------------------Media Queries---------------------------------*/
+
+@media only screen and (max-width:780px){
+    #login-form{
+        border:none;
+        box-shadow:none;
+    }
+}
+
+@media only screen and (max-width:764px){
+    .btn{
+        width:150px;
+        font-size:20px;
+    }
+}
+
+@media only screen and (max-width:560px){
+    .btn{
+        width:100px;
+        font-size:18px;
+        border-radius:10px;
+        height:40px;
+    }
+    label{
+        font-size:14px;
+    }
+    input{
+        font-size:14px;
+    }
+}
+
+@media only screen and (max-width:356px){
+    .btn{
+        width:80px;
+        font-size:15px;
+        border-radius:10px;
+        height:35px;
+    }
+    label{
+        font-size:13px;
+    }
+    input{
+        font-size:13px;
+    }
+}
+
+@media only screen and (max-width:320px){
+    .btn{
+        width:80px;
+        font-size:15px;
+        border-radius:10px;
+        height:35px;
+    }
+    label{
+        font-size:13px;
+    }
+    input{
+        font-size:12px;
+    }
+}
 

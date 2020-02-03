@@ -10,8 +10,6 @@
 
 
 .myBtn {
-    margin-left: 29%;
-
     margin-top:10px;
     background-color: #F26925;
     color:white;
@@ -36,19 +34,31 @@
 
 @media(min-width: 768px){
     .mainContainer {
-        width: 55%;
-        position: absolute;
-        top: 22%;
-         left: 45%;
+        width: 80%;
+        position: inherit;
+         top: 15%;
+         left: 50%;
     }
 }
 
-@media(min-width: 991px){
+@media(min-width: 992px){
     .mainContainer {
-        width: 55%;
+        width: 60%;
         position: absolute;
-        top: 15%;
-        left: 35%;
+        margin-top:0%;
+         left: 80%;
+         
+    }
+}
+@media(max-width:560px){
+    .mainContainer{
+        width:80%;
+        position:inherit;
+        left:0%;
+        text-align:center;
+    }
+    .form-control{
+        width:100%;
     }
 }
 

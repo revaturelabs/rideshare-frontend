@@ -13,7 +13,7 @@
         <div *ngIf="!name && !admin" class="collapse show" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-              <a class="nav-link" (click)="redirectToHome()"><span class="borderbottom">Home</span></a>
+              <a class="nav-link" routerLink="/landingPage"><span class="borderbottom">Search</span></a>
             </li>
             <li class="nav-item" *ngIf="authService.user.driver">
               <a class="nav-link" routerLink="/all-drivers"><span class="borderbottom">Drivers</span></a>
@@ -29,8 +29,6 @@
               </a>
                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                       <a class="dropdown-item" routerLink="/profile">Profile</a>
-                      <a class="dropdown-item" routerLink="/preference">Preference</a>
-                      <a class="dropdown-item" routerLink="/login/admin">Admin</a>
                       <div class="dropdown-divider"></div>
                       <a class="dropdown-item" (click)="logout()" id="logout-btn">Log Out</a>
                     </div>

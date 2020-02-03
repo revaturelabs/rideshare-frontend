@@ -14,6 +14,8 @@ export class AuthService {
 
 
 	@Output() fireIsLoggedIn: EventEmitter<any> = new EventEmitter<any>();
+	 loggedIn: boolean = false;
+
 
 	/**
 	 * This is the constructor

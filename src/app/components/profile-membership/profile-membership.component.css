@@ -1,8 +1,18 @@
+*{
+    font-family:"Overpass",sans-serif;
+}
+
+
 .mainContainer {
     margin: 5% auto;
     width: 61%;  
+    border:1px solid black;
+    
 }
 
+.title{
+    text-align:center;
+}
 
 .form-control {
     width: 230px;
@@ -39,7 +49,9 @@
         position: inherit;
          top: 15%;
          left: 50%;
+         
     }
+    .row{text-align:center;}
 }
 
 @media(min-width: 992px){

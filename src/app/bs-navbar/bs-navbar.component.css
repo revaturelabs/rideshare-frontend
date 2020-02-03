@@ -1,5 +1,6 @@
 *{
     font-family:"Overpass",sans-serif;
+    
 }
 
 
@@ -11,6 +12,7 @@ img{
 }
 .main-nav{
     border-bottom:1px inset rgb(214, 214, 214);
+   
 }
 .nav-link{
     color:black !important;
@@ -23,11 +25,11 @@ img{
 }
 
 .navbar{
-    margin:0% 3%;
-
+    width:100%;
+    border-bottom: 1px inset rgb(214, 214, 214);
+    margin-bottom:20px;
 }
 .navbar-nav{
-    border:1px solid red;
     float:right;
 }
 

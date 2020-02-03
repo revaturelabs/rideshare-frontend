@@ -1,3 +1,8 @@
+*{
+    font-family:"Overpass",sans-serif;
+}
+
+
 p {
     font-size: smaller;
     color: gray;
@@ -113,6 +118,7 @@ img {
         font-size:14px;
     }
     input{
+        width:100%;
         font-size:14px;
     }
 }
@@ -132,7 +138,7 @@ img {
     }
 }
 
-@media only screen and (max-width:320px){
+@media only screen and (max-width:333px){
     .btn{
         width:80px;
         font-size:15px;
@@ -143,7 +149,7 @@ img {
         font-size:13px;
     }
     input{
-        font-size:12px;
+        font-size:11px;
     }
 }
 

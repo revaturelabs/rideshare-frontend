@@ -8,11 +8,13 @@
     </button>
   </div>
   <div class="modal-body">
-    <label id="firstname">First Name</label>
-    <input type="text" [(ngModel)]="fname" class="form-control" required/>
+    <label for="firstname">First Name</label>
+    <input (click)="firstNameError = ''" id="firstname" type="text" [(ngModel)]="user.firstName" class="form-control" required/>
+    <p *ngIf="firstNameError != ''" class="error">{{firstNameError}}</p>
 
-    <label id="lastname">Last Name</label>
-    <input type="text" [(ngModel)]="lname" class="form-control" required/>
+    <label for="lastname">Last Name</label>
+    <input (click)="lastNameError = ''" id="lastname" type="text" [(ngModel)]="user.lastName" class="form-control" required/>
+    <p *ngIf="lastNameError != ''" class="error">{{lastNameError}}</p>
 
     <label id="username">Username</label>
     <input type="text" [(ngModel)]="username" class="form-control" required/>
@@ -23,8 +25,8 @@
     <label id="phone">Phone Number</label>
     <input type="text" [(ngModel)]="phone" class="form-control" required/>
 
-    <label id="address">Address</label>
-    <input type="text" [(ngModel)]="address" class="form-control" required/>
+    <label for="address">Address</label>
+    <input id="address" type="text" [(ngModel)]="address" class="form-control" required/>
 
     <div class="city">
         <label id="city">City</label>
@@ -55,7 +57,7 @@
   </div>
     </div>
     <div class="btn-container">
-    <button type="submit" class="btn btn-primary register">Submit</button>
+    <button type="submit" class="btn btn-primary register" (click)="submitUser()">Submit</button>
     </div>
   </div>
 </ng-template> 

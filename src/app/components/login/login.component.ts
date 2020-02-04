@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgModule } from '@angular/core';
 import { UserService } from 'src/app/services/user-service/user.service';
 import { User } from 'src/app/models/user';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from 'src/app/services/auth-service/auth.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
 	selector: 'app-login',
 	templateUrl: './login.component.html',
 	styleUrls: ['./login.component.css']
 })
+
 
 /**
  * This is the login component
@@ -37,6 +39,9 @@ export class LoginComponent implements OnInit {
 	showDropDown: boolean = false;
 	failed: boolean = false;
 	banned: boolean = false;
+
+	pwdError: string;
+    usernameError: string;
 
 	/**
 	 * This is a constructor
@@ -142,7 +147,22 @@ export class LoginComponent implements OnInit {
 	 */
 
 	login() {
-		this.http.get<User[]>(`${environment.userUri}?username=${this.userName}`)
+		this.pwdError ='';
+        this.usernameError= '';
+        this.http.get(`${environment.loginUri}?userName=${this.userName}&passWord=${this.passWord}`)
+			.subscribe(
+                  (response) => {
+                     console.log(response);
+       
+                      if(response["userName"] != undefined){
+                         this.pwdError = response["userName"][0];
+                      }
+                      /*if(response["passWord"] != undefined){
+                         this.usernameError=  response["passWord"][0];
+                      }*/
+                 }
+        );
+		/*this.http.get<User[]>(`${environment.userUri}?username=${this.userName}`)
 			.subscribe((user: User[]) => {
 				if (!user.length) {
 					this.loginFailed();
@@ -155,7 +175,7 @@ export class LoginComponent implements OnInit {
 						this.loginFailed();
 					}
 				}
-			});
+			});*/
 	}
 
 }

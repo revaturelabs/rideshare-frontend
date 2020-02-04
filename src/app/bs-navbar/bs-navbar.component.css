@@ -1,0 +1,48 @@
+*{
+    font-family:"Overpass",sans-serif;
+    
+}
+
+
+img{
+    width:35%;
+    height:30%;
+    margin-left:10%;
+    position:relative;
+}
+.main-nav{
+    border-bottom:1px inset rgb(214, 214, 214);
+   
+}
+.nav-link{
+    color:black !important;
+    font-weight:600;
+    cursor:pointer;
+}
+
+.nav-link:enabled{
+    border-bottom:10px solid black;
+}
+
+.navbar{
+    width:100%;
+    border-bottom: 1px inset rgb(214, 214, 214);
+    margin-bottom:20px;
+}
+.navbar-nav{
+    float:right;
+}
+
+
+.borderbottom:hover{
+    border-bottom: 2px solid #F26925;
+}
+.navbar-toggler-icon{
+    border:1px solid green;
+}
+.nav-item{
+    display:inline-block;
+    width:8em;
+    margin-left:10%;
+}
+

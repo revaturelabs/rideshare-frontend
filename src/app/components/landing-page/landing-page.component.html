@@ -1,6 +1,6 @@
 <div class = "content">
     <div id="side1">
-     <div class="form-group">
+     <!--<div class="form-group">
         <h4>Origin</h4>
         <input [(ngModel)]="origin" id="origin" class="form-control" placeholder="Morgantown, WV"/>
       </div>
@@ -13,7 +13,25 @@
           <button id = "search" class="btn btn-primary" (click)="getDirection()">Get Direction</button>
         </div>
       </div>
-      <p id="total"></p>
+      <p id="total"></p>-->
+      <h4>Driver's List</h4>
+     <table id="t01" class="table table-striped">
+       <thead class="thead-dark">
+         <tr>
+           <th scope="col">Name</th>
+           <th scope="col">Distance</th>
+           <th scope="col">Time</th>
+         </tr>
+       </thead>
+       <tbody>  
+            <tr *ngFor="let car of availableCars">
+               <td>{{car.Name}}</td>
+               <td>{{car.Distance}}</td>
+               <td>{{car.Time}}</td>
+               <td><button class="btn btn-primary" id="sign-in-btn" (click)="getDirection(car.Distance)" >Get Direction</button></td>
+             </tr>
+       </tbody>
+      </table>
      </div>
      <div id="side2">
        <div #map id="gmap"></div>

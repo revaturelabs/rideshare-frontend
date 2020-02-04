@@ -55,7 +55,9 @@
 #side1 {
     width: 400px;
     float:left; 
+    padding-left: 250px;
 }
 #side2 {
     background-color:white;
+    padding-left: 300px;
 }

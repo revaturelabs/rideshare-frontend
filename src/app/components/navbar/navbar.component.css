@@ -1,14 +1,30 @@
+*{
+    font-family:"Overpass",sans-serif;
+}
+
+
 img {
     width: 13%;
     height: 13%;
     cursor: pointer;
+    
 }
+.content{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+
 
 nav {
     background-color: rgb(255, 255, 255);
     
 }
 
+.imageLogo {
+    height: 35px;
+}
 
 
 #logout-btn {
@@ -19,15 +35,15 @@ a{
     cursor: pointer;
 }
 
-.navbar-nav .nav-link {
-    /*padding-right: 6.5rem;*/
-    padding-left: 4.5rem;
+img.logo-navbar {
+    width: 2rem !important;
+    height: 2rem !important;
 }
 
 
 .navbar {
-    padding: 0.5rem 12rem;
-    left: 50px;
+     padding: 2% 5%;
+    /* left: 50px; */
     line-height: 42px;
     font-size: -2.7rem;
     font-weight: 800;
@@ -46,6 +62,10 @@ a.nav-link{
 .mainnav{
     border-bottom: 1px inset rgb(214, 214, 214);
     font-size:17px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-right: 0;
 }
 .mt-lg-0, .my-lg-0 {
     margin-left: 100px;

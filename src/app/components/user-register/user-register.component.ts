@@ -1,27 +1,22 @@
-import { Component, OnInit, NgModule } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user-service/user.service';
 import { BatchService } from 'src/app/services/batch-service/batch.service';
 import { Batch } from 'src/app/models/batch';
-import { Router, RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
 import { ValidationService } from 'src/app/services/validation-service/validation.service';
 import { User } from 'src/app/models/user';
 
 @Component({
 	selector: 'app-user-register',
-	templateUrl: './register.component.html',
-	styleUrls: ['./register.component.css']
+	templateUrl: './user-register.component.html',
+	styleUrls: ['./user-register.component.css']
 })
 
-@NgModule({
-    imports: [
-       RouterModule
-	 ]
-	})
 /**
  * This is the Driver Register
  */
 
-export class RegisterComponent implements OnInit {
+export class UserRegisterComponent implements OnInit {
 
 	batches: Batch[] = [];
 	user: User = new User();
@@ -41,15 +36,15 @@ export class RegisterComponent implements OnInit {
    * The system will check if the token is valid; once validated a batch service is called.
    */
 	ngOnInit() {
-		if (sessionStorage.getItem('auth')) {
-			this.router.navigate(['home']);
-		} else {
-			/*this.batchService.getAllBatches()
-				.subscribe(allBatches => {
-					this.batches = allBatches;
-					this.user.batch.batchNumber = this.batches[0].batchNumber;
-			});*/
-		}
+		// if (sessionStorage.getItem('auth')) {
+		// 	this.router.navigate(['home']);
+		// } else {
+		// 	this.batchService.getAllBatches()
+		// 		.subscribe(allBatches => {
+		// 			this.batches = allBatches;
+		// 			this.user.batch.batchNumber = this.batches[0].batchNumber;
+		// 	});
+		// }
 	}
 
 	/**
@@ -64,9 +59,9 @@ export class RegisterComponent implements OnInit {
 	 * This function creates a driver if all the validations are true.
 	 */
 	signUpDriver() {
-		//if (this.validationService.validateUserName(this.user.userName) && this.validationService.validateName(this.user.firstName) && this.validationService.validateName(this.user.lastName) && this.validationService.validateEmail(this.user.email) && this.validationService.validatePhone(this.user.phoneNumber)) {
+		if (this.validationService.validateUserName(this.user.userName) && this.validationService.validateName(this.user.firstName) && this.validationService.validateName(this.user.lastName) && this.validationService.validateEmail(this.user.email) && this.validationService.validatePhone(this.user.phoneNumber)) {
 			this.userService.createDriver(this.user, 'driver');
-		//}
+		}
 	}
 	signUpRider() {
 		if (this.validationService.validateUserName(this.user.userName) && this.validationService.validateName(this.user.firstName) && this.validationService.validateName(this.user.lastName) && this.validationService.validateEmail(this.user.email) && this.validationService.validatePhone(this.user.phoneNumber)) {

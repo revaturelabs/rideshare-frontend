@@ -8,10 +8,11 @@ import { ViewChild } from '@angular/core';
 })
 export class LandingPageComponent implements OnInit {
 
-  origin : string ='';
+  origin : string ='Morgantown, WV';
   destination : string ='';
 
   mapProperties :{};
+  availableCars : Array<any> = [];
 
   @ViewChild('map',null) mapElement: any;
   map: google.maps.Map;
@@ -19,6 +20,13 @@ export class LandingPageComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    this.availableCars = [];
+    this.availableCars.push({'Name': 'Tom Tom','Distance':'Reston, VA', 'Time':'10:45'});
+    this.availableCars.push({'Name': 'Tim Tim','Distance':'Oklahoma, OK', 'Time':'18:55'});
+    this.availableCars.push({'Name': 'Tom Tom','Distance':'Texas, TX', 'Time':'06:15'});
+    this.availableCars.push({'Name': 'Tam Tam','Distance':'New York, NY', 'Time':'19:45'});
+    this.availableCars.push({'Name': 'Tem Tem','Distance':'Arkansas, AR', 'Time':'11:45'});
+    console.log(this.availableCars);
     this.mapProperties = {
       center: new google.maps.LatLng(Number(sessionStorage.getItem("lat")), Number(sessionStorage.getItem("lng"))),
       zoom: 15,
@@ -27,7 +35,7 @@ export class LandingPageComponent implements OnInit {
     this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapProperties);
   }
 
-  getDirection(){
+  getDirection(destination: string){
     //refresh
     this.ngOnInit();
     var directionsService = new google.maps.DirectionsService;
@@ -35,8 +43,8 @@ export class LandingPageComponent implements OnInit {
       draggable: true,
       map: this.map
     });
-    console.log(this.origin+"  &  "+this.destination);
-    this.displayRoute(this.origin, this.destination, directionsService, directionsRenderer);
+    console.log(this.origin+"  &  "+destination);
+    this.displayRoute(this.origin, destination, directionsService, directionsRenderer);
 
   }
 

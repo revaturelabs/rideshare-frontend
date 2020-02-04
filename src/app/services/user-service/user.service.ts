@@ -2,14 +2,17 @@ import { Injectable, Output, EventEmitter } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from 'src/app/models/user';
 import { Router } from '@angular/router';
-import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
 import { AuthService } from '../auth-service/auth.service';
 import { LogService } from "../log.service"
+import { environment } from 'src/environments/environment.dev';
+
+
 
 @Injectable({
   	providedIn: 'root'
 })
+
 export class UserService {
 
 	/**
@@ -17,6 +20,9 @@ export class UserService {
 	 */
 	@Output() fireIsLoggedIn: EventEmitter<any> = new EventEmitter<any>();
 
+	// http headers
+	private headers = new HttpHeaders({'Content-Type': 'application/json'});
+	
 	/**
 	 * Set up the url string to the env var
 	 * Creates a new user object
@@ -55,7 +61,6 @@ export class UserService {
 	 * @param user 
 	 * @param role 
 	 */
-
 	createDriver(user: User, role) {
 
 		user.active = true;
@@ -78,6 +83,12 @@ export class UserService {
 			}
 		);
 
+	}
+
+
+	// add user method
+	addUser(user :User) :Observable<User> {
+		return this.http.post<User>(this.url, user, {headers: this.headers});
 	}
 
 	/**
@@ -169,13 +180,10 @@ export class UserService {
 
 	changeDriverIsAccepting(data) {
 		let id=data.userId;
-		return this.http.put(this.url+id, data)
-	}
-
-  /**
-   * A GET method that fetches riders from a location
-   */
-  
+		return this.http.put(this.url+id, data).toPromise()
+		
+	  }
+	  
 	  getRidersForLocation(location: string): Observable <any>{
 		return this.http.get(this.url + '?is-driver=false&location='+ location)
 	  }

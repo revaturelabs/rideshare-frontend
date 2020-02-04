@@ -2,6 +2,10 @@
     font-family:"Overpass",sans-serif;
 }
 
+*{
+    font-family:"Overpass",sans-serif;
+}
+
 
 img {
     width: 13%;
@@ -15,34 +19,25 @@ img {
     flex-wrap: nowrap;
     justify-content: space-between;
 }
-
-
 nav {
     background-color: rgb(255, 255, 255);
     
 }
-
 .imageLogo {
     width:8.5em;
     height:3.5em;
   
 }
-
-
 #logout-btn {
     cursor: pointer;
 }
-
 a{
     cursor: pointer;
 }
-
 img.logo-navbar {
     width: 2rem !important;
     height: 2rem !important;
 }
-
-
 .navbar {
      padding: 2% 5%;
     /* left: 50px; */
@@ -50,14 +45,11 @@ img.logo-navbar {
     font-size: -2.7rem;
     font-weight: 800;
     margin-bottom: 20px;
-
   
 }
-
 a.nav-link{
     color:black !important;
 }
-
 .borderbottom:hover{
     border-bottom: 2px solid #F26925;
 }
@@ -72,7 +64,6 @@ a.nav-link{
 .mt-lg-0, .my-lg-0 {
     margin-left: 100px;
 }
-
 .loginbutton{
     margin-top:10px;
     background-color: #F26925;
@@ -95,20 +86,15 @@ a.nav-link{
     font-family:"Overpass";
     font-size:23px;
 }
-
 .dropdown-item {
     padding: 0.25rem 4.5rem;
 }
-
 .dropdown-item:hover{
     border: 3px solid #F26925;
     background-color: rgb(212, 113, 64);
     color:white;
     font-weight:bold;
 }
-
 #user-dropa{
     padding-left:10px;
 }
-
-

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user-service/user.service';
@@ -16,43 +16,61 @@ import { BatchService } from 'src/app/services/batch-service/batch.service';
 })
 export class DriverListComponent implements OnInit {
 
-  page = 1;
-  pageSize =10;
-  items = [];
+  origin : string ='Morgantown, WV';
+  destination : string ='';
 
-  batches: Batch[] = [];
-  allAvailableCars: Car[] = [];
-  availableCars: Car[] = [];
+  mapProperties :{};
+  availableCars : Array<any> = [];
 
-  constructor(private carService: CarService, private authService: AuthService, private router: Router, private batchService: BatchService) {
-   
-  }
+  @ViewChild('map',null) mapElement: any;
+  map: google.maps.Map;
+
+  constructor() { }
 
   ngOnInit() {
-    let userId = this.authService.user.userId;
-    if (!userId) {
-      this.router.navigate(['']);
-    } else {
-      this.carService.getAllCars().subscribe(
-        data => {
-          this.allAvailableCars = data.filter(car => car.user.acceptingRides);
-          this.orderByLocation();
-        }
-      )
-      this.batches = this.batchService.getAllBatches();
-    }
+    this.availableCars = [];
+    this.availableCars.push({'Name': 'Ed Ogeron','Distance':'Reston, VA', 'Time':'10:45'});
+    this.availableCars.push({'Name': 'Nick Saban','Distance':'Oklahoma, OK', 'Time':'18:55'});
+    this.availableCars.push({'Name': 'Bobbie Bowden','Distance':'Texas, TX', 'Time':'06:15'});
+    this.availableCars.push({'Name': 'Les Miles','Distance':'New York, NY', 'Time':'19:45'});
+    this.availableCars.push({'Name': 'Bear Bryant','Distance':'Arkansas, AR', 'Time':'11:45'});
+    console.log(this.availableCars);
+    this.mapProperties = {
+      center: new google.maps.LatLng(Number(sessionStorage.getItem("lat")), Number(sessionStorage.getItem("lng"))),
+      zoom: 15,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapProperties);
   }
 
-  /**
-   * A function the sorts the car object by batch location
-   */
+  getDirection(destination: string){
+    //refresh
+    this.ngOnInit();
+    var directionsService = new google.maps.DirectionsService;
+    var directionsRenderer = new google.maps.DirectionsRenderer({
+      draggable: true,
+      map: this.map
+    });
+    console.log(this.origin+"  &  "+destination);
+    this.displayRoute(this.origin, destination, directionsService, directionsRenderer);
 
-  orderByLocation() {
-    let userLocation = this.authService.user.batch.batchLocation;
+  }
 
-    this.allAvailableCars.sort((a, b) => a.user.batch.batchLocation > b.user.batch.batchLocation ? 1 : -1);
-    this.allAvailableCars = this.allAvailableCars.filter(car => car.user.batch.batchLocation === userLocation).concat(this.allAvailableCars.filter(car => car.user.batch.batchLocation !== userLocation));
-    this.availableCars = this.allAvailableCars;
+
+displayRoute(origin, destination, service, display) {
+    service.route({
+      origin: origin,
+      destination: destination,
+      //waypoints: [{location: 'Adelaide, SA'}, {location: 'Broken Hill, NSW'}],
+      travelMode: 'DRIVING',
+      //avoidTolls: true
+    }, function(response, status) {
+      if (status === 'OK') {
+        display.setDirections(response);
+      } else {
+        alert('Could not display directions due to: ' + status);
+      }
+    });
   }
 
 

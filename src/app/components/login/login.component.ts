@@ -149,7 +149,7 @@ export class LoginComponent implements OnInit {
 	login() {
 		this.pwdError ='';
         this.usernameError= '';
-        this.http.get(`http://localhost:8080?userName=${this.userName}&passWord=${this.passWord}`)
+        this.http.get(`http://localhost:8080/login?userName=${this.userName}&passWord=${this.passWord}`)
 			.subscribe(
                   (response) => {
                      console.log(response);
@@ -157,9 +157,9 @@ export class LoginComponent implements OnInit {
                       if(response["userName"] != undefined){
                          this.usernameError=  response["userName"][0];
                       }
-                      /*if(response["passWord"] != undefined){
+                      if(response["passWord"] != undefined){
                          this.pwdError = response["pwdError"][0];
-                      }*/
+                      }
                  }
         );
 		/*this.http.get<User[]>(`${environment.userUri}?username=${this.userName}`)

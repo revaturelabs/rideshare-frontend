@@ -86,5 +86,7 @@ h4{
 
 @media(max-width:459px){
     .myBtn{width:110px;}
+    .mainContainer{width:80%;}
+    .form-control{width:100%;}
 }
 

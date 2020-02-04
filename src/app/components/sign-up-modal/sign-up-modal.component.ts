@@ -9,8 +9,9 @@ import { BsModalService, BsModalRef} from 'ngx-bootstrap';
 export class SignupModalComponent implements OnInit {
   fname :string;
   lname :string;
+  username :string;
   email :string;
-  password :string;
+  phone :string;
   address :string;
   city :string;
   state :string;

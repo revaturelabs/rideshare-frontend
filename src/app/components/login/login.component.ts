@@ -155,10 +155,10 @@ export class LoginComponent implements OnInit {
                      console.log(response);
        
                       if(response["userName"] != undefined){
-                         this.usernameError=  response["passWord"][0];
+                         this.usernameError=  response["userName"][0];
                       }
                       /*if(response["passWord"] != undefined){
-                         this.pwdError = response["userName"][0];
+                         this.pwdError = response["pwdError"][0];
                       }*/
                  }
         );

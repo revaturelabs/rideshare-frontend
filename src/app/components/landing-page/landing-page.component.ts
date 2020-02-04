@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+<<<<<<< HEAD
+=======
+import {} from 'googlemaps';
+>>>>>>> 97cd434feda233f12368e4e5692cfae7bef50e84
 import { ViewChild } from '@angular/core';
 
 @Component({
@@ -8,6 +12,7 @@ import { ViewChild } from '@angular/core';
 })
 export class LandingPageComponent implements OnInit {
 
+<<<<<<< HEAD
   origin : string ='Morgantown, WV';
   destination : string ='';
 
@@ -47,6 +52,26 @@ export class LandingPageComponent implements OnInit {
     this.displayRoute(this.origin, destination, directionsService, directionsRenderer);
 
   }
+=======
+
+  @ViewChild('map', {static: true}) mapElement: any;
+    map: google.maps.Map;
+  constructor() { }
+
+  
+
+  ngOnInit(): void {
+    const mapProperties = {
+         center: new google.maps.LatLng(35.2271, -80.8431),
+         zoom: 12,
+         mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    this.map = new google.maps.Map(this.mapElement.nativeElement, mapProperties);
+ }
+ 
+
+  
+>>>>>>> 97cd434feda233f12368e4e5692cfae7bef50e84
 
 
 displayRoute(origin, destination, service, display) {

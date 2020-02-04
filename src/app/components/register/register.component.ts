@@ -40,6 +40,7 @@ export class RegisterComponent implements OnInit {
    * This is an OnInit function that sets the token to the parsed token string.
    * The system will check if the token is valid; once validated a batch service is called.
    */
+<<<<<<< HEAD
 	ngOnInit() {
 		if (sessionStorage.getItem('auth')) {
 			this.router.navigate(['home']);
@@ -51,6 +52,9 @@ export class RegisterComponent implements OnInit {
 			});*/
 		}
 	}
+=======
+	ngOnInit() {}
+>>>>>>> 97cd434feda233f12368e4e5692cfae7bef50e84
 
 	/**
 	 * This function allows the user to select the batch location.

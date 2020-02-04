@@ -4,14 +4,14 @@
 
 .form-control{
     margin:auto;
-    width: 75%;
+    width: 30%;
 }
 
 #search{
     margin-top:10px;
     background-color: #F26925;
     color:white;
-    width:300px;
+    width:30%;
     font-family:"Overpass",sans-serif;
     font-weight:bold;
     font-size:22px;
@@ -31,6 +31,7 @@
     font-size:23px;
 }
 
+<<<<<<< HEAD
 
 #right-panel {
     font-family: 'Roboto','sans-serif';
@@ -61,3 +62,12 @@
     background-color:white;
     padding-left: 300px;
 }
+=======
+.googleapi {
+    margin-top: 25px;
+}
+
+#map{
+    margin: auto;
+}
+>>>>>>> 97cd434feda233f12368e4e5692cfae7bef50e84

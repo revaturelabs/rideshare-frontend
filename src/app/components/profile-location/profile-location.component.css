@@ -1,17 +1,25 @@
+*{
+    font-family:"Overpass",sans-serif;
+}
+
+h4{
+    margin-bottom:20px;
+    text-align:left;
+}
+
 .mainContainer {
     margin: 5% auto;
     width: 61%;  
+   
 }
-
 
 .form-control {
     width: 230px;
 }
 
 .myBtn {
-    margin-left: 29%;
 
-    margin-top:10px;
+    margin-top:15px;
     background-color: #F26925;
     color:white;
     width:150px;
@@ -22,6 +30,7 @@
     letter-spacing:1px;
     height:45px;
     display:inline-block;
+    text-align:center;
 }
  
 .myBtn:hover{
@@ -35,19 +44,47 @@
 
 @media(min-width: 768px){
     .mainContainer {
-        width: 55%;
+        width: 80%;
+        position: inherit;
+         top: 15%;
+         left: 50%;
+    }
+    
+}
+
+@media(min-width: 992px){
+    .mainContainer {
+        width: 50%;
         position: absolute;
-        top: 22%;
-         left: 45%;
+        margin-top:0%;
+         left: 80%;
+    }
+    
+}
+@media(max-width:580px){
+    .mainContainer{
+        width:80%;
+        position:inherit;
+        left:0%;
+    }
+    .form-control{
+        width:200%
+    }
+ 
+}
+
+@media(max-width:576px){
+    .mainContainer{
+        width:50%;
+        position:inherit;
+        left:80%;
+    }
+    .form-control{
+        width:100%
     }
 }
 
-@media(min-width: 991px){
-    .mainContainer {
-        width: 55%;
-        position: absolute;
-        top: 15%;
-        left: 35%;
-    }
+@media(max-width:459px){
+    .myBtn{width:110px;}
 }
 

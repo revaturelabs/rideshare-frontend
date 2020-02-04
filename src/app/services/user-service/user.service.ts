@@ -6,8 +6,11 @@ import { Observable } from 'rxjs';
 import { AuthService } from '../auth-service/auth.service';
 import { LogService } from "../log.service"
 import { environment } from 'src/environments/environment.dev';
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 97cd434feda233f12368e4e5692cfae7bef50e84
 
 @Injectable({
   	providedIn: 'root'
@@ -22,7 +25,12 @@ export class UserService {
 
 	// http headers
 	private headers = new HttpHeaders({'Content-Type': 'application/json'});
+<<<<<<< HEAD
 	
+=======
+
+
+>>>>>>> 97cd434feda233f12368e4e5692cfae7bef50e84
 	/**
 	 * Set up the url string to the env var
 	 * Creates a new user object
@@ -66,6 +74,7 @@ export class UserService {
 		user.active = true;
 		user.driver = false;
 		user.acceptingRides = false;
+		console.log(user);
 
 		this.http.post(this.url, user, {observe: 'response'}).subscribe(
 			(response) => {
@@ -85,7 +94,10 @@ export class UserService {
 
 	}
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 97cd434feda233f12368e4e5692cfae7bef50e84
 	// add user method
 	addUser(user :User) :Observable<User> {
 		return this.http.post<User>(this.url, user, {headers: this.headers});

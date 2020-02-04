@@ -1,5 +1,9 @@
 <a (click)="openModal(template)">Sign up</a >
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> 97cd434feda233f12368e4e5692cfae7bef50e84
 <ng-template #template >
   <div class="modal-header">
     <h4 class="modal-title">Sign Up</h4>
@@ -20,11 +24,11 @@
     <input (click)="emailError = ''" id="email" type="email" [(ngModel)]="user.email" class="form-control" required/>
     <p *ngIf="emailError != ''" class="error">{{emailError}}</p>
 
-    <label id="password">Password</label>
-    <input type="password" [(ngModel)]="password" class="form-control" required/>
+    <label for="password">Password</label>
+    <input id="password" type="password" [(ngModel)]="password" class="form-control" required/>
 
-    <label id="address">Address</label>
-    <input type="text" [(ngModel)]="address" class="form-control" required/>
+    <label for="address">Address</label>
+    <input id="address" type="text" [(ngModel)]="address" class="form-control" required/>
 
     <div class="city">
         <label id="city">City</label>
@@ -55,7 +59,11 @@
   </div>
     </div>
     <div class="btn-container">
+<<<<<<< HEAD
       <button type="submit" class="btn btn-primary register" (click)="submitUser()">Submit</button>
+=======
+    <button type="submit" class="btn btn-primary register" (click)="submitUser()">Submit</button>
+>>>>>>> 97cd434feda233f12368e4e5692cfae7bef50e84
     </div>
   </div>
 </ng-template> 

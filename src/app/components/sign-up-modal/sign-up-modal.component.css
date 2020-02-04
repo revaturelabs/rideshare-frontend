@@ -1,8 +1,12 @@
 *{
     font-family: "Overpass",sans-serif;
-    font-style: normal;
+   
 }
-
+.signup{
+    cursor:pointer;
+    display:inline-block;
+    width: 70px;
+}
 label{
     margin-left:10px;
     font-size:25px;
@@ -31,7 +35,7 @@ h3{
     background-color: #F26925;
     color:white;
     width:300px;
-    font-family:"Overpass";
+    font-family:"Overpass",sans-serif;
     font-weight:bold;
     font-size:22px;
     border-radius:27px;
@@ -46,7 +50,7 @@ h3{
     color:#F26925;
     border: 2px solid #F26925;
     border-radius: 22px ;
-    font-family:"Overpass";
+    font-family:"Overpass",sans-serif;
     font-size:23px;
 }
 
@@ -94,6 +98,16 @@ h3{
     margin-left:10px;
 }
 
+.borderbottom:hover{
+    border-bottom:2px solid #F26925;
+}
+
+/* error */
+.error {
+    border-radius: 5px;
+    color: red;
+    font-size: 16px;
+}
 
 /*----------------Removes up/down input arrows for zipcode input field--------------*/
 
@@ -109,3 +123,29 @@ input[type=number] {
 }
 
 /*---------------------------------------------------------------------------------*/
+
+/*---------------------Media Queries-----------------------------------------------*/
+
+
+@media only screen and (max-width:574px){
+    label{
+        font-size:20px;
+    }
+    .city{
+        width:100%;        
+    }
+    .state{
+        width:100%;
+    }
+    .zip{
+        width:100%;
+    }
+    .register{
+        border:1px solid black;
+        text-align:center;
+        width:70%;
+    }
+    .modal-title{
+        font-size:40px;
+    }
+}

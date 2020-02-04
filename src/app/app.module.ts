@@ -24,6 +24,7 @@ import { PreferenceComponent } from './components/preference/preference.componen
 import { ValidationService } from './services/validation-service/validation.service';
 import { AdminLoginComponent } from './components/admin-login/admin-login.component';
 import { DriverInfoComponent } from './components/driver-info/driver-info.component';
+import { LandingComponent } from './components/landing/landing.component';
 import { SignupModalComponent } from './components/sign-up-modal/sign-up-modal.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { ProfileContactComponent } from './components/profile-contact/profile-contact.component';
@@ -33,10 +34,16 @@ import { ProfileMembershipComponent } from './components/profile-membership/prof
 import { DriverContactModalComponent } from './components/driver-contact-modal/driver-contact-modal.component';
 import { DriverListComponent } from './components/driver-list/driver-list.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
+<<<<<<< HEAD
 import { UserRegisterComponent } from './components/user-register/user-register.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
 
+=======
+import { HomePageComponent } from './components/home-page/home-page.component';
+import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
+import { UserRegisterComponent } from './components/user-register/user-register.component';
+>>>>>>> 97cd434feda233f12368e4e5692cfae7bef50e84
 
 
 @NgModule({
@@ -54,6 +61,7 @@ import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
     PreferenceComponent,
     AdminLoginComponent,
     DriverInfoComponent,
+    LandingComponent,
     SignupModalComponent,
     LandingPageComponent,
     ProfileContactComponent,
@@ -62,10 +70,17 @@ import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
     ProfileMembershipComponent,
     DriverContactModalComponent,
     DriverListComponent,
+<<<<<<< HEAD
     UserRegisterComponent,
     HomePageComponent,
     BsNavbarComponent
     
+=======
+    DriverListComponent,
+    HomePageComponent,
+    BsNavbarComponent,
+    UserRegisterComponent
+>>>>>>> 97cd434feda233f12368e4e5692cfae7bef50e84
   ],
   imports: [
     BrowserModule,
@@ -83,9 +98,7 @@ import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
     BatchService,
     AuthService,
     ValidationService,
-    BsModalService,
-   
-   
+    BsModalService
   ],
   bootstrap: [AppComponent]
 })

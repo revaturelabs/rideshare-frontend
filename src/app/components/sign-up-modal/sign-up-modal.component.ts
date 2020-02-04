@@ -18,7 +18,11 @@ export class SignupModalComponent implements OnInit {
   state :string;
   zipcode :number;
   accountType :string;
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> 97cd434feda233f12368e4e5692cfae7bef50e84
   user :User = new User();
 
   // validation
@@ -35,6 +39,11 @@ export class SignupModalComponent implements OnInit {
   constructor(private modalService :BsModalService, private userService :UserService) { }
 
   ngOnInit() {
+    this.userService.getAllUsers().subscribe(
+      res => {
+        console.log(res);
+      }
+    );
   }
   //Opens 'sign up' modal that takes in a template of type 'ng-template'.
 

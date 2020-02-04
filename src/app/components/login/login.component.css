@@ -91,15 +91,13 @@ img {
 }
 
 
-<<<<<<< HEAD
 .error {
     border-radius: 5px;
     background-color: #dd1616;
     color: white;
-    width: 190%; 
+    width: 30%; 
   } 
 
-=======
 /*-------------------------Media Queries---------------------------------*/
 
 @media only screen and (max-width:780px){
@@ -161,5 +159,4 @@ img {
         font-size:11px;
     }
 }
->>>>>>> 97cd434feda233f12368e4e5692cfae7bef50e84
 

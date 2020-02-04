@@ -34,16 +34,10 @@ import { ProfileMembershipComponent } from './components/profile-membership/prof
 import { DriverContactModalComponent } from './components/driver-contact-modal/driver-contact-modal.component';
 import { DriverListComponent } from './components/driver-list/driver-list.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
-<<<<<<< HEAD
 import { UserRegisterComponent } from './components/user-register/user-register.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
 
-=======
-import { HomePageComponent } from './components/home-page/home-page.component';
-import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
-import { UserRegisterComponent } from './components/user-register/user-register.component';
->>>>>>> 97cd434feda233f12368e4e5692cfae7bef50e84
 
 
 @NgModule({
@@ -70,17 +64,10 @@ import { UserRegisterComponent } from './components/user-register/user-register.
     ProfileMembershipComponent,
     DriverContactModalComponent,
     DriverListComponent,
-<<<<<<< HEAD
     UserRegisterComponent,
     HomePageComponent,
     BsNavbarComponent
     
-=======
-    DriverListComponent,
-    HomePageComponent,
-    BsNavbarComponent,
-    UserRegisterComponent
->>>>>>> 97cd434feda233f12368e4e5692cfae7bef50e84
   ],
   imports: [
     BrowserModule,

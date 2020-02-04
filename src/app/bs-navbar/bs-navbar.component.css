@@ -3,28 +3,16 @@
     
 }
 
-<<<<<<< HEAD
-
-=======
 nav {
     background-color: rgb(255, 255, 255);
     
 }
->>>>>>> 97cd434feda233f12368e4e5692cfae7bef50e84
 img{
     width:35%;
     height:30%;
     margin-left:10%;
     position:relative;
 }
-<<<<<<< HEAD
-.main-nav{
-    border-bottom:1px inset rgb(214, 214, 214);
-   
-}
-=======
-
->>>>>>> 97cd434feda233f12368e4e5692cfae7bef50e84
 .nav-link{
     color:black !important;
     font-weight:600;
@@ -39,10 +27,7 @@ img{
     width:100%;
     border-bottom: 1px inset rgb(214, 214, 214);
     margin-bottom:20px;
-<<<<<<< HEAD
-=======
     
->>>>>>> 97cd434feda233f12368e4e5692cfae7bef50e84
 }
 .navbar-nav{
     float:right;

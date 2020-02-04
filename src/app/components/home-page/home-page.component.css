@@ -53,10 +53,7 @@ i{
 
 .blackFade{
     background-color: rgba(0, 0, 0, 1);
-<<<<<<< HEAD
-=======
     border:1px outset black;
->>>>>>> 97cd434feda233f12368e4e5692cfae7bef50e84
 }
 
 #loginbutton{
@@ -100,8 +97,6 @@ margin: 0 auto;
 .card-body{
   font-family: "Overpass",sans-serif;
 }
-<<<<<<< HEAD
-=======
 
 @media(max-width:767px){
   .card{
@@ -128,4 +123,3 @@ margin: 0 auto;
 
   .card{height:210px;}
 }
->>>>>>> 97cd434feda233f12368e4e5692cfae7bef50e84

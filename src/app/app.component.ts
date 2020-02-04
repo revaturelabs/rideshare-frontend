@@ -1,9 +1,6 @@
 import { Component } from '@angular/core';
 import {} from 'googlemaps';
-<<<<<<< HEAD
 
-=======
->>>>>>> 97cd434feda233f12368e4e5692cfae7bef50e84
 /**
  * This is the App Component.
  */

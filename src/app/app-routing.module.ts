@@ -19,10 +19,7 @@ import { ProfileLocationComponent } from './components/profile-location/profile-
 import { DriverContactModalComponent } from './components/driver-contact-modal/driver-contact-modal.component';
 import { DriverListComponent } from './components/driver-list/driver-list.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
-<<<<<<< HEAD
-=======
 import { NavbarComponent } from './components/navbar/navbar.component';
->>>>>>> 97cd434feda233f12368e4e5692cfae7bef50e84
 
 
 const routes: Routes = [
@@ -45,10 +42,7 @@ const routes: Routes = [
 {path: 'profile/membership', component: ProfileMembershipComponent},
 {path: 'profile/location', component: ProfileLocationComponent},
 {path: 'driver', component: DriverContactModalComponent},
-<<<<<<< HEAD
-=======
 {path: 'navbar', component: NavbarComponent},
->>>>>>> 97cd434feda233f12368e4e5692cfae7bef50e84
 {path: '', component: HomePageComponent},
 {path: '**', pathMatch: 'full', redirectTo: ''}];
 

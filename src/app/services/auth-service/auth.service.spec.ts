@@ -20,7 +20,6 @@ describe('AuthService', () => {
   beforeEach(() => TestBed.configureTestingModule({
     declarations: [AdminComponent, CarRegisterComponent, UserRegisterComponent, LoginComponent, MyCarComponent, NavbarComponent, PreferenceComponent, ProfileComponent],
     imports: [AppRoutingModule, FormsModule, HttpClientModule],
-    imports: [HttpClientModule, AppRoutingModule, FormsModule],
     providers: [{provide: APP_BASE_HREF, useValue: '/my/app'}]
   }));
    let service: AuthService;

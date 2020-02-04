@@ -64,9 +64,9 @@ it('should register a batch', () => {
     let response;
     spyOn(batchService, 'getAllBatches').and.returnValue(of(batchResponse));
 
-    batchService.getAllBatches().subscribe(res => {
-      response = res;
-    });
+    // batchService.getAllBatches().subscribe(res => {
+    //   response = res;
+    // });
 
     expect(response).toEqual(batchResponse);
   });

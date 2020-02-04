@@ -7,9 +7,12 @@ import { AuthService } from '../auth-service/auth.service';
 import { LogService } from "../log.service"
 import { environment } from 'src/environments/environment.dev';
 
+
+
 @Injectable({
   	providedIn: 'root'
 })
+
 export class UserService {
 
 	/**
@@ -19,6 +22,7 @@ export class UserService {
 
 	// http headers
 	private headers = new HttpHeaders({'Content-Type': 'application/json'});
+	
 
 
 	/**
@@ -59,7 +63,6 @@ export class UserService {
 	 * @param user 
 	 * @param role 
 	 */
-
 	createDriver(user: User, role) {
 
 		user.active = true;

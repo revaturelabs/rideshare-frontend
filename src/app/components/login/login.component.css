@@ -91,6 +91,13 @@ img {
 }
 
 
+.error {
+    border-radius: 5px;
+    background-color: #dd1616;
+    color: white;
+    width: 30%; 
+  } 
+
 /*-------------------------Media Queries---------------------------------*/
 
 @media only screen and (max-width:780px){

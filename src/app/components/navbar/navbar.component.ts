@@ -25,6 +25,8 @@ export class NavbarComponent implements OnInit {
   name: string = '';
   admin: string = '';
 
+  currentUser: string;
+
   /**
    * This is a constructor
    * @param router Provides an instance of a router.

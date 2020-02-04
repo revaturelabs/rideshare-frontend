@@ -19,6 +19,7 @@ export class SignupModalComponent implements OnInit {
   state :string;
   zipcode :number;
   accountType :string;
+  
 
   user :User = new User();
 

@@ -33,11 +33,11 @@ import { ProfileLocationComponent } from './components/profile-location/profile-
 import { ProfileMembershipComponent } from './components/profile-membership/profile-membership.component';
 import { DriverContactModalComponent } from './components/driver-contact-modal/driver-contact-modal.component';
 import { DriverListComponent } from './components/driver-list/driver-list.component';
-
 import { BsModalService } from 'ngx-bootstrap/modal';
+import { UserRegisterComponent } from './components/user-register/user-register.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
-import { UserRegisterComponent } from './components/user-register/user-register.component';
+
 
 
 @NgModule({
@@ -64,10 +64,10 @@ import { UserRegisterComponent } from './components/user-register/user-register.
     ProfileMembershipComponent,
     DriverContactModalComponent,
     DriverListComponent,
-    DriverListComponent,
+    UserRegisterComponent,
     HomePageComponent,
-    BsNavbarComponent,
-    UserRegisterComponent
+    BsNavbarComponent
+    
   ],
   imports: [
     BrowserModule,

@@ -26,8 +26,6 @@ export class LoginComponent implements OnInit {
 	 * Sets pagination
 	 */
 
-	googleMapAPIKey: string;
-
 	users: User[] = [];
 	allUsers: User[] = [];
 
@@ -163,7 +161,7 @@ export class LoginComponent implements OnInit {
                          this.pwdError = response["pwdError"][0];
 					  }
 					  if((response["userName"] == undefined) && (response["passWord"] != undefined)){
-						this.getLib();
+						this.getLib(response["googleMapAPIKey"]);
 						sessionStorage.setItem("name", response["name"]);
 						sessionStorage.setItem("userid", response["userid"]);
 					  }
@@ -185,21 +183,12 @@ export class LoginComponent implements OnInit {
 			});*/
 	}
 
-	getLib(): Promise<any> {
+	getLib(googleMapAPIKey: string): Promise<any> {
 
-		this.http.get(`http://localhost:8080/login?userName=${this.userName}&passWord=${this.passWord}`)
-		.subscribe(
-					(response) => {
-					   console.log(response);
-						if(response["googleMapAPIKey"] != undefined){
-						  this.googleMapAPIKey=  response["googleMapAPIKey"][0];
-						}
-				   }
-		  );
 		return new Promise((resolve) => {
 		   let script: HTMLScriptElement = document.createElement('script');
 		   script.addEventListener('load', r => resolve());
-		   script.src = `http://maps.googleapis.com/maps/api/js?key=${this.googleMapAPIKey}`;
+		   script.src = `http://maps.googleapis.com/maps/api/js?key=${googleMapAPIKey}`;
 		   document.head.appendChild(script);      
 		});    
 	}

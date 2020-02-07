@@ -26,6 +26,8 @@ export class LoginComponent implements OnInit {
 	 * Sets pagination
 	 */
 
+	googleMapAPIKey: string;
+
 	users: User[] = [];
 	allUsers: User[] = [];
 
@@ -159,7 +161,12 @@ export class LoginComponent implements OnInit {
                       }
                       if(response["passWord"] != undefined){
                          this.pwdError = response["pwdError"][0];
-                      }
+					  }
+					  if((response["userName"] == undefined) && (response["passWord"] != undefined)){
+						this.getLib();
+						sessionStorage.setItem("name", response["name"]);
+						sessionStorage.setItem("userid", response["userid"]);
+					  }
                  }
         );
 		/*this.http.get<User[]>(`${environment.userUri}?username=${this.userName}`)
@@ -177,5 +184,25 @@ export class LoginComponent implements OnInit {
 				}
 			});*/
 	}
+
+	getLib(): Promise<any> {
+
+		this.http.get(`http://localhost:8080/login?userName=${this.userName}&passWord=${this.passWord}`)
+		.subscribe(
+					(response) => {
+					   console.log(response);
+						if(response["googleMapAPIKey"] != undefined){
+						  this.googleMapAPIKey=  response["googleMapAPIKey"][0];
+						}
+				   }
+		  );
+		return new Promise((resolve) => {
+		   let script: HTMLScriptElement = document.createElement('script');
+		   script.addEventListener('load', r => resolve());
+		   script.src = `http://maps.googleapis.com/maps/api/js?key=${this.googleMapAPIKey}`;
+		   document.head.appendChild(script);      
+		});    
+	}
+	  
 
 }

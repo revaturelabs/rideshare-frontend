@@ -1,11 +1,25 @@
 .mainContainer {
     margin: 5% auto;
     width: 61%;  
-
+    border:1px outset gray;
+    box-shadow:2px 2px 5px rgb(212, 212, 212);
+    background-color:rgb(243, 243, 243);
+    padding-bottom:5%;
+    border-radius: 10px;
 }
-
+.fa-user{
+    z-index: 2;
+    border:1.5px solid black;
+    padding:14px;
+    font-size:25px;
+    margin-left:85%;
+    border-radius: 20px;
+    background-color: rgb(255, 255, 255);
+    display:inline;
+}
 .form-control {
     width: 230px;
+    border-radius:15px;
 }
 .row{
     text-align:center;
@@ -47,11 +61,14 @@ h4{
          top: 15%;
          left: 50%;
     }
+    .form-control{
+        width:100%;
+    }
 }
 
 @media(min-width: 1068px){
     .mainContainer {
-        width: 50%;
+        width: 80%;
         position: absolute;
         margin-top:0%;
         left: 80%;
@@ -59,23 +76,25 @@ h4{
     label{
         font-size:17px;
     }
-}
-@media(max-width:580px){
-    .mainContainer{
-        width:80%;
-        position:inherit;
-        left:0%;
-        
-    }
     .form-control{
-        width:200%
+        width:150%;
+    }
+}
+@media(max-width: 1068px){
+    .mainContainer {
+        width: 80%;
+        position: inherit;
+        margin-top:10%;
+        left: 80%;
     }
     label{
-        font-size:15px;
+        font-size:17px;
+    }
+    .form-control{
+        width:150%;
     }
 }
-
-@media(max-width:576px){
+@media(max-width:580px){
     .mainContainer{
         width:80%;
         position:inherit;
@@ -90,3 +109,22 @@ h4{
     }
 }
 
+
+
+@media(min-width:1474px){
+    .mainContainer{
+        margin-top:15px;
+            width:60%;
+            position:absolute;
+            left:80%;
+        }
+        .form-control{
+            width:150%;
+        }
+    }
+    @media(max-width:420px){
+       .fa-user{
+           font-size:20px;
+           padding:10px;
+       }
+    }

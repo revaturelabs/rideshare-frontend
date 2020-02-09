@@ -24,7 +24,8 @@ nav {
     
 }
 .imageLogo {
-    height: 35px;
+    height:60px;
+    width:140px;
 }
 #logout-btn {
     cursor: pointer;

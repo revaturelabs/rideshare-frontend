@@ -2,6 +2,11 @@
     margin: 5% auto;
     width: 61%;  
     text-align:center;
+    border:1px outset gray;
+    box-shadow:2px 2px 5px rgb(212, 212, 212);
+    background-color:rgb(243, 243, 243);
+    padding-bottom:5%;
+    border-radius: 10px;
 }
 
 #Nrseats{
@@ -10,8 +15,19 @@
 
 .form-control {
     width: 230px;
+    border-radius:10px;
 }
 
+.fa-car{
+    z-index: 2;
+    border:1.5px solid black;
+    padding:14px;
+    font-size:23px;
+    margin-left:85%;
+    border-radius: 20px;
+    background-color: white;
+    display:inline;
+}
 h4{
     text-align:left;
 }
@@ -37,7 +53,6 @@ h4{
     font-family:"Overpass";
     font-size:23px;
 }
-
 @media(min-width: 768px){
     .mainContainer {
         width: 80%;
@@ -45,27 +60,70 @@ h4{
          top: 15%;
          left: 50%;
     }
-}
-
-@media(min-width: 992px){
-    .mainContainer {
-        width: 60%;
-        position: absolute;
-        margin-top:0%;
-         left: 80%;
-         
-    }
-}
-@media(max-width:560px){
-    .mainContainer{
-        width:80%;
-        position:inherit;
-        left:0%;
-        text-align:center;
-    }
     .form-control{
         width:100%;
     }
 }
 
+@media(min-width: 1068px){
+    .mainContainer {
+        width: 80%;
+        position: absolute;
+        margin-top:0%;
+        left: 80%;
+    }
+    label{
+        font-size:17px;
+    }
+    .form-control{
+        width:150%;
+    }
+}
+@media(max-width: 1068px){
+    .mainContainer {
+        width: 80%;
+        position: inherit;
+        margin-top:10%;
+        left: 80%;
+    }
+    label{
+        font-size:17px;
+    }
+    .form-control{
+        width:150%;
+    }
+}
+@media(max-width:580px){
+    .mainContainer{
+        width:80%;
+        position:inherit;
+        left:0%;
+        
+    }
+    .form-control{
+        width:100%
+    }
+    label{
+        font-size:15px;
+    }
+}
 
+
+
+@media(min-width:1474px){
+    .mainContainer{
+        margin-top:15px;
+            width:60%;
+            position:absolute;
+            left:80%;
+        }
+        .form-control{
+            width:150%;
+        }
+    }
+    @media(max-width:512px){
+       .fa-car{
+           font-size:20px;
+           padding:10px;
+       }
+    }

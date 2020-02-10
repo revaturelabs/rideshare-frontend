@@ -135,7 +135,7 @@ displayDriversList(origin, drivers) {
                                   <td class="col">${results[0].distance.text}</td>
                                   <td class="col">${results[0].duration.text}</td>
                                   <td class="col">
-                                  <button (click)="view(${element.name}, ${element.email} , ${element.phone} )"  type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCentered"> View</button>
+                                  <button (click)="view(${element.name}, ${element.email}, ${element.phone})" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCentered"> View</button>
                                   <div id="view"></div>
                                   </td></tr>`;
       }
@@ -146,7 +146,7 @@ displayDriversList(origin, drivers) {
 
 
 view(name, email, phone){
-  console
+  console.log(name);
   var view = document.getElementById('view');
   view.innerHTML=`<div class="modal" id="exampleModalCentered" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">

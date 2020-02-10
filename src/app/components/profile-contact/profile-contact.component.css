@@ -1,3 +1,7 @@
+*{
+    font-family:"Overpass",sans-serif;
+}
+
 .mainContainer {
     margin: 5% auto;
     width: 61%;  
@@ -30,6 +34,7 @@ label{
 
 h4{
     text-align:left;
+    font-weight:bold;
 }
 .myBtn {
     margin-top:15px;
@@ -128,3 +133,16 @@ h4{
            padding:10px;
        }
     }
+
+    @media(max-width:375px){
+        h4{
+            font-size:20px;
+        }
+        }
+
+        @media(max-width:345px){
+            .fa-user{
+                font-size:18px;
+                padding:8px;
+            }
+        }

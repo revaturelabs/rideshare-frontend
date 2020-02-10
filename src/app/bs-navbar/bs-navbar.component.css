@@ -5,8 +5,12 @@
 
 nav {
     background-color: rgb(255, 255, 255);
-    
 }
+
+.bg-light {
+    background-color: rgb(255, 255, 255);
+}
+
 img{
     width:35%;
     height:30%;
@@ -25,8 +29,8 @@ img{
 
 .navbar{
     width:100%;
-    border-bottom: 1px inset rgb(214, 214, 214);
-    margin-bottom:20px;
+    /*border-bottom: 1px inset rgb(214, 214, 214);
+    margin-bottom:20px;*/
     
 }
 .navbar-nav{

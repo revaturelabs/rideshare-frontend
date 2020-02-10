@@ -34,4 +34,8 @@ export class BatchService {
 	getAllBatchesByLocation(location: string): Observable<Batch[]> {
 		return this.http.get<Batch[]>(`${this.url}?location=${location}`);
 	}
+
+	getAllBatchesByLocation1(): Observable<Batch[]> {
+		return this.http.get<Batch[]>(`${this.url}`);
+	}
 }

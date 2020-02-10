@@ -12,12 +12,14 @@ p {
     /* border: 2px solid #e75c0c; */
     border: 2px solid rgb(253, 111, 39)(173, 173, 173);
     border-radius: 100px;
-    padding: 3%;
-    margin-top: 8%;
-    margin-left: 15%;
-    margin-right: 15%;
+    padding-top: 11%;
+    padding-left: -11%;
+    padding-right: -30%;
     text-align: center;
     box-shadow: 6px 6px 10px rgb(255, 117, 48);
+    position: relative;
+    margin-top: 110px;
+    margin-bottom: 110px;
 }
 
 #next-btn, #prev-btn {

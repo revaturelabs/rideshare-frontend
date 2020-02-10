@@ -1,3 +1,4 @@
+<div class="pagebody">
 <div class=" container profile-container">
         <div class="btn-group-vertical" role="group" aria-label="Basic example">
             <button type="button" class="btn btn-outline-warning btn-lg" (click)="showContact()">Contact Information</button>
@@ -6,7 +7,7 @@
             <button type="button" class="btn btn-outline-warning btn-lg" (click)="showCarInfo()">Car Information</button>
           </div>  
 
-   
+  
     <div *ngIf='showCont'>
         <app-profile-contact></app-profile-contact>
     </div>
@@ -20,4 +21,4 @@
           <app-profile-location></app-profile-location>
       </div>
 </div>
-
+</div>

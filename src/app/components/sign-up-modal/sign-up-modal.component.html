@@ -15,12 +15,14 @@
     <input (click)="lastNameError = ''" id="lastname" type="text" [(ngModel)]="user.lastName" class="form-control" required/>
     <p *ngIf="lastNameError != ''" class="error">{{lastNameError}}</p>
 
-    <label for="email">Email</label>
-    <input (click)="emailError = ''" id="email" type="email" [(ngModel)]="user.email" class="form-control" required/>
-    <p *ngIf="emailError != ''" class="error">{{emailError}}</p>
+    <label id="username">Username</label>
+    <input type="text" [(ngModel)]="username" class="form-control" required/>
 
-    <label for="password">Password</label>
-    <input id="password" type="password" [(ngModel)]="password" class="form-control" required/>
+    <label id="email">Email</label>
+    <input type="email" [(ngModel)]="email" class="form-control" required/>
+
+    <label id="phone">Phone Number</label>
+    <input type="text" [(ngModel)]="phone" class="form-control" required/>
 
     <label for="address">Address</label>
     <input id="address" type="text" [(ngModel)]="address" class="form-control" required/>

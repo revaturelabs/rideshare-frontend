@@ -17,7 +17,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class DriverListComponent implements OnInit {
 
-  origin : string = 'Morgantown, WV';
+  location : string = 'Morgantown, WV';
   mapProperties :{};
   availableCars : Array<any> = [];
   drivers : Array<any> = [];
@@ -26,17 +26,30 @@ export class DriverListComponent implements OnInit {
   @ViewChild('map',null) mapElement: any;
   map: google.maps.Map;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,private userService: UserService) { }
 
   ngOnInit() {
     this.drivers = [];
-    this.drivers.push({'name': 'Ed Ogeron','origin':'Reston, VA', 'email': 'ed@gmail.com', 'phone':'555-555-5555'});
-    this.drivers.push({'name': 'Nick Saban','origin':'Oklahoma, OK', 'email': 'nick@gmail.com', 'phone':'555-555-5555'});
-    this.drivers.push({'name': 'Bobbie sfsBowden','origin':'Texas, TX', 'email': 'bobbie@gmail.com', 'phone':'555-555-5555'});
-    this.drivers.push({'name': 'Les Miles','origin':'New York, NY', 'email': 'les@gmail.com', 'phone':'555-555-5555'});
-    this.drivers.push({'name': 'Bear Bryant','origin':'Arkansas, AR', 'email': 'bear@gmail.com', 'phone':'555-555-5555'});
-    //console.log(this.drivers);
 
+    this.userService.getRidersForLocation1(this.location).subscribe(
+      res => {
+           //console.log(res);
+           res.forEach(element => {
+              this.drivers.push({
+                   'id': element.userId,
+                 'name': element.firstName+" "+element.lastName,
+               'origin':element.hCity+","+element.hState, 
+                'email': element.email, 
+                'phone':element.phoneNumber
+              });
+          });
+      });
+    /*this.drivers.push({'id': '1','name': 'Ed Ogeron','origin':'Reston, VA', 'email': 'ed@gmail.com', 'phone':'555-555-5555'});
+    this.drivers.push({'id': '2','name': 'Nick Saban','origin':'Oklahoma, OK', 'email': 'nick@gmail.com', 'phone':'555-555-5555'});
+    this.drivers.push({'id': '3','name': 'Bobbie sfsBowden','origin':'Texas, TX', 'email': 'bobbie@gmail.com', 'phone':'555-555-5555'});
+    this.drivers.push({'id': '4','name': 'Les Miles','origin':'New York, NY', 'email': 'les@gmail.com', 'phone':'555-555-5555'});
+    this.drivers.push({'id': '5','name': 'Bear Bryant','origin':'Arkansas, AR', 'email': 'bear@gmail.com', 'phone':'555-555-5555'});*/
+    //console.log(this.drivers);
     this.getGoogleApi();
 
     this.sleep(2000).then(() => {
@@ -47,9 +60,9 @@ export class DriverListComponent implements OnInit {
       };
       this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapProperties);
       //get all routes 
-      this.displayDriversList(this.origin, this.drivers);
+      this.displayDriversList(this.location, this.drivers);
       //show drivers on map
-      this.showDriversOnMap(this.origin, this.drivers);
+      this.showDriversOnMap(this.location, this.drivers);
     });
   }
 
@@ -101,10 +114,6 @@ displayRoute(origin, destination, service, display) {
     });
   }
 
-  getDirection(){
-     
-
-  }
 
 displayDriversList(origin, drivers) {
     let  origins = [];
@@ -119,7 +128,7 @@ displayDriversList(origin, drivers) {
         origins: origins,
         destinations: [element.origin],
         travelMode: google.maps.TravelMode.DRIVING,
-        unitSystem: google.maps.UnitSystem.METRIC,
+        unitSystem: google.maps.UnitSystem.IMPERIAL,
         avoidHighways: false,
         avoidTolls: false
       }, function(response, status) {
@@ -129,49 +138,43 @@ displayDriversList(origin, drivers) {
           var originList = response.originAddresses;
           var destinationList = response.destinationAddresses;
           var results = response.rows[0].elements;
-          //console.log(originList[0] + ' to ' + destinationList[0]);
+          console.log(results[0].distance.text);
           var name =  element.name;
           outputDiv.innerHTML += `<tr><td class="col">${name}</td>
                                   <td class="col">${results[0].distance.text}</td>
                                   <td class="col">${results[0].duration.text}</td>
                                   <td class="col">
-                                    <button (click)="view(${element.name}, ${element.email}, ${element.phone})" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCentered"> View</button>
-                                    <div id="view"></div>
-                                  </td></tr>`;
+                                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCentered${element.id}"> View</button>
+                                    <div class="col-lg-5">
+                                     <div class="modal" id="exampleModalCentered${element.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true">
+                                      <div class="modal-dialog modal-dialog-centered" role="document">
+                                          <div class="modal-content">
+                                              <div class="modal-header">
+                                                  <h5 class="modal-title" id="exampleModalCenteredLabel">Contact Info:</h5>
+                                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                     <span aria-hidden="true">×</span>
+                                                   </button>
+                                              </div>
+                                              <div class="modal-body">
+                                                  <h1>${name}</h1>
+                                                  <h3>Email: ${element.email}</h3>         
+                                                  <h3>Phone: ${element.phone}</h3>                 
+                                              </div>
+                                              <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                              </div>
+                                            </div>
+                                         </div>
+                                       </div>
+                                  </div>
+                                  <div class="col-lg-6">
+                                      <div #maps id="gmap" class="img-responsive"></div>
+                                  </div>
+                                </td></tr>`;
       }
     });
     
    });
-}
-
-
-view(name, email, phone){
-  console.log(name);
-  var view = document.getElementById('view');
-  view.innerHTML=`<div class="modal" id="exampleModalCentered" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-         <div class="modal-content">
-            <div class="modal-header">
-                 <h5 class="modal-title" id="exampleModalCenteredLabel">Contact Info:</h5>
-                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                 </button>
-               </div>
-               <div class="modal-body">
-                 <h1>${name}</h1>
-                 <h3>Email: ${email}</h3>         
-                 <h3>Phone: ${phone}</h3>                 
-               </div>
-               <div class="col-lg-6">
-               <h4>Directions:</h4>
-               <div #map id="gmap" class="img-responsive"></div>
-              </div>
-              <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              </div>
-           </div>
-        </div>
-    </div>`
 }
 
 }

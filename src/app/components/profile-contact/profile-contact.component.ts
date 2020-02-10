@@ -12,7 +12,10 @@ export class ProfileContactComponent implements OnInit {
 
   profileObject : User;
   currentUser: any = '';
-
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
 
   constructor(private router: Router, private userService: UserService) { }
 
@@ -21,12 +24,34 @@ export class ProfileContactComponent implements OnInit {
     this.currentUser = this.userService.getUserById2(sessionStorage.getItem("userid")).subscribe((response)=>{
       this.profileObject = response;
 
+      this.firstName = this.profileObject.firstName;
+      this.lastName = this.profileObject.lastName;
+      this.email = this.profileObject.email;
+      this.phone = this.profileObject.phoneNumber;
+
+      console.log(this.firstName);
+      console.log(this.profileObject);
+
     });
  
 console.log(this.profileObject);
     
+  }
+
+  updatesContactInfo(){
+    this.profileObject.firstName = this.firstName;
+    this.profileObject.lastName = this.lastName;
+    this.profileObject.email = this.email;
+    this.profileObject.phoneNumber = this.phone;
+
+    console.log(this.firstName);
+    console.log(this.profileObject.firstName);
+
+ 
+    this.userService.updateUserInfo2(this.profileObject);
 
 
   }
+
 
 }

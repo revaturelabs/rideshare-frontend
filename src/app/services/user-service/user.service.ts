@@ -55,7 +55,20 @@ export class UserService {
 	 * @param idParam 
 	 */
 	getUserById(idParam: number){
+		
+		console.log(this.url)
 		return this.http.get<User>(this.url+idParam).toPromise();
+
+
+	}
+
+	 
+	getUserById2(idParam2: String){
+		
+		console.log(this.url)
+		return this.http.get<User>(this.url+idParam2);
+
+
 	}
 
 	/**

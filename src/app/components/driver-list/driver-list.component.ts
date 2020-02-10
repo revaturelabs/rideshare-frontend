@@ -135,8 +135,8 @@ displayDriversList(origin, drivers) {
                                   <td class="col">${results[0].distance.text}</td>
                                   <td class="col">${results[0].duration.text}</td>
                                   <td class="col">
-                                  <button (click)="view(${element.name}, ${element.email}, ${element.phone})" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCentered"> View</button>
-                                  <div id="view"></div>
+                                    <button (click)="view(${element.name}, ${element.email}, ${element.phone})" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCentered"> View</button>
+                                    <div id="view"></div>
                                   </td></tr>`;
       }
     });

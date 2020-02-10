@@ -1,12 +1,10 @@
-.content{
+/* .content{
     text-align: center;
 }
-
 .form-control{
     margin:auto;
     width: 30%;
 }
-
 #search{
     margin-top:10px;
     background-color: #F26925;
@@ -30,23 +28,11 @@
     font-family:"Overpass",sans-serif;
     font-size:23px;
 }
-
-
 #right-panel {
     font-family: 'Roboto','sans-serif';
     line-height: 30px;
     
   }
-
-#gmap { 
-    margin: 40px 350px 0px 350px;
-    width: 50%;
-    height: 400px; 
-    position: relative; 
-    overflow: hidden;
-    border-radius: 5px;
-}
-
 #wrapper {
     width: 500px;
     border: 1px solid black;
@@ -60,13 +46,14 @@
 #side2 {
     background-color:white;
     padding-left: 300px;
+} */
+#gmap { 
+    height: 369px; 
 }
 .googleapi {
-    margin-top: 25px;
+ 
 }
-
 #map{
-    margin: auto;
 }
 
 .col{

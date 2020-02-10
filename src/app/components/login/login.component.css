@@ -55,7 +55,6 @@ p {
     z-index: 1;
 }  
 
-
 img {
     width: 50%;
     height: 50%;
@@ -123,6 +122,12 @@ img {
 
 @media only screen and (max-width:560px){
     .btn{
+        width:100px;
+        font-size:18px;
+        border-radius:10px;
+        height:40px;
+    }
+    .btn:hover{
         width:100px;
         font-size:18px;
         border-radius:10px;

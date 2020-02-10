@@ -13,8 +13,9 @@ import { BatchService } from 'src/app/services/batch-service/batch.service';
 export class SignupModalComponent implements OnInit {
   fname :string;
   lname :string;
+  username :string;
   email :string;
-  password :string;
+  phone :string;
   address :string;
   isDriver: boolean;
   isRider: boolean;

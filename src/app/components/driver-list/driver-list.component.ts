@@ -101,7 +101,10 @@ displayRoute(origin, destination, service, display) {
     });
   }
 
+  getDirection(){
+     
 
+  }
 
 displayDriversList(origin, drivers) {
     let  origins = [];
@@ -127,9 +130,11 @@ displayDriversList(origin, drivers) {
           var destinationList = response.destinationAddresses;
           var results = response.rows[0].elements;
           //console.log(originList[0] + ' to ' + destinationList[0]);
+          this.availableCars.push(originList[0] + ' to ' + destinationList[0]);
           outputDiv.innerHTML += '<tr><td class="col">'+element.name+ '</td>'+
                                   '<td class="col">'+results[0].distance.text + '</td>'+
-                                  '<td class="col">'+results[0].duration.text+ '</td></tr>';
+                                  '<td class="col">'+results[0].duration.text+ '</td>'+
+                                  '<td class="col"><app-driver-contact-modal></app-driver-contact-modal></td></tr>';
       }
     });
     

@@ -12,7 +12,7 @@ export const environment = {
   production: false,
   environmentName: 'Default Dev Environment',
   userUri: `${baseUri}:${port}/users/`,
-  batchesUri: `${baseUri}/batches`,
+  batchesUri: `${baseUri}:${port}/batches`,
   carUri: `${baseUri}:${port}/cars/`,
   adminUri: `${baseUri}:${port}/admins/`
 };

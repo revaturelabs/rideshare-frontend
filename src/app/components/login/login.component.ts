@@ -1,10 +1,11 @@
-import { Component, OnInit, NgModule } from '@angular/core';
+import { Component, OnInit, NgModule, TemplateRef } from '@angular/core';
 import { UserService } from 'src/app/services/user-service/user.service';
 import { User } from 'src/app/models/user';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from 'src/app/services/auth-service/auth.service';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { BsModalService, BsModalRef} from 'ngx-bootstrap';
 
 @Component({
 	selector: 'app-login',
@@ -42,7 +43,8 @@ export class LoginComponent implements OnInit {
 
 	pwdError: string;
     usernameError: string;
-
+	userNotFound: string;
+	modalRef :BsModalRef;
 	/**
 	 * This is a constructor
 	 * @param userService An user service is instantiated.
@@ -51,7 +53,7 @@ export class LoginComponent implements OnInit {
 	 * @param authService An auth service is injected.
 	 *
 	 */
-	constructor(private userService: UserService, private http: HttpClient, private authService: AuthService) { }
+	constructor(private modalService :BsModalService,private userService: UserService, private http: HttpClient, private authService: AuthService, public router: Router) { }
 
 	/**
 	 * When the component is initialized, the system checks for the session storage to validate. Once validated, the user service is called to retrieve all users.
@@ -91,7 +93,7 @@ export class LoginComponent implements OnInit {
 					user.firstName.toLowerCase().startsWith(this.chosenUserFullName.toLowerCase()) ||
 					user.lastName.toLowerCase().startsWith(this.chosenUserFullName.toLowerCase()) ||
 					`${user.firstName} ${user.lastName}`.toLowerCase().startsWith(this.chosenUserFullName.toLowerCase()) ||
-					`${user.firstName} ${user.lastName}: ${user.driver ? 'Driver' : 'Rider'}`.toLowerCase().startsWith(this.chosenUserFullName.toLowerCase())
+					`${user.firstName} ${user.lastName}: ${user.isDriver ? 'Driver' : 'Rider'}`.toLowerCase().startsWith(this.chosenUserFullName.toLowerCase())
 				);
 			});
 			this.totalPage = Math.ceil(this.users.length / 5);
@@ -142,6 +144,10 @@ export class LoginComponent implements OnInit {
 		this.banned = true;
 	}
 
+	openModal(template :TemplateRef<any>){
+		this.modalRef = this.modalService.show(template);
+	}
+
 	/**
 	 * A login function
 	 */
@@ -149,17 +155,27 @@ export class LoginComponent implements OnInit {
 	login() {
 		this.pwdError ='';
         this.usernameError= '';
-        this.http.get(`http://localhost:8080?userName=${this.userName}&passWord=${this.passWord}`)
+        this.http.get(`http://localhost:8080/login?userName=${this.userName}&passWord=${this.passWord}`)
 			.subscribe(
                   (response) => {
-                     console.log(response);
-       
+                     //console.log(response);
                       if(response["userName"] != undefined){
                          this.usernameError=  response["userName"][0];
                       }
-                      /*if(response["passWord"] != undefined){
+                      if(response["passWord"] != undefined){
                          this.pwdError = response["pwdError"][0];
-                      }*/
+					  }
+					  if((response["name"] != undefined) && (response["userid"] != undefined)){
+						sessionStorage.setItem("name", response["name"]);
+						sessionStorage.setItem("userid", response["userid"]);
+						
+						//call landing page
+						//this.router.navigate(['landingPage']);
+						location.replace('landingPage');
+					  }
+					  if(response["userNotFound"] != undefined){
+						this.userNotFound = response["userNotFound"][0];
+					  }
                  }
         );
 		/*this.http.get<User[]>(`${environment.userUri}?username=${this.userName}`)
@@ -177,5 +193,6 @@ export class LoginComponent implements OnInit {
 				}
 			});*/
 	}
+
 
 }

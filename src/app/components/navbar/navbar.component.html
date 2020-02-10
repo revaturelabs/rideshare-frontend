@@ -7,7 +7,7 @@
           <span class="navbar-toggler-icon" ></span>
         </button>
     <!-- </div> -->
-      <div *ngIf="!name && !admin" class="collapse navbar-collapse myColapse" id="navbarSupportedContent">
+      <div *ngIf="currentUser != ''" class="collapse navbar-collapse myColapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
             <a class="nav-link" routerLink="/landingPage"><span class="borderbottom">Search</span></a>
@@ -17,7 +17,7 @@
           </li>
           <li class="nav-item active dropdown">
             <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-             <span class="borderbottom nameplaceholder">John Doe</span><!--{{name placeholder}}-->
+             <span class="borderbottom nameplaceholder">{{currentUser}}</span><!--{{name placeholder}}-->
               <img ng-if="internImageUrl" src="https://app.revature.com/core/resources/download/default/interns/image?t=1580327501130" alt="" id="user-dropa" class="img-circle profileUpdate ng-scope userimg"/>
               
             </a>

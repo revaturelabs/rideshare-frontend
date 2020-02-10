@@ -66,8 +66,8 @@ export class UserService {
 	createDriver(user: User, role) {
 
 		user.active = true;
-		user.driver = false;
-		user.acceptingRides = false;
+		user.isDriver = false;
+		user.isAcceptingRides = false;
 		console.log(user);
 
 		this.http.post(this.url, user, {observe: 'response'}).subscribe(
@@ -112,8 +112,8 @@ export class UserService {
 		this.getUserById(userId)
 			.then((response) => {
 				this.user = response;
-				this.user.driver = isDriver;
-				this.user.acceptingRides = (this.user.active && isDriver);
+				this.user.isDriver = isDriver;
+				this.user.isAcceptingRides = (this.user.active && isDriver);
 
 				this.http.put(this.url+userId, this.user).subscribe(
 					(response) => {
@@ -142,7 +142,7 @@ export class UserService {
 				this.user = response;
 				this.user[property] = bool;
 				if (property === 'active' && bool === false) {
-					this.user.acceptingRides = false;
+					this.user.isAcceptingRides = false;
 				}
 
 				this.http.put(this.url+userId, this.user).subscribe(
@@ -212,5 +212,9 @@ export class UserService {
     banUser(user: User){
       this.body = JSON.stringify(user);
       this.http.put(`${this.url + user.userId}`,this.body,this.httpOptions).subscribe();
-    }
+	}
+	
+	getRidersForLocation1(location: string): Observable <any>{
+		return this.http.get(this.url + '/findMyPeeps?location='+ location)
+	  }
 }

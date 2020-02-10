@@ -3,13 +3,14 @@
 }
 
 .mainContainer {
-    margin: 5% auto;
+    margin: 3% auto;
     width: 61%;  
     text-align:center;
     border:1px outset gray;
     box-shadow:2px 2px 5px rgb(212, 212, 212);
     background-color:rgb(243, 243, 243);
     padding-bottom:5%;
+   
     border-radius: 10px;
 }
 

@@ -25,7 +25,7 @@ export class NavbarComponent implements OnInit {
   name: string = '';
   admin: string = '';
 
-  currentUser: string;
+  currentUser: string = '';
 
   /**
    * This is a constructor
@@ -44,6 +44,12 @@ export class NavbarComponent implements OnInit {
    */
 
   ngOnInit() {
+
+    if(sessionStorage.getItem("userid") != null){
+      this.currentUser =sessionStorage.getItem("name");
+    }else{
+      this.currentUser ='';
+    }
     if (this.authService.user.userId) {
       this.userService.getUserById(this.authService.user.userId).then((response)=>{
         this.name = response.firstName;
@@ -74,8 +80,13 @@ export class NavbarComponent implements OnInit {
   logout() {
     this.authService.user = {};
     this.authService.admin = new Admin();
+    //clear all session
     this.name = '';
     this.admin = '';
+    this.currentUser = '';
+    sessionStorage.removeItem("name");
+    sessionStorage.removeItem("userid");
+    //sessionStorage.clear(); 
     this.router.navigate(['']);
   }
 

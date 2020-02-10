@@ -55,6 +55,9 @@
 }
 #map{
 }
+.col{
+    margin-right: 3%;
+}
 .btn-outline-secondary{
     font-size:14px;
 }

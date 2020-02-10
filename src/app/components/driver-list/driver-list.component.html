@@ -16,32 +16,22 @@
       </div>
       <p id="total"></p>-->
       <h4>Driver's List</h4>
+      
      <table class="table table-striped">
        <thead class="thead-dark">
          <tr>
            <th scope="col">Name</th>
            <th scope="col">Distance</th>
            <th scope="col">Time</th>
-           <th scope="col">Directions</th>
-          
+           <th scope="col">View Info</th>
          </tr>
        </thead>
-       <tbody>  
-            <tr *ngFor="let car of availableCars">
-               <td>{{car.Name}}</td>
-               <td>{{car.Distance}}</td>
-               <td>{{car.Time}}</td>
-               <td><button class="btn btn-outline-primary" id="sign-in-btn" (click)="getDirection(car.Distance)" >Directions</button></td>
-               
-             </tr>
-       </tbody>
+       <tbody id="output"></tbody>
       </table>
      </div>
      <div class="col-lg-6">
        <h4>Directions:</h4>
        <div #map id="gmap" class="img-responsive"></div>
      </div>
-     
     </div>
   </div>
-    

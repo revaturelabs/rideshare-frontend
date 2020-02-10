@@ -21,6 +21,10 @@ h3{
     font-weight:bold;
 }
 
+.modal-content{
+    top: 50px;
+}
+
 .modal-body{
     font-size:20px;
     margin:30px;
@@ -106,6 +110,13 @@ h3{
 .error {
     border-radius: 5px;
     color: red;
+    font-size: 16px;
+}
+
+/**success*/
+.success {
+    border-radius: 5px;
+    color: green;
     font-size: 16px;
 }
 

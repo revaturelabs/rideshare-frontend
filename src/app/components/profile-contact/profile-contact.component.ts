@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from 'src/app/services/user-service/user.service';
+import { Router } from '@angular/router';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-profile-contact',
@@ -7,13 +10,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileContactComponent implements OnInit {
 
-  profileObject : Array<any> = [];
+  profileObject : User;
+  currentUser: any = '';
 
-  constructor() { }
+
+  constructor(private router: Router, private userService: UserService) { }
 
   ngOnInit() {
-    this.profileObject = [];
-    this.profileObject.push({'firstName': 'Ed', 'lastName': 'Ogeron', 'email':'ed@gmail.com', 'phone':'555-555-5555'});
+  sessionStorage.getItem("userid")
+    this.currentUser = this.userService.getUserById2(sessionStorage.getItem("userid")).subscribe((response)=>{
+      this.profileObject = response;
+
+    });
+ 
+console.log(this.profileObject);
+    
+
 
   }
 

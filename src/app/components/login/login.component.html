@@ -16,7 +16,14 @@
                 </div>
             </div> 
         </div> -->
-        <div class = "content"></div>
+       
+        <div class="modal-title-container">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+            <h4 class="modal-title">Login</h4>
+    </div>
+            <div class = "content">
             <div class="form-group"><p  class="error">{{userNotFound}}</p></div>
             <div class="form-group">
               <label for="formGroupExampleInput">Username</label><br>
@@ -25,7 +32,7 @@
             </div>
             <div class="form-group">
               <label for="formGroupExampleInput2">Password</label><br>
-              <input type="text" [(ngModel)]="passWord" class="form-control" id="formGroupExampleInput2" placeholder="Enter Password">
+              <input type="password" [(ngModel)]="passWord" class="form-control" id="formGroupExampleInput2" placeholder="Enter Password">
               <p  class="error">{{pwdError}}</p>
             </div>
           
@@ -34,5 +41,6 @@
           <button type="submit" class="btn btn-primary" id="sign-in-btn" (click)="login()">Login</button>
         <br><br>
     </div>
+</div>
 </div>
 </ng-template> 

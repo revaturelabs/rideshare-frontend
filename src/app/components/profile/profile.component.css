@@ -1,8 +1,8 @@
 
 .btn-group-vertical{
-    margin-top: 5%;
+    margin:0 auto;
     color: black;
-    margin-left:5%
+  
 }
 .btn  {
     color:black;
@@ -50,6 +50,7 @@
 @media(min-width:992px){
     .profile-container{
         position: relative;
+        width:60%;
     }
 }
 

@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileContactComponent implements OnInit {
 
+  profileObject : Array<any> = [];
+
   constructor() { }
 
   ngOnInit() {
+    this.profileObject = [];
+    this.profileObject.push({'firstName': 'Ed', 'lastName': 'Ogeron', 'email':'ed@gmail.com', 'phone':'555-555-5555'});
+
   }
 
 }

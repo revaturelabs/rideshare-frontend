@@ -2,26 +2,32 @@
     font-family:"Overpass",sans-serif;
 }
 
-
+label{
+    font-size:25px;
+}
 p {
     font-size: smaller;
     color: gray;
 }
 
-#login-form {
-    /* border: 2px solid #e75c0c; */
-    border: 2px solid rgb(253, 111, 39)(173, 173, 173);
-    border-radius: 100px;
-    padding-top: 11%;
-    padding-left: -11%;
-    padding-right: -30%;
-    text-align: center;
-    box-shadow: 6px 6px 10px rgb(255, 117, 48);
-    position: relative;
-    margin-top: 110px;
-    margin-bottom: 110px;
+.content{
+    margin-top:20%;
+    padding-bottom:50%;
 }
 
+#login-form {
+    height:100%;
+    padding-bottom:20%;
+    text-align: center;
+    position: relative;
+}
+.modal-title-container{
+    margin-top:5%;
+}
+.modal-title{
+    font-size:60px;
+    text-align:left;
+}
 #next-btn, #prev-btn {
     background-color: white;
     color: black;
@@ -133,9 +139,7 @@ img {
         border-radius:10px;
         height:40px;
     }
-    label{
-        font-size:14px;
-    }
+    
     input{
         width:100%;
         font-size:14px;
@@ -149,9 +153,7 @@ img {
         border-radius:10px;
         height:35px;
     }
-    label{
-        font-size:13px;
-    }
+    
     input{
         font-size:13px;
     }
@@ -164,11 +166,15 @@ img {
         border-radius:10px;
         height:35px;
     }
-    label{
-        font-size:13px;
-    }
+    
     input{
         font-size:11px;
+    }
+}
+
+@media only screen and (max-width:457px){
+    label{
+        font-size:18px;
     }
 }
 

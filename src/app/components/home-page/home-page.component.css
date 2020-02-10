@@ -123,3 +123,18 @@ margin: 0 auto;
 
   .card{height:210px;}
 }
+
+@media(max-width:370px){
+
+  .btn-outline-light{
+    font-size:17px;
+  }
+
+  p.orangeText{
+    font-size:14px;
+  }
+
+  h1.orangeText{
+    font-size:36px;
+  }
+}

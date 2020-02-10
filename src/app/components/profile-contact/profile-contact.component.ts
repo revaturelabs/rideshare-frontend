@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from 'src/app/services/user-service/user.service';
+import { Router } from '@angular/router';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-profile-contact',
@@ -7,9 +10,48 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileContactComponent implements OnInit {
 
-  constructor() { }
+  profileObject : User;
+  currentUser: any = '';
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+
+  constructor(private router: Router, private userService: UserService) { }
 
   ngOnInit() {
+  sessionStorage.getItem("userid")
+    this.currentUser = this.userService.getUserById2(sessionStorage.getItem("userid")).subscribe((response)=>{
+      this.profileObject = response;
+
+      this.firstName = this.profileObject.firstName;
+      this.lastName = this.profileObject.lastName;
+      this.email = this.profileObject.email;
+      this.phone = this.profileObject.phoneNumber;
+
+      console.log(this.firstName);
+      console.log(this.profileObject);
+
+    });
+ 
+console.log(this.profileObject);
+    
   }
+
+  updatesContactInfo(){
+    this.profileObject.firstName = this.firstName;
+    this.profileObject.lastName = this.lastName;
+    this.profileObject.email = this.email;
+    this.profileObject.phoneNumber = this.phone;
+
+    console.log(this.firstName);
+    console.log(this.profileObject.firstName);
+
+ 
+    this.userService.updateUserInfo2(this.profileObject);
+
+
+  }
+
 
 }

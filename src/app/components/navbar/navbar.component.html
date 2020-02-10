@@ -3,11 +3,12 @@
     <a class="navbar-brand logoRev" href="#">
         <img class="imageLogo" src="../assets/revature-logo-600x219.png" routerLink="/" >
       </a>
+      <div *ngIf="currentUser != ''" class="collapse navbar-collapse myColapse" id="navbarSupportedContent">
       <button class="navbar-toggler ml-auto " type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon" ></span>
         </button>
     <!-- </div> -->
-      <div *ngIf="currentUser != ''" class="collapse navbar-collapse myColapse" id="navbarSupportedContent">
+      
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
             <a class="nav-link" routerLink="/landingPage"><span class="borderbottom">Search</span></a>

@@ -34,7 +34,7 @@ export class ProfileCarComponent implements OnInit {
     this.currentCar.seats = this.nrSeats;
     //console.log(this.currentUser);
     this.carService.updateCarInfo(this.currentCar);
-    this.success = "Updated successfully!";
+    this.success = "Updated Successfully!";
   }
 
 }

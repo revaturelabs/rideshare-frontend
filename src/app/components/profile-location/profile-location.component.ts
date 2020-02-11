@@ -13,6 +13,7 @@ export class ProfileLocationComponent implements OnInit {
   city:string;
   address:string;
   address2:string;
+  hState: string;
   currentUser: User;
   success :string;
 
@@ -25,6 +26,7 @@ export class ProfileLocationComponent implements OnInit {
       this.city = response.hCity;
       this.address = response.hAddress;
       this.address2 = response.wAddress;
+      this.hState = response.hState;
 
     });
   }
@@ -33,8 +35,10 @@ export class ProfileLocationComponent implements OnInit {
     this.currentUser.hZip = this.zipcode;
     this.currentUser.hCity = this.city;
     this.currentUser.hAddress = this.address;
+    this.currentUser.wAddress = this.address2;
+    this.currentUser.hState = this.hState;
     //console.log(this.currentUser);
     this.userService.updateUserInfo(this.currentUser);
-    this.success = "updated successfully!";
+    this.success = "Updated Successfully!";
   }
 }

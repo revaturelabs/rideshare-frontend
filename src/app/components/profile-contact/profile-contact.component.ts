@@ -39,7 +39,7 @@ export class ProfileContactComponent implements OnInit {
     this.profileObject.phoneNumber = this.phone;
 
     this.userService.updateUserInfo(this.profileObject);
-    this.success = "updated successfully!";
+    this.success = "Updated Successfully!";
   }
 
 

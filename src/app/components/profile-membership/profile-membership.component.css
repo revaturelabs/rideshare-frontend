@@ -1,7 +1,15 @@
 *{
     font-family:"Overpass",sans-serif;
 }
+h5{
 
+    float:left;
+}
+
+.col-sm-6{
+    width:100%;
+    border:1px solid black;
+}
 .mainContainer {
     margin: 8% auto;
     width: 100%;  

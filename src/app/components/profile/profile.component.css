@@ -2,7 +2,6 @@
     width: 100vw;
     height: 100vh;
     margin: 0 auto;
-    background-color:rgba(221, 169, 95, 0.1);
     padding-bottom:10px;
 }
 .btn-group-vertical{
@@ -37,7 +36,6 @@
         width: 100vw;
         height: 100%;
         margin: 0 auto;
-        background-color:rgba(221, 169, 95, 0.1);
         padding-bottom:10px;
     }
 }
@@ -56,7 +54,6 @@
         width: 100vw;
         height: 100%;
         margin: 0 auto;
-        background-color:rgba(221, 169, 95, 0.1);
         padding-bottom:10px;
     }
    
@@ -70,7 +67,7 @@
         width: 100vw;
         height: 100%;
         margin: 0 auto;
-        background-color:rgba(221, 169, 95, 0.1);
+        
         padding-bottom:10px;
     }
 }
@@ -85,7 +82,7 @@
         width: 100vw;
         height: 100%;
         margin: 0 auto;
-        background-color:rgba(221, 169, 95, 0.1);
+       
         padding-bottom:10px;
     }
 }
@@ -95,7 +92,7 @@
         width: 100vw;
         height: 100vh;
         margin: 0 auto;
-        background-color:rgba(221, 169, 95, 0.1);
+        
         padding-bottom:10px;
     }
 }

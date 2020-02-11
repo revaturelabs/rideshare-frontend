@@ -2,7 +2,7 @@
 <div class="container mainContainer">
     
     <i class="fa fa-user" style="font-family:'FontAwesome';"></i>
-       <p *ngIf="success != ''" class="success">{{success}}</p>
+       
         <h4>Contact Information:</h4>
     
         <div class="form-group row">
@@ -34,6 +34,7 @@
             <label for="phone" class="col-sm-4 col-form-label">Phone:</label>
             <div class="col-sm-4">
                 <input type="text" class="form-control" id="phone" [(ngModel)]=phone value="{{ profileObject?.phoneNumber }}">
+                <p *ngIf="success != ''" class="success">{{success}}</p>
             </div>
         </div>
         

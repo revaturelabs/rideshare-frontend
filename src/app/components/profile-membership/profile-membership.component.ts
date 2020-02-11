@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user-service/user.service';
 import { User } from 'src/app/models/user';
-
 @Component({
   selector: 'app-profile-membership',
   templateUrl: './profile-membership.component.html',
@@ -14,24 +13,15 @@ export class ProfileMembershipComponent implements OnInit {
   active: boolean;
   success: string;
   constructor(private userService: UserService) { }
-
-
-
   ngOnInit() {
     this.currentUser = this.userService.getUserById2(sessionStorage.getItem("userid")).subscribe((response)=>{
       this.profileObject = response;
-
     });
   }
-
   updatesMembershipInfo(){
     this.profileObject.isDriver = this.driver;
     this.profileObject.active = this.active;
-
-
     this.userService.updateUserInfo(this.profileObject);
-    this.success = "Updated successfully!";
+    this.success = "Updated Successfully!";
   }
-
-
 }

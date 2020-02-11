@@ -1,7 +1,7 @@
 
 <div class="container mainContainer">
     <i class="fa fa-home" style="font-family:'FontAwesome';"></i>
-        <p *ngIf="success != ''" class="success">{{success}}</p>
+       
         <h4>Location:</h4>
         
         <div class="form-group row">
@@ -32,7 +32,7 @@
                 <div class="col-sm-1"></div>
                 <label for="state" class="col-sm-4 col-form-label">State:</label>
                 <div class="col-sm-4">
-                    <select class="form-control" name="states" id="state" [(ngModel)]=hState value="{{profileObject.hState}}" required>
+                    <select class="form-control" name="states" id="state" [(ngModel)]=hState required>
                         <option value="" selected disabled>Select a state</option>
                         <option value="AL">Alabama</option>
                         <option value="AK">Alaska</option>
@@ -94,6 +94,7 @@
                         <label for="zipcode" class="col-sm-4 col-form-label">Zipcode:</label>
                         <div class="col-sm-4">
                         <input [(ngModel)]=zipcode type="text" class="form-control" id="zipcode">
+                        <p *ngIf="success != ''" class="success">{{success}}</p>
                     </div>
             </div>
         

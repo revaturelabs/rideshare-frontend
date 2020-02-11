@@ -47,6 +47,11 @@ export class CarService {
 		return this.http.get<Car>(`${this.url}users/${userId}`).toPromise();
 	}
 
+	getCarByUserId2(userId: string) {
+		return this.http.get<Car>(`${this.url}users/${userId}`);
+	}
+
+
 	/**
 	 * This function creates a car.
 	 * @param car 

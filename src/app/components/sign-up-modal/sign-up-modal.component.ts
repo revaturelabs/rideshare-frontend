@@ -90,7 +90,7 @@ export class SignupModalComponent implements OnInit {
     if(rider.checked == true){
       this.user.isDriver =  false;
     }
-    console.log(this.user);
+    //console.log(this.user);
     this.userService.addUser(this.user).subscribe(
       res => {
         console.log(res);

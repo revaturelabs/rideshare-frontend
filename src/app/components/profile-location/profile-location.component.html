@@ -32,8 +32,8 @@
                 <div class="col-sm-1"></div>
                 <label for="state" class="col-sm-4 col-form-label">State:</label>
                 <div class="col-sm-4">
-                    <select class="form-control" name="states" id="state" required>
-                        <option value="none" selected disabled>Select a state</option>
+                    <select class="form-control" name="states" id="state" [(ngModel)]=hState value="{{profileObject.hState}}" required>
+                        <option value="" selected disabled>Select a state</option>
                         <option value="AL">Alabama</option>
                         <option value="AK">Alaska</option>
                         <option value="AZ">Arizona</option>

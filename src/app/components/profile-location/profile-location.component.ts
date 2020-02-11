@@ -24,13 +24,12 @@ export class ProfileLocationComponent implements OnInit {
       this.zipcode = response.hZip;
       this.city = response.hCity;
       this.address = response.hAddress;
-      this.address2 = response.hAddress;
+      this.address2 = response.wAddress;
 
     });
   }
 
   updatesContactInfo(){
-
     this.currentUser.hZip = this.zipcode;
     this.currentUser.hCity = this.city;
     this.currentUser.hAddress = this.address;

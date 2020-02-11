@@ -7,6 +7,10 @@
     width: 30%;
 }
 
+.register{
+    margin-top:15px;
+}
+
 #search{
     margin-top:10px;
     background-color: #F26925;
@@ -35,6 +39,14 @@
     margin-top: 25px;
 }
 
+
 #map{
     margin: auto;
+    height: 369px; 
+    width: 60vw;
+}
+@media (min-width : 1000px) {
+    #map{
+        width: 40vw;
+    }
 }

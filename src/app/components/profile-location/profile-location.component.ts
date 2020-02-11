@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user-service/user.service';
 import { User } from 'src/app/models/user';
 
@@ -10,26 +9,33 @@ import { User } from 'src/app/models/user';
 })
 export class ProfileLocationComponent implements OnInit {
 
-  profileObject : User;
-  currentUser: any = '';
-  wAddress: string;
-  hAddress: string;
-  hCity: string;
-  hState: string;
-  hZip: string;
+  zipcode: number;
+  city:string;
+  address:string;
+  address2:string;
+  currentUser: User;
+  success :string;
 
-  constructor(private router: Router, private userService: UserService) { }
+  constructor(private userService: UserService) { }
 
   ngOnInit() {
-    sessionStorage.getItem("userid")
-    this.currentUser = this.userService.getUserById2(sessionStorage.getItem("userid")).subscribe((response)=>{
-      this.profileObject = response;
-      
+   this.userService.getUserById2(sessionStorage.getItem("userid")).subscribe((response)=>{
+      this.currentUser = response;
+      this.zipcode = response.hZip;
+      this.city = response.hCity;
+      this.address = response.hAddress;
+      this.address2 = response.hAddress;
+
     });
   }
 
-  updatesLocationInfo(){
+  updatesContactInfo(){
 
+    this.currentUser.hZip = this.zipcode;
+    this.currentUser.hCity = this.city;
+    this.currentUser.hAddress = this.address;
+    //console.log(this.currentUser);
+    this.userService.updateUserInfo(this.currentUser);
+    this.success = "updated successfully!";
   }
-
 }

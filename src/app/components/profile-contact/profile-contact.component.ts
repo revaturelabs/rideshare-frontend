@@ -16,11 +16,10 @@ export class ProfileContactComponent implements OnInit {
   lastName: string;
   email: string;
   phone: string;
-
+  success :string;
   constructor(private router: Router, private userService: UserService) { }
 
   ngOnInit() {
-  sessionStorage.getItem("userid")
     this.currentUser = this.userService.getUserById2(sessionStorage.getItem("userid")).subscribe((response)=>{
       this.profileObject = response;
 
@@ -29,12 +28,7 @@ export class ProfileContactComponent implements OnInit {
       this.email = this.profileObject.email;
       this.phone = this.profileObject.phoneNumber;
 
-      console.log(this.firstName);
-      console.log(this.profileObject);
-
     });
- 
-console.log(this.profileObject);
     
   }
 
@@ -44,13 +38,8 @@ console.log(this.profileObject);
     this.profileObject.email = this.email;
     this.profileObject.phoneNumber = this.phone;
 
-    console.log(this.firstName);
-    console.log(this.profileObject.firstName);
-
- 
-    this.userService.updateUserInfo2(this.profileObject);
-
-
+    this.userService.updateUserInfo(this.profileObject);
+    this.success = "updated successfully!";
   }
 
 

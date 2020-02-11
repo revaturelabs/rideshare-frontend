@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user-service/user.service';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-profile-location',
@@ -7,9 +10,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileLocationComponent implements OnInit {
 
-  constructor() { }
+  profileObject : User;
+  currentUser: any = '';
+  wAddress: string;
+  hAddress: string;
+  hCity: string;
+  hState: string;
+  hZip: string;
+
+  constructor(private router: Router, private userService: UserService) { }
 
   ngOnInit() {
+    sessionStorage.getItem("userid")
+    this.currentUser = this.userService.getUserById2(sessionStorage.getItem("userid")).subscribe((response)=>{
+      this.profileObject = response;
+      
+    });
+  }
+
+  updatesLocationInfo(){
+
   }
 
 }

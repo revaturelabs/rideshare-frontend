@@ -12,15 +12,26 @@ export class ProfileMembershipComponent implements OnInit {
   currentUser: any = '';
   driver: boolean;
   active: boolean;
-
+  success: string;
   constructor(private userService: UserService) { }
 
+
+
   ngOnInit() {
-    sessionStorage.getItem("userid")
     this.currentUser = this.userService.getUserById2(sessionStorage.getItem("userid")).subscribe((response)=>{
       this.profileObject = response;
-      
+
     });
   }
+
+  updatesMembershipInfo(){
+    this.profileObject.isDriver = this.driver;
+    this.profileObject.active = this.active;
+
+
+    this.userService.updateUserInfo(this.profileObject);
+    this.success = "Updated successfully!";
+  }
+
 
 }

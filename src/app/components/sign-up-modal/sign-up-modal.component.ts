@@ -114,7 +114,7 @@ export class SignupModalComponent implements OnInit {
         else if(res.hZip != undefined){
           this.hZipError = res.hZip[0];
         }
-      else {
+     else {
           this.success = "register successfully!";
         }
       }, 

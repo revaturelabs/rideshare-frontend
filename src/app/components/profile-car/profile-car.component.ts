@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { CarService } from 'src/app/services/car-service/car.service';
+import { Car } from 'src/app/models/car';
+
 
 @Component({
   selector: 'app-profile-car',
@@ -7,9 +10,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileCarComponent implements OnInit {
 
-  constructor() { }
+  carObject : Car;
+  currentCar: any = '';
+  make: string;
+  model: string;
+  seats: string;
+
+
+  constructor(private carService : CarService) { }
 
   ngOnInit() {
+    this.currentCar = this.carService.getCarByUserId2( sessionStorage.getItem("userid")).subscribe((response) => {
+      this.carObject = response;
+    });
+  }
+
+  updatesCarInfo(){
+
   }
 
 }

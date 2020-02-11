@@ -10,24 +10,23 @@
   </div>
   <div class="modal-body">
     <label for="firstname">First Name</label>
-    <input  id="firstname" type="text" [(ngModel)]="user.firstName" class="form-control" />
+    <input (keydown)="firstNameError = ''" id="firstname" type="text" [(ngModel)]="user.firstName" class="form-control" />
     <p *ngIf="firstNameError != ''" class="error">{{firstNameError}}</p>
-    <small *ngIf="user.firstName && !validationService.validateName(user.firstName)">Invalid Name</small>
 
     <label for="lastname">Last Name</label>
-    <input  id="lastname" type="text" [(ngModel)]="user.lastName" class="form-control" />
+    <input (keydown)="lastNameError = ''" id="lastname" type="text" [(ngModel)]="user.lastName" class="form-control" />
     <p *ngIf="lastNameError != ''" class="error">{{lastNameError}}</p>
 
     <label for="email">Email</label>
-    <input  id="email" type="email" [(ngModel)]="user.email" class="form-control"/>
+    <input (keydown)="emailError = ''" id="email" type="email" [(ngModel)]="user.email" class="form-control"/>
     <p *ngIf="emailError != ''" class="error">{{emailError}}</p>
 
     <label for="phoneNumber">Phone Number</label>
-    <input  id="phoneNumber" type="text" [(ngModel)]="user.phoneNumber" class="form-control" />
+    <input (keydown)="phoneNumberError = ''" id="phoneNumber" type="text" [(ngModel)]="user.phoneNumber" class="form-control" />
     <p *ngIf="phoneNumberError != ''" class="error">{{phoneNumberError}}</p>
 
     <label for="userName">User Name</label>
-    <input  id="userName" type="text" [(ngModel)]="user.userName" class="form-control" />
+    <input (keydown)="userNameError = ''" id="userName" type="text" [(ngModel)]="user.userName" class="form-control" />
     <p *ngIf="userNameError != ''" class="error">{{userNameError}}</p>
 
     <!--<label for="password">Password</label>
@@ -41,15 +40,15 @@
     </select>
 
     <label for="hAddress">Address</label>
-    <input id="hAddress" type="text" [(ngModel)]="user.hAddress" class="form-control" />
+    <input (keydown)="hAddressError = ''" id="hAddress" type="text" [(ngModel)]="user.hAddress" class="form-control" />
     <p *ngIf="hAddressError != ''" class="error">{{hAddressError}}</p>
 
     <label id="hCity">City</label>
-    <input type="text" [(ngModel)]="user.hCity" class="form-control" />
+    <input (keydown)="hCityError = ''" type="text" [(ngModel)]="user.hCity" class="form-control" />
     <p *ngIf="hCityError != ''" class="error">{{hCityError}}</p>
 
     <label id="hState">State</label>
-    <select class="form-control" [(ngModel)]="user.hState" id="hState" >
+    <select (keydown)="hStateError = ''" class="form-control" [(ngModel)]="user.hState" id="hState" >
             <option value="none" selected disabled hidden>  
             </option>
             <option *ngFor="let state of states" value="{{state}}">{{state}}</option>
@@ -57,7 +56,7 @@
     <p *ngIf="hStateError != ''" class="error">{{hStateError}}</p>
 
     <label id="hZip">Zip Code</label>
-    <input type="number" [(ngModel)]="user.hZip" class="form-control" />
+    <input (keydown)="hZipError = ''" type="number" [(ngModel)]="user.hZip" class="form-control" />
     <p *ngIf="hZipError != ''" class="error">{{hZipError}}</p>
 
     <div class="radiobody">

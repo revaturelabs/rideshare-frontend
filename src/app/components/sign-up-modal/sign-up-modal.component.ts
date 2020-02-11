@@ -75,6 +75,10 @@ export class SignupModalComponent implements OnInit {
     this.hCityError='';
     this.hZipError='';
     this.success='';
+    this.user.wAddress = this.user.hAddress;
+    this.user.wState = this.user.hState;
+    this.user.wCity = this.user.hCity;
+    this.user.wZip = this.user.hZip;
     let driver = <HTMLInputElement> document.getElementById("driver");  
     let rider = <HTMLInputElement> document.getElementById("rider");  
 
@@ -88,35 +92,54 @@ export class SignupModalComponent implements OnInit {
     this.userService.addUser(this.user).subscribe(
       res => {
         console.log(res);
+        let i = 0;
         if(res.firstName != undefined){
           this.firstNameError = res.firstName[0];
+          i = 1;
         }
-        else if(res.lastName != undefined){
+        if(res.lastName != undefined){
           this.lastNameError = res.lastName[0];
+          i = 1;
+          
         }
-        else if(res.phoneNumber != undefined){
+        if(res.phoneNumber != undefined){
           this.phoneNumberError = res.phoneNumber[0];
+          i = 1;
+
         }
-        else if(res.email != undefined){
+        if(res.email != undefined){
           this.emailError = res.email[0];
+          i = 1;
+
         }
-        else if(res.userName != undefined){
+        if(res.userName != undefined){
           this.userNameError = res.userName[0];
+          i = 1;
+
         }
-        else if(res.hState != undefined){
+        if(res.hState != undefined){
           this.hStateError = res.hState[0];
+          i = 1;
+
         }
-        else if(res.hAddress != undefined){
+        if(res.hAddress != undefined){
           this.hAddressError = res.hAddress[0];
+          i = 1;
+
         }
-        else if(res.hCity != undefined){
+        if(res.hCity != undefined){
           this.hCityError = res.hCity[0];
+          i = 1;
+
         }
-        else if(res.hZip != undefined){
+        if(res.hZip != undefined){
           this.hZipError = res.hZip[0];
+          i = 1;
+
         }
-      else {
-          this.success = "register successfully!";
+        if(i === 0) {
+          i = 0;
+          this.success = "Registered successfully!";
         }
       }, 
       /*res => {

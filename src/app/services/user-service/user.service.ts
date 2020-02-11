@@ -55,7 +55,20 @@ export class UserService {
 	 * @param idParam 
 	 */
 	getUserById(idParam: number){
+		
+		console.log(this.url)
 		return this.http.get<User>(this.url+idParam).toPromise();
+
+
+	}
+
+	 
+	getUserById2(idParam2: String): Observable<User>{
+		
+		//console.log(this.url)
+		return this.http.get<User>(this.url+idParam2);
+
+
 	}
 
 	/**
@@ -163,9 +176,9 @@ export class UserService {
 	 */
 
 	updateUserInfo(user: User) {
-		return this.http.put(this.url+user.userId, user).toPromise();
+		//console.log(user);
+		return this.http.put(this.url, user).toPromise();
 	}
-
 	/**
 	 * A GET method that retrieves a driver by Id
 	 * @param id 
@@ -215,6 +228,6 @@ export class UserService {
 	}
 	
 	getRidersForLocation1(location: string): Observable <any>{
-		return this.http.get(this.url + '/findMyPeeps?location='+ location)
-	  }
+		return this.http.get(this.url + 'driver/'+ location)
+	}
 }

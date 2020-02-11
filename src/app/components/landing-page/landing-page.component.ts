@@ -12,7 +12,7 @@ import { UserService } from 'src/app/services/user-service/user.service';
 })
 export class LandingPageComponent implements OnInit {
 
-  origin : string =''; //sample: Morgantown, WV
+  location_s : string =''; //sample: Morgantown, WV
  
 
   @ViewChild('map', {static: true}) mapElement: any;
@@ -63,7 +63,9 @@ sleep(ms) {
 
  searchDriver(){
   //call service search algorithm ()
-  this.userService.getRidersForLocation1(this.origin)
+  //console.log(this.location_s);
+  this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapProperties);
+  this.userService.getRidersForLocation1(this.location_s)
   .subscribe(
             (response) => {
               response.forEach(element => {
@@ -73,7 +75,7 @@ sleep(ms) {
                          map: this.map
                     });
                     console.log(element.Distance);
-                    this.displayRoute(this.origin, element.origin, directionsService, directionsRenderer);
+                    this.displayRoute(this.location_s, element.hCity+","+element.hState, directionsService, directionsRenderer);
          });
   });
  }

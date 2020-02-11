@@ -34,10 +34,7 @@ export class SignupModalComponent implements OnInit {
   hStateError :string;
   hCityError :string;
   hZipError :string;
-  wStateError :string;
-  wAddressError :string;
-  wCityError :string;
-  wZipError :string;
+  
   success :string;
   //Store the retrieved template from the 'openModal' method for future use cases.
   modalRef :BsModalRef;
@@ -77,10 +74,6 @@ export class SignupModalComponent implements OnInit {
     this.hAddressError='';
     this.hCityError='';
     this.hZipError='';
-    this.wStateError='';
-    this.wAddressError='';
-    this.wCityError='';
-    this.wZipError='';
     this.success='';
     let driver = <HTMLInputElement> document.getElementById("driver");  
     let rider = <HTMLInputElement> document.getElementById("rider");  
@@ -122,19 +115,7 @@ export class SignupModalComponent implements OnInit {
         else if(res.hZip != undefined){
           this.hZipError = res.hZip[0];
         }
-        else if(res.wState != undefined){
-          this.wStateError = res.wState[0];
-        }
-        else if(res.wAddress != undefined){
-          this.wAddressError = res.wAddress[0];
-        }
-       
-        else if(res.wCity != undefined){
-          this.wCityError = res.wCity[0];
-        }
-        else if(res.wZip != undefined){
-          this.wZipError = res.wZip[0];
-        }else {
+      else {
           this.success = "register successfully!";
         }
       }, 

@@ -40,15 +40,15 @@
           <option *ngFor="let batch of batches" [ngValue]="batch">{{batch.batchNumber}} {{batch.batchLocation}}</option>
     </select>
 
-    <label for="hAddress">Home Address</label>
+    <label for="hAddress">Address</label>
     <input id="hAddress" type="text" [(ngModel)]="user.hAddress" class="form-control" />
     <p *ngIf="hAddressError != ''" class="error">{{hAddressError}}</p>
 
-    <label id="hCity">Home City</label>
+    <label id="hCity">City</label>
     <input type="text" [(ngModel)]="user.hCity" class="form-control" />
     <p *ngIf="hCityError != ''" class="error">{{hCityError}}</p>
 
-    <label id="hState">Home State</label>
+    <label id="hState">State</label>
     <select class="form-control" [(ngModel)]="user.hState" id="hState" >
             <option value="none" selected disabled hidden>  
             </option>
@@ -56,29 +56,9 @@
     </select>
     <p *ngIf="hStateError != ''" class="error">{{hStateError}}</p>
 
-    <label id="hZip">Home Zip Code</label>
+    <label id="hZip">Zip Code</label>
     <input type="number" [(ngModel)]="user.hZip" class="form-control" />
     <p *ngIf="hZipError != ''" class="error">{{hZipError}}</p>
-
-    <label for="wAddress">Work Address</label>
-    <input id="wAddress" type="text" [(ngModel)]="user.wAddress" class="form-control" />
-    <p *ngIf="wAddressError != ''" class="error">{{wAddressError}}</p>
-
-    <label id="wCity">Work City</label>
-    <input type="text" [(ngModel)]="user.wCity" class="form-control" />
-    <p *ngIf="wCityError != ''" class="error">{{wCityError}}</p>
-
-    <label id="wState">Work State</label>
-    <select class="form-control" [(ngModel)]="user.wState" id="wState" >
-            <option value="none" selected disabled hidden>  
-            </option>
-            <option *ngFor="let state of states" value="{{state}}">{{state}}</option>
-    </select>
-    <p *ngIf="wStateError != ''" class="error">{{wStateError}}</p>
-
-    <label id="wZip">Work Zip Code</label>
-    <input type="number" [(ngModel)]="user.wZip" class="form-control" />
-    <p *ngIf="wZipError != ''" class="error">{{wZipError}}</p>
 
     <div class="radiobody">
     <div class="btn-group" data-toggle="buttons">

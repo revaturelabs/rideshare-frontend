@@ -28,3 +28,7 @@ Run `npm run compodoc`. The build artifacts will be stored in the `documentation
 ## Generate Documentation for User Service using JavaDocs
 
 Run the command `maven javadoc:javadoc`. The build artifacts will be stored in the `target/` directory.
+
+## About Rideshare
+
+The Rideshare application was designed/developed to connect Revature employees to drivers closest to them for carpooling purposes. As a user of the application, you can change your profile information (address,city,state,driver status(on/off),etc...), search for drivers based on a specified address, view top 5 drivers nearest you, and basic functionalities such as login/register. 

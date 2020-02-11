@@ -12,6 +12,7 @@
     <label for="firstname">First Name</label>
     <input  id="firstname" type="text" [(ngModel)]="user.firstName" class="form-control" />
     <p *ngIf="firstNameError != ''" class="error">{{firstNameError}}</p>
+    <small *ngIf="user.firstName && !validationService.validateName(user.firstName)">Invalid Name</small>
 
     <label for="lastname">Last Name</label>
     <input  id="lastname" type="text" [(ngModel)]="user.lastName" class="form-control" />

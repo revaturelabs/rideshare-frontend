@@ -4,6 +4,7 @@ import { UserService } from 'src/app/services/user-service/user.service';
 import { User } from 'src/app/models/user';
 import { Batch } from 'src/app/models/batch';
 import { BatchService } from 'src/app/services/batch-service/batch.service';
+import { ValidationService } from 'src/app/services/validation-service/validation.service';
 
 @Component({
   selector: 'signupmodal',
@@ -44,7 +45,7 @@ export class SignupModalComponent implements OnInit {
             'KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY',
             'NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV',
             'WI','WY'];
-  constructor(private modalService :BsModalService, private userService :UserService, private batchService :BatchService) { }
+  constructor(private modalService :BsModalService, private userService :UserService, private batchService :BatchService, private validationService :ValidationService) { }
 
   ngOnInit() {
     this.userService.getAllUsers().subscribe(

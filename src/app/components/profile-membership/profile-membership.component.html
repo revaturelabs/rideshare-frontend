@@ -5,22 +5,29 @@
         <div class="innercontainer">
         <div class="form-group row">
         
-                <div class="col-sm-4">
-                    <select class="form-control mySelect" name="states" id="state" required>
-                        <option value="none" selected disabled>Select Batch</option>
-                        <option value="x">X</option>
-                    </select>
+                <div class="col-sm-6">
+                   <h5>Batch:</h5>
+                   <span> {{profileObject.batch.batchNumber}} {{profileObject.batch.batchLocation}}</span>
                 </div>
             </div>
             
             <div class="form-group row">
                  <div class="col-sm-4 t">
                 <h6>Status:</h6>
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <select class="form-control mySelect" name="rider" id="rider" [(ngModel)]=driver value="{{profileObject.driver}}">
+                    <option value="true">Driver</option>
+                    <option value="false">Rider</option>
+                </select>
+                <select class="form-control mySelect" name="active" id="active" [(ngModel)]=active value="{{profileObject.active}}">
+                    <option value="true">Active</option>
+                    <option value="false">Disabled</option>
+                </select>
+
+                <!-- <div class="btn-group" role="group" aria-label="Basic example">
                     <button type="button" class="btn btn-outline-success mybtngroup">Rider</button>
                     <button type="button" class="btn btn-outline-success mybtngroup">Driver</button>
                     <button type="button" class="btn btn-outline-danger mybtngroup">Off</button>
-                </div>
+                </div> -->
         
             <button type="submit" class="btn btn-primary myBtn">Save</button>
             </div>

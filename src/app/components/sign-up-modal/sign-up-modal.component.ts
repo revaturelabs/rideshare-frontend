@@ -4,6 +4,7 @@ import { UserService } from 'src/app/services/user-service/user.service';
 import { User } from 'src/app/models/user';
 import { Batch } from 'src/app/models/batch';
 import { BatchService } from 'src/app/services/batch-service/batch.service';
+import { ValidationService } from 'src/app/services/validation-service/validation.service';
 
 @Component({
   selector: 'signupmodal',
@@ -41,7 +42,7 @@ export class SignupModalComponent implements OnInit {
             'KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY',
             'NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV',
             'WI','WY'];
-  constructor(private modalService :BsModalService, private userService :UserService, private batchService :BatchService) { }
+  constructor(private modalService :BsModalService, private userService :UserService, private batchService :BatchService, private validationService :ValidationService) { }
 
   ngOnInit() {
     this.userService.getAllUsers().subscribe(
@@ -74,6 +75,10 @@ export class SignupModalComponent implements OnInit {
     this.hCityError='';
     this.hZipError='';
     this.success='';
+    this.user.wAddress = this.user.hAddress;
+    this.user.wState = this.user.hState;
+    this.user.wCity = this.user.hCity;
+    this.user.wZip = this.user.hZip;
     let driver = <HTMLInputElement> document.getElementById("driver");  
     let rider = <HTMLInputElement> document.getElementById("rider");  
 
@@ -87,42 +92,61 @@ export class SignupModalComponent implements OnInit {
     this.userService.addUser(this.user).subscribe(
       res => {
         console.log(res);
+        let i = 0;
         if(res.firstName != undefined){
           this.firstNameError = res.firstName[0];
+          i = 1;
         }
-        else if(res.lastName != undefined){
+        if(res.lastName != undefined){
           this.lastNameError = res.lastName[0];
+          i = 1;
+          
         }
-        else if(res.phoneNumber != undefined){
+        if(res.phoneNumber != undefined){
           this.phoneNumberError = res.phoneNumber[0];
+          i = 1;
+
         }
-        else if(res.email != undefined){
+        if(res.email != undefined){
           this.emailError = res.email[0];
+          i = 1;
+
         }
-        else if(res.userName != undefined){
+        if(res.userName != undefined){
           this.userNameError = res.userName[0];
+          i = 1;
+
         }
-        else if(res.hState != undefined){
+        if(res.hState != undefined){
           this.hStateError = res.hState[0];
+          i = 1;
+
         }
-        else if(res.hAddress != undefined){
+        if(res.hAddress != undefined){
           this.hAddressError = res.hAddress[0];
+          i = 1;
+
         }
-        else if(res.hCity != undefined){
+        if(res.hCity != undefined){
           this.hCityError = res.hCity[0];
+          i = 1;
+
         }
-        else if(res.hZip != undefined){
+        if(res.hZip != undefined){
           this.hZipError = res.hZip[0];
+          i = 1;
+
         }
-     else {
-          this.success = "register successfully!";
+        if(i === 0) {
+          i = 0;
+          this.success = "Registered successfully!";
         }
-      }, 
+      } 
       /*res => {
         console.log("failed to add user");
         console.log(res);
       }*/
     );
-  }
   
-}
+    }
+    }

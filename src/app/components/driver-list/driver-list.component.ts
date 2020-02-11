@@ -138,7 +138,7 @@ displayDriversList(origin, drivers) {
           var originList = response.originAddresses;
           var destinationList = response.destinationAddresses;
           var results = response.rows[0].elements;
-          console.log(results[0].distance.text);
+          //console.log(results[0].distance.text);
           var name =  element.name;
           outputDiv.innerHTML += `<tr><td class="col">${name}</td>
                                   <td class="col">${results[0].distance.text}</td>

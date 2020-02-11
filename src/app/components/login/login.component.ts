@@ -154,7 +154,8 @@ export class LoginComponent implements OnInit {
 
 	login() {
 		this.pwdError ='';
-        this.usernameError= '';
+		this.usernameError= '';
+		
         this.http.get(`http://localhost:8080/login?userName=${this.userName}&passWord=${this.passWord}`)
 			.subscribe(
                   (response) => {

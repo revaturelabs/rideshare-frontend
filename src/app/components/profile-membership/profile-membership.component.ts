@@ -9,7 +9,7 @@ import { User } from 'src/app/models/user';
 export class ProfileMembershipComponent implements OnInit {
   profileObject : User;
   currentUser: any = '';
-  driver: boolean;
+  isDriver: boolean;
   active: boolean;
   success: string;
   constructor(private userService: UserService) { }
@@ -19,7 +19,7 @@ export class ProfileMembershipComponent implements OnInit {
     });
   }
   updatesMembershipInfo(){
-    this.profileObject.isDriver = this.driver;
+    this.profileObject.isDriver = this.isDriver;
     this.profileObject.active = this.active;
     this.userService.updateUserInfo(this.profileObject);
     this.success = "Updated Successfully!";

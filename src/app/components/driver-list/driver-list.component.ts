@@ -71,7 +71,7 @@ export class DriverListComponent implements OnInit {
   }
   
 getGoogleApi()  {
-    this.http.get(`http://localhost:8080/login/getGoogleApi`)
+    this.http.get(`http://54.174.82.153:8080/login/getGoogleApi`)
        .subscribe(
                  (response) => {
                      //console.log(response);

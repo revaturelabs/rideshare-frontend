@@ -1,0 +1,37 @@
+<div class = "container">
+    <div class="row">
+    <div class="col-lg-5">
+     <!--<div class="form-group">
+        <h4>Origin</h4>
+        <input [(ngModel)]="origin" id="origin" class="form-control" placeholder="Morgantown, WV"/>
+      </div>
+      <div class="form-group">
+        <h4>Destination</h4>
+        <input [(ngModel)]="destination" id="destination" class="form-control" placeholder="Reston, VA"/>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-8">
+          <button id = "search" class="btn btn-primary" (click)="getDirection()">Get Direction</button>
+        </div>
+      </div>
+      <p id="total"></p>-->
+      <h4>Driver's List</h4>
+      
+     <table class="table table-striped">
+       <thead class="thead-dark">
+         <tr>
+           <th scope="col">Name</th>
+           <th scope="col">Distance</th>
+           <th scope="col">Time</th>
+           <th scope="col">View Info</th>
+         </tr>
+       </thead>
+       <tbody id="output"></tbody>
+      </table>
+     </div>
+     <div class="col-lg-6">
+       <h4>Directions:</h4>
+       <div #map id="gmap" class="img-responsive"></div>
+     </div>
+    </div>
+  </div>

@@ -1,17 +1,33 @@
+*{
+    font-family:"Overpass",sans-serif;
+}
+
+label{
+    font-size:25px;
+}
 p {
     font-size: smaller;
     color: gray;
 }
 
-#login-form {
-    border: 1px solid #dddddd;
-    border-radius: 7px;
-    padding: 3%;
-    margin-top: 8%;
-    margin-left: 30%;
-    margin-right: 30%;
+.content{
+    margin-top:20%;
+    padding-bottom:30%;
 }
 
+#login-form {
+    height:100%;
+    padding-bottom:20%;
+    text-align: center;
+    position: relative;
+}
+.modal-title-container{
+    margin-top:5%;
+}
+.modal-title{
+    font-size:60px;
+    text-align:left;
+}
 #next-btn, #prev-btn {
     background-color: white;
     color: black;
@@ -44,3 +60,121 @@ p {
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
 }  
+
+img {
+    width: 50%;
+    height: 50%;
+    margin-bottom:30px;
+}
+
+.form-control{
+    width: 60%;
+    margin:auto;
+    border-radius: 20px;
+}
+
+.btn{
+    margin-top:20px;
+    background-color: #F26925;
+    color:white;
+    width:200px;
+    font-family:"Overpass",sans-serif;
+    font-weight:bold;
+    font-size:22px;
+    border-radius:27px;
+    letter-spacing:1px;
+    height:45px;
+    display:inline-block;
+    
+}
+ 
+.btn:hover{
+    background-color:white;
+    color:#F26925;
+    border: 2px solid #F26925;
+    border-radius: 22px ;
+    font-family:"Overpass",sans-serif;
+    font-size:23px;
+}
+
+
+.error {
+    border-radius: 5px;
+    /*background-color: #dd1616;
+    color: white;*/
+    width: 30%; 
+    margin-left: 150px;
+    margin-top: 8px;
+    border-radius: 5px;
+    color: red;
+    font-size: 16px;
+  } 
+
+/*-------------------------Media Queries---------------------------------*/
+
+@media only screen and (max-width:780px){
+    #login-form{
+        border:none;
+        box-shadow:none;
+    }
+}
+
+@media only screen and (max-width:764px){
+    .btn{
+        width:150px;
+        font-size:20px;
+    }
+}
+
+@media only screen and (max-width:560px){
+    .btn{
+        width:100px;
+        font-size:18px;
+        border-radius:10px;
+        height:40px;
+    }
+    .btn:hover{
+        width:100px;
+        font-size:18px;
+        border-radius:10px;
+        height:40px;
+    }
+    
+    input{
+        width:100%;
+        font-size:14px;
+    }
+}
+
+@media only screen and (max-width:356px){
+    .btn{
+        width:80px;
+        font-size:15px;
+        border-radius:10px;
+        height:35px;
+    }
+    
+    input{
+        font-size:13px;
+    }
+}
+
+@media only screen and (max-width:333px){
+    .btn{
+        width:80px;
+        font-size:15px;
+        border-radius:10px;
+        height:35px;
+    }
+    
+    input{
+        font-size:11px;
+    }
+}
+
+@media only screen and (max-width:457px){
+    label{
+        font-size:18px;
+    }
+}
+

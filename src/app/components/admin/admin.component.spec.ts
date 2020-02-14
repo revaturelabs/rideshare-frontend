@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AdminComponent } from './admin.component';
 import { CarRegisterComponent } from '../car-register/car-register.component';
+import { UserRegisterComponent } from '../user-register/user-register.component';
 import { RegisterComponent } from '../register/register.component';
 import { LoginComponent } from '../login/login.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -19,7 +20,7 @@ describe('AdminComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [AdminComponent, CarRegisterComponent, RegisterComponent, LoginComponent, MyCarComponent, NavbarComponent, PreferenceComponent, ProfileComponent],
+      declarations: [AdminComponent, MyCarComponent, NavbarComponent, PreferenceComponent, ProfileComponent, CarRegisterComponent, UserRegisterComponent, LoginComponent],
       imports: [HttpClientModule, AppRoutingModule, FormsModule],
       providers: [{provide: APP_BASE_HREF, useValue: '/my/app'}]
     })
@@ -34,5 +35,11 @@ describe('AdminComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('logout()', () => {
+    component.router.navigate(['']);
+    component.logout();
+    expect(component.router.navigate).toHaveBeenCalled;
   });
 });

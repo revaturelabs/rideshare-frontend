@@ -4,12 +4,16 @@
  * `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
  */
 
-const baseUri = `http://localhost`;
+const baseUri = `http://54.174.82.153`;
 /**
  * Set the port to 8080
  */
 const port = '8080';
 
+/**
+ * google map api key 
+ */
+const googleKey = '';
  /**
    * This is the environment config.
    */
@@ -19,9 +23,11 @@ export const environment = {
   production: false,
   environmentName: 'Default Environment',
   userUri: `${baseUri}:${port}/users/`,
+  loginUri: `${baseUri}:${port}/login`,
   batchesUri: `${baseUri}:${port}/batches/`,
   carUri: `${baseUri}:${port}/cars/`,
-  adminUri: `${baseUri}:${port}/admins/`
+  adminUri: `${baseUri}:${port}/admins/`,
+  googleMapKey: `${googleKey}`,
 };
 
 /*

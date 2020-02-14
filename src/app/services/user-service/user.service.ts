@@ -2,20 +2,28 @@ import { Injectable, Output, EventEmitter } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from 'src/app/models/user';
 import { Router } from '@angular/router';
-import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
 import { AuthService } from '../auth-service/auth.service';
 import { LogService } from "../log.service"
+import { environment } from 'src/environments/environment.dev';
+
+
 
 @Injectable({
   	providedIn: 'root'
 })
+
 export class UserService {
 
 	/**
 	 * This is an user service
 	 */
 	@Output() fireIsLoggedIn: EventEmitter<any> = new EventEmitter<any>();
+
+	// http headers
+	private headers = new HttpHeaders({'Content-Type': 'application/json'});
+	
+
 
 	/**
 	 * Set up the url string to the env var
@@ -47,7 +55,20 @@ export class UserService {
 	 * @param idParam 
 	 */
 	getUserById(idParam: number){
+		
+		console.log(this.url)
 		return this.http.get<User>(this.url+idParam).toPromise();
+
+
+	}
+
+	 
+	getUserById2(idParam2: String): Observable<User>{
+		
+		//console.log(this.url)
+		return this.http.get<User>(this.url+idParam2);
+
+
 	}
 
 	/**
@@ -55,12 +76,12 @@ export class UserService {
 	 * @param user 
 	 * @param role 
 	 */
-
 	createDriver(user: User, role) {
 
 		user.active = true;
-		user.driver = false;
-		user.acceptingRides = false;
+		user.isDriver = false;
+		user.isAcceptingRides = false;
+		console.log(user);
 
 		this.http.post(this.url, user, {observe: 'response'}).subscribe(
 			(response) => {
@@ -78,6 +99,11 @@ export class UserService {
 			}
 		);
 
+	}
+
+	// add user method
+	addUser(user :User) :Observable<User> {
+		return this.http.post<User>(this.url, user, {headers: this.headers});
 	}
 
 	/**
@@ -99,8 +125,8 @@ export class UserService {
 		this.getUserById(userId)
 			.then((response) => {
 				this.user = response;
-				this.user.driver = isDriver;
-				this.user.acceptingRides = (this.user.active && isDriver);
+				this.user.isDriver = isDriver;
+				this.user.isAcceptingRides = (this.user.active && isDriver);
 
 				this.http.put(this.url+userId, this.user).subscribe(
 					(response) => {
@@ -129,7 +155,7 @@ export class UserService {
 				this.user = response;
 				this.user[property] = bool;
 				if (property === 'active' && bool === false) {
-					this.user.acceptingRides = false;
+					this.user.isAcceptingRides = false;
 				}
 
 				this.http.put(this.url+userId, this.user).subscribe(
@@ -150,9 +176,9 @@ export class UserService {
 	 */
 
 	updateUserInfo(user: User) {
-		return this.http.put(this.url+user.userId, user).toPromise();
+		//console.log(user);
+		return this.http.put(this.url, user).toPromise();
 	}
-
 	/**
 	 * A GET method that retrieves a driver by Id
 	 * @param id 
@@ -169,13 +195,10 @@ export class UserService {
 
 	changeDriverIsAccepting(data) {
 		let id=data.userId;
-		return this.http.put(this.url+id, data)
-	}
-
-  /**
-   * A GET method that fetches riders from a location
-   */
-  
+		return this.http.put(this.url+id, data).toPromise()
+		
+	  }
+	  
 	  getRidersForLocation(location: string): Observable <any>{
 		return this.http.get(this.url + '?is-driver=false&location='+ location)
 	  }
@@ -202,5 +225,9 @@ export class UserService {
     banUser(user: User){
       this.body = JSON.stringify(user);
       this.http.put(`${this.url + user.userId}`,this.body,this.httpOptions).subscribe();
-    }
+	}
+	
+	getRidersForLocation1(location: string): Observable <any>{
+		return this.http.get(this.url + 'driver/'+ location)
+	}
 }

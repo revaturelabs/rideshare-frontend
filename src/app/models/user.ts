@@ -36,9 +36,17 @@ export class User {
     /**
      * Set driver as a boolean
      */
-    driver: boolean;
+    isDriver: boolean;
     /**
      * Set accepting ride as a boolean
      */
-    acceptingRides: boolean;
+    isAcceptingRides: boolean;
+    hState: string;
+    hAddress: string;
+    hCity: string;
+    hZip: number;
+    wAddress: string;
+    wCity: string;
+    wState: string;
+    wZip: number;
 }

@@ -4,7 +4,8 @@ import { Car } from 'src/app/models/car';
 import { User } from 'src/app/models/user';
 import { Router } from '@angular/router';
 import { UserService } from '../user-service/user.service';
-import { environment } from '../../../environments/environment';
+import { environment } from 'src/environments/environment.dev';
+import { Observable } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -46,6 +47,17 @@ export class CarService {
 	getCarByUserId(userId: number) {
 		return this.http.get<Car>(`${this.url}users/${userId}`).toPromise();
 	}
+
+	getCarByUserId2(userId: string): Observable<Car> {
+		return this.http.get<Car>(`${this.url}users/${userId}`);
+	}
+
+	updateCarInfo(car: Car) {
+		//console.log(user);
+		return this.http.put(this.url, car).toPromise();
+	}
+
+
 
 	/**
 	 * This function creates a car.

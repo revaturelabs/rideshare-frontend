@@ -4,6 +4,7 @@ import { UserService } from 'src/app/services/user-service/user.service';
 import { AuthService } from 'src/app/services/auth-service/auth.service';
 import { User } from 'src/app/models/user';
 import { Admin } from 'src/app/models/admin';
+import {SignupModalComponent} from '../sign-up-modal/sign-up-modal.component';
 
 @Component({
   selector: 'app-navbar',
@@ -16,13 +17,15 @@ import { Admin } from 'src/app/models/admin';
    */
 
 export class NavbarComponent implements OnInit {
-
+  modal :SignupModalComponent;
   /**
    * This is a name string.
    */
 
   name: string = '';
   admin: string = '';
+
+  currentUser: string = '';
 
   /**
    * This is a constructor
@@ -41,6 +44,12 @@ export class NavbarComponent implements OnInit {
    */
 
   ngOnInit() {
+
+    if(sessionStorage.getItem("userid") != null){
+      this.currentUser =sessionStorage.getItem("name");
+    }else{
+      this.currentUser ='';
+    }
     if (this.authService.user.userId) {
       this.userService.getUserById(this.authService.user.userId).then((response)=>{
         this.name = response.firstName;
@@ -67,10 +76,17 @@ export class NavbarComponent implements OnInit {
    * 
    */
 
+   
   logout() {
     this.authService.user = {};
+    this.authService.admin = new Admin();
+    //clear all session
     this.name = '';
     this.admin = '';
+    this.currentUser = '';
+    sessionStorage.removeItem("name");
+    sessionStorage.removeItem("userid");
+    //sessionStorage.clear(); 
     this.router.navigate(['']);
   }
 

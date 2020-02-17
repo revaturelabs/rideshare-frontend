@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment'
 
 @Component({
   selector: 'app-driver-contact-modal',
@@ -32,7 +33,7 @@ export class DriverContactModalComponent implements OnInit {
   }
   
 getGoogleApi()  {
-    this.http.get(`http://54.174.82.153:8080/login/getGoogleApi`)
+    this.http.get(`${environment.loginUri}getGoogleApi`)
        .subscribe(
                  (response) => {
                      //console.log(response);

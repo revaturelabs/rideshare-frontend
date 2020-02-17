@@ -9,6 +9,7 @@ import { CarService } from 'src/app/services/car-service/car.service';
 import { Router } from '@angular/router';
 import { BatchService } from 'src/app/services/batch-service/batch.service';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-driver-list',
@@ -71,7 +72,7 @@ export class DriverListComponent implements OnInit {
   }
   
 getGoogleApi()  {
-    this.http.get(`http://54.174.82.153:8080/login/getGoogleApi`)
+    this.http.get(`${environment.loginUri}getGoogleApi`)
        .subscribe(
                  (response) => {
                      //console.log(response);

@@ -156,7 +156,7 @@ export class LoginComponent implements OnInit {
 		this.pwdError ='';
 		this.usernameError= '';
 		
-        this.http.get(`http://${environment.loginUri}?userName=${this.userName}&passWord=${this.passWord}`)
+        this.http.get(`${environment.loginUri}?userName=${this.userName}&passWord=${this.passWord}`)
 			.subscribe(
                   (response) => {
                      //console.log(response);

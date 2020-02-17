@@ -4,7 +4,7 @@ import { Car } from 'src/app/models/car';
 import { User } from 'src/app/models/user';
 import { Router } from '@angular/router';
 import { UserService } from '../user-service/user.service';
-import { environment } from 'src/environments/environment.dev';
+import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
 
 @Injectable({

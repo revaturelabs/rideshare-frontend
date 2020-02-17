@@ -3,6 +3,7 @@ import {} from 'googlemaps';
 import { ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { UserService } from 'src/app/services/user-service/user.service';
+import { environment } from '../../../environments/environment';
 
 
 @Component({
@@ -45,7 +46,7 @@ sleep(ms) {
 }
 
  getGoogleApi()  {
-  this.http.get(`http://54.174.82.153:8080/login/getGoogleApi`)
+  this.http.get(`${environment.loginUri}/getGoogleApi`)
      .subscribe(
                (response) => {
                    //console.log(response);

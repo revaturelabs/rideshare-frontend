@@ -1,7 +1,7 @@
 /**
  * This is the base URI
  */
-const baseUri = `http://54.174.82.153`;
+const baseUri = `http://localhost`;
 
 const port = '8080';
   /**

@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from '../auth-service/auth.service';
 import { LogService } from "../log.service"
-import { environment } from 'src/environments/environment.dev';
+import { environment } from '../../../environments/environment';
 
 
 

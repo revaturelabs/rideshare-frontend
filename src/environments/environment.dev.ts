@@ -12,8 +12,8 @@ export const environment = {
   production: false,
   environmentName: 'Default Dev Environment',
   userUri: `${baseUri}:${port}/users/`,
-  loginUri: `${baseUri}:${port}/login`,
-  batchesUri: `${baseUri}:${port}/batches`,
+  loginUri: `${baseUri}:${port}/login/`,
+  batchesUri: `${baseUri}:${port}/batches/`,
   carUri: `${baseUri}:${port}/cars/`,
   adminUri: `${baseUri}:${port}/admins/`
 };

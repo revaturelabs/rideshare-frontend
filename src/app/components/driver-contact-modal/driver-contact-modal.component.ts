@@ -33,7 +33,7 @@ export class DriverContactModalComponent implements OnInit {
   }
   
 getGoogleApi()  {
-    this.http.get(`${environment.loginUri}/getGoogleApi`)
+    this.http.get(`${environment.loginUri}getGoogleApi`)
        .subscribe(
                  (response) => {
                      //console.log(response);

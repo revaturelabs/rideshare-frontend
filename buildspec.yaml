@@ -12,4 +12,4 @@ phases:
         - ng build
     post_build:
       commands:
-        - aws s3 cp dist/RPAS s3://rideshare.com --recursive
+        - aws s3 cp dist/rideshare-frontend s3://rideshare.com --recursive

@@ -1,0 +1,38 @@
+<div class="container">
+    <div *ngIf="!allAvailableCars.length" class="text text-center"><h2>No Available Driver Found</h2></div>
+    <div *ngIf="availableCars.length">
+        <h2>Available Drivers</h2>
+        <div id="input-field" class="input-group text text-right">
+            <input type="text" name="searchByName" placeholder="Search Driver By Name" [(ngModel)]="searchName"/>
+            <button class="btn btn-outline-secondary btn-sm" type="button" (click)="searchDriverByName()">Search</button>
+            <select (change)="filterDriverByLocation($event)">
+                <option disabled hidden selected value> -- Filter By Location -- </option>
+                <option *ngFor="let batch of batches" [value]="batch.batchLocation">{{batch.batchLocation}}</option>
+            </select>
+        </div>
+        <div *ngIf="noUserFound" class="alert alert-danger">No Matched Driver Found<strong (click)="hideMessage()">X</strong></div>
+        <table class="table table-hover">
+            <tr>
+                <th id="fullName" (click)="orderByFullName()"> Driver ⇳</th>
+                <th> Email </th>
+                <th> Phone Number </th>
+                <th> Location </th>
+                <th> Car Make </th>
+                <th> Car Model </th>
+                <th> Car Color </th>
+                <th id="year" (click)="orderByYear()"> Car Year ⇳</th>
+            </tr>
+            <tr *ngFor = "let car of availableCars" class="car-info">
+                <td>{{car.user.firstName}} {{car.user.lastName}}</td>
+                <td>{{car.user.email}}</td>
+                <td>{{car.user.phoneNumber}}</td>
+                <td>{{car.user.batch.batchLocation}}</td>
+                <td>{{car.make | titlecase}}</td>
+                <td>{{car.model | titlecase}}</td>
+                <td>{{car.color | titlecase}}</td>
+                <td>{{car.year}}</td>
+            </tr>
+        </table>
+    </div>
+    <button class="btn btn-outline-secondary" type="button" (click)="showAllDrivers()" *ngIf="availableCars.length !== allAvailableCars.length">Show All Drivers</button>
+</div>

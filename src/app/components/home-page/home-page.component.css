@@ -1,0 +1,140 @@
+
+/* Container holding the image and the text */
+.centerMe {
+    position: relative;
+    text-align: center;
+    color: white;
+  } 
+  
+i{
+  padding-top:5px;
+}
+
+  /* Bottom left text */
+  .bottom-left {
+    position: absolute;
+    bottom: 8px;
+    left: 16px;
+  }
+  
+  /* Top left text */
+  .top-left {
+    position: absolute;
+    top: 8px;
+    left: 16px;
+  }
+  
+  /* Top right text */
+  .top-right {
+    position: absolute;
+    top: 8px;
+    right: 16px;
+  }
+  
+  /* Bottom right text */
+  .bottom-right {
+    position: absolute;
+    bottom: 8px;
+    right: 16px;
+  }
+  
+  /* Centered text */
+  .centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: "Overpass",sans-serif;
+  }
+/* 
+  .orangeText {
+      color: black;
+  } */
+
+.blackFade{
+    background-color: rgba(0, 0, 0, 1);
+    border:1px outset black;
+}
+
+#loginbutton{
+  margin-top:10px;
+  background-color: #F26925;
+  color:white;
+  width:300px;
+  font-family:"Overpass";
+  font-weight:bold;
+  font-size:22px;
+  border-radius:27px;
+  letter-spacing:1px;
+  height:45px;
+  display:inline-block;
+}
+
+#loginbutton:hover{
+  background-color:white;
+  color:#F26925;
+  border: 2px solid #F26925;
+  border-radius: 22px ;
+  font-family:"Overpass";
+  font-size:23px;
+}
+
+.center1{
+margin: 0 auto;
+}
+.cBorder{
+  margin-top: 15px;
+}
+
+.mBot{
+  margin-bottom: 15px;
+}
+
+.card{
+  box-shadow: 2px 2px 5px black;
+}
+
+.card-body{
+  font-family: "Overpass",sans-serif;
+}
+
+@media(max-width:767px){
+  .card{
+    max-height:200px;
+  }
+  .card-title{
+    font-size:17px;
+  }
+  .card-text{
+    font-size:15px;
+  }
+}
+
+@media(max-width:574px){
+  .card-title{
+    font-size:20px;
+  }
+  .card-text{
+    font-size:17px;
+  }
+}
+
+@media(max-width:232px){
+
+  .card{height:210px;}
+}
+
+@media(max-width:370px){
+
+  .btn-outline-light{
+    font-size:17px;
+  }
+
+  p.orangeText{
+    font-size:14px;
+  }
+
+  h1.orangeText{
+    font-size:36px;
+  }
+}

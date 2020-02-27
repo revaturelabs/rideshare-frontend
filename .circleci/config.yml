@@ -1,0 +1,64 @@
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: circleci/node:12.13.1
+    steps:
+      - checkout
+      - run:
+          name: Install Node Packages
+          command: npm install
+      - run:
+          name: Install Angular
+          command: echo y | sudo npm install -g @angular/cli
+      - run: 
+          name: Install Compodoc
+          command: npm install @compodoc/compodoc
+      - run:
+          name: Build Angular Application
+          command: npm run compodoc && ng build --configuration=dev
+      - sonarcloud/scan
+      - persist_to_workspace:
+          # Must be an absolute path, or relative path from working_directory. This is a directory on the container which is 
+          # taken to be the root directory of the workspace.
+          root: ~/
+          # Must be relative path from root
+          paths: 
+            - project
+
+  deploy:
+    docker:
+      - image: circleci/python:3.7-stretch
+    working_directory: ~/project
+    steps:
+      - checkout
+      - attach_workspace:
+          # Must be absolute path or relative path from working_directory
+          at: ~/
+      - run:
+          name: Install awscli
+          command: sudo pip install awscli
+      - run: 
+          name: Deploy Compodoc
+          command: aws s3 sync ~/project/documentation s3://rideshare-frontend-compodoc --delete
+      - run: 
+          name: Deploy to S3
+          command: aws s3 sync ~/project/dist/rideshare-frontend s3://rideshare-frontend --delete
+
+orbs:
+  sonarcloud: sonarsource/sonarcloud@1.0.1
+
+workflows:
+  main:
+    jobs:
+      - build:
+          context: SonarCloud
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: dev
+
+
+

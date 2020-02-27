@@ -19,9 +19,12 @@ export class ProfileMembershipComponent implements OnInit {
     });
   }
   updatesMembershipInfo(){
-    this.profileObject.isDriver = this.isDriver;
+
+    this.profileObject.driver = this.isDriver;
     this.profileObject.active = this.active;
+
     this.userService.updateUserInfo(this.profileObject);
+
     this.success = "Updated Successfully!";
   }
 }

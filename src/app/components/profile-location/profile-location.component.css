@@ -27,8 +27,8 @@ h4{
 }
 
 .form-control {
-    width: 260px;
-    border-radius:15px;
+    width: max-content;
+    border-radius:20px;
 }
 
 .fa-home{

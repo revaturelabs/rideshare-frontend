@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { BatchService } from 'src/app/services/batch-service/batch.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
+import { ɵAnimationGroupPlayer } from '@angular/animations';
 
 @Component({
   selector: 'app-driver-list',
@@ -27,7 +28,7 @@ export class DriverListComponent implements OnInit {
   @ViewChild('map',null) mapElement: any;
   map: google.maps.Map;
 
-  constructor(private http: HttpClient,private userService: UserService) { }
+  constructor(private http: HttpClient,private userService: UserService, private carService: CarService) { }
 
   ngOnInit() {
     this.drivers = [];
@@ -35,13 +36,16 @@ export class DriverListComponent implements OnInit {
     this.userService.getRidersForLocation1(this.location).subscribe(
       res => {
            //console.log(res);
-           res.forEach(element => {
+           res.forEach(async element => {
+            let car = await this.carService.getCarByUserId(element.userId);
+            //  let car = this.getCarForUser(element.userId);
               this.drivers.push({
                    'id': element.userId,
                  'name': element.firstName+" "+element.lastName,
                'origin':element.hCity+","+element.hState, 
                 'email': element.email, 
-                'phone':element.phoneNumber
+                'phone':element.phoneNumber,
+                'seats':car.seats
               });
           });
       });
@@ -66,6 +70,17 @@ export class DriverListComponent implements OnInit {
       this.showDriversOnMap(this.location, this.drivers);
     });
   }
+
+
+
+
+  // car:Car;
+  //  async getCarForUser(id:number){
+  //      let response = await this.carService.getCarByUserId(id);
+  //      this.car = response;
+  // }
+  
+  
 
   sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -144,6 +159,7 @@ displayDriversList(origin, drivers) {
           outputDiv.innerHTML += `<tr><td class="col">${name}</td>
                                   <td class="col">${results[0].distance.text}</td>
                                   <td class="col">${results[0].duration.text}</td>
+                                  <td class="col">${element.seats}</td>
                                   <td class="col">
                                   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCentered${element.id}"> View</button>
                                     <div class="col-lg-5">

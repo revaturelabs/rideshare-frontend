@@ -24,9 +24,7 @@ import { PreferenceComponent } from './components/preference/preference.componen
 import { ValidationService } from './services/validation-service/validation.service';
 import { AdminLoginComponent } from './components/admin-login/admin-login.component';
 import { DriverInfoComponent } from './components/driver-info/driver-info.component';
-import { LandingComponent } from './components/landing/landing.component';
 import { SignupModalComponent } from './components/sign-up-modal/sign-up-modal.component';
-import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { ProfileContactComponent } from './components/profile-contact/profile-contact.component';
 import { ProfileCarComponent } from './components/profile-car/profile-car.component';
 import { ProfileLocationComponent } from './components/profile-location/profile-location.component';
@@ -55,9 +53,7 @@ import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
     PreferenceComponent,
     AdminLoginComponent,
     DriverInfoComponent,
-    LandingComponent,
     SignupModalComponent,
-    LandingPageComponent,
     ProfileContactComponent,
     ProfileCarComponent,
     ProfileLocationComponent,

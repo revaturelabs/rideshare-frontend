@@ -1,9 +1,33 @@
-// This file can be replaced during build by using the `fileReplacements` array.
-// `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
-// The list of file replacements can be found in `angular.json`.
+/**
+ * This file can be replaced during build by using the `fileReplacements` array.
+ * The list of file replacements can be found in `angular.json`.
+ * `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
+ */
+
+const baseUri = `http://localhost`;
+/**
+ * Set the port to 8080
+ */
+const port = '9999';
+
+/**
+ * google map api key 
+ */
+const googleKey = '';
+ /**
+   * This is the environment config.
+   */
 
 export const environment = {
-  production: false
+ 
+  production: false,
+  environmentName: 'Default Environment',
+  userUri: `${baseUri}:${port}/users/`,
+  loginUri: `${baseUri}:${port}/login/`,
+  batchesUri: `${baseUri}:${port}/batches/`,
+  carUri: `${baseUri}:${port}/cars/`,
+  adminUri: `${baseUri}:${port}/admins/`,
+  googleMapKey: `${googleKey}`,
 };
 
 /*

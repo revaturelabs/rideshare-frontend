@@ -1,0 +1,63 @@
+/* .content{
+    text-align: center;
+}
+.form-control{
+    margin:auto;
+    width: 30%;
+}
+#search{
+    margin-top:10px;
+    background-color: #F26925;
+    color:white;
+    width:30%;
+    font-family:"Overpass",sans-serif;
+    font-weight:bold;
+    font-size:22px;
+    border-radius:27px;
+    letter-spacing:1px;
+    height:45px;
+    display:inline-block;
+    
+}
+ 
+#search:hover{
+    background-color:white;
+    color:#F26925;
+    border: 2px solid #F26925;
+    border-radius: 22px ;
+    font-family:"Overpass",sans-serif;
+    font-size:23px;
+}
+#right-panel {
+    font-family: 'Roboto','sans-serif';
+    line-height: 30px;
+    
+  }
+#wrapper {
+    width: 500px;
+    border: 1px solid black;
+    background-color:rgb(43, 15, 15)
+}
+#side1 {
+    width: 400px;
+    float:left; 
+    padding-left: 250px;
+}
+#side2 {
+    background-color:white;
+    padding-left: 300px;
+} */
+#gmap { 
+    height: 369px; 
+}
+.googleapi {
+ 
+}
+#map{
+}
+.col{
+    margin-right: 3%;
+}
+.btn-outline-secondary{
+    font-size:14px;
+}

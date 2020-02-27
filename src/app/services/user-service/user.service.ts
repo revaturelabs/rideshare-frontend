@@ -120,26 +120,26 @@ export class UserService {
 	 * @param userId 
 	 */
 
-	// updateIsDriver(isDriver, userId) {
+	updateIsDriver(isDriver, userId) {
 
-	// 	this.getUserById(userId)
-	// 		.then((response) => {
-	// 			this.user = response;
-	// 			this.user.isDriver = isDriver;
-	// 			this.user.isAcceptingRides = (this.user.active && isDriver);
+		this.getUserById(userId)
+			.then((response) => {
+				this.user = response;
+				this.user.driver = isDriver;
+				this.user.isAcceptingRides = (this.user.active && isDriver);
 
-	// 			this.http.put(this.url+userId, this.user).subscribe(
-	// 				(response) => {
-	// 					this.authService.user = response;
-	// 					this.log.info(JSON.stringify(response));
-	// 				},
-	// 				(error) => this.log.error(error)
-	// 			);
-	// 		})
-	// 		.catch(e => {
-	// 			this.log.error(e)
-	// 		})
-	// }
+				this.http.put(this.url+userId, this.user).subscribe(
+					(response) => {
+						this.authService.user = response;
+						this.log.info(JSON.stringify(response));
+					},
+					(error) => this.log.error(error)
+				);
+			})
+			.catch(e => {
+				this.log.error(e)
+			})
+	}
 
 	/**
 	 * A PUT method that updates the preference of the user

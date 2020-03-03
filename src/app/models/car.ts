@@ -1,32 +1,22 @@
-import { User } from './user';
+import { Employee } from 'src/app/models/employee';
 
 export class Car {
-    /**
-     * Set Car model
-     */
-    carId: number;
-    /**
-     * Set color as a string 
-     */
-    color: string;
-    /**
-     * Set set as a number
-     */
-    seats: number;
-    /**
-     * Set make as a string
-     */
-    make: string;
-    /**
-     * Set model as a string
-     */
-    model: string;
-    /**
-     * Set year as a number
-     */
-    year: number;
-    /**
-     * Attached a user object
-     */
-    user: User = new User();
+    car_id : number;
+    color : string;
+    make : string;
+    model : string;
+    available_seats : number;
+    car_year : number; 
+    employee : Employee;
+
+    constructor(car_id : number, color : string, make : string, model : string, 
+                available_seats : number, car_year : number, employee : Employee) {
+        this.car_id = car_id;
+        this.color = color;
+        this.make = make;
+        this.model = model;
+        this.available_seats = available_seats;
+        this.car_year = car_year;
+        this.employee = employee;
+    }
 }

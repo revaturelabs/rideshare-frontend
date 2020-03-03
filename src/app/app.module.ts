@@ -35,6 +35,10 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { UserRegisterComponent } from './components/user-register/user-register.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
+import { ShowDriversComponent } from './components/show-drivers/show-drivers.component';
+import { MapComponent } from './components/map/map.component';
+import { EditOfficeComponent } from './components/edit-office/edit-office.component';
+import { EditEmployeeComponent } from './components/edit-employee/edit-employee.component';
 
 
 
@@ -62,7 +66,11 @@ import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
     DriverListComponent,
     UserRegisterComponent,
     HomePageComponent,
-    BsNavbarComponent
+    BsNavbarComponent,
+    ShowDriversComponent,
+    MapComponent,
+    EditOfficeComponent,
+    EditEmployeeComponent
     
   ],
   imports: [

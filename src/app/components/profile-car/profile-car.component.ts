@@ -29,10 +29,10 @@ export class ProfileCarComponent implements OnInit {
       if(response != null){ 
         this.currentCar = response;
         this.color = response.color;
-        this.year = response.year;
+        this.year = response.car_year;
         this.make = response.make;
         this.model = response.model;
-        this.nrSeats = response.seats;
+        this.nrSeats = response.available_seats;
         this.hasCar = true;
       }
     });
@@ -41,8 +41,8 @@ export class ProfileCarComponent implements OnInit {
   updatesCarInfo(){
     this.currentCar.make = this.make;
     this.currentCar.model= this.model;
-    this.currentCar.seats = this.nrSeats;
-    this.currentCar.year = this.year;
+    this.currentCar.available_seats = this.nrSeats;
+    this.currentCar.car_year = this.year;
     this.currentCar.color = this.color;
     this.carService.updateCarInfo(this.currentCar);
     this.success = "Updated Successfully!";
@@ -50,11 +50,12 @@ export class ProfileCarComponent implements OnInit {
 
   addCar(){
     let car:Car = new Car();
+    car.car_id = 0;
     car.make = this.make;
     car.model = this.model;
-    car.seats = this.nrSeats;
+    car.available_seats = this.nrSeats;
     car.color = this.color;
-    car.year = this.year;
+    car.car_year = this.year;
     this.carService.createCar(car, this.userId);
     this.hasCar = true;
   }

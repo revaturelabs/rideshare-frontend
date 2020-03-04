@@ -6,6 +6,7 @@ import { ProfileComponent } from './components/profile/profile.component'; //thi
 import { RegisterComponent } from './Components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { AdminComponent } from './components/admin/admin.component'; //this is manager-page
+import { DriverListComponent } from './Components/driver-list/driver-list.component';
 
 const routes: Routes = [
 
@@ -15,6 +16,7 @@ const routes: Routes = [
 {path: "register", component: RegisterComponent},
 {path: "login", component: LoginComponent},
 {path: "manager", component: AdminComponent},
+{path:"driverlist",component:DriverListComponent},
 {path: "**", component: HomePageComponent}
 
 ];

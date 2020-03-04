@@ -26,7 +26,7 @@ export class ManagerEditComponent implements OnInit {
     
     async delete(employee){
   
-      alert(`{{employee.first_name}} ` + `{{employee.last_name}} ` + `was deleted!`);
+      alert(employee.first_name + " " + employee.last_name + " was deleted!");
       await this.ess.deleteEmployee(employee.employee_id);
       this.ngOnInit();
       
@@ -38,7 +38,7 @@ export class ManagerEditComponent implements OnInit {
   
       this.ngOnInit(); 
       if(tempE.is_manager = true){
-        alert(`{{employee.first_name}} ` + `{{employee.last_name}} ` + `was promoted!`); 
+        alert(employee.first_name + " " + employee.last_name + ` was promoted!`); 
       }
     }
 

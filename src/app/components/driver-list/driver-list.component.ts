@@ -11,6 +11,7 @@ import { BatchService } from 'src/app/services/batch-service/batch.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { ɵAnimationGroupPlayer } from '@angular/animations';
+import { CarServiceService } from 'src/app/services/car-service.service';
 
 @Component({
   selector: 'app-driver-list',
@@ -28,7 +29,7 @@ export class DriverListComponent implements OnInit {
   @ViewChild('map',null) mapElement: any;
   map: google.maps.Map;
 
-  constructor(private http: HttpClient,private userService: UserService, private carService: CarService) { }
+  constructor(private http: HttpClient,private userService: UserService, private carService: CarServiceService) { }
 
   ngOnInit() {
     this.drivers = [];
@@ -37,7 +38,7 @@ export class DriverListComponent implements OnInit {
       res => {
            //console.log(res);
            res.forEach(async element => {
-            let car = await this.carService.getCarByUserId(element.userId);
+            let car = await this.carService.getCarByEmployeeId(element.userId);
             //  let car = this.getCarForUser(element.userId);
               this.drivers.push({
                    'id': element.userId,
@@ -45,7 +46,7 @@ export class DriverListComponent implements OnInit {
                'origin':element.hCity+","+element.hState, 
                 'email': element.email, 
                 'phone':element.phoneNumber,
-                'seats':car.seats
+                'seats':car.available_seats
               });
           });
       });

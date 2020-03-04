@@ -33,6 +33,8 @@ export class ProfileLocationComponent implements OnInit {
   oCity : string;
   oState : string;
   oZipcode : string;
+  citySelected : boolean = false;
+  officeSelected : boolean = false;
 
 
   constructor(private officeService : OfficeServiceService, private employeeService : EmployeeServiceService, private configService:ConfigServiceService) { }
@@ -79,6 +81,9 @@ export class ProfileLocationComponent implements OnInit {
         this.cityOffices.push(this.offices[i]);
       }
     }
+    this.citySelected = true;
+    this.office = " Select an Office ";
+    this.officeSelected = false;
     console.log(this.cityOffices);
   }
 
@@ -89,8 +94,8 @@ export class ProfileLocationComponent implements OnInit {
         this.officeObject = this.cityOffices[i];
       }
     }
+    this.officeSelected = true;
     console.log(this.officeObject);
-
   }
 
   async GetAllOffices(){
@@ -134,5 +139,12 @@ export class ProfileLocationComponent implements OnInit {
 
     sessionStorage.setItem('User',JSON.stringify(this.employee));
     this.employee = JSON.parse(sessionStorage.getItem('User'));
+    let address2 : Array<string> = this.employee.office.office_address.split(", ");
+    this.oStreet = address2[0];
+    console.log(this.oStreet);
+    this.oCity = address2[1];
+    address2 = address2[2].split(" ");
+    this.oState = address2[0];
+    this.oZipcode = address2[1];
   }
 }

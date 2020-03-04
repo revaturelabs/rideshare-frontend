@@ -24,9 +24,11 @@ import { ModalModule } from 'node_modules/ngx-bootstrap';
 import { RegisterComponent } from './Components/register/register.component';
 import { SignupModalComponent } from './Components/sign-up-modal/sign-up-modal.component';
 import { ProfileMembershipComponent } from './components/profile-membership/profile-membership.component'
+import { DriverContactModalComponent } from './components/driver-contact-modal/driver-contact-modal.component';
 
 @NgModule({
   declarations: [
+    DriverContactModalComponent,
     AppComponent,
     HomePageComponent,
     RegisterComponent,
@@ -43,7 +45,8 @@ import { ProfileMembershipComponent } from './components/profile-membership/prof
     NavbarComponent,
     EditEmployeeComponent,
     SignupModalComponent,
-    ProfileMembershipComponent
+    ProfileMembershipComponent,
+    ManagerEditComponent
 
     
   ],

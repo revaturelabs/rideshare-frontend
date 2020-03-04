@@ -36,8 +36,8 @@ export class LoginComponent implements OnInit {
 
 	chosenUser: User;
 	chosenUserFullName: string = '';
-	userName: string = '';
-	passWord: string = '';
+	userName: string;
+	passWord: string;
 	totalPage: number = 1;
   	curPage: number = 1;
 
@@ -132,17 +132,6 @@ export class LoginComponent implements OnInit {
 	 * A function that indicate a fail to login
 	 */
 
-
-	loginFailed() {
-		this.userName = '';
-		this.failed = true;
-	}
-
-	loginBanned(){
-		this.userName = '';
-		this.banned = true;
-	}
-
 	openModal(template :TemplateRef<any>){
 		this.modalRef = this.modalService.show(template);
 	}
@@ -152,17 +141,19 @@ export class LoginComponent implements OnInit {
 	 */
 
 	async employeelogin(){
-		let username=((document.getElementById("username")as HTMLInputElement).value);
-		let password=((document.getElementById("password")as HTMLInputElement).value);
+		let username=this.userName;
+		let password=this.passWord;
 		let  empl:Employee = new Employee(0,"","","","",username,password,"",false,true,false,false,null);
 		let e:Employee = await this.es.login(empl);
+		console.log(e);
 		  if(e != null){
-			let key = 'User'
+			let key = 'User';
 			sessionStorage.setItem(key,JSON.stringify(e));
 			let user = JSON.parse(sessionStorage.getItem(key))
+			this.modalRef.hide();
 			if(e.is_manager){
+				
 			  this.r.navigateByUrl("/manager");
-	
 			}else{
 			  this.r.navigateByUrl("/profile");
 			}

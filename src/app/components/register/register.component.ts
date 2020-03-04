@@ -5,6 +5,8 @@ import { Batch } from 'src/app/models/batch';
 import { Router, RouterModule } from '@angular/router';
 import { ValidationService } from 'src/app/services/validation-service/validation.service';
 import { User } from 'src/app/models/user';
+import { EmployeeServiceService } from 'src/app/services/employee-service.service';
+import { OfficeServiceService } from 'src/app/services/office-service.service';
 
 @Component({
 	selector: 'app-user-register',
@@ -33,7 +35,7 @@ export class RegisterComponent implements OnInit {
    * @param batchService A dependency of a batch service is injected.
    */
 
-	constructor(private userService: UserService, private batchService: BatchService, private router: Router, public validationService: ValidationService) { }
+	constructor(private userService: EmployeeServiceService, private batchService: OfficeServiceService, private router: Router, public validationService: ValidationService) { }
 
 
   /**
@@ -60,18 +62,5 @@ export class RegisterComponent implements OnInit {
 		this.user.batch.batchNumber = this.batches[option].batchNumber;
 	}
 
-	/**
-	 * This function creates a driver if all the validations are true.
-	 */
-	signUpDriver() {
-		//if (this.validationService.validateUserName(this.user.userName) && this.validationService.validateName(this.user.firstName) && this.validationService.validateName(this.user.lastName) && this.validationService.validateEmail(this.user.email) && this.validationService.validatePhone(this.user.phoneNumber)) {
-			this.userService.createDriver(this.user, 'driver');
-		//}
-	}
-	signUpRider() {
-		if (this.validationService.validateUserName(this.user.userName) && this.validationService.validateName(this.user.firstName) && this.validationService.validateName(this.user.lastName) && this.validationService.validateEmail(this.user.email) && this.validationService.validatePhone(this.user.phoneNumber)) {
-			this.userService.createDriver(this.user, 'rider');
-		}
-	}
 
 }

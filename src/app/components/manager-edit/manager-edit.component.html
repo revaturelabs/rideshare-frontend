@@ -1,0 +1,23 @@
+<div class="container mainContainer">
+
+  <i class="fa fa-black-tie" style="font-family:'FontAwesome';"></i>
+  <h4>Employees:</h4>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Delete</th>
+        <th>Promote</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="c" *ngFor="let employee of employees">
+        <td>{{employee.first_name}}</td>
+        <td>{{employee.last_name}}</td>
+        <td><button type="update" class="btn btn-primary myBtn" id="delete1" (click)="delete(employee)">Delete </button></td>
+        <td><button type="update" class="btn btn-primary myBtn" id="promote1" (click)="promote(employee)">Promote </button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

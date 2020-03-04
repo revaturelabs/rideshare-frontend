@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Employee } from 'src/app/Models/Employee';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -11,14 +12,22 @@ export class ProfileComponent implements OnInit {
   showCar :boolean = false;
   showLocation :boolean = false;
   showMemberInfo :boolean = false;
+  showManager : boolean = false;
+  showManagerB : boolean = false;
 
   contact :string = '';
   car :string = '';
   location :string = '';
-  membership :string = '';
+  manager :string = '';
+  employee: Employee;
 
   ngOnInit() {
     this.showCont = true;
+    this.employee = JSON.parse(sessionStorage.getItem('User'));
+    if (this.employee.is_manager) {
+      console.log('employeeeeee')
+      this.showManagerB = true;
+    }
   /**
    * A GET method that retrieves user's information
    */
@@ -27,12 +36,13 @@ export class ProfileComponent implements OnInit {
     this.showCont = true;
     this.showCar = false;
     this.showLocation = false;
-    this.showMemberInfo = false;
+    this.showManager = false;
+
     
     this.contact = 'profileBtn';
     this.car = '';
     this.location = '';
-    this.membership = '';
+    this.manager = '';
 
   }
 
@@ -40,36 +50,38 @@ export class ProfileComponent implements OnInit {
     this.showCont = false;
     this.showCar = false;
     this.showLocation = true;
-    this.showMemberInfo = false;
+    this.showManager = false;
+
     
     this.contact = '';
     this.car = '';
     this.location = 'profileBtn';
-    this.membership = '';
-  }
-
-  showMembership(){
-    this.showCont = false;
-    this.showCar = false;
-    this.showLocation = false;
-    this.showMemberInfo = true;
-    
-    this.contact = '';
-    this.car = '';
-    this.location = '';
-    this.membership = 'profileBtn';
+    this.manager = '';
   }
 
   showCarInfo(){
     this.showCont = false;
     this.showCar = true;
     this.showLocation = false;
-    this.showMemberInfo = false;
+    this.showManager = false;
     
     this.contact = '';
     this.car = 'profileBtn';
-    this.location = ''; 
-    this.membership = '';
+    this.location = '';
+    this.manager = '';
+
+  }
+
+  showManagerEdit(){
+    this.showCont = false;
+    this.showCar = false;
+    this.showLocation = false;
+    this.showManager = true;
+    
+    this.contact = '';
+    this.car = '';
+    this.location = '';
+    this.manager = 'profileBtn';
 
   }
 }

@@ -153,7 +153,7 @@ export class LoginComponent implements OnInit {
 			this.modalRef.hide();
 			if(e.is_manager){
 				
-			  this.r.navigateByUrl("/manager");
+			  this.r.navigateByUrl("/profile");
 			}else{
 			  this.r.navigateByUrl("/profile");
 			}

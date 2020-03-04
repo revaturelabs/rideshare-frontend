@@ -45,7 +45,8 @@ import { DriverContactModalComponent } from './components/driver-contact-modal/d
     NavbarComponent,
     EditEmployeeComponent,
     SignupModalComponent,
-    ProfileMembershipComponent
+    ProfileMembershipComponent,
+    ManagerEditComponent
 
     
   ],

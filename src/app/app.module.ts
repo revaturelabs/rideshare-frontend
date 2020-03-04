@@ -4,7 +4,7 @@ import {FormsModule} from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomePageComponent } from './components/home-page/home-page.component';//this is home
-import { RegisterComponent } from './components/register/register.component';//this is register
+//import { RegisterComponent } from './components/register/register.component';//this is register
 import { LoginComponent } from './components/login/login.component';//this is login
 import { AdminComponent } from './components/admin/admin.component';//this is manager-page
 import { ProfileComponent } from './components/profile/profile.component';//this is employee-page
@@ -21,6 +21,9 @@ import { EditEmployeeComponent } from './components/edit-employee/edit-employee.
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ModalModule } from 'node_modules/ngx-bootstrap';
+import { RegisterComponent } from './Components/register/register.component';
+import { SignupModalComponent } from './Components/sign-up-modal/sign-up-modal.component';
+import { ProfileMembershipComponent } from './components/profile-membership/profile-membership.component'
 
 @NgModule({
   declarations: [
@@ -38,7 +41,11 @@ import { ModalModule } from 'node_modules/ngx-bootstrap';
     ProfileCarComponent,
     EditOfficeComponent,
     NavbarComponent,
-    EditEmployeeComponent
+    EditEmployeeComponent,
+    SignupModalComponent,
+    ProfileMembershipComponent
+
+    
   ],
   imports: [
     BrowserModule,

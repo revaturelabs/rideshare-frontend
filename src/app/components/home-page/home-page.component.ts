@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Office } from 'src/app/models/office';
+import { OfficeServiceService } from 'src/app/services/office-service.service';
 
 
 @Component({
@@ -8,11 +10,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomePageComponent implements OnInit {
   
-  constructor() { }
+  offices: Office[];
+
+  constructor(private os : OfficeServiceService) { }
 
   ngOnInit() {
   }
 
+  async register(){
+    this.offices =  await this.os.getAllOffices();
+    sessionStorage.setItem("offices", JSON.stringify(this.offices));
+    console.log(this.offices);
+  }
 
 
 }

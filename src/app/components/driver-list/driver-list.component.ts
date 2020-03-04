@@ -12,6 +12,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { ɵAnimationGroupPlayer } from '@angular/animations';
 import { CarServiceService } from 'src/app/services/car-service.service';
+import { EmployeeServiceService } from 'src/app/services/employee-service.service';
 
 @Component({
   selector: 'app-driver-list',
@@ -29,24 +30,24 @@ export class DriverListComponent implements OnInit {
   @ViewChild('map',null) mapElement: any;
   map: google.maps.Map;
 
-  constructor(private http: HttpClient,private userService: UserService, private carService: CarServiceService) { }
+  constructor(private http: HttpClient,private employeeService:EmployeeServiceService, private carService: CarServiceService) { }
 
   ngOnInit() {
     this.drivers = [];
-
-    this.userService.getRidersForLocation1(this.location).subscribe(
+    
+    this.employeeService.getDriversForLocation(this.location).subscribe(
       res => {
            //console.log(res);
            res.forEach(async element => {
-            let car = await this.carService.getCarByEmployeeId(element.userId);
+         //   let car = await this.carService.getCarByUserId(element.userId);
             //  let car = this.getCarForUser(element.userId);
               this.drivers.push({
-                   'id': element.userId,
-                 'name': element.firstName+" "+element.lastName,
-               'origin':element.hCity+","+element.hState, 
+                   'id': element.employee_id,
+                 'name': element.first_name+" "+element.last_name,
+                'driverlocation':element.user_address, 
                 'email': element.email, 
-                'phone':element.phoneNumber,
-                'seats':car.available_seats
+                'phone':element.phone_number,
+                //'seats':car.seats
               });
           });
       });
@@ -87,21 +88,24 @@ export class DriverListComponent implements OnInit {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
   
-getGoogleApi()  {
-    this.http.get(`${environment.loginUri}getGoogleApi`)
-       .subscribe(
-                 (response) => {
-                     //console.log(response);
-                     if(response["googleMapAPIKey"] != undefined){
+async getGoogleApi()  {
+     this.http.get(`http://localhost:9999/configurations/API_KEY`)
+        .subscribe(
+                  (response) => {
+                  
+                      console.log("jrknjtkenkjh");
+                      if(response != undefined){
+                        console.log(response);
                          new Promise((resolve) => {
                            let script: HTMLScriptElement = document.createElement('script');
                            script.addEventListener('load', r => resolve());
-                           script.src = `http://maps.googleapis.com/maps/api/js?key=${response["googleMapAPIKey"][0]}`;
+                           script.src = `http://maps.googleapis.com/maps/api/js?key=${response}`;
                            document.head.appendChild(script);      
                      }); 
                }    
            }
        );
+   
    }
 
   showDriversOnMap(origin, drivers){
@@ -111,7 +115,7 @@ getGoogleApi()  {
          draggable: true,
          map: this.map
        });
-       this.displayRoute(origin, element.origin, directionsService, directionsRenderer);
+       this.displayRoute(origin, element.driverlocation, directionsService, directionsRenderer);
     });
   }
 
@@ -143,7 +147,7 @@ displayDriversList(origin, drivers) {
       var service = new google.maps.DistanceMatrixService;
       service.getDistanceMatrix({
         origins: origins,
-        destinations: [element.origin],
+        destinations: [element.driverlocation],
         travelMode: google.maps.TravelMode.DRIVING,
         unitSystem: google.maps.UnitSystem.IMPERIAL,
         avoidHighways: false,
@@ -160,7 +164,7 @@ displayDriversList(origin, drivers) {
           outputDiv.innerHTML += `<tr><td class="col">${name}</td>
                                   <td class="col">${results[0].distance.text}</td>
                                   <td class="col">${results[0].duration.text}</td>
-                                  <td class="col">${element.seats}</td>
+                                  <td class="col">${4}</td>
                                   <td class="col">
                                   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCentered${element.id}"> View</button>
                                     <div class="col-lg-5">
@@ -174,7 +178,7 @@ displayDriversList(origin, drivers) {
                                                    </button>
                                               </div>
                                               <div class="modal-body">
-                                                  <h1>${name}</h1>
+                                                  <h1>${element.name}</h1>
                                                   <h3>Email: ${element.email}</h3>         
                                                   <h3>Phone: ${element.phone}</h3>                 
                                               </div>

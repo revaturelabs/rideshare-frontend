@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from 'src/app/services/user-service/user.service';
-import { Router } from '@angular/router';
-import { User } from 'src/app/models/user';
+import { EmployeeServiceService } from 'src/app/services/employee-service.service';
+import { ConfigServiceService } from 'src/app/services/config-service.service';
+import { Employee } from 'src/app/Models/Employee';
 
 @Component({
   selector: 'app-profile-contact',
@@ -10,37 +10,56 @@ import { User } from 'src/app/models/user';
 })
 export class ProfileContactComponent implements OnInit {
 
-  profileObject : User;
-  currentUser: any = '';
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone: string;
-  success :string;
-  constructor(private router: Router, private userService: UserService) { }
+  employee: Employee;
+  f_name : string;
+  l_name : string;
+  username : string;
+  password : string;
+  email : string;
+  phone : string;
+  address : string;
+  isDriver : boolean;
+  isActive : boolean;
+
+  constructor(private employeeService: EmployeeServiceService, private configService:ConfigServiceService) { }
 
   ngOnInit() {
-    this.currentUser = this.userService.getUserById2(sessionStorage.getItem("userid")).subscribe((response)=>{
-      this.profileObject = response;
+    // this.currentUser = this.userService.getUserById2(sessionStorage.getItem("userid")).subscribe((response)=>{
+    //   this.profileObject = response;
 
-      this.firstName = this.profileObject.firstName;
-      this.lastName = this.profileObject.lastName;
-      this.email = this.profileObject.email;
-      this.phone = this.profileObject.phoneNumber;
+    //   this.firstName = this.profileObject.firstName;
+    //   this.lastName = this.profileObject.lastName;
+    //   this.email = this.profileObject.email;
+    //   this.phone = this.profileObject.phoneNumber;
 
-    });
+    // });
     
+    this.employee = JSON.parse(sessionStorage.getItem('User'));
+    this.f_name = this.employee.first_name;
+    this.l_name = this.employee.last_name;
+    this.username = this.employee.username;
+    this.password = this.employee.password;
+    this.email = this.employee.email;
+    this.phone = this.employee.phone_number;
+    this.address = this.employee.user_address;
+    this.isDriver = this.employee.isDriver;
+    this.isActive = this.employee.is_active;
   }
 
-  updatesContactInfo(){
-    this.profileObject.firstName = this.firstName;
-    this.profileObject.lastName = this.lastName;
-    this.profileObject.email = this.email;
-    this.profileObject.phoneNumber = this.phone;
+  async UpdateContactInfo(){
+    let employee : Employee = new Employee(this.employee.employee_id, this.email, this.f_name, this.l_name,
+      this.phone, this.username, this.password, this.address, this.employee.is_accepting_rides,
+      this.isActive, this.isDriver, this.employee.is_manager, this.employee.office);
 
-    this.userService.updateUserInfo(this.profileObject);
-    this.success = "Updated Successfully!";
+    let updated: Employee = await this.employeeService.updateEmployee(employee)
+    .then((onfulfilled) => {
+      this.employee = onfulfilled;
+      console.log(this.employee);
+      return onfulfilled;
+    })
+
+    sessionStorage.setItem('User',JSON.stringify(this.employee));
+    this.employee = JSON.parse(sessionStorage.getItem('User'));
   }
-
 
 }

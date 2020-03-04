@@ -6,6 +6,10 @@ import { HttpClient } from '@angular/common/http';
 import { AuthService } from 'src/app/services/auth-service/auth.service';
 import { Router, RouterModule } from '@angular/router';
 import { BsModalService, BsModalRef} from 'ngx-bootstrap';
+import { EmployeeServiceService } from 'src/app/services/employee-service.service';
+
+	import { from } from 'rxjs';
+import { Employee } from 'src/app/models/employee';
 
 @Component({
 	selector: 'app-login',
@@ -32,8 +36,8 @@ export class LoginComponent implements OnInit {
 
 	chosenUser: User;
 	chosenUserFullName: string = '';
-	userName: string = '';
-	passWord: string = '';
+	userName: string;
+	passWord: string;
 	totalPage: number = 1;
   	curPage: number = 1;
 
@@ -53,18 +57,13 @@ export class LoginComponent implements OnInit {
 	 * @param authService An auth service is injected.
 	 *
 	 */
-	constructor(private modalService :BsModalService,private userService: UserService, private http: HttpClient, private authService: AuthService, public router: Router) { }
+	constructor(private modalService :BsModalService,private es: EmployeeServiceService, private http: HttpClient, private authService: AuthService, public r: Router) { }
 
 	/**
 	 * When the component is initialized, the system checks for the session storage to validate. Once validated, the user service is called to retrieve all users.
 	 */
 	ngOnInit() {
-		this.userService.getAllUsers()
-			.subscribe(allUsers => {
-				this.allUsers = allUsers;
-				this.totalPage = Math.ceil(this.allUsers.length / 5);
-				this.users = this.allUsers.slice(0, 5);
-		});
+		
 	}
 
 	/**
@@ -72,14 +71,14 @@ export class LoginComponent implements OnInit {
 	 * @param user
 	 */
 
-	changeUser(user) {
-		this.showDropDown = false;
-		this.curPage = 1;
-		this.totalPage = Math.ceil(this.allUsers.length / 5);
-		this.users = this.allUsers.slice(this.curPage * 5 - 5, this.curPage * 5);
-		this.chosenUserFullName = `${user.firstName} ${user.lastName}: ${user.driver ? 'Driver' : 'Rider'}`;
-		this.chosenUser = user;
-	}
+	// changeUser(user) {
+	// 	this.showDropDown = false;
+	// 	this.curPage = 1;
+	// 	this.totalPage = Math.ceil(this.allUsers.length / 5);
+	// 	this.users = this.allUsers.slice(this.curPage * 5 - 5, this.curPage * 5);
+	// 	this.chosenUserFullName = `${user.firstName} ${user.lastName}: ${user.driver ? 'Driver' : 'Rider'}`;
+	// 	this.chosenUser = user;
+	// }
 
 	/**
 	 * A GET method the fetches all the users
@@ -133,17 +132,6 @@ export class LoginComponent implements OnInit {
 	 * A function that indicate a fail to login
 	 */
 
-
-	loginFailed() {
-		this.userName = '';
-		this.failed = true;
-	}
-
-	loginBanned(){
-		this.userName = '';
-		this.banned = true;
-	}
-
 	openModal(template :TemplateRef<any>){
 		this.modalRef = this.modalService.show(template);
 	}
@@ -152,33 +140,62 @@ export class LoginComponent implements OnInit {
 	 * A login function
 	 */
 
-	login() {
-		this.pwdError ='';
-		this.usernameError= '';
+	async employeelogin(){
+		let username=this.userName;
+		let password=this.passWord;
+		let  empl:Employee = new Employee(0,"","","","",username,password,"",false,true,false,false,null);
+		let e:Employee = await this.es.login(empl);
+		console.log(e);
+		  if(e != null){
+			let key = 'User';
+			sessionStorage.setItem(key,JSON.stringify(e));
+			let user = JSON.parse(sessionStorage.getItem(key))
+			this.modalRef.hide();
+			if(e.is_manager){
+				
+			  this.r.navigateByUrl("/profile");
+			}else{
+			  this.r.navigateByUrl("/profile");
+			}
+		  }
+		  else {
+			console.log("c")
+			alert("User or password doesnt exist!");
+		  } 
+	  }
+	}
+
+
+
+
+
+	// login() {
+	// 	this.pwdError ='';
+	// 	this.usernameError= '';
 		
-        this.http.get(`${environment.loginUri}?userName=${this.userName}&passWord=${this.passWord}`)
-			.subscribe(
-                  (response) => {
-                     //console.log(response);
-                      if(response["userName"] != undefined){
-                         this.usernameError=  response["userName"][0];
-                      }
-                      if(response["passWord"] != undefined){
-                         this.pwdError = response["pwdError"][0];
-					  }
-					  if((response["name"] != undefined) && (response["userid"] != undefined)){
-						sessionStorage.setItem("name", response["name"]);
-						sessionStorage.setItem("userid", response["userid"]);
+    //     this.http.get(`${environment.loginUri}?userName=${this.userName}&passWord=${this.passWord}`)
+	// 		.subscribe(
+    //               (response) => {
+    //                  //console.log(response);
+    //                   if(response["userName"] != undefined){
+    //                      this.usernameError=  response["userName"][0];
+    //                   }
+    //                   if(response["passWord"] != undefined){
+    //                      this.pwdError = response["pwdError"][0];
+	// 				  }
+	// 				  if((response["name"] != undefined) && (response["userid"] != undefined)){
+	// 					sessionStorage.setItem("name", response["name"]);
+	// 					sessionStorage.setItem("userid", response["userid"]);
 						
-						//call landing page
-						//this.router.navigate(['landingPage']);
-						location.replace('profile');
-					  }
-					  if(response["userNotFound"] != undefined){
-						this.userNotFound = response["userNotFound"][0];
-					  }
-                 }
-        );
+	// 					//call landing page
+	// 					//this.router.navigate(['landingPage']);
+	// 					location.replace('profile');
+	// 				  }
+	// 				  if(response["userNotFound"] != undefined){
+	// 					this.userNotFound = response["userNotFound"][0];
+	// 				  }
+    //              }
+    //     );
 		/*this.http.get<User[]>(`${environment.userUri}?username=${this.userName}`)
 			.subscribe((user: User[]) => {
 				if (!user.length) {
@@ -193,7 +210,6 @@ export class LoginComponent implements OnInit {
 					}
 				}
 			});*/
-	}
+	// }
 
 
-}

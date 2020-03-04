@@ -1,97 +1,62 @@
-
-
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-import { ModalModule } from 'node_modules/ngx-bootstrap';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { AppComponent } from './app.component';
-import { RegisterComponent } from './components/register/register.component';
-import { DriverComponent} from './components/driver/driver.component';
-import { AdminComponent } from './components/admin/admin.component';
-import { UserService } from './services/user-service/user.service';
-import { CarService } from './services/car-service/car.service';
-import { BatchService } from './services/batch-service/batch.service';
-import { CarRegisterComponent } from './components/car-register/car-register.component';
-import { LoginComponent } from './components/login/login.component';
-import { AuthService } from './services/auth-service/auth.service';
+import {FormsModule} from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
-import { NavbarComponent } from './components/navbar/navbar.component';
-import { MyCarComponent } from './components/my-car/my-car.component';
-import { ProfileComponent } from './components/profile/profile.component';
-import { PreferenceComponent } from './components/preference/preference.component';
-import { ValidationService } from './services/validation-service/validation.service';
-import { AdminLoginComponent } from './components/admin-login/admin-login.component';
-import { DriverInfoComponent } from './components/driver-info/driver-info.component';
-import { SignupModalComponent } from './components/sign-up-modal/sign-up-modal.component';
-import { ProfileContactComponent } from './components/profile-contact/profile-contact.component';
-import { ProfileCarComponent } from './components/profile-car/profile-car.component';
-import { ProfileLocationComponent } from './components/profile-location/profile-location.component';
-import { ProfileMembershipComponent } from './components/profile-membership/profile-membership.component';
-import { DriverContactModalComponent } from './components/driver-contact-modal/driver-contact-modal.component';
-import { DriverListComponent } from './components/driver-list/driver-list.component';
-import { BsModalService } from 'ngx-bootstrap/modal';
-import { UserRegisterComponent } from './components/user-register/user-register.component';
-import { HomePageComponent } from './components/home-page/home-page.component';
-import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
-import { ShowDriversComponent } from './components/show-drivers/show-drivers.component';
-import { MapComponent } from './components/map/map.component';
-import { EditOfficeComponent } from './components/edit-office/edit-office.component';
-import { EditEmployeeComponent } from './components/edit-employee/edit-employee.component';
-
-
+import { AppComponent } from './app.component';
+import { HomePageComponent } from './components/home-page/home-page.component';//this is home
+//import { RegisterComponent } from './components/register/register.component';//this is register
+import { LoginComponent } from './components/login/login.component';//this is login
+import { AdminComponent } from './components/admin/admin.component';//this is manager-page
+import { ProfileComponent } from './components/profile/profile.component';//this is employee-page
+import { ShowDriversComponent } from './components/show-drivers/show-drivers.component';//this is show-drivers
+import { MapComponent } from './components/map/map.component';//this is map
+import { DriverListComponent } from './Components/driver-list/driver-list.component';//this is drivers-list
+import { ProfileContactComponent } from './components/profile-contact/profile-contact.component';//this is edit-contact
+import { ProfileLocationComponent } from './components/profile-location/profile-location.component';//this is edit-location
+import { ProfileCarComponent } from './components/profile-car/profile-car.component';//this is edit-car
+import { EditOfficeComponent } from './components/edit-office/edit-office.component';//this is edit-office
+import { NavbarComponent } from './components/navbar/navbar.component';//this is nav-bar
+import { EditEmployeeComponent } from './components/edit-employee/edit-employee.component';//this is manager-edit-employee
+// import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { HttpClientModule } from '@angular/common/http';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ModalModule } from 'node_modules/ngx-bootstrap';
+import { RegisterComponent } from './Components/register/register.component';
+import { SignupModalComponent } from './Components/sign-up-modal/sign-up-modal.component';
+import { ProfileMembershipComponent } from './components/profile-membership/profile-membership.component'
 
 @NgModule({
   declarations: [
     AppComponent,
-    RegisterComponent,
-    DriverComponent,
-    AdminComponent,
-    LoginComponent,
-    CarRegisterComponent,
-    LoginComponent,
-    NavbarComponent,
-    MyCarComponent,
-    ProfileComponent,
-    PreferenceComponent,
-    AdminLoginComponent,
-    DriverInfoComponent,
-    SignupModalComponent,
-    ProfileContactComponent,
-    ProfileCarComponent,
-    ProfileLocationComponent,
-    ProfileMembershipComponent,
-    DriverContactModalComponent,
-    DriverListComponent,
-    UserRegisterComponent,
     HomePageComponent,
-    BsNavbarComponent,
+    RegisterComponent,
+    LoginComponent,
+    AdminComponent,
+    ProfileComponent,
     ShowDriversComponent,
     MapComponent,
+    DriverListComponent,
+    ProfileContactComponent,
+    ProfileLocationComponent,
+    ProfileCarComponent,
     EditOfficeComponent,
-    EditEmployeeComponent
+    NavbarComponent,
+    EditEmployeeComponent,
+    SignupModalComponent,
+    ProfileMembershipComponent
+
     
   ],
   imports: [
     BrowserModule,
-    HttpClientModule,
-    FormsModule,
-    BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ModalModule.forRoot(),
-    NgbModule
+    // FontAwesomeModule,
+    HttpClientModule,
+    NgbModule,
+    ModalModule.forRoot()
   ],
-  providers: [
-    UserService,
-    CarService,
-    BatchService,
-    AuthService,
-    ValidationService,
-    BsModalService
-  ],
+  providers: [Title],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
-

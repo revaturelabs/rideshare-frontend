@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/services/auth-service/auth.service';
 import { Router } from '@angular/router';
 import { BatchService } from 'src/app/services/batch-service/batch.service';
 import { Batch } from 'src/app/models/batch';
+import { CarServiceService } from 'src/app/services/car-service.service';
 
 
 @Component({
@@ -53,108 +54,107 @@ export class DriverInfoComponent implements OnInit {
    * @param batchService A batch service is injected.
    */
 
-  constructor(private carService: CarService, private authService: AuthService, private router: Router, private batchService: BatchService) { }
+  constructor(private carService: CarServiceService, private authService: AuthService, private router: Router, private batchService: BatchService) { }
 
   /**
    * A function that set the component
    */
   ngOnInit() {
-    let userId = this.authService.user.userId;
-    if (!userId) {
-      this.router.navigate(['']);
-    } else {
-      this.carService.getAllCars().subscribe(
-        data => {
-          this.allAvailableCars = data.filter(car => car.user.isAcceptingRides && car.user.active);
-          this.orderByLocation();
-        }
-      )
-      this.batches = this.batchService.getAllBatches();
-    }
+    // let userId = this.authService.user.userId;
+    // if (!userId) {
+    //   this.router.navigate(['']);
+    // } else {
+    //   this.carService.getAllCars()
+    //     data => {
+    //       this.allAvailableCars = data.filter(car => car.user.isAcceptingRides && car.user.active);
+    //       this.orderByLocation();
+    //     }
+    //   this.batches = this.batchService.getAllBatches();
+    // }
   }
 
   /**
    * A function the sorts the car object by batch location
    */
 
-  orderByLocation() {
-    let userLocation = this.authService.user.batch.batchLocation;
+  // orderByLocation() {
+  //   let userLocation = this.authService.user.batch.batchLocation;
 
-    this.allAvailableCars.sort((a, b) => a.user.batch.batchLocation > b.user.batch.batchLocation ? 1 : -1);
-    this.allAvailableCars = this.allAvailableCars.filter(car => car.user.batch.batchLocation === userLocation).concat(this.allAvailableCars.filter(car => car.user.batch.batchLocation !== userLocation));
-    this.availableCars = this.allAvailableCars;
-  }
+  //   this.allAvailableCars.sort((a, b) => a.user.batch.batchLocation > b.user.batch.batchLocation ? 1 : -1);
+  //   this.allAvailableCars = this.allAvailableCars.filter(car => car.user.batch.batchLocation === userLocation).concat(this.allAvailableCars.filter(car => car.user.batch.batchLocation !== userLocation));
+  //   this.availableCars = this.allAvailableCars;
+  // }
 
-  /**
-   * A function that orders the year of the car
-   */
+  // /**
+  //  * A function that orders the year of the car
+  //  */
 
-  orderByYear() {
-    if (!this.orderYear) {
-      this.availableCars.sort((a, b) => b.year - a.year);
-    } else {
-      this.availableCars.sort((a, b) => a.year - b.year);
-    }
-    this.orderYear = !this.orderYear;
-  }
+  // orderByYear() {
+  //   if (!this.orderYear) {
+  //     this.availableCars.sort((a, b) => b.year - a.year);
+  //   } else {
+  //     this.availableCars.sort((a, b) => a.year - b.year);
+  //   }
+  //   this.orderYear = !this.orderYear;
+  // }
 
-  /**
-   * A function that orders the data by full name
-   */
+  // /**
+  //  * A function that orders the data by full name
+  //  */
 
-  orderByFullName() {
-    if (!this.orderFirstName) {
-      this.availableCars.sort((a, b) => a.user.firstName > b.user.firstName ? 1 : -1);
-    } else {
-      this.availableCars.sort((a, b) => a.user.firstName > b.user.firstName ? -1 : 1);
-    }
-    this.orderFirstName = !this.orderFirstName;
-  }
+  // orderByFullName() {
+  //   if (!this.orderFirstName) {
+  //     this.availableCars.sort((a, b) => a.user.firstName > b.user.firstName ? 1 : -1);
+  //   } else {
+  //     this.availableCars.sort((a, b) => a.user.firstName > b.user.firstName ? -1 : 1);
+  //   }
+  //   this.orderFirstName = !this.orderFirstName;
+  // }
 
-  /**
-   * A function that searches driver by name
-   */
+  // /**
+  //  * A function that searches driver by name
+  //  */
 
-  searchDriverByName() {
-    this.noUserFound = false;
-    this.availableCars = this.allAvailableCars.filter(car => `${car.user.firstName} ${car.user.lastName}`.toLowerCase().includes(this.searchName.toLowerCase()));
-    if (this.availableCars.length === 0) {
-      this.availableCars = this.allAvailableCars;
-      this.noUserFound = true;
-    }
-  }
+  // searchDriverByName() {
+  //   this.noUserFound = false;
+  //   this.availableCars = this.allAvailableCars.filter(car => `${car.user.firstName} ${car.user.lastName}`.toLowerCase().includes(this.searchName.toLowerCase()));
+  //   if (this.availableCars.length === 0) {
+  //     this.availableCars = this.allAvailableCars;
+  //     this.noUserFound = true;
+  //   }
+  // }
 
-  /**
-   * A function that searchs driver by location
-   */
+  // /**
+  //  * A function that searchs driver by location
+  //  */
 
-  searchDriverByLocation() {
-    this.availableCars = this.allAvailableCars.filter(car => 
-     car.user.batch.batchLocation.toLowerCase().includes(this.searchLocation.toLowerCase()))
-    }
-  /**
-   * A function that filters by location
-   *
-   */
+  // searchDriverByLocation() {
+  //   this.availableCars = this.allAvailableCars.filter(car => 
+  //    car.user.batch.batchLocation.toLowerCase().includes(this.searchLocation.toLowerCase()))
+  //   }
+  // /**
+  //  * A function that filters by location
+  //  *
+  //  */
   
-  filterDriverByLocation(event) {
-    this.noUserFound = false;
-    this.availableCars = this.allAvailableCars.filter(car => car.user.batch.batchLocation == event.target.value);
-    if (this.availableCars.length === 0) {
-      this.availableCars = this.allAvailableCars;
-      this.noUserFound = true;
-    }
-  }
+  // filterDriverByLocation(event) {
+  //   this.noUserFound = false;
+  //   this.availableCars = this.allAvailableCars.filter(car => car.user.batch.batchLocation == event.target.value);
+  //   if (this.availableCars.length === 0) {
+  //     this.availableCars = this.allAvailableCars;
+  //     this.noUserFound = true;
+  //   }
+  // }
 
-  /**
-   * A GET method that retrieves all driver
-   */
-  showAllDrivers() {
-    this.searchName = '';
-    this.orderByLocation();
-  }
+  // /**
+  //  * A GET method that retrieves all driver
+  //  */
+  // showAllDrivers() {
+  //   this.searchName = '';
+  //   this.orderByLocation();
+  // }
 
-  hideMessage() {
-    this.noUserFound = false;
-  }
+  // hideMessage() {
+  //   this.noUserFound = false;
+  // }
 }

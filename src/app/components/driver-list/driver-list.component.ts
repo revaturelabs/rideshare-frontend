@@ -105,9 +105,7 @@ async getGoogleApi()  {
                }    
            }
        );
-    // let script : HTMLScriptElement = document.createElement('script');
-    //  script.src = "http://maps.googleapis.com/maps/api/js?key=AIzaSyDzZ0vjRJf-N_twLVPrZMsgdB579KUxHGo";
-    //  document.head.append(script);
+   
    }
 
   showDriversOnMap(origin, drivers){

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+
 import { EmployeeServiceService } from 'src/app/services/employee-service.service';
 import { ConfigServiceService } from 'src/app/services/config-service.service';
+
 import { Employee } from 'src/app/Models/Employee';
 
 @Component({
@@ -9,6 +11,7 @@ import { Employee } from 'src/app/Models/Employee';
   styleUrls: ['./profile-contact.component.css']
 })
 export class ProfileContactComponent implements OnInit {
+
 
   employee: Employee;
   f_name : string;
@@ -32,6 +35,7 @@ export class ProfileContactComponent implements OnInit {
     //   this.email = this.profileObject.email;
     //   this.phone = this.profileObject.phoneNumber;
 
+
     // });
     
     this.employee = JSON.parse(sessionStorage.getItem('User'));
@@ -46,6 +50,7 @@ export class ProfileContactComponent implements OnInit {
     this.isActive = this.employee.is_active;
   }
 
+
   async UpdateContactInfo(){
     let employee : Employee = new Employee(this.employee.employee_id, this.email, this.f_name, this.l_name,
       this.phone, this.username, this.password, this.address, this.employee.is_accepting_rides,
@@ -57,6 +62,7 @@ export class ProfileContactComponent implements OnInit {
       console.log(this.employee);
       return onfulfilled;
     })
+
 
     sessionStorage.setItem('User',JSON.stringify(this.employee));
     this.employee = JSON.parse(sessionStorage.getItem('User'));

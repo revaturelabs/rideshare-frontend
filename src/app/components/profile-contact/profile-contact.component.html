@@ -9,7 +9,7 @@
             <div class="col-sm-1"></div>
                 <label for="f_name" class="col-sm-4 col-form-label">First Name:</label>
                 <div class="col-sm-4">
-                    <input type="text" class="form-control" id="f_name" [(ngModel)]=firstName value="{{ profileObject?.firstName }}">
+                    <input type="text" class="form-control" id="f_name" [(ngModel)]=firstName value="{{ currentEmployee?.first_name }}">
                 </div>
         </div>
         
@@ -17,7 +17,7 @@
                 <div class="col-sm-1"></div>
             <label for="l_name" class="col-sm-4 col-form-label">Last Name:</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" id="l_name" [(ngModel)]=lastName value="{{ profileObject?.lastName }}">
+                <input type="text" class="form-control" id="l_name" [(ngModel)]=lastName value="{{ currentEmployee?.last_name }}">
             </div>
         </div>
     
@@ -25,7 +25,7 @@
                 <div class="col-sm-1"></div>
             <label for="user_email" class="col-sm-4 col-form-label">Email:</label>
             <div class="col-sm-4">
-                <input type="email" class="form-control" id="user_email" aria-describedby="emailHelp" [(ngModel)]=email value="{{ profileObject?.email }}">
+                <input type="email" class="form-control" id="user_email" aria-describedby="emailHelp" [(ngModel)]=email value="{{ currentemployee?.email }}">
             </div>
         </div>
     
@@ -33,7 +33,7 @@
                 <div class="col-sm-1"></div>
             <label for="phone" class="col-sm-4 col-form-label">Phone:</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" id="phone" [(ngModel)]=phone value="{{ profileObject?.phoneNumber }}">
+                <input type="text" class="form-control" id="phone" [(ngModel)]=phone value="{{ currentEmployee?.phone_number }}">
                 <p *ngIf="success != ''" class="success">{{success}}</p>
             </div>
         </div>

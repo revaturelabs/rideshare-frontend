@@ -25,8 +25,8 @@ export class DriverListComponent implements OnInit {
   mapProperties :{};
   availableCars : Array<any> = [];
   drivers : Array<any> = [];
-
-
+  p: Number = 1;
+  count: Number = 5;
   @ViewChild('map',null) mapElement: any;
   map: google.maps.Map;
 

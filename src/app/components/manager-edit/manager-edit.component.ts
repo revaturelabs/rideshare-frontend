@@ -11,7 +11,8 @@ export class ManagerEditComponent implements OnInit {
   employees:Array<Employee>= [];
   manager:Employee;
   role:string;
-  
+  count: Number = 5;
+  p: Number = 1;
 
   constructor(public ess:EmployeeServiceService) { }
 

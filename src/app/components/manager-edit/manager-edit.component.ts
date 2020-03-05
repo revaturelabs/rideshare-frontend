@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Employee } from 'src/app/models/employee';
-import { EmployeeServiceService } from 'src/app/services/employee-service.service';
+import { Employee } from '../../models/employee';
+import { EmployeeServiceService } from '../../services/employee-service.service';
 
 @Component({
   selector: 'app-manager-edit',
@@ -10,12 +10,17 @@ import { EmployeeServiceService } from 'src/app/services/employee-service.servic
 export class ManagerEditComponent implements OnInit {
   employees:Array<Employee>= [];
   manager:Employee;
+  role:string;
 
   constructor(public ess:EmployeeServiceService) { }
 
   async populateEmployeeTable(){
     let tempE:Employee[] = await this.ess.getAllEmployees(); 
-    this.employees = tempE; 
+    for (let employee in tempE) {
+      if (!tempE[employee].is_manager) {
+        this.employees.push(tempE[employee]);
+      }
+    }
   }
   
     ngOnInit() {
@@ -25,21 +30,16 @@ export class ManagerEditComponent implements OnInit {
   
     
     async delete(employee){
-  
-      alert(`{{employee.first_name}} ` + `{{employee.last_name}} ` + `was deleted!`);
+      this.employees = [];
       await this.ess.deleteEmployee(employee.employee_id);
-      this.ngOnInit();
+      this.populateEmployeeTable();
       
     }
     async promote(employee){
-  
+      this.employees = [];
       employee.is_manager = true; 
-      let tempE:Employee = await this.ess.updateEmployee(employee);
-  
-      this.ngOnInit(); 
-      if(tempE.is_manager = true){
-        alert(`{{employee.first_name}} ` + `{{employee.last_name}} ` + `was promoted!`); 
-      }
+      await this.ess.updateEmployee(employee);
+      this.populateEmployeeTable();
     }
 
 }

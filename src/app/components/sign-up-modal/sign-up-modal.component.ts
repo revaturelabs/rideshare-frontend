@@ -1,16 +1,16 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { BsModalService, BsModalRef} from 'ngx-bootstrap';
-import { UserService } from 'src/app/services/user-service/user.service';
-import { User } from 'src/app/models/user';
-import { Batch } from 'src/app/models/batch';
-import { BatchService } from 'src/app/services/batch-service/batch.service';
-import { ValidationService } from 'src/app/services/validation-service/validation.service';
-import { Office } from 'src/app/models/office';
-import { Employee } from 'src/app/Models/Employee';
-import { EmployeeServiceService } from 'src/app/services/employee-service.service';
-import { OfficeServiceService } from 'src/app/services/office-service.service';
+// import { UserService } from 'src/app/services/user-service/user.service';
+// import { User } from 'src/app/models/user';
+// import { Batch } from 'src/app/models/batch';
+// import { BatchService } from 'src/app/services/batch-service/batch.service';
+// import { ValidationService } from 'src/app/services/validation-service/validation.service';
+import { Office } from '../../models/office';
+import { Employee } from '../../models/employee';
+import { EmployeeServiceService } from '../../services/employee-service.service';
+import { OfficeServiceService } from '../../services/office-service.service';
 import { Router } from '@angular/router';
-import { ConfigServiceService } from 'src/app/services/config-service.service';
+import { ConfigServiceService } from '../../services/config-service.service';
 
 @Component({
   selector: 'signupmodal',
@@ -75,6 +75,7 @@ export class SignupModalComponent implements OnInit {
     if(verstat) {
       try {
         let e:Employee =await this.es.addEmployee(empl);
+        this.modalRef.hide();
         this.r.navigateByUrl("/home");
       } catch(e) {
         console.log(e);

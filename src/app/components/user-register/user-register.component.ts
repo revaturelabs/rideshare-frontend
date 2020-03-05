@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from 'src/app/services/user-service/user.service';
-import { BatchService } from 'src/app/services/batch-service/batch.service';
-import { Batch } from 'src/app/models/batch';
+import { UserService } from '../../services/user-service/user.service';
+import { BatchService } from '../../services/batch-service/batch.service';
+import { Batch } from '../../models/batch';
 import { Router } from '@angular/router';
-import { ValidationService } from 'src/app/services/validation-service/validation.service';
-import { User } from 'src/app/models/user';
+import { ValidationService } from '../../services/validation-service/validation.service';
+import { User } from '../../models/user';
 
 @Component({
 	selector: 'app-user-register',

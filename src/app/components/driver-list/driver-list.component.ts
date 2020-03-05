@@ -1,18 +1,18 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { User } from 'src/app/models/user';
-import { UserService } from 'src/app/services/user-service/user.service';
-import { AuthService } from 'src/app/services/auth-service/auth.service';
-import { Batch } from 'src/app/models/batch';
-import { Car } from 'src/app/models/car';
-import { CarService } from 'src/app/services/car-service/car.service';
-import { Router } from '@angular/router';
-import { BatchService } from 'src/app/services/batch-service/batch.service';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
+// import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+// import { User } from 'src/app/models/user';
+// import { UserService } from 'src/app/services/user-service/user.service';
+// import { AuthService } from 'src/app/services/auth-service/auth.service';
+// import { Batch } from 'src/app/models/batch';
+// import { Car } from 'src/app/models/car';
+// import { CarService } from 'src/app/services/car-service/car.service';
+// import { Router } from '@angular/router';
+// import { BatchService } from 'src/app/services/batch-service/batch.service';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../environments/environment';
-import { ɵAnimationGroupPlayer } from '@angular/animations';
-import { CarServiceService } from 'src/app/services/car-service.service';
-import { EmployeeServiceService } from 'src/app/services/employee-service.service';
+// import { environment } from '../../../environments/environment';
+// import { ɵAnimationGroupPlayer } from '@angular/animations';
+import { CarServiceService } from '../../services/car-service.service';
+import { EmployeeServiceService } from '../../services/employee-service.service';
 
 @Component({
   selector: 'app-driver-list',
@@ -161,38 +161,11 @@ displayDriversList(origin, drivers) {
           var results = response.rows[0].elements;
           //console.log(results[0].distance.text);
           var name =  element.name;
-          outputDiv.innerHTML += `<tr><td class="col">${name}</td>
-                                  <td class="col">${results[0].distance.text}</td>
-                                  <td class="col">${results[0].duration.text}</td>
-                                  <td class="col">${4}</td>
-                                  <td class="col">
-                                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCentered${element.id}"> View</button>
-                                    <div class="col-lg-5">
-                                     <div class="modal" id="exampleModalCentered${element.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true">
-                                      <div class="modal-dialog modal-dialog-centered" role="document">
-                                          <div class="modal-content">
-                                              <div class="modal-header">
-                                                  <h5 class="modal-title" id="exampleModalCenteredLabel">Contact Info:</h5>
-                                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                     <span aria-hidden="true">×</span>
-                                                   </button>
-                                              </div>
-                                              <div class="modal-body">
-                                                  <h1>${element.name}</h1>
-                                                  <h3>Email: ${element.email}</h3>         
-                                                  <h3>Phone: ${element.phone}</h3>                 
-                                              </div>
-                                              <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                              </div>
-                                            </div>
-                                         </div>
-                                       </div>
-                                  </div>
-                                  <div class="col-lg-6">
-                                      <div #maps id="gmap" class="img-responsive"></div>
-                                  </div>
-                                </td></tr>`;
+          if(results[0].distance.value < 26400){
+            element.distance = results[0].distance.text;
+            element.time = results[0].duration.text;
+            return element;
+            }
       }
     });
     

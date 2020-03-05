@@ -1,12 +1,12 @@
 import { Component, OnInit, NgModule } from '@angular/core';
-import { UserService } from 'src/app/services/user-service/user.service';
-import { BatchService } from 'src/app/services/batch-service/batch.service';
-import { Batch } from 'src/app/models/batch';
+// import { UserService } from 'src/app/services/user-service/user.service';
+// import { BatchService } from 'src/app/services/batch-service/batch.service';
+import { Batch } from '../../models/batch';
 import { Router, RouterModule } from '@angular/router';
-import { ValidationService } from 'src/app/services/validation-service/validation.service';
-import { User } from 'src/app/models/user';
-import { EmployeeServiceService } from 'src/app/services/employee-service.service';
-import { OfficeServiceService } from 'src/app/services/office-service.service';
+import { ValidationService } from '../../services/validation-service/validation.service';
+import { User } from '../../models/user';
+import { EmployeeServiceService } from '../../services/employee-service.service';
+import { OfficeServiceService } from '../../services/office-service.service';
 
 @Component({
 	selector: 'app-user-register',

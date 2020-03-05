@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Admin } from 'src/app/models/admin';
-import { environment } from 'src/environments/environment';
+import { Admin } from '../../models/admin';
+import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { AuthService } from 'src/app/services/auth-service/auth.service';
-import { AdminService } from 'src/app/services/admin-service/admin.service';
+import { AuthService } from '../../services/auth-service/auth.service';
+import { AdminService } from '../../services/admin-service/admin.service';
 
 @Component({
   selector: 'app-admin-login',

@@ -1,10 +1,10 @@
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCentered">
+<button type="button" class="btn btn-primary" data-toggle="modal" [attr.data-target]="'#' + driver.id">
     View 
   </button>
   
   <!-- Modal -->
-  <div class="modal" id="exampleModalCentered" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true">
+  <div class="modal" id={{driver.id}} tabindex="-1" role="dialog" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -14,9 +14,9 @@
           </button>
         </div>
         <div class="modal-body">
-          <h1>Nick Saban</h1>
-          <h3>Email: nick.saban@gmail.com</h3>            
-          <h3>Phone: 555-867-5309</h3>                      
+          <h1>{{driver.name}}</h1>
+          <h3>Email: {{driver.email}}</h3>            
+          <h3>Phone: {{driver.phone}}</h3>                      
           </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

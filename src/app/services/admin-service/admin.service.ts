@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { Admin } from 'src/app/models/admin';
+import { Admin } from '../../models/admin';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({

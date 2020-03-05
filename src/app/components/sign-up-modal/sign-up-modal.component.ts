@@ -67,7 +67,7 @@ export class SignupModalComponent implements OnInit {
     let  empl:Employee = new Employee(0,this.email,this.fname,this.lname,this.phone,this.username,this.password,uaddress,true,true,this.checked,false,this.office);
     let veri = await this.cs.verifyAddress(this.state ,this.city, this.street, this.zip);
     console.log(veri);
-    let verstat = veri;
+    let verstat = veri.is_valid;
     if(verstat) {
       try {
         let e:Employee =await this.es.addEmployee(empl);
@@ -77,7 +77,8 @@ export class SignupModalComponent implements OnInit {
         console.log(e);
       }
     } else {
-      console.log("asdasd");
+      alert("Address is not validated, User not created");
+      console.log("address not real");
     }
     
     // this.showLogin = true;

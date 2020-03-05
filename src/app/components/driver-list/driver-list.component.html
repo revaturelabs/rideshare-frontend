@@ -37,11 +37,11 @@
        </thead>
        <tbody id="output"></tbody>
       </table>
-   
+      <div class="text-left">
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+      </div>
      </div>
-     <div class="text-right">
-      <pagination-controls (pageChange)="p = $event"></pagination-controls>
-    </div>
+    
      <div class="col-lg-6">
        <h4>Directions:</h4>
        <div #map id="gmap" class="img-responsive"></div>

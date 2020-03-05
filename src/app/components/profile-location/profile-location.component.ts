@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from 'src/app/services/user-service/user.service';
-import { User } from 'src/app/models/user';
-import { ConfigServiceService } from 'src/app/services/config-service.service';
-import { EmployeeServiceService } from 'src/app/services/employee-service.service';
-import { OfficeServiceService } from 'src/app/services/office-service.service';
-import { Office } from 'src/app/models/office';
-import { Employee } from 'src/app/Models/Employee';
+// import { UserService } from 'src/app/services/user-service/user.service';
+// import { User } from 'src/app/models/user';
+import { ConfigServiceService } from '../../services/config-service.service';
+import { EmployeeServiceService } from '../../services/employee-service.service';
+import { OfficeServiceService } from '../../services/office-service.service';
+import { Office } from '../../models/office';
+import { Employee } from '../../models/employee';
 
 @Component({
   selector: 'app-profile-location',

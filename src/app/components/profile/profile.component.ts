@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Employee } from 'src/app/Models/Employee';
+import { Employee } from '../../models/employee';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',

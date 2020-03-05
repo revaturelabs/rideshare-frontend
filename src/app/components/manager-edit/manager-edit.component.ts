@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Employee } from 'src/app/models/employee';
-import { EmployeeServiceService } from 'src/app/services/employee-service.service';
+import { Employee } from '../../models/employee';
+import { EmployeeServiceService } from '../../services/employee-service.service';
 
 @Component({
   selector: 'app-manager-edit',

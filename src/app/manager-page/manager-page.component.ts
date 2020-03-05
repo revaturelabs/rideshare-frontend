@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Title } from '@angular/platform-browser';
 
 
 @Component({
@@ -13,10 +12,9 @@ export class ManagerPageComponent implements OnInit {
   showEditOffice:boolean;
   showManagerEditEmployee:boolean;
 
-  constructor(private titleService: Title) { }
+  constructor() { }
 
   ngOnInit() {
-    this.titleService.setTitle("Manager Page - RideShare");
     this.showManagerPage = true;
     this.showEditOffice = false;
     this.showManagerEditEmployee = false;

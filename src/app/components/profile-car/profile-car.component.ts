@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { CarServiceService } from 'src/app/services/car-service.service';
-import { Car } from 'src/app/models/car';
-import { EmployeeServiceService } from 'src/app/services/employee-service.service'
-import { Employee } from 'src/app/models/employee';
-import { ConfigServiceService } from 'src/app/services/config-service.service';
+import { CarServiceService } from '../../services/car-service.service';
+import { Car } from '../../models/car';
+import { EmployeeServiceService } from '../../services/employee-service.service';
+import { Employee } from '../../models/employee';
+import { ConfigServiceService } from '../../services/config-service.service';
 
 @Component({
   selector: 'app-profile-car',

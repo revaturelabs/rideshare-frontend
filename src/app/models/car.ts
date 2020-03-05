@@ -1,4 +1,4 @@
-import { Employee } from 'src/app/models/employee';
+import { Employee } from './employee';
 
 export class Car {
     car_id : number;

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Car } from 'src/app/models/car';
-import { User } from 'src/app/models/user';
+import { Car } from '../../models/car';
+import { User } from '../../models/user';
 import { Router } from '@angular/router';
 import { UserService } from '../user-service/user.service';
 import { environment } from '../../../environments/environment';

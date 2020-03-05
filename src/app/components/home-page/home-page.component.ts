@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Office } from 'src/app/models/office';
-import { OfficeServiceService } from 'src/app/services/office-service.service';
+import { Office } from '../../models/office';
+import { OfficeServiceService } from '../../services/office-service.service';
 
 
 @Component({

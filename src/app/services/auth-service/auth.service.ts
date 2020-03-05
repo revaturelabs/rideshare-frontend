@@ -1,7 +1,7 @@
 import { Injectable, Output, EventEmitter } from '@angular/core';
-import { User } from 'src/app/models/user';
+import { User } from '../../models/user';
 import { Router } from '@angular/router';
-import { Admin } from 'src/app/models/admin';
+import { Admin } from '../../models/admin';
 
 
 @Injectable({

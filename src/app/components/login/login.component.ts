@@ -1,14 +1,14 @@
 import { Component, OnInit, NgModule, TemplateRef } from '@angular/core';
-import { UserService } from 'src/app/services/user-service/user.service';
-import { User } from 'src/app/models/user';
-import { environment } from '../../../environments/environment';
+// import { UserService } from 'src/app/services/user-service/user.service';
+import { User } from '../../models/user';
+// import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { AuthService } from 'src/app/services/auth-service/auth.service';
+import { AuthService } from '../../services/auth-service/auth.service';
 import { Router, RouterModule } from '@angular/router';
 import { BsModalService, BsModalRef} from 'ngx-bootstrap';
-import { EmployeeServiceService } from 'src/app/services/employee-service.service';
+import { EmployeeServiceService } from '../../services/employee-service.service';
 
-	import { from } from 'rxjs';
+	// import { from } from 'rxjs';
 import { Employee } from 'src/app/models/employee';
 
 @Component({

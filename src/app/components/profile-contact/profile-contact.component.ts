@@ -3,6 +3,7 @@ import { EmployeeServiceService } from 'src/app/services/employee-service.servic
 import { ConfigServiceService } from 'src/app/services/config-service.service';
 import { Employee } from 'src/app/Models/Employee';
 
+
 @Component({
   selector: 'app-profile-contact',
   templateUrl: './profile-contact.component.html',

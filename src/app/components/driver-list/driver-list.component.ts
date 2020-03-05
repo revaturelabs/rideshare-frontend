@@ -1,18 +1,19 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { User } from 'src/app/models/user';
-import { UserService } from 'src/app/services/user-service/user.service';
-import { AuthService } from 'src/app/services/auth-service/auth.service';
-import { Batch } from 'src/app/models/batch';
-import { Car } from 'src/app/models/car';
-import { CarService } from 'src/app/services/car-service/car.service';
-import { Router } from '@angular/router';
-import { BatchService } from 'src/app/services/batch-service/batch.service';
+// import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+// import { User } from 'src/app/models/user';
+// import { UserService } from 'src/app/services/user-service/user.service';
+// import { AuthService } from 'src/app/services/auth-service/auth.service';
+// import { Batch } from 'src/app/models/batch';
+// import { Car } from 'src/app/models/car';
+// import { CarService } from 'src/app/services/car-service/car.service';
+// import { Router } from '@angular/router';
+// import { BatchService } from 'src/app/services/batch-service/batch.service';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../environments/environment';
-import { ɵAnimationGroupPlayer } from '@angular/animations';
-import { CarServiceService } from 'src/app/services/car-service.service';
-import { EmployeeServiceService } from 'src/app/services/employee-service.service';
+// import { environment } from '../../../environments/environment';
+// import { ɵAnimationGroupPlayer } from '@angular/animations';
+import { CarServiceService } from '../../services/car-service.service';
+import { EmployeeServiceService } from '../../services/employee-service.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-driver-list',
@@ -30,9 +31,10 @@ export class DriverListComponent implements OnInit {
   @ViewChild('map',null) mapElement: any;
   map: google.maps.Map;
 
-  constructor(private http: HttpClient,private employeeService:EmployeeServiceService, private carService: CarServiceService) { }
+  constructor(private http: HttpClient,private employeeService:EmployeeServiceService, private carService: CarServiceService, private titleService: Title) { }
 
   ngOnInit() {
+    this.titleService.setTitle("Driver List - RideShare");
     this.drivers = [];
     
     this.employeeService.getDriversForLocation(this.location).subscribe(

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserService } from 'src/app/services/user-service/user.service';
-import { User } from 'src/app/models/user';
-import { AuthService } from 'src/app/services/auth-service/auth.service';
+import { UserService } from '../../services/user-service/user.service';
+import { User } from '../../models/user';
+import { AuthService } from '../../services/auth-service/auth.service';
 
 /**
  * This is a navbar component.

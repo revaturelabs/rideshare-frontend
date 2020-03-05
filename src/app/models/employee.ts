@@ -1,4 +1,4 @@
-import { Office } from 'src/app/models/office';
+import { Office } from './office';
 
 export class Employee {
     employee_id : number;

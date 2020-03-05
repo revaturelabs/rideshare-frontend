@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from 'src/app/services/user-service/user.service';
-import { User } from 'src/app/models/user';
-import { ConfigServiceService } from 'src/app/services/config-service.service';
-import { EmployeeServiceService } from 'src/app/services/employee-service.service';
-import { OfficeServiceService } from 'src/app/services/office-service.service';
-import { Office } from 'src/app/models/office';
-import { Employee } from 'src/app/Models/Employee';
+// import { UserService } from 'src/app/services/user-service/user.service';
+// import { User } from 'src/app/models/user';
+import { ConfigServiceService } from '../../services/config-service.service';
+import { EmployeeServiceService } from '../../services/employee-service.service';
+import { OfficeServiceService } from '../../services/office-service.service';
+import { Office } from '../../models/office';
+import { Employee } from '../../models/employee';
 
 @Component({
   selector: 'app-profile-location',
@@ -21,10 +21,9 @@ export class ProfileLocationComponent implements OnInit {
   selectCity : string = " Select a City ";
   office : string = " Select an Office ";
   officeObject : Office;
-  states = ['AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA','KS',
-            'KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY',
-            'NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV',
-            'WI','WY'];
+  states = ['AK','AL','AR','AZ','CA','CO','CT','DE','FL','GA','HI','IA','ID','IL','IN','KS',
+    'KY','LA','MA','MD','ME','MI','MN','MO','MS','MT','NC','ND','NE','NH','NJ','NM','NV','NY',
+    'OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WI','WV','WY'];
   eStreet : string;
   eCity : string;
   eState : string;

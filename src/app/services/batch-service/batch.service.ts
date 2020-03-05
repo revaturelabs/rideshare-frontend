@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Batch } from 'src/app/models/batch';
+import { Batch } from '../../models/batch';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';

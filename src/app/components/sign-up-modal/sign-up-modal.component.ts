@@ -75,6 +75,7 @@ export class SignupModalComponent implements OnInit {
     if(verstat) {
       try {
         let e:Employee =await this.es.addEmployee(empl);
+        this.modalRef.hide();
         this.r.navigateByUrl("/home");
       } catch(e) {
         console.log(e);

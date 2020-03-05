@@ -24,8 +24,8 @@
         <label for="employeeState" class="col-sm-4 col-form-label">State:</label>
         <div class="col-sm-4">
             <select id="employeeStateSelect" class="form-control" name="states" id="employeeState" [(ngModel)] = "eState">
-                <option value="none" selected disabled hidden></option>
-                <option *ngFor="let state of states" value="{{state}}">{{state}}</option>
+                <option id="noneOption" value="none" selected disabled hidden></option>
+                <option id="stateOption" *ngFor="let state of states" value="{{state}}">{{state}}</option>
             </select>
         </div>
     </div>
@@ -47,8 +47,8 @@
         <label for="selectState" class="col-sm-4 col-form-label">City:</label>
         <div class="col-sm-4">
             <select  id="citySelect" class="form-control" name="states" id="selectState" [(ngModel)] = "selectCity" (change)="GetAllCityOffices();">
-                <option value=" Select a City " selected disabled hidden> Select a City </option> 
-                <option *ngFor="let string of officeCities" value="{{string}}">{{string}}</option>
+                <option id="placeholderOption" value=" Select a City " selected disabled hidden> Select a City </option> 
+                <option id="cityOption" *ngFor="let string of officeCities" value="{{string}}">{{string}}</option>
             </select>
         </div>
     </div>
@@ -58,8 +58,8 @@
         <label for="selectOffice" class="col-sm-4 col-form-label">Office:</label>
         <div class="col-sm-4">
             <select id="officeSelect" [disabled]="!citySelected" class="form-control" name="offices" id="selectOffice" (change)="updateOffice();" [(ngModel)] = office>
-                <option value=" Select an Office " selected disabled hidden> Select an Office </option> 
-                <option *ngFor="let Office of cityOffices" value="{{Office.office_address}}">{{Office.office_address}}</option>
+                <option id="placeholderOption" value=" Select an Office " selected disabled hidden> Select an Office </option> 
+                <option id="officeOption" *ngFor="let Office of cityOffices" value="{{Office.office_address}}">{{Office.office_address}}</option>
             </select>
         </div>
     </div>

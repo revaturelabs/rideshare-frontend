@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Employee } from '../../models/employee';
+import { Title } from '@angular/platform-browser';
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  constructor( private router: Router) { }
+  constructor( private router: Router, private titleService: Title) { }
   showCont :boolean = false;
   showCar :boolean = false;
   showLocation :boolean = false;
@@ -22,6 +24,7 @@ export class ProfileComponent implements OnInit {
   employee: Employee;
 
   ngOnInit() {
+    this.titleService.setTitle("Profile Page - RideShare");
     this.showCont = true;
     this.employee = JSON.parse(sessionStorage.getItem('User'));
     if (this.employee.is_manager) {

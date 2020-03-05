@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EmployeeServiceService } from 'src/app/services/employee-service.service';
 import { ConfigServiceService } from 'src/app/services/config-service.service';
-import { Employee } from 'src/app/Models/Employee';
+import { Employee } from 'src/app/models/employee';
 
 
 @Component({

@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { HomePageComponent } from './components/home-page/home-page.component';//this is home
 //import { RegisterComponent } from './components/register/register.component';//this is register
 import { LoginComponent } from './components/login/login.component';//this is login
-import { AdminComponent } from './components/admin/admin.component';//this is manager-page
+// import { AdminComponent } from './components/admin/admin.component';//this is manager-page
 import { ProfileComponent } from './components/profile/profile.component';//this is employee-page
 import { ShowDriversComponent } from './components/show-drivers/show-drivers.component';//this is show-drivers
 import { MapComponent } from './components/map/map.component';//this is map
@@ -16,25 +16,27 @@ import { ProfileLocationComponent } from './components/profile-location/profile-
 import { ProfileCarComponent } from './components/profile-car/profile-car.component';//this is edit-car
 import { EditOfficeComponent } from './components/edit-office/edit-office.component';//this is edit-office
 import { NavbarComponent } from './components/navbar/navbar.component';//this is nav-bar
-import { EditEmployeeComponent } from './components/edit-employee/edit-employee.component';//this is manager-edit-employee
+// import { EditEmployeeComponent } from './components/edit-employee/edit-employee.component';//this is manager-edit-employee
 // import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ModalModule } from 'node_modules/ngx-bootstrap';
-import { RegisterComponent } from './Components/register/register.component';
-import { SignupModalComponent } from './Components/sign-up-modal/sign-up-modal.component';
-import { ProfileMembershipComponent } from './components/profile-membership/profile-membership.component'
+// import { RegisterComponent } from './Components/register/register.component';
+import { SignupModalComponent } from './components/sign-up-modal/sign-up-modal.component';
+// import { ProfileMembershipComponent } from './components/profile-membership/profile-membership.component'
 import { DriverContactModalComponent } from './components/driver-contact-modal/driver-contact-modal.component';
 import { ManagerEditComponent } from './components/manager-edit/manager-edit.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { ManagerStatusPipe } from './pipes/manager-status.pipe';
 
 @NgModule({
   declarations: [
     DriverContactModalComponent,
     AppComponent,
     HomePageComponent,
-    RegisterComponent,
+    // RegisterComponent,
     LoginComponent,
-    AdminComponent,
+    // AdminComponent,
     ProfileComponent,
     ShowDriversComponent,
     MapComponent,
@@ -44,10 +46,12 @@ import { ManagerEditComponent } from './components/manager-edit/manager-edit.com
     ProfileCarComponent,
     EditOfficeComponent,
     NavbarComponent,
-    EditEmployeeComponent,
+    // EditEmployeeComponent,
     SignupModalComponent,
-    ProfileMembershipComponent,
-    ManagerEditComponent
+
+    // ProfileMembershipComponent,
+    ManagerEditComponent,
+    ManagerStatusPipe
 
   ],
   imports: [
@@ -57,7 +61,8 @@ import { ManagerEditComponent } from './components/manager-edit/manager-edit.com
     // FontAwesomeModule,
     HttpClientModule,
     NgbModule,
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    NgxPaginationModule
   ],
   providers: [Title],
   bootstrap: [AppComponent]

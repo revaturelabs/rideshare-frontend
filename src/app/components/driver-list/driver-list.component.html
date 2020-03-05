@@ -17,7 +17,7 @@
       </div>
       <p id="total"></p>-->
       <h4>Driver's List</h4>
-      
+   
      <table class="table table-striped">
        <thead class="thead-dark">
          <tr>
@@ -26,16 +26,22 @@
            <th scope="col">Time</th>
            <th scope="col">View Info</th>
          </tr>
-         <tr *ngFor="let driver of drivers">
+         
+         <tr *ngFor="let driver of drivers | paginate: { itemsPerPage: count, currentPage: p }">
            <td name="col">{{driver.name}}</td>
            <td name="col">{{driver.distance}}</td>
            <td name="col">{{driver.time}}</td>
            <td name="col"><app-driver-contact-modal [driver]="driver"></app-driver-contact-modal></td>
          </tr>
+         
        </thead>
        <tbody id="output"></tbody>
       </table>
+      <div class="text-left">
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+      </div>
      </div>
+    
      <div class="col-lg-6">
        <h4>Directions:</h4>
        <div #map id="gmap" class="img-responsive"></div>

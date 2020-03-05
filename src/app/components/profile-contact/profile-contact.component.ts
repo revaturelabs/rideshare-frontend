@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
 import { EmployeeServiceService } from 'src/app/services/employee-service.service';
 import { ConfigServiceService } from 'src/app/services/config-service.service';
-
 import { Employee } from 'src/app/Models/Employee';
 
 @Component({
@@ -11,7 +9,6 @@ import { Employee } from 'src/app/Models/Employee';
   styleUrls: ['./profile-contact.component.css']
 })
 export class ProfileContactComponent implements OnInit {
-
 
   employee: Employee;
   f_name : string;
@@ -27,17 +24,6 @@ export class ProfileContactComponent implements OnInit {
   constructor(private employeeService: EmployeeServiceService, private configService:ConfigServiceService) { }
 
   ngOnInit() {
-    // this.currentUser = this.userService.getUserById2(sessionStorage.getItem("userid")).subscribe((response)=>{
-    //   this.profileObject = response;
-
-    //   this.firstName = this.profileObject.firstName;
-    //   this.lastName = this.profileObject.lastName;
-    //   this.email = this.profileObject.email;
-    //   this.phone = this.profileObject.phoneNumber;
-
-
-    // });
-    
     this.employee = JSON.parse(sessionStorage.getItem('User'));
     this.f_name = this.employee.first_name;
     this.l_name = this.employee.last_name;
@@ -50,11 +36,13 @@ export class ProfileContactComponent implements OnInit {
     this.isActive = this.employee.is_active;
   }
 
+  changeActive(){
+    this.isActive = false;
+  }
 
   async UpdateContactInfo(){
-    let employee : Employee = new Employee(this.employee.employee_id, this.email, this.f_name, this.l_name,
-      this.phone, this.username, this.password, this.address, this.employee.is_accepting_rides,
-      this.isActive, this.isDriver, this.employee.is_manager, this.employee.office);
+    let employee : Employee = new Employee(this.employee.employee_id, this.email, this.f_name, this.l_name, this.phone, this.username, 
+      this.password, this.address, this.isActive, this.isActive, this.isDriver, this.employee.is_manager, this.employee.office);
 
     let updated: Employee = await this.employeeService.updateEmployee(employee)
     .then((onfulfilled) => {

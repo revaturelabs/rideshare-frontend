@@ -68,6 +68,7 @@ export class SignupModalComponent implements OnInit {
     let veri = await this.cs.verifyAddress(this.state ,this.city, this.street, this.zip);
     console.log(veri);
     let verstat = veri.is_valid;
+    if(this.es.)
     if(verstat) {
       try {
         let e:Employee =await this.es.addEmployee(empl);

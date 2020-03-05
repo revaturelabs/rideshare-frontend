@@ -26,6 +26,7 @@ import { SignupModalComponent } from './Components/sign-up-modal/sign-up-modal.c
 // import { ProfileMembershipComponent } from './components/profile-membership/profile-membership.component'
 import { DriverContactModalComponent } from './components/driver-contact-modal/driver-contact-modal.component';
 import { ManagerEditComponent } from './components/manager-edit/manager-edit.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 import { ManagerStatusPipe } from './pipes/manager-status.pipe';
 
 @NgModule({
@@ -60,7 +61,8 @@ import { ManagerStatusPipe } from './pipes/manager-status.pipe';
     // FontAwesomeModule,
     HttpClientModule,
     NgbModule,
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    NgxPaginationModule
   ],
   providers: [Title],
   bootstrap: [AppComponent]

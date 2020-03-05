@@ -9,7 +9,7 @@ import { BsModalService, BsModalRef} from 'ngx-bootstrap';
 import { EmployeeServiceService } from '../../services/employee-service.service';
 
 	// import { from } from 'rxjs';
-import { Employee } from 'src/app/models/employee';
+import { Employee } from '../../models/employee';
 
 @Component({
 	selector: 'app-login',

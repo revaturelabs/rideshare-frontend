@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { EmployeeServiceService } from '../../services/employee-service.service';
 import { ConfigServiceService } from '../../services/config-service.service';
 
-import { Employee } from 'src/app/Models/Employee';
+import { Employee } from '../../models/employee';
 
 @Component({
   selector: 'app-profile-contact',

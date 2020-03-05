@@ -15,7 +15,7 @@ export class EmployeeServiceService {
     return this.http.get<Employee>(`http://localhost:9999/employees/${employee_id}`).toPromise();
   }
 
-  getEmployeeByUsername(user_name:number):Promise<Employee>{
+  getEmployeeByUsername(user_name:string):Promise<Employee>{
 
     return this.http.get<Employee>(`http://localhost:9999/employees/username/${user_name}`).toPromise();
   }

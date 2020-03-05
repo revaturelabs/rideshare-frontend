@@ -68,8 +68,18 @@ export class SignupModalComponent implements OnInit {
     let veri = await this.cs.verifyAddress(this.state ,this.city, this.street, this.zip);
     console.log(veri);
     let verstat = veri.is_valid;
-    if(this.es.)
-    if(verstat) {
+    console.log(this.phone.length);
+    let u=await this.es.getEmployeeByUsername(this.username);
+    console.log(u);
+    if(u != null){
+      alert("Username already exist!");
+      console.log("user already exist");
+    }
+    if(this.phone.length != 10){
+      this.phoneNumberError = "Invalid phone number!";
+    }
+
+    else if(verstat) {
       try {
         let e:Employee =await this.es.addEmployee(empl);
         this.modalRef.hide();

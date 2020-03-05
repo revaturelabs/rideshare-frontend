@@ -21,9 +21,11 @@
     <input (keydown)="emailError = ''" id="email" type="email" [(ngModel)]="email" class="form-control"/>
     <p *ngIf="emailError != ''" class="error">{{emailError}}</p>
 
+
+    
     <label for="phoneNumber">Phone Number</label>
     <input (keydown)="phoneNumberError = ''" id="phoneNumber" type="text" [(ngModel)]="phone" class="form-control" />
-    <p *ngIf="phoneNumberError != ''" class="error">{{phoneNumberError}}</p>
+    <p >{{phoneNumberError}}</p>
 
     <label for="userName">User Name</label>
     <input (keydown)="userNameError = ''" id="userName" type="text" [(ngModel)]="username" class="form-control" />

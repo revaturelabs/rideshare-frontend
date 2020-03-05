@@ -57,14 +57,14 @@
         <div class="col-sm-1"></div>
         <label for="selectOffice" class="col-sm-4 col-form-label">Office:</label>
         <div class="col-sm-4">
-            <select class="form-control" name="offices" id="selectOffice" (click)="updateOffice();" [(ngModel)] = office>
+            <select [disabled]="!citySelected" class="form-control" name="offices" id="selectOffice" (change)="updateOffice();" [(ngModel)] = office>
                 <option value=" Select an Office " selected disabled hidden> Select an Office </option> 
                 <option *ngFor="let Office of cityOffices" value="{{Office.office_address}}">{{Office.office_address}}</option>
             </select>
         </div>
     </div>
 
-    <button type="submit" class="btn btn-primary myBtn" (click)="UpdateContactInfo()">Update</button><br>
+    <button [disabled]="!officeSelected" type="submit" class="btn btn-primary myBtn" (click)="UpdateContactInfo()">Update</button><br>
 
     <h4>Current Office Address:</h4>
 

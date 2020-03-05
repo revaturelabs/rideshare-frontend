@@ -25,6 +25,7 @@ import { RegisterComponent } from './Components/register/register.component';
 import { SignupModalComponent } from './Components/sign-up-modal/sign-up-modal.component';
 import { ProfileMembershipComponent } from './components/profile-membership/profile-membership.component'
 import { DriverContactModalComponent } from './components/driver-contact-modal/driver-contact-modal.component';
+import { ManagerEditComponent } from './components/manager-edit/manager-edit.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,6 @@ import { DriverContactModalComponent } from './components/driver-contact-modal/d
     ProfileMembershipComponent,
     ManagerEditComponent
 
-    
   ],
   imports: [
     BrowserModule,

@@ -74,6 +74,24 @@ export class ProfileCarComponent implements OnInit {
       console.log(this.car);
       return onfulfilled;
     })
+
+    this.UpdateContactInfo();
+  }
+
+  async UpdateContactInfo(){
+    let employee : Employee = new Employee(this.employee.employee_id, this.employee.email, this.employee.first_name, this.employee.last_name,
+      this.employee.phone_number, this.employee.username, this.employee.password, this.employee.user_address, this.employee.is_accepting_rides,
+      this.employee.is_active, true, this.employee.is_manager, this.employee.office);
+
+    let updated: Employee = await this.employeeService.updateEmployee(employee)
+    .then((onfulfilled) => {
+      this.employee = onfulfilled;
+      console.log(this.employee);
+      return onfulfilled;
+    })
+
+    sessionStorage.setItem('User',JSON.stringify(this.employee));
+    this.employee = JSON.parse(sessionStorage.getItem('User'));
   }
 
 }

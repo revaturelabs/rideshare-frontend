@@ -50,7 +50,7 @@ export class NavbarComponent implements OnInit {
     this.employee = JSON.parse(sessionStorage.getItem("User"));
 
     if(this.employee != null){
-      this.currentEmployee = this.employee.first_name;
+      this.currentEmployee = this.employee.first_name + " " + this.employee.last_name;
 
     }else{
       this.currentEmployee = '';

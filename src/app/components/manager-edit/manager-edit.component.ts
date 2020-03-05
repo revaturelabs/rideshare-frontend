@@ -11,19 +11,13 @@ export class ManagerEditComponent implements OnInit {
   employees:Array<Employee>= [];
   manager:Employee;
   role:string;
+  
 
   constructor(public ess:EmployeeServiceService) { }
 
   async populateEmployeeTable(){
     let tempE:Employee[] = await this.ess.getAllEmployees(); 
-    for (let employee in tempE) {
-      if (tempE[employee].is_manager) {
-        console.log("hello")
-      }
-      else {
-        this.employees.push(tempE[employee]);
-      }
-    }
+    this.employees = tempE;
   }
   
     ngOnInit() {
@@ -41,8 +35,7 @@ export class ManagerEditComponent implements OnInit {
     async promote(employee){
       this.employees = [];
       employee.is_manager = true; 
-      let tempE:Employee = await this.ess.updateEmployee(employee);
-  
+      await this.ess.updateEmployee(employee);
       this.populateEmployeeTable();
     }
 

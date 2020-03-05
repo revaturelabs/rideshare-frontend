@@ -13,6 +13,7 @@ import { HttpClient } from '@angular/common/http';
 // import { ɵAnimationGroupPlayer } from '@angular/animations';
 import { CarServiceService } from '../../services/car-service.service';
 import { EmployeeServiceService } from '../../services/employee-service.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-driver-list',
@@ -30,9 +31,10 @@ export class DriverListComponent implements OnInit {
   @ViewChild('map',null) mapElement: any;
   map: google.maps.Map;
 
-  constructor(private http: HttpClient,private employeeService:EmployeeServiceService, private carService: CarServiceService) { }
+  constructor(private http: HttpClient,private employeeService:EmployeeServiceService, private carService: CarServiceService, private titleService: Title) { }
 
   ngOnInit() {
+    this.titleService.setTitle("Driver List - RideShare");
     this.drivers = [];
     
     this.employeeService.getDriversForLocation(this.location).subscribe(

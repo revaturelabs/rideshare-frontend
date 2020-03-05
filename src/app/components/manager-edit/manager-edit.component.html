@@ -13,7 +13,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr class="c" *ngFor="let employee of employees">
+      <tr class="c" *ngFor="let employee of employees | paginate: { itemsPerPage: count, currentPage: p }">
         <td>{{employee.first_name}}</td>
         <td>{{employee.last_name}}</td>
         <td>{{employee.is_manager | managerStatus}}</td>
@@ -22,4 +22,8 @@
       </tr>
     </tbody>
   </table>
+  <div style = "text-align:center">
+  <!-- class="text-center" -->
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div>
 </div>

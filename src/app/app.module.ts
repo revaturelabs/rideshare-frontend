@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { HomePageComponent } from './components/home-page/home-page.component';//this is home
 //import { RegisterComponent } from './components/register/register.component';//this is register
 import { LoginComponent } from './components/login/login.component';//this is login
-import { AdminComponent } from './components/admin/admin.component';//this is manager-page
+// import { AdminComponent } from './components/admin/admin.component';//this is manager-page
 import { ProfileComponent } from './components/profile/profile.component';//this is employee-page
 import { ShowDriversComponent } from './components/show-drivers/show-drivers.component';//this is show-drivers
 import { MapComponent } from './components/map/map.component';//this is map
@@ -26,6 +26,7 @@ import { SignupModalComponent } from './components/sign-up-modal/sign-up-modal.c
 // import { ProfileMembershipComponent } from './components/profile-membership/profile-membership.component'
 import { DriverContactModalComponent } from './components/driver-contact-modal/driver-contact-modal.component';
 import { ManagerEditComponent } from './components/manager-edit/manager-edit.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 import { ManagerStatusPipe } from './pipes/manager-status.pipe';
 
 @NgModule({
@@ -35,7 +36,7 @@ import { ManagerStatusPipe } from './pipes/manager-status.pipe';
     HomePageComponent,
     // RegisterComponent,
     LoginComponent,
-    AdminComponent,
+    // AdminComponent,
     ProfileComponent,
     ShowDriversComponent,
     MapComponent,
@@ -60,7 +61,8 @@ import { ManagerStatusPipe } from './pipes/manager-status.pipe';
     // FontAwesomeModule,
     HttpClientModule,
     NgbModule,
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    NgxPaginationModule
   ],
   providers: [Title],
   bootstrap: [AppComponent]

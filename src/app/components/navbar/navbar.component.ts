@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 // import { UserService } from 'src/app/services/user-service/user.service';
-import { AuthService } from '../../services/auth-service/auth.service';
+// import { AuthService } from '../../services/auth-service/auth.service';
 // import { User } from 'src/app/models/user';
 // import { Admin } from 'src/app/models/admin';
 import {SignupModalComponent} from '../sign-up-modal/sign-up-modal.component';
@@ -37,7 +37,7 @@ export class NavbarComponent implements OnInit {
    * @param authService A dependency of an auth service is injected.
    */
 
-  constructor(private router: Router, public authService: AuthService, public employeeService : EmployeeServiceService) { }
+  constructor(private router: Router, public employeeService : EmployeeServiceService) { }
 
   /**
    * This is an OnInit function that sets the token to the parsed token string.
@@ -98,7 +98,9 @@ export class NavbarComponent implements OnInit {
     this.router.navigateByUrl("/home");
   }
 
-  redirectToHome() {
-    this.authService.user.driver ? this.router.navigate(['home/riders']) : this.router.navigate(['home/drivers']);
-  }
+  // redirectToHome() {
+  //   this.authService.user.driver ? this.router.navigate(['home/riders']) : this.router.navigate(['home/drivers']);
+  // }
+
+
 }

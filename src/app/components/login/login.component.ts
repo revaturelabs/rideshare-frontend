@@ -86,9 +86,9 @@ export class LoginComponent implements OnInit {
 			sessionStorage.setItem(key,JSON.stringify(e));
 			let user = JSON.parse(sessionStorage.getItem(key))
 			this.modalRef.hide();
-			if(e.is_manager){
+			if(e.isDriver != true){
 				
-			  this.r.navigateByUrl("/profile");
+			  this.r.navigateByUrl("/drivers");
 			}else{
 			  this.r.navigateByUrl("/profile");
 			}

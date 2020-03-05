@@ -9,7 +9,7 @@
 
             <label for="f_name" class="col-sm-4 col-form-label">First Name:</label>
             <div class="col-sm-4">
-                <input id="firstNameInput" type="text" class="form-control" id="f_name" [(ngModel)]=f_name value="{{employee.first_name}}">
+                <input id="firstNameInput" type="text" class="form-control"  [(ngModel)]=f_name value="{{employee.first_name}}">
             </div>
 
         </div>
@@ -19,7 +19,7 @@
             <label for="l_name" class="col-sm-4 col-form-label">Last Name:</label>
             <div class="col-sm-4">
 
-                <input id="lastNameInput" type="text" class="form-control" id="l_name" [(ngModel)]=l_name value="{{employee.last_name}}">
+                <input id="lastNameInput" type="text" class="form-control" [(ngModel)]=l_name value="{{employee.last_name}}">
 
             </div>
         </div>
@@ -29,7 +29,7 @@
             <label for="user_email" class="col-sm-4 col-form-label">Email:</label>
             <div class="col-sm-4">
 
-                <input id="emailInput" type="email" class="form-control" id="user_email" aria-describedby="emailHelp" [(ngModel)]=email value="{{employee.email}}">
+                <input id="emailInput" type="email" class="form-control"  aria-describedby="emailHelp" [(ngModel)]=email value="{{employee.email}}">
 
             </div>
         </div>
@@ -39,7 +39,7 @@
             <label for="phone" class="col-sm-4 col-form-label">Phone:</label>
             <div class="col-sm-4">
 
-                <input id="phoneInput" type="text" class="form-control" id="phone" [(ngModel)]=phone value="{{employee.phone_number}}">
+                <input id="phoneInput" type="text" class="form-control"  [(ngModel)]=phone value="{{employee.phone_number}}">
             </div>
         </div>
 
@@ -47,7 +47,7 @@
             <div class="col-sm-1"></div>
             <label for="username" class="col-sm-4 col-form-label">Username:</label>
             <div class="col-sm-4">
-                <input id="usernameInput" type="text" class="form-control" id="username" [(ngModel)]=username value="{{employee.username}}">
+                <input id="usernameInput" type="text" class="form-control" [(ngModel)]=username value="{{employee.username}}">
             </div>
         </div>
 
@@ -55,7 +55,7 @@
             <div class="col-sm-1"></div>
             <label for="password" class="col-sm-4 col-form-label">Password:</label>
             <div class="col-sm-4">
-                <input id="passwordInput" type="text" class="form-control" id="password" [(ngModel)]=password value="{{employee.password}}">
+                <input id="passwordInput" type="text" class="form-control" [(ngModel)]=password value="{{employee.password}}">
 
             </div>
         </div>
@@ -64,7 +64,7 @@
             <div class="col-sm-1"></div>
             <label for="drvierCheck" class="col-sm-4 col-form-label">I'm a Driver:</label>
             <div class="col-sm-4">
-                <input id="driverInput" type="checkbox" class="form-control" id="driverCheck" [(ngModel)]=isDriver value="{{employee.isDriver}}" (click)="changeActive()">
+                <input id="driverInput" type="checkbox" class="form-control"  [(ngModel)]=isDriver value="{{employee.isDriver}}" (click)="changeActive()">
             </div>
         </div>
 
@@ -72,7 +72,7 @@
             <div class="col-sm-1"></div>
             <label for="activeCheck" class="col-sm-4 col-form-label">Actively accepting Rides:</label>
             <div class="col-sm-4">
-                <input id="activeInput" [disabled]="!isDriver" type="checkbox" class="form-control" id="activeCheck" [(ngModel)]=isActive value="{{employee.is_active}}">
+                <input id="activeInput" [disabled]="!isDriver" type="checkbox" class="form-control"  [(ngModel)]=isActive value="{{employee.is_active}}">
             </div>
         </div>
         

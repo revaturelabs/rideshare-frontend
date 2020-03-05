@@ -11,16 +11,13 @@ export class ManagerEditComponent implements OnInit {
   employees:Array<Employee>= [];
   manager:Employee;
   role:string;
+  
 
   constructor(public ess:EmployeeServiceService) { }
 
   async populateEmployeeTable(){
     let tempE:Employee[] = await this.ess.getAllEmployees(); 
-    for (let employee in tempE) {
-      if (!tempE[employee].is_manager) {
-        this.employees.push(tempE[employee]);
-      }
-    }
+    this.employees = tempE;
   }
   
     ngOnInit() {

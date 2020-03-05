@@ -3,100 +3,100 @@
 
     <h4>Employee Address:</h4>
 
-    <div class="form-group row">
+    <div id="employeeStreetHolder" class="form-group row">
         <div class="col-sm-1"></div>
-        <label for="employeeStreet" class="col-sm-4 col-form-label">Address:</label>
+        <label for="employeeStreet" class="col-sm-4 col-form-label">Street:</label>
         <div class="col-sm-4">
-            <input [(ngModel)]=eStreet type="text" class="form-control" id="employeeStreet">
+            <input id="employeeStreetInput" [(ngModel)]=eStreet type="text" class="form-control" id="employeeStreet">
         </div>
     </div>
 
-    <div class="form-group row">
+    <div id="employeeCityHolder" class="form-group row">
         <div class="col-sm-1"></div>
         <label for="employeeCity" class="col-sm-4 col-form-label">City:</label>
         <div class="col-sm-4">
-            <input [(ngModel)]=eCity type="text" class="form-control" id="employeeCity">
+            <input id="employeeCityInput" [(ngModel)]=eCity type="text" class="form-control" id="employeeCity">
         </div>
     </div>
 
-    <div class="form-group row">
+    <div id="employeeStateHolder" class="form-group row">
         <div class="col-sm-1"></div>
         <label for="employeeState" class="col-sm-4 col-form-label">State:</label>
         <div class="col-sm-4">
-            <select class="form-control" name="states" id="employeeState" [(ngModel)] = "eState">
+            <select id="employeeStateSelect" class="form-control" name="states" id="employeeState" [(ngModel)] = "eState">
                 <option value="none" selected disabled hidden></option>
                 <option *ngFor="let state of states" value="{{state}}">{{state}}</option>
             </select>
         </div>
     </div>
 
-    <div class="form-group row">
+    <div id="employeeZipcodeHolder" class="form-group row">
         <div class="col-sm-1"></div>
         <label for="employeeZipcode" class="col-sm-4 col-form-label">Zipcode:</label>
         <div class="col-sm-4">
-            <input [(ngModel)]=eZipcode type="text" class="form-control" id="employeeZipcode">
+            <input id="employeeZipcodeInput" [(ngModel)]=eZipcode type="text" class="form-control" id="employeeZipcode">
         </div>
     </div>
 
-    <button type="submit" class="btn btn-primary myBtn" (click)="UpdateContactInfo()">Update</button>
+    <button id="updateButton" type="submit" class="btn btn-primary myBtn" (click)="UpdateContactInfo()">Update</button>
 
     <h4>Offices:</h4>
 
-    <div class="form-group row">
+    <div id="cityHolder" class="form-group row">
         <div class="col-sm-1"></div>
         <label for="selectState" class="col-sm-4 col-form-label">City:</label>
         <div class="col-sm-4">
-            <select class="form-control" name="states" id="selectState" [(ngModel)] = "selectCity" (change)="GetAllCityOffices();">
+            <select  id="citySelect" class="form-control" name="states" id="selectState" [(ngModel)] = "selectCity" (change)="GetAllCityOffices();">
                 <option value=" Select a City " selected disabled hidden> Select a City </option> 
                 <option *ngFor="let string of officeCities" value="{{string}}">{{string}}</option>
             </select>
         </div>
     </div>
 
-    <div class="form-group row">
+    <div id="officeHolder" class="form-group row">
         <div class="col-sm-1"></div>
         <label for="selectOffice" class="col-sm-4 col-form-label">Office:</label>
         <div class="col-sm-4">
-            <select class="form-control" name="offices" id="selectOffice" (click)="updateOffice();" [(ngModel)] = office>
+            <select id="officeSelect" [disabled]="!citySelected" class="form-control" name="offices" id="selectOffice" (change)="updateOffice();" [(ngModel)] = office>
                 <option value=" Select an Office " selected disabled hidden> Select an Office </option> 
                 <option *ngFor="let Office of cityOffices" value="{{Office.office_address}}">{{Office.office_address}}</option>
             </select>
         </div>
     </div>
 
-    <button type="submit" class="btn btn-primary myBtn" (click)="UpdateContactInfo()">Update</button><br>
+    <button id="updateButton" [disabled]="!officeSelected" type="submit" class="btn btn-primary myBtn" (click)="UpdateContactInfo()">Update</button><br>
 
     <h4>Current Office Address:</h4>
 
-    <div class="form-group row">
+    <div id="officeStreetHolder" class="form-group row">
         <div class="col-sm-1"></div>
         <label for="officeStreet" class="col-sm-4 col-form-label">Street:</label>
         <div class="col-sm-4">
-            <input [(ngModel)]="oStreet" type="text" class="form-control" id="officeStreet" value="{{oStreet}}" readonly>
+            <input id="officeStreetInput" [(ngModel)]="oStreet" type="text" class="form-control" id="officeStreet" value="{{oStreet}}" readonly>
         </div>
     </div>
 
-    <div class="form-group row">
+    <div id="officeCityHolder" class="form-group row">
         <div class="col-sm-1"></div>
         <label for="officeCity" class="col-sm-4 col-form-label">City:</label>
         <div class="col-sm-4">
-            <input [(ngModel)]="oCity" type="text" class="form-control" id="officeCity" placeholder="{{oCity}}" readonly>
+            <input id="officeCityInput" [(ngModel)]="oCity" type="text" class="form-control" id="officeCity" placeholder="{{oCity}}" readonly>
         </div>
     </div>
 
-    <div class="form-group row">
+    <div id="officeStateHolder" class="form-group row">
         <div class="col-sm-1"></div>
         <label for="officeState" class="col-sm-4 col-form-label">State:</label>
         <div class="col-sm-4">
-            <input [(ngModel)]="oState" type="text" class="form-control" id="officeState" placeholder="{{oState}}" readonly>
+            <input id="officeStateInput" [(ngModel)]="oState" type="text" class="form-control" id="officeState" placeholder="{{oState}}" readonly>
         </div>
     </div>
 
-    <div class="form-group row">
+    <div id="officeZipcodeHolder" class="form-group row">
         <div class="col-sm-1"></div>
         <label for="officeZipcode" class="col-sm-4 col-form-label">Zipcode:</label>
         <div class="col-sm-4">
-            <input [(ngModel)]=oZipcode type="text" class="form-control" id="officeZipcode" placeholder="{{oZipcode}}" readonly>
+            <input id="officeZipcodeInput" [(ngModel)]=oZipcode type="text" class="form-control" id="officeZipcode" placeholder="{{oZipcode}}" readonly>
         </div>
     </div>
 </div>

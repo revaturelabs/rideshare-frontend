@@ -16,21 +16,24 @@ import { ProfileLocationComponent } from './components/profile-location/profile-
 import { ProfileCarComponent } from './components/profile-car/profile-car.component';//this is edit-car
 import { EditOfficeComponent } from './components/edit-office/edit-office.component';//this is edit-office
 import { NavbarComponent } from './components/navbar/navbar.component';//this is nav-bar
-import { EditEmployeeComponent } from './components/edit-employee/edit-employee.component';//this is manager-edit-employee
+// import { EditEmployeeComponent } from './components/edit-employee/edit-employee.component';//this is manager-edit-employee
 // import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ModalModule } from 'node_modules/ngx-bootstrap';
-import { RegisterComponent } from './Components/register/register.component';
+// import { RegisterComponent } from './Components/register/register.component';
 import { SignupModalComponent } from './Components/sign-up-modal/sign-up-modal.component';
-import { ProfileMembershipComponent } from './components/profile-membership/profile-membership.component';
-import { ManagerEditComponent } from './components/manager-edit/manager-edit.component'
+// import { ProfileMembershipComponent } from './components/profile-membership/profile-membership.component'
+import { DriverContactModalComponent } from './components/driver-contact-modal/driver-contact-modal.component';
+import { ManagerEditComponent } from './components/manager-edit/manager-edit.component';
+import { ManagerStatusPipe } from './pipes/manager-status.pipe';
 
 @NgModule({
   declarations: [
+    DriverContactModalComponent,
     AppComponent,
     HomePageComponent,
-    RegisterComponent,
+    // RegisterComponent,
     LoginComponent,
     AdminComponent,
     ProfileComponent,
@@ -42,12 +45,13 @@ import { ManagerEditComponent } from './components/manager-edit/manager-edit.com
     ProfileCarComponent,
     EditOfficeComponent,
     NavbarComponent,
-    EditEmployeeComponent,
+    // EditEmployeeComponent,
     SignupModalComponent,
-    ProfileMembershipComponent,
-    ManagerEditComponent
 
-    
+    // ProfileMembershipComponent,
+    ManagerEditComponent,
+    ManagerStatusPipe
+
   ],
   imports: [
     BrowserModule,

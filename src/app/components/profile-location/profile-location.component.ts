@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from 'src/app/services/user-service/user.service';
-import { User } from 'src/app/models/user';
-import { ConfigServiceService } from 'src/app/services/config-service.service';
-import { EmployeeServiceService } from 'src/app/services/employee-service.service';
-import { OfficeServiceService } from 'src/app/services/office-service.service';
-import { Office } from 'src/app/models/office';
-import { Employee } from 'src/app/Models/Employee';
+// import { UserService } from 'src/app/services/user-service/user.service';
+// import { User } from 'src/app/models/user';
+import { ConfigServiceService } from '../../services/config-service.service';
+import { EmployeeServiceService } from '../../services/employee-service.service';
+import { OfficeServiceService } from '../../services/office-service.service';
+import { Office } from '../../models/office';
+import { Employee } from '../../models/employee';
 
 @Component({
   selector: 'app-profile-location',
@@ -21,10 +21,9 @@ export class ProfileLocationComponent implements OnInit {
   selectCity : string = " Select a City ";
   office : string = " Select an Office ";
   officeObject : Office;
-  states = ['AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA','KS',
-            'KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY',
-            'NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV',
-            'WI','WY'];
+  states = ['AK','AL','AR','AZ','CA','CO','CT','DE','FL','GA','HI','IA','ID','IL','IN','KS',
+    'KY','LA','MA','MD','ME','MI','MN','MO','MS','MT','NC','ND','NE','NH','NJ','NM','NV','NY',
+    'OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WI','WV','WY'];
   eStreet : string;
   eCity : string;
   eState : string;
@@ -33,6 +32,8 @@ export class ProfileLocationComponent implements OnInit {
   oCity : string;
   oState : string;
   oZipcode : string;
+  citySelected : boolean = false;
+  officeSelected : boolean = false;
 
 
   constructor(private officeService : OfficeServiceService, private employeeService : EmployeeServiceService, private configService:ConfigServiceService) { }
@@ -79,6 +80,9 @@ export class ProfileLocationComponent implements OnInit {
         this.cityOffices.push(this.offices[i]);
       }
     }
+    this.citySelected = true;
+    this.office = " Select an Office ";
+    this.officeSelected = false;
     console.log(this.cityOffices);
   }
 
@@ -89,8 +93,8 @@ export class ProfileLocationComponent implements OnInit {
         this.officeObject = this.cityOffices[i];
       }
     }
+    this.officeSelected = true;
     console.log(this.officeObject);
-
   }
 
   async GetAllOffices(){
@@ -134,5 +138,12 @@ export class ProfileLocationComponent implements OnInit {
 
     sessionStorage.setItem('User',JSON.stringify(this.employee));
     this.employee = JSON.parse(sessionStorage.getItem('User'));
+    let address2 : Array<string> = this.employee.office.office_address.split(", ");
+    this.oStreet = address2[0];
+    console.log(this.oStreet);
+    this.oCity = address2[1];
+    address2 = address2[2].split(" ");
+    this.oState = address2[0];
+    this.oZipcode = address2[1];
   }
 }

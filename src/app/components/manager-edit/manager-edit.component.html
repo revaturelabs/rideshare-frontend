@@ -7,6 +7,7 @@
       <tr>
         <th>First Name</th>
         <th>Last Name</th>
+        <th>Status</th>
         <th>Delete</th>
         <th>Promote</th>
       </tr>
@@ -15,8 +16,9 @@
       <tr class="c" *ngFor="let employee of employees">
         <td>{{employee.first_name}}</td>
         <td>{{employee.last_name}}</td>
+        <td>{{employee.is_manager | managerStatus}}</td>
         <td><button type="update" class="btn btn-primary myBtn" id="delete1" (click)="delete(employee)">Delete </button></td>
-        <td><button type="update" class="btn btn-primary myBtn" id="promote1" (click)="promote(employee)">Promote </button></td>
+        <td><button *ngIf = "!employee.is_manager" type="update" class="btn btn-primary myBtn" id="promote1" (click)="promote(employee)">Promote </button></td>
       </tr>
     </tbody>
   </table>

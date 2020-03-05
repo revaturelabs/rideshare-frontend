@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Office } from 'src/app/models/office';
-import { OfficeServiceService } from 'src/app/services/office-service.service';
+import { Office } from '../../models/office';
+import { OfficeServiceService } from '../../services/office-service.service';
+import { Title } from '@angular/platform-browser';
 
 
 @Component({
@@ -12,9 +13,10 @@ export class HomePageComponent implements OnInit {
   
   offices: Office[];
 
-  constructor(private os : OfficeServiceService) { }
+  constructor(private os : OfficeServiceService, private titleService: Title) { }
 
   ngOnInit() {
+    this.titleService.setTitle("Home - RideShare");
   }
 
   async register(){

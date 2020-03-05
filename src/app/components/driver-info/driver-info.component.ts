@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { CarService } from 'src/app/services/car-service/car.service';
-import { Car } from 'src/app/models/car';
-import { AuthService } from 'src/app/services/auth-service/auth.service';
+// import { CarService } from 'src/app/services/car-service/car.service';
+import { Car } from '../../models/car';
+import { AuthService } from '../../services/auth-service/auth.service';
 import { Router } from '@angular/router';
-import { BatchService } from 'src/app/services/batch-service/batch.service';
-import { Batch } from 'src/app/models/batch';
-import { CarServiceService } from 'src/app/services/car-service.service';
+import { BatchService } from '../../services/batch-service/batch.service';
+import { Batch } from '../../models/batch';
+import { CarServiceService } from '../../services/car-service.service';
 
 
 @Component({

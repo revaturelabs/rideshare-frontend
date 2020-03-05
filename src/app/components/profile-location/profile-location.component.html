@@ -24,8 +24,8 @@
         <label for="employeeState" class="col-sm-4 col-form-label">State:</label>
         <div class="col-sm-4">
             <select id="employeeStateSelect" class="form-control" name="states" [(ngModel)] = "eState">
-                <option value="none" selected disabled hidden></option>
-                <option *ngFor="let state of states" value="{{state}}">{{state}}</option>
+                <option id="noneOption" value="none" selected disabled hidden></option>
+                <option id="stateOption" *ngFor="let state of states" value="{{state}}">{{state}}</option>
             </select>
         </div>
     </div>

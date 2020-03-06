@@ -6,7 +6,7 @@
 
   </a>
 
-  <button class="navbar-toggler ml-auto " type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+  <button id="toggleButton" class="navbar-toggler ml-auto " type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -28,9 +28,9 @@
         </a>
 
         <div class="dropdown-menu myDropDown" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" routerLink="/profile">Profile</a>
+          <a id="profileAnchor" class="dropdown-item" routerLink="/profile">Profile</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" (click)="logout()" id="logout-btn">Log Out</a>
+          <a id="logoutAnchor" class="dropdown-item" (click)="logout()" id="logout-btn">Log Out</a>
         </div>
       </li>
     </ul>

@@ -10,7 +10,7 @@ import { LoginComponent } from './components/login/login.component';//this is lo
 import { ProfileComponent } from './components/profile/profile.component';//this is employee-page
 import { ShowDriversComponent } from './components/show-drivers/show-drivers.component';//this is show-drivers
 import { MapComponent } from './components/map/map.component';//this is map
-import { DriverListComponent } from './Components/driver-list/driver-list.component';//this is drivers-list
+import { DriverListComponent } from './components/driver-list/driver-list.component';//this is drivers-list
 import { ProfileContactComponent } from './components/profile-contact/profile-contact.component';//this is edit-contact
 import { ProfileLocationComponent } from './components/profile-location/profile-location.component';//this is edit-location
 import { ProfileCarComponent } from './components/profile-car/profile-car.component';//this is edit-car

@@ -1,0 +1,16 @@
+
+<div *ngIf = "showManagerPage">
+
+    <button id = "editEmployee" (click) = "editEmployee()">Promote / Delete Employee</button>
+    <button id = "editLocation" (click) = "editLocation()">Edit Location</button>
+
+    
+</div>
+
+<div *ngIf = "showEditOffice">
+    <app-edit-office></app-edit-office>
+</div>
+
+<div *ngIf = showManagerEditEmployee>
+    <app-manager-edit-employee></app-manager-edit-employee>
+</div>

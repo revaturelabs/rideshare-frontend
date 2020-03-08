@@ -11,6 +11,12 @@
 }
 .btn  {
     color:black;
+    outline: #F26925;
+}
+
+.btn:hover{
+    background-color: #F26925;
+    color: white;
 }
 
 .profile-container {

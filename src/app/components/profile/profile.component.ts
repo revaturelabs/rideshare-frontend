@@ -14,13 +14,15 @@ export class ProfileComponent implements OnInit {
   showCar :boolean = false;
   showLocation :boolean = false;
   showMemberInfo :boolean = false;
-  showManager : boolean = false;
+  showManagerE : boolean = false;
+  showManagerO : boolean = false;
   showManagerB : boolean = false;
 
   contact :string = '';
   car :string = '';
   location :string = '';
-  manager :string = '';
+  managerE :string = '';
+  managerP : string = '';
   employee: Employee;
 
   ngOnInit() {
@@ -39,13 +41,15 @@ export class ProfileComponent implements OnInit {
     this.showCont = true;
     this.showCar = false;
     this.showLocation = false;
-    this.showManager = false;
+    this.showManagerE = false;
+    this.showManagerO = false;
 
     
     this.contact = 'profileBtn';
     this.car = '';
     this.location = '';
-    this.manager = '';
+    this.managerE = '';
+    this.managerP = '';
 
   }
 
@@ -53,38 +57,59 @@ export class ProfileComponent implements OnInit {
     this.showCont = false;
     this.showCar = false;
     this.showLocation = true;
-    this.showManager = false;
+    this.showManagerE = false;
+    this.showManagerO = false;
 
     
     this.contact = '';
     this.car = '';
     this.location = 'profileBtn';
-    this.manager = '';
+    this.managerE = '';
+    this.managerP = '';
   }
 
   showCarInfo(){
     this.showCont = false;
     this.showCar = true;
     this.showLocation = false;
-    this.showManager = false;
+    this.showManagerE = false;
+    this.showManagerO = false;
     
     this.contact = '';
     this.car = 'profileBtn';
     this.location = '';
-    this.manager = '';
+    this.managerE = '';
+    this.managerP = '';
 
   }
 
-  showManagerEdit(){
+  showEmployeeEdit(){
     this.showCont = false;
     this.showCar = false;
     this.showLocation = false;
-    this.showManager = true;
+    this.showManagerE = true;
+    this.showManagerO = false;
     
     this.contact = '';
     this.car = '';
     this.location = '';
-    this.manager = 'profileBtn';
+    this.managerE = 'profileBtn';
+    this.managerP = '';
+
+  }
+
+  showEditOffice(){
+    this.showCont = false;
+    this.showCar = false;
+    this.showLocation = false;
+    this.showManagerE = false;
+    this.showManagerO = true;
+    
+    this.contact = '';
+    this.car = '';
+    this.location = '';
+    this.managerE = '';
+    this.managerP = 'profileBtn';
 
   }
 }

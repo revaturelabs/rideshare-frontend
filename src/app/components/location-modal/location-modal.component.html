@@ -1,0 +1,38 @@
+<a id="viewButton" data-toggle="modal" [attr.data-target]="'#' + office.office_id">
+    {{text}}
+</a>
+<!-- Modal -->
+<div #template class="modal" id={{office.office_id}} tabindex="-1" role="dialog" aria-labelledby="exampleModalCenteredLabel"
+    aria-oidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenteredLabel">Office Info:</h5>
+                <button id="xButton" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <label id="address" for="address">Address</label>
+                <input id="addressInput" type="text" [(ngModel)]="street" class="form-control" />
+
+                <label id="city">City</label>
+                <input id="cityInput" type="text" [(ngModel)]="city" class="form-control" />
+
+                <label id="state">State</label>
+                <select class="form-control" [(ngModel)]="state" id="stateSelect">
+                    <option id="noneOption" value="none" selected disabled hidden>
+                    </option>
+                    <option id="stateOption" *ngFor="let state of states" value="{{state}}">{{state}}</option>
+                </select>
+
+                <label id="zip">Zip Code</label>
+                <input id="zipInput" type="number" [(ngModel)]="zipcode" class="form-control" />
+            </div>
+            <div class="btn-container">
+                <button id="submitButton" type="submit" class="btn btn-primary update"
+                    (click)="submit()" data-dismiss="modal">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>

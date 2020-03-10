@@ -5,7 +5,9 @@
                   <button id="contactButton" type="button" class="btn btn-outline-primary btn-lg" (click)="showContact()">Contact Information</button>
                   <button id="locationButton" type="button" class="btn btn-outline-primary btn-lg" (click)="showLoc()">Location</button>
                   <button id="carButton" type="button" class="btn btn-outline-primary btn-lg" (click)="showCarInfo()">Car Information</button>
-                  <button id="managerButton" *ngIf='showManagerB' type="button" class="btn btn-outline-primary btn-lg" (click)="showManagerEdit()">Manager Edit</button>
+
+                  <button id="managerButton1" *ngIf='showManagerB' type="button" class="btn btn-outline-primary btn-lg" (click)="showEmployeeEdit()">Edit Employees</button>
+                  <button id="managerButton2" *ngIf='showManagerB' type="button" class="btn btn-outline-primary btn-lg" (click)="showEditOffice()">Edit Offices</button>
             </div>
 
 
@@ -18,8 +20,11 @@
             <div *ngIf='showLocation'>
                   <app-profile-location></app-profile-location>
             </div>
-            <div *ngIf='showManager'>
+            <div *ngIf='showManagerE'>
                   <app-manager-edit></app-manager-edit>
+            </div>
+            <div *ngIf='showManagerO'>
+                  <app-edit-office></app-edit-office>
             </div>
       </div>
 </div>

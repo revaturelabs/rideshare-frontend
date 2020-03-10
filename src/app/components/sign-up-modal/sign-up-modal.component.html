@@ -4,28 +4,30 @@
   <p *ngIf="success != ''" class="success">{{success}}</p>
   <div class="modal-header">
     <h4 class="modal-title">Sign Up</h4>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+    <button id="closeButton" type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
-    <label for="firstname">First Name</label>
+    <label id="firstname" for="firstname">First Name</label>
     <input (keydown)="firstNameError = ''" id="firstname" type="text" [(ngModel)]="fname" class="form-control" />
     <p *ngIf="firstNameError != ''" class="error">{{firstNameError}}</p>
 
-    <label for="lastname">Last Name</label>
+    <label id="lastname" for="lastname">Last Name</label>
     <input (keydown)="lastNameError = ''" id="lastname" type="text" [(ngModel)]="lname" class="form-control" />
     <p *ngIf="lastNameError != ''" class="error">{{lastNameError}}</p>
 
-    <label for="email">Email</label>
+    <label id="email" for="email">Email</label>
     <input (keydown)="emailError = ''" id="email" type="email" [(ngModel)]="email" class="form-control"/>
     <p *ngIf="emailError != ''" class="error">{{emailError}}</p>
 
-    <label for="phoneNumber">Phone Number</label>
-    <input (keydown)="phoneNumberError = ''" id="phoneNumber" type="text" [(ngModel)]="phone" class="form-control" />
-    <p *ngIf="phoneNumberError != ''" class="error">{{phoneNumberError}}</p>
 
-    <label for="userName">User Name</label>
+    <label id="phone" for="phoneNumber">Phone Number</label>
+
+    <input (keydown)="phoneNumberError = ''" id="phoneNumber" type="text" [(ngModel)]="phone" class="form-control" />
+    <p >{{phoneNumberError}}</p>
+
+    <label id="username" for="userName">User Name</label>
     <input (keydown)="userNameError = ''" id="userName" type="text" [(ngModel)]="username" class="form-control" />
     <p *ngIf="userNameError != ''" class="error">{{userNameError}}</p>
 
@@ -34,27 +36,27 @@
 
     <label id="office">Office</label>
     <select id="location" (change)='changeLocation($event)' class="form-control">
-      <option *ngFor="let off of offices" [value]="off.office_id">{{off.office_address}}</option>
+      <option id="officeOption{{off.office_id}}" *ngFor="let off of offices" [value]="off.office_id">{{off.office_address}}</option>
     </select>
 
-    <label for="hAddress">Address</label>
-    <input (keydown)="hAddressError = ''" id="hAddress" type="text" [(ngModel)]="street" class="form-control" />
+    <label id="hAddress" for="hAddress">Address</label>
+    <input (keydown)="hAddressError = ''" id="hAddressInput" type="text" [(ngModel)]="street" class="form-control" />
     <p *ngIf="hAddressError != ''" class="error">{{hAddressError}}</p>
 
     <label id="hCity">City</label>
-    <input (keydown)="hCityError = ''" type="text" [(ngModel)]="city" class="form-control" />
+    <input id="hCityInput" (keydown)="hCityError = ''" type="text" [(ngModel)]="city" class="form-control" />
     <p *ngIf="hCityError != ''" class="error">{{hCityError}}</p>
 
     <label id="hState">State</label>
-    <select (keydown)="hStateError = ''" class="form-control" [(ngModel)]="state" id="state" >
-            <option value="none" selected disabled hidden>  
+    <select (keydown)="hStateError = ''" class="form-control" [(ngModel)]="state" id="hStateSelect" >
+            <option id="noneOption" value="none" selected disabled hidden>  
             </option>
-            <option *ngFor="let state of states" value="{{state}}">{{state}}</option>
+            <option id="stateOption" *ngFor="let state of states" value="{{state}}">{{state}}</option>
     </select>
     <p *ngIf="hStateError != ''" class="error">{{hStateError}}</p>
 
     <label id="hZip">Zip Code</label>
-    <input (keydown)="hZipError = ''" type="number" [(ngModel)]="zip" class="form-control" />
+    <input id="hZipInput" (keydown)="hZipError = ''" type="number" [(ngModel)]="zip" class="form-control" />
     <p *ngIf="hZipError != ''" class="error">{{hZipError}}</p>
 
     <div class="radiobody">
@@ -65,7 +67,7 @@
   </div>
     </div>
     <div class="btn-container">
-      <button type="submit" class="btn btn-primary register" (click)="submit()">Submit</button>
+      <button id="submitButton" type="submit" class="btn btn-primary register" (click)="submit()">Submit</button>
     </div>
   </div>
 </ng-template> 

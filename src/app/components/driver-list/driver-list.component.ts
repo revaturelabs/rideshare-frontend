@@ -25,17 +25,20 @@ export class DriverListComponent implements OnInit {
   location : string = 'Morgantown, WV';
   mapProperties :{};
   availableCars : Array<any> = [];
+  unfiltereddrivers:Array<any> = [];
   drivers : Array<any> = [];
   p: Number = 1;
   count: Number = 5;
   @ViewChild('map',null) mapElement: any;
   map: google.maps.Map;
+  sortasc : boolean = false;
 
   constructor(private http: HttpClient,private employeeService:EmployeeServiceService, private carService: CarServiceService, private titleService: Title) { }
 
   ngOnInit() {
     this.titleService.setTitle("Driver List - RideShare");
     this.drivers = [];
+    this.unfiltereddrivers = [];
     
     this.employeeService.getDriversForLocation(this.location).subscribe(
       res => {
@@ -43,7 +46,7 @@ export class DriverListComponent implements OnInit {
            res.forEach(async element => {
          //   let car = await this.carService.getCarByUserId(element.userId);
             //  let car = this.getCarForUser(element.userId);
-              this.drivers.push({
+              this.unfiltereddrivers.push({
                    'id': element.employee_id,
                  'name': element.first_name+" "+element.last_name,
                 'driverlocation':element.user_address, 
@@ -53,12 +56,7 @@ export class DriverListComponent implements OnInit {
               });
           });
       });
-    /*this.drivers.push({'id': '1','name': 'Ed Ogeron','origin':'Reston, VA', 'email': 'ed@gmail.com', 'phone':'555-555-5555'});
-    this.drivers.push({'id': '2','name': 'Nick Saban','origin':'Oklahoma, OK', 'email': 'nick@gmail.com', 'phone':'555-555-5555'});
-    this.drivers.push({'id': '3','name': 'Bobbie sfsBowden','origin':'Texas, TX', 'email': 'bobbie@gmail.com', 'phone':'555-555-5555'});
-    this.drivers.push({'id': '4','name': 'Les Miles','origin':'New York, NY', 'email': 'les@gmail.com', 'phone':'555-555-5555'});
-    this.drivers.push({'id': '5','name': 'Bear Bryant','origin':'Arkansas, AR', 'email': 'bear@gmail.com', 'phone':'555-555-5555'});*/
-    //console.log(this.drivers);
+    
     this.getGoogleApi();
 
     this.sleep(2000).then(() => {
@@ -68,10 +66,39 @@ export class DriverListComponent implements OnInit {
          mapTypeId: google.maps.MapTypeId.ROADMAP
       };
       this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapProperties);
+      this.drivers = this.filterdrivers(this.location,this.unfiltereddrivers);
+      this.sleep(2000).then(()=>{
       //get all routes 
+      console.log("DRIVERS AFTER FILTER");
+      console.log(this.drivers);
+      console.log("DRIVERS AFTER SORT");
+      this.drivers.sort(function(a, b){
+        if(a.distance > b.distance){
+          return 1;
+        }
+        else if (a.distance == b.distance){
+          return 0;
+        }
+        else if(a.distance < b.distance){
+          return -1;
+        }
+        
+      });
+      console.log(this.drivers);
       this.displayDriversList(this.location, this.drivers);
       //show drivers on map
-      this.showDriversOnMap(this.location, this.drivers);
+      });
+     
+      
+     
+      console.log("DRIVERS AFTER DISPLAY");
+      
+      this.sleep(2000).then(()=>{
+        this.showDriversOnMap(this.location,this.drivers);
+      });
+     
+    //  this.showDriversOnMap(this.location, this.drivers);
+      
     });
   }
 
@@ -95,9 +122,9 @@ async getGoogleApi()  {
         .subscribe(
                   (response) => {
                   
-                      console.log("jrknjtkenkjh");
+                     
                       if(response != undefined){
-                        console.log(response);
+                      
                          new Promise((resolve) => {
                            let script: HTMLScriptElement = document.createElement('script');
                            script.addEventListener('load', r => resolve());
@@ -111,6 +138,7 @@ async getGoogleApi()  {
    }
 
   showDriversOnMap(origin, drivers){
+    console.log("IN DRIVERS ON MAP");
      drivers.forEach(element => {
       var directionsService = new google.maps.DirectionsService;
       var directionsRenderer = new google.maps.DirectionsRenderer({
@@ -130,48 +158,144 @@ displayRoute(origin, destination, service, display) {
       //avoidTolls: true
     }, function(response, status) {
       if (status === 'OK') {
+        console.log(response);
         display.setDirections(response);
       } else {
+        console.log("response");
         alert('Could not display directions due to: ' + status);
       }
     });
   }
 
 
-displayDriversList(origin, drivers) {
-    let  origins = [];
-    //set origin
-    origins.push(origin)
-
-    var outputDiv = document.getElementById('output');
-    drivers.forEach(element => {
-
-      var service = new google.maps.DistanceMatrixService;
-      service.getDistanceMatrix({
-        origins: origins,
-        destinations: [element.driverlocation],
-        travelMode: google.maps.TravelMode.DRIVING,
-        unitSystem: google.maps.UnitSystem.IMPERIAL,
-        avoidHighways: false,
-        avoidTolls: false
-      }, function(response, status) {
-        if (status !== 'OK') {
-          alert('Error was: ' + status);
-        } else {
-          var originList = response.originAddresses;
-          var destinationList = response.destinationAddresses;
-          var results = response.rows[0].elements;
-          //console.log(results[0].distance.text);
-          var name =  element.name;
-          if(results[0].distance.value < 26400){
-            element.distance = results[0].distance.text;
-            element.time = results[0].duration.text;
-            return element;
-            }
-      }
-    });
+displayDriversList(origin, unfiltereddrivers) {
+  //   let  origins = [];
+  //   //set origin
+  //   origins.push(origin)
     
-   });
+
+  //   var outputDiv = document.getElementById('output');
+    
+    
+  //   unfiltereddrivers.forEach(element => {
+
+  //     var service = new google.maps.DistanceMatrixService;
+      
+  //     service.getDistanceMatrix({
+  //       origins: origins,
+  //       destinations: [element.driverlocation],
+  //       travelMode: google.maps.TravelMode.DRIVING,
+  //       unitSystem: google.maps.UnitSystem.IMPERIAL,
+  //       avoidHighways: false,
+  //       avoidTolls: false
+  //     }, function(response, status) {
+  //       if (status !== 'OK') {
+  //         alert('Error was: ' + status);
+  //       } else {
+  //         var originList = response.originAddresses;
+  //         var destinationList = response.destinationAddresses;
+  //         var results = response.rows[0].elements;
+  //         //console.log(results[0].distance.text);
+          
+  //         var name =  element.name;
+           
+  //     }
+  //   });
+    
+  //  });
+  
 }
 
+ filterdrivers(origin,unfiltereddrivers){
+  let  origins = [];
+  //set origin
+  origins.push(origin)
+  var holder = [];
+
+  var outputDiv = document.getElementById('output');
+  
+  
+  unfiltereddrivers.forEach(element => {
+
+    var service = new google.maps.DistanceMatrixService;
+    
+    service.getDistanceMatrix({
+      origins: origins,
+      destinations: [element.driverlocation],
+      travelMode: google.maps.TravelMode.DRIVING,
+      unitSystem: google.maps.UnitSystem.IMPERIAL,
+      avoidHighways: false,
+      avoidTolls: false
+    }, function(response, status) {
+      if (status !== 'OK') {
+        alert('Error was: ' + status);
+      } else {
+        var originList = response.originAddresses;
+        var destinationList = response.destinationAddresses;
+        var results = response.rows[0].elements;
+        //console.log(results[0].distance.text);
+        
+        var name =  element.name;
+         if(results[0].distance.value < 26400){
+           element.distance = results[0].distance.text;
+           element.time = results[0].duration.text;
+           console.log(element.name + "TRUE");
+           holder.push(element);
+           }
+           else{
+            console.log(element.name + "FALSE");
+           }
+    }
+  });
+  
+ });
+ return holder;
 }
+
+sortDrivers(){
+  if(!this.sortasc){
+    this.sortasc = !this.sortasc;
+    console.log(this.sortasc);
+  this.drivers.sort(function(a, b){
+    if(a.distance > b.distance){
+      return 1;
+    }
+    else if (a.distance == b.distance){
+      return 0;
+    }
+    else if(a.distance < b.distance){
+      return -1;
+    }
+    
+  });
+  
+}
+  else{
+    
+    console.log(this.sortasc);
+    if(this.sortasc){
+      this.sortasc = !this.sortasc;
+      this.drivers.sort(function(a, b){
+        if(a.distance > b.distance){
+          return -1;
+        }
+        else if (a.distance == b.distance){
+          return 0;
+        }
+        else if(a.distance < b.distance){
+          return 1;
+        }
+        
+      });
+    }
+    
+}
+
+console.log(this.drivers);
+  //this.displayDriversList(this.location, this.drivers);
+  //show drivers on map
+  };
+}
+
+
+

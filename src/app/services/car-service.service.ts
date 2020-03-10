@@ -19,6 +19,11 @@ export class CarServiceService {
     return this.http.get<Car>(`http://localhost:9999/cars/cars/${employee_id}`).toPromise();
   }
 
+  getCarByEmployeeId1(employee_id:number){
+
+    return this.http.get<Car>(`http://localhost:9999/cars/cars/${employee_id}`);
+  }
+
   getAllCars():Promise<Car[]>{
 
     return this.http.get<Car[]>(`http://localhost:9999/cars`).toPromise();

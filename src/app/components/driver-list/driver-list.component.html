@@ -24,13 +24,17 @@
            <th scope="col">Name</th>
            <th scope="col" (click) = "sortDrivers()">Distance</th>
            <th scope="col">Time</th>
+           <th scope="col">Seats</th>
+           <!-- <th scope="col">Reserve</th> -->
            <th scope="col">View Info</th>
          </tr>
          
-         <tr *ngFor="let driver of drivers | paginate: { itemsPerPage: count, currentPage: p }">
+         <tr *ngFor="let driver of drivers let car of cars | paginate: { itemsPerPage: count, currentPage: p }">
            <td name="col">{{driver.name}}</td>
            <td name="col">{{driver.distance}}</td>
            <td name="col">{{driver.time}}</td>
+           <td name="col">{{driver.seats}}</td>
+           <!-- <th scope="col"><button (click)="update()">update</button></th> -->
            <td name="col"><app-driver-contact-modal [driver]="driver"></app-driver-contact-modal></td>
          </tr>
          
@@ -48,3 +52,4 @@
      </div>
     </div>
   </div>
+  

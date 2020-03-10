@@ -4,7 +4,7 @@ import { Component, OnInit, ViewChild, Input } from '@angular/core';
 // import { UserService } from 'src/app/services/user-service/user.service';
 // import { AuthService } from 'src/app/services/auth-service/auth.service';
 // import { Batch } from 'src/app/models/batch';
-// import { Car } from 'src/app/models/car';
+
 // import { CarService } from 'src/app/services/car-service/car.service';
 // import { Router } from '@angular/router';
 // import { BatchService } from 'src/app/services/batch-service/batch.service';
@@ -14,6 +14,7 @@ import { HttpClient } from '@angular/common/http';
 import { CarServiceService } from '../../services/car-service.service';
 import { EmployeeServiceService } from '../../services/employee-service.service';
 import { Title } from '@angular/platform-browser';
+import { Car } from 'src/app/models/car';
 
 @Component({
   selector: 'app-driver-list',
@@ -32,6 +33,7 @@ export class DriverListComponent implements OnInit {
   @ViewChild('map',null) mapElement: any;
   map: google.maps.Map;
   sortasc : boolean = false;
+  car:Car;
 
   constructor(private http: HttpClient,private employeeService:EmployeeServiceService, private carService: CarServiceService, private titleService: Title) { }
 
@@ -42,17 +44,36 @@ export class DriverListComponent implements OnInit {
     
     this.employeeService.getDriversForLocation(this.location).subscribe(
       res => {
-           //console.log(res);
+           console.log(res);
+          //  res.forEach( async element => {
+          //   this.car = await this.carService.getCarByEmployeeId(element.employee_id);
+          //   // let car = this.updateSeats(element.employee_id);
+          //   console.log(this.car);
+          //  });
+
            res.forEach(async element => {
-         //   let car = await this.carService.getCarByUserId(element.userId);
-            //  let car = this.getCarForUser(element.userId);
+          let car = await this.carService.getCarByEmployeeId(element.employee_id);
+          // let car = this.updateSeats(element.employee_id);
+
+          // let car = this.carService.getCarByEmployeeId1(element.employee_id).subscribe( sub => {
+          //   'id': sub.car_id,
+          //   'color' : sub.color,
+          //   'make' : sub.make,
+          //   'model' : sub.model,
+          //   'available_seats' : sub.available_seats,
+          //   'car_year' : sub.car_year,
+          //   'employee' : sub.employee
+          // );
+        
+          console.log(this.car);
+
               this.unfiltereddrivers.push({
                    'id': element.employee_id,
                  'name': element.first_name+" "+element.last_name,
                 'driverlocation':element.user_address, 
                 'email': element.email, 
                 'phone':element.phone_number,
-                //'seats':car.seats
+                'seats':car.available_seats
               });
           });
       });
@@ -102,14 +123,23 @@ export class DriverListComponent implements OnInit {
     });
   }
 
-
-
-
-  // car:Car;
-  //  async getCarForUser(id:number){
-  //      let response = await this.carService.getCarByUserId(id);
-  //      this.car = response;
+  // update(){
+  //   this.updateSeats(3);
   // }
+
+  // this.car = new Promise(function(id)){
+
+  // };
+
+   async updateSeats(id:number){
+    return await this.carService.getCarByEmployeeId(id);
+    
+  //   // console.log(car.available_seats);
+  //   // let  updatedSeats = car.available_seats - 1;
+  //   // car.available_seats = updatedSeats;
+  //   // car.updateSeats();
+  //   // console.log(car.available_seats);
+   } 
   
   
 

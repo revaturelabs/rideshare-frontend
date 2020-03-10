@@ -1,1 +1,31 @@
-<p>edit-office works!</p>
+<div class="container mainContainer">
+    <i class="fa fa-black-tie" style="font-family:'FontAwesome';"></i>
+    <h4>Offices:</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Office Address</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="c" *ngFor="let office of offices | paginate: { itemsPerPage: count, currentPage: p }">
+                <td>{{office.office_address}}</td>
+                <td><button type="update" class="btn btn-primary myBtn" id="update1">
+                        <app-location-modal [office]="office"></app-location-modal>
+                    </button>
+                </td>
+                <td><button type="delete" class="btn btn-primary myBtn" id="delete1" (click)="deleteOffice(office)">Delete
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div style="text-align:center">
+        <!-- class="text-center" -->
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </div>
+    <td><button type="add" class="btn btn-primary myBtn" id="add1"><app-location-modal  [office]="null"></app-location-modal></button></td>
+
+</div>

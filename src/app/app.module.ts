@@ -28,6 +28,7 @@ import { DriverContactModalComponent } from './components/driver-contact-modal/d
 import { ManagerEditComponent } from './components/manager-edit/manager-edit.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ManagerStatusPipe } from './pipes/manager-status.pipe';
+import { LocationModalComponent } from './components/location-modal/location-modal.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { ManagerStatusPipe } from './pipes/manager-status.pipe';
 
     // ProfileMembershipComponent,
     ManagerEditComponent,
-    ManagerStatusPipe
+    ManagerStatusPipe,
+    LocationModalComponent
 
   ],
   imports: [

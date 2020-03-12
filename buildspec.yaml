@@ -1,0 +1,15 @@
+version: 0.2
+
+phases:
+    install:
+      runtime-versions:
+        nodejs: 10
+      commands:
+      - npm install -g @angular/cli
+      - npm install --save-dev @angular-devkit/build-angular
+    build:
+      commands:
+        - ng build
+    post_build:
+      commands:
+        - aws s3 cp dist/rideshare-frontend s3://rideshare.com --recursive

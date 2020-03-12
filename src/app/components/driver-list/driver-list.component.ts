@@ -1,15 +1,20 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { User } from 'src/app/models/user';
-import { UserService } from 'src/app/services/user-service/user.service';
-import { AuthService } from 'src/app/services/auth-service/auth.service';
-import { Batch } from 'src/app/models/batch';
-import { Car } from 'src/app/models/car';
-import { CarService } from 'src/app/services/car-service/car.service';
-import { Router } from '@angular/router';
-import { BatchService } from 'src/app/services/batch-service/batch.service';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
+// import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+// import { User } from 'src/app/models/user';
+// import { UserService } from 'src/app/services/user-service/user.service';
+// import { AuthService } from 'src/app/services/auth-service/auth.service';
+// import { Batch } from 'src/app/models/batch';
+
+// import { CarService } from 'src/app/services/car-service/car.service';
+// import { Router } from '@angular/router';
+// import { BatchService } from 'src/app/services/batch-service/batch.service';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../environments/environment';
+// import { environment } from '../../../environments/environment';
+// import { ɵAnimationGroupPlayer } from '@angular/animations';
+import { CarServiceService } from '../../services/car-service.service';
+import { EmployeeServiceService } from '../../services/employee-service.service';
+import { Title } from '@angular/platform-browser';
+import { Car } from 'src/app/models/car';
 
 @Component({
   selector: 'app-driver-list',
@@ -21,36 +26,58 @@ export class DriverListComponent implements OnInit {
   location : string = 'Morgantown, WV';
   mapProperties :{};
   availableCars : Array<any> = [];
+  unfiltereddrivers:Array<any> = [];
   drivers : Array<any> = [];
-
-
+  p: Number = 1;
+  count: Number = 5;
   @ViewChild('map',null) mapElement: any;
   map: google.maps.Map;
+  sortasc : boolean = false;
+  car:Car;
 
-  constructor(private http: HttpClient,private userService: UserService) { }
+  constructor(private http: HttpClient,private employeeService:EmployeeServiceService, private carService: CarServiceService, private titleService: Title) { }
 
   ngOnInit() {
+    this.titleService.setTitle("Driver List - RideShare");
     this.drivers = [];
-
-    this.userService.getRidersForLocation1(this.location).subscribe(
+    this.unfiltereddrivers = [];
+    
+    this.employeeService.getDriversForLocation(this.location).subscribe(
       res => {
-           //console.log(res);
-           res.forEach(element => {
-              this.drivers.push({
-                   'id': element.userId,
-                 'name': element.firstName+" "+element.lastName,
-               'origin':element.hCity+","+element.hState, 
+           console.log(res);
+          //  res.forEach( async element => {
+          //   this.car = await this.carService.getCarByEmployeeId(element.employee_id);
+          //   // let car = this.updateSeats(element.employee_id);
+          //   console.log(this.car);
+          //  });
+
+           res.forEach(async element => {
+          let car = await this.carService.getCarByEmployeeId(element.employee_id);
+          // let car = this.updateSeats(element.employee_id);
+
+          // let car = this.carService.getCarByEmployeeId1(element.employee_id).subscribe( sub => {
+          //   'id': sub.car_id,
+          //   'color' : sub.color,
+          //   'make' : sub.make,
+          //   'model' : sub.model,
+          //   'available_seats' : sub.available_seats,
+          //   'car_year' : sub.car_year,
+          //   'employee' : sub.employee
+          // );
+        
+          console.log(this.car);
+
+              this.unfiltereddrivers.push({
+                   'id': element.employee_id,
+                 'name': element.first_name+" "+element.last_name,
+                'driverlocation':element.user_address, 
                 'email': element.email, 
-                'phone':element.phoneNumber
+                'phone':element.phone_number,
+                'seats':car.available_seats
               });
           });
       });
-    /*this.drivers.push({'id': '1','name': 'Ed Ogeron','origin':'Reston, VA', 'email': 'ed@gmail.com', 'phone':'555-555-5555'});
-    this.drivers.push({'id': '2','name': 'Nick Saban','origin':'Oklahoma, OK', 'email': 'nick@gmail.com', 'phone':'555-555-5555'});
-    this.drivers.push({'id': '3','name': 'Bobbie sfsBowden','origin':'Texas, TX', 'email': 'bobbie@gmail.com', 'phone':'555-555-5555'});
-    this.drivers.push({'id': '4','name': 'Les Miles','origin':'New York, NY', 'email': 'les@gmail.com', 'phone':'555-555-5555'});
-    this.drivers.push({'id': '5','name': 'Bear Bryant','origin':'Arkansas, AR', 'email': 'bear@gmail.com', 'phone':'555-555-5555'});*/
-    //console.log(this.drivers);
+    
     this.getGoogleApi();
 
     this.sleep(2000).then(() => {
@@ -60,42 +87,95 @@ export class DriverListComponent implements OnInit {
          mapTypeId: google.maps.MapTypeId.ROADMAP
       };
       this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapProperties);
+      this.drivers = this.filterdrivers(this.location,this.unfiltereddrivers);
+      this.sleep(2000).then(()=>{
       //get all routes 
+      console.log("DRIVERS AFTER FILTER");
+      console.log(this.drivers);
+      console.log("DRIVERS AFTER SORT");
+      this.drivers.sort(function(a, b){
+        if(a.distance > b.distance){
+          return 1;
+        }
+        else if (a.distance == b.distance){
+          return 0;
+        }
+        else if(a.distance < b.distance){
+          return -1;
+        }
+        
+      });
+      console.log(this.drivers);
       this.displayDriversList(this.location, this.drivers);
       //show drivers on map
-      this.showDriversOnMap(this.location, this.drivers);
+      });
+     
+      
+     
+      console.log("DRIVERS AFTER DISPLAY");
+      
+      this.sleep(2000).then(()=>{
+        this.showDriversOnMap(this.location,this.drivers);
+      });
+     
+    //  this.showDriversOnMap(this.location, this.drivers);
+      
     });
   }
+
+  // update(){
+  //   this.updateSeats(3);
+  // }
+
+  // this.car = new Promise(function(id)){
+
+  // };
+
+   async updateSeats(id:number){
+    return await this.carService.getCarByEmployeeId(id);
+    
+  //   // console.log(car.available_seats);
+  //   // let  updatedSeats = car.available_seats - 1;
+  //   // car.available_seats = updatedSeats;
+  //   // car.updateSeats();
+  //   // console.log(car.available_seats);
+   } 
+  
+  
 
   sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
   
-getGoogleApi()  {
-    this.http.get(`${environment.loginUri}getGoogleApi`)
-       .subscribe(
-                 (response) => {
-                     //console.log(response);
-                     if(response["googleMapAPIKey"] != undefined){
+async getGoogleApi()  {
+     this.http.get(`http://localhost:9999/configurations/API_KEY`)
+        .subscribe(
+                  (response) => {
+                  
+                     
+                      if(response != undefined){
+                      
                          new Promise((resolve) => {
                            let script: HTMLScriptElement = document.createElement('script');
                            script.addEventListener('load', r => resolve());
-                           script.src = `http://maps.googleapis.com/maps/api/js?key=${response["googleMapAPIKey"][0]}`;
+                           script.src = `http://maps.googleapis.com/maps/api/js?key=${response}`;
                            document.head.appendChild(script);      
                      }); 
                }    
            }
        );
+   
    }
 
   showDriversOnMap(origin, drivers){
+    console.log("IN DRIVERS ON MAP");
      drivers.forEach(element => {
       var directionsService = new google.maps.DirectionsService;
       var directionsRenderer = new google.maps.DirectionsRenderer({
          draggable: true,
          map: this.map
        });
-       this.displayRoute(origin, element.origin, directionsService, directionsRenderer);
+       this.displayRoute(origin, element.driverlocation, directionsService, directionsRenderer);
     });
   }
 
@@ -108,74 +188,144 @@ displayRoute(origin, destination, service, display) {
       //avoidTolls: true
     }, function(response, status) {
       if (status === 'OK') {
+        console.log(response);
         display.setDirections(response);
       } else {
+        console.log("response");
         alert('Could not display directions due to: ' + status);
       }
     });
   }
 
 
-displayDriversList(origin, drivers) {
-    let  origins = [];
-    //set origin
-    origins.push(origin)
-
-    var outputDiv = document.getElementById('output');
-    drivers.forEach(element => {
-
-      var service = new google.maps.DistanceMatrixService;
-      service.getDistanceMatrix({
-        origins: origins,
-        destinations: [element.origin],
-        travelMode: google.maps.TravelMode.DRIVING,
-        unitSystem: google.maps.UnitSystem.IMPERIAL,
-        avoidHighways: false,
-        avoidTolls: false
-      }, function(response, status) {
-        if (status !== 'OK') {
-          alert('Error was: ' + status);
-        } else {
-          var originList = response.originAddresses;
-          var destinationList = response.destinationAddresses;
-          var results = response.rows[0].elements;
-          //console.log(results[0].distance.text);
-          var name =  element.name;
-          outputDiv.innerHTML += `<tr><td class="col">${name}</td>
-                                  <td class="col">${results[0].distance.text}</td>
-                                  <td class="col">${results[0].duration.text}</td>
-                                  <td class="col">
-                                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCentered${element.id}"> View</button>
-                                    <div class="col-lg-5">
-                                     <div class="modal" id="exampleModalCentered${element.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true">
-                                      <div class="modal-dialog modal-dialog-centered" role="document">
-                                          <div class="modal-content">
-                                              <div class="modal-header">
-                                                  <h5 class="modal-title" id="exampleModalCenteredLabel">Contact Info:</h5>
-                                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                     <span aria-hidden="true">×</span>
-                                                   </button>
-                                              </div>
-                                              <div class="modal-body">
-                                                  <h1>${name}</h1>
-                                                  <h3>Email: ${element.email}</h3>         
-                                                  <h3>Phone: ${element.phone}</h3>                 
-                                              </div>
-                                              <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                              </div>
-                                            </div>
-                                         </div>
-                                       </div>
-                                  </div>
-                                  <div class="col-lg-6">
-                                      <div #maps id="gmap" class="img-responsive"></div>
-                                  </div>
-                                </td></tr>`;
-      }
-    });
+displayDriversList(origin, unfiltereddrivers) {
+  //   let  origins = [];
+  //   //set origin
+  //   origins.push(origin)
     
-   });
+
+  //   var outputDiv = document.getElementById('output');
+    
+    
+  //   unfiltereddrivers.forEach(element => {
+
+  //     var service = new google.maps.DistanceMatrixService;
+      
+  //     service.getDistanceMatrix({
+  //       origins: origins,
+  //       destinations: [element.driverlocation],
+  //       travelMode: google.maps.TravelMode.DRIVING,
+  //       unitSystem: google.maps.UnitSystem.IMPERIAL,
+  //       avoidHighways: false,
+  //       avoidTolls: false
+  //     }, function(response, status) {
+  //       if (status !== 'OK') {
+  //         alert('Error was: ' + status);
+  //       } else {
+  //         var originList = response.originAddresses;
+  //         var destinationList = response.destinationAddresses;
+  //         var results = response.rows[0].elements;
+  //         //console.log(results[0].distance.text);
+          
+  //         var name =  element.name;
+           
+  //     }
+  //   });
+    
+  //  });
+  
 }
 
+ filterdrivers(origin,unfiltereddrivers){
+  let  origins = [];
+  //set origin
+  origins.push(origin)
+  var holder = [];
+
+  var outputDiv = document.getElementById('output');
+  
+  
+  unfiltereddrivers.forEach(element => {
+
+    var service = new google.maps.DistanceMatrixService;
+    
+    service.getDistanceMatrix({
+      origins: origins,
+      destinations: [element.driverlocation],
+      travelMode: google.maps.TravelMode.DRIVING,
+      unitSystem: google.maps.UnitSystem.IMPERIAL,
+      avoidHighways: false,
+      avoidTolls: false
+    }, function(response, status) {
+      if (status !== 'OK') {
+        alert('Error was: ' + status);
+      } else {
+        var originList = response.originAddresses;
+        var destinationList = response.destinationAddresses;
+        var results = response.rows[0].elements;
+        //console.log(results[0].distance.text);
+        
+        var name =  element.name;
+         if(results[0].distance.value < 26400){
+           element.distance = results[0].distance.text;
+           element.time = results[0].duration.text;
+           console.log(element.name + "TRUE");
+           holder.push(element);
+           }
+           else{
+            console.log(element.name + "FALSE");
+           }
+    }
+  });
+  
+ });
+ return holder;
 }
+
+sortDrivers(){
+  if(!this.sortasc){
+    this.sortasc = !this.sortasc;
+    console.log(this.sortasc);
+  this.drivers.sort(function(a, b){
+    if(a.distance > b.distance){
+      return 1;
+    }
+    else if (a.distance == b.distance){
+      return 0;
+    }
+    else if(a.distance < b.distance){
+      return -1;
+    }
+    
+  });
+  
+}
+  else{
+    
+    console.log(this.sortasc);
+    if(this.sortasc){
+      this.sortasc = !this.sortasc;
+      this.drivers.sort(function(a, b){
+        if(a.distance > b.distance){
+          return -1;
+        }
+        else if (a.distance == b.distance){
+          return 0;
+        }
+        else if(a.distance < b.distance){
+          return 1;
+        }
+        
+      });
+    }
+    
+}
+
+console.log(this.drivers);
+  //this.displayDriversList(this.location, this.drivers);
+  //show drivers on map
+  };
+}
+
+
+

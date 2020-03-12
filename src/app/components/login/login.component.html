@@ -1,0 +1,31 @@
+<a (click)="openModal(template)">Login</a >
+<ng-template #template >
+<div class="container">
+    <div class="text-center" id="login-form">
+        <div class="modal-title-container">
+        <button id="closeButton" type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+            <h4 class="modal-title">Login</h4>
+    </div>
+            <div class = "content">
+            <div class="form-group"><p id="noUser" class="error">{{userNotFound}}</p></div>
+            <div class="form-group">
+              <label for="formGroupExampleInput">Username</label><br>
+              <input type="text" [(ngModel)]="userName" class="form-control" id="formGroupExampleInput" placeholder="Enter Username">
+              <p  class="error">{{usernameError}}</p>
+            </div>
+            <div class="form-group">
+              <label for="formGroupExampleInput2">Password</label><br>
+              <input type="password" [(ngModel)]="passWord" class="form-control" id="formGroupExampleInput2" placeholder="Enter Password">
+              <p  class="error">{{pwdError}}</p>
+            </div>
+          
+        <p class="alert alert-danger" *ngIf="failed"><strong>Login Failed!</strong></p>
+        <p class="alert alert-danger" *ngIf="banned"><strong>You are banned</strong></p>
+          <button type="submit" class="btn btn-primary" id="sign-in-btn" (click)="employeelogin()">Login</button>
+        <br><br>
+    </div>
+</div>
+</div>
+</ng-template> 

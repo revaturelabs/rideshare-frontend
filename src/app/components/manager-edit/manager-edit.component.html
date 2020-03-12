@@ -1,0 +1,29 @@
+<div class="container mainContainer">
+
+  <i class="fa fa-black-tie" style="font-family:'FontAwesome';"></i>
+  <h4>Employees:</h4>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Status</th>
+        <th>Delete</th>
+        <th>Promote</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="c" *ngFor="let employee of employees | paginate: { itemsPerPage: count, currentPage: p }">
+        <td>{{employee.first_name}}</td>
+        <td>{{employee.last_name}}</td>
+        <td>{{employee.is_manager | managerStatus}}</td>
+        <td><button type="update" class="btn btn-primary myBtn" id="delete1" (click)="delete(employee)">Delete </button></td>
+        <td><button *ngIf = "!employee.is_manager" type="update" class="btn btn-primary myBtn" id="promote1" (click)="promote(employee)">Promote </button></td>
+      </tr>
+    </tbody>
+  </table>
+  <div style = "text-align:center">
+  <!-- class="text-center" -->
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div>
+</div>

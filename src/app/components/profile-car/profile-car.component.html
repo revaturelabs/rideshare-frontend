@@ -1,0 +1,61 @@
+<div class="container mainContainer">
+    
+        <i class="fa fa-car" style="font-family:'FontAwesome';"></i>
+        
+    
+        <h4>Car Information:</h4>
+        
+        <div id="makeHolder" class="form-group row">
+            <div class="col-sm-1"></div>
+                <label for="make" class="col-sm-4 col-form-label">Make:</label>
+                <div class="col-sm-4">
+                    <input id="makeInput" type="text" class="form-control" [(ngModel)]=make value="{{car.make}}">
+                </div>
+        </div>
+        
+        <div id="modelHolder" class="form-group row">
+                <div class="col-sm-1"></div>
+            <label for="model" class="col-sm-4 col-form-label">Model:</label>
+            <div class="col-sm-4">
+                <input id="modelInput" type="text" class="form-control"  [(ngModel)]=model value="{{car.model}}">
+            </div>
+        </div>
+
+        <div id="yearHolder" class="form-group row">
+            <div class="col-sm-1"></div>
+                <label for="year" class="col-sm-4 col-form-label">Year:</label>
+                <div class="col-sm-4">
+                    <input id="yearInput" type="number" class="form-control" [(ngModel)]=year min="1970" max="2020" value="{{car.car_year}}">
+                </div>
+        </div>
+
+        <div id="colorHolder" class="form-group row">
+            <div class="col-sm-1"></div>
+                <label for="color" class="col-sm-4 col-form-label">Color:</label>
+                <div class="col-sm-4">
+                    <input id="colorInput" type="text" class="form-control" [(ngModel)]=color value="{{car.color}}">
+                </div>
+        </div>
+
+        <div id="seatsHolder" class="form-group row">
+            <div class="col-sm-1"></div>
+                <label for="seatSelect" class="col-sm-4 col-form-label ">Number of seats:</label>
+                <div class="col-sm-4">
+                <select class="form-control" id="seatSelect" [(ngModel)]=seats value="{{car.available_seats}}">
+                    <option id="seatOption" value="1">1</option>
+                    <option id="seatOption" value="2">2</option>
+                    <option id="seatOption" value="3">3</option>
+                    <option id="seatOption" value="4">4</option>
+                    <option id="seatOption" value="5">5</option>
+                    <option id="seatOption" value="6">6</option>
+                    <option id="seatOption" value="7">7</option>
+                    <option id="seatOption" value="8">8</option>
+                </select>
+            </div>
+        </div>
+        
+        <button id="updateButton" type="submit" class="btn btn-primary myBtn" (click)="UpdateCarInfo(car)">Update</button>
+    </div>
+    
+        
+    

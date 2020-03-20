@@ -29,7 +29,9 @@ export class UserService {
 	 * Set up the url string to the env var
 	 * Creates a new user object
 	 */
-	url: string = environment.userUri;
+    url: string = environment.userUri;
+    googleBaseUrl: string = environment.googleBaseUri;
+    googleApiKey: string = environment.googleMapKey;
 	user: User = new User();
 
 	/**
@@ -106,15 +108,37 @@ export class UserService {
 
        // validate address through googleapi. If invalid, set the location string to ''
        // in order to conform to behavior of back-end api setting of status codes on modular form
-
-    const numAndStreetName = user.hAddress.split(' ', 2); // ensures user placed a space between the street number and street name
+    
+    const numAndStreetName = user.hAddress.split(' '); // ensures user placed a space between the street number and street name
     let InvalidateLocation = false;
     if ( isNaN(Number(numAndStreetName[0]))){
         console.log("first part of haddress is not a number!")
         InvalidateLocation = true;
+        
 
     }else{
+        console.log("Number of parts in haddress is: " + numAndStreetName.length);
+        //construct url with needed number of +'s based on length of numAndStreetName...
+        let googleConstructedUrl = `${this.googleBaseUrl}`;
+        numAndStreetName.forEach(numAndStreetNamePart => {//for each element concatenate + and the element itself to original googleConstructedUrl
+            if (numAndStreetNamePart === numAndStreetName[0]){
+                googleConstructedUrl += `${numAndStreetNamePart}`;
+            }
+            else{
+                googleConstructedUrl += `+${numAndStreetNamePart}`;
+            }
+            console.log("num and street name part value is " + numAndStreetNamePart);
+
+            
+               
+            
+        });
+       
         //leverage google api
+        // const googleConstructedUrl = `${this.googleBaseUrl}${user.hAddress}+${user.hCity},+${user.hState}&key=${this.googleApiKey}`;
+        console.log("the google constructed url is: " + googleConstructedUrl);
+        // https://maps.googleapis.com/maps/api/geocode/json?address=${+Amphitheatre+Parkway,
+        //  	+Mountain+View,+CA&key=AIzaSyBdRzOTbQmvOKTWPFeKHsam7URoNpxKtxc
     }
 
     if (InvalidateLocation === true){

@@ -4,7 +4,6 @@
 /**success*/
 .success {
     border-radius: 5px;
-    color: green;
     font-size: 16px;
 }
 .mainContainer {
@@ -151,3 +150,7 @@ h4{
                 padding:8px;
             }
         }
+
+.error {
+    color:red;
+}

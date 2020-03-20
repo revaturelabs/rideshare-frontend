@@ -54,7 +54,7 @@ export class UserService {
 	 * A GET method for one user
 	 * @param idParam 
 	 */
-	getUserById(idParam: number){
+	getUserById(idParam: number) {
 		
 		console.log(this.url)
 		return this.http.get<User>(this.url+idParam).toPromise();
@@ -63,7 +63,7 @@ export class UserService {
 	}
 
 	 
-	getUserById2(idParam2: String): Observable<User>{
+	getUserById2(idParam2: String): Observable<User> {
 		
 		//console.log(this.url)
 		return this.http.get<User>(this.url+idParam2);
@@ -103,8 +103,29 @@ export class UserService {
 
 	// add user method
 	addUser(user :User) :Observable<User> {
-		return this.http.post<User>(this.url, user, {headers: this.headers});
-	}
+
+       // validate address through googleapi. If invalid, set the location string to ''
+       // in order to conform to behavior of back-end api setting of status codes on modular form
+
+    const numAndStreetName = user.hAddress.split(' ', 2); // ensures user placed a space between the street number and street name
+    let InvalidateLocation = false;
+    if ( isNaN(Number(numAndStreetName[0]))){
+        console.log("first part of haddress is not a number!")
+        InvalidateLocation = true;
+
+    }else{
+        //leverage google api
+    }
+
+    if (InvalidateLocation === true){
+        user.hAddress = '';//allows front-end to render appropriate response
+    }
+
+  
+
+
+      return this.http.post<User>(this.url, user, {headers: this.headers});
+    }
 
 	/**
 	 * This function returns the fireIsLoggedIn variable
@@ -184,7 +205,7 @@ export class UserService {
 	 * @param id 
 	 */
 
-	getDriverById(id: number): Observable <any>{
+	getDriverById(id: number): Observable <any> {
 		return this.http.get(this.url + id);
 	}
 	
@@ -199,13 +220,13 @@ export class UserService {
 		
 	  }
 	  
-	  getRidersForLocation(location: string): Observable <any>{
+	  getRidersForLocation(location: string): Observable <any> {
 		return this.http.get(this.url + '?is-driver=false&location='+ location)
 	  }
     /**
      * A GET method that shows all users
      */
-		showAllUser(): Observable<any>{
+		showAllUser(): Observable<any> {
 		  return this.http.get(this.url);
 		}
 
@@ -222,12 +243,57 @@ export class UserService {
     /**
      * A function that bans users.
      */
-    banUser(user: User){
+    banUser(user: User) {
       this.body = JSON.stringify(user);
       this.http.put(`${this.url + user.userId}`,this.body,this.httpOptions).subscribe();
 	}
 	
-	getRidersForLocation1(location: string): Observable <any>{
+	getRidersForLocation1(location: string): Observable <any> {
 		return this.http.get(this.url + 'driver/'+ location)
 	}
+
+/**
+ * This function returns the contents of googlemaps api request for a location
+ */
+    // googleLocationValidation(address: string): boolean {
+    //     let addressMatch = false;
+
+    //     // attempt to find the address
+    //     this.returnGoogleMapsResponse.subscribe(response => {
+    //         console.log(response);
+	// 		// parse the madness and compare
+	// 		const foundAddress = "ok";
+	// 		if(foundAddress = address) {
+    //         }
+
+    //         }, error =>
+    //         console.log(error));
+
+
+    //     return addressMatch;
+
+    // }
+
+    // grabs user-supplied home address and compares case-insensitively with google api response result
+    // private returnGoogleMapsResponse(user: User): Observable<any> {
+    //     // split string into number portion and street name portion at the space character
+    //     const numAndStreetName = user.hAddress.split(' ', 2); // ensures user placed a space between the street number and street name
+    //     let autoInvalidateLocation = false;
+    //     numAndStreetName.forEach(element => {
+    //         if(element === undefined){
+    //             console.log("detected invalid address immediately");
+    //             autoInvalidateLocation = true;
+    //         }
+    //     });
+        
+
+
+		
+	// 	return this.http.get<any>(`https://maps.googleapis.com/maps/api/geocode/json?address=${+Amphitheatre+Parkway,
+	// 	+Mountain+View,+CA&key=AIzaSyBdRzOTbQmvOKTWPFeKHsam7URoNpxKtxc`);
+
+	// 	// return this.http.get<any>(`https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,
+	// 	// +Mountain+View,+CA&key=AIzaSyBdRzOTbQmvOKTWPFeKHsam7URoNpxKtxc`);
+
+	// }
 }

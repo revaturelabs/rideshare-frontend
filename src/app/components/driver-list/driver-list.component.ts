@@ -6,10 +6,11 @@ import { AuthService } from 'src/app/services/auth-service/auth.service';
 import { Batch } from 'src/app/models/batch';
 import { Car } from 'src/app/models/car';
 import { CarService } from 'src/app/services/car-service/car.service';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { BatchService } from 'src/app/services/batch-service/batch.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
+import {} from 'googlemaps'; //came from landing Page compon 11:24AM 3/20
 
 @Component({
   selector: 'app-driver-list',
@@ -19,18 +20,20 @@ import { environment } from '../../../environments/environment';
 export class DriverListComponent implements OnInit {
 
   location : string = 'Morgantown, WV';
+  location_s : string ='';
   mapProperties :{};
   availableCars : Array<any> = [];
   drivers : Array<any> = [];
 
 
-  @ViewChild('map',null) mapElement: any;
+  @ViewChild('map',null) mapElement: any; //('map', {static: true}) from landingPage compon 11:05AAM 3/20
   map: google.maps.Map;
 
   constructor(private http: HttpClient,private userService: UserService) { }
-
+    //load google map api
   ngOnInit() {
     this.drivers = [];
+    this.getGoogleApi();
 
     this.userService.getRidersForLocation1(this.location).subscribe(
       res => {
@@ -51,7 +54,9 @@ export class DriverListComponent implements OnInit {
     this.drivers.push({'id': '4','name': 'Les Miles','origin':'New York, NY', 'email': 'les@gmail.com', 'phone':'555-555-5555'});
     this.drivers.push({'id': '5','name': 'Bear Bryant','origin':'Arkansas, AR', 'email': 'bear@gmail.com', 'phone':'555-555-5555'});*/
     //console.log(this.drivers);
-    this.getGoogleApi();
+
+    //this.getGoogleApi(); 
+    //The above method was uncommented before 11:14AM 3/20
 
     this.sleep(2000).then(() => {
       this.mapProperties = {
@@ -86,6 +91,25 @@ getGoogleApi()  {
                }    
            }
        );
+   }
+
+   searchDriver(){
+    //call service search algorithm ()
+    //console.log(this.location_s);
+    this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapProperties);
+    this.userService.getRidersForLocation1(this.location_s)
+    .subscribe(
+              (response) => {
+                response.forEach(element => {
+                     var directionsService = new google.maps.DirectionsService;
+                     var directionsRenderer = new google.maps.DirectionsRenderer({
+                           draggable: true,
+                           map: this.map
+                      });
+                      console.log(element.Distance);
+                      this.displayRoute(this.location_s, element.hCity+","+element.hState, directionsService, directionsRenderer);
+           });
+    });
    }
 
   showDriversOnMap(origin, drivers){

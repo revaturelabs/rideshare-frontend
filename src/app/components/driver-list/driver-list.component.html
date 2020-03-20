@@ -1,3 +1,12 @@
+
+<div class = "search col-5-content">
+  <input type="text" [(ngModel)]="location_s" class=" form-control" id="formGroupExampleInput2" placeholder="Search for a driver">
+  <button  class="btn btn-primary register" (click)="searchDriver()">Search</button>
+  <!-- <div class = "googleapi">
+      <div  id = "map" #map></div>
+  </div> -->
+</div>
+
 <div class = "container">
     <div class="row">
     <div class="col-lg-5">
@@ -15,7 +24,8 @@
         </div>
       </div>
       <p id="total"></p>-->
-      <h4>Driver's List</h4>
+
+      <h4>Drivers List</h4>
       
      <table class="table table-striped">
        <thead class="thead-dark">

@@ -1,10 +1,21 @@
-/* .content{
+.search{
+    display: flex;
+    flex-direction: row;
     text-align: center;
+    margin: 20px 0px;
+    justify-content: center;
+
 }
 .form-control{
-    margin:auto;
+    align-self: center;   
+    margin-right: 15px;
     width: 30%;
 }
+
+/* .register{
+    margin-top:15px;
+} */
+
 #search{
     margin-top:10px;
     background-color: #F26925;
@@ -46,15 +57,15 @@
 #side2 {
     background-color:white;
     padding-left: 300px;
-} */
+}
 #gmap { 
     height: 369px; 
 }
-.googleapi {
+/* .googleapi {
  
 }
 #map{
-}
+} */
 .col{
     margin-right: 3%;
 }

@@ -4,7 +4,7 @@ import { User } from 'src/app/models/user';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from 'src/app/services/auth-service/auth.service';
-import { Router, RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
 import { BsModalService, BsModalRef} from 'ngx-bootstrap';
 
 @Component({
@@ -170,16 +170,15 @@ export class LoginComponent implements OnInit {
 						sessionStorage.setItem("name", response["name"]);
 						sessionStorage.setItem("userid", response["userid"]);
 						
-						//call landing page
-						//this.router.navigate(['landingPage']);
-						location.replace('landingPage');
+							//call 'drivers' page instead of 'landingPage'
+							location.replace('drivers');
 					  }
 					  if(response["userNotFound"] != undefined){
 						this.userNotFound = response["userNotFound"][0];
 					  }
                  }
         );
-		/*this.http.get<User[]>(`${environment.userUri}?username=${this.userName}`)
+		this.http.get<User[]>(`${environment.userUri}?username=${this.userName}`)
 			.subscribe((user: User[]) => {
 				if (!user.length) {
 					this.loginFailed();
@@ -192,7 +191,7 @@ export class LoginComponent implements OnInit {
 						this.loginFailed();
 					}
 				}
-			});*/
+			});
 	}
 
 

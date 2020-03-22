@@ -22,7 +22,6 @@ export class ProfileContactComponent implements OnInit {
   ngOnInit() {
     this.currentUser = this.userService.getUserById2(sessionStorage.getItem("userid")).subscribe((response)=>{
       this.profileObject = response;
-
       this.firstName = this.profileObject.firstName;
       this.lastName = this.profileObject.lastName;
       this.email = this.profileObject.email;
@@ -37,7 +36,6 @@ export class ProfileContactComponent implements OnInit {
     this.profileObject.lastName = this.lastName;
     this.profileObject.email = this.email;
     this.profileObject.phoneNumber = this.phone;
-
     this.userService.updateUserInfo(this.profileObject);
     this.success = "Updated Successfully!";
   }

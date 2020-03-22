@@ -21,7 +21,7 @@ export class ProfileCarComponent implements OnInit {
   ngOnInit() {
 
     this.currentCar = this.carService.getCarByUserId2(sessionStorage.getItem("userid")).subscribe((response)=>{
-      this.currentCar = response;
+      this.profileObject = response;
       this.make = response.make;
       this.model = response.model;
       this.nrSeats = response.seats;

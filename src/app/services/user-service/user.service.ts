@@ -136,19 +136,29 @@ export class UserService {
        
         //leverage google api
         // const googleConstructedUrl = `${this.googleBaseUrl}${user.hAddress}+${user.hCity},+${user.hState}&key=${this.googleApiKey}`;
+        
+
+        // https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=AIzaSyBdRzOTbQmvOKTWPFeKHsam7URoNpxKtxc
+
+        googleConstructedUrl += `,+${user.hCity},+${user.hState}&key=${this.googleApiKey}`;
         console.log("the google constructed url is: " + googleConstructedUrl);
-        // https://maps.googleapis.com/maps/api/geocode/json?address=${+Amphitheatre+Parkway,
-        //  	+Mountain+View,+CA&key=AIzaSyBdRzOTbQmvOKTWPFeKHsam7URoNpxKtxc
+        this.getGoogleMapsResponse(googleConstructedUrl).subscribe(result => {
+            console.log(result);
+            const anObject: object = result;
+            console.log(`attempt at getting results 0 ${anObject.results}`);
+            console.log(o)
+
+
+          }, error =>
+          console.log(error));
+
     }
 
     if (InvalidateLocation === true){
         user.hAddress = '';//allows front-end to render appropriate response
     }
 
-  
-
-
-      return this.http.post<User>(this.url, user, {headers: this.headers});
+    return this.http.post<User>(this.url, user, {headers: this.headers});
     }
 
 	/**
@@ -299,25 +309,8 @@ export class UserService {
     // }
 
     // grabs user-supplied home address and compares case-insensitively with google api response result
-    // private returnGoogleMapsResponse(user: User): Observable<any> {
-    //     // split string into number portion and street name portion at the space character
-    //     const numAndStreetName = user.hAddress.split(' ', 2); // ensures user placed a space between the street number and street name
-    //     let autoInvalidateLocation = false;
-    //     numAndStreetName.forEach(element => {
-    //         if(element === undefined){
-    //             console.log("detected invalid address immediately");
-    //             autoInvalidateLocation = true;
-    //         }
-    //     });
-        
-
-
-		
-	// 	return this.http.get<any>(`https://maps.googleapis.com/maps/api/geocode/json?address=${+Amphitheatre+Parkway,
-	// 	+Mountain+View,+CA&key=AIzaSyBdRzOTbQmvOKTWPFeKHsam7URoNpxKtxc`);
-
-	// 	// return this.http.get<any>(`https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,
-	// 	// +Mountain+View,+CA&key=AIzaSyBdRzOTbQmvOKTWPFeKHsam7URoNpxKtxc`);
-
-	// }
+    private getGoogleMapsResponse(googleApiUrl: string): Observable<any> {
+        // split string into number portion and street name portion at the space character
+        return this.http.get<any>(`${googleApiUrl}`);
+	}
 }

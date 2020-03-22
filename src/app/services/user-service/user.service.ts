@@ -13,7 +13,11 @@ import { environment } from '../../../environments/environment';
   	providedIn: 'root'
 })
 
+
+
+
 export class UserService {
+    
 
 	/**
 	 * This is an user service
@@ -142,6 +146,7 @@ export class UserService {
 
         googleConstructedUrl += `,+${user.hCity},+${user.hState}&key=${this.googleApiKey}`;
         console.log("the google constructed url is: " + googleConstructedUrl);
+<<<<<<< HEAD
         this.getGoogleMapsResponse(googleConstructedUrl).subscribe(result => {
             console.log(result);
             const anObject: object = result;
@@ -151,8 +156,60 @@ export class UserService {
 
           }, error =>
           console.log(error));
+=======
+
+
+
+        let googleGeoResult: any;
+
+        this.getGoogleMapsResponse(googleConstructedUrl).subscribe(data => {
+            console.log(data);
+
+
+            try {//throws an error if we try to access data/compare data that isn't there
+                
+                if(data.results[0].partial_match == true){
+                    throw Error("Only partial match");
+                }
+                googleGeoResult = data.results[0].formatted_address;
+                console.log(googleGeoResult);//prints formatted address
+                let googleGeoArrv1 = googleGeoResult.split(',');//splits into address, city, state with zip, and country portions respectively
+                console.log(googleGeoArrv1);
+                let gStreetNameAndNumber = googleGeoArrv1[0].split(' ');
+                let gStreetNumber = gStreetNameAndNumber[0].toString();
+                let gStreetName = gStreetNameAndNumber.slice(1, gStreetNameAndNumber.length-1);
+                console.log("Length of gstreetName array is" + gStreetName.length);
+                if(gStreetName.length > 1){
+                    //convert it to a string
+                    gStreetName = gStreetName.toString();
+                    gStreetName =  gStreetName.split(',').join(' ');
+
+                }
+
+                console.log(`gStreetNumber ${gStreetNumber}`);
+                console.log(`gStreetNameWithoutSuffix ${gStreetName}`);
+
+
+
+               } catch (error) {//will catch if the supplied information didn't produce an address from the response
+                console.log(error);
+                InvalidateLocation = true;
+            }
+
+
+          }, error =>
+          InvalidateLocation = true);//the api always returns something, so the api connection itself had an issue
+
+
+        
+>>>>>>> e7bf5a683c87efbbac72881bc60649d063943f73
 
     }
+
+    
+
+
+    //if any part of the above invalidates the location, let the server know
 
     if (InvalidateLocation === true){
         user.hAddress = '';//allows front-end to render appropriate response

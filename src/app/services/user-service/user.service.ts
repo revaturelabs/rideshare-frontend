@@ -170,7 +170,6 @@ export class UserService {
                 console.log("Length of gstreetName array is" + gStreetName.length);
                 if(gStreetName.length > 1){
                     //convert it to a string
-                    console.log("inside of if conditional");
                     gStreetName = gStreetName.toString();
                     gStreetName =  gStreetName.split(',').join(' ');
 

@@ -33,7 +33,7 @@
       <th>Active</th>
       <th>Role</th>
     </tr>
-  
+
     <tr *ngFor="let get of riders" >
       <td>{{get.userId}}</td>
       <td>{{get.firstName}}</td>
@@ -45,9 +45,9 @@
       <td *ngIf="get.active===false"><img src=".\assets\no.jpg" width="15" height="15"></td>
       <td *ngIf="get.driver===false">Rider</td>
       <td *ngIf="get.driver===true">Driver</td>
-     
+
     </tr>
-  
+
   </table>
 
 </div>

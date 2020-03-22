@@ -11,15 +11,15 @@ const baseUri = `http://localhost`;
 const port = '8080';
 
 /**
- * google map api key 
+ * google map api key
  */
-const googleKey = '';
+const googleKey = 'AIzaSyCFCwp_Ef8hDVvIEsqXcnowl78_iI7kRU4';
  /**
    * This is the environment config.
    */
 
 export const environment = {
- 
+
   production: false,
   environmentName: 'Default Environment',
   userUri: `${baseUri}:${port}/users/`,
@@ -37,4 +37,4 @@ export const environment = {
  * This import should be commented out in production mode because it will have a negative impact
  * on performance if an error is thrown.
  */
-// import 'zone.js/dist/zone-error';  // Included with Angular CLI.
+ // import 'zone.js/dist/zone-error';  // Included with Angular CLI.

@@ -15,7 +15,7 @@ export class AppComponent {
    * This is the title of the Application.
    */
   title = 'rideshare-frontend';
-  googleMapAPIKey: string;
+  googleMapAPIKey = 'AIzaSyA3_1dZMnfENx9Ksa05PojGVbsMt7M6IpQ';
 
   constructor() { }
 
@@ -26,10 +26,10 @@ export class AppComponent {
         sessionStorage.setItem("lng", position.coords.longitude+"")
      })
   }
- } 
+ }
 
 
-   
+
 
 
 }

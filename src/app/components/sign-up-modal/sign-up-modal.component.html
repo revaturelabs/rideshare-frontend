@@ -8,7 +8,7 @@
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
-  <div class="modal-body">
+  <div class="modal-body"  (keyup.enter)="submitUser()">
     <label for="firstname">First Name</label>
     <input (keydown)="firstNameError = ''" id="firstname" type="text" [(ngModel)]="user.firstName" class="form-control" />
     <p *ngIf="firstNameError != ''" class="error">{{firstNameError}}</p>

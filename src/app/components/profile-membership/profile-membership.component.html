@@ -1,4 +1,4 @@
-<div class="container mainContainer">
+<div class="container mainContainer" (keyup.enter)="updatesMembershipInfo()">
         <i class="fa fa-users" style="font-family:'FontAwesome';"></i>
             <h4 class="title">Membership:</h4>
             <div class="innercontainer">
@@ -31,9 +31,15 @@
                         <button type="button" class="btn btn-outline-success mybtngroup">Driver</button>
                         <button type="button" class="btn btn-outline-danger mybtngroup">Off</button>
                     </div> -->
+<<<<<<< HEAD
                     <p *ngIf="success != ''" class="success">{{success}}</p>
                 <button type="submit" class="btn btn-primary myBtn" (click)="updatesMembershipInfo()">Save</button>
                 </div> 
+=======
+            
+                <button type="submit" (click)="updatesMembershipInfo()"class="btn btn-primary myBtn">Save</button>
+                </div>
+>>>>>>> dd2a5b11f2a85cd19285c70ed2cb4392d333057e
             </div>
         </div>
     </div>

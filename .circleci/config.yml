@@ -3,6 +3,10 @@ jobs:
   build:
     docker:
       - image: circleci/node:12.13.1
+      - image: selenium/standalone-chrome:3.1.0
+      environment:
+        CHROME_BIN=chromium-browser
+        DISPLAY=:99.0
     steps:
       - checkout
       - run:
@@ -11,6 +15,12 @@ jobs:
       - run:
           name: Install Angular
           command: echo y | sudo npm install -g @angular/cli
+      - run:
+          name: Start Headless Chrome
+          command: google-chrome-stable --headless --disable-grpu --remote-debugging-port=9222 http://localhost &
+      - run:
+          name: Run Unit Tests
+          command: ng test --watch=false
       - run: 
           name: Install Compodoc
           command: npm install @compodoc/compodoc

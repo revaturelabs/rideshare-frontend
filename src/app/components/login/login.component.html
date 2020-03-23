@@ -1,6 +1,6 @@
 <a (click)="openModal(template)">Login</a >
-<ng-template #template >
-<div class="container">
+<ng-template #template>
+<div class="container" (keyup.enter)="login()">
     <div class="text-center" id="login-form">
   <!-- <div class="form-group">
              <div class="dropdown">

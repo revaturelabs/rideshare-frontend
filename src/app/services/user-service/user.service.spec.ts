@@ -5,7 +5,7 @@ import { AdminComponent } from 'src/app/components/admin/admin.component';
 import { CarRegisterComponent } from 'src/app/components/car-register/car-register.component';
 import { UserRegisterComponent } from 'src/app/components/user-register/user-register.component';
 import { LoginComponent } from 'src/app/components/login/login.component';
-import { HttpClientModule} from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { FormsModule } from '@angular/forms';
 import { APP_BASE_HREF } from '@angular/common';
@@ -15,12 +15,14 @@ import { NavbarComponent } from 'src/app/components/navbar/navbar.component';
 import { PreferenceComponent } from 'src/app/components/preference/preference.component';
 import { ProfileComponent } from 'src/app/components/profile/profile.component';
 import { RegisterComponent } from 'src/app/components/register/register.component';
+import { User } from 'src/app/models/user';
 
 describe('UserService', () => {
   beforeEach(() => TestBed.configureTestingModule({
-    declarations: [AdminComponent, CarRegisterComponent, UserRegisterComponent, LoginComponent, MyCarComponent, NavbarComponent, PreferenceComponent, ProfileComponent],
+    declarations: [AdminComponent, CarRegisterComponent, UserRegisterComponent,
+      LoginComponent, MyCarComponent, NavbarComponent, PreferenceComponent, ProfileComponent],
     imports: [HttpClientModule, AppRoutingModule, FormsModule],
-    providers: [{provide: APP_BASE_HREF, useValue: '/my/app'}]
+    providers: [{ provide: APP_BASE_HREF, useValue: '/my/app' }]
   }));
 
   it('should be created', () => {
@@ -33,13 +35,14 @@ describe('UserService', () => {
   let userService: UserService;
 
   // Adding injection here instead of it() method to reduce redundancy
-  beforeEach(() => { 
-   TestBed.configureTestingModule({
-    declarations: [AdminComponent, CarRegisterComponent, UserRegisterComponent, LoginComponent, MyCarComponent, NavbarComponent, PreferenceComponent, ProfileComponent],
-    imports: [HttpClientModule, AppRoutingModule, FormsModule],
-    providers: [{provide: APP_BASE_HREF, useValue: '/my/app'}]
-   }); 
-    
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      declarations: [AdminComponent, CarRegisterComponent, UserRegisterComponent,
+        LoginComponent, MyCarComponent, NavbarComponent, PreferenceComponent, ProfileComponent],
+      imports: [HttpClientModule, AppRoutingModule, FormsModule],
+      providers: [{ provide: APP_BASE_HREF, useValue: '/my/app' }]
+    });
+
     userService = TestBed.get(UserService);
   });
 
@@ -47,10 +50,24 @@ describe('UserService', () => {
     expect(userService).toBeTruthy();
   });
 
-  //Adding test for getAllUsers() method
+  const genericUserData = {
+    isDriver: true,
+    active: true,
+    isAcceptingRides: true,
+    hState: '',
+    hAddress: '',
+    hCity: '',
+    hZip: 13456,
+    wAddress: '',
+    wCity: '',
+    wState: '',
+    wZip: 12345
+  };
+
+  // Adding test for getAllUsers() method
   describe('getAllUsers', () => {
     it('should return a collection of users', () => {
-      const userResponse = [
+      const userResponse: User[] = [
         {
           userId: 1,
           userName: 'carsryan',
@@ -62,9 +79,7 @@ describe('UserService', () => {
           lastName: 'Carstons',
           email: 'ryan@gmail.com',
           phoneNumber: '1231231231',
-          driver: true,
-          active: true,
-          acceptingRides: true
+          ...genericUserData
         },
         {
           userId: 2,
@@ -77,9 +92,7 @@ describe('UserService', () => {
           lastName: 'Nguyen',
           email: 'pete@gmail.com',
           phoneNumber: '3213213213',
-          driver: true,
-          active: true,
-          acceptingRides: true
+          ...genericUserData
         }
       ];
       let response;

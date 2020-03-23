@@ -15,12 +15,14 @@ import { MyCarComponent } from 'src/app/components/my-car/my-car.component';
 import { NavbarComponent } from 'src/app/components/navbar/navbar.component';
 import { PreferenceComponent } from 'src/app/components/preference/preference.component';
 import { ProfileComponent } from 'src/app/components/profile/profile.component';
+import { Batch } from 'src/app/models/batch';
 
 describe('BatchService', () => {
   beforeEach(() => TestBed.configureTestingModule({
-    declarations: [AdminComponent, CarRegisterComponent, UserRegisterComponent, LoginComponent, MyCarComponent, NavbarComponent, PreferenceComponent, ProfileComponent],
+    declarations: [AdminComponent, CarRegisterComponent, UserRegisterComponent,
+      LoginComponent, MyCarComponent, NavbarComponent, PreferenceComponent, ProfileComponent],
     imports: [HttpClientModule, AppRoutingModule, FormsModule],
-    providers: [{provide: APP_BASE_HREF, useValue: '/my/app'}]
+    providers: [{ provide: APP_BASE_HREF, useValue: '/my/app' }]
   }));
 
   it('should be created', () => {
@@ -33,42 +35,40 @@ describe('BatchService', () => {
 
 describe('BatchService', () => {
   let batchService: BatchService;
-  
+
   beforeEach(() => {
     TestBed.configureTestingModule({
-    declarations: [AdminComponent, CarRegisterComponent, UserRegisterComponent, LoginComponent, MyCarComponent, NavbarComponent, PreferenceComponent, ProfileComponent],
-    imports: [HttpClientModule, AppRoutingModule, FormsModule],
-    providers: [{provide: APP_BASE_HREF, useValue: '/my/app'}]
-  })
+      declarations: [AdminComponent, CarRegisterComponent, UserRegisterComponent,
+        LoginComponent, MyCarComponent, NavbarComponent, PreferenceComponent, ProfileComponent],
+      imports: [HttpClientModule, AppRoutingModule, FormsModule],
+      providers: [{ provide: APP_BASE_HREF, useValue: '/my/app' }]
+    });
 
-  batchService = TestBed.get(BatchService);
-})
-
-it('should register a batch', () => {
-  expect(batchService).toBeTruthy();
-});
-
- //Adding test for getAllBatches() method
- describe('getAllBatches', () => {
-  it('should return a list of batches', () => {
-    const batchResponse = [
-      {
-        batchNumber: 1,
-        batchLocation: 'NYC'
-      },
-      {
-        batchNumber: 2,
-        batchLocation: 'VA'
-      }
-    ];
-    let response;
-    spyOn(batchService, 'getAllBatches').and.returnValue(of(batchResponse));
-
-    // batchService.getAllBatches().subscribe(res => {
-    //   response = res;
-    // });
-
-    expect(response).toEqual(batchResponse);
+    batchService = TestBed.get(BatchService);
   });
-});
+
+  it('should register a batch', () => {
+    expect(batchService).toBeTruthy();
+  });
+
+  // Adding test for getAllBatches() method
+  describe('getAllBatches', () => {
+    it('should return a list of batches', () => {
+      const batchResponse: Batch[] = [
+        {
+          batchNumber: 1,
+          batchLocation: 'NYC'
+        },
+        {
+          batchNumber: 2,
+          batchLocation: 'VA'
+        }
+      ];
+      spyOn(batchService, 'getAllBatches').and.returnValue(batchResponse);
+
+      const response: Batch[] = batchService.getAllBatches();
+
+      expect(response).toEqual(batchResponse);
+    });
+  });
 });

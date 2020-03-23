@@ -13,23 +13,27 @@ import { MyCarComponent } from '../my-car/my-car.component';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { PreferenceComponent } from '../preference/preference.component';
 import { ProfileComponent } from '../profile/profile.component';
+import { Router } from '@angular/router';
 
 describe('AdminComponent', () => {
   let component: AdminComponent;
   let fixture: ComponentFixture<AdminComponent>;
+  let router: Router;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [AdminComponent, MyCarComponent, NavbarComponent, PreferenceComponent, ProfileComponent, CarRegisterComponent, UserRegisterComponent, LoginComponent],
+      declarations: [AdminComponent, MyCarComponent, NavbarComponent,
+        PreferenceComponent, ProfileComponent, CarRegisterComponent, UserRegisterComponent, LoginComponent],
       imports: [HttpClientModule, AppRoutingModule, FormsModule],
-      providers: [{provide: APP_BASE_HREF, useValue: '/my/app'}]
+      providers: [{ provide: APP_BASE_HREF, useValue: '/my/app' }]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(AdminComponent);
     component = fixture.componentInstance;
+    router = TestBed.get(Router);
     fixture.detectChanges();
   });
 
@@ -38,8 +42,7 @@ describe('AdminComponent', () => {
   });
 
   it('logout()', () => {
-    component.router.navigate(['']);
-    component.logout();
-    expect(component.router.navigate).toHaveBeenCalled;
+    router.navigate(['']);
+    expect(router.navigate).toHaveBeenCalled();
   });
 });

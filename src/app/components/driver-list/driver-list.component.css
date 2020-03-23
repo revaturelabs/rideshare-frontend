@@ -1,74 +1,73 @@
-.search{
-    display: flex;
-    flex-direction: row;
-    text-align: center;
-    margin: 20px 0px;
-    justify-content: center;
+.search {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  margin: 20px 0px;
+  justify-content: center;
 
 }
-.form-control{
-    align-self: center;   
-    margin-right: 15px;
-    width: 30%;
+
+.form-control {
+  align-self: center;
+  margin-right: 15px;
+  width: 30%;
 }
 
-/* .register{
-    margin-top:15px;
-} */
+#search {
+  margin-top: 10px;
+  background-color: #F26925;
+  color: white;
+  width: 30%;
+  font-family: "Overpass", sans-serif;
+  font-weight: bold;
+  font-size: 22px;
+  border-radius: 27px;
+  letter-spacing: 1px;
+  height: 45px;
+  display: inline-block;
 
-#search{
-    margin-top:10px;
-    background-color: #F26925;
-    color:white;
-    width:30%;
-    font-family:"Overpass",sans-serif;
-    font-weight:bold;
-    font-size:22px;
-    border-radius:27px;
-    letter-spacing:1px;
-    height:45px;
-    display:inline-block;
-    
 }
- 
-#search:hover{
-    background-color:white;
-    color:#F26925;
-    border: 2px solid #F26925;
-    border-radius: 22px ;
-    font-family:"Overpass",sans-serif;
-    font-size:23px;
+
+#search:hover {
+  background-color: white;
+  color: #F26925;
+  border: 2px solid #F26925;
+  border-radius: 22px;
+  font-family: "Overpass", sans-serif;
+  font-size: 23px;
 }
+
 #right-panel {
-    font-family: 'Roboto','sans-serif';
-    line-height: 30px;
-    
-  }
+  font-family: 'Roboto', 'sans-serif';
+  line-height: 30px;
+
+}
+
 #wrapper {
-    width: 500px;
-    border: 1px solid black;
-    background-color:rgb(43, 15, 15)
+  width: 500px;
+  border: 1px solid black;
+  background-color: rgb(43, 15, 15)
 }
+
 #side1 {
-    width: 400px;
-    float:left; 
-    padding-left: 250px;
+  width: 400px;
+  float: left;
+  padding-left: 250px;
 }
+
 #side2 {
-    background-color:white;
-    padding-left: 300px;
+  background-color: white;
+  padding-left: 300px;
 }
-#gmap { 
-    height: 369px; 
+
+#gmap {
+  height: 369px;
 }
-/* .googleapi {
- 
+
+.col {
+  margin-right: 3%;
 }
-#map{
-} */
-.col{
-    margin-right: 3%;
-}
-.btn-outline-secondary{
-    font-size:14px;
+
+.btn-outline-secondary {
+  font-size: 14px;
 }

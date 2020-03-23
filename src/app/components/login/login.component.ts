@@ -64,7 +64,7 @@ export class LoginComponent implements OnInit {
 		private http: HttpClient, private authService: AuthService, public router: Router) { }
 
 	/**
-	 * When the component is initialized, the system checks for the session storage to validate. 
+	 * When the component is initialized, the system checks for the session storage to validate.
 	 * Once validated, the user service is called to retrieve all users.
 	 */
 	ngOnInit() {
@@ -175,9 +175,8 @@ export class LoginComponent implements OnInit {
 					if ((response.name !== undefined) && (response.userid !== undefined)) {
 						sessionStorage.setItem('name', response.name);
 						sessionStorage.setItem('userid', response.userid);
-
-						// call 'drivers' page instead of 'landingPage'
-						location.replace('drivers');
+						this.modalRef.hide();
+						this.router.navigateByUrl('/drivers');
 					}
 					if (response.userNotFound !== undefined) {
 						this.userNotFound = response.userNotFound[0];

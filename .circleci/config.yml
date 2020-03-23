@@ -2,8 +2,8 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: circleci/node:12.13.1
-      - image: selenium/standalone-chrome:3.1.0
+      # Image List: https://circleci.com/docs/2.0/docker-image-tags.json
+      - image: circleci/node:12.13.1-browsers
         # environment:
         #   CHROME_BIN: chromium-browser
         #   DISPLAY: :99.0

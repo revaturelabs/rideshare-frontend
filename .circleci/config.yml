@@ -4,9 +4,6 @@ jobs:
     docker:
       # Image List: https://circleci.com/docs/2.0/docker-image-tags.json
       - image: circleci/node:12.13.1-browsers
-        # environment:
-        #   CHROME_BIN: chromium-browser
-        #   DISPLAY: :99.0
     steps:
       - checkout
       - restore_cache:

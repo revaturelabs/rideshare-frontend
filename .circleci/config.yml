@@ -4,8 +4,8 @@ jobs:
     docker:
       - image: selenium/standalone-chrome:3.1.0
       - environment:
-        CHROME_BIN=chromium-browser
-        DISPLAY=:99.0
+        CHROME_BIN: chromium-browser
+        DISPLAY: :99.0
     steps:
       - checkout
       - run:

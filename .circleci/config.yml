@@ -4,9 +4,9 @@ jobs:
     docker:
       - image: circleci/node:12.13.1
       - image: selenium/standalone-chrome:3.1.0
-        environment:
-          CHROME_BIN: chromium-browser
-          DISPLAY: :99.0
+        # environment:
+        #   CHROME_BIN: chromium-browser
+        #   DISPLAY: :99.0
     steps:
       - checkout
       - restore_cache:

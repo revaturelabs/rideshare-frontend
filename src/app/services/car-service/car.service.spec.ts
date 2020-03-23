@@ -15,14 +15,16 @@ import { MyCarComponent } from 'src/app/components/my-car/my-car.component';
 import { NavbarComponent } from 'src/app/components/navbar/navbar.component';
 import { PreferenceComponent } from 'src/app/components/preference/preference.component';
 import { ProfileComponent } from 'src/app/components/profile/profile.component';
+import { Car } from 'src/app/models/car';
 
 describe('CarService', () => {
-  beforeEach(() => 
+  beforeEach(() =>
     TestBed.configureTestingModule({
-     declarations: [AdminComponent, CarRegisterComponent, UserRegisterComponent, LoginComponent, MyCarComponent, NavbarComponent, PreferenceComponent, ProfileComponent],
-     imports: [HttpClientModule, AppRoutingModule, FormsModule],
-     providers: [{provide: APP_BASE_HREF, useValue: '/my/app'}]
-  }));
+      declarations: [AdminComponent, CarRegisterComponent, UserRegisterComponent,
+        LoginComponent, MyCarComponent, NavbarComponent, PreferenceComponent, ProfileComponent],
+      imports: [HttpClientModule, AppRoutingModule, FormsModule],
+      providers: [{ provide: APP_BASE_HREF, useValue: '/my/app' }]
+    }));
 
   it('should be created', () => {
     const service: CarService = TestBed.get(CarService);
@@ -30,14 +32,15 @@ describe('CarService', () => {
   });
 });
 
-  describe('CarService', () => {
-    let carService: CarService;
-    
-    beforeEach(() => {
-      TestBed.configureTestingModule({
-      declarations: [AdminComponent, CarRegisterComponent, UserRegisterComponent, LoginComponent, MyCarComponent, NavbarComponent, PreferenceComponent, ProfileComponent],
+describe('CarService', () => {
+  let carService: CarService;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      declarations: [AdminComponent, CarRegisterComponent, UserRegisterComponent,
+        LoginComponent, MyCarComponent, NavbarComponent, PreferenceComponent, ProfileComponent],
       imports: [HttpClientModule, AppRoutingModule, FormsModule],
-      providers: [{provide: APP_BASE_HREF, useValue: '/my/app'}]
+      providers: [{ provide: APP_BASE_HREF, useValue: '/my/app' }]
     })
 
     carService = TestBed.get(CarService);
@@ -47,20 +50,35 @@ describe('CarService', () => {
     expect(carService).toBeTruthy();
   });
 
-    //Adding test for getAllCars() method
-    describe('getAllCars', () => {
-      it('should return a collection of cars', () => {
-        const carsResponse = [
-          {
-            carId: 1,
-            color: 'black',
-            seats: 6,
-            make: 'Tesla',
-            model: 'Model X',
-            year: 2019,
-            user: {
-              userId: 1,
-              userName: 'carsryan',
+  // Helper object to fillout properties for meeting User object definition
+  const genericUserData = {
+    isDriver: true,
+    active: true,
+    isAcceptingRides: true,
+    hState: '',
+    hAddress: '',
+    hCity: '',
+    hZip: 13456,
+    wAddress: '',
+    wCity: '',
+    wState: '',
+    wZip: 12345
+  };
+
+  // Adding test for getAllCars() method
+  describe('getAllCars', () => {
+    it('should return a collection of cars', () => {
+      const carsResponse: Car[] = [
+        {
+          carId: 1,
+          color: 'black',
+          seats: 6,
+          make: 'Tesla',
+          model: 'Model X',
+          year: 2019,
+          user: {
+            userId: 1,
+            userName: 'carsryan',
             batch: {
               batchNumber: 1,
               batchLocation: '123'
@@ -69,21 +87,19 @@ describe('CarService', () => {
             lastName: 'Carstons',
             email: 'ryan@gmail.com',
             phoneNumber: '1231231231',
-            driver: true,
-            active: true,
-            acceptingRides: true
-            }
-          },    
-          {
-            carId: 2,
-            color: 'white',
-            seats: 4,
-            make: 'Toyota',
-            model: 'Supra',
-            year: 2019,
-            user: {
-              userId: 2,
-              userName: 'pwin',
+            ...genericUserData
+          }
+        },
+        {
+          carId: 2,
+          color: 'white',
+          seats: 4,
+          make: 'Toyota',
+          model: 'Supra',
+          year: 2019,
+          user: {
+            userId: 2,
+            userName: 'pwin',
             batch: {
               batchNumber: 2,
               batchLocation: '456'
@@ -92,20 +108,18 @@ describe('CarService', () => {
             lastName: 'Nguyen',
             email: 'pete@gmail.com',
             phoneNumber: '3213213213',
-            driver: true,
-            active: true,
-            acceptingRides: true
-                  }
-            }  
-        ];
-        let response;
-        spyOn(carService, 'getAllCars').and.returnValue(of(carsResponse));
-  
-        carService.getAllCars().subscribe(res => {
-          response = res;
-        });
-  
-        expect(response).toEqual(carsResponse);
+            ...genericUserData
+          }
+        }
+      ];
+      let response;
+      spyOn(carService, 'getAllCars').and.returnValue(of(carsResponse));
+
+      carService.getAllCars().subscribe(res => {
+        response = res;
       });
+
+      expect(response).toEqual(carsResponse);
     });
+  });
 });

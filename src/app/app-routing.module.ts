@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { NgModule, Component, Type } from '@angular/core';
+import { Routes, RouterModule, Route } from '@angular/router';
 import { AdminComponent } from './components/admin/admin.component';
 import { CarRegisterComponent } from './components/car-register/car-register.component';
 import { RegisterComponent } from './components/register/register.component';
@@ -44,9 +44,39 @@ const routes: Routes = [
   { path: '', component: HomePageComponent },
   { path: '**', pathMatch: 'full', redirectTo: '' }];
 
-
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+
+
+/**
+ * Function that provides a component list for testing
+ * classes that leverage the router.  For whatever reason
+ * the test classes require declarations for every component
+ * used in the router, even when it is being mocked. There
+ * should be a more elegant solution for this as I have not
+ * had to do this in older projects - for the time being this
+ * helper function can be used to keep unit test component
+ * declarations up to date with the router's components.
+ */
+export const getRoutableComponents = () => {
+  const components = new Set<Type<any>>();
+  const routeQueue: Routes[] = [];
+
+  routeQueue.push(routes);
+  while (routeQueue.length > 0) {
+    const currentRoutes = routeQueue.pop();
+    currentRoutes.forEach((r) => {
+      if (r.component) {
+        components.add(r.component);
+      }
+
+      if (r.children) {
+        routeQueue.push(r.children);
+      }
+    });
+  }
+  return components;
+}

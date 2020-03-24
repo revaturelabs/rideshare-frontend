@@ -6,7 +6,7 @@ import { CarRegisterComponent } from 'src/app/components/car-register/car-regist
 import { UserRegisterComponent } from 'src/app/components/user-register/user-register.component';
 import { LoginComponent } from 'src/app/components/login/login.component';
 import { HttpClientModule } from '@angular/common/http';
-import { AppRoutingModule } from 'src/app/app-routing.module';
+import { AppRoutingModule, getRoutableComponents } from 'src/app/app-routing.module';
 import { FormsModule } from '@angular/forms';
 import { APP_BASE_HREF } from '@angular/common';
 import { of } from 'rxjs';
@@ -19,34 +19,14 @@ import { User } from 'src/app/models/user';
 
 describe('UserService', () => {
   beforeEach(() => TestBed.configureTestingModule({
-    declarations: [AdminComponent, CarRegisterComponent, UserRegisterComponent,
-      LoginComponent, MyCarComponent, NavbarComponent, PreferenceComponent, ProfileComponent],
-    imports: [HttpClientModule, AppRoutingModule, FormsModule],
+    declarations: [
+      ...getRoutableComponents()
+    ],
     providers: [{ provide: APP_BASE_HREF, useValue: '/my/app' }]
   }));
 
   it('should be created', () => {
     const service: UserService = TestBed.get(UserService);
     expect(service).toBeTruthy();
-  });
-});
-
-describe('UserService', () => {
-  let userService: UserService;
-
-  // Adding injection here instead of it() method to reduce redundancy
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      declarations: [AdminComponent, CarRegisterComponent, UserRegisterComponent,
-        LoginComponent, MyCarComponent, NavbarComponent, PreferenceComponent, ProfileComponent],
-      imports: [HttpClientModule, AppRoutingModule, FormsModule],
-      providers: [{ provide: APP_BASE_HREF, useValue: '/my/app' }]
-    });
-
-    userService = TestBed.get(UserService);
-  });
-
-  it('should create be created', () => {
-    expect(userService).toBeTruthy();
   });
 });

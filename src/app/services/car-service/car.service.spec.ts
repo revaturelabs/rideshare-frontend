@@ -2,10 +2,12 @@ import { TestBed } from '@angular/core/testing';
 
 import { CarService } from './car.service';
 import { APP_BASE_HREF } from '@angular/common';
-import { UserService } from 'src/app/services/user-service/user.service';
 import { RouterTestingModule } from '@angular/router/testing';
-import { MyCarComponent } from 'src/app/components/my-car/my-car.component';
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user-service/user.service';
+import { HttpClient } from 'selenium-webdriver/http';
+import { getRoutableComponents } from 'src/app/app-routing.module';
 
 @Component({ template: '' })
 class DummyComponent {
@@ -13,9 +15,20 @@ class DummyComponent {
 }
 
 describe('CarService', () => {
-  beforeEach(() =>
+
+  let mockRouter: { navigate: jasmine.Spy };
+  let mockHttpClient: {};
+  let mockUserService: {};
+  beforeEach(() => {
+
+    mockRouter = jasmine.createSpyObj('Router', ['navigate']);
+    mockHttpClient = jasmine.createSpyObj('HttpClient', ['get', 'post', 'delete']);
+    mockUserService = jasmine.createSpyObj('UserService', ['updateIsDriver']);
+
     TestBed.configureTestingModule({
       declarations: [
+        DummyComponent,
+        ...getRoutableComponents()
       ],
       imports: [
         RouterTestingModule.withRoutes(
@@ -23,16 +36,16 @@ describe('CarService', () => {
         )
       ],
       providers: [{ provide: APP_BASE_HREF, useValue: '/my/app' },
-      { provide: UserService, userClass: MockUserService }]
-    }));
+      { provide: UserService, useValue: mockUserService },
+      { provide: Router, useValue: mockRouter },
+      { provide: HttpClient, useValue: mockHttpClient }
+      ]
+    });
+  });
 
-  fit('should be created', () => {
+  it('should be created', () => {
     const service: CarService = TestBed.get(CarService);
     expect(service).toBeTruthy();
   });
 });
 
-
-class MockUserService {
-
-}

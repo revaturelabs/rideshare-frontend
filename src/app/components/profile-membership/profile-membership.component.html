@@ -11,29 +11,37 @@
                 </div>
                 
                 <div class="form-group row">
-                     <div class="col-sm-4 t">
-                    <h6>Status:</h6>
-                    <select class="form-control mySelect" name="rider" id="rider" [(ngModel)]=isDriver value="{{profileObject.isDriver}}">
-                        <option value="true">Driver</option>
-                        <option value="false">Rider</option>
-                    </select>
-                    <select class="form-control mySelect" name="active" id="active" [(ngModel)]=active value="{{profileObject.active}}">
-                        <option value="true">Active</option>
-                        <option value="false">Disabled</option>
-                    </select>
-                    <!-- <div class="btn-group" role="group" aria-label="Basic example">
-                        <button type="button" class="btn btn-outline-success mybtngroup">Rider</button>
-                        <button type="button" class="btn btn-outline-success mybtngroup">Driver</button>
-                        <button type="button" class="btn btn-outline-danger mybtngroup">Off</button>
-                    </div> -->
-            
-                <button type="submit" (click)="updatesMembershipInfo()"class="btn btn-primary myBtn">Save</button>
-                </div>
+                    <div class="col-sm-4 t">
+                   <h6>Status:</h6>
+                   <label class="btn btn-primary">
+                        <select class="form-control mySelect" name="rider" id="rider" [(ngModel)]=isDriver required>
+                            
+                            <option value="true">Driver</option>
+                            <option value="false">Rider</option>
+                   </select>
+                   </label>
+                   <br>
+                   <label class="btn btn-primary">
+                   <select class="form-control mySelect" name="active" id="active" [(ngModel)]=active value="{{profileObject.active}}">
+                       <option value="true">Active</option>
+                       <option value="false">Disabled</option>
+                   </select>
+                   </label>
+
+
+                   <p *ngIf="success != ''" class="success">{{success}}</p>
+                   <button type="submit" class="btn btn-primary myBtn" (click)="updatesMembershipInfo()">Save</button>
+               </div> 
             </div>
         </div>
     </div>
             
-       
+                    <!-- <div class="btn-group" role="group" aria-label="Basic example">
+                       <button type="button" class="btn btn-outline-success mybtngroup">Rider</button>
+                       <button type="button" class="btn btn-outline-success mybtngroup">Driver</button>
+                       <button type="button" class="btn btn-outline-danger mybtngroup">Off</button>
+                   </div> -->
+
                     <!-- <h4>To drive or not to drive?</h4>
                     <div class="custom-control custom-radio custom-control-inline">
                         <input type="radio" id="rider" name="customRadioInline1" class="custom-control-input">

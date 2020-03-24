@@ -137,6 +137,7 @@ export class UserService {
                
             
         });
+    
        
         //leverage google api
         // const googleConstructedUrl = `${this.googleBaseUrl}${user.hAddress}+${user.hCity},+${user.hState}&key=${this.googleApiKey}`;
@@ -171,27 +172,65 @@ export class UserService {
                 if(data.results[0].partial_match == true){
                     throw Error("Only partial match");
                 }
+                //The api will always return a particular format for an address if it makes a best effort delivery; therefore, we can parse and compare to user input
                 googleGeoResult = data.results[0].formatted_address;
                 console.log(googleGeoResult);//prints formatted address
                 let googleGeoArrv1 = googleGeoResult.split(',');//splits into address, city, state with zip, and country portions respectively
                 console.log(googleGeoArrv1);
+                let gStateandZip = googleGeoArrv1[2].split(' ');//array of state and zip
                 let gStreetNameAndNumber = googleGeoArrv1[0].split(' ');
+                //Breaking the formatted address into the strings required to compare to user input
+                console.log(gStateandZip);
+                let gCity = googleGeoArrv1[1].toString().trim();
+                let gState = gStateandZip[1].toString();
+                let gZip = gStateandZip[2].toString();
                 let gStreetNumber = gStreetNameAndNumber[0].toString();
-                let gStreetName = gStreetNameAndNumber.slice(1, gStreetNameAndNumber.length-1);
+                console.log(`length of gStreetNameAndNumbwer is: ${gStreetNameAndNumber.length}`);
+                let gStreetName = gStreetNameAndNumber.slice(1, gStreetNameAndNumber.length-1);//removes suffix, which every street has
+                console.log(`length of gStreet name is: ${gStreetName.length}`);
                 console.log("Length of gstreetName array is" + gStreetName.length);
-                if(gStreetName.length > 1){
+                if(gStreetName.length > 1){//google api seperates multi-length street names with commas, we must remove them
                     //convert it to a string
                     gStreetName = gStreetName.toString();
                     gStreetName =  gStreetName.split(',').join(' ');
 
                 }
 
-                console.log(`gStreetNumber ${gStreetNumber}`);
-                console.log(`gStreetNameWithoutSuffix ${gStreetName}`);
+                console.log(`gStreetNumber:${gStreetNumber}`);
+                console.log(`gStreetNameWithoutSuffix:${gStreetName}`);
+                console.log(`gCity:${gCity}`);
+                console.log(`gState:${gState}`);
+                console.log(`gZip:${gZip}`);
+                console.log(`user.hAddress:${user.hAddress}`);
+                console.log(`user.hCity:${user.hCity}`);
+                console.log(`user.hState:${user.hState}`);
+                console.log(`user.hZip:${user.hZip}`);
+                let lastIndex = user.hAddress.lastIndexOf(" ");//ensures that the user added the suffix, if not will fail
+                let tempUserHaddress = user.hAddress.substring(0, lastIndex);
+
+                console.log(`tempUserHaddress: ${tempUserHaddress}`);
+                //temporarily remove suffix from user supplied address
+                if(tempUserHaddress.toUpperCase() === (gStreetNumber + ' ' + gStreetName).toUpperCase()){
+                    console.log("Street name + number confirmed")
+                }
+                else{
+                    console.log("Stree name and number DENIED")
+                    console.log(`user num and name: ${tempUserHaddress} and google's: ${gStreetNumber + ' ' + gStreetName} don't match`);
+                }
+                if(user.hCity.toUpperCase() === gCity.toUpperCase()){
+                    console.log("City confirmed");
+                }
+                if(user.hState.toUpperCase() === gState.toUpperCase()){
+                    console.log("State confirmed");
+                }
+                if(user.hZip == gZip){
+                    console.log("Zip confirmed");
+                }
+
+                //set all to uppercase before submitting for uniform data representation on database
 
 
-
-               } catch (error) {//will catch if the supplied information didn't produce an address from the response
+               } catch (error) {//will catch anything from unresolved response to comparing undefined values which results in invalidation
                 console.log(error);
                 InvalidateLocation = true;
             }

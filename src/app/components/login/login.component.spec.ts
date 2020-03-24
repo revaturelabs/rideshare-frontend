@@ -21,24 +21,42 @@ describe('LoginComponent', () => {
   let component: LoginComponent;
   // let fixture: ComponentFixture<LoginComponent>;
 
+  // Helper object to fillout properties for meeting User object definition
+  const genericUserData = {
+    isDriver: true,
+    active: true,
+    isAcceptingRides: true,
+    hState: '',
+    hAddress: '',
+    hCity: '',
+    hZip: 13456,
+    wAddress: '',
+    wCity: '',
+    wState: '',
+    wZip: 12345
+  };
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [LoginComponent, UserRegisterComponent, MyCarComponent, NavbarComponent, PreferenceComponent, ProfileComponent, AdminComponent, CarRegisterComponent],
-      imports: [HttpClientModule, AppRoutingModule, FormsModule, RouterTestingModule,],
+      declarations: [LoginComponent, UserRegisterComponent, MyCarComponent,
+        NavbarComponent, PreferenceComponent, ProfileComponent, AdminComponent, CarRegisterComponent],
+      imports: [HttpClientModule, AppRoutingModule, FormsModule, RouterTestingModule],
       schemas: [NO_ERRORS_SCHEMA],
-      //imports: [HttpClientModule, AppRoutingModule, FormsModule],
-      providers: [{provide: APP_BASE_HREF, useValue: '/my/app'}]
+      // imports: [HttpClientModule, AppRoutingModule, FormsModule],
+      providers: [{ provide: APP_BASE_HREF, useValue: '/my/app' }]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
-   const fixture = TestBed.createComponent(LoginComponent);
+    const fixture = TestBed.createComponent(LoginComponent);
+
     component = fixture.componentInstance;
     component.showDropDown = false;
     component.curPage = 1;
     component.totalPage = 10;
-    component.users = [{ userId: 1,
+    component.users = [{
+      userId: 1,
       userName: 'username',
       batch: {
         batchNumber: 1,
@@ -48,9 +66,8 @@ describe('LoginComponent', () => {
       lastName: 'Smith',
       email: 'john.smith@gmail.com',
       phoneNumber: '9171234567',
-      active: true,
-      driver: true,
-      acceptingRides: true}]
+      ...genericUserData
+    }];
     // fixture.detectChanges();
   });
 
@@ -59,9 +76,10 @@ describe('LoginComponent', () => {
   });
 
   it('should change user in login dropdown', () => {
-    
+
     // arrange
-    const user = component.users = [{ userId: 1,
+    const user = component.users = [{
+      userId: 1,
       userName: 'username',
       batch: {
         batchNumber: 1,
@@ -71,16 +89,15 @@ describe('LoginComponent', () => {
       lastName: 'Smith',
       email: 'john.smith@gmail.com',
       phoneNumber: '9171234567',
-      active: true,
-      driver: true,
-      acceptingRides: true}];
-      // act
-      component.changeUser(user);
-      // assert
-      expect(component.users).toMatch;
+      ...genericUserData
+    }];
+    // act
+    component.changeUser(user);
+    // assert
+    expect(component.users).toMatch;
   });
 
-  it('should search account and return a user', () => { 
+  it('should search account and return a user', () => {
 
   });
 
@@ -112,5 +129,5 @@ describe('LoginComponent', () => {
     expect(component.userName).toBe('');
     expect(component.failed).toBe(true);
   });
-  
+
 });

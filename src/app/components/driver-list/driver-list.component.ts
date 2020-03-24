@@ -30,7 +30,7 @@ export class DriverListComponent implements OnInit {
     this.drivers = [];
     this.getGoogleApi();
 
-    this.userService.getRidersForLocation1(this.location).subscribe(
+    this.userService.getRidersForLocation2(this.location).subscribe(
       res => {
         res.forEach(element => {
           this.drivers.push({

@@ -32,17 +32,17 @@ export class DriverListComponent implements OnInit {
   ngOnInit() {
     this.drivers = [];
 
-    this.userService.getRidersForLocation1(this.location).subscribe(
+    this.userService.getRidersForLocation2(this.location).subscribe(
       res => {
            //console.log(res);
            res.forEach(element => {
               this.drivers.push({
-                   'id': element.user.userId,
-                 'name': element.user.firstName+" "+element.user.lastName,
-               'origin':element.user.hCity+","+element.user.hState, 
-                'email': element.user.email, 
-                'phone':element.user.phoneNumber,
-                'seats': element.seats
+                   id: element.user.userId,
+                 name: element.user.firstName + ' ' + element.user.lastName,
+               origin: element.user.hCity + ',' + element.user.hState,
+                email: element.user.email,
+                phone: element.user.phoneNumber,
+                seats: element.seats
               });
           });
       });

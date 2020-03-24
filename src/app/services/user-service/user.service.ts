@@ -30,6 +30,7 @@ export class UserService {
 	 * Creates a new user object
 	 */
 	url: string = environment.userUri;
+	carUrl: string = environment.carUri;
 	user: User = new User();
 
 	/**
@@ -229,5 +230,9 @@ export class UserService {
 	
 	getRidersForLocation1(location: string): Observable <any>{
 		return this.http.get(this.url + 'driver/'+ location)
+	}
+
+	getRidersForLocation2(location: string): Observable <any>{
+		return this.http.get(this.carUrl + 'driver/'+ location)
 	}
 }

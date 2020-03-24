@@ -2,22 +2,14 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LoginComponent } from './login.component';
 import { APP_BASE_HREF } from '@angular/common';
-import { AdminComponent } from '../admin/admin.component';
-import { CarRegisterComponent } from '../car-register/car-register.component';
-import { UserRegisterComponent } from '../user-register/user-register.component';
-import { RegisterComponent } from '../register/register.component';
 import { HttpClientModule } from '@angular/common/http';
-import { AppRoutingModule } from 'src/app/app-routing.module';
+import { AppRoutingModule, getRoutableComponents } from 'src/app/app-routing.module';
 import { FormsModule } from '@angular/forms';
-import { MyCarComponent } from '../my-car/my-car.component';
-import { NavbarComponent } from '../navbar/navbar.component';
-import { PreferenceComponent } from '../preference/preference.component';
-import { ProfileComponent } from '../profile/profile.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
-import { Batch } from 'src/app/models/batch';
+import { BsModalService } from 'ngx-bootstrap';
 
-describe('LoginComponent', () => {
+fdescribe('LoginComponent', () => {
   let component: LoginComponent;
   // let fixture: ComponentFixture<LoginComponent>;
 
@@ -36,14 +28,18 @@ describe('LoginComponent', () => {
     wZip: 12345
   };
 
+  let mockBsModalService;
+
   beforeEach(async(() => {
+    mockBsModalService = jasmine.createSpyObj('BsModalService', ['show']);
     TestBed.configureTestingModule({
-      declarations: [LoginComponent, UserRegisterComponent, MyCarComponent,
-        NavbarComponent, PreferenceComponent, ProfileComponent, AdminComponent, CarRegisterComponent],
+      declarations: [...getRoutableComponents()],
       imports: [HttpClientModule, AppRoutingModule, FormsModule, RouterTestingModule],
       schemas: [NO_ERRORS_SCHEMA],
       // imports: [HttpClientModule, AppRoutingModule, FormsModule],
-      providers: [{ provide: APP_BASE_HREF, useValue: '/my/app' }]
+      providers: [
+        { provide: APP_BASE_HREF, useValue: '/my/app' },
+        { provide: BsModalService, useValue: mockBsModalService }]
     })
       .compileComponents();
   }));
@@ -91,14 +87,13 @@ describe('LoginComponent', () => {
       phoneNumber: '9171234567',
       ...genericUserData
     }];
+    console.log(user);
     // act
     component.changeUser(user);
+    console.log(component.users);
+    console.log(component.chosenUser);
     // assert
-    expect(component.users).toMatch;
-  });
-
-  it('should search account and return a user', () => {
-
+    expect(component.users).toEqual(user);
   });
 
   it('should toggle dropdown', () => {

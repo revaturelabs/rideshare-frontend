@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProfileLocationComponent } from './profile-location.component';
+import { getRoutableComponents } from 'src/app/app-routing.module';
 
 describe('ProfileLocationComponent', () => {
   let component: ProfileLocationComponent;
@@ -8,9 +9,9 @@ describe('ProfileLocationComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProfileLocationComponent ]
+      declarations: [ProfileLocationComponent, ...getRoutableComponents()]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

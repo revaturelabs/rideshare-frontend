@@ -4,6 +4,7 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { APP_BASE_HREF } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { getRoutableComponents } from 'src/app/app-routing.module';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -13,7 +14,8 @@ describe('AppComponent', () => {
         HttpClientModule
       ],
       declarations: [
-        AppComponent, NavbarComponent
+        AppComponent,
+        ...getRoutableComponents()
       ]
     }).compileComponents();
   }));
@@ -29,6 +31,4 @@ describe('AppComponent', () => {
     const app = fixture.debugElement.componentInstance;
     expect(app.title).toEqual('rideshare-frontend');
   });
-
- 
 });

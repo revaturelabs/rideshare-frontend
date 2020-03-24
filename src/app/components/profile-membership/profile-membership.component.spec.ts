@@ -3,6 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ProfileMembershipComponent } from './profile-membership.component';
 import { getRoutableComponents } from 'src/app/app-routing.module';
 import { UserService } from 'src/app/services/user-service/user.service';
+import { of } from 'rxjs';
 
 describe('ProfileMembershipComponent', () => {
   let component: ProfileMembershipComponent;
@@ -22,7 +23,7 @@ describe('ProfileMembershipComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ProfileMembershipComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
+    mockUserService.getUserById2.and.returnValue(of(1));
   });
 
   it('should create', () => {

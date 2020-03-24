@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AdminLoginComponent } from './admin-login.component';
+import { getRoutableComponents } from 'src/app/app-routing.module';
 
 describe('AdminLoginComponent', () => {
   let component: AdminLoginComponent;
@@ -8,9 +9,9 @@ describe('AdminLoginComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AdminLoginComponent ]
+      declarations: [...getRoutableComponents()]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

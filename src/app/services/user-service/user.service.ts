@@ -4,7 +4,7 @@ import { User } from 'src/app/models/user';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from '../auth-service/auth.service';
-import { LogService } from "../log.service"
+import { LogService } from '../log.service'
 import { environment } from '../../../environments/environment';
 
 
@@ -71,7 +71,7 @@ export class UserService {
 	 
 	getUserById2(idParam2: String): Observable<User> {
 		
-		//console.log(this.url)
+		// console.log(this.url)
 		return this.http.get<User>(this.url+idParam2);
 
 
@@ -107,142 +107,118 @@ export class UserService {
 
 	}
 
-	// add user method
+	// adds user if form is filled out and user input matches a real address
 	addUser(user :User) :Observable<User> {
+        this.addressValidation(user);
 
-       // validate address through googleapi. If invalid, set the location string to ''
-       // in order to conform to behavior of back-end api setting of status codes on modular form
+        this.addressValidation(user).subscribe(data => {//hopefully this waits for things to happen
+
+        }, error =>
+        this.setInvalidAddress(user)); // the google api always returns something, so the api connection itself had an issue
+
+        console.log(`all user location stuff: ${user.hAddress}, ${user.hCity}, ${user.hState}, ${user.hZip}`)
+        return this.http.post<User>(this.url, user, {headers: this.headers});
+
     
-    const numAndStreetName = user.hAddress.split(' '); // ensures user placed a space between the street number and street name
-    let InvalidateLocation = false;
-    if ( isNaN(Number(numAndStreetName[0]))){
-        console.log("first part of haddress is not a number!")
-        InvalidateLocation = true;
-        
-
-    }else{
-        console.log("Number of parts in haddress is: " + numAndStreetName.length);
-        //construct url with needed number of +'s based on length of numAndStreetName...
-        let googleConstructedUrl = `${this.googleBaseUrl}`;
-        numAndStreetName.forEach(numAndStreetNamePart => {//for each element concatenate + and the element itself to original googleConstructedUrl
-            if (numAndStreetNamePart === numAndStreetName[0]){
-                googleConstructedUrl += `${numAndStreetNamePart}`;
-            }
-            else{
-                googleConstructedUrl += `+${numAndStreetNamePart}`;
-            }
-            console.log("num and street name part value is " + numAndStreetNamePart);
-
-            
-               
-            
-        });
-    
-       
-        //leverage google api
-        // const googleConstructedUrl = `${this.googleBaseUrl}${user.hAddress}+${user.hCity},+${user.hState}&key=${this.googleApiKey}`;
-        
-
-        // https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=AIzaSyBdRzOTbQmvOKTWPFeKHsam7URoNpxKtxc
-
-        googleConstructedUrl += `,+${user.hCity},+${user.hState}&key=${this.googleApiKey}`;
-        console.log("the google constructed url is: " + googleConstructedUrl);
-
-
-
-        let googleGeoResult: any;
-
-        this.getGoogleMapsResponse(googleConstructedUrl).subscribe(data => {
-            console.log(data);
-
-
-            try {//throws an error if we try to access data/compare data that isn't there
-                
-                if(data.results[0].partial_match == true){
-                    throw Error("Only partial match");
-                }
-                //The api will always return a particular format for an address if it makes a best effort delivery; therefore, we can parse and compare to user input
-                googleGeoResult = data.results[0].formatted_address;
-                console.log(googleGeoResult);//prints formatted address
-                let googleGeoArrv1 = googleGeoResult.split(',');//splits into address, city, state with zip, and country portions respectively
-                console.log(googleGeoArrv1);
-                let gStateandZip = googleGeoArrv1[2].split(' ');//array of state and zip
-                let gStreetNameAndNumber = googleGeoArrv1[0].split(' ');
-                //Breaking the formatted address into the strings required to compare to user input
-                console.log(gStateandZip);
-                let gCity = googleGeoArrv1[1].toString().trim();
-                let gState = gStateandZip[1].toString();
-                let gZip = gStateandZip[2].toString();
-                let gStreetNumber = gStreetNameAndNumber[0].toString();
-                console.log(`length of gStreetNameAndNumbwer is: ${gStreetNameAndNumber.length}`);
-                let gStreetName = gStreetNameAndNumber.slice(1, gStreetNameAndNumber.length-1);//removes suffix, which every street has
-                console.log(`length of gStreet name is: ${gStreetName.length}`);
-                console.log("Length of gstreetName array is" + gStreetName.length);
-                if(gStreetName.length > 1){//google api seperates multi-length street names with commas, we must remove them
-                    //convert it to a string
-                    gStreetName = gStreetName.toString();
-                    gStreetName =  gStreetName.split(',').join(' ');
-
-                }
-
-                console.log(`gStreetNumber:${gStreetNumber}`);
-                console.log(`gStreetNameWithoutSuffix:${gStreetName}`);
-                console.log(`gCity:${gCity}`);
-                console.log(`gState:${gState}`);
-                console.log(`gZip:${gZip}`);
-                console.log(`user.hAddress:${user.hAddress}`);
-                console.log(`user.hCity:${user.hCity}`);
-                console.log(`user.hState:${user.hState}`);
-                console.log(`user.hZip:${user.hZip}`);
-                let lastIndex = user.hAddress.lastIndexOf(" ");//ensures that the user added the suffix, if not will fail
-                let tempUserHaddress = user.hAddress.substring(0, lastIndex);
-
-                console.log(`tempUserHaddress: ${tempUserHaddress}`);
-                //temporarily remove suffix from user supplied address
-                if(tempUserHaddress.toUpperCase() === (gStreetNumber + ' ' + gStreetName).toUpperCase()){
-                    console.log("Street name + number confirmed")
-                }
-                else{
-                    console.log("Stree name and number DENIED")
-                    console.log(`user num and name: ${tempUserHaddress} and google's: ${gStreetNumber + ' ' + gStreetName} don't match`);
-                }
-                if(user.hCity.toUpperCase() === gCity.toUpperCase()){
-                    console.log("City confirmed");
-                }
-                if(user.hState.toUpperCase() === gState.toUpperCase()){
-                    console.log("State confirmed");
-                }
-                if(user.hZip == gZip){
-                    console.log("Zip confirmed");
-                }
-
-                //set all to uppercase before submitting for uniform data representation on database
-
-
-               } catch (error) {//will catch anything from unresolved response to comparing undefined values which results in invalidation
-                console.log(error);
-                InvalidateLocation = true;
-            }
-
-
-          }, error =>
-          InvalidateLocation = true);//the api always returns something, so the api connection itself had an issue
-
-
-        
-
     }
 
-    
+    private addressValidation(user:User): Observable<any>{
+        const numAndStreetName = user.hAddress.split(' '); // ensures user placed a space between the street number and street name
+        if ( isNaN(Number(numAndStreetName[0]))){
+            console.log('first part of haddress is not a number!')
+            this.setInvalidAddress(user);
+        } else{
+            console.log('Number of parts in haddress is: ' + numAndStreetName.length);
+            // construct url with needed number of +'s based on length of numAndStreetName...
+            let googleConstructedUrl = `${this.googleBaseUrl}`;
+            numAndStreetName.forEach(numAndStreetNamePart => {
+                // for each element concatenate + and the element itself to original googleConstructedUrl
+                if (numAndStreetNamePart === numAndStreetName[0]){
+                    googleConstructedUrl += `${numAndStreetNamePart}`;
+                } else{
+                    googleConstructedUrl += `+${numAndStreetNamePart}`;
+                }
 
+            });
+            googleConstructedUrl += `,+${user.hCity},+${user.hState}&key=${this.googleApiKey}`;
+            console.log('the google constructed url is: ' + googleConstructedUrl);
+            let googleGeoResult: any;
+            this.getGoogleMapsResponse(googleConstructedUrl).subscribe(data => {
+                console.log(data);
+                try {// throws an error if we try to access data/compare data that isn't there
+                    if(data.results[0].partial_match == true){
+                        throw Error('Only partial match');
+                    }
+                    // tslint:disable-next-line: max-line-length
+                    // The api will always return a particular format for an address if it makes a best effort delivery; therefore, we can parse and compare to user input
+                    googleGeoResult = data.results[0].formatted_address;
+                    console.log(googleGeoResult);// prints formatted address
+                    // splits into address, city, state with zip, and country portions respectively
+                    let googleGeoArrv1 = googleGeoResult.split(',');
+                    console.log(googleGeoArrv1);
+                    let gStateandZip = googleGeoArrv1[2].split(' ');// array of state and zip
+                    let gStreetNameAndNumber = googleGeoArrv1[0].split(' ');
+                    // Breaking the formatted address into the strings required to compare to user input
+                    let gCity = googleGeoArrv1[1].toString().trim();
+                    let gState = gStateandZip[1].toString();
+                    let gZip = gStateandZip[2].toString();
+                    let gStreetNumber = gStreetNameAndNumber[0].toString();
+                    let gStreetName = gStreetNameAndNumber.slice(1, gStreetNameAndNumber.length-1);// removes suffix, which every street has
+                    if(gStreetName.length > 1){// google api seperates multi-length street names with commas, we must remove them
+                        // convert it to a string
+                        gStreetName = gStreetName.toString();
+                        gStreetName =  gStreetName.split(',').join(' ');
 
-    //if any part of the above invalidates the location, let the server know
+                    }
+                    let gFormattedStrtNameAndNum = gStreetNumber + ' ' + gStreetName;
+                    console.log(`gFormattedStrtNameAndNum:${gFormattedStrtNameAndNum}`);
+                    console.log(`gCity:${gCity}`);
+                    console.log(`gState:${gState}`);
+                    console.log(`gZip:${gZip}`);
+                    console.log(`user.hAddress:${user.hAddress}`);
+                    console.log(`user.hCity:${user.hCity}`);
+                    console.log(`user.hState:${user.hState}`);
+                    console.log(`user.hZip:${user.hZip}`);
+                    let lastIndex = user.hAddress.lastIndexOf(' ');// ensures that the user added the suffix, if not will fail
+                    let tempUserHaddress = user.hAddress.substring(0, lastIndex);
+                    console.log(`tempUserHaddress: ${tempUserHaddress}`);
+                    // temporarily remove suffix from user supplied address and confirm all parts of address with response from google
+                    if((tempUserHaddress.toUpperCase() === gFormattedStrtNameAndNum.toUpperCase())
+                        && (user.hCity.toUpperCase() === gCity.toUpperCase())
+                        && (user.hState.toUpperCase() === gState.toUpperCase())
+                        && (user.hZip == gZip)){
+                        console.log('User input confirmed with a google location');
+                        // add suffix back in for accurate address stored in db, as well as capitalizing every8thing
+                        user.hAddress = gStreetNameAndNumber.join(' ').toUpperCase();
+                        user.hCity = gCity.toUpperCase();
+                        user.hState = gState.toUpperCase();
+                    }
+                    else{// Another invalid pathway in the case a user's input doens't match the google best-effort response
+                        console.log('else condition regarding failed comparisons to google output trigger')
+                        this.setInvalidAddress(user);
 
-    if (InvalidateLocation === true){
-        user.hAddress = '';//allows front-end to render appropriate response
-    }
+                    }
+                } catch (error) {// Another invalid pathway in the case that google api is not set up properly
+                    console.log(error);
+                    this.setInvalidAddress(user);
 
-    return this.http.post<User>(this.url, user, {headers: this.headers});
+                }
+            }, error =>
+            this.setInvalidAddress(user)); // the google api always returns something, so the api connection itself had an issue
+            }
+        return new Observable<any>();
+
+        }
+	/**
+	 * This function sets the location to empty string for back-end invalidation response
+	 */
+    private setInvalidAddress(user: User) {
+        console.log('invalidated...');
+        user.hAddress = '';
+        user.hState = '';
+        user.hCity = '';
+        user.hZip = null;
+
     }
 
 	/**
@@ -315,7 +291,7 @@ export class UserService {
 	 */
 
 	updateUserInfo(user: User) {
-		//console.log(user);
+		// console.log(user);
 		return this.http.put(this.url, user).toPromise();
 	}
 	/**
@@ -354,8 +330,8 @@ export class UserService {
       private body: string;
 
       private httpOptions = {
-        headers: new HttpHeaders({"Content-Type": "application/json"}),
-        observe: "response" as "body"
+        headers: new HttpHeaders({'Content-Type': 'application/json'}),
+        observe: 'response' as 'body'
       }
   
     /**

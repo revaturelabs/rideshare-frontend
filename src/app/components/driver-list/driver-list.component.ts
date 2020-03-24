@@ -180,10 +180,10 @@ export class DriverListComponent implements OnInit {
                                 </td>
                                 <td class="col">${seats}</td>
                                 </tr>`;
-      }
+        }
 
+      });
     });
+
   }
-
 }
-

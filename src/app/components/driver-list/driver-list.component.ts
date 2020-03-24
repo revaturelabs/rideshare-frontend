@@ -18,6 +18,8 @@ export class DriverListComponent implements OnInit {
   location = 'Morgantown, WV';
   location_s = '';
   mapProperties: {};
+  // associates columns of table
+  tableColumns: string[] = ['Name', 'Distance', 'Time'];
   availableCars: Array<any> = [];
   drivers: Array<any> = [];
 
@@ -33,6 +35,7 @@ export class DriverListComponent implements OnInit {
     this.userService.getRidersForLocation1(this.location).subscribe(
       res => {
         res.forEach(element => {
+          console.log(element.user);
           this.drivers.push({
             id: element.user.userId,
             name: element.user.firstName + ' ' + element.user.lastName,
@@ -52,7 +55,7 @@ export class DriverListComponent implements OnInit {
         mapTypeId: google.maps.MapTypeId.ROADMAP
       };
       this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapProperties);
-      //get all routes
+      // get all routes
       this.displayDriversList(this.location, this.drivers);
       // show drivers on map
       this.showDriversOnMap(this.location, this.drivers);
@@ -130,7 +133,7 @@ export class DriverListComponent implements OnInit {
     const outputDiv = document.getElementById('output');
     drivers.forEach(element => {
 ​
-        const service = new google.maps.DistanceMatrixService;
+      // const service = new google.maps.DistanceMatrixService;
 
       const service = new google.maps.DistanceMatrixService();
       service.getDistanceMatrix({
@@ -141,16 +144,16 @@ export class DriverListComponent implements OnInit {
         avoidHighways: false,
         avoidTolls: false
       }, (response, status) => {
-        if (status !== 'OK') {
+         if (status !== 'OK') {
           alert('Error was: ' + status);
-        } else {
-          const originList = response.originAddresses;
-          const destinationList = response.destinationAddresses;
-          const results = response.rows[0].elements;
-          const name = element.name;
-          const seats = element.seats;
+         } else {
+           const originList = response.originAddresses;
+           const destinationList = response.destinationAddresses;
+           const results = response.rows[0].elements;
+           const name = element.name;
+           const seats = element.seats;
 
-          outputDiv.innerHTML += `<tr><td class="col">${name}</td>
+           outputDiv.innerHTML += `<tr><td class="col">${name}</td>
                                   <td class="col">${results[0].distance.text}</td>
                                   <td class="col">${results[0].duration.text}</td>
                                   <td class="col">
@@ -183,19 +186,19 @@ export class DriverListComponent implements OnInit {
                                 </td>
                                 <td class="col">${seats}</td>
                                 </tr>`;
-      }
+
+
+          }
+        });
 
     });
-  }
-
-  }
 
 
     // right is larger numbers or equal
     // left is strictly less than pivot
 ​
-    let leftSorted = this.quickSort(left, desc, holder);
-    let rightSorted = this.quickSort(right, desc, holder);
+    const leftSorted = quickSort(left, desc, holder);
+    const rightSorted = this.quickSort(right, desc, holder);
 ​
     // console.log("left: " + leftSorted);
     // console.log("right: " + rightSorted);

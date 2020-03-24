@@ -30,10 +30,3 @@ getTestBed().initTestEnvironment([
 const context = require.context('./', true, /\.spec\.ts$/);
 // And load the modules.
 context.keys().map(context);
-
-/**
- * Array of components used by the Router.  These are declared to make it easier
- * to declare them testing files that leverage the router. This should not be necessary -
- * I've not had to do this in other projects, but could not figure out a way to prevent
- * routed components to break tests.
- */

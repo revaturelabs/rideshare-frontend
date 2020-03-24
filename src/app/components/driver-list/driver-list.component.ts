@@ -190,9 +190,10 @@ export class DriverListComponent implements OnInit {
 
           }
         });
+      }
 
     });
-
+  });
 
     // right is larger numbers or equal
     // left is strictly less than pivot
@@ -211,5 +212,6 @@ export class DriverListComponent implements OnInit {
     return [...leftSorted, pivot, ...rightSorted];
   }
 ​
+}
 }
 

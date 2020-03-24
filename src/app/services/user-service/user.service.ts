@@ -233,6 +233,6 @@ export class UserService {
 	}
 
 	getRidersForLocation2(location: string): Observable <any>{
-		return this.http.get(this.carUrl + 'driver/'+ location)
+		return this.http.get(this.carUrl + 'driver/' + location);
 	}
 }

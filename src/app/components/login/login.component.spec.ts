@@ -71,28 +71,6 @@ describe('LoginComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  xit('should change user in login dropdown', () => {
-
-    // arrange
-    const user = component.users = [{
-      userId: 1,
-      userName: 'username',
-      batch: {
-        batchNumber: 1,
-        batchLocation: 'NYC'
-      },
-      firstName: 'John',
-      lastName: 'Smith',
-      email: 'john.smith@gmail.com',
-      phoneNumber: '9171234567',
-      ...genericUserData
-    }];
-    // act
-    component.changeUser(user);
-    // assert
-    expect(component.users).toEqual(user);
-  });
-
   it('should toggle dropdown', () => {
     // arrange
     component.showDropDown = false;

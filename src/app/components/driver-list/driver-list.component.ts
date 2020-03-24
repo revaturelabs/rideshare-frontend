@@ -34,11 +34,12 @@ export class DriverListComponent implements OnInit {
       res => {
         res.forEach(element => {
           this.drivers.push({
-            id: element.userId,
-            name: element.firstName + ' ' + element.lastName,
-            origin: element.hCity + ',' + element.hState,
-            email: element.email,
-            phone: element.phoneNumber
+            id: element.user.userId,
+            name: element.user.firstName + ' ' + element.user.lastName,
+            origin: element.user.hCity + ',' + element.user.hState,
+            email: element.user.email,
+            phone: element.user.phoneNumber,
+            seats: element.seats
           });
         });
       });
@@ -144,6 +145,8 @@ export class DriverListComponent implements OnInit {
           const destinationList = response.destinationAddresses;
           const results = response.rows[0].elements;
           const name = element.name;
+          const seats = element.seats;
+
           outputDiv.innerHTML += `<tr><td class="col">${name}</td>
                                   <td class="col">${results[0].distance.text}</td>
                                   <td class="col">${results[0].duration.text}</td>
@@ -174,12 +177,13 @@ export class DriverListComponent implements OnInit {
                                   <div class="col-lg-6">
                                       <div #maps id="gmap" class="img-responsive"></div>
                                   </div>
-                                </td></tr>`;
+                                </td>
+                                <td class="col">${seats}</td>
+                                </tr>`;
         }
+
       });
-
     });
+
   }
-
 }
-

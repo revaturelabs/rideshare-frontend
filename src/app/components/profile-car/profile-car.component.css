@@ -153,3 +153,7 @@ h4{
                 padding:8px;
             }
         }
+
+.error {
+    color:red;
+}

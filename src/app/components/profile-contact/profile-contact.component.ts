@@ -136,7 +136,6 @@ export class ProfileContactComponent implements OnInit {
     }
     else {
 
-      //regular expression matches server
       const isValid = this.validationService.validateEmail(this.email);
 
       if(isValid) {

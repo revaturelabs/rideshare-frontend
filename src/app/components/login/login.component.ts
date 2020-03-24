@@ -42,7 +42,8 @@ export class LoginComponent implements OnInit {
 	banned: boolean = false;
 
 	pwdError: string;
-    usernameError: string;
+	usernameError: string = 'Username Required';
+	usernameErrorVisible: string = "hidden";
 	userNotFound: string;
 	modalRef :BsModalRef;
 	/**
@@ -148,20 +149,44 @@ export class LoginComponent implements OnInit {
 		this.modalRef = this.modalService.show(template);
 	}
 
+	validateUsername() {
+		if(!this.userName) {
+			this.usernameError = "Username Required";
+			this.usernameErrorVisible = "visible";
+			return false;
+		}
+		else {
+			//don't set to empty string else the element is removed from the page which changes the spacing
+			//this.usernameError = ""
+			this.usernameErrorVisible = "hidden"; //instead make hidden
+			return true;
+		}
+	}
+
+	onUsernameChange() {
+		this.validateUsername();
+	}
+
 	/**
 	 * A login function
 	 */
 
 	login() {
+
+		if(!this.validateUsername()) {
+			return;
+		}
+
 		this.pwdError ='';
-		this.usernameError= '';
+		this.usernameErrorVisible = "hidden";
 		
         this.http.get(`${environment.loginUri}?userName=${this.userName}&passWord=${this.passWord}`)
 			.subscribe(
                   (response) => {
                      //console.log(response);
                       if(response["userName"] != undefined){
-                         this.usernameError=  response["userName"][0];
+						 this.usernameError=  response["userName"][0];
+						 this.usernameErrorVisible = "visible";
                       }
                       if(response["passWord"] != undefined){
                          this.pwdError = response["pwdError"][0];

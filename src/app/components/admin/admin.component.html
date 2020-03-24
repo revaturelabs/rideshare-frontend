@@ -2,7 +2,7 @@
 
 <div class="container">
 
-<div class="row">
+<div class="row" (keyup.enter)="searchUser()">
   <div class="offset-lg-1 offset-sm-1 col-lg-9 col-sm-10">
    <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Search by Username">
 

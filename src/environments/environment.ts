@@ -13,7 +13,7 @@ const port = '8080';
 /**
  * google map api key 
  */
-const googleKey = 'AIzaSyBdRzOTbQmvOKTWPFeKHsam7URoNpxKtxc';
+const googleKey = '';
  /**
    * This is the environment config.
    */

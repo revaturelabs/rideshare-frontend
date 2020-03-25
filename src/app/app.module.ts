@@ -2,7 +2,7 @@
 
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ModalModule } from 'node_modules/ngx-bootstrap';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -67,7 +67,8 @@ import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
   imports: [
     BrowserModule,
     HttpClientModule,
-    FormsModule,
+    FormsModule, 
+    ReactiveFormsModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,

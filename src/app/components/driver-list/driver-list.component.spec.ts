@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DriverListComponent } from './driver-list.component';
+import { getRoutableComponents } from 'src/app/app-routing.module';
 
 describe('DriverListComponent', () => {
   let component: DriverListComponent;
@@ -8,9 +9,9 @@ describe('DriverListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DriverListComponent ]
+      declarations: [...getRoutableComponents()]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

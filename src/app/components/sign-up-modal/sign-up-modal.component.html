@@ -3,7 +3,7 @@
 <ng-template #template >
   <p *ngIf="success != ''" class="success">{{success}}</p>
   <div class="modal-header">
-    <h4 class="modal-title">Sign Up</h4>
+    <h4 id="sign-up-modal-modal-title" class="modal-title">Sign Up</h4>
     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -71,4 +71,4 @@
       <button type="submit" class="btn btn-primary register" (click)="submitUser()">Submit</button>
     </div>
   </div>
-</ng-template> 
+</ng-template>

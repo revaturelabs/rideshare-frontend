@@ -28,6 +28,8 @@
                     </div> -->
             
                 <button type="submit" class="btn btn-primary myBtn">Save</button>
+                <p *ngIf="success != ''" class="success">{{success}}</p>
+                <p *ngIf="failed != ''" class="failed">{{failed}}</p>
                 </div>
             </div>
         </div>

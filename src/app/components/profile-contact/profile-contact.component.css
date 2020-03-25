@@ -7,6 +7,14 @@
     color: green;
     font-size: 16px;
 }
+
+/**failed*/
+.failed {
+    border-radius: 5px;
+    color: red;
+    font-size: 16px;
+}
+
 .mainContainer {
     margin: 5% auto;
     width: 61%;  

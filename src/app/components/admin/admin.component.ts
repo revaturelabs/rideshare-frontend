@@ -4,57 +4,54 @@ import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user-service/user.service';
 import { AuthService } from 'src/app/services/auth-service/auth.service';
 
+/**
+ * The Admin component
+ */
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.css']
 })
-
-/**
- * The Admin component
- */
-
 export class AdminComponent implements OnInit {
   /**
    * This is the constructor
-   * @param router Provides an instance of a router 
+   * @param router Provides an instance of a router
    * @param adminservice Provides an instance of an admin.
    */
 
   constructor(private router: Router, private adminservice: UserService, private authService: AuthService) { }
 
 
-   users: User[];
-   listofUsers: User[];
+  users: User[];
+  listofUsers: User[];
 
-   truthy: string = 'btn btn-success';
-   falsy: string = 'btn btn-danger';
-   searchText;
+  truthy = 'btn btn-success';
+  falsy = 'btn btn-danger';
+  searchText;
+
   ngOnInit() {
-    let adminId = this.authService.admin.adminId;
+    const adminId = this.authService.admin.adminId;
 
-    if(adminId){
-        this.adminservice.showAllUser()
+    if (adminId) {
+      this.adminservice.showAllUser()
         .subscribe(
-          data=> {
+          data => {
             this.users = data;
             this.listofUsers = data;
           }
-        )
-      }
-      else{
-        this.router.navigate(['/']);
-      }
+        );
+    } else {
+      this.router.navigate(['/']);
+    }
   }
 
-  searchUser(){
+  searchUser() {
     this.users = this.listofUsers.filter(user =>
-      user.userName.toLowerCase().includes(this.searchText.toLowerCase()))
+      user.userName.toLowerCase().includes(this.searchText.toLowerCase()));
   }
 
   banning(user: User) {
     user.active = !user.active;
     this.adminservice.banUser(user);
   }
-
 }

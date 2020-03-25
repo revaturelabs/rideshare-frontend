@@ -13,16 +13,20 @@ import { MyCarComponent } from '../my-car/my-car.component';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { PreferenceComponent } from '../preference/preference.component';
 import { ProfileComponent } from '../profile/profile.component';
+import { Router } from '@angular/router';
+import { getRoutableComponents } from 'src/app/app-routing.module';
 
 describe('AdminComponent', () => {
   let component: AdminComponent;
   let fixture: ComponentFixture<AdminComponent>;
 
   beforeEach(async(() => {
+    router = jasmine.createSpyObj('router', ['navigate']);
     TestBed.configureTestingModule({
-      declarations: [AdminComponent, MyCarComponent, NavbarComponent, PreferenceComponent, ProfileComponent, CarRegisterComponent, UserRegisterComponent, LoginComponent],
-      imports: [HttpClientModule, AppRoutingModule, FormsModule],
-      providers: [{provide: APP_BASE_HREF, useValue: '/my/app'}]
+      declarations: [...getRoutableComponents()],
+      providers: [{ provide: APP_BASE_HREF, useValue: '/my/app' },
+      { provide: Router, useValue: router }
+      ]
     })
     .compileComponents();
   }));
@@ -35,11 +39,5 @@ describe('AdminComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
-  });
-
-  it('logout()', () => {
-    component.router.navigate(['']);
-    component.logout();
-    expect(component.router.navigate).toHaveBeenCalled;
   });
 });

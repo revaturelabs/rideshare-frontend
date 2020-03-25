@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProfileContactComponent } from './profile-contact.component';
+import { getRoutableComponents } from 'src/app/app-routing.module';
 
 describe('ProfileContactComponent', () => {
   let component: ProfileContactComponent;
@@ -8,9 +9,9 @@ describe('ProfileContactComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProfileContactComponent ]
+      declarations: [ProfileContactComponent, ...getRoutableComponents()]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

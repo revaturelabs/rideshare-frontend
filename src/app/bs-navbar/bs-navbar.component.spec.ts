@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BsNavbarComponent } from './bs-navbar.component';
+import { getRoutableComponents } from 'src/app/app-routing.module';
 
 describe('BsNavbarComponent', () => {
   let component: BsNavbarComponent;
@@ -8,9 +9,12 @@ describe('BsNavbarComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BsNavbarComponent ]
+      declarations: [
+        BsNavbarComponent,
+        ...getRoutableComponents()
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

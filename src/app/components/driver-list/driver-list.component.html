@@ -1,31 +1,39 @@
-<div class="search col-5-content">
-  <input type="text" [(ngModel)]="location_s" class=" form-control" id="formGroupExampleInput2"
-    placeholder="Search for a driver">
-  <button class="btn btn-primary register" (click)="searchDriver()">Search</button>
-</div>
-
-<div class="container">
-  <div class="row">
+<div class = "container">
+    <div class="row">
     <div class="col-lg-5">
-      <h4>Drivers List</h4>
-      <table class="table table-striped">
-        <thead class="thead-dark">
-          <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Distance</th>
-            <th scope="col">Time</th>
-            <th scope="col">View Info</th>
-            <th scope="col">Seats</th>
-          </tr>
-        </thead>
-        <tbody *ngFor  id="output"></tbody>
+     <!--<div class="form-group">
+        <h4>Origin</h4>
+        <input [(ngModel)]="origin" id="origin" class="form-control" placeholder="Morgantown, WV"/>
+      </div>
+      <div class="form-group">
+        <h4>Destination</h4>
+        <input [(ngModel)]="destination" id="destination" class="form-control" placeholder="Reston, VA"/>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-8">
+          <button id = "search" class="btn btn-primary" (click)="getDirection()">Get Direction</button>
+        </div>
+      </div>
+      <p id="total"></p>-->
+      <h4>Driver's List</h4>
+
+     <table class="table table-striped">
+       <thead class="thead-dark">
+         <tr>
+           <th scope="col">Name</th>
+           <th scope="col">Distance</th>
+           <th scope="col" (click)="reverse()">Time</th>
+           <th scope="col">View Info</th>
+         </tr>
+       </thead>
+       <tbody id="output"></tbody>
       </table>
-      <mat-table [dataSource] = "drivers">
+      <table mat-table [dataSource] = "drivers">
         <mat-header-row *matHeaderRowDef="tableColumns"></mat-header-row>
         <mat-row *matRowDef = "let row; columns: tableColumns"></mat-row>
         <ng-container matColumnDef = "Name">
-          <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
-          <mat-cell *matCellDef = "let name"></mat-cell>
+          <th mat-header-cell *matHeaderCellDef>Name</th>
+          <td mat-cell *matCellDef = "let name">{{driver.name}}</td>
         </ng-container>
         <ng-container matColumnDef = "Distance">
           <mat-header-cell *matHeaderCellDef>Distance</mat-header-cell>
@@ -33,13 +41,13 @@
         </ng-container>
         <ng-container matColumnDef = "Time">
           <mat-header-cell *matHeaderCellDef>Time</mat-header-cell>
-          <mat-cell *matCellDef = "let time"></mat-cell>
+          <mat-cell *matCellDef = "let time">working</mat-cell>
         </ng-container>
-      </mat-table>
-    </div>
-    <div class="col-lg-6">
-      <h4>Directions:</h4>
-      <div #map id="gmap" class="img-responsive"></div>
+      </table>
+     </div>
+     <div class="col-lg-6">
+       <h4>Directions:</h4>
+       <div #map id="gmap" class="img-responsive"></div>
+     </div>
     </div>
   </div>
-</div>

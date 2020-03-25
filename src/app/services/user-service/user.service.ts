@@ -109,24 +109,18 @@ export class UserService {
 
 	// adds user if form is filled out and user input matches a real address
 	addUser(user :User) :Observable<User> {
-        this.addressValidation(user);
-
-        this.addressValidation(user).subscribe(data => {//hopefully this waits for things to happen
-
-        }, error =>
-        this.setInvalidAddress(user)); // the google api always returns something, so the api connection itself had an issue
-
         console.log(`all user location stuff: ${user.hAddress}, ${user.hCity}, ${user.hState}, ${user.hZip}`)
         return this.http.post<User>(this.url, user, {headers: this.headers});
+ // the google api always returns something, so the api connection itself had an issue
 
-    
     }
 
-    private addressValidation(user:User): Observable<any>{
+    addressValidation(user:User): Observable<User>{
         const numAndStreetName = user.hAddress.split(' '); // ensures user placed a space between the street number and street name
         if ( isNaN(Number(numAndStreetName[0]))){
             console.log('first part of haddress is not a number!')
             this.setInvalidAddress(user);
+            return this.addUser(user);
         } else{
             console.log('Number of parts in haddress is: ' + numAndStreetName.length);
             // construct url with needed number of +'s based on length of numAndStreetName...
@@ -138,7 +132,6 @@ export class UserService {
                 } else{
                     googleConstructedUrl += `+${numAndStreetNamePart}`;
                 }
-
             });
             googleConstructedUrl += `,+${user.hCity},+${user.hState}&key=${this.googleApiKey}`;
             console.log('the google constructed url is: ' + googleConstructedUrl);
@@ -192,22 +185,29 @@ export class UserService {
                         user.hAddress = gStreetNameAndNumber.join(' ').toUpperCase();
                         user.hCity = gCity.toUpperCase();
                         user.hState = gState.toUpperCase();
+                        return this.addUser(user);
                     }
                     else{// Another invalid pathway in the case a user's input doens't match the google best-effort response
                         console.log('else condition regarding failed comparisons to google output trigger')
                         this.setInvalidAddress(user);
+                        return this.addUser(user);
 
                     }
                 } catch (error) {// Another invalid pathway in the case that google api is not set up properly
                     console.log(error);
                     this.setInvalidAddress(user);
+                    return this.addUser(user);
+                    
 
                 }
-            }, error =>
-            this.setInvalidAddress(user)); // the google api always returns something, so the api connection itself had an issue
-            }
-        return new Observable<any>();
-
+            }, error =>{
+            console.log(error);
+            this.setInvalidAddress(user); // the google api always returns something, so the api connection itself had an issue
+            return this.addUser(user);
+            });
+            console.log("hello");
+        }
+     
         }
 	/**
 	 * This function sets the location to empty string for back-end invalidation response

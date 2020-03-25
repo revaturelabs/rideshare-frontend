@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./profile-membership.component.css']
 })
 export class ProfileMembershipComponent implements OnInit {
-  profileObject : User;
+  profileObject : User = new User();
   currentUser: any = '';
   isDriver: boolean;
   active: boolean;

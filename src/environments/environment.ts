@@ -10,6 +10,7 @@ const baseUrl = `http://localhost`;
  */
 const port = '8080';
 
+// combination of the base uniform resource locator and its port number
 const url = `${baseUrl}:${port}`;
 
 /**
@@ -30,7 +31,7 @@ export const environment = {
   carUri: `${url}/cars/`,
   adminUri: `${url}/admins/`,
   infoUri: `${url}/info/`,
-  googleMapKey: `${googleKey}`,
+  googleMapKey: `${googleKey}`
 };
 
 /*

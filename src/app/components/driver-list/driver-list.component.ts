@@ -25,7 +25,8 @@ export class DriverListComponent implements OnInit {
   @ViewChild('map', null) mapElement: any;
   map: google.maps.Map;
 
-  constructor(private http: HttpClient, private userService: UserService) {}
+  constructor(private http: HttpClient, private userService: UserService,
+      private carService: CarService) {}
 
   ngOnInit() {
     this.drivers = [];
@@ -127,8 +128,12 @@ export class DriverListComponent implements OnInit {
     //set origin
     origins.push(origin);
 
+    // var seatservice = this.carService
+    // this.carService.getCarByUserId(element.getCarByUserId)
+
     var outputDiv = document.getElementById('output');
     drivers.forEach(element => {
+
       var service = new google.maps.DistanceMatrixService();
       service.getDistanceMatrix(
         {
@@ -148,9 +153,16 @@ export class DriverListComponent implements OnInit {
             var results = response.rows[0].elements;
             // console.log(results[0].distance.text);
             var name = element.name;
+
+            var seats = element.seats; //TODO: Does var pull seats?
+            console.log(seats);
+            //TODO:  Added TD COLUMN at line 156; Will be SEATS column
             outputDiv.innerHTML += `<tr><td class="col">${name}</td>
                                   <td class="col">${results[0].distance.text}</td>
                                   <td class="col">${results[0].duration.text}</td>
+
+                                  <td class="col">${seats}</td>  
+
                                   <td class="col">
                                   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCentered${element.id}"> View</button>
                                     <div class="col-lg-5">

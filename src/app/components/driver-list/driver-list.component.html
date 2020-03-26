@@ -1,4 +1,9 @@
-<app-landing-page></app-landing-page>
+  <div class = "content text-center col-md align-self-center">
+    <h1>Revature RideForce</h1>
+    <input type="text" [(ngModel)]="location" class="form-control" id="formGroupExampleInput2" placeholder="Where do you live?">
+    <button  class="btn btn-primary register" (click)="searchDriver()">Search</button>  
+
+  </div>
 <div class = "container">
     <div class="row">
     <div class="col-lg-5">
@@ -16,7 +21,7 @@
         </div>
       </div>
       <p id="total"></p>-->
-      <h4>Driver's List</h4>
+      <h4>Drivers</h4>
       
      <table class="table table-striped">
        <thead class="thead-dark">
@@ -35,4 +40,4 @@
        <div #map id="gmap" class="img-responsive"></div>
      </div>
     </div>
-  </div>
+</div>

@@ -18,7 +18,7 @@ import { environment } from '../../../environments/environment';
 })
 export class DriverListComponent implements OnInit {
 
-  location : string = 'Morgantown, WV';
+  location : string = '';
   mapProperties :{};
   availableCars : Array<any> = [];
   drivers : Array<any> = [];
@@ -86,6 +86,56 @@ getGoogleApi()  {
                }    
            }
        );
+   }
+
+   searchDriver(){
+    //call service search algorithm ()
+    //console.log(this.location_s);
+    this.drivers = [];
+    this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapProperties);
+    this.userService.getRidersForLocation1(this.location)
+    .subscribe(
+              (response) => {
+                response.forEach(element => {
+                     var directionsService = new google.maps.DirectionsService;
+                     var directionsRenderer = new google.maps.DirectionsRenderer({
+                           draggable: true,
+                           map: this.map
+                      });
+                      console.log(element.Distance);
+                      this.displayRoute(this.location, element.hCity+","+element.hState, directionsService, directionsRenderer);
+           });
+    });
+
+    this.userService.getRidersForLocation1(this.location).subscribe(
+      res => {
+           //console.log(res);
+           res.forEach(element => {
+              this.drivers.push({
+                   'id': element.userId,
+                 'name': element.firstName+" "+element.lastName,
+               'origin':element.hCity+","+element.hState, 
+                'email': element.email, 
+                'phone':element.phoneNumber
+              });
+          });
+      });
+
+    this.getGoogleApi();
+
+    this.sleep(2000).then(() => {
+      this.mapProperties = {
+         center: new google.maps.LatLng(Number(sessionStorage.getItem("lat")), Number(sessionStorage.getItem("lng"))),
+         zoom: 15,
+         mapTypeId: google.maps.MapTypeId.ROADMAP
+      };
+      this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapProperties);
+      //get all routes 
+      this.displayDriversList(this.location, this.drivers);
+      //show drivers on map
+      this.showDriversOnMap(this.location, this.drivers);
+    });
+
    }
 
   showDriversOnMap(origin, drivers){

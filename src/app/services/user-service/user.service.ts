@@ -6,6 +6,8 @@ import { Observable } from 'rxjs';
 import { AuthService } from '../auth-service/auth.service';
 import { LogService } from "../log.service"
 import { environment } from '../../../environments/environment';
+import { map } from 'rxjs/operators';
+
 
 
 
@@ -228,6 +230,9 @@ export class UserService {
 	}
 	
 	getRidersForLocation1(location: string): Observable <any>{
-		return this.http.get(this.url + 'driver/'+ location)
+		return this.http.get(this.url + 'driver/'+ location
+		)
+		
+		
 	}
 }

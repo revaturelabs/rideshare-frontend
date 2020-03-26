@@ -46,11 +46,15 @@ export class ProfileContactComponent implements OnInit {
     this.profileObject.email = this.email;
     
     //Format phone
-    //Needs condition to throw error if length over 10
     let phone = this.phone.replace(/[^\w\s]/gi, '');
+    if(phone.length == 10){
     phone = phone.substring(0,3)+"-"+phone.substring(3,6)+"-"+phone.substring(6,10);
     console.log(phone);
     this.profileObject.phoneNumber = phone;
+    }else{
+      this.profileObject.phoneNumber = phone;
+    }
+
 
     this.firstNameError = '';
     this.lastNameError = '';

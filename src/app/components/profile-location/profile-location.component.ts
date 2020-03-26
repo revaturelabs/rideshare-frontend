@@ -77,8 +77,20 @@ export class ProfileLocationComponent implements OnInit {
         if (componentForm[addressType]) {
           var val = place.address_components[i][componentForm[addressType]];
           (<HTMLInputElement> document.getElementById(addressType)).value = val;
+          switch (addressType) {
+            case "locality":
+              self.city = val;
+              break;
+            case "administrative_area_level_1":
+              self.hState = val;
+              break;
+            case "postal_code":
+              self.zipcode = val;
+              break;
+          }
         }
       }
+      // Create a proper address by combining street_number and route
       self.address = place.address_components[0]['long_name'] + ' ' +
       place.address_components[1]['long_name'];
       (<HTMLInputElement> document.getElementById('address')).value = 
@@ -128,7 +140,7 @@ export class ProfileLocationComponent implements OnInit {
               document.head.appendChild(script);
                    
             }).then( resp => {
-              this.initAutocomplete()
+              this.initAutocomplete();
             });
           }    
         }

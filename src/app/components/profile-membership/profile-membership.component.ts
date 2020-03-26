@@ -16,6 +16,7 @@ export class ProfileMembershipComponent implements OnInit {
   ngOnInit() {
     this.currentUser = this.userService.getUserById2(sessionStorage.getItem("userid")).subscribe((response)=>{
       this.profileObject = response;
+      console.log("This is profile Object: " + JSON.stringify(this.profileObject))
     });
   }
   updatesMembershipInfo(){

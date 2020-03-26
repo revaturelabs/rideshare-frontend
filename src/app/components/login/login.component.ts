@@ -53,7 +53,12 @@ export class LoginComponent implements OnInit {
 	 * @param authService An auth service is injected.
 	 *
 	 */
-	constructor(private modalService :BsModalService,private userService: UserService, private http: HttpClient, private authService: AuthService, public router: Router) { }
+	constructor(
+		private modalService :BsModalService,
+		private userService: UserService, 
+		private http: HttpClient,
+		private authService: AuthService, 
+		public router: Router) { }
 
 	/**
 	 * When the component is initialized, the system checks for the session storage to validate. Once validated, the user service is called to retrieve all users.
@@ -170,9 +175,10 @@ export class LoginComponent implements OnInit {
 						sessionStorage.setItem("name", response["name"]);
 						sessionStorage.setItem("userid", response["userid"]);
 						
-						//call landing page
-						//this.router.navigate(['landingPage']);
-						location.replace('landingPage');
+						// removed landingPage (research)
+						// call drivers
+						// new location after login is: drivers
+						location.replace('drivers');
 					  }
 					  if(response["userNotFound"] != undefined){
 						this.userNotFound = response["userNotFound"][0];

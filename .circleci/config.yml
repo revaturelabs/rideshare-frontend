@@ -2,15 +2,19 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: circleci/node:12.13.1
+      # Image List: https://circleci.com/docs/2.0/docker-image-tags.json
+      - image: circleci/node:12.13.1-browsers
     steps:
       - checkout
-      - run:
-          name: Install Node Packages
-          command: npm install
-      - run:
-          name: Install Angular
-          command: echo y | sudo npm install -g @angular/cli
+      - restore_cache:
+          key: my-project-{{ .Branch }}-{{ checksum "package-lock.json" }}
+      - run: npm install
+      - save_cache:
+          key: my-project-{{ .Branch }}-{{ checksum "package-lock.json" }}
+          paths:
+            - "node_modules"
+      - run: npm run test -- --no-watch --no-progress --browsers=ChromeHeadless
+      - run: npm run e2e -- --protractor-config=e2e/protractor-ci.conf.js
       - run: 
           name: Install Compodoc
           command: npm install @compodoc/compodoc

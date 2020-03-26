@@ -42,12 +42,13 @@ export class ProfileCarComponent implements OnInit {
     this.currentCar.model= this.model;
     this.currentCar.seats = this.nrSeats;
     //console.log(this.currentUser);
-    this.carService.updateCarInfo(this.currentCar);
+    this.carService.updateCarInfo(this.currentCar, sessionStorage.getItem("userid"));
     this.success = "Updated Successfully!";
   }
 
+  //if car make field changes
   onMakeChange() {
-    this.validateMake();
+    this.validateMake(); //validate again
   }
 
   onModelChange() {
@@ -58,12 +59,14 @@ export class ProfileCarComponent implements OnInit {
     this.validateNrSeats();
   }
 
+  //validate entire form
   validateForm() {
 
     const isMakeValid = this.validateMake();
     const isModelValid = this.validateModel();
     const isNrSeatsValid = this.validateNrSeats();
 
+    //if invalid, return false
     if(!isMakeValid ||
       !isModelValid ||
       !isNrSeatsValid) {
@@ -73,17 +76,19 @@ export class ProfileCarComponent implements OnInit {
       return true;
   }
 
+  //validate make
   validateMake() {
-    if(!this.make) {
-      this.makeError = "Required";
+    if(!this.make) { //if empty
+      this.makeError = "Required"; //required
       return false;
     }
     else {
-      this.makeError = "";
+      this.makeError = ""; //hide error
       return true;
     }
   }
 
+  //validate model
   validateModel() {
     if(!this.model) {
       this.modelError = "Required";
@@ -95,6 +100,7 @@ export class ProfileCarComponent implements OnInit {
     }
   }
 
+  //validate # of seats
   validateNrSeats() {
     if(!this.nrSeats) {
       this.nrSeatsError = "Required";

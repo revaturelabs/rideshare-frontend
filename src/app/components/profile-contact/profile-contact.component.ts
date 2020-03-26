@@ -169,18 +169,22 @@ export class ProfileContactComponent implements OnInit {
   }
 
   onFirstNameChange() {
+    this.resultVisible = "hidden";
     this.validateFirstName();
   }
 
   onLastNameChange() {
+    this.resultVisible = "hidden";
     this.validateLastName();
   }
 
   onEmailChange() {
+    this.resultVisible = "hidden";
     this.validateEmail();
   }
 
   onPhoneChange() {
+    this.resultVisible = "hidden";
     this.validatePhone();
   }
 }

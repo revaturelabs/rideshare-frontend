@@ -18,7 +18,8 @@ import { environment } from '../../../environments/environment';
 })
 export class DriverListComponent implements OnInit {
 
-  location : string = '';
+  homeLocation : string = '';
+  workLocation: string = '';
   mapProperties :{};
   availableCars : Array<any> = [];
   drivers : Array<any> = [];
@@ -32,7 +33,18 @@ export class DriverListComponent implements OnInit {
   ngOnInit() {
     this.drivers = [];
 
-    this.userService.getRidersForLocation1(this.location).subscribe(
+    //Retriving 
+
+    console.log("User Id: "+sessionStorage.getItem('userid'));
+    console.log("Home: "+sessionStorage.getItem('hAddress'));
+    console.log("Work: "+sessionStorage.getItem('wAddress'));
+
+  
+    this.homeLocation = sessionStorage.getItem('hAddress');
+    this.workLocation = sessionStorage.getItem('wAddress');
+
+
+    this.userService.getRidersForLocation1(this.homeLocation).subscribe(
       res => {
            //console.log(res);
            res.forEach(element => {
@@ -45,13 +57,9 @@ export class DriverListComponent implements OnInit {
               });
           });
       });
-    /*this.drivers.push({'id': '1','name': 'Ed Ogeron','origin':'Reston, VA', 'email': 'ed@gmail.com', 'phone':'555-555-5555'});
-    this.drivers.push({'id': '2','name': 'Nick Saban','origin':'Oklahoma, OK', 'email': 'nick@gmail.com', 'phone':'555-555-5555'});
-    this.drivers.push({'id': '3','name': 'Bobbie sfsBowden','origin':'Texas, TX', 'email': 'bobbie@gmail.com', 'phone':'555-555-5555'});
-    this.drivers.push({'id': '4','name': 'Les Miles','origin':'New York, NY', 'email': 'les@gmail.com', 'phone':'555-555-5555'});
-    this.drivers.push({'id': '5','name': 'Bear Bryant','origin':'Arkansas, AR', 'email': 'bear@gmail.com', 'phone':'555-555-5555'});*/
-    //console.log(this.drivers);
+
     this.getGoogleApi();
+
 
     this.sleep(2000).then(() => {
       this.mapProperties = {
@@ -61,9 +69,11 @@ export class DriverListComponent implements OnInit {
       };
       this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapProperties);
       //get all routes 
-      this.displayDriversList(this.location, this.drivers);
+      this.emptyDriversList(this.homeLocation, this.drivers);
+
+      this.displayDriversList(this.homeLocation, this.drivers);
       //show drivers on map
-      this.showDriversOnMap(this.location, this.drivers);
+      this.showDriversOnMap(this.homeLocation, this.drivers);
     });
   }
 
@@ -93,7 +103,7 @@ getGoogleApi()  {
     //console.log(this.location_s);
     this.drivers = [];
     this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapProperties);
-    this.userService.getRidersForLocation1(this.location)
+    this.userService.getRidersForLocation1(this.homeLocation)
     .subscribe(
               (response) => {
                 response.forEach(element => {
@@ -103,11 +113,11 @@ getGoogleApi()  {
                            map: this.map
                       });
                       console.log(element.Distance);
-                      this.displayRoute(this.location, element.hCity+","+element.hState, directionsService, directionsRenderer);
+                      this.displayRoute(this.homeLocation, element.hCity+","+element.hState, directionsService, directionsRenderer);
            });
     });
 
-    this.userService.getRidersForLocation1(this.location).subscribe(
+    this.userService.getRidersForLocation1(this.homeLocation).subscribe(
       res => {
            //console.log(res);
            res.forEach(element => {
@@ -121,7 +131,6 @@ getGoogleApi()  {
           });
       });
 
-    this.getGoogleApi();
 
     this.sleep(2000).then(() => {
       this.mapProperties = {
@@ -131,9 +140,10 @@ getGoogleApi()  {
       };
       this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapProperties);
       //get all routes 
-      this.displayDriversList(this.location, this.drivers);
+      this.emptyDriversList(this.homeLocation, this.drivers);
+      this.displayDriversList(this.homeLocation, this.drivers);
       //show drivers on map
-      this.showDriversOnMap(this.location, this.drivers);
+      this.showDriversOnMap(this.homeLocation, this.drivers);
     });
 
    }
@@ -227,5 +237,38 @@ displayDriversList(origin, drivers) {
     
    });
 }
+
+emptyDriversList(origin, drivers) {
+  let  origins = [];
+  //set origin
+  origins.push(origin)
+
+  var outputDiv = document.getElementById('output');
+  drivers.forEach(element => {
+
+    var service = new google.maps.DistanceMatrixService;
+    service.getDistanceMatrix({
+      origins: origins,
+      destinations: [element.origin],
+      travelMode: google.maps.TravelMode.DRIVING,
+      unitSystem: google.maps.UnitSystem.IMPERIAL,
+      avoidHighways: false,
+      avoidTolls: false
+    }, function(response, status) {
+      if (status !== 'OK') {
+        alert('Error was: ' + status);
+      } else {
+        var originList = response.originAddresses;
+        var destinationList = response.destinationAddresses;
+        var results = response.rows[0].elements;
+        //console.log(results[0].distance.text);
+        var name =  element.name;
+        outputDiv.innerHTML = ``;
+    }
+  });
+  
+ });
+}
+
 
 }

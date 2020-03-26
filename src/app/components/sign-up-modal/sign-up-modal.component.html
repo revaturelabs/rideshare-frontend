@@ -62,11 +62,11 @@
     <div class="radiobody">
     <div class="btn-group" data-toggle="buttons">
         <label class="btn btn-primary">
-          <input type="checkbox"  id="driver" [(ngModel)]="isDriver" /> Driver
+          <input type="checkbox" (keydown.enter)="submitUser()" id="driver" [(ngModel)]="isDriver" /> Driver
         </label>
         <br>
         <label class="btn btn-primary">
-          <input type="checkbox"  id="rider" [(ngModel)]="isRider"/> Rider
+          <input type="checkbox" (keydown.enter)="submitUser()" id="rider" [(ngModel)]="isRider"/> Rider
         </label>
   </div>
     </div>

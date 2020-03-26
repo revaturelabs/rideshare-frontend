@@ -40,16 +40,27 @@
       <option *ngFor="let batch of batches" [ngValue]="batch">{{batch.batchNumber}} {{batch.batchLocation}}</option>
     </select>
 
+    <div class="form-group">
+      <label for="address" class="col-sm-6 col-form-label">Enter your address:</label>
+      <div class="col-sm-8">
+          <input type="text" class="form-control" id="autocomplete" ng-focus="geolocate()">
+      </div>
+  </div>
+
+    <input type="hidden" class="field" id="street_number" disabled="true">
+    <input type="hidden" class="field" id="route" disabled="true">
+
+
     <label for="hAddress">Address</label>
-    <input (keydown)="hAddressError = ''" id="hAddress" type="text" [(ngModel)]="user.hAddress" class="form-control" />
+    <input (keydown)="hAddressError = ''" id="address" type="text" [(ngModel)]="user.hAddress" class="form-control" />
     <p *ngIf="hAddressError != ''" class="error">{{hAddressError}}</p>
 
     <label id="hCity">City</label>
-    <input (keydown)="hCityError = ''" type="text" [(ngModel)]="user.hCity" class="form-control" />
+    <input (keydown)="hCityError = ''" id="locality" type="text" [(ngModel)]="user.hCity" class="form-control" />
     <p *ngIf="hCityError != ''" class="error">{{hCityError}}</p>
 
     <label id="hState">State</label>
-    <select (keydown)="hStateError = ''" class="form-control" [(ngModel)]="user.hState" id="hState">
+    <select (keydown)="hStateError = ''" class="form-control" [(ngModel)]="user.hState" id="administrative_area_level_1">
       <option value="none" selected disabled hidden>
       </option>
       <option *ngFor="let state of states" value="{{state}}">{{state}}</option>
@@ -57,7 +68,7 @@
     <p *ngIf="hStateError != ''" class="error">{{hStateError}}</p>
 
     <label id="hZip">Zip Code</label>
-    <input (keydown)="hZipError = ''" type="number" [(ngModel)]="user.hZip" class="form-control" />
+    <input (keydown)="hZipError = ''" id="postal_code" type="number" [(ngModel)]="user.hZip" class="form-control" />
     <p *ngIf="hZipError != ''" class="error">{{hZipError}}</p>
 
     <div class="radiobody">

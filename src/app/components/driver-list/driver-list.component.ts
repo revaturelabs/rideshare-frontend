@@ -18,6 +18,10 @@ import { GoogleService } from 'src/app/services/google-service/google.service';
   styleUrls: ['./driver-list.component.css']
 })
 export class DriverListComponent implements OnInit {
+
+  location: string = 'Morgantown, WV';
+  mapProperties: {};
+  availableCars: Array<any> = [];
   drivers: Array<any> = [];
 
   // TODO: Added variables to make getCarByUserId2 work?
@@ -28,11 +32,14 @@ export class DriverListComponent implements OnInit {
   success: string;
 
   @ViewChild('map', null) mapElement: any;
-  location: string = 'Morgantown, WV';
   map: google.maps.Map;
 
-  constructor(private http: HttpClient,private userService: UserService,
-              private googleService: GoogleService, private carService: CarService) { }
+  constructor(
+    private http: HttpClient,
+    private userService: UserService,
+    private googleService: GoogleService,
+    private carService: CarService
+  ) {}
 
   ngOnInit() {
     this.drivers = [];
@@ -57,22 +64,17 @@ export class DriverListComponent implements OnInit {
           phone: element.phoneNumber
         });
       });
+    });
 
-      this.googleService.getGoogleApi();
+    this.googleService.getGoogleApi();
 
-      this.sleep(2000).then(() => {
+    this.sleep(2000).then(() => {
       this.mapProperties = {
-        center: new google.maps.LatLng(
-          Number(sessionStorage.getItem('lat')),
-          Number(sessionStorage.getItem('lng'))
-        ),
-        zoom: 15,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
+         center: new google.maps.LatLng(Number(sessionStorage.getItem("lat")), Number(sessionStorage.getItem("lng"))),
+         zoom: 15,
+         mapTypeId: google.maps.MapTypeId.ROADMAP
       };
-      this.map = new google.maps.Map(
-        this.mapElement.nativeElement,
-        this.mapProperties
-      );
+      this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapProperties);
       // get all routes
       this.displayDriversList(this.location, this.drivers);
       // show drivers on map
@@ -84,16 +86,19 @@ export class DriverListComponent implements OnInit {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
-
-
-  showDriversOnMap(origin, drivers){
-     drivers.forEach(element => {
-      var directionsService = new google.maps.DirectionsService;
+  showDriversOnMap(origin, drivers) {
+    drivers.forEach(element => {
+      var directionsService = new google.maps.DirectionsService();
       var directionsRenderer = new google.maps.DirectionsRenderer({
-         draggable: true,
-         map: this.map
-       });
-      this.displayRoute(origin, element.origin, directionsService, directionsRenderer);
+        draggable: true,
+        map: this.map
+      });
+      this.displayRoute(
+        origin,
+        element.origin,
+        directionsService,
+        directionsRenderer
+      );
     });
   }
 
@@ -103,7 +108,7 @@ export class DriverListComponent implements OnInit {
         origin: origin,
         destination: destination,
         travelMode: 'DRIVING'
-        //avoidTolls: true
+        // avoidTolls: true
       },
       function(response, status) {
         if (status === 'OK') {
@@ -117,7 +122,7 @@ export class DriverListComponent implements OnInit {
 
   displayDriversList(origin, drivers) {
     let origins = [];
-    //set origin
+    // set origin
     origins.push(origin);
 
     // var seatservice = this.carService
@@ -125,16 +130,15 @@ export class DriverListComponent implements OnInit {
 
     var outputDiv = document.getElementById('output');
     drivers.forEach(element => {
-
-    //   var driver = this.drivers;
-    // // TODO: test out displayDriversList to get car info to display on this component
-    // this.carService.getCarByUserId2(sessionStorage.getItem("driver")).subscribe((response)=>{
-    //   this.currentCar = response;
-    //   this.make = response.make;
-    //   this.model = response.model;
-    //   this.nrSeats = response.seats;
-    //   console.log("this.nrSeats is " +this.nrSeats);
-    // });
+      //   var driver = this.drivers;
+      // // TODO: test out displayDriversList to get car info to display on this component
+      // this.carService.getCarByUserId2(sessionStorage.getItem("driver")).subscribe((response)=>{
+      //   this.currentCar = response;
+      //   this.make = response.make;
+      //   this.model = response.model;
+      //   this.nrSeats = response.seats;
+      //   console.log("this.nrSeats is " +this.nrSeats);
+      // });
 
       var service = new google.maps.DistanceMatrixService();
       service.getDistanceMatrix(
@@ -156,9 +160,9 @@ export class DriverListComponent implements OnInit {
             // console.log(results[0].distance.text);
             var name = element.name;
 
-            var seats = element.seats; //TODO: Does var pull seats?
+            var seats = element.seats; // TODO: Does var pull seats?
             console.log(seats);
-            //TODO:  Added TD COLUMN at line 156; Will be SEATS column
+            // TODO:  Added TD COLUMN at line 156; Will be SEATS column
             outputDiv.innerHTML += `<tr><td class="col">${name}</td>
                                   <td class="col">${results[0].distance.text}</td>
                                   <td class="col">${results[0].duration.text}</td>

@@ -22,6 +22,13 @@ export class DriverListComponent implements OnInit {
   availableCars: Array<any> = [];
   drivers: Array<any> = [];
 
+  // TODO: Added variables to make getCarByUserId2 work?
+  make: string;
+  model: string;
+  nrSeats: number;
+  currentCar: Car;
+  success: string;
+
   @ViewChild('map', null) mapElement: any;
   map: google.maps.Map;
 
@@ -33,6 +40,15 @@ export class DriverListComponent implements OnInit {
 
   ngOnInit() {
     this.drivers = [];
+
+    // TODO: test out ngOninit to get car info to display on this component
+    this.carService.getCarByUserId2(sessionStorage.getItem("userid")).subscribe((response)=>{
+      this.currentCar = response;
+      this.make = response.make;
+      this.model = response.model;
+      this.nrSeats = response.seats;
+
+    });
 
     this.userService.getRidersForLocation1(this.location).subscribe(res => {
       // console.log(res);

@@ -368,6 +368,7 @@ export class UserService {
     // }
 
     // grabs user-supplied home address and compares case-insensitively with google api response result
+    //TODO change this function, or remove it and find approach to address validation before post that leverages google api asynch call first
     private getGoogleMapsResponse(googleApiUrl: string): Observable<any> {
         // split string into number portion and street name portion at the space character
         return this.http.get<any>(`${googleApiUrl}`);

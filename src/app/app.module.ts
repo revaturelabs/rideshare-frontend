@@ -21,7 +21,6 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { MyCarComponent } from './components/my-car/my-car.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { PreferenceComponent } from './components/preference/preference.component';
-import { ValidationService } from './services/validation-service/validation.service';
 import { AdminLoginComponent } from './components/admin-login/admin-login.component';
 import { DriverInfoComponent } from './components/driver-info/driver-info.component';
 import { LandingComponent } from './components/landing/landing.component';
@@ -37,6 +36,8 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { UserRegisterComponent } from './components/user-register/user-register.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
+import { GoogleService } from './services/google-service/google.service';
+import { ValidationService } from './services/validation-service/validation.service';
 
 
 
@@ -84,8 +85,9 @@ import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
     CarService,
     BatchService,
     AuthService,
+    BsModalService,
     ValidationService,
-    BsModalService
+    GoogleService
   ],
   bootstrap: [AppComponent]
 })

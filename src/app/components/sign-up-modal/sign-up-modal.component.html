@@ -1,6 +1,6 @@
 <a (click)="openModal(template)">Sign up</a >
   
-<ng-template #template (keydown.enter)="submitUser()">
+<ng-template #template>
   <p *ngIf="success != ''" class="success">{{success}}</p>
   <div class="modal-header">
     <h4 class="modal-title">Sign Up</h4>
@@ -8,7 +8,7 @@
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
-  <div class="modal-body">
+  <div class="modal-body" (keydown.enter)="submitUser()">
     <label for="firstname">First Name</label>
     <input (keydown)="firstNameError = ''" id="firstname" type="text" [(ngModel)]="user.firstName" class="form-control" />
     <p *ngIf="firstNameError != ''" class="error">{{firstNameError}}</p>

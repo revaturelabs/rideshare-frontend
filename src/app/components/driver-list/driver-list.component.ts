@@ -11,6 +11,7 @@ import { BatchService } from 'src/app/services/batch-service/batch.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { GoogleService } from 'src/app/services/google-service/google.service';
+import { SelectMultipleControlValueAccessor } from '@angular/forms';
 
 @Component({
   selector: 'app-driver-list',
@@ -33,52 +34,19 @@ export class DriverListComponent implements OnInit {
     private googleService: GoogleService) { }
 
   ngOnInit() {
-    this.drivers = [];
 
     //Retriving 
 
     console.log("User Id: "+sessionStorage.getItem('userid'));
     console.log("Home: "+sessionStorage.getItem('hAddress'));
     console.log("Work: "+sessionStorage.getItem('wAddress'));
-
   
     this.homeLocation = sessionStorage.getItem('hAddress');
     this.workLocation = sessionStorage.getItem('wAddress');
 
-
-    this.userService.getRidersForLocation1(this.homeLocation, this.workLocation,"none").subscribe(
-      res => {
-           //console.log(res);
-           res.forEach(element => {
-              this.drivers.push({
-                   'id': element.userId,
-                 'name': element.firstName+" "+element.lastName,
-               'origin':element.hCity+","+element.hState, 
-                'email': element.email, 
-                'phone':element.phoneNumber
-              });
-          });
-      });
-
     this.googleService.getGoogleApi();
 
-
-    this.sleep(2000).then(() => {
-      this.mapProperties = {
-         center: new google.maps.LatLng(Number(sessionStorage.getItem("lat")), Number(sessionStorage.getItem("lng"))),
-         zoom: 15,
-         mapTypeId: google.maps.MapTypeId.ROADMAP
-      };
-      this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapProperties);
-      //get all routes 
-      this.emptyDriversList(this.homeLocation, this.drivers);
-
-      this.displayDriversList(this.homeLocation, this.drivers);
-      //show drivers on map
-      this.showDriversOnMap(this.homeLocation, this.drivers);
-    });
-
-    this.searchDriver();
+    this.searchDriver("none");
   }
 
   sleep(ms) {
@@ -87,33 +55,19 @@ export class DriverListComponent implements OnInit {
   
 
 
-   searchDriver(){
+   searchDriver(sorter: string){
     //call service search algorithm ()
-    //console.log(this.location_s);
+    console.log("searching for Drivers");
     this.drivers = [];
-    this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapProperties);
-    this.userService.getRidersForLocation1(this.homeLocation, this.workLocation, "none")
-    .subscribe(
-              (response) => {
-                response.forEach(element => {
-                     var directionsService = new google.maps.DirectionsService;
-                     var directionsRenderer = new google.maps.DirectionsRenderer({
-                           draggable: true,
-                           map: this.map
-                      });
-                      console.log(element.Distance);
-                      this.displayRoute(this.homeLocation, element.hCity+","+element.hState, directionsService, directionsRenderer);
-           });
-    });
 
-    this.userService.getRidersForLocation1(this.homeLocation, this.workLocation, "none").subscribe(
+    this.userService.getRidersForLocation1(this.homeLocation, this.workLocation, sorter).subscribe(
       res => {
-           //console.log(res);
            res.forEach(element => {
+            console.log("Driver: "+res);
               this.drivers.push({
                    'id': element.userId,
                  'name': element.firstName+" "+element.lastName,
-               'origin':element.hCity+","+element.hState, 
+               'origin':element.hAddress+","+element.hCity+","+element.hState, 
                 'email': element.email, 
                 'phone':element.phoneNumber
               });
@@ -121,19 +75,21 @@ export class DriverListComponent implements OnInit {
       });
 
 
-    this.sleep(2000).then(() => {
-      this.mapProperties = {
-         center: new google.maps.LatLng(Number(sessionStorage.getItem("lat")), Number(sessionStorage.getItem("lng"))),
-         zoom: 15,
-         mapTypeId: google.maps.MapTypeId.ROADMAP
-      };
-      this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapProperties);
       //get all routes 
-      this.emptyDriversList(this.homeLocation, this.drivers);
-      this.displayDriversList(this.homeLocation, this.drivers);
-      //show drivers on map
-      this.showDriversOnMap(this.homeLocation, this.drivers);
-    });
+      this.sleep(2000).then(() => {
+        this.mapProperties = {
+           center: new google.maps.LatLng(Number(sessionStorage.getItem("lat")), Number(sessionStorage.getItem("lng"))),
+           zoom: 15,
+           mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapProperties);
+        //empty drivers list
+        this.emptyDriversList(this.homeLocation, this.drivers);
+  
+        this.displayDriversList(this.homeLocation, this.drivers);
+        //show drivers on map
+        this.showDriversOnMap(this.homeLocation, this.drivers);
+      });
 
    }
 
@@ -164,16 +120,16 @@ displayRoute(origin, destination, service, display) {
     });
   }
 
-
 displayDriversList(origin, drivers) {
+    console.log(drivers)
     let  origins = [];
     //set origin
     origins.push(origin)
 
     var outputDiv = document.getElementById('output');
     drivers.forEach(element => {
-
-      var service = new google.maps.DistanceMatrixService;
+      this.sleep(200).then(() => {
+        var service = new google.maps.DistanceMatrixService;
       service.getDistanceMatrix({
         origins: origins,
         destinations: [element.origin],
@@ -188,7 +144,7 @@ displayDriversList(origin, drivers) {
           var originList = response.originAddresses;
           var destinationList = response.destinationAddresses;
           var results = response.rows[0].elements;
-          //console.log(results[0].distance.text);
+          console.log(results);
           var name =  element.name;
           outputDiv.innerHTML += `<tr><td class="col">${name}</td>
                                   <td class="col">${results[0].distance.text}</td>
@@ -222,115 +178,59 @@ displayDriversList(origin, drivers) {
                                   </div>
                                 </td></tr>`;
       }
+      
     });
     
-   });
+  
+    });
+  
+  });
 }
 
 emptyDriversList(origin, drivers) {
-  let  origins = [];
-  //set origin
-  origins.push(origin)
+
 
   var outputDiv = document.getElementById('output');
-  drivers.forEach(element => {
-
-    var service = new google.maps.DistanceMatrixService;
-    service.getDistanceMatrix({
-      origins: origins,
-      destinations: [element.origin],
-      travelMode: google.maps.TravelMode.DRIVING,
-      unitSystem: google.maps.UnitSystem.IMPERIAL,
-      avoidHighways: false,
-      avoidTolls: false
-    }, function(response, status) {
-      if (status !== 'OK') {
-        alert('Error was: ' + status);
-      } else {
-        var originList = response.originAddresses;
-        var destinationList = response.destinationAddresses;
-        var results = response.rows[0].elements;
-        //console.log(results[0].distance.text);
-        var name =  element.name;
         outputDiv.innerHTML = ``;
-    }
-  });
+    
   
- });
 }
 
 sortByName(){
-  //empty list
-  this.emptyDriversList(this.homeLocation, this.drivers);
+  this.userService.getRidersForLocation1(this.homeLocation, this.workLocation, "name").subscribe(
+    res => {
+         res.forEach(element => {
+          console.log("Driver: "+res);
+            this.drivers.push({
+                 'id': element.userId,
+               'name': element.firstName+" "+element.lastName,
+             'origin':element.hAddress+","+element.hCity+","+element.hState, 
+              'email': element.email, 
+              'phone':element.phoneNumber
+            });
+        });
+    });
 
-  //find drivers
-  this.userService.getRidersForLocation1(this.homeLocation, this.workLocation, "name")
-  .subscribe(
-            (response) => {
-              response.forEach(element => {
-                   var directionsService = new google.maps.DirectionsService;
-                   var directionsRenderer = new google.maps.DirectionsRenderer({
-                         draggable: true,
-                         map: this.map
-                    });
-                    console.log(element.Distance);
-                    this.displayRoute(this.homeLocation, element.hCity+","+element.hState, directionsService, directionsRenderer);
-         });
-  });
-  this.displayDriversList(this.homeLocation, this.drivers);
 
-  //show drivers on map
-  this.showDriversOnMap(this.homeLocation, this.drivers);
+    //get all routes 
+      this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapProperties);
+      //empty drivers list
+      this.emptyDriversList(this.homeLocation, this.drivers);
+
+      this.displayDriversList(this.homeLocation, this.drivers);
+      //show drivers on map
+      this.showDriversOnMap(this.homeLocation, this.drivers);
 
 }
 
 sortByDistance(){
-  //empty list
-  this.emptyDriversList(this.homeLocation, this.drivers);
-
-  //find drivers
-  this.userService.getRidersForLocation1(this.homeLocation, this.workLocation, "distance")
-  .subscribe(
-            (response) => {
-              response.forEach(element => {
-                   var directionsService = new google.maps.DirectionsService;
-                   var directionsRenderer = new google.maps.DirectionsRenderer({
-                         draggable: true,
-                         map: this.map
-                    });
-                    console.log(element.Distance);
-                    this.displayRoute(this.homeLocation, element.hCity+","+element.hState, directionsService, directionsRenderer);
-         });
-  });
-  this.displayDriversList(this.homeLocation, this.drivers);
-
-  //show drivers on map
-  this.showDriversOnMap(this.homeLocation, this.drivers);
+  this.searchDriver("name");
 
 }
 
 sortByTime(){
-  //empty list
-  this.emptyDriversList(this.homeLocation, this.drivers);
+  this.searchDriver("time");
 
-  //find drivers
-  this.userService.getRidersForLocation1(this.homeLocation, this.workLocation, "time")
-  .subscribe(
-            (response) => {
-              response.forEach(element => {
-                   var directionsService = new google.maps.DirectionsService;
-                   var directionsRenderer = new google.maps.DirectionsRenderer({
-                         draggable: true,
-                         map: this.map
-                    });
-                    console.log(element.Distance);
-                    this.displayRoute(this.homeLocation, element.hCity+","+element.hState, directionsService, directionsRenderer);
-         });
-  });
-  this.displayDriversList(this.homeLocation, this.drivers);
-
-  //show drivers on map
-  this.showDriversOnMap(this.homeLocation, this.drivers);
 
 }
 

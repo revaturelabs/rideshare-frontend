@@ -14,6 +14,9 @@ export class ProfileCarComponent implements OnInit {
   nrSeats:number;
   currentCar: Car;
   success :string;
+  emptyMake: string;
+  emptyModel: string;
+  failed: String;
 
   constructor(private carService: CarService) { }
 
@@ -33,8 +36,26 @@ export class ProfileCarComponent implements OnInit {
     this.currentCar.model= this.model;
     this.currentCar.seats = this.nrSeats;
     //console.log(this.currentUser);
-    this.carService.updateCarInfo(this.currentCar);
-    this.success = "Updated Successfully!";
+    switch(this.currentCar.make){
+      case '': this.emptyMake = "Invalid Input! Cannot be empty";
+              this.failed = "CANNOT UPDATE CAR INFORMATION!";
+              this.success = "";
+              break;
+      default: this.emptyMake = "";
+    }
+    switch(this.currentCar.model){
+      case '': this.emptyModel = "Invalid Input! Cannot be empty";
+              this.failed = "CANNOT UPDATE CAR INFORMATION!";
+              this.success = "";
+              break;
+      default: this.emptyModel = "";
+    }
+    if((this.currentCar.make !== '') && (this.currentCar.model !== '')){
+      this.carService.updateCarInfo(this.currentCar);
+      this.success = "Updated Successfully!";
+      this.failed = ""
+    }
+
   }
 
 }

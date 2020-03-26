@@ -44,6 +44,7 @@ export class SeatsService {
    * This function returns an car by user ID.
    * @param userId
    */
+
   getSeatsByUserId(userId: number) {
     return this.http.get<Car>(`${this.url}users/${userId}`).toPromise();
   }

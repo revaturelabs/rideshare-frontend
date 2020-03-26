@@ -32,12 +32,7 @@ export class DriverListComponent implements OnInit {
   map: google.maps.Map;
 
   constructor(private http: HttpClient,private userService: UserService,
-    private googleService: GoogleService) { }
-  constructor(
-    private http: HttpClient,
-    private userService: UserService,
-    private carService: CarService
-    ) {}
+              private googleService: GoogleService, private carService: CarService) { }
 
   ngOnInit() {
     this.drivers = [];
@@ -63,9 +58,9 @@ export class DriverListComponent implements OnInit {
         });
       });
 
-    this.googleService.getGoogleApi();
+      this.googleService.getGoogleApi();
 
-    this.sleep(2000).then(() => {
+      this.sleep(2000).then(() => {
       this.mapProperties = {
         center: new google.maps.LatLng(
           Number(sessionStorage.getItem('lat')),
@@ -88,7 +83,7 @@ export class DriverListComponent implements OnInit {
   sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
-  
+
 
 
   showDriversOnMap(origin, drivers){
@@ -98,23 +93,7 @@ export class DriverListComponent implements OnInit {
          draggable: true,
          map: this.map
        });
-       this.displayRoute(origin, element.origin, directionsService, directionsRenderer);
-    });
-  }
-
-  showDriversOnMap(origin, drivers) {
-    drivers.forEach(element => {
-      var directionsService = new google.maps.DirectionsService();
-      var directionsRenderer = new google.maps.DirectionsRenderer({
-        draggable: true,
-        map: this.map
-      });
-      this.displayRoute(
-        origin,
-        element.origin,
-        directionsService,
-        directionsRenderer
-      );
+      this.displayRoute(origin, element.origin, directionsService, directionsRenderer);
     });
   }
 

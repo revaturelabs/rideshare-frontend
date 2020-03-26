@@ -90,7 +90,8 @@ export class SignupModalComponent implements OnInit {
       this.user.isDriver =  false;
     }
     //console.log(this.user);
-    this.userService.addUser(this.user).subscribe(
+    
+    this.userService.addressValidation(this.user).subscribe(
       res => {
         console.log(res);
         let i = 0;
@@ -142,7 +143,11 @@ export class SignupModalComponent implements OnInit {
           i = 0;
           this.success = "Registered successfully!";
         }
-      } 
+      } ,
+      error => {
+          console.log(this.user)
+          console.log(error);
+      }
       /*res => {
         console.log("failed to add user");
         console.log(res);

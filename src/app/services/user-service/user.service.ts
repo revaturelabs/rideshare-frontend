@@ -109,18 +109,17 @@ export class UserService {
 
 	// adds user if form is filled out and user input matches a real address
 	addUser(user :User) :Observable<User> {
-        console.log(`all user location stuff: ${user.hAddress}, ${user.hCity}, ${user.hState}, ${user.hZip}`)
+        this.addressValidation(this.user);//sets the address according to whether the address given by the user is a real address, currently not executing synchronously...=/
+        console.log(`User location info log(location modifying to '' on failure) happens first: ${user.hAddress}, ${user.hCity}, ${user.hState}, ${user.hZip}`)
         return this.http.post<User>(this.url, user, {headers: this.headers});
- // the google api always returns something, so the api connection itself had an issue
-
     }
 
-    addressValidation(user:User): Observable<User>{
+    addressValidation(user:User){// TODO place observable<User> for the return type after subscribing to the google api(below code) as a seperate function. 
         const numAndStreetName = user.hAddress.split(' '); // ensures user placed a space between the street number and street name
         if ( isNaN(Number(numAndStreetName[0]))){
             console.log('first part of haddress is not a number!')
-            this.setInvalidAddress(user);
-            return this.addUser(user);
+            this.setInvalidAddress(user);// TODO JOSH NOTE not an actual todo here... sets the user's location to null due to invalidated address, called at several levels below as well
+
         } else{
             console.log('Number of parts in haddress is: ' + numAndStreetName.length);
             // construct url with needed number of +'s based on length of numAndStreetName...
@@ -190,20 +189,20 @@ export class UserService {
                     else{// Another invalid pathway in the case a user's input doens't match the google best-effort response
                         console.log('else condition regarding failed comparisons to google output trigger')
                         this.setInvalidAddress(user);
-                        return this.addUser(user);
+
 
                     }
                 } catch (error) {// Another invalid pathway in the case that google api is not set up properly
                     console.log(error);
                     this.setInvalidAddress(user);
-                    return this.addUser(user);
+
                     
 
                 }
             }, error =>{
             console.log(error);
             this.setInvalidAddress(user); // the google api always returns something, so the api connection itself had an issue
-            return this.addUser(user);
+
             });
             console.log("hello");
         }

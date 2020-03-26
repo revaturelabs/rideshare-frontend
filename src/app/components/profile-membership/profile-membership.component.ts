@@ -21,6 +21,7 @@ export class ProfileMembershipComponent implements OnInit {
   updatesMembershipInfo(){
     this.profileObject.isDriver = this.isDriver;
     this.profileObject.active = this.active;
+    console.log(this.profileObject.isDriver);
     this.userService.updateUserInfo(this.profileObject);
     this.success = "Updated Successfully!";
   }

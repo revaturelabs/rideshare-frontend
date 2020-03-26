@@ -26,9 +26,9 @@
      <table class="table table-striped">
        <thead class="thead-dark">
          <tr>
-           <th scope="col">Name</th>
-           <th scope="col">Distance</th>
-           <th scope="col">Time</th>
+           <th scope="col" id="nameColumn" (click)="sortByName()">Name</th>
+           <th scope="col" id="distanceColumn" (click)="sortByDistance()">Distance</th>
+           <th scope="col" id="timeColumn" (click)="sortByTime()">Time</th>
            <th scope="col">View Info</th>
          </tr>
        </thead>

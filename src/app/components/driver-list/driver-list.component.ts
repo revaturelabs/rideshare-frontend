@@ -46,7 +46,7 @@ export class DriverListComponent implements OnInit {
     this.workLocation = sessionStorage.getItem('wAddress');
 
 
-    this.userService.getRidersForLocation1(this.homeLocation).subscribe(
+    this.userService.getRidersForLocation1(this.homeLocation, this.workLocation,null).subscribe(
       res => {
            //console.log(res);
            res.forEach(element => {
@@ -90,7 +90,7 @@ export class DriverListComponent implements OnInit {
     //console.log(this.location_s);
     this.drivers = [];
     this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapProperties);
-    this.userService.getRidersForLocation1(this.homeLocation)
+    this.userService.getRidersForLocation1(this.homeLocation, this.workLocation, null)
     .subscribe(
               (response) => {
                 response.forEach(element => {
@@ -104,7 +104,7 @@ export class DriverListComponent implements OnInit {
            });
     });
 
-    this.userService.getRidersForLocation1(this.homeLocation).subscribe(
+    this.userService.getRidersForLocation1(this.homeLocation, this.workLocation, null).subscribe(
       res => {
            //console.log(res);
            res.forEach(element => {
@@ -257,5 +257,79 @@ emptyDriversList(origin, drivers) {
  });
 }
 
+sortByName(){
+  //empty list
+  this.emptyDriversList(this.homeLocation, this.drivers);
+
+  //find drivers
+  this.userService.getRidersForLocation1(this.homeLocation, this.workLocation, "name")
+  .subscribe(
+            (response) => {
+              response.forEach(element => {
+                   var directionsService = new google.maps.DirectionsService;
+                   var directionsRenderer = new google.maps.DirectionsRenderer({
+                         draggable: true,
+                         map: this.map
+                    });
+                    console.log(element.Distance);
+                    this.displayRoute(this.homeLocation, element.hCity+","+element.hState, directionsService, directionsRenderer);
+         });
+  });
+  this.displayDriversList(this.homeLocation, this.drivers);
+
+  //show drivers on map
+  this.showDriversOnMap(this.homeLocation, this.drivers);
+
+}
+
+sortByDistance(){
+  //empty list
+  this.emptyDriversList(this.homeLocation, this.drivers);
+
+  //find drivers
+  this.userService.getRidersForLocation1(this.homeLocation, this.workLocation, "distance")
+  .subscribe(
+            (response) => {
+              response.forEach(element => {
+                   var directionsService = new google.maps.DirectionsService;
+                   var directionsRenderer = new google.maps.DirectionsRenderer({
+                         draggable: true,
+                         map: this.map
+                    });
+                    console.log(element.Distance);
+                    this.displayRoute(this.homeLocation, element.hCity+","+element.hState, directionsService, directionsRenderer);
+         });
+  });
+  this.displayDriversList(this.homeLocation, this.drivers);
+
+  //show drivers on map
+  this.showDriversOnMap(this.homeLocation, this.drivers);
+
+}
+
+sortByTime(){
+  //empty list
+  this.emptyDriversList(this.homeLocation, this.drivers);
+
+  //find drivers
+  this.userService.getRidersForLocation1(this.homeLocation, this.workLocation, "time")
+  .subscribe(
+            (response) => {
+              response.forEach(element => {
+                   var directionsService = new google.maps.DirectionsService;
+                   var directionsRenderer = new google.maps.DirectionsRenderer({
+                         draggable: true,
+                         map: this.map
+                    });
+                    console.log(element.Distance);
+                    this.displayRoute(this.homeLocation, element.hCity+","+element.hState, directionsService, directionsRenderer);
+         });
+  });
+  this.displayDriversList(this.homeLocation, this.drivers);
+
+  //show drivers on map
+  this.showDriversOnMap(this.homeLocation, this.drivers);
+
+}
 
 }

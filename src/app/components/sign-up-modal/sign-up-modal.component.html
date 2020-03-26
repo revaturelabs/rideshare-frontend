@@ -22,7 +22,7 @@
     <p *ngIf="emailError != ''" class="error">{{emailError}}</p>
 
     <label for="phoneNumber">Phone Number</label>
-    <input (keydown)="phoneNumberError = ''" id="phoneNumber" type="text" [(ngModel)]="user.phoneNumber" class="form-control" />
+    <input (keydown)="phoneNumberError = ''" id="phoneNumber" type="text" [(ngModel)]="user.phoneNumber" class="form-control" maxlength="12"/>
     <p *ngIf="phoneNumberError != ''" class="error">{{phoneNumberError}}</p>
 
     <label for="userName">User Name</label>
@@ -72,6 +72,8 @@
     </div>
     <div class="btn-container">
       <button type="submit" class="btn btn-primary register" (click)="submitUser()">Submit</button>
+      <p *ngIf="success != ''" class="success">{{success}}</p>
+      <p *ngIf="failed != ''" class="error">{{failed}}</p>
     </div>
   </div>
 </ng-template> 

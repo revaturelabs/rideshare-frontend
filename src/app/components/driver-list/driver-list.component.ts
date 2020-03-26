@@ -25,8 +25,11 @@ export class DriverListComponent implements OnInit {
   @ViewChild('map', null) mapElement: any;
   map: google.maps.Map;
 
-  constructor(private http: HttpClient, private userService: UserService,
-      private carService: CarService) {}
+  constructor(
+    private http: HttpClient,
+    private userService: UserService,
+    private carService: CarService
+    ) {}
 
   ngOnInit() {
     this.drivers = [];
@@ -161,7 +164,7 @@ export class DriverListComponent implements OnInit {
                                   <td class="col">${results[0].distance.text}</td>
                                   <td class="col">${results[0].duration.text}</td>
 
-                                  <td class="col">${seats}</td>  
+                                  <td class="col">${seats}</td>
 
                                   <td class="col">
                                   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCentered${element.id}"> View</button>

@@ -45,22 +45,9 @@ export class DriverListComponent implements OnInit {
     this.homeLocation = sessionStorage.getItem('hAddress');
     this.workLocation = sessionStorage.getItem('wAddress');
 
-
-    this.userService.getRidersForLocation1(this.homeLocation, this.workLocation,null).subscribe(
-      res => {
-           //console.log(res);
-           res.forEach(element => {
-              this.drivers.push({
-                   'id': element.userId,
-                 'name': element.firstName+" "+element.lastName,
-               'origin':element.hCity+","+element.hState, 
-                'email': element.email, 
-                'phone':element.phoneNumber
-              });
-          });
-      });
-
     this.googleService.getGoogleApi();
+
+    this.searchDriver();
 
 
     this.sleep(2000).then(() => {

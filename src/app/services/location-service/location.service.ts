@@ -6,7 +6,7 @@ import { Autocomplete } from 'googlemaps';
 @Injectable({
   providedIn: 'root'
 })
-export class LocationServiceService {
+export class LocationService {
   constructor(private http: HttpClient, private log: LogService) { }
 
   placeSearch: any;

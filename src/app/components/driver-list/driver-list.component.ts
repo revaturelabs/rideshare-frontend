@@ -42,13 +42,13 @@ export class DriverListComponent implements OnInit {
     this.drivers = [];
 
     // TODO: test out ngOninit to get car info to display on this component
-    this.carService.getCarByUserId2(sessionStorage.getItem("userid")).subscribe((response)=>{
-      this.currentCar = response;
-      this.make = response.make;
-      this.model = response.model;
-      this.nrSeats = response.seats;
-
-    });
+    // this.carService.getCarByUserId2(sessionStorage.getItem("userid")).subscribe((response)=>{
+    //   this.currentCar = response;
+    //   this.make = response.make;
+    //   this.model = response.model;
+    //   this.nrSeats = response.seats;
+    //   console.log("this.nrSeats is " +this.nrSeats);
+    // });
 
     this.userService.getRidersForLocation1(this.location).subscribe(res => {
       // console.log(res);
@@ -152,6 +152,16 @@ export class DriverListComponent implements OnInit {
 
     var outputDiv = document.getElementById('output');
     drivers.forEach(element => {
+
+    //   var driver = this.drivers;
+    // // TODO: test out displayDriversList to get car info to display on this component
+    // this.carService.getCarByUserId2(sessionStorage.getItem("driver")).subscribe((response)=>{
+    //   this.currentCar = response;
+    //   this.make = response.make;
+    //   this.model = response.model;
+    //   this.nrSeats = response.seats;
+    //   console.log("this.nrSeats is " +this.nrSeats);
+    // });
 
       var service = new google.maps.DistanceMatrixService();
       service.getDistanceMatrix(

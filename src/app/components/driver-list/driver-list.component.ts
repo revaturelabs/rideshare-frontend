@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { BatchService } from 'src/app/services/batch-service/batch.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
+import { GoogleService } from 'src/app/services/google-service/google.service';
 
 @Component({
   selector: 'app-driver-list',
@@ -27,7 +28,8 @@ export class DriverListComponent implements OnInit {
   @ViewChild('map',null) mapElement: any;
   map: google.maps.Map;
 
-  constructor(private http: HttpClient,private userService: UserService) { }
+  constructor(private http: HttpClient,private userService: UserService,
+    private googleService: GoogleService) { }
 
   ngOnInit() {
     this.drivers = [];
@@ -45,13 +47,8 @@ export class DriverListComponent implements OnInit {
               });
           });
       });
-    /*this.drivers.push({'id': '1','name': 'Ed Ogeron','origin':'Reston, VA', 'email': 'ed@gmail.com', 'phone':'555-555-5555'});
-    this.drivers.push({'id': '2','name': 'Nick Saban','origin':'Oklahoma, OK', 'email': 'nick@gmail.com', 'phone':'555-555-5555'});
-    this.drivers.push({'id': '3','name': 'Bobbie sfsBowden','origin':'Texas, TX', 'email': 'bobbie@gmail.com', 'phone':'555-555-5555'});
-    this.drivers.push({'id': '4','name': 'Les Miles','origin':'New York, NY', 'email': 'les@gmail.com', 'phone':'555-555-5555'});
-    this.drivers.push({'id': '5','name': 'Bear Bryant','origin':'Arkansas, AR', 'email': 'bear@gmail.com', 'phone':'555-555-5555'});*/
-    //console.log(this.drivers);
-    this.getGoogleApi();
+
+    this.googleService.getGoogleApi();
 
     this.sleep(2000).then(() => {
       this.mapProperties = {
@@ -71,22 +68,7 @@ export class DriverListComponent implements OnInit {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
   
-getGoogleApi()  {
-    this.http.get(`${environment.loginUri}getGoogleApi`)
-       .subscribe(
-                 (response) => {
-                     //console.log(response);
-                     if(response["googleMapAPIKey"] != undefined){
-                         new Promise((resolve) => {
-                           let script: HTMLScriptElement = document.createElement('script');
-                           script.addEventListener('load', r => resolve());
-                           script.src = `http://maps.googleapis.com/maps/api/js?key=${response["googleMapAPIKey"][0]}`;
-                           document.head.appendChild(script);      
-                     }); 
-               }    
-           }
-       );
-   }
+
 
   showDriversOnMap(origin, drivers){
      drivers.forEach(element => {

@@ -17,11 +17,14 @@ export class ProfileContactComponent implements OnInit {
   email: string;
   phone: string;
   success :string;
-  failed: string;
-  emptyFirst: string;
-  emptyLast: string;
-  emptyEmail: string;
-  emptyPhone: string;
+  failed : string;
+
+  // validation
+  firstNameError :string;
+  lastNameError :string;
+  emailError :string;
+  phoneNumberError :string;
+
   constructor(private router: Router, private userService: UserService) { }
 
   ngOnInit() {
@@ -43,42 +46,47 @@ export class ProfileContactComponent implements OnInit {
     this.profileObject.email = this.email;
     this.profileObject.phoneNumber = this.phone;
 
-    switch(this.profileObject.firstName){
-      case '': this.emptyFirst = "Invalid Input! Cannot be empty";
-              this.failed = "CANNOT UPDATE CONTACT INFORMATION";
-              this.success = "";
-              break;
-      default: this.emptyFirst = "";
-    }
-    switch(this.profileObject.lastName){
-      case '': this.emptyLast = "Invalid Input! Cannot be empty";
-              this.failed = "CANNOT UPDATE CONTACT INFORMATION";
-              this.success = "";
-              break;
-      default: this.emptyLast = "";
-    }
-    switch(this.profileObject.phoneNumber){
-      case '': this.emptyPhone = "Invalid Input! Cannot be empty";
-              this.failed = "CANNOT UPDATE CONTACT INFORMATION";
-              this.success = "";
-              break;
-      default: this.emptyPhone = "";
-    }
-    switch(this.profileObject.email){
-      case '': this.emptyEmail = "Invalid Input! Cannot be empty";
-              this.failed = "CANNOT UPDATE CONTACT INFORMATION";
-              this.success = "";
-              break;
-      default: this.emptyEmail = "";
-    }
+    this.firstNameError = '';
+    this.lastNameError = '';
+    this.phoneNumberError ='';
+    this.emailError ='';
+    this.failed='Update failed. Please resolve above error(s).';
+    this.success='';
 
-    if((this.profileObject.email !== '') && (this.profileObject.phoneNumber !== '') 
-    && (this.profileObject.firstName !== '') && (this.profileObject.lastName !== '')){
-      this.userService.updateUserInfo(this.profileObject);
-      this.success = "Updated Successfully!";
-      this.failed = "";
-    }
-    
+    this.userService.updateUserInfo(this.profileObject).subscribe(
+      res => {
+        console.log(res);
+        let i = 0;
+        if(res.firstName != undefined){
+          this.firstNameError = res.firstName[0];
+          i = 1;
+        }
+        if(res.lastName != undefined){
+          this.lastNameError = res.lastName[0];
+          i = 1;
+          
+        }
+        if(res.phoneNumber != undefined){
+          this.phoneNumberError = res.phoneNumber[0];
+          i = 1;
+
+        }
+        if(res.email != undefined){
+          this.emailError = res.email[0];
+          i = 1;
+
+        }
+        if(i === 0) {
+          i = 0;
+          this.success = "Updated Successfully!";
+          this.failed = '';
+        }
+      } 
+      /*res => {
+        console.log("failed to add user");
+        console.log(res);
+      }*/
+    );
   }
 
 

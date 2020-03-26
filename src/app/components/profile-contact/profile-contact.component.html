@@ -10,7 +10,7 @@
                 <label for="f_name" class="col-sm-4 col-form-label">First Name:</label>
                 <div class="col-sm-4">
                     <input type="text" class="form-control" id="f_name" [(ngModel)]=firstName value="{{ profileObject?.firstName }}">
-                    <p *ngIf="emptyFirst != ''" class="failed">{{emptyFirst}}</p>
+                    <p *ngIf="firstNameError != ''" class="error">{{firstNameError}}</p>
                 </div>
         </div>
         
@@ -19,7 +19,7 @@
             <label for="l_name" class="col-sm-4 col-form-label">Last Name:</label>
             <div class="col-sm-4">
                 <input type="text" class="form-control" id="l_name" [(ngModel)]=lastName value="{{ profileObject?.lastName }}">
-                <p *ngIf="emptyLast != ''" class="failed">{{emptyLast}}</p>
+                <p *ngIf="lastNameError != ''" class="error">{{lastNameError}}</p>
             </div>
         </div>
     
@@ -28,7 +28,7 @@
             <label for="user_email" class="col-sm-4 col-form-label">Email:</label>
             <div class="col-sm-4">
                 <input type="email" class="form-control" id="user_email" aria-describedby="emailHelp" [(ngModel)]=email value="{{ profileObject?.email }}">
-                <p *ngIf="emptyEmail != ''" class="failed">{{emptyEmail}}</p>
+                <p *ngIf="emailError != ''" class="error">{{emailError}}</p>
             </div>
         </div>
     
@@ -37,7 +37,7 @@
             <label for="phone" class="col-sm-4 col-form-label">Phone:</label>
             <div class="col-sm-4">
                 <input type="text" class="form-control" id="phone" [(ngModel)]=phone value="{{ profileObject?.phoneNumber }}">
-                <p *ngIf="emptyPhone != ''" class="failed">{{emptyPhone}}</p>
+                <p *ngIf="phoneNumberError != ''" class="error">{{phoneNumberError}}</p>
             </div>
         </div>
         

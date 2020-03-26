@@ -45,9 +45,22 @@ export class DriverListComponent implements OnInit {
     this.homeLocation = sessionStorage.getItem('hAddress');
     this.workLocation = sessionStorage.getItem('wAddress');
 
-    this.googleService.getGoogleApi();
 
-    this.searchDriver();
+    this.userService.getRidersForLocation1(this.homeLocation, this.workLocation,"none").subscribe(
+      res => {
+           //console.log(res);
+           res.forEach(element => {
+              this.drivers.push({
+                   'id': element.userId,
+                 'name': element.firstName+" "+element.lastName,
+               'origin':element.hCity+","+element.hState, 
+                'email': element.email, 
+                'phone':element.phoneNumber
+              });
+          });
+      });
+
+    this.googleService.getGoogleApi();
 
 
     this.sleep(2000).then(() => {
@@ -64,6 +77,8 @@ export class DriverListComponent implements OnInit {
       //show drivers on map
       this.showDriversOnMap(this.homeLocation, this.drivers);
     });
+
+    this.searchDriver();
   }
 
   sleep(ms) {
@@ -77,7 +92,7 @@ export class DriverListComponent implements OnInit {
     //console.log(this.location_s);
     this.drivers = [];
     this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapProperties);
-    this.userService.getRidersForLocation1(this.homeLocation, this.workLocation, null)
+    this.userService.getRidersForLocation1(this.homeLocation, this.workLocation, "none")
     .subscribe(
               (response) => {
                 response.forEach(element => {
@@ -91,7 +106,7 @@ export class DriverListComponent implements OnInit {
            });
     });
 
-    this.userService.getRidersForLocation1(this.homeLocation, this.workLocation, null).subscribe(
+    this.userService.getRidersForLocation1(this.homeLocation, this.workLocation, "none").subscribe(
       res => {
            //console.log(res);
            res.forEach(element => {

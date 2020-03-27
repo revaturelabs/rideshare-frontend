@@ -12,6 +12,7 @@ exports.config = {
     specs: [
         // './src/**/*.e2e-spec.ts'
         './test/landingpage.spec.js',
+        './test/signup-form.spec.js',
         './test/register.spec.js',
         './test/usernav.spec.js'
     ],

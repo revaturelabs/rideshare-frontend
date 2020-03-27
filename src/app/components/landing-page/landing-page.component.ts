@@ -5,29 +5,49 @@ import { HttpClient } from '@angular/common/http';
 import { UserService } from 'src/app/services/user-service/user.service';
 import { environment } from '../../../environments/environment';
 
-
+/**
+ *
+ *
+ * @export
+ * @class LandingPageComponent
+ * @implements {OnInit}
+ */
 @Component({
   selector: 'app-landing-page',
   templateUrl: './landing-page.component.html',
   styleUrls: ['./landing-page.component.css']
 })
 export class LandingPageComponent implements OnInit {
-
+  /**
+   *
+   *
+   * @type {string}
+   * @memberof LandingPageComponent
+   */
   location_s : string =''; //sample: Morgantown, WV
- 
+
 
   @ViewChild('map', {static: true}) mapElement: any;
   map: google.maps.Map;
-  
-  mapProperties :{};
 
-  constructor(private http: HttpClient,private userService: UserService) {
+  mapProperties :{};
+/**
+ *Creates an instance of LandingPageComponent.
+ * @param {HttpClient} http
+ * @param {UserService} userService
+ * @memberof LandingPageComponent
+ */
+constructor(private http: HttpClient,private userService: UserService) {
     //load google map api
   }
-
-  ngOnInit(): void {
+/**
+ *
+ *
+ * @memberof LandingPageComponent
+ */
+ngOnInit(): void {
      //load google map  api
-    
+
     this.getGoogleApi();
 
     this.sleep(2000).then(() => {
@@ -40,12 +60,22 @@ export class LandingPageComponent implements OnInit {
    });
 
  }
-
+/**
+ *
+ *
+ * @param {*} ms
+ * @returns
+ * @memberof LandingPageComponent
+ */
 sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
-
- getGoogleApi()  {
+/**
+ *
+ *
+ * @memberof LandingPageComponent
+ */
+getGoogleApi()  {
   this.http.get(`${environment.loginUri}getGoogleApi`)
      .subscribe(
                (response) => {
@@ -55,14 +85,18 @@ sleep(ms) {
                          let script: HTMLScriptElement = document.createElement('script');
                          script.addEventListener('load', r => resolve());
                          script.src = `http://maps.googleapis.com/maps/api/js?key=${response["googleMapAPIKey"][0]}`;
-                         document.head.appendChild(script);      
-                   }); 
-             }    
+                         document.head.appendChild(script);
+                   });
+             }
          }
      );
  }
-
- searchDriver(){
+/**
+ *
+ *
+ * @memberof LandingPageComponent
+ */
+searchDriver(){
   //call service search algorithm ()
   //console.log(this.location_s);
   this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapProperties);
@@ -81,7 +115,15 @@ sleep(ms) {
   });
  }
 
- 
+/**
+ *
+ *
+ * @param {*} origin
+ * @param {*} destination
+ * @param {*} service
+ * @param {*} display
+ * @memberof LandingPageComponent
+ */
 displayRoute(origin, destination, service, display) {
   service.route({
     origin: origin,

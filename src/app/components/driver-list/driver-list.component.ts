@@ -106,10 +106,7 @@ export class DriverListComponent implements OnInit {
        this.displayRoute(origin, element.origin, directionsService, directionsRenderer);
     });
   }
-stasher(list: Object){
-  return list;
 
-}
 
 displayRoute(origin, destination, service, display) {
     service.route({

@@ -7,7 +7,7 @@ import { User } from 'src/app/models/user';
   styleUrls: ['./profile-membership.component.css']
 })
 export class ProfileMembershipComponent implements OnInit {
-  profileObject: any;
+  profileObject: any; //note: changing this from 'User' to 'any' because the object returned by getUserById2() has different class members than User. ie: User has "isDriver" but the obj returned has "driver". this causes errors and the component to not work correctly
   currentUser: any = '';
   isDriver: boolean;
   active: boolean;
@@ -22,7 +22,7 @@ export class ProfileMembershipComponent implements OnInit {
   ngOnInit() {
     this.currentUser = this.userService.getUserById2(sessionStorage.getItem('userid')).subscribe((response) => {
       this.profileObject = response;
-      this.isDriver = this.profileObject.driver; //note: isDriver is undefined in this.profileObject
+      this.isDriver = this.profileObject.driver;
       this.active = this.profileObject.active;
     });
   }

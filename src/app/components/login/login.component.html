@@ -1,7 +1,7 @@
 <a (click)="openModal(template)">Login</a>
 <ng-template #template>
-  <div class="container">
-    <div class="text-center" id="login-form" (keyup.enter)="login()">
+  <div class="container" (keyup.enter)="login()">
+    <div class="text-center" id="login-form">
       <div class="modal-title-container">
         <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
           <span aria-hidden="true">&times;</span>

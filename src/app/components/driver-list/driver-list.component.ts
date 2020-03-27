@@ -72,6 +72,12 @@ export class DriverListComponent implements OnInit {
                 'phone':element.phoneNumber
               });
           });
+          console.log(this.drivers);
+
+          this.emptyDriversList();
+  
+          this.displayDriversList(this.homeLocation, this.drivers);
+
       });
 
 
@@ -84,9 +90,6 @@ export class DriverListComponent implements OnInit {
         };
         this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapProperties);
         //empty drivers list
-        this.emptyDriversList(this.homeLocation, this.drivers);
-  
-        this.displayDriversList(this.homeLocation, this.drivers);
         //show drivers on map
         this.showDriversOnMap(this.homeLocation, this.drivers);
       });
@@ -103,7 +106,10 @@ export class DriverListComponent implements OnInit {
        this.displayRoute(origin, element.origin, directionsService, directionsRenderer);
     });
   }
+stasher(list: Object){
+  return list;
 
+}
 
 displayRoute(origin, destination, service, display) {
     service.route({
@@ -121,30 +127,40 @@ displayRoute(origin, destination, service, display) {
   }
 
 displayDriversList(origin, drivers) {
-    console.log(drivers)
+
     let  origins = [];
     //set origin
     origins.push(origin)
 
     var outputDiv = document.getElementById('output');
     drivers.forEach(element => {
-      this.sleep(200).then(() => {
+
+      console.log("Element "+element.name);
+
+
+      // this.sleep(2000).then(() => {
         var service = new google.maps.DistanceMatrixService;
-      service.getDistanceMatrix({
+      service.getDistanceMatrix(
+        {
         origins: origins,
         destinations: [element.origin],
         travelMode: google.maps.TravelMode.DRIVING,
         unitSystem: google.maps.UnitSystem.IMPERIAL,
         avoidHighways: false,
         avoidTolls: false
-      }, function(response, status) {
+      }, callback);
+
+     function callback(response, status) {
         if (status !== 'OK') {
-          alert('Error was: ' + status);
+          alert('Google API Error: ' + status);
         } else {
           var originList = response.originAddresses;
           var destinationList = response.destinationAddresses;
           var results = response.rows[0].elements;
-          console.log(results);
+          
+          console.log("Element After "+element.name);
+
+
           var name =  element.name;
           outputDiv.innerHTML += `<tr><td class="col">${name}</td>
                                   <td class="col">${results[0].distance.text}</td>
@@ -178,16 +194,18 @@ displayDriversList(origin, drivers) {
                                   </div>
                                 </td></tr>`;
       }
+    }
+    
       
     });
     
   
-    });
+    // });
+
   
-  });
 }
 
-emptyDriversList(origin, drivers) {
+emptyDriversList() {
 
 
   var outputDiv = document.getElementById('output');
@@ -197,38 +215,22 @@ emptyDriversList(origin, drivers) {
 }
 
 sortByName(){
-  this.userService.getRidersForLocation1(this.homeLocation, this.workLocation, "name").subscribe(
-    res => {
-         res.forEach(element => {
-          console.log("Driver: "+res);
-            this.drivers.push({
-                 'id': element.userId,
-               'name': element.firstName+" "+element.lastName,
-             'origin':element.hAddress+","+element.hCity+","+element.hState, 
-              'email': element.email, 
-              'phone':element.phoneNumber
-            });
-        });
-    });
+  console.log("Sorting By Name");
+  this.emptyDriversList();
+  this.searchDriver("name");
 
 
-    //get all routes 
-      this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapProperties);
-      //empty drivers list
-      this.emptyDriversList(this.homeLocation, this.drivers);
-
-      this.displayDriversList(this.homeLocation, this.drivers);
-      //show drivers on map
-      this.showDriversOnMap(this.homeLocation, this.drivers);
 
 }
 
 sortByDistance(){
-  this.searchDriver("name");
+  this.emptyDriversList();
+  this.searchDriver("dist");
 
 }
 
 sortByTime(){
+  this.emptyDriversList();
   this.searchDriver("time");
 
 

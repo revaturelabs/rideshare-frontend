@@ -7,7 +7,7 @@ import { User } from 'src/app/models/user';
   styleUrls: ['./profile-membership.component.css']
 })
 export class ProfileMembershipComponent implements OnInit {
-  profileObject: User;
+  profileObject: any;
   currentUser: any = '';
   isDriver: boolean;
   active: boolean;
@@ -22,7 +22,7 @@ export class ProfileMembershipComponent implements OnInit {
   ngOnInit() {
     this.currentUser = this.userService.getUserById2(sessionStorage.getItem('userid')).subscribe((response) => {
       this.profileObject = response;
-      this.isDriver = this.profileObject.driver; //note: isDriver does not exist on this object
+      this.isDriver = this.profileObject.driver; //note: isDriver is undefined in this.profileObject
       this.active = this.profileObject.active;
     });
   }
@@ -37,6 +37,7 @@ export class ProfileMembershipComponent implements OnInit {
       this.resultVisible="visible";
     }, error =>{
 
+      //likely server error
       this.result = "Error " + error.status;
       this.resultColor="red";
       this.resultVisible="visible";

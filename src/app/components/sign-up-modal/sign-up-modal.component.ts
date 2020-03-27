@@ -49,6 +49,17 @@ export class SignupModalComponent implements OnInit {
   constructor(private modalService: BsModalService, private userService: UserService, private batchService: BatchService, private validationService: ValidationService) { }
 
   ngOnInit() {
+
+    //set to empty string so we can call trim() during validation without the variable being undefined
+    this.user.firstName = "";
+    this.user.lastName = "";
+    this.user.email = "";
+    this.user.phoneNumber = "";
+    this.user.userName = "";
+    this.user.hAddress = "";
+    this.user.hCity = "";
+    this.user.hState = "";
+
     this.userService.getAllUsers().subscribe(
       res => {
         //console.log(res);
@@ -69,6 +80,7 @@ export class SignupModalComponent implements OnInit {
 
   submitUser() {
 
+    //if failed client validation, return
     if(!this.validateForm()) {
       this.submitMessage = "Please correct errors";
       this.submitMessageColor = "red";
@@ -159,14 +171,16 @@ export class SignupModalComponent implements OnInit {
           this.submitMessageColor = "green";
           this.submitMessageVisible = "visible";
         }
+      },
+      error => {
+        this.submitMessage = "Error: " + error.status;
+        this.submitMessageColor = "red";
+        this.submitMessageVisible = "visible";
       }
-      /*res => {
-        console.log("failed to add user");
-        console.log(res);
-      }*/
     );
   }
 
+  //validate the entire form
   validateForm() : boolean {
     const isFirstValid = this.validateFirstName();
     const isLastValid = this.validateLastName();
@@ -199,45 +213,53 @@ export class SignupModalComponent implements OnInit {
 
     this.validateFirstName();
   }
+  //validate first name
   validateFirstName() : boolean {
-    if(!this.user.firstName) {
+    this.user.firstName = this.user.firstName.trim();
+    if(!this.user.firstName) { //if blank
       this.firstNameError = "Required";
       return false;
     }
-    else if(!this.validationService.validateName(this.user.firstName)) {
-      this.firstNameError = "Invalid Format";
-      return false;
-    }
     else {
-      this.user.firstName = this.validationService.nameFormat(this.user.firstName);
-      this.firstNameError = "";
-      return true;
+      this.firstNameError = this.validationService.validateNameErrorMessage(this.user.firstName);
+      if(this.firstNameError) {
+        return false;
+      }
+      else {
+        this.user.firstName = this.validationService.nameFormat(this.user.firstName);
+        return true;
+      }
     }
   }
 
   onLastNameChange() {
     this.validateLastName();
   }
+  //valdiate last name
   validateLastName() : boolean {
+    this.user.lastName = this.user.lastName.trim();
     if(!this.user.lastName) {
       this.lastNameError = "Required";
       return false;
     }
-    else if(!this.validationService.validateName(this.user.lastName)) {
-      this.lastNameError = "Invalid Format";
-      return false;
-    }
     else {
-      this.user.lastName = this.validationService.nameFormat(this.user.lastName);
-      this.lastNameError = "";
-      return true;
+      this.lastNameError = this.validationService.validateNameErrorMessage(this.user.lastName);
+      if(this.lastNameError) {
+        return false;
+      }
+      else {
+        this.user.lastName = this.validationService.nameFormat(this.user.lastName);
+        return true;
+      }
     }
   }
 
   onEmailChange() {
     this.validateEmail();
   }
+  //validate email
   validateEmail() : boolean {
+    this.user.email = this.user.email.trim();
     if(!this.user.email) {
       this.emailError = "Required";
       return false;
@@ -255,7 +277,9 @@ export class SignupModalComponent implements OnInit {
   onPhoneNumberChange() {
     this.validatePhoneNumber();
   }
+  //validate phone number
   validatePhoneNumber() : boolean {
+    this.user.phoneNumber = this.user.phoneNumber.trim();
     if(!this.user.phoneNumber) {
       this.phoneNumberError = "Required";
       return false;
@@ -273,24 +297,28 @@ export class SignupModalComponent implements OnInit {
   onUsernameChange() {
     this.validateUsername();
   }
+  //validate username
   validateUsername() : boolean {
+    this.user.userName = this.user.userName.trim();
     if(!this.user.userName) {
       this.userNameError = "Required";
       return false;
     }
-    else if(!this.validationService.validateUserName(this.user.userName)) {
-      this.userNameError = "Invalid Format";
-      return false;
-    }
     else {
-      this.userNameError = "";
-      return true;
+      this.userNameError = this.validationService.validateUserNameErrorMessage(this.user.userName);
+      if(this.userNameError) {
+        return false;
+      }
+      else {
+        return true;
+      }
     }
   }
 
   onBatchChange() {
     this.validateBatch();
   }
+  //validate batch
   validateBatch() : boolean {
     //batch is not required on the backend, so allowing blank
     return true;
@@ -302,6 +330,7 @@ export class SignupModalComponent implements OnInit {
     this.validateAddress();
   }
   validateAddress() : boolean {
+    this.user.hAddress = this.user.hAddress.trim();
     if(!this.user.hAddress) {
       this.hAddressError = "Required";
       return false;
@@ -316,6 +345,7 @@ export class SignupModalComponent implements OnInit {
     this.validateCity();
   }
   validateCity() : boolean {
+    this.user.hCity = this.user.hCity.trim();
     if(!this.user.hCity) {
       this.hCityError = "Required";
       return false;
@@ -330,6 +360,7 @@ export class SignupModalComponent implements OnInit {
     this.validateState();
   }
   validateState() : boolean {
+    this.user.hState = this.user.hState.trim();
     if(!this.user.hState) {
       this.hStateError = "Required";
       return false;

@@ -18,10 +18,10 @@ export class ProfileContactComponent implements OnInit {
 
   profileObject : User;
   currentUser: any = '';
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone: string;
+  firstName: string = '';
+  lastName: string = '';
+  email: string = '';
+  phone: string = '';
   result: string = "Updated Successfully!";
   resultColor: string = "red";
   resultVisible: string = "hidden";
@@ -90,6 +90,7 @@ export class ProfileContactComponent implements OnInit {
   }
 
   validateFirstName() {
+    this.firstName = this.firstName.trim();
     if(!this.firstName) {
       this.firstNameError = "Required";
       return false;
@@ -110,6 +111,7 @@ export class ProfileContactComponent implements OnInit {
   }
 
   validateLastName() {
+    this.lastName = this.lastName.trim();
     if(!this.lastName) {
       this.lastNameError = "Required";
       return false;
@@ -130,6 +132,7 @@ export class ProfileContactComponent implements OnInit {
   }
 
   validateEmail() {
+    this.email = this.email.trim();
     if(!this.email) {
       this.emailError = "Required";
       return false;
@@ -150,6 +153,7 @@ export class ProfileContactComponent implements OnInit {
   }
 
   validatePhone() {
+    this.phone = this.phone.trim();
     if(!this.phone) {
       this.phoneError = "Required";
       return false;

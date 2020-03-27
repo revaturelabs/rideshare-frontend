@@ -154,6 +154,7 @@ export class LoginComponent implements OnInit {
 
 	//validate the username
 	validateUsername() {
+		this.userName = this.userName.trim();
 		if(!this.userName) {
 			this.usernameError = "Username Required";
 			this.usernameErrorVisible = "visible"; //make error visible

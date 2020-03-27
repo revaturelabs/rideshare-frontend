@@ -9,11 +9,11 @@ import { Car } from 'src/app/models/car';
 })
 export class ProfileCarComponent implements OnInit {
 
-  make: string;
-  model:string;
-  nrSeats:number;
+  make: string = "";
+  model: string = "";
+  nrSeats: number;
   currentCar: Car;
-  success :string;
+  success: string = "";
 
   makeError: string = "";
   modelError: string = "";
@@ -78,6 +78,7 @@ export class ProfileCarComponent implements OnInit {
 
   //validate make
   validateMake() {
+    this.make = this.make.trim();
     if(!this.make) { //if empty
       this.makeError = "Required"; //required
       return false;
@@ -90,6 +91,7 @@ export class ProfileCarComponent implements OnInit {
 
   //validate model
   validateModel() {
+    this.model = this.model.trim();
     if(!this.model) {
       this.modelError = "Required";
       return false;

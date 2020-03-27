@@ -18,7 +18,8 @@
 
     <label for="email">Email</label>
     <span *ngIf="emailError != ''" class="error"> {{emailError}}</span>
-    <input id="email" type="email" [(ngModel)]="user.email" class="form-control" (change)="onEmailChange()"/>
+    <!--note: if input type is email, onEmailChange() does not fire if adding white space characters-->
+    <input id="email" type="text" [(ngModel)]="user.email" class="form-control" (change)="onEmailChange()"/>
 
     <label for="phoneNumber">Phone Number</label>
     <span *ngIf="phoneNumberError != ''" class="error"> {{phoneNumberError}}</span>

@@ -4,9 +4,9 @@
 const baseUri = `http://localhost`;
 
 const port = '8080';
-  /**
-   * These are the dev environment variables
-   */
+/**
+ * These are the dev environment variables
+ */
 export const environment = {
 
   production: false,
@@ -15,5 +15,6 @@ export const environment = {
   loginUri: `${baseUri}:${port}/login/`,
   batchesUri: `${baseUri}:${port}/batches/`,
   carUri: `${baseUri}:${port}/cars/`,
-  adminUri: `${baseUri}:${port}/admins/`
+  adminUri: `${baseUri}:${port}/admins/`,
+  loginV2Uri: `${baseUri}:${port}/v2/login/`
 };

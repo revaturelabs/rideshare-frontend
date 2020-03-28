@@ -10,16 +10,24 @@
       </div>
       <div class="content">
         <div class="form-group">
+          <!-- Misc. Iterable Response Payload Errors -->
+          <p *ngFor="let error of miscErrors" class="error">{{error}}</p>
+        </div>
+        <div class="form-group">
           <label for="formGroupExampleInput">Username</label><br>
           <input type="text" [(ngModel)]="userName" class="form-control" id="formGroupExampleInput"
-            placeholder="Enter Username" (change)="onUsernameChange()">
+            placeholder="Enter Username">
           <p class="error mx-auto w-100" [ngStyle]="{'visibility': usernameErrorVisible}">{{usernameError}}</p>
+          <!-- Username Iterable Respone Payload Errors -->
+          <p *ngFor="let error of usernameErrors" class="error">{{error}}</p>
         </div>
         <div class="form-group">
           <label for="formGroupExampleInput2">Password</label><br>
           <input type="password" [(ngModel)]="passWord" class="form-control" id="formGroupExampleInput2"
             placeholder="Enter Password">
           <p class="error mx-auto w-100">{{pwdError}}</p>
+          <!-- Password Iterable Response Errors -->
+          <p *ngFor="let error of passwordErrors"  class="error">{{error}}</p>
         </div>
 
         <p class="alert alert-danger" *ngIf="failed"><strong>Login Failed!</strong></p>

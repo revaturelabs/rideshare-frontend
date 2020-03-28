@@ -5,9 +5,9 @@
         Active: <button type="button" [ngClass]="user.active? truthy : falsy" (click)="toggleActive()">{{user.active? "On" : "Off"}}</button>
     </div><br>
     <div>
-        Driver: <button type="button" [ngClass]="user.driver? truthy : falsy" disabled>{{user.driver? "Yes" : "No"}}</button>
+        Driver: <button type="button" [ngClass]="user.isDriver? truthy : falsy" disabled>{{user.isDriver? "Yes" : "No"}}</button>
     </div><br>
     <div>
-        Accept Riders: <button type="button" [ngClass]="user.isAcceptingRides? truthy : falsy" (click)="toggleAcceptRider()" [disabled]="!(user.driver && user.active)">{{user.isAcceptingRides? "On" : "Off"}}</button>
+        Accept Riders: <button type="button" [ngClass]="user.isAcceptingRides? truthy : falsy" (click)="toggleAcceptRider()" [disabled]="!(user.isDriver && user.active)">{{user.isAcceptingRides? "On" : "Off"}}</button>
     </div>
 </div>

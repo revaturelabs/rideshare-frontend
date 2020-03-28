@@ -19,8 +19,6 @@ export class SignupModalComponent implements OnInit {
   email: string;
   phone: string;
   address: string;
-  isDriver: boolean;
-  isRider: boolean;
   submitMessage: string = "Please correct errors";
   submitMessageColor: string = "red";
   submitMessageVisible: string = "hidden";
@@ -105,21 +103,6 @@ export class SignupModalComponent implements OnInit {
     this.user.wState = this.user.hState;
     this.user.wCity = this.user.hCity;
     this.user.wZip = this.user.hZip;
-    let driver = <HTMLInputElement>document.getElementById("driver");
-    let rider = <HTMLInputElement>document.getElementById("rider");
-
-    if (driver.checked == true) {
-      this.user.isDriver = true;
-    }
-    else {
-      this.user.isDriver = false;
-    }
-    if (rider.checked == true) {
-      this.user.isAcceptingRides = true;
-    }
-    else {
-      this.user.isAcceptingRides = false;
-    }
 
     //console.log(this.user);
     this.userService.addUser(this.user).subscribe(

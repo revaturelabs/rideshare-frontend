@@ -61,13 +61,13 @@
     <input type="number" [(ngModel)]="user.hZip" class="form-control" (change)="onZipChange()"/>
 
     <div class="radiobody">
-    <div class="btn-group" data-toggle="buttons">
+    <div class="btn-group">
         <label class="btn btn-primary">
-          <input type="checkbox"  id="driver" [(ngModel)]="isDriver" /> Driver
+          <input type="checkbox" class="check" id="driver" [(ngModel)]="isDriver"/> Driver
         </label>
         <br>
         <label class="btn btn-primary">
-          <input type="checkbox"  id="rider" [(ngModel)]="isRider"/> Rider
+          <input type="checkbox" class="check" id="rider" [(ngModel)]="isRider"/> Rider
         </label>
   </div>
     </div>

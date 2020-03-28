@@ -7,11 +7,12 @@ import { User } from 'src/app/models/user';
   styleUrls: ['./profile-membership.component.css']
 })
 export class ProfileMembershipComponent implements OnInit {
-  profileObject: any; //note: changing this from 'User' to 'any' because the object returned by getUserById2() has different class members than User. ie: User has "isDriver" but the obj returned has "driver". this causes errors and the component to not work correctly
+  profileObject: User;
   currentUser: any = '';
-  isDriver: boolean;
-  active: boolean;
+  active: boolean = false;
   success: string;
+  batchNumber: string = "";
+  batchLocation: string = "";
 
   result: string = "Updated Successfully!";
   resultColor: string = "";
@@ -22,13 +23,16 @@ export class ProfileMembershipComponent implements OnInit {
   ngOnInit() {
     this.currentUser = this.userService.getUserById2(sessionStorage.getItem('userid')).subscribe((response) => {
       this.profileObject = response;
-      this.isDriver = this.profileObject.driver;
       this.active = this.profileObject.active;
+
+      if(this.profileObject.batch != null) {
+        this.batchLocation = this.profileObject.batch.batchLocation;
+        this.batchNumber =  this.profileObject.batch.batchNumber.toString();
+      }
     });
   }
 
   updatesMembershipInfo() {
-    this.profileObject.driver = this.isDriver;
     this.profileObject.active = this.active;
     this.userService.updateUserInfo(this.profileObject).subscribe((response)=>{
 

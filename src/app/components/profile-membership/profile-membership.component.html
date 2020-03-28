@@ -6,14 +6,14 @@
 
             <div class="col-sm-12">
                 <h5>Batch:</h5>
-                <span> {{profileObject?.batch.batchNumber}} - {{profileObject?.batch.batchLocation}}</span>
+                <span> {{batchNumber}} - {{batchLocation}}</span>
             </div>
         </div>
 
         <div class="form-group row">
             <div class="col-sm-4 t">
                 <h6>Status:</h6>
-                <select class="form-control mySelect" name="rider" id="rider" [(ngModel)]=isDriver (change)="onDriverChange()">
+                <select class="form-control mySelect" name="rider" id="rider" [(ngModel)]=profileObject.isDriver (change)="onDriverChange()">
                     <option value="true">Driver</option>
                     <option value="false">Rider</option>
                 </select>

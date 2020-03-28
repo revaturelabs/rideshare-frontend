@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, fakeAsync } from '@angular/core/testing';
 
 import { LoginComponent } from './login.component';
 import { APP_BASE_HREF } from '@angular/common';
@@ -8,6 +8,10 @@ import { FormsModule } from '@angular/forms';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
 import { BsModalService } from 'ngx-bootstrap';
+import { AuthService } from 'src/app/services/auth-service/auth.service';
+import RequestError from 'src/app/models/request-error';
+import { HttpTestingController } from '@angular/common/http/testing';
+import { Routes, Router } from '@angular/router';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -29,9 +33,11 @@ describe('LoginComponent', () => {
   };
 
   let mockBsModalService;
-
+  let mockRouter;
   beforeEach(async(() => {
     mockBsModalService = jasmine.createSpyObj('BsModalService', ['show']);
+    mockRouter = jasmine.createSpyObj('Router', ['navigateByUrl']);
+
     TestBed.configureTestingModule({
       declarations: [...getRoutableComponents()],
       imports: [HttpClientModule, AppRoutingModule, FormsModule, RouterTestingModule],
@@ -39,9 +45,9 @@ describe('LoginComponent', () => {
       // imports: [HttpClientModule, AppRoutingModule, FormsModule],
       providers: [
         { provide: APP_BASE_HREF, useValue: '/my/app' },
-        { provide: BsModalService, useValue: mockBsModalService }]
-    })
-      .compileComponents();
+        { provide: BsModalService, useValue: mockBsModalService },
+        { provide: Router, useValue: mockRouter }]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -100,4 +106,30 @@ describe('LoginComponent', () => {
     expect(component.failed).toBe(true);
   });
 
+  fit('distributes errors to error lists by error element', () => {
+    const errorList: RequestError[] = [
+      { element: 'username', message: 'msg'},
+      { element: 'password', message: 'msg'},
+      { element: 'password', message: 'msg'},
+      { element: 'misc', message: 'msg'},
+      { element: 'misc', message: 'msg'},
+      { element: 'misc', message: 'msg'},
+      { element: 'other', message: 'msg'}
+    ];
+
+    component.mapErrorMessages(errorList);
+    expect(component.usernameErrors.length).toBe(1);
+    expect(component.passwordErrors.length).toBe(2);
+    expect(component.miscErrors.length).toBe(4);
+  });
+
+  fit('closes login modal and navigates to /drivers when successfulLoginCallback called', fakeAsync(() => {
+    const modalHideSpy = spyOn(component.modalRef, 'hide');
+    component.successfulLoginCallback();
+
+    expect(component.modalRef.hide).toHaveBeenCalled();
+    // expect(mockRouter.navigateByUrl).toBeCalledWith('/drivers');
+  }));
 });
+
+

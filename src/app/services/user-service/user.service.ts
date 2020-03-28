@@ -2,7 +2,7 @@ import { Injectable, Output, EventEmitter } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from 'src/app/models/user';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { AuthService } from '../auth-service/auth.service';
 import { LogService } from '../log.service'
 import { environment } from '../../../environments/environment';
@@ -17,6 +17,7 @@ import { environment } from '../../../environments/environment';
 
 
 export class UserService {
+
     
 
 	/**
@@ -109,17 +110,18 @@ export class UserService {
 
 	// adds user if form is filled out and user input matches a real address
 	addUser(user :User) :Observable<User> {
-        this.addressValidation(this.user);//sets the address according to whether the address given by the user is a real address, currently not executing synchronously...=/
         console.log(`User location info log(location modifying to '' on failure) happens first: ${user.hAddress}, ${user.hCity}, ${user.hState}, ${user.hZip}`)
         return this.http.post<User>(this.url, user, {headers: this.headers});
     }
 
-    addressValidation(user:User){// TODO place observable<User> for the return type after subscribing to the google api(below code) as a seperate function. 
+    addressValidation(user:User): Subject<any> {
         const numAndStreetName = user.hAddress.split(' '); // ensures user placed a space between the street number and street name
+        const sub = new Subject();
         if ( isNaN(Number(numAndStreetName[0]))){
             console.log('first part of haddress is not a number!')
-            this.setInvalidAddress(user);// TODO JOSH NOTE not an actual todo here... sets the user's location to null due to invalidated address, called at several levels below as well
-
+            this.setInvalidAddress(user);
+            sub.next(user.hAddress);
+            return sub;
         } else{
             console.log('Number of parts in haddress is: ' + numAndStreetName.length);
             // construct url with needed number of +'s based on length of numAndStreetName...
@@ -141,8 +143,8 @@ export class UserService {
                     if(data.results[0].partial_match == true){
                         throw Error('Only partial match');
                     }
-                    // tslint:disable-next-line: max-line-length
-                    // The api will always return a particular format for an address if it makes a best effort delivery; therefore, we can parse and compare to user input
+                    // The api will always return a particular format for an 
+                    // address if it makes a best effort delivery; therefore, we can parse and compare to user input
                     googleGeoResult = data.results[0].formatted_address;
                     console.log(googleGeoResult);// prints formatted address
                     // splits into address, city, state with zip, and country portions respectively
@@ -184,29 +186,39 @@ export class UserService {
                         user.hAddress = gStreetNameAndNumber.join(' ').toUpperCase();
                         user.hCity = gCity.toUpperCase();
                         user.hState = gState.toUpperCase();
-                        return this.addUser(user);
+                        sub.next(user.hAddress);
+                        return sub;
                     }
                     else{// Another invalid pathway in the case a user's input doens't match the google best-effort response
                         console.log('else condition regarding failed comparisons to google output trigger')
                         this.setInvalidAddress(user);
-
+                        sub.next(user.hAddress);
+                        return sub;
 
                     }
                 } catch (error) {// Another invalid pathway in the case that google api is not set up properly
                     console.log(error);
-                    this.setInvalidAddress(user);
-
-                    
-
+                    console.log("error caught when trying to send api google request")
+                    sub.next(user.hAddress);
+                    return sub;
                 }
             }, error =>{
             console.log(error);
-            this.setInvalidAddress(user); // the google api always returns something, so the api connection itself had an issue
-
+            sub.next(user.hAddress);
+            return sub;
             });
-            console.log("hello");
+
         }
-     
+        //return truthy/falsey
+        // let sub = new Subject();
+        // sub.next(user.hAddress);
+        // return sub;
+
+        }
+
+        
+        googleApiResult() {
+            throw new Error("Method not implemented.");
         }
 	/**
 	 * This function sets the location to empty string for back-end invalidation response

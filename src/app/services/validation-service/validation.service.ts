@@ -20,8 +20,15 @@ export class ValidationService {
 
 
 //   this function checks for special characters in the username and validates the length
-  validateUserName(userName: string) {
+  	validateUserName(userName: string) {
 		return /^\w+\.?\w+$/.test(userName) && userName.length >= 3 && userName.length <= 12;
+	}
+	//returns an empty string if valid, else returns the error message
+	validateUserNameErrorMessage(userName: string) : string {
+		if(!this.validateUserName(userName)) {
+			return "Invalid chars or wrong length";
+		}
+		return "";
 	}
 
   /**
@@ -29,6 +36,13 @@ export class ValidationService {
 	 */
 	validateName(name: string) {
 		return /^[a-zA-Z\u00C0-\u017F]+[- ]?[a-zA-Z\u00C0-\u017F]+$/.test(name) && name.length < 30;
+	}
+	//returns an empty string if valid, else returns the error message
+	validateNameErrorMessage(name: string) : string {
+		if(!this.validateName(name)) {
+			return "Contains a number or wrong length"
+		}
+		return "";
 	}
 
   /**

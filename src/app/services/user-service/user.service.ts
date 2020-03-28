@@ -34,9 +34,14 @@ export class UserService {
 	 * Set up the url string to the env var
 	 * Creates a new user object
 	 */
+<<<<<<< HEAD
     url: string = environment.userUri;
     googleBaseUrl: string = environment.googleBaseUri;
     googleApiKey: string = environment.googleMapKey;
+=======
+	url: string = environment.userUri;
+	carUrl: string = environment.carUri;
+>>>>>>> b0fc4bd570be6b854f5aeb5b744f8c7a78c48bca
 	user: User = new User();
 
 	/**
@@ -301,9 +306,15 @@ export class UserService {
 	 * @param user 
 	 */
 
+<<<<<<< HEAD
 	updateUserInfo(user: User) {
 		// console.log(user);
 		return this.http.put(this.url, user).toPromise();
+=======
+	updateUserInfo(user: User): Observable<Object> {
+		//console.log(user);
+		return this.http.put(this.url, user);
+>>>>>>> b0fc4bd570be6b854f5aeb5b744f8c7a78c48bca
 	}
 	/**
 	 * A GET method that retrieves a driver by Id
@@ -357,6 +368,7 @@ export class UserService {
 		return this.http.get(this.url + 'driver/'+ location)
 	}
 
+<<<<<<< HEAD
 /**
  * This function returns the contents of googlemaps api request for a location
  */
@@ -386,3 +398,9 @@ export class UserService {
         return this.http.get<any>(`${googleApiUrl}`);
 	}
 }
+=======
+	getRidersForLocation2(location: string): Observable <any>{
+		return this.http.get(this.carUrl + 'driver/' + location);
+	}
+}
+>>>>>>> b0fc4bd570be6b854f5aeb5b744f8c7a78c48bca

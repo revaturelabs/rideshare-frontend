@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DriverContactModalComponent } from './driver-contact-modal.component';
+import { getRoutableComponents } from 'src/app/app-routing.module';
 
 describe('DriverContactModalComponent', () => {
   let component: DriverContactModalComponent;
@@ -8,9 +9,9 @@ describe('DriverContactModalComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DriverContactModalComponent ]
+      declarations: [...getRoutableComponents()]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

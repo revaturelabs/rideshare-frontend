@@ -184,14 +184,6 @@ export class DriverListComponent implements OnInit {
 
       });
     });
-<<<<<<< HEAD
-  });
-=======
->>>>>>> b0fc4bd570be6b854f5aeb5b744f8c7a78c48bca
 
   }
 }
-<<<<<<< HEAD
-}
-=======
->>>>>>> b0fc4bd570be6b854f5aeb5b744f8c7a78c48bca

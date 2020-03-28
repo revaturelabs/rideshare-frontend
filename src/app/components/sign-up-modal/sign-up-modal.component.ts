@@ -41,22 +41,12 @@ export class SignupModalComponent implements OnInit {
   hZipError: string;
 
   //Store the retrieved template from the 'openModal' method for future use cases.
-<<<<<<< HEAD
-  modalRef :BsModalRef;
-  states = ['AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA','KS',
-            'KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY',
-            'NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV',
-            'WI','WY'];
-  constructor(private modalService: BsModalService, 
-              private userService: UserService, private batchService : BatchService, private validationService :ValidationService) { }
-=======
   modalRef: BsModalRef;
   states = ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS',
     'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY',
     'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV',
     'WI', 'WY'];
   constructor(private modalService: BsModalService, private userService: UserService, private batchService: BatchService, private validationService: ValidationService) { }
->>>>>>> b0fc4bd570be6b854f5aeb5b744f8c7a78c48bca
 
   ngOnInit() {
 
@@ -88,7 +78,7 @@ export class SignupModalComponent implements OnInit {
     this.modalRef = this.modalService.show(template);
   }
 
-  submitUser() {
+  async submitUser() {
 
     //if failed client validation, return
     if(!this.validateForm()) {
@@ -125,72 +115,67 @@ export class SignupModalComponent implements OnInit {
       this.user.isDriver = false;
     }
     //console.log(this.user);
-    this.userService.addressValidation(this.user)
-    .subscribe(
-        () => console.log("function 1 terminated"));
-    this.userService.addUser(this.user).subscribe(
-      res => {
-        
-        console.log(res);
-        let i = 0;
-        if (res.firstName != undefined) {
-          this.firstNameError = res.firstName[0]; //additional server validation
-          i = 1;
-        }
-        if (res.lastName != undefined) {
-          this.lastNameError = res.lastName[0];
-          i = 1;
 
-        }
-        if (res.phoneNumber != undefined) {
-          this.phoneNumberError = res.phoneNumber[0];
-          i = 1;
 
-        }
-        if (res.email != undefined) {
-          this.emailError = res.email[0];
-          i = 1;
+    const res = await this.userService.addUser(this.user);
 
-        }
-        if (res.userName != undefined) {
-          this.userNameError = res.userName[0];
-          i = 1;
+    console.log(res);
+    let i = 0;
+    if (res.firstName != undefined) {
+        this.firstNameError = res.firstName[0]; //additional server validation
+        i = 1;
+    }
+    if (res.lastName != undefined) {
+        this.lastNameError = res.lastName[0];
+        i = 1;
 
-        }
-        if (res.hState != undefined) {
-          this.hStateError = res.hState[0];
-          i = 1;
+    }
+    if (res.phoneNumber != undefined) {
+        this.phoneNumberError = res.phoneNumber[0];
+        i = 1;
 
-        }
-        if (res.hAddress != undefined) {
-          this.hAddressError = res.hAddress[0];
-          i = 1;
+    }
+    if (res.email != undefined) {
+        this.emailError = res.email[0];
+        i = 1;
 
-        }
-        if (res.hCity != undefined) {
-          this.hCityError = res.hCity[0];
-          i = 1;
+    }
+    if (res.userName != undefined) {
+        this.userNameError = res.userName[0];
+        i = 1;
 
-        }
-        if (res.hZip != undefined) {
-          this.hZipError = res.hZip[0];
-          i = 1;
+    }
+    if (res.hState != undefined) {
+        this.hStateError = res.hState[0];
+        i = 1;
 
-        }
-        if (i === 0) {
-          i = 0;
+    }
+    if (res.hAddress != undefined) {
+        this.hAddressError = res.hAddress[0];
+        i = 1;
 
-          this.submitMessage = "Registered successfully";
-          this.submitMessageColor = "green";
-          this.submitMessageVisible = "visible";
-        }
-      },
-      error => {
-        this.submitMessage = "Error: " + error.status;
-        this.submitMessageColor = "red";
+    }
+    if (res.hCity != undefined) {
+        this.hCityError = res.hCity[0];
+        i = 1;
+
+    }
+    if (res.hZip != undefined) {
+        this.hZipError = res.hZip[0];
+        i = 1;
+
+    }
+    if (i === 0) {
+        i = 0;
+
+        this.submitMessage = "Registered successfully";
+        this.submitMessageColor = "green";
         this.submitMessageVisible = "visible";
-      }
-    );
+    }
+
+
+
+    
   }
 
   //validate the entire form

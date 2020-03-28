@@ -40,12 +40,12 @@ export class LoginComponent implements OnInit, OnDestroy {
     banned = false;
 
     pwdError: string;
-    usernameError: string = 'Username Required';
-    usernameErrorVisible: string = "hidden";
+    usernameError = 'Username Required';
+    usernameErrorVisible: 'hidden' | 'visible' = 'hidden';
     userNotFound: string;
     modalRef: BsModalRef;
-    
-    
+
+
     usernameErrors: string[];
     passwordErrors: string[];
     miscErrors: string[];
@@ -94,7 +94,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         const passwordErrors = [];
         const miscErrors = [];
         errors.forEach(e => {
-            switch(e.element) {
+            switch (e.element) {
                 case 'username': usernameErrors.push(e.message); break;
                 case 'password': passwordErrors.push(e.message); break;
                 default: miscErrors.push(e.message); break;
@@ -104,6 +104,12 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.passwordErrors = passwordErrors;
         this.miscErrors = miscErrors;
     }
+
+    successfulLoginCallback() {
+        this.modalRef.hide();
+        this.router.navigateByUrl('/drivers');
+    }
+
     /**
      * A function that allows the user to choose an account to log in as
      */
@@ -179,18 +185,17 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.modalRef = this.modalService.show(template);
     }
 
-    //validate the username
+    // validate the username
     validateUsername() {
         this.userName = this.userName.trim();
-        if(!this.userName) {
-            this.usernameError = "Username Required";
-            this.usernameErrorVisible = "visible"; //make error visible
+        if (!this.userName) {
+            this.usernameError = 'Username Required';
+            this.usernameErrorVisible = 'visible'; // make error visible
             return false;
-        }
-        else {
-            //don't set to empty string else the element is removed from the page which changes the spacing
-            //this.usernameError = ""
-            this.usernameErrorVisible = "hidden"; //instead make hidden
+        } else {
+            // Don't set to empty string else the element is removed from the page which changes the spacing
+            // this.usernameError = ''
+            this.usernameErrorVisible = 'hidden'; // instead make hidden
             return true;
         }
     }

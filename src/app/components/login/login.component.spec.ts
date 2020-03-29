@@ -8,14 +8,20 @@ import { FormsModule } from '@angular/forms';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
 import { BsModalService } from 'ngx-bootstrap';
-import { AuthService } from 'src/app/services/auth-service/auth.service';
 import RequestError from 'src/app/models/request-error';
-import { HttpTestingController } from '@angular/common/http/testing';
-import { Routes, Router } from '@angular/router';
+import { Routes, Router, Route } from '@angular/router';
+import { HomePageComponent } from 'src/app/components/home-page/home-page.component';
+import { DriverListComponent } from 'src/app/components/driver-list/driver-list.component';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
   // let fixture: ComponentFixture<LoginComponent>;
+
+  const routes: Routes = [{
+    path: '', component: HomePageComponent
+  }, {
+    path: 'drivers', component: DriverListComponent
+  }];
 
   // Helper object to fillout properties for meeting User object definition
   const genericUserData = {
@@ -33,26 +39,28 @@ describe('LoginComponent', () => {
   };
 
   let mockBsModalService;
-  let mockRouter;
+  let router;
+
   beforeEach(async(() => {
     mockBsModalService = jasmine.createSpyObj('BsModalService', ['show']);
-    mockRouter = jasmine.createSpyObj('Router', ['navigateByUrl']);
 
     TestBed.configureTestingModule({
       declarations: [...getRoutableComponents()],
-      imports: [HttpClientModule, AppRoutingModule, FormsModule, RouterTestingModule],
+      imports: [HttpClientModule, AppRoutingModule, FormsModule,
+          RouterTestingModule.withRoutes(routes)
+      ],
       schemas: [NO_ERRORS_SCHEMA],
-      // imports: [HttpClientModule, AppRoutingModule, FormsModule],
       providers: [
         { provide: APP_BASE_HREF, useValue: '/my/app' },
-        { provide: BsModalService, useValue: mockBsModalService },
-        { provide: Router, useValue: mockRouter }]
+        { provide: BsModalService, useValue: mockBsModalService }
+      ]
     }).compileComponents();
+
+    router = TestBed.get(Router);
   }));
 
   beforeEach(() => {
     const fixture = TestBed.createComponent(LoginComponent);
-
     component = fixture.componentInstance;
     component.showDropDown = false;
     component.curPage = 1;
@@ -70,7 +78,6 @@ describe('LoginComponent', () => {
       phoneNumber: '9171234567',
       ...genericUserData
     }];
-    // fixture.detectChanges();
   });
 
   it('should create', () => {
@@ -106,30 +113,65 @@ describe('LoginComponent', () => {
     expect(component.failed).toBe(true);
   });
 
-  fit('distributes errors to error lists by error element', () => {
-    const errorList: RequestError[] = [
-      { element: 'username', message: 'msg'},
-      { element: 'password', message: 'msg'},
-      { element: 'password', message: 'msg'},
-      { element: 'misc', message: 'msg'},
-      { element: 'misc', message: 'msg'},
-      { element: 'misc', message: 'msg'},
-      { element: 'other', message: 'msg'}
-    ];
+  describe('mapErrorMessages', () => {
+    it('should distribute errors to error lists by error element', () => {
+      const errorList: RequestError[] = [
+        { element: 'username', message: 'msg'},
+        { element: 'password', message: 'msg'},
+        { element: 'password', message: 'msg'},
+        { element: 'misc', message: 'msg'},
+        { element: 'misc', message: 'msg'},
+        { element: 'misc', message: 'msg'},
+        { element: 'other', message: 'msg'}
+      ];
 
-    component.mapErrorMessages(errorList);
-    expect(component.usernameErrors.length).toBe(1);
-    expect(component.passwordErrors.length).toBe(2);
-    expect(component.miscErrors.length).toBe(4);
+      component.mapErrorMessages(errorList);
+      expect(component.usernameErrors.length).toBe(1);
+      expect(component.passwordErrors.length).toBe(2);
+      expect(component.miscErrors.length).toBe(4);
+    });
+
+    it('should correctly map error strings into the appropriate buckets', () => {
+      const usernameMessage = 'U';
+      const passwordMessage = 'P';
+      const miscMessage = 'M';
+
+      const errors: RequestError[] = [
+        {element: 'username', message: usernameMessage},
+        {element: 'password', message: passwordMessage},
+        {element: 'other', message: miscMessage},
+      ];
+
+      component.mapErrorMessages(errors);
+      expect(component.usernameErrors).toContain(usernameMessage);
+      expect(component.passwordErrors).toContain(passwordMessage);
+      expect(component.miscErrors).toContain(miscMessage);
+    });
   });
 
-  fit('closes login modal and navigates to /drivers when successfulLoginCallback called', fakeAsync(() => {
-    const modalHideSpy = spyOn(component.modalRef, 'hide');
-    component.successfulLoginCallback();
+  describe('successfulLoginCallback', () => {
+    let navigateSpy: jasmine.Spy;
+    let expectedRoute: Route;
 
-    expect(component.modalRef.hide).toHaveBeenCalled();
-    // expect(mockRouter.navigateByUrl).toBeCalledWith('/drivers');
-  }));
+    beforeEach(() => {
+      component.modalRef = jasmine.createSpyObj('modalRef', ['hide']);
+      navigateSpy = spyOn(router, 'navigateByUrl');
+      expectedRoute = routes.filter(r => r.component === DriverListComponent)[0];
+    });
+
+    it('should close modal', fakeAsync(() => {
+      component.successfulLoginCallback();
+      expect(component.modalRef.hide).toHaveBeenCalled();
+      expect(navigateSpy).toHaveBeenCalledWith(`/${expectedRoute.path}`);
+    }));
+
+    it('should navigate to show DriversListComponent', () => {
+      component.modalRef = jasmine.createSpyObj('modalRef', ['hide']);
+      component.successfulLoginCallback();
+      expect(navigateSpy).toHaveBeenCalledWith(`/${expectedRoute.path}`);
+    });
+  });
+
 });
 
 

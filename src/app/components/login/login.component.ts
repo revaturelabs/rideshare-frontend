@@ -106,6 +106,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
 
     successfulLoginCallback() {
+        console.log(this.modalRef);
         this.modalRef.hide();
         this.router.navigateByUrl('/drivers');
     }

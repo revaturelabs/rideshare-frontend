@@ -135,7 +135,7 @@ export class UserService {
                 googleConstructedUrl += `+${numAndStreetNamePart}`;
             }
         });
-        googleConstructedUrl += `,+${user.hCity},+${user.hState}&key=${environment.googleMapKey}`;
+        googleConstructedUrl += `,+${user.hCity},+${user.hState}&key=${this.googleApiKey}`;
         console.log('the google constructed url is: ' + googleConstructedUrl);
         let googleGeoResult: any;
         const data = await this.googleApiResult(googleConstructedUrl);

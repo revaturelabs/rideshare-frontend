@@ -78,6 +78,8 @@ export class SignupModalComponent implements OnInit {
     this.modalRef = this.modalService.show(template);
   }
 
+  
+
   async submitUser() {
 
     //if failed client validation, return

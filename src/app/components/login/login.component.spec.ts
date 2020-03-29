@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed, fakeAsync } from '@angular/core/testing';
+import { async, TestBed, fakeAsync } from '@angular/core/testing';
 
 import { LoginComponent } from './login.component';
 import { APP_BASE_HREF } from '@angular/common';
@@ -12,6 +12,7 @@ import RequestError from 'src/app/models/request-error';
 import { Routes, Router, Route } from '@angular/router';
 import { HomePageComponent } from 'src/app/components/home-page/home-page.component';
 import { DriverListComponent } from 'src/app/components/driver-list/driver-list.component';
+import { AuthService } from 'src/app/services/auth-service/auth.service';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -40,7 +41,9 @@ describe('LoginComponent', () => {
 
   let mockBsModalService;
   let router;
-
+  let authService: AuthService;
+  let spyAuthenticatedUser$;
+  let spyLoginErrors$;
   beforeEach(async(() => {
     mockBsModalService = jasmine.createSpyObj('BsModalService', ['show']);
 
@@ -57,6 +60,9 @@ describe('LoginComponent', () => {
     }).compileComponents();
 
     router = TestBed.get(Router);
+    authService = TestBed.get(AuthService);
+    spyAuthenticatedUser$ = spyOn(authService.authenticatedUser$, 'subscribe');
+    spyLoginErrors$ = spyOn(authService.loginErrors$, 'subscribe');
   }));
 
   beforeEach(() => {
@@ -111,6 +117,18 @@ describe('LoginComponent', () => {
     component.loginFailed();
     expect(component.userName).toBe('');
     expect(component.failed).toBe(true);
+  });
+
+  describe('ngOnInit', () => {
+    it('should subscribe to authService authenticatedUser$ data pipeline', () => {
+      component.ngOnInit();
+      expect(spyAuthenticatedUser$).toHaveBeenCalled();
+    });
+
+    it('should subscribe to authService loginErrors$ data pipeline', () => {
+      component.ngOnInit();
+      expect(spyLoginErrors$).toHaveBeenCalled();
+    });
   });
 
   describe('mapErrorMessages', () => {

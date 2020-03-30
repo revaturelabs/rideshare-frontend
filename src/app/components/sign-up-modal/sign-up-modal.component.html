@@ -33,10 +33,10 @@
     <input id="password" type="password" [(ngModel)]="password" class="form-control" />-->
 
     <label id="state">Batch</label>
-    <select class="form-control" [(ngModel)]="user.batch">
+    <select class="dropdown-menu" [(ngModel)]="user.batch">
           <option value="none" >  
           </option>
-          <option *ngFor="let batch of batches" [ngValue]="batch">{{batch.batchNumber}} {{batch.batchLocation}}</option>
+          <option class="dropdown-item" *ngFor="let batch of batches" [ngValue]="batch">{{batch.batchNumber}} {{batch.batchLocation}}</option>
     </select>
 
     <label for="hAddress">Address</label>

@@ -8,6 +8,8 @@ import { ValidationService } from 'src/app/services/validation-service/validatio
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { } from 'googlemaps';
+import { GoogleService } from 'src/app/services/google-service/google.service';
+import { Promise } from 'q';
 declare var google: any;
 
 @Component({
@@ -47,10 +49,11 @@ export class SignupModalComponent implements OnInit {
     'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY',
     'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV',
     'WI', 'WY'];
-  constructor(private http: HttpClient, private modalService: BsModalService, private userService: UserService, private batchService: BatchService, private validationService: ValidationService) { }
+  constructor(private googleApiKey: GoogleService, private http: HttpClient, private modalService: BsModalService, private userService: UserService, private batchService: BatchService, private validationService: ValidationService) { }
 
   ngOnInit() {
-  
+    //load google api
+    this.googleApiKey.getGoogleApi();
     this.userService.getAllUsers().subscribe(
       res => {
 
@@ -67,17 +70,30 @@ export class SignupModalComponent implements OnInit {
   //Opens 'sign up' modal that takes in a template of type 'ng-template'.
 
   openModal(template: TemplateRef<any>) {
-     
+
     this.modalRef = this.modalService.show(template);
-    this.getGoogleApi();
+    this.initAutocomplete();
+
+  }
+
+  sleep(ms) {
+    return Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  fixPlacesApi() {
+    (<HTMLElement>document.getElementsByClassName('pac-container')[0]).style.zIndex = '1051';
   }
 
   initAutocomplete(): void {
-    console.log('what is going on?');
+
     var self = this;
     // Create the autocomplete object, restricting the search predictions to
     // geographical location types.
+
     var autocomplete = new google.maps.places.Autocomplete(<HTMLInputElement>document.getElementById('autocomplete'), { types: ['geocode'] });
+
+    //making the pac-container zIndex higher than the modal so it shows up.
+    this.sleep(1000).then(res => this.fixPlacesApi());
 
     // Avoid paying for data that you don't need by restricting the set of
     // place fields that are returned to just the address components.
@@ -109,6 +125,7 @@ export class SignupModalComponent implements OnInit {
         var addressType = place.address_components[i].types[0];
         if (componentForm[addressType]) {
           var val = place.address_components[i][componentForm[addressType]];
+          console.log(val);
           (<HTMLInputElement>document.getElementById(addressType)).value = val;
           switch (addressType) {
             case "locality":
@@ -123,6 +140,7 @@ export class SignupModalComponent implements OnInit {
           }
         }
       }
+      console.log(self.user.hState);
       // Create a proper address by combining street_number and route
       self.address = place.address_components[0]['long_name'] + ' ' +
         place.address_components[1]['long_name'];
@@ -238,24 +256,4 @@ export class SignupModalComponent implements OnInit {
 
   }
 
-  getGoogleApi() {
-    let self = this;
-    this.http.get(`${environment.loginUri}getGoogleApi`)
-      .subscribe(
-      (response) => {
-        //console.log(response);
-        if (response["googleMapAPIKey"] != undefined) {
-          new Promise((resolve) => {
-            let script: HTMLScriptElement = document.createElement('script');
-            script.addEventListener('load', r => resolve());
-            script.src = `http://maps.googleapis.com/maps/api/js?libraries=places&key=${response["googleMapAPIKey"][0]}`;
-            document.head.appendChild(script);
-
-          }).then(resp => {
-            this.initAutocomplete();
-          });
-        }
-      }
-      );
-  }
 }

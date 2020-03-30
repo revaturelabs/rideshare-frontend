@@ -37,7 +37,7 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { UserRegisterComponent } from './components/user-register/user-register.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
-
+import { AgmCoreModule } from '@agm/core';
 
 
 @NgModule({
@@ -77,7 +77,11 @@ import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
     AppRoutingModule,
     FormsModule,
     ModalModule.forRoot(),
-    NgbModule
+    NgbModule,
+    AgmCoreModule.forRoot({
+        apiKey: 'AIzaSyCOhEKYZTSJ1ON2xRxYk15QxPYL4JOTnP8',
+        libraries: ['places']
+      })
   ],
   providers: [
     UserService,

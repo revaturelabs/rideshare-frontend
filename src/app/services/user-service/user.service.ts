@@ -146,17 +146,17 @@ export class UserService {
 
         googleConstructedUrl += `,+${user.hCity},+${user.hState}&key=${this.googleApiKey}`;
         console.log("the google constructed url is: " + googleConstructedUrl);
-<<<<<<< HEAD
+
         this.getGoogleMapsResponse(googleConstructedUrl).subscribe(result => {
             console.log(result);
             const anObject: object = result;
-            console.log(`attempt at getting results 0 ${anObject.results}`);
-            console.log(o)
+            //console.log(`attempt at getting results 0 ${anObject.results}`);
+            //console.log(o)
 
 
           }, error =>
           console.log(error));
-=======
+
 
 
 
@@ -202,7 +202,6 @@ export class UserService {
 
 
         
->>>>>>> e7bf5a683c87efbbac72881bc60649d063943f73
 
     }
 

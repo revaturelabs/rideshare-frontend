@@ -1,10 +1,11 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild, ElementRef } from '@angular/core';
 import { BsModalService, BsModalRef} from 'ngx-bootstrap';
 import { UserService } from 'src/app/services/user-service/user.service';
 import { User } from 'src/app/models/user';
 import { Batch } from 'src/app/models/batch';
 import { BatchService } from 'src/app/services/batch-service/batch.service';
 import { ValidationService } from 'src/app/services/validation-service/validation.service';
+import { MapsAPILoader } from '@agm/core';
 
 @Component({
   selector: 'signupmodal',
@@ -42,9 +43,18 @@ export class SignupModalComponent implements OnInit {
             'KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY',
             'NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV',
             'WI','WY'];
-  constructor(private modalService: BsModalService, 
-              private userService: UserService, private batchService : BatchService, private validationService :ValidationService) { }
 
+    //Decorator for element directive for the goole autocomplete 
+    @ViewChild('autocomplete', {static: false})
+    public autocompleteElementRef: ElementRef;
+
+
+  constructor(private modalService: BsModalService, 
+              private userService: UserService, 
+              private batchService : BatchService, 
+              private validationService :ValidationService,
+              private mapsAPILoader: MapsAPILoader) { }
+              
   ngOnInit() {
     this.userService.getAllUsers().subscribe(
       res => {
@@ -57,12 +67,21 @@ export class SignupModalComponent implements OnInit {
          this.batches = res;
           },
       );
+
+
+      //loads the google maps api, calls on the elementRef
+      this.mapsAPILoader.load().then(() => {   
+        new google.maps.places.Autocomplete(this.autocompleteElementRef.nativeElement, {
+          types: ["address"]
+        });
+    });
   }
   //Opens 'sign up' modal that takes in a template of type 'ng-template'.
 
   openModal(template :TemplateRef<any>){
     this.modalRef = this.modalService.show(template);
   }
+  
 
   submitUser() {
     this.user.userId = 0;

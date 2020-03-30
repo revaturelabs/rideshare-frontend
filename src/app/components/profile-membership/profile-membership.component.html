@@ -13,18 +13,17 @@
         <div class="form-group row">
             <div class="col-sm-4 t">
                 <h6>Status:</h6>
-                <select class="form-control mySelect" name="rider" id="rider" [(ngModel)]=isDriver
-                    value="{{profileObject.isDriver}}">
+                <select class="form-control mySelect" name="rider" id="rider" [(ngModel)]=isDriver (change)="onDriverChange()">
                     <option value="true">Driver</option>
                     <option value="false">Rider</option>
                 </select>
-                <select class="form-control mySelect" name="active" id="active" [(ngModel)]=active
-                    value="{{profileObject.active}}">
+                <select class="form-control mySelect" name="active" id="active" [(ngModel)]=active (change)="onActiveChange()">
                     <option value="true">Active</option>
                     <option value="false">Disabled</option>
                 </select>
-                <button type="submit" (click)="updatesMembershipInfo()" class="btn btn-primary myBtn">Save</button>
             </div>
         </div>
     </div>
+    <p class="mx-auto my-0" [ngStyle]="{'color': resultColor, 'visibility': resultVisible}">{{result}}</p>
+    <button type="submit" (click)="updatesMembershipInfo()" class="btn btn-primary myBtn mt-3">Save</button>
 </div>

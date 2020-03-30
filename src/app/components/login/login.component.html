@@ -14,33 +14,35 @@
                     </div>
                     <button type="button" id="next-btn" *ngIf="curPage<totalPage" (click)="nextPage()">v</button>
                 </div>
-            </div> 
+            </div>
         </div> -->
-       
+
         <div class="modal-title-container">
         <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
           <span aria-hidden="true">&times;</span>
         </button>
-            <h4 class="modal-title">Login</h4>
-    </div>
-            <div class = "content">
-            <div class="form-group"><p  class="error">{{userNotFound}}</p></div>
-            <div class="form-group">
-              <label for="formGroupExampleInput">Username</label><br>
-              <input type="text" [(ngModel)]="userName" class="form-control" id="formGroupExampleInput" placeholder="Enter Username">
-              <p  class="error">{{usernameError}}</p>
-            </div>
-            <div class="form-group">
-              <label for="formGroupExampleInput2">Password</label><br>
-              <input type="password" [(ngModel)]="passWord" class="form-control" id="formGroupExampleInput2" placeholder="Enter Password">
-              <p  class="error">{{pwdError}}</p>
-            </div>
-          
+        <h4 class="modal-title">Login</h4>
+      </div>
+      <div class="content">
+        <div class="form-group">
+          <label for="formGroupExampleInput">Username</label><br>
+          <input type="text" [(ngModel)]="userName" class="form-control" id="formGroupExampleInput"
+            placeholder="Enter Username" (change)="onUsernameChange()">
+          <p class="error mx-auto w-100" [ngStyle]="{'visibility': usernameErrorVisible}">{{usernameError}}</p>
+        </div>
+        <div class="form-group">
+          <label for="formGroupExampleInput2">Password</label><br>
+          <input type="password" [(ngModel)]="passWord" class="form-control" id="formGroupExampleInput2"
+            placeholder="Enter Password">
+          <p class="error mx-auto w-100">{{pwdError}}</p>
+        </div>
+
         <p class="alert alert-danger" *ngIf="failed"><strong>Login Failed!</strong></p>
         <p class="alert alert-danger" *ngIf="banned"><strong>You are banned</strong></p>
-          <button type="submit" class="btn btn-primary" id="sign-in-btn" (click)="login()">Login</button>
+        <button type="submit" class="btn btn-primary" id="sign-in-btn" (click)="login()">Login</button>
+        <!--<p class="error mx-auto w-100">{{userNotFound}}</p>-->
         <br><br>
     </div>
 </div>
 </div>
-</ng-template> 
+</ng-template>

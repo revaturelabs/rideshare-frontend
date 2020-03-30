@@ -42,7 +42,8 @@ export class LoginComponent implements OnInit {
 	banned: boolean = false;
 
 	pwdError: string;
-    usernameError: string;
+	usernameError: string = 'Username Required';
+	usernameErrorVisible: string = "hidden";
 	userNotFound: string;
 	modalRef :BsModalRef;
 	/**
@@ -107,7 +108,6 @@ export class LoginComponent implements OnInit {
 	/**
 	 * A toggle function
 	 */
-
 	toggleDropDown() {
 		this.showDropDown = !this.showDropDown;
 	}
@@ -123,7 +123,6 @@ export class LoginComponent implements OnInit {
 	/**
 	 * Set prev page
 	 */
-
 	prevPage() {
 		this.curPage--;
 		this.users = this.allUsers.slice(this.curPage * 5 - 5, this.curPage * 5);
@@ -132,8 +131,6 @@ export class LoginComponent implements OnInit {
 	/**
 	 * A function that indicate a fail to login
 	 */
-
-
 	loginFailed() {
 		this.userName = '';
 		this.failed = true;
@@ -148,15 +145,41 @@ export class LoginComponent implements OnInit {
 		this.modalRef = this.modalService.show(template);
 	}
 
+	//validate the username
+	validateUsername() {
+		this.userName = this.userName.trim();
+		if(!this.userName) {
+			this.usernameError = "Username Required";
+			this.usernameErrorVisible = "visible"; //make error visible
+			return false;
+		}
+		else {
+			//don't set to empty string else the element is removed from the page which changes the spacing
+			//this.usernameError = ""
+			this.usernameErrorVisible = "hidden"; //instead make hidden
+			return true;
+		}
+	}
+
+	onUsernameChange() {
+		this.validateUsername();
+	}
+
 	/**
 	 * A login function
 	 */
 
 	login() {
+
+		//if username not valid, return
+		if(!this.validateUsername()) {
+			return;
+		}
+
 		this.pwdError ='';
-		this.usernameError= '';
-		
-        this.http.get(`${environment.loginUri}?userName=${this.userName}&passWord=${this.passWord}`)
+		this.usernameErrorVisible = "hidden";
+
+		this.http.get<IUserLoginResponse>(`${environment.loginUri}?userName=${this.userName}&passWord=${this.passWord}`)
 			.subscribe(
                   (response) => {
                      //console.log(response);
@@ -169,7 +192,7 @@ export class LoginComponent implements OnInit {
 					  if((response["name"] != undefined) && (response["userid"] != undefined)){
 						sessionStorage.setItem("name", response["name"]);
 						sessionStorage.setItem("userid", response["userid"]);
-						
+
 						//call landing page
 						//this.router.navigate(['landingPage']);
 						location.replace('landingPage');

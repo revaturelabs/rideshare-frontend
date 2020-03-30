@@ -18,7 +18,44 @@
             <th scope="col">Seats</th>
           </tr>
         </thead>
-        <tbody id="output"></tbody>
+        <tbody id="output">
+          <div *ngFor="let info of allInfo">
+                  <tr>
+                    <td class="col"> {{info.user.name}} </td>
+                    <td class="col">{{info.results[0].distance.text}}</td>
+                    <td class="col">{{info.results[0].duration.text}}</td>
+                      <td class="col">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCentered${element.id}"> View</button>
+                          <div class="col-lg-5">
+                            <div class="modal" id="exampleModalCentered${element.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true">
+                              <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalCenteredLabel">Contact Info:</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <h1>{{info.user.name}}</h1>
+                                    <h3>Email: {{info.user.email}}</h3>
+                                    <h3>Phone: {{info.user.phone}}</h3>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </div>
+                              </div>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div #maps id="gmap" class="img-responsive"></div>
+                    </div>
+                  </td>
+                  <td class="col">{{info.seats}}</td>
+                  </tr>
+          </div>
+          </tbody>
       </table>
     </div>
     <div class="col-lg-6">
@@ -27,3 +64,9 @@
     </div>
   </div>
 </div>
+
+<!-- <div>
+  <li *ngFor="let driver of drivers">
+    {{driver.firstName}}
+  </li>
+</div> -->

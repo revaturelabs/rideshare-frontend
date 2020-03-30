@@ -76,7 +76,6 @@ export class CarService {
 			(response) => {
 				if (response) {
 					this.userService.updateIsDriver(true, userId);
-					this.router.navigate(['car']);
 				}
 			},
 			(error) => {

@@ -49,26 +49,46 @@ export class DriverListComponent implements OnInit {
           });
         });
         // console.log("drivers " + JSON.stringify(this.drivers))
-      });
+
+        
+          this.mapProperties = {
+            center: new google.maps.LatLng(Number(sessionStorage.getItem('lat')), Number(sessionStorage.getItem('lng'))),
+            zoom: 15,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+          };
+          this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapProperties);
+          // get all routes
+          this.displayDriversList(this.location, this.drivers);
+          // show drivers on map
+          this.showDriversOnMap(this.location, this.drivers);
+        
+
+      }
+      
+      );
 
     // Why are we sleeping instead using callbacks/observables?
-    this.sleep(2000).then(() => {
-      this.mapProperties = {
-        center: new google.maps.LatLng(Number(sessionStorage.getItem('lat')), Number(sessionStorage.getItem('lng'))),
-        zoom: 15,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-      };
-      this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapProperties);
-      // get all routes
-      this.displayDriversList(this.location, this.drivers);
-      // show drivers on map
-      this.showDriversOnMap(this.location, this.drivers);
-    });
+    // this.sleep(2000).then(() => 
+    
+    // {
+    //   this.mapProperties = {
+    //     center: new google.maps.LatLng(Number(sessionStorage.getItem('lat')), Number(sessionStorage.getItem('lng'))),
+    //     zoom: 15,
+    //     mapTypeId: google.maps.MapTypeId.ROADMAP
+    //   };
+    //   this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapProperties);
+    //   // get all routes
+    //   this.displayDriversList(this.location, this.drivers);
+    //   // show drivers on map
+    //   this.showDriversOnMap(this.location, this.drivers);
+    // }
+    
+    // );
   }
 
-  sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-  }
+  // sleep(ms) {
+  //   return new Promise(resolve => setTimeout(resolve, ms));
+  // }
 
   getGoogleApi() {
     this.http.get<IGoogleMapsAPIResponse>(`${environment.loginUri}getGoogleApi`)
@@ -233,46 +253,13 @@ export class DriverListComponent implements OnInit {
             "seats": seats,
           });
 
-          // outputDiv.innerHTML += `<tr><td class="col">${name}</td>
-          //                         <td class="col">${results[0].distance.text}</td>
-          //                         <td class="col">${results[0].duration.text}</td>
-          //                         <td class="col">
-          //                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCentered${element.id}"> View</button>
-          //                           <div class="col-lg-5">
-          //                            <div class="modal" id="exampleModalCentered${element.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true">
-          //                             <div class="modal-dialog modal-dialog-centered" role="document">
-          //                                 <div class="modal-content">
-          //                                     <div class="modal-header">
-          //                                         <h5 class="modal-title" id="exampleModalCenteredLabel">Contact Info:</h5>
-          //                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          //                                            <span aria-hidden="true">×</span>
-          //                                          </button>
-          //                                     </div>
-          //                                     <div class="modal-body">
-          //                                         <h1>${name}</h1>
-          //                                         <h3>Email: ${element.email}</h3>
-          //                                         <h3>Phone: ${element.phone}</h3>
-          //                                     </div>
-          //                                     <div class="modal-footer">
-          //                                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          //                                     </div>
-          //                                   </div>
-          //                                </div>
-          //                              </div>
-          //                         </div>
-          //                         <div class="col-lg-6">
-          //                             <div #maps id="gmap" class="img-responsive"></div>
-          //                         </div>
-          //                       </td>
-          //                       <td class="col">${seats}</td>
-          //                       </tr>`;
         }
 
 
       });
     });
 
-    this.sleep(7000).then(() => console.log("most imp: " + JSON.stringify(this.allInfo)));
+    // this.sleep(7000).then(() => console.log("most imp: " + JSON.stringify(this.allInfo)));
 
   }
 }

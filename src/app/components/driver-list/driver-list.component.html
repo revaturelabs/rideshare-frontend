@@ -19,8 +19,8 @@
           </tr>
         </thead>
         <tbody id="output">
-          <div *ngFor="let info of allInfo">
-                  <tr>
+          <!-- <div > -->
+                  <tr *ngFor="let info of allInfo">
                     <td class="col"> {{info.user.name}} </td>
                     <td class="col">{{info.results[0].distance.text}}</td>
                     <td class="col">{{info.results[0].duration.text}}</td>
@@ -54,7 +54,7 @@
                   </td>
                   <td class="col">{{info.seats}}</td>
                   </tr>
-          </div>
+          <!-- </div> -->
           </tbody>
       </table>
     </div>

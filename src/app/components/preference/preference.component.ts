@@ -34,6 +34,9 @@ export class PreferenceComponent implements OnInit {
 
   constructor(private router: Router, private userService: UserService, private authService: AuthService) { }
 
+  /**
+   * Function that makes sure a user is logged in
+   */
   ngOnInit() {
     this.user.userId = this.authService.user.userId;;
     if (!this.user.userId) {

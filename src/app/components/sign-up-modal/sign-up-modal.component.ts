@@ -73,7 +73,7 @@ export class SignupModalComponent implements OnInit {
    */
   constructor(private modalService :BsModalService, private userService :UserService, private batchService :BatchService, private validationService :ValidationService) { }
 /**
- *
+ * OnInit function
  *
  * @memberof SignupModalComponent
  */
@@ -91,7 +91,7 @@ ngOnInit() {
   }
 /**
  *
- * Opens 'sign up' modal that takes in a template of type 'ng-template'.
+ * Function that opens 'sign up' modal that takes in a template of type 'ng-template'.
  * @param {TemplateRef<any>} template
  * @memberof SignupModalComponent
  */
@@ -99,7 +99,7 @@ openModal(template :TemplateRef<any>){
     this.modalRef = this.modalService.show(template);
   }
 /**
- *
+ * Function that submits user information and status
  *
  * @memberof SignupModalComponent
  */

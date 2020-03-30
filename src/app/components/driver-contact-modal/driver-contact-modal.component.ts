@@ -57,6 +57,7 @@ export class DriverContactModalComponent implements OnInit {
   }
 
   /**
+   * This function checks sleep timer
    * @param ms
    * @returns {Promise}
   */
@@ -65,6 +66,7 @@ export class DriverContactModalComponent implements OnInit {
   }
 
   /**
+   * This function calls the google api
    * @param GoogleAPI
    * @returns {Promise}
    */
@@ -85,6 +87,7 @@ getGoogleApi()  {
    }
 
    /**
+    * This function shows drivers on Google maps
     * @param origin
     * @param destination
     * @returns {displayRoute}
@@ -101,7 +104,7 @@ getGoogleApi()  {
   }
 
 /**
- *
+ * This function displays route from driver to endpoint
  * @param origin
  * @param destination
  * @param service

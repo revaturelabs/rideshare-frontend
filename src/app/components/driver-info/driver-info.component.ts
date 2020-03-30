@@ -61,7 +61,7 @@ export class DriverInfoComponent implements OnInit {
   constructor(private carService: CarService, private authService: AuthService, private router: Router, private batchService: BatchService) { }
 
   /**
-   * A function that set the component
+   * This function sets the component
    */
   ngOnInit() {
     let userId = this.authService.user.userId;
@@ -152,13 +152,16 @@ export class DriverInfoComponent implements OnInit {
   }
 
   /**
-   * A GET method that retrieves all driver
+   * A GET method that retrieves all drivers
    */
   showAllDrivers() {
     this.searchName = '';
     this.orderByLocation();
   }
 
+  /**
+   * A function that hides the no user found message
+   */
   hideMessage() {
     this.noUserFound = false;
   }

@@ -30,6 +30,9 @@ export class ProfileComponent implements OnInit {
   location :string = '';
   membership :string = '';
 
+  /**
+   * OnInit function
+   */
   ngOnInit() {
     this.showCont = true;
   /**
@@ -37,7 +40,7 @@ export class ProfileComponent implements OnInit {
    */
 }
 /**
- *
+ * Function that shows contact info
  *
  * @memberof ProfileComponent
  */
@@ -54,7 +57,7 @@ showContact() {
 
   }
 /**
- *
+ * Function that shows location
  *
  * @memberof ProfileComponent
  */
@@ -70,7 +73,7 @@ showLoc(){
     this.membership = '';
   }
 /**
- *
+ * Function that shows membership
  *
  * @memberof ProfileComponent
  */
@@ -86,7 +89,7 @@ showMembership(){
     this.membership = 'profileBtn';
   }
 /**
- *
+ * Function that shows car info
  *
  * @memberof ProfileComponent
  */

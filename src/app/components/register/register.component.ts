@@ -72,7 +72,7 @@ export class RegisterComponent implements OnInit {
 		this.userService.createDriver(this.user, 'driver');
   }
  /**
-  *
+  * This function validates, then registers a rider
   *
   * @memberof RegisterComponent
   */

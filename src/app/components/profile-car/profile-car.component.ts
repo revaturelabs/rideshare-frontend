@@ -32,7 +32,7 @@ make: string;
  */
 constructor(private carService: CarService) { }
 /**
- *
+ * OnInit function
  *
  * @memberof ProfileCarComponent
  */
@@ -47,7 +47,7 @@ ngOnInit() {
     });
   }
 /**
- *
+ * Function that updates car info
  *
  * @memberof ProfileCarComponent
  */

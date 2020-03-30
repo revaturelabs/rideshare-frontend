@@ -32,7 +32,7 @@ export class ProfileMembershipComponent implements OnInit {
    */
   constructor(private userService: UserService) { }
  /**
-  *
+  * OnInit function
   *
   * @memberof ProfileMembershipComponent
   */
@@ -42,7 +42,7 @@ export class ProfileMembershipComponent implements OnInit {
     });
   }
   /**
-   *
+   * Function that updates membership info
    *
    * @memberof ProfileMembershipComponent
    */

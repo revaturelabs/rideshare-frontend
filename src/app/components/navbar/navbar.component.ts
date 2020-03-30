@@ -75,7 +75,6 @@ export class NavbarComponent implements OnInit {
    * @return {void} 
    * 
    */
-
    
   logout() {
     this.authService.user = {};
@@ -89,6 +88,9 @@ export class NavbarComponent implements OnInit {
     this.router.navigate(['']);
   }
 
+  /**
+   * Function that redirects to home component
+   */
   redirectToHome() {
     this.authService.user.driver ? this.router.navigate(['home/riders']) : this.router.navigate(['home/drivers']);
   }

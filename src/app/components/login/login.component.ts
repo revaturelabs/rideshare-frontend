@@ -133,17 +133,23 @@ export class LoginComponent implements OnInit {
 	 * A function that indicate a fail to login
 	 */
 
-
 	loginFailed() {
 		this.userName = '';
 		this.failed = true;
 	}
-
+	
+	/**
+	 * Function that doesnt let banned users login
+	 */
 	loginBanned(){
 		this.userName = '';
 		this.banned = true;
 	}
 
+	/**
+	 * Function that opens modal template
+	 * @param template 
+	 */
 	openModal(template :TemplateRef<any>){
 		this.modalRef = this.modalService.show(template);
 	}

@@ -62,7 +62,7 @@ ngOnInit(): void {
 
  }
 /**
- *
+ * This function checks the sleep timer
  *
  * @param {*} ms
  * @returns
@@ -72,7 +72,7 @@ sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 /**
- *
+ * This function calls the Google api
  *
  * @memberof LandingPageComponent
  */
@@ -93,7 +93,7 @@ getGoogleApi()  {
      );
  }
 /**
- *
+ * This function searches for a driver
  *
  * @memberof LandingPageComponent
  */
@@ -115,7 +115,7 @@ searchDriver(){
  }
 
 /**
- *
+ * This function shows the route
  *
  * @param {*} origin
  * @param {*} destination

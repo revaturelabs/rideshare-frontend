@@ -42,7 +42,7 @@ export class DriverListComponent implements OnInit {
 
   /**
    * This is a constructor
-   *Creates an instance of DriverListComponent.
+   * Creates an instance of DriverListComponent.
    * @param {HttpClient} http
    * @param {UserService} userService
    * @memberof DriverListComponent
@@ -50,8 +50,8 @@ export class DriverListComponent implements OnInit {
   constructor(private http: HttpClient,private userService: UserService) { }
 
   /**
-   *on init is calls on location of user
-   *pushes information to driver
+   * on init is calls on location of user
+   * pushes information to driver
    * @memberof DriverListComponent
    */
   ngOnInit() {
@@ -95,7 +95,7 @@ export class DriverListComponent implements OnInit {
   }
 
 /**
- *
+ * This function calls the Google api
  *
  * @memberof DriverListComponent
  */
@@ -116,7 +116,7 @@ getGoogleApi()  {
    }
 
   /**
-   *
+   * This function shows drivers on the map
    *
    * @param {*} origin
    * @param {*} drivers
@@ -134,7 +134,7 @@ getGoogleApi()  {
   }
 
 /**
- *
+ * This function shows the route from the driver to endpoint
  *
  * @param {*} origin
  * @param {*} destination
@@ -157,7 +157,7 @@ displayRoute(origin, destination, service, display) {
   }
 
 /**
- *
+ * This function populates a list of drivers on the page
  *
  * @param {*} origin
  * @param {*} drivers

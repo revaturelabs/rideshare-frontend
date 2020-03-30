@@ -34,7 +34,7 @@ zipcode: number;
  */
 constructor(private userService: UserService) { }
 /**
- *
+ * OnInit function
  *
  * @memberof ProfileLocationComponent
  */
@@ -50,7 +50,7 @@ ngOnInit() {
     });
   }
 /**
- *
+ * Function that updates contact information
  *
  * @memberof ProfileLocationComponent
  */

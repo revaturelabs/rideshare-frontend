@@ -36,7 +36,7 @@ profileObject : User;
    */
   constructor(private router: Router, private userService: UserService) { }
 /**
- *
+ * OnInit function
  *
  * @memberof ProfileContactComponent
  */
@@ -53,7 +53,7 @@ ngOnInit() {
 
   }
 /**
- *
+ * Function that updates contact info
  *
  * @memberof ProfileContactComponent
  */

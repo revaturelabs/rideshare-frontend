@@ -56,6 +56,7 @@ export class CarRegisterComponent implements OnInit {
   }
 
  /**
+  * This function changes the car year
   * @param event
   * @returns {void}
   */

@@ -38,7 +38,7 @@ export class UserService {
 	carUrl: string = environment.carUri;
 	user: User = new User();
     googleBaseUrl = environment.googleBaseUri;
-    googleApiKey: any;
+    googleApiKey: any = '';
 
 
 	/**
@@ -112,14 +112,14 @@ export class UserService {
 
 	// adds user if form is filled out and user input matches a real address
 	async addUser(user :User) : Promise<User> {
-        const addressValid = await this.addressValidation(user);
+        const addressValid = await this.addressValidation(user);//waits for validation to edit fields before post request
         console.log(`User location info log(location modifying to '' on failure) happens first: ${user.hAddress}, ${user.hCity}, ${user.hState}, ${user.hZip}`)
         return this.http.post<User>(this.url, user, {headers: this.headers}).toPromise();
     }
 
     async addressValidation(user:User): Promise<any> {
         const numAndStreetName = user.hAddress.split(' '); // ensures user placed a space between the street number and street name
-
+        console.log(`google api key is: ${this.googleApiKey}`)
         if ( isNaN(Number(numAndStreetName[0]))){
             console.log('first part of haddress is not a number!')
             this.setInvalidAddress(user);
@@ -289,9 +289,10 @@ export class UserService {
 	 * @param user 
 	 */
 
-	updateUserInfo(user: User): Observable<Object> {
-		//console.log(user);
-		return this.http.put(this.url, user);
+	async updateUserInfo(user: User): Promise<Object> {
+        const addressValid = await this.addressValidation(user);//waits for validation to edit fields before put request
+        console.log(`USER UPDATE: User location info log(location modifying to '' on failure) happens first: ${user.hAddress}, ${user.hCity}, ${user.hState}, ${user.hZip}`)
+        return this.http.put(this.url, user).toPromise();
 	}
 	/**
 	 * A GET method that retrieves a driver by Id

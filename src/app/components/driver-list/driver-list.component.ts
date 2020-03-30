@@ -155,7 +155,7 @@ export class DriverListComponent implements OnInit {
         // this is a CB that gets called once Google responds
       }, (response, status) => {
           if (status !== 'OK') {
-            // alert('Error was: ' + status);
+            alert('Error was: ' + status);
           } 
           else {
             
@@ -202,9 +202,6 @@ export class DriverListComponent implements OnInit {
             // driver's car's number of seats
             const seats = element.seats;
             // console.log("seats: " + seats);
-
-            // How about storing all this info in an array with object. So we can use 
-            // Angular instead of this atrocity.
 
             this.dataToDisplay.push({
               "itemLabel": `exampleModalCentered${element.id}`,

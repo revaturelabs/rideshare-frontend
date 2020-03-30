@@ -27,7 +27,7 @@ export const environment = {
   batchesUri: `${baseUri}:${port}/batches/`,
   // Anvar's trying to fix GET ....cars/drivers/ ... net: ERR_FAILED
   // previously  / car /
-  carUri: `${baseUri}:${port}/users/`,
+  carUri: `${baseUri}:${port}/cars/`,
   adminUri: `${baseUri}:${port}/admins/`,
   googleMapKey: `${googleKey}`,
 };

@@ -3,7 +3,6 @@
     placeholder="Search for a driver">
   <button class="btn btn-primary register" (click)="searchDriver()">Search</button>
 </div>
-
 <div class="container">
   <div class="row">
     <div class="col-lg-5">
@@ -19,15 +18,14 @@
           </tr>
         </thead>
         <tbody id="output">
-          <!-- <div > -->
-                  <tr *ngFor="let info of allInfo">
-                    <td class="col"> {{info.user.name}} </td>
+                  <tr *ngFor="let info of dataToDisplay">
+                    <td class="col">{{info.user.name}}</td>
                     <td class="col">{{info.results[0].distance.text}}</td>
                     <td class="col">{{info.results[0].duration.text}}</td>
-                      <td class="col">
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCentered${element.id}"> View</button>
+                      <td class="col"> 
+                        <button type="button" class="btn btn-primary" data-toggle="modal" [attr.data-target]="'#' + info.itemLabel"> View</button>
                           <div class="col-lg-5">
-                            <div class="modal" id="exampleModalCentered${element.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true">
+                            <div class="modal" [attr.id]="info.itemLabel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true">
                               <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
                                   <div class="modal-header">
@@ -54,7 +52,6 @@
                   </td>
                   <td class="col">{{info.seats}}</td>
                   </tr>
-          <!-- </div> -->
           </tbody>
       </table>
     </div>
@@ -64,9 +61,3 @@
     </div>
   </div>
 </div>
-
-<!-- <div>
-  <li *ngFor="let driver of drivers">
-    {{driver.firstName}}
-  </li>
-</div> -->

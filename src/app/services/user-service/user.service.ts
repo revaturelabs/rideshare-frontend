@@ -57,7 +57,7 @@ export class UserService {
 	 */
 	getUserById(idParam: number){
 		
-		console.log(this.url)
+		// console.log(this.url)
 		return this.http.get<User>(this.url+idParam).toPromise();
 
 
@@ -82,7 +82,7 @@ export class UserService {
 		user.active = true;
 		user.isDriver = false;
 		user.isAcceptingRides = false;
-		console.log(user);
+		// console.log(user);
 
 		this.http.post(this.url, user, {observe: 'response'}).subscribe(
 			(response) => {
@@ -233,8 +233,8 @@ export class UserService {
 	}
 
 	getRidersForLocation2(location: string): Observable <any>{
-		console.log("carUrl: " + this.carUrl);
-		console.log("location:" + location);
+		// console.log("carUrl: " + this.carUrl);
+		// console.log("location:" + location);
 		return this.http.get(this.carUrl + 'driver/' + location);
 	}
 }

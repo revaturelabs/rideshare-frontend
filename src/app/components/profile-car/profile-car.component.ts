@@ -11,9 +11,9 @@ import { UserService } from 'src/app/services/user-service/user.service';
 })
 export class ProfileCarComponent implements OnInit {
 
-  make: string = "Car Make";
-  model:string = "Car Model";
-  color: string = "Car Color";
+  make: string = "";
+  model:string = "";
+  color: string = "";
   year: number = 0;
   nrSeats:number = 0;
   currentCar: Car;
@@ -22,7 +22,7 @@ export class ProfileCarComponent implements OnInit {
 
   constructor(private carService: CarService, private userService: UserService) { }
 
-  ngOnInit() {
+ngOnInit() {
 
     this.carService.getCarByUserId2(sessionStorage.getItem("userid")).subscribe((response)=>{
       this.currentCar = response;
@@ -42,16 +42,22 @@ export class ProfileCarComponent implements OnInit {
 
 
   }
-
-  createCarInfo(){
+/**
+ *
+ *
+ * @memberof ProfileCarComponent
+ */
+createCarInfo(){
+    this.currentCar = new Car();
     this.currentCar.make = this.make;
     this.currentCar.model= this.model;
     this.currentCar.color = this.color;
     this.currentCar.year = this.year;
     this.currentCar.seats = this.nrSeats;
-    console.log(this.currentCar);
+    this.currentCar.user = this.currentUser
+    console.log(this.currentCar.user.batch);
     console.log(this.currentUser);
-    this.carService.createCar(this.currentUser, this.currentCar);
+    this.carService.createCar(this.currentCar,this.currentCar.user.userId);
     this.success = "Updated Successfully!";
   }
 
@@ -61,7 +67,6 @@ export class ProfileCarComponent implements OnInit {
     this.currentCar.color = this.color;
     this.currentCar.year = this.year;
     this.currentCar.seats = this.nrSeats;
-    //console.log(this.currentUser);
     this.carService.updateCarInfo(this.currentCar);
     this.success = "Updated Successfully!";
   }

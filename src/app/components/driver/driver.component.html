@@ -44,8 +44,8 @@
                 <td>{{get.batch.batchLocation}}</td>
                 <td *ngIf="get.active===true"><img src=".\assets\yesno.jpg" width="15" height="15"></td>
                 <td *ngIf="get.active===false"><img src=".\assets\no.jpg" width="15" height="15"></td>
-                <td *ngIf="get.driver===false">Rider</td>
-                <td *ngIf="get.driver===true">Driver</td>
+                <td *ngIf="get.isDriver===false">Rider</td>
+                <td *ngIf="get.isDriver===true">Driver</td>
 
             </tr>
 

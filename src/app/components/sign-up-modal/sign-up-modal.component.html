@@ -60,17 +60,13 @@
     <span *ngIf="hZipError != ''" class="error"> {{hZipError}}</span>
     <input type="number" [(ngModel)]="user.hZip" class="form-control" (change)="onZipChange()"/>
 
-    <div class="radiobody">
-    <div class="btn-group">
-        <label class="btn btn-primary">
+    <div class="radiobody mx-auto w-50 mt-4 mb-2">
+        <label class="btn btn-primary mx-auto w-100">
           <input type="checkbox" class="check" id="driver" [(ngModel)]="this.user.isDriver"/>&nbsp; Driver
         </label>
         <br>
-        <label class="btn btn-primary">
-          <input type="checkbox" class="check" id="rider" [(ngModel)]="this.user.isAcceptingRides"/>&nbsp; Rider
-        </label>
-  </div>
     </div>
+
     <div class="btn-container">
       <button type="submit" class="btn btn-primary register" (click)="submitUser()">Submit</button>
       <p class="mt-2" [ngStyle]="{'color': submitMessageColor, 'visibility': submitMessageVisible}">{{submitMessage}}</p>

@@ -9,9 +9,7 @@ import { User } from 'src/app/models/user';
 export class ProfileMembershipComponent implements OnInit {
   profileObject: User;
   currentUser: any = '';
-  active: boolean = false;
-  success: string;
-  batchNumber: string = "";
+  batchNumber: string = "Not Set";
   batchLocation: string = "";
 
   result: string = "Updated Successfully!";
@@ -23,7 +21,6 @@ export class ProfileMembershipComponent implements OnInit {
   ngOnInit() {
     this.currentUser = this.userService.getUserById2(sessionStorage.getItem('userid')).subscribe((response) => {
       this.profileObject = response;
-      this.active = this.profileObject.active;
 
       if(this.profileObject.batch != null) {
         this.batchLocation = this.profileObject.batch.batchLocation;
@@ -33,7 +30,6 @@ export class ProfileMembershipComponent implements OnInit {
   }
 
   updatesMembershipInfo() {
-    this.profileObject.active = this.active;
     this.userService.updateUserInfo(this.profileObject).subscribe((response)=>{
 
       this.result = "Updated Successfully!";
@@ -46,14 +42,5 @@ export class ProfileMembershipComponent implements OnInit {
       this.resultColor="red";
       this.resultVisible="visible";
     });
-  }
-
-  onActiveChange() {
-    //no validation because fields are optional in database
-    this.resultVisible="hidden";
-  }
-
-  onDriverChange() {
-    this.resultVisible="hidden";
   }
 }

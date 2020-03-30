@@ -94,12 +94,16 @@ export class SignupModalComponent implements OnInit {
 
     console.log(this.user.userName);
     //Check username
-    for(let i = 0; i < this.users.length; i++){
-      if(this.users[i].userName.includes(this.user.userName)){
-        console.log("this username is taken :" + this.users[i].userId);
-        this.newUserName = false;
-        console.log(this.newUserName);
-        break;
+    if(this.user.userName == ''){
+    console.log("empty username")
+    }else{
+      for(let i = 0; i < this.users.length; i++){
+        if(this.users[i].userName.includes(this.user.userName)){
+          console.log("this username is taken :" + this.users[i].userId);
+          this.newUserName = false;
+          console.log(this.newUserName);
+          break;
+        }
       }
     }
     this.user.wAddress = this.user.hAddress;
@@ -143,8 +147,7 @@ export class SignupModalComponent implements OnInit {
           this.userNameError = res.userName[0];
           i = 1;
 
-        }
-        if(this.newUserName == false){
+        }else if(this.newUserName == false){
           this.userNameError = "Username already in use";
           i = 1;
         }

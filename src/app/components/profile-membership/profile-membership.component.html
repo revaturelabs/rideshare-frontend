@@ -1,29 +1,47 @@
 <div class="container mainContainer" (keyup.enter)="updatesMembershipInfo()">
     <i class="fa fa-users" style="font-family:'FontAwesome';"></i>
     <h4 class="title">Membership:</h4>
-    <div class="innercontainer" *ngIf="profileObject">
-        <div class="form-group row">
 
-            <div class="col-sm-12">
-                <h5>Batch:</h5>
-                <span> {{profileObject?.batch.batchNumber}} - {{profileObject?.batch.batchLocation}}</span>
+    <div *ngIf="this.profileObject">
+        <div class="form-group row">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-6 text-left">
+                <p class="my-auto">Batch: {{batchNumber}} {{batchLocation}}</p>
             </div>
+            <div class="col-sm-2"></div>
         </div>
 
         <div class="form-group row">
-            <div class="col-sm-4 t">
-                <h6>Status:</h6>
-                <select class="form-control mySelect" name="rider" id="rider" [(ngModel)]=isDriver (change)="onDriverChange()">
-                    <option value="true">Driver</option>
-                    <option value="false">Rider</option>
-                </select>
-                <select class="form-control mySelect" name="active" id="active" [(ngModel)]=active (change)="onActiveChange()">
-                    <option value="true">Active</option>
-                    <option value="false">Disabled</option>
-                </select>
+            <div class="col-sm-4"></div>
+            <div class="custom-control custom-switch col-sm-6 text-left">
+                <input type="checkbox" class="custom-control-input" id="switch-driver" name="driver"
+                    [(ngModel)]=profileObject.isDriver>
+                <label class="custom-control-label" for="switch-driver" [ngStyle]="{'color': profileObject.isDriver ? 'black' : 'gray'}">I am a driver</label>
             </div>
+            <div class="col-sm-2"></div>
         </div>
+
+        <div class="form-group row">
+            <div class="col-sm-4"></div>
+            <div class="custom-control custom-switch col-sm-6 text-left">
+                <input type="checkbox" class="custom-control-input" id="switch-rider" name="rider"
+                    [(ngModel)]=profileObject.isAcceptingRides>
+                <label class="custom-control-label" for="switch-rider" [ngStyle]="{'color': profileObject.isAcceptingRides ? 'black' : 'gray'}">I am accepting rides</label>
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-sm-4"></div>
+            <div class="custom-control custom-switch col-sm-6 text-left">
+                <input type="checkbox" class="custom-control-input" id="switch-acct" name="acct"
+                    [(ngModel)]=profileObject.active>
+                <label class="custom-control-label" for="switch-acct" [ngStyle]="{'color': profileObject.active ? 'black' : 'gray'}">Account is active</label>
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
+
+        <p class="mx-auto my-0" [ngStyle]="{'color': resultColor, 'visibility': resultVisible}">{{result}}</p>
+        <button type="submit" (click)="updatesMembershipInfo()" class="btn btn-primary myBtn mt-3">Save</button>
     </div>
-    <p class="mx-auto my-0" [ngStyle]="{'color': resultColor, 'visibility': resultVisible}">{{result}}</p>
-    <button type="submit" (click)="updatesMembershipInfo()" class="btn btn-primary myBtn mt-3">Save</button>
 </div>

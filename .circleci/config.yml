@@ -14,13 +14,13 @@ jobs:
           paths:
             - "node_modules"
       - run: npm run test -- --no-watch --no-progress --browsers=ChromeHeadless
-      - run: npm run e2e -- --protractor-config=e2e/protractor-ci.conf.js
+      # - run: npm run e2e -- --protractor-config=e2e/protractor-ci.conf.js
       - run: 
           name: Install Compodoc
           command: npm install @compodoc/compodoc
       - run:
           name: Build Angular Application
-          command: npm run compodoc && ng build --configuration=dev
+          command: npm run compodoc && npm run build -- --configuration=dev
       - sonarcloud/scan
       - persist_to_workspace:
           # Must be an absolute path, or relative path from working_directory. This is a directory on the container which is 

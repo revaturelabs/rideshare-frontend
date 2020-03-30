@@ -44,7 +44,7 @@ ngOnInit() {
   }
 /**
  *
- *
+ * allows user to create a car
  * @memberof ProfileCarComponent
  */
 createCarInfo(){
@@ -60,8 +60,12 @@ createCarInfo(){
     this.carService.createCar(this.currentCar,this.currentCar.user.userId);
     this.success = "Updated Successfully!";
   }
-
-  updatesCarInfo(){
+/**
+ *allows user to update existing car
+ *
+ * @memberof ProfileCarComponent
+ */
+updatesCarInfo(){
     this.currentCar.make = this.make;
     this.currentCar.model= this.model;
     this.currentCar.color = this.color;
@@ -70,8 +74,14 @@ createCarInfo(){
     this.carService.updateCarInfo(this.currentCar);
     this.success = "Updated Successfully!";
   }
-
-  onSubmit() {
+/**
+ *will create a new car if user does not have a car
+ *
+ * will update a car inof if car is not present
+ * @returns
+ * @memberof ProfileCarComponent
+ */
+onSubmit() {
     if(this.currentCar) {
       return this.updatesCarInfo();
       console.log(this.currentCar);

@@ -45,7 +45,7 @@ export class User {
     hAddress: string;
     hCity: string;
     hZip: number;
-    wAddress: string;
+    wAddress: any;
     wCity: string;
     wState: string;
     wZip: number;

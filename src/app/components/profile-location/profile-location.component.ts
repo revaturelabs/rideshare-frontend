@@ -12,7 +12,7 @@ export class ProfileLocationComponent implements OnInit {
   zipcode: number;
   city:string;
   address:string;
-  address2:string;
+  address2:any;
   hState: string;
   currentUser: User;
   success :string;

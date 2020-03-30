@@ -35,7 +35,7 @@ export class DriverListComponent implements OnInit {
 
     this.userService.getRidersForLocation2(this.location)
       .subscribe(
-        // AAA: Data is array of objects. Each object has keys relevant to car and users key that holds user object
+        // Data is array of objects. Each object has keys relevant to car and users key that holds user object
         (data) => {
           data.forEach(carOwner => {
             // console.log("data: " + JSON.stringify(carOwner))
@@ -135,7 +135,6 @@ export class DriverListComponent implements OnInit {
       const service = new google.maps.DistanceMatrixService();
 
         /**
-         * AAA
          * 
          * Google's Distance Matrix service computes travel distance and journey duration 
          * between multiple origins and destinations using a given mode of travel.
@@ -163,7 +162,6 @@ export class DriverListComponent implements OnInit {
             // on success, for each driver, do this:
           
             /**
-             * AAA
              * 
              * The architecture of Response is as following:
              * 
@@ -205,7 +203,7 @@ export class DriverListComponent implements OnInit {
             const seats = element.seats;
             // console.log("seats: " + seats);
 
-            // AAA: How about storing all this info in an array with object. So we can use 
+            // How about storing all this info in an array with object. So we can use 
             // Angular instead of this atrocity.
 
             this.dataToDisplay.push({

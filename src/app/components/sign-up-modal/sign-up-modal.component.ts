@@ -20,10 +20,12 @@ export class SignupModalComponent implements OnInit {
   address :string;
   isDriver: boolean;
   isRider: boolean;
+  newUserName: boolean;
 
   user :User = new User();
   batch: Batch = new Batch();
   batches: Batch[];
+  users : User[];
   // validation
   firstNameError :string;
   lastNameError :string;
@@ -48,10 +50,11 @@ export class SignupModalComponent implements OnInit {
   ngOnInit() {
     this.userService.getAllUsers().subscribe(
       res => {
-        //console.log(res);
+        this.users = res;
+        console.log(this.users);
       }
     );
-
+  this.failed = '';
   this.batchService.getAllBatchesByLocation1().subscribe(
       res => {
          this.batches = res;
@@ -65,6 +68,7 @@ export class SignupModalComponent implements OnInit {
   }
 
   submitUser() {
+    this.newUserName = true;
     this.user.userId = 0;
     this.firstNameError = '';
     this.lastNameError = '';
@@ -88,6 +92,20 @@ export class SignupModalComponent implements OnInit {
       this.user.phoneNumber = phone;
     }
 
+    console.log(this.user.userName);
+    //Check username
+    if(this.user.userName == ''){
+    console.log("empty username")
+    }else{
+      for(let i = 0; i < this.users.length; i++){
+        if(this.users[i].userName.includes(this.user.userName)){
+          console.log("this username is taken :" + this.users[i].userId);
+          this.newUserName = false;
+          console.log(this.newUserName);
+          break;
+        }
+      }
+    }
     this.user.wAddress = this.user.hAddress;
     this.user.wState = this.user.hState;
     this.user.wCity = this.user.hCity;
@@ -129,6 +147,9 @@ export class SignupModalComponent implements OnInit {
           this.userNameError = res.userName[0];
           i = 1;
 
+        }else if(this.newUserName == false){
+          this.userNameError = "Username already in use";
+          i = 1;
         }
         if(res.hState != undefined){
           this.hStateError = res.hState[0];

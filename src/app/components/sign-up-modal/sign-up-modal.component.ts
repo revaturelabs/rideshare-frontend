@@ -16,7 +16,7 @@ export class SignupModalComponent implements OnInit {
   lname :string;
   username :string;
   email :string;
-  phone :string;
+  phoneNumber :string;
   address :string;
   isDriver: boolean;
   isRider: boolean;
@@ -36,6 +36,7 @@ export class SignupModalComponent implements OnInit {
   hZipError :string;
   
   success :string;
+  failed: string;
   //Store the retrieved template from the 'openModal' method for future use cases.
   modalRef :BsModalRef;
   states = ['AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA','KS',
@@ -75,6 +76,18 @@ export class SignupModalComponent implements OnInit {
     this.hCityError='';
     this.hZipError='';
     this.success='';
+    this.failed =  "Registration Unsuccessful!";
+
+    //Format phone
+    let phone = this.user.phoneNumber.replace(/[^\w\s]/gi, '');
+    if(phone.length == 10){
+    phone = phone.substring(0,3)+"-"+phone.substring(3,6)+"-"+phone.substring(6,10);
+    console.log(phone);
+    this.user.phoneNumber = phone;
+    }else{
+      this.user.phoneNumber = phone;
+    }
+
     this.user.wAddress = this.user.hAddress;
     this.user.wState = this.user.hState;
     this.user.wCity = this.user.hCity;
@@ -140,6 +153,7 @@ export class SignupModalComponent implements OnInit {
         if(i === 0) {
           i = 0;
           this.success = "Registered successfully!";
+          this.failed = "";
         }
       } 
       /*res => {

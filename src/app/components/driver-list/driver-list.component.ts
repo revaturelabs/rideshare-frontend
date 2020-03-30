@@ -165,8 +165,8 @@ displayDriversList(origin, drivers) {
           
           console.log("Element After "+element.name);
           list.push(element);
-          distance.push(results[0].distance.text);
-          time.push(results[0].duration.text);
+          distance.push(results[0].distance);
+          time.push(results[0].duration);
 
           var name =  element.name;
           outputDiv.innerHTML += `<tr><td class="col">${name}</td>
@@ -261,12 +261,12 @@ sortByName(){
 
 
       outputDiv.innerHTML += `<tr><td class="col">${sDr}</td>
-      <td class="col">${this.distance[index[mark]]}</td>
-      <td class="col">${this.time[index[mark]]}</td>
+      <td class="col">${this.distance[index[mark]].text}</td>
+      <td class="col">${this.time[index[mark]].text}</td>
       <td class="col">
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCentered${drClone[index[mark]].id}"> View</button>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCentered${this.driversList[index[mark]].id}"> View</button>
         <div class="col-lg-5">
-        <div class="modal" id="exampleModalCentered${drClone[index[mark]].id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true">
+        <div class="modal" id="exampleModalCentered${this.driversList[index[mark]].id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered" role="document">
               <div class="modal-content">
                   <div class="modal-header">
@@ -276,9 +276,9 @@ sortByName(){
                       </button>
                   </div>
                   <div class="modal-body">
-                      <h1>${sDr}</h1>
-                      <h3>Email: ${drClone[index[mark]].email}</h3>         
-                      <h3>Phone: ${drClone[index[mark]].phone}</h3>                 
+                  <h1>${this.driversList[index[mark]].name}</h1>
+                  <h3>Email: ${this.driversList[index[mark]].email}</h3>         
+                  <h3>Phone: ${this.driversList[index[mark]].phone}</h3>                 
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -303,15 +303,71 @@ sortByName(){
 
 sortByDistance(){
   this.emptyDriversList();
-  this.searchDriver("dist");
+
+  console.log(this.driversList);
+  console.log(this.time);
+  console.log(this.distance);
+
+  let ds = [];
+  //CREATE ARRAY OF Distances. 
+  this.distance.forEach(d =>{ ds.push(Number(d.value));})
+  console.log("Unsorted: " +ds);
+
+  const dsClone  = Object.assign([], ds);
+  console.log("Clone: "+dsClone);
+
+  let sortDs = ds.sort((a, b) => a - b); // For ascending sort
+  console.log(sortDs);
+
+  let index = [];
+  sortDs.forEach(s =>{ index.push(dsClone.indexOf(s));})
+  console.log(index);
+
+  let mark = 0;
+  var outputDiv = document.getElementById('output');
+  sortDs.forEach(sDr =>{
+
+
+      outputDiv.innerHTML += `<tr><td class="col">${this.driversList[index[mark]].name}</td>
+      <td class="col">${this.distance[index[mark]].text}</td>
+      <td class="col">${this.time[index[mark]].text}</td>
+      <td class="col">
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCentered${this.driversList[index[mark]].id}"> View</button>
+        <div class="col-lg-5">
+        <div class="modal" id="exampleModalCentered${this.driversList[index[mark]].id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalCenteredLabel">Contact Info:</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                      </button>
+                  </div>
+                  <div class="modal-body">
+                      <h1>${this.driversList[index[mark]].name}</h1>
+                      <h3>Email: ${this.driversList[index[mark]].email}</h3>         
+                      <h3>Phone: ${this.driversList[index[mark]].phone}</h3>                 
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+            </div>
+          </div>
+      </div>
+      <div class="col-lg-6">
+          <div #maps id="gmap" class="img-responsive"></div>
+      </div>
+    </td></tr>`;
+    mark++
+    
+  })
+
+
+
+
 
 }
 
-sortByTime(){
-  this.emptyDriversList();
-  this.searchDriver("time");
-
-
-}
 
 }

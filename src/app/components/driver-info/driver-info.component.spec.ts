@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DriverInfoComponent } from './driver-info.component';
+import { getRoutableComponents } from 'src/app/app-routing.module';
 
 describe('DriverInfoComponent', () => {
   let component: DriverInfoComponent;
@@ -8,9 +9,9 @@ describe('DriverInfoComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DriverInfoComponent ]
+      declarations: [...getRoutableComponents()]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

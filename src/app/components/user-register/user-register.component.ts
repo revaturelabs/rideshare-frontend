@@ -63,6 +63,10 @@ export class UserRegisterComponent implements OnInit {
 			this.userService.createDriver(this.user, 'driver');
 		}
 	}
+
+	/**
+	 * This function creates a rider if all the validations are true
+	 */
 	signUpRider() {
 		if (this.validationService.validateUserName(this.user.userName) && this.validationService.validateName(this.user.firstName) && this.validationService.validateName(this.user.lastName) && this.validationService.validateEmail(this.user.email) && this.validationService.validatePhone(this.user.phoneNumber)) {
 			this.userService.createDriver(this.user, 'rider');

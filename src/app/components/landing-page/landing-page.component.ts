@@ -46,8 +46,9 @@ constructor(private http: HttpClient,private userService: UserService) {
  * @memberof LandingPageComponent
  */
 ngOnInit(): void {
-     //load google map  api
-
+    /**
+     * Load google map api
+     */
     this.getGoogleApi();
 
     this.sleep(2000).then(() => {
@@ -97,8 +98,6 @@ getGoogleApi()  {
  * @memberof LandingPageComponent
  */
 searchDriver(){
-  //call service search algorithm ()
-  //console.log(this.location_s);
   this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapProperties);
   this.userService.getRidersForLocation1(this.location_s)
   .subscribe(
@@ -128,9 +127,7 @@ displayRoute(origin, destination, service, display) {
   service.route({
     origin: origin,
     destination: destination,
-    //waypoints: [{location: 'Adelaide, SA'}, {location: 'Broken Hill, NSW'}],
     travelMode: 'DRIVING',
-    //avoidTolls: true
   }, function(response, status) {
     if (status === 'OK') {
       display.setDirections(response);

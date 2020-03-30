@@ -72,7 +72,6 @@ getGoogleApi()  {
     this.http.get(`${environment.loginUri}getGoogleApi`)
        .subscribe(
                  (response) => {
-                     //console.log(response);
                      if(response["googleMapAPIKey"] != undefined){
                          new Promise((resolve) => {
                            let script: HTMLScriptElement = document.createElement('script');
@@ -114,8 +113,8 @@ displayRoute(origin, destination, service, display) {
       origin: origin,
       destination: destination,
       travelMode: 'DRIVING',
-      //avoidTolls: true
-    }, function(response, status) {
+    }, 
+    function(response, status) {
       if (status === 'OK') {
         display.setDirections(response);
       } else {

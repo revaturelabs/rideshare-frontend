@@ -86,7 +86,6 @@ export class NavbarComponent implements OnInit {
     this.currentUser = '';
     sessionStorage.removeItem("name");
     sessionStorage.removeItem("userid");
-    //sessionStorage.clear(); 
     this.router.navigate(['']);
   }
 

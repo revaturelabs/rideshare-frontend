@@ -70,12 +70,6 @@ export class DriverListComponent implements OnInit {
               });
           });
       });
-    /**this.drivers.push({'id': '1','name': 'Ed Ogeron','origin':'Reston, VA', 'email': 'ed@gmail.com', 'phone':'555-555-5555'});
-    this.drivers.push({'id': '2','name': 'Nick Saban','origin':'Oklahoma, OK', 'email': 'nick@gmail.com', 'phone':'555-555-5555'});
-    this.drivers.push({'id': '3','name': 'Bobbie sfsBowden','origin':'Texas, TX', 'email': 'bobbie@gmail.com', 'phone':'555-555-5555'});
-    this.drivers.push({'id': '4','name': 'Les Miles','origin':'New York, NY', 'email': 'les@gmail.com', 'phone':'555-555-5555'});
-    this.drivers.push({'id': '5','name': 'Bear Bryant','origin':'Arkansas, AR', 'email': 'bear@gmail.com', 'phone':'555-555-5555'});*/
-    //console.log(this.drivers);
     this.getGoogleApi();
 
     this.sleep(2000).then(() => {
@@ -85,9 +79,7 @@ export class DriverListComponent implements OnInit {
          mapTypeId: google.maps.MapTypeId.ROADMAP
       };
       this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapProperties);
-      //get all routes
       this.displayDriversList(this.location, this.drivers);
-      //show drivers on map
       this.showDriversOnMap(this.location, this.drivers);
     });
   }
@@ -111,7 +103,6 @@ getGoogleApi()  {
     this.http.get(`${environment.loginUri}getGoogleApi`)
        .subscribe(
                  (response) => {
-                     //console.log(response);
                      if(response["googleMapAPIKey"] != undefined){
                          new Promise((resolve) => {
                            let script: HTMLScriptElement = document.createElement('script');
@@ -156,7 +147,6 @@ displayRoute(origin, destination, service, display) {
       origin: origin,
       destination: destination,
       travelMode: 'DRIVING',
-      //avoidTolls: true
     }, function(response, status) {
       if (status === 'OK') {
         display.setDirections(response);
@@ -175,7 +165,6 @@ displayRoute(origin, destination, service, display) {
  */
 displayDriversList(origin, drivers) {
     let  origins = [];
-    //set origin
     origins.push(origin)
 
     var outputDiv = document.getElementById('output');
@@ -196,7 +185,6 @@ displayDriversList(origin, drivers) {
           var originList = response.originAddresses;
           var destinationList = response.destinationAddresses;
           var results = response.rows[0].elements;
-          //console.log(results[0].distance.text);
           var name =  element.name;
           outputDiv.innerHTML += `<tr><td class="col">${name}</td>
                                   <td class="col">${results[0].distance.text}</td>

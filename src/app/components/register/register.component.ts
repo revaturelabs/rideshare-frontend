@@ -34,7 +34,7 @@ export class RegisterComponent implements OnInit {
  * @type {Batch[]}
  * @memberof RegisterComponent
  */
-batches: Batch[] = [];
+	batches: Batch[] = [];
 	user: User = new User();
 
   /**
@@ -54,12 +54,6 @@ batches: Batch[] = [];
 	ngOnInit() {
 		if (sessionStorage.getItem('auth')) {
 			this.router.navigate(['home']);
-		} else {
-			/*this.batchService.getAllBatches()
-				.subscribe(allBatches => {
-					this.batches = allBatches;
-					this.user.batch.batchNumber = this.batches[0].batchNumber;
-			});*/
 		}
 	}
 
@@ -75,9 +69,7 @@ batches: Batch[] = [];
 	 * This function creates a driver if all the validations are true.
 	 */
 	signUpDriver() {
-		//if (this.validationService.validateUserName(this.user.userName) && this.validationService.validateName(this.user.firstName) && this.validationService.validateName(this.user.lastName) && this.validationService.validateEmail(this.user.email) && this.validationService.validatePhone(this.user.phoneNumber)) {
-			this.userService.createDriver(this.user, 'driver');
-		//}
+		this.userService.createDriver(this.user, 'driver');
   }
  /**
   *

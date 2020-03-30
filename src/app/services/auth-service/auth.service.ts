@@ -53,6 +53,8 @@ export class AuthService {
 
 	/**
 	 * This function returns an emitter.
+	 * @param admin
+	 * @param userName
 	 */
 
 	loginAsAdmin(admin: Admin, userName: string) {

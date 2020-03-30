@@ -5,9 +5,8 @@ import { User } from 'src/app/models/user';
 import { Batch } from 'src/app/models/batch';
 import { BatchService } from 'src/app/services/batch-service/batch.service';
 import { ValidationService } from 'src/app/services/validation-service/validation.service';
+
 /**
- *
- *
  * @export
  * @class SignupModalComponent
  * @implements {OnInit}
@@ -19,8 +18,6 @@ import { ValidationService } from 'src/app/services/validation-service/validatio
 })
 export class SignupModalComponent implements OnInit {
   /**
-   *
-   *
    * @type {string}
    * @memberof SignupModalComponent
    */
@@ -33,15 +30,15 @@ export class SignupModalComponent implements OnInit {
   isDriver: boolean;
   isRider: boolean;
 /**
- *
- *
  * @type {User}
  * @memberof SignupModalComponent
  */
-user :User = new User();
+  user :User = new User();
   batch: Batch = new Batch();
   batches: Batch[];
-  // validation
+  /**
+   * Fields for validation
+   */
   firstNameError :string;
   lastNameError :string;
   emailError :string;
@@ -58,7 +55,9 @@ user :User = new User();
    * @memberof SignupModalComponent
    */
   success :string;
-  //Store the retrieved template from the 'openModal' method for future use cases.
+  /**
+   * Store the retrieved template from the 'openModal' method for future use cases.
+   */
   modalRef :BsModalRef;
   states = ['AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA','KS',
             'KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY',
@@ -81,7 +80,6 @@ user :User = new User();
 ngOnInit() {
     this.userService.getAllUsers().subscribe(
       res => {
-        //console.log(res);
       }
     );
 
@@ -91,10 +89,9 @@ ngOnInit() {
           },
       );
   }
-  //Opens 'sign up' modal that takes in a template of type 'ng-template'.
 /**
  *
- *
+ * Opens 'sign up' modal that takes in a template of type 'ng-template'.
  * @param {TemplateRef<any>} template
  * @memberof SignupModalComponent
  */
@@ -131,7 +128,6 @@ submitUser() {
     if(rider.checked == true){
       this.user.isDriver =  false;
     }
-    //console.log(this.user);
     this.userService.addUser(this.user).subscribe(
       res => {
         console.log(res);
@@ -185,11 +181,7 @@ submitUser() {
           this.success = "Registered successfully!";
         }
       }
-      /*res => {
-        console.log("failed to add user");
-        console.log(res);
-      }*/
     );
 
-    }
-    }
+  }
+}

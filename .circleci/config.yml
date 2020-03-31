@@ -5,25 +5,28 @@ jobs:
       - image: circleci/node:12.13.1
     steps:
       - checkout
+      - restore_cache:
+          key: my-project-{{ .Branch }}-{{ checksum "package-lock.json" }}
+      - run: npm install
+      - save_cache:
+          key: my-project-{{ .Branch }}-{{ checksum "package-lock.json" }}
+          paths:
+            - "node_modules"
+      - run: npm run test -- --no-watch --no-progress --browsers=ChromeHeadless
+      # - run: npm run e2e -- --protractor-config=e2e/protractor-ci.conf.js
       - run:
-          name: Install Node Packages
-          command: npm install
-      - run:
-          name: Install Angular
-          command: echo y | sudo npm install -g @angular/cli
-      - run: 
           name: Install Compodoc
           command: npm install @compodoc/compodoc
       - run:
           name: Build Angular Application
-          command: npm run compodoc && ng build --configuration=dev
+          command: npm run compodoc && npm run build -- --configuration=dev
       - sonarcloud/scan
       - persist_to_workspace:
-          # Must be an absolute path, or relative path from working_directory. This is a directory on the container which is 
+          # Must be an absolute path, or relative path from working_directory. This is a directory on the container which is
           # taken to be the root directory of the workspace.
           root: ~/
           # Must be relative path from root
-          paths: 
+          paths:
             - project
 
   deploy:
@@ -38,10 +41,10 @@ jobs:
       - run:
           name: Install awscli
           command: sudo pip install awscli
-      - run: 
+      - run:
           name: Deploy Compodoc
           command: aws s3 sync ~/project/documentation s3://rideshare-frontend-compodoc --delete
-      - run: 
+      - run:
           name: Deploy to S3
           command: aws s3 sync ~/project/dist/rideshare-frontend s3://rideshare-frontend --delete
 

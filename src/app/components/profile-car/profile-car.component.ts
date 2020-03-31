@@ -25,10 +25,11 @@ export class ProfileCarComponent implements OnInit {
 
     this.carService.getCarByUserId2(sessionStorage.getItem("userid")).subscribe((response)=>{
       this.currentCar = response;
-      this.make = response.make;
-      this.model = response.model;
-      this.nrSeats = response.seats;
-
+      if(response) {
+        this.make = response.make;
+        this.model = response.model;
+        this.nrSeats = response.seats;
+      }
     });
   }
 

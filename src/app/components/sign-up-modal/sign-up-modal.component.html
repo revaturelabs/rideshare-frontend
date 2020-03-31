@@ -1,0 +1,79 @@
+<a (click)="openModal(template)">Sign up</a >
+  
+<ng-template #template >
+  <div class="modal-header">
+    <h4 class="modal-title">Sign Up</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body"  (keyup.enter)="submitUser()">
+    <label for="firstname">First Name</label>
+    <span *ngIf="firstNameError != ''" class="error"> {{firstNameError}}</span>
+    <input id="firstname" type="text" [(ngModel)]="user.firstName" class="form-control" (change)="onFirstNameChange()"/>
+
+    <label for="lastname">Last Name</label>
+    <span *ngIf="lastNameError != ''" class="error"> {{lastNameError}}</span>
+    <input id="lastname" type="text" [(ngModel)]="user.lastName" class="form-control" (change)="onLastNameChange()"/>
+
+    <label for="email">Email</label>
+    <span *ngIf="emailError != ''" class="error"> {{emailError}}</span>
+    <!--note: if input type is email, onEmailChange() does not fire if adding white space characters-->
+    <input id="email" type="text" [(ngModel)]="user.email" class="form-control" (change)="onEmailChange()"/>
+
+    <label for="phoneNumber">Phone Number</label>
+    <span *ngIf="phoneNumberError != ''" class="error"> {{phoneNumberError}}</span>
+    <input id="phoneNumber" type="text" [(ngModel)]="user.phoneNumber" class="form-control" (change)="onPhoneNumberChange()"/>
+
+    <label for="userName">User Name</label>
+    <span *ngIf="userNameError != ''" class="error"> {{userNameError}}</span>
+    <input id="userName" type="text" [(ngModel)]="user.userName" class="form-control" (change)="onUsernameChange()"/>
+
+    <!--<label for="password">Password</label>
+    <input id="password" type="password" [(ngModel)]="password" class="form-control" />-->
+
+    <label id="state">Batch</label>
+    <span *ngIf="batchError != ''" class="error"> {{batchError}}</span>
+    <select class="form-control" [(ngModel)]="user.batch" (change)="onBatchChange()">
+          <option value="none" >  
+          </option>
+          <option class="dropdown-item" *ngFor="let batch of batches" [ngValue]="batch">{{batch.batchNumber}} {{batch.batchLocation}}</option>
+    </select>
+
+    <label for="hAddress">Address</label>
+    <span *ngIf="hAddressError != ''" class="error"> {{hAddressError}}</span>
+    <input id="hAddress" type="text" [(ngModel)]="user.hAddress" class="form-control" (change)="onAddressChange()"/>
+
+    <label id="hCity">City</label>
+    <span *ngIf="hCityError != ''" class="error"> {{hCityError}}</span>
+    <input  id="hCityInput" type="text" [(ngModel)]="user.hCity" class="form-control" (change)="onCityChange()"/>
+    <!--JL: added id="hCityInput" for my needs when developping the e2e tests -->
+
+    <label id="hState">State</label>
+    <span *ngIf="hStateError != ''" class="error"> {{hStateError}}</span>
+    <select class="form-control" [(ngModel)]="user.hState" id="hState" (change)="onStateChange()">
+            <option value="none" selected disabled hidden>  
+            </option>
+            <option id="state{{state}}" *ngFor="let state of states" value="{{state}}"> {{state}}</option>
+    </select>
+    <!--JL: added id="state{{state}}" for my needs when developping the e2e tests -->
+
+    <label id="hZip">Zip Code</label>
+    <span *ngIf="hZipError != ''" class="error"> {{hZipError}}</span>
+    <input id="hZipInput" type="number" [(ngModel)]="user.hZip" class="form-control" (change)="onZipChange()"/>
+    <!--JL: added id="hZipInput" for my needs when developping the e2e tests -->
+
+    <div class="radiobody mx-auto w-50 mt-4 mb-2">
+        <label class="btn btn-primary mx-auto w-100">
+          <input type="checkbox" class="check" id="driver" [(ngModel)]="this.user.isDriver"/>&nbsp; Driver
+        </label>
+        <br>
+    </div>
+
+    <!--JL: added id="signupSubmit" for my needs when developping the e2e tests -->
+    <div class="btn-container">
+      <button id="signupSubmit" type="submit" class="btn btn-primary register" (click)="submitUser()">Submit</button>
+      <p class="mt-2" [ngStyle]="{'color': submitMessageColor, 'visibility': submitMessageVisible}">{{submitMessage}}</p>
+    </div>
+  </div>
+</ng-template> 

@@ -1,0 +1,29 @@
+<div class="search col-5-content">
+  <input type="text" [(ngModel)]="location_s" class=" form-control" id="formGroupExampleInput2"
+    placeholder="Search for a driver">
+  <button class="btn btn-primary register" (click)="searchDriver()">Search</button>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-5">
+      <h4>Drivers List</h4>
+      <table class="table table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Distance</th>
+            <th scope="col">Time</th>
+            <th scope="col">View Info</th>
+            <th scope="col">Seats</th>
+          </tr>
+        </thead>
+        <tbody id="output"></tbody>
+      </table>
+    </div>
+    <div class="col-lg-6">
+      <h4>Directions:</h4>
+      <div #map id="gmap" class="img-responsive"></div>
+    </div>
+  </div>
+</div>

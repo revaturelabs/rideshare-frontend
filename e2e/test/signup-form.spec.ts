@@ -1,3 +1,5 @@
+import { browser, by, element } from 'protractor';
+
 describe('Sign up form tests', function(){
     let signUpButton = element(by.id('home-page-sign-up-btn'));
     let signUpSubmitButton = element(by.xpath('/html/body/modal-container/div/div/div[2]/div[2]/button'));

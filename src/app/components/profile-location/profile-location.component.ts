@@ -23,7 +23,7 @@ export class ProfileLocationComponent implements OnInit {
   constructor(private http: HttpClient, private userService: UserService) { }
 
   ngOnInit() {
-
+    //TODO should be removed once navbar on login bug is fixed, as this method is already called on homepage retrieving key
     this.getGoogleApiKey();
     // console.log('google api key is' + this.userService.googleApiKey);
    

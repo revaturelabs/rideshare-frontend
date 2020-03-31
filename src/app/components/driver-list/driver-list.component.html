@@ -3,10 +3,12 @@
     <input type="text" [(ngModel)]="homeLocation" class="form-control" id="formGroupExampleInput2">
     <button  class="btn btn-primary register" (click)="searchDriver()">Search</button> 
     
-    <div class = "content text-center col-md align-self-center">
+    <div class = "content text-center col-md align-self-center col-lg-5">
       <h6 for="customRange3">Distance Range</h6>
-      <label for="customRange3">{{this.range}}</label>
-        <input type="range" class="custom-range" min="0" max="1300" step="1" id="customRange3" [(ngModel)]="range" (change)="searchDriver()">
+      <!-- <label for="customRange3">{{this.range}}</label> -->
+      <ng-template #popContent>{{this.range}}</ng-template>
+        <input type="range" class="custom-range" min="0" max="1300" step="1" id="customRange3" [(ngModel)]="range" (change)="searchDriver()" [ngbPopover]="popContent" triggers="mouseenter:mouseleave" placement="right">
+
 
       <div class="custom-control custom-checkbox">
         <input type="checkbox" class="custom-control-input" id="defaultChecked2" [(ngModel)]="sameOffice" (change)="searchDriver()">
@@ -39,3 +41,6 @@
      </div>
     </div>
 </div>
+
+
+

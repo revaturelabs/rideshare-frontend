@@ -53,7 +53,7 @@ export class ProfileLocationComponent implements OnInit {
   }
 
   updatesContactInfo() {
-    this.currentUser = this.locationService.updatesContactInfo(this.currentUser)
+    this.currentUser = this.locationService.updatesContactInfo(this.currentUser);
     this.userService.updateUserInfo(this.currentUser);
     this.success = "Updated Successfully!";
   }

@@ -34,8 +34,9 @@ export class DriverListComponent implements OnInit {
   location = 'Morgantown, WV';
   mapProperties: {};
   drivers: Array<any> = [];
+  dataSource = [];
   arr = [];
-  tableColumns: string[] = ['name', 'distance', 'time', 'view'];
+  tableColumns: string[] = ['name', 'distance', 'time', 'seats', 'view'];
   reverseClicked = false;
   sortNumber = 0;
 
@@ -46,7 +47,7 @@ export class DriverListComponent implements OnInit {
 
   ngOnInit() {
     this.drivers = [];
-
+    this.dataSource = this.drivers;
     this.userService.getRidersForLocation1(this.location).subscribe(
       res => {
            // console.log(res);
@@ -124,8 +125,8 @@ displayRoute(origin: any, destination: any, service: google.maps.DirectionsServi
     service.route({
       origin,
       destination,
-      travelMode: 'DRIVING',
-      // avoidTolls: true
+      travelMode: google.maps.TravelMode.DRIVING,
+      avoidTolls: true
     }, function(response: any, status: string) {
       if (status === 'OK') {
         display.setDirections(response);
@@ -155,7 +156,7 @@ displayRoute(origin: any, destination: any, service: google.maps.DirectionsServi
         service.getDistanceMatrix(
           {
             origins,
-            destinations: [element.origin],
+            destinations: origins,
             travelMode: google.maps.TravelMode.DRIVING,
             unitSystem: google.maps.UnitSystem.IMPERIAL,
             avoidHighways: false,

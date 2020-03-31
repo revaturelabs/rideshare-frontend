@@ -29,8 +29,6 @@
        <tbody id="output"></tbody>
       </table>
       <mat-table [dataSource] = "drivers">
-        <mat-header-row *matHeaderRowDef="tableColumns"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: tableColumns"></mat-row>
         <ng-container matColumnDef = "name">
           <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
           <mat-cell *matCellDef = "let name"></mat-cell>
@@ -43,11 +41,17 @@
           <mat-header-cell *matHeaderCellDef>Time</mat-header-cell>
           <mat-cell *matCellDef = "let time"></mat-cell>
         </ng-container>
+        <ng-container matColumnDef = "seats">
+          <mat-header-cell *matHeaderCellDef>Seats</mat-header-cell>
+          <mat-cell *matCellDef = "let seats"></mat-cell>
+        </ng-container>
         <ng-container matColumnDef = "view">
           <mat-header-cell *matHeaderCellDef>View Info</mat-header-cell>
           <mat-cell *matCellDef = "let view"></mat-cell>
           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCentered${element.id}"> View</button>
         </ng-container>
+        <mat-header-row *matHeaderRowDef="tableColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: tableColumns"></mat-row>
       </mat-table>
      </div>
      <div class="col-lg-6">

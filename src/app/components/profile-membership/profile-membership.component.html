@@ -34,7 +34,10 @@
                 <div class="col-sm-1"></div>
                 <label for="seats-available-input" class="col-sm-4 col-form-label">Seats Available:</label>
                 <div class="col-sm-4">
-                    <input class="form-control" type="number" name="seats-available" id="seats-available-input" [(ngModel)]="carObject.seatsAvailable"  [disabled]="profileObject.active == 'false' || profileObject.active == false">
+                    <select class="form-control" name="seats-available" id="seats-available-select" [(ngModel)]="carObject.seatsAvailable"  [disabled]="profileObject.active == 'false' || profileObject.active == false">
+                        <option *ngFor="let seat of possibleSeats; let x = index" [ngValue]="seat">{{seat}}</option>
+                    </select>
+                    <p *ngIf="success != ''" class="success">{{success}}</p>
                 </div>
             </div>
         </div>

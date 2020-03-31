@@ -12,6 +12,7 @@ export class ProfileMembershipComponent implements OnInit {
   profileObject: User;
   carObject: Car;
   success: string;
+  possibleSeats: Array<Number>;
 
   constructor(private userService: UserService, private carService: CarService) { }
   ngOnInit() {
@@ -20,6 +21,7 @@ export class ProfileMembershipComponent implements OnInit {
     });
     this.carService.getCarByUserId2(sessionStorage.getItem("userid")).subscribe((response)=>{
       this.carObject = response;
+      this.possibleSeats = new Array(this.carObject.seats).fill(0).map((x,i)=>i+1);
     });
   }
 

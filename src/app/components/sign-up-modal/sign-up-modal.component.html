@@ -46,19 +46,22 @@
 
     <label id="hCity">City</label>
     <span *ngIf="hCityError != ''" class="error"> {{hCityError}}</span>
-    <input type="text" [(ngModel)]="user.hCity" class="form-control" (change)="onCityChange()"/>
+    <input  id="hCityInput" type="text" [(ngModel)]="user.hCity" class="form-control" (change)="onCityChange()"/>
+    <!--JL: added id="hCityInput" for my needs when developping the e2e tests -->
 
     <label id="hState">State</label>
     <span *ngIf="hStateError != ''" class="error"> {{hStateError}}</span>
     <select class="form-control" [(ngModel)]="user.hState" id="hState" (change)="onStateChange()">
             <option value="none" selected disabled hidden>  
             </option>
-            <option *ngFor="let state of states" value="{{state}}"> {{state}}</option>
+            <option id="state{{state}}" *ngFor="let state of states" value="{{state}}"> {{state}}</option>
     </select>
+    <!--JL: added id="state{{state}}" for my needs when developping the e2e tests -->
 
     <label id="hZip">Zip Code</label>
     <span *ngIf="hZipError != ''" class="error"> {{hZipError}}</span>
-    <input type="number" [(ngModel)]="user.hZip" class="form-control" (change)="onZipChange()"/>
+    <input id="hZipInput" type="number" [(ngModel)]="user.hZip" class="form-control" (change)="onZipChange()"/>
+    <!--JL: added id="hZipInput" for my needs when developping the e2e tests -->
 
     <div class="radiobody">
     <div class="btn-group" data-toggle="buttons">
@@ -71,8 +74,10 @@
         </label>
   </div>
     </div>
+
+    <!--JL: added id="signupSubmit" for my needs when developping the e2e tests -->
     <div class="btn-container">
-      <button type="submit" class="btn btn-primary register" (click)="submitUser()">Submit</button>
+      <button id="signupSubmit" type="submit" class="btn btn-primary register" (click)="submitUser()">Submit</button>
       <p class="mt-2" [ngStyle]="{'color': submitMessageColor, 'visibility': submitMessageVisible}">{{submitMessage}}</p>
     </div>
   </div>

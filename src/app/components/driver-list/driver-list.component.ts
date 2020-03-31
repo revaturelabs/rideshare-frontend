@@ -11,6 +11,8 @@ import { BatchService } from 'src/app/services/batch-service/batch.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { GoogleService } from 'src/app/services/google-service/google.service';
+import { SelectMultipleControlValueAccessor } from '@angular/forms';
+import { listenToTriggers } from 'ngx-bootstrap/utils/triggers';
 
 @Component({
   selector: 'app-driver-list',
@@ -19,10 +21,15 @@ import { GoogleService } from 'src/app/services/google-service/google.service';
 })
 export class DriverListComponent implements OnInit {
 
-  location: string = 'Morgantown, WV';
-  mapProperties: {};
-  availableCars: Array<any> = [];
-  drivers: Array<any> = [];
+  homeLocation : string = '';
+  workLocation: string = '';
+  mapProperties :{};
+  availableCars : Array<any> = [];
+  drivers : Array<any> = [];
+  driversList: Array<any> = [];
+  distance: Array<any> = [];
+  time: Array<any> = [];
+
 
   // TODO: Added variables to make getCarByUserId2 work?
   make: string;
@@ -42,49 +49,68 @@ export class DriverListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.drivers = [];
 
-    // TODO: test out ngOninit to get car info to display on this component
-    // this.carService.getCarByUserId2(sessionStorage.getItem("userid")).subscribe((response)=>{
-    //   this.currentCar = response;
-    //   this.make = response.make;
-    //   this.model = response.model;
-    //   this.nrSeats = response.seats;
-    //   console.log("this.nrSeats is " +this.nrSeats);
-    // });
+    //Retriving 
 
-    this.userService.getRidersForLocation1(this.location).subscribe(res => {
-      // console.log(res);
-      res.forEach(element => {
-        this.drivers.push({
-          id: element.userId,
-          name: element.firstName + ' ' + element.lastName,
-          origin: element.hCity + ',' + element.hState,
-          email: element.email,
-          phone: element.phoneNumber
-        });
-      });
-    });
+    console.log("User Id: "+sessionStorage.getItem('userid'));
+    console.log("Home: "+sessionStorage.getItem('hAddress'));
+    console.log("Work: "+sessionStorage.getItem('wAddress'));
+  
+    this.homeLocation = sessionStorage.getItem('hAddress');
+    this.workLocation = sessionStorage.getItem('wAddress');
 
     this.googleService.getGoogleApi();
 
-    this.sleep(2000).then(() => {
-      this.mapProperties = {
-         center: new google.maps.LatLng(Number(sessionStorage.getItem("lat")), Number(sessionStorage.getItem("lng"))),
-         zoom: 15,
-         mapTypeId: google.maps.MapTypeId.ROADMAP
-      };
-      this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapProperties);
-      // get all routes
-      this.displayDriversList(this.location, this.drivers);
-      // show drivers on map
-      this.showDriversOnMap(this.location, this.drivers);
-    });
+    this.searchDriver("none");
   }
 
   sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
+  
+
+
+   searchDriver(sorter: string){
+    //call service search algorithm ()
+    console.log("searching for Drivers");
+    this.drivers = [];
+
+    this.userService.getRidersForLocation1(this.homeLocation, this.workLocation, sorter).subscribe(
+      res => {
+           res.forEach(element => {
+            console.log("Driver: "+res);
+              this.drivers.push({
+                   'id': element.userId,
+                 'name': element.firstName+" "+element.lastName,
+               'origin':element.hAddress+","+element.hCity+","+element.hState, 
+                'email': element.email, 
+                'phone':element.phoneNumber
+              });
+          });
+          console.log(this.drivers);
+
+          this.emptyDriversList();
+  
+          this.displayDriversList(this.homeLocation, this.drivers);
+
+      });
+    });
+
+
+      //get all routes 
+      this.sleep(2000).then(() => {
+        this.mapProperties = {
+           center: new google.maps.LatLng(Number(sessionStorage.getItem("lat")), Number(sessionStorage.getItem("lng"))),
+           zoom: 15,
+           mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapProperties);
+        //empty drivers list
+        //show drivers on map
+        this.showDriversOnMap(this.homeLocation, this.drivers);
+      });
+
+   }
 
   showDriversOnMap(origin, drivers) {
     drivers.forEach(element => {
@@ -120,50 +146,48 @@ export class DriverListComponent implements OnInit {
     );
   }
 
-  displayDriversList(origin, drivers) {
-    let origins = [];
-    // set origin
-    origins.push(origin);
+displayDriversList(origin, drivers) {
+  let list = [];
+  let distance = [];
+  let time = [];
 
-    // var seatservice = this.carService
-    // this.carService.getCarByUserId(element.getCarByUserId)
+    let  origins = [];
+    //set origin
+    origins.push(origin)
 
     var outputDiv = document.getElementById('output');
     drivers.forEach(element => {
-      //   var driver = this.drivers;
-      // // TODO: test out displayDriversList to get car info to display on this component
-      // this.carService.getCarByUserId2(sessionStorage.getItem("driver")).subscribe((response)=>{
-      //   this.currentCar = response;
-      //   this.make = response.make;
-      //   this.model = response.model;
-      //   this.nrSeats = response.seats;
-      //   console.log("this.nrSeats is " +this.nrSeats);
-      // });
 
-      var service = new google.maps.DistanceMatrixService();
+      console.log("Element "+element.name);
+
+
+      // this.sleep(2000).then(() => {
+        var service = new google.maps.DistanceMatrixService;
       service.getDistanceMatrix(
         {
-          origins: origins,
-          destinations: [element.origin],
-          travelMode: google.maps.TravelMode.DRIVING,
-          unitSystem: google.maps.UnitSystem.IMPERIAL,
-          avoidHighways: false,
-          avoidTolls: false
-        },
-        function(response, status) {
-          if (status !== 'OK') {
-            alert('Error was: ' + status);
-          } else {
-            var originList = response.originAddresses;
-            var destinationList = response.destinationAddresses;
-            var results = response.rows[0].elements;
-            // console.log(results[0].distance.text);
-            var name = element.name;
+        origins: origins,
+        destinations: [element.origin],
+        travelMode: google.maps.TravelMode.DRIVING,
+        unitSystem: google.maps.UnitSystem.IMPERIAL,
+        avoidHighways: false,
+        avoidTolls: false
+      }, callback);
 
-            var seats = element.seats; // TODO: Does var pull seats?
-            console.log(seats);
-            // TODO:  Added TD COLUMN at line 156; Will be SEATS column
-            outputDiv.innerHTML += `<tr><td class="col">${name}</td>
+     function callback(response, status) {
+        if (status !== 'OK') {
+          alert('Google API Error: ' + status);
+        } else {
+          var originList = response.originAddresses;
+          var destinationList = response.destinationAddresses;
+          var results = response.rows[0].elements;
+          
+          console.log("Element After "+element.name);
+          list.push(element);
+          distance.push(results[0].distance);
+          time.push(results[0].duration);
+
+          var name =  element.name;
+          outputDiv.innerHTML += `<tr><td class="col">${name}</td>
                                   <td class="col">${results[0].distance.text}</td>
                                   <td class="col">${results[0].duration.text}</td>
 
@@ -197,9 +221,174 @@ export class DriverListComponent implements OnInit {
                                       <div #maps id="gmap" class="img-responsive"></div>
                                   </div>
                                 </td></tr>`;
-          }
-        }
-      );
+      }
+    }
+
+    
+      
     });
-  }
+    console.log (list);
+    console.log(distance);
+    console.log(time);
+
+    this.time = time;
+    this.distance = distance; 
+    this.driversList = list;
+
+    
+  
+    // });
+
+  
+}
+
+emptyDriversList() {
+
+
+  var outputDiv = document.getElementById('output');
+        outputDiv.innerHTML = ``;
+    
+  
+}
+
+sortByName(){
+  console.log("Sorting By Name");
+  this.emptyDriversList();
+
+  console.log(this.driversList);
+  console.log(this.time);
+  console.log(this.distance);
+
+  let dr = [];
+  //CREATE ARRAY OF NAMES. 
+  this.driversList.forEach(d =>{ dr.push(d.name);})
+  console.log("Unsorted: " +dr);
+
+  const drClone  = Object.assign([], dr);
+  console.log("Clone: "+drClone);
+
+
+  let sortDr = dr.sort();
+  console.log(sortDr);
+
+  let index = [];
+  sortDr.forEach(s =>{ index.push(drClone.indexOf(s));})
+  console.log(index);
+
+
+  let mark = 0;
+  var outputDiv = document.getElementById('output');
+  sortDr.forEach(sDr =>{
+
+
+      outputDiv.innerHTML += `<tr><td class="col">${sDr}</td>
+      <td class="col">${this.distance[index[mark]].text}</td>
+      <td class="col">${this.time[index[mark]].text}</td>
+      <td class="col">
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCentered${this.driversList[index[mark]].id}"> View</button>
+        <div class="col-lg-5">
+        <div class="modal" id="exampleModalCentered${this.driversList[index[mark]].id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalCenteredLabel">Contact Info:</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                      </button>
+                  </div>
+                  <div class="modal-body">
+                  <h1>${this.driversList[index[mark]].name}</h1>
+                  <h3>Email: ${this.driversList[index[mark]].email}</h3>         
+                  <h3>Phone: ${this.driversList[index[mark]].phone}</h3>                 
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+            </div>
+          </div>
+      </div>
+      <div class="col-lg-6">
+          <div #maps id="gmap" class="img-responsive"></div>
+      </div>
+    </td></tr>`;
+    mark++
+    
+  })
+      
+
+
+
+
+}
+
+sortByDistance(){
+  this.emptyDriversList();
+
+  console.log(this.driversList);
+  console.log(this.time);
+  console.log(this.distance);
+
+  let ds = [];
+  //CREATE ARRAY OF Distances. 
+  this.distance.forEach(d =>{ ds.push(Number(d.value));})
+  console.log("Unsorted: " +ds);
+
+  const dsClone  = Object.assign([], ds);
+  console.log("Clone: "+dsClone);
+
+  let sortDs = ds.sort((a, b) => a - b); // For ascending sort
+  console.log(sortDs);
+
+  let index = [];
+  sortDs.forEach(s =>{ index.push(dsClone.indexOf(s));})
+  console.log(index);
+
+  let mark = 0;
+  var outputDiv = document.getElementById('output');
+  sortDs.forEach(sDr =>{
+
+
+      outputDiv.innerHTML += `<tr><td class="col">${this.driversList[index[mark]].name}</td>
+      <td class="col">${this.distance[index[mark]].text}</td>
+      <td class="col">${this.time[index[mark]].text}</td>
+      <td class="col">
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCentered${this.driversList[index[mark]].id}"> View</button>
+        <div class="col-lg-5">
+        <div class="modal" id="exampleModalCentered${this.driversList[index[mark]].id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalCenteredLabel">Contact Info:</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                      </button>
+                  </div>
+                  <div class="modal-body">
+                      <h1>${this.driversList[index[mark]].name}</h1>
+                      <h3>Email: ${this.driversList[index[mark]].email}</h3>         
+                      <h3>Phone: ${this.driversList[index[mark]].phone}</h3>                 
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+            </div>
+          </div>
+      </div>
+      <div class="col-lg-6">
+          <div #maps id="gmap" class="img-responsive"></div>
+      </div>
+    </td></tr>`;
+    mark++
+    
+  })
+
+
+
+
+
+}
+
+
 }

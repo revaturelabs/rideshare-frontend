@@ -4,116 +4,124 @@ import { User } from 'src/app/models/user';
 import { Router } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
 import { AuthService } from '../auth-service/auth.service';
-import { LogService } from '../log.service'
+import { LogService } from '../log.service';
 import { environment } from '../../../environments/environment';
 
 
 
 @Injectable({
-  	providedIn: 'root'
+    providedIn: 'root'
 })
-//ok
+
 
 
 
 export class UserService {
 
-    
 
-	/**
-	 * This is an user service
-	 */
-	@Output() fireIsLoggedIn: EventEmitter<any> = new EventEmitter<any>();
+    /**
+     * Constructor
+     * @param http An HTTP client object
+     * @param router A router
+     * @param log A log service
+     * @param authService An authorization service
+     */
 
-	// http headers
-	private headers = new HttpHeaders({'Content-Type': 'application/json'});
-	
+    constructor(private http: HttpClient, private router: Router, private log: LogService, private authService: AuthService) { }
+
+    /**
+     * This is an user service
+     */
+    @Output() fireIsLoggedIn: EventEmitter<any> = new EventEmitter<any>();
+
+    // http headers
+    private headers = new HttpHeaders({'Content-Type': 'application/json'});
 
 
-	/**
-	 * Set up the url string to the env var
-	 * Creates a new user object
-	 */
-	url: string = environment.userUri;
-	carUrl: string = environment.carUri;
-	user: User = new User();
+
+    /**
+     * Set up the url string to the env var
+     * Creates a new user object
+     */
+    url: string = environment.userUri;
+    carUrl: string = environment.carUri;
+    user: User = new User();
     googleBaseUrl = environment.googleBaseUri;
     googleApiKey: any = '';
 
+    /**
+     * body to send update data
+     */
+    private body: string;
 
-	/**
-	 * Constructor
-	 * @param http An HTTP client object
-	 * @param router A router
-	 * @param log A log service
-	 * @param authService An authorization service
-	 */
+    private httpOptions = {
+        headers: new HttpHeaders({'Content-Type': 'application/json'}),
+        observe: 'response' as 'body'
+    };
 
-	constructor(private http: HttpClient, private router: Router, private log: LogService, private authService: AuthService) { }
-  
-	/**
-	 * A GET method for all users
-	 */
+    /**
+     * A GET method for all users
+     */
 
-	getAllUsers() {
-		return this.http.get<User[]>(this.url);
-	}
-	
-	/**
-	 * A GET method for one user
-	 * @param idParam 
-	 */
-	getUserById(idParam: number) {
-		
-		console.log(this.url)
-		return this.http.get<User>(this.url+idParam).toPromise();
+    getAllUsers() {
+        return this.http.get<User[]>(this.url);
+    }
+
+    /**
+     * A GET method for one user
+     * @param idParam 
+     */
+    getUserById(idParam: number) {
+        console.log(this.url);
+        return this.http.get<User>(this.url+idParam).toPromise();
 
 
-	}
-
-	 
-	getUserById2(idParam2: String): Observable<User> {
-		
-		// console.log(this.url)
-		return this.http.get<User>(this.url+idParam2);
+    }
 
 
-	}
+    getUserById2(idParam2: String): Observable<User> {
 
-	/**
-	 * A POST method that switch an Rider to a Driver
-	 * @param user 
-	 * @param role 
-	 */
-	createDriver(user: User, role) {
+        // console.log(this.url)
+        return this.http.get<User>(this.url+idParam2);
 
-		user.active = true;
-		user.isDriver = false;
-		user.isAcceptingRides = false;
-		console.log(user);
 
-		this.http.post(this.url, user, {observe: 'response'}).subscribe(
-			(response) => {
-				this.authService.user = response.body;
-				this.fireIsLoggedIn.emit(response.body);
+    }
 
-				if (role === 'driver') {
-					this.router.navigate(['new/car']);
-				} else {
-					this.router.navigate(['home/drivers']);
-				}
-			},
-			(error) => {
-				this.log.error(error)
-			}
-		);
+    /**
+     * A POST method that switch an Rider to a Driver
+     * @param user 
+     * @param role 
+     */
+    createDriver(user: User, role) {
 
-	}
+        user.active = true;
+        user.isDriver = false;
+        user.isAcceptingRides = false;
+        console.log(user);
 
-	// adds user if form is filled out and user input matches a real address
-	async addUser(user :User) : Promise<User> {
+        this.http.post(this.url, user, {observe: 'response'}).subscribe(
+            (response) => {
+                this.authService.user = response.body;
+                this.fireIsLoggedIn.emit(response.body);
+
+                if (role === 'driver') {
+                    this.router.navigate(['new/car']);
+                } else {
+                    this.router.navigate(['home/drivers']);
+                }
+            },
+            (error) => {
+                this.log.error(error);
+            }
+        );
+
+    }
+
+    // adds user if form is filled out and user input matches a real address
+    async addUser(user :User) : Promise<User> {
         const addressValid = await this.addressValidation(user);//waits for validation to edit fields before post request
-        console.log(`User location info log(location modifying to '' on failure) happens first: ${user.hAddress}, ${user.hCity}, ${user.hState}, ${user.hZip}`)
+        console.log(`User location info log(location modifying to '' on failure)
+        happens first: ${user.hAddress}, ${user.hCity}, ${user.hState}, ${user.hZip}`);
         return this.http.post<User>(this.url, user, {headers: this.headers}).toPromise();
     }
 
@@ -126,15 +134,14 @@ export class UserService {
     private async addressValidation(user: User): Promise<any> {
         const numAndStreetName = user.hAddress.split(' '); // ensures user placed a space between the street number and street name
         let valid = true;
-        console.log(`google api key is: ${this.googleApiKey}`)
+        console.log(`google api key is: ${this.googleApiKey}`);
         if ( isNaN(Number(numAndStreetName[0]))){
-            console.log('first part of haddress is not a number!')
+            console.log('first part of haddress is not a number!');
             valid = false;
-        }
-        else{
+        }else{
             console.log('Number of parts in haddress is: ' + numAndStreetName.length);
             // construct url with needed number of +'s based on length of numAndStreetName...
-            let googleConstructedUrl = this.constructGoogleUrl(numAndStreetName, user);
+            const googleConstructedUrl = this.constructGoogleUrl(numAndStreetName, user);
             const data = await this.googleApiResult(googleConstructedUrl);
             valid = (this.partialMatch(data) || this.parseAndValidate(data, user));
             console.log('valid after "or" logic is: ' + valid);
@@ -143,7 +150,7 @@ export class UserService {
         if (valid === false){
             this.setInvalidAddress(user);
         }
-        let promise1 = new Promise(function(resolve, reject){
+        const promise1 = new Promise(function(resolve, reject){
             resolve('Address validation complete');
         });
         return promise1;
@@ -152,13 +159,13 @@ export class UserService {
         console.log(data);
         try {// throws an error if we try to access data/compare data that isn't there
             if (data.results[0].partial_match == true){
-                console.log('partial match only')
+                console.log('partial match only');
                 return false;
             }
 
         } catch (error) {// Another invalid pathway in the case that google api is not set up properly/api is no longer in expected format
             console.log(error);
-            console.log('Invalid/no gapi geocode compatible key or no "partial_match" at position 0 of result data')
+            console.log('Invalid/no gapi geocode compatible key or no "partial_match" at position 0 of result data');
             return false;
         }
     }
@@ -218,11 +225,11 @@ export class UserService {
                 return true; // validated
 
             } else { // user's inputted address elements don't match the google address elements
-                console.log('else condition regarding failed comparisons to google output trigger')
+                console.log('else condition regarding failed comparisons to google output trigger');
                 return false;
             }
         } catch (error){
-            console.log(' Invalid/no gapi geocode compatible key or no "formatted_address" element at position [0])')
+            console.log(' Invalid/no gapi geocode compatible key or no "formatted_address" element at position [0])');
             return false;
         }
     }
@@ -267,133 +274,122 @@ export class UserService {
 
     }
 
-	/**
-	 * This function returns the fireIsLoggedIn variable
-	 */
+    /**
+     * This function returns the fireIsLoggedIn variable
+     */
 
-	getEmitter() {
-		return this.fireIsLoggedIn;
-	}
+    getEmitter() {
+        return this.fireIsLoggedIn;
+    }
 
-	/**
-	 * A PUT method that updates the user information
-	 * @param isDriver 
-	 * @param userId 
-	 */
+    /**
+     * A PUT method that updates the user information
+     * @param isDriver 
+     * @param userId 
+     */
 
-	updateIsDriver(isDriver, userId) {
+    updateIsDriver(isDriver, userId) {
 
-		this.getUserById(userId)
-			.then((response) => {
-				this.user = response;
-				this.user.isDriver = isDriver;
-				this.user.isAcceptingRides = (this.user.active && isDriver);
+        this.getUserById(userId)
+            .then((response) => {
+                this.user = response;
+                this.user.isDriver = isDriver;
+                this.user.isAcceptingRides = (this.user.active && isDriver);
 
-				this.http.put(this.url+userId, this.user).subscribe(
-					(response) => {
-						this.authService.user = response;
-						this.log.info(JSON.stringify(response));
-					},
-					(error) => this.log.error(error)
-				);
-			})
-			.catch(e => {
-				this.log.error(e)
-			})
-	}
+                this.http.put(this.url+userId, this.user).subscribe(
+                    (response) => {
+                    this.authService.user = response;
+                        this.log.info(JSON.stringify(response));
+                    },
+                    (error) => this.log.error(error)
+                );
+            })
+            .catch(e => {
+                this.log.error(e);
+            });
+    }
 
-	/**
-	 * A PUT method that updates the preference of the user
-	 * @param property 
-	 * @param bool 
-	 * @param userId 
-	 */
+    /**
+     * A PUT method that updates the preference of the user
+     * @param property 
+     * @param bool 
+     * @param userId 
+     */
 
-	updatePreference(property, bool, userId) {
+    updatePreference(property, bool, userId) {
 
-		this.getUserById(userId)
-			.then((response) => {
-				this.user = response;
-				this.user[property] = bool;
-				if (property === 'active' && bool === false) {
-					this.user.isAcceptingRides = false;
-				}
+        this.getUserById(userId)
+            .then((response) => {
+                this.user = response;
+                this.user[property] = bool;
+                if (property === 'active' && bool === false) {
+                    this.user.isAcceptingRides = false;
+                }
 
-				this.http.put(this.url+userId, this.user).subscribe(
-					(response) => {
-						this.authService.user = response;
-					},
-					(error) => console.warn(error)
-				);
-			})
-			.catch(e => {
-				this.log.error(e);
-			})
-	}
+                this.http.put(this.url+userId, this.user).subscribe(
+                    (response) => {
+                        this.authService.user = response;
+                    },
+                    (error) => console.warn(error)
+                );
+            })
+            .catch(e => {
+                this.log.error(e);
+            });
+    }
 
-	/**
-	 * A PUT method that updates user's information
-	 * @param user 
-	 */
+    /**
+     * A PUT method that updates user's information
+     * @param user
+     */
 
-	async updateUserInfo(user: User): Promise<Object> {
-        const addressValid = await this.addressValidation(user);//waits for validation to edit fields before put request
-        console.log(`USER UPDATE: User location info log(location modifying to '' on failure) happens first: ${user.hAddress}, ${user.hCity}, ${user.hState}, ${user.hZip}`)
+    async updateUserInfo(user: User): Promise<Object> {
+        const addressValid = await this.addressValidation(user); // waits for validation to edit fields before put request
+        console.log(`USER UPDATE: User location info log
+        (location modifying to '' on failure) happens first: ${user.hAddress}, ${user.hCity}, ${user.hState}, ${user.hZip}`);
         return this.http.put(this.url, user).toPromise();
-	}
-	/**
-	 * A GET method that retrieves a driver by Id
-	 * @param id 
-	 */
+    }
+    /**
+     * A GET method that retrieves a driver by Id
+     * @param id 
+     */
+    getDriverById(id: number): Observable <any> {
+        return this.http.get(this.url + id);
+    }
 
-	getDriverById(id: number): Observable <any> {
-		return this.http.get(this.url + id);
-	}
-	
-	/**
-	 * A PUT method that changes the isAcceptingRide variable
-	 * @param data 
-	 */
+    /**
+     * A PUT method that changes the isAcceptingRide variable
+     * @param data 
+     */
 
-	changeDriverIsAccepting(data) {
-		let id=data.userId;
-		return this.http.put(this.url+id, data).toPromise()
-		
-	  }
-	  
-	  getRidersForLocation(location: string): Observable <any> {
-		return this.http.get(this.url + '?is-driver=false&location='+ location)
-	  }
+    changeDriverIsAccepting(data) {
+        const id=data.userId;
+        return this.http.put(this.url+id, data).toPromise();
+
+        }
+
+    getRidersForLocation(location: string): Observable <any> {
+        return this.http.get(this.url + '?is-driver=false&location='+ location);
+    }
     /**
      * A GET method that shows all users
      */
-		showAllUser(): Observable<any> {
-		  return this.http.get(this.url);
-		}
-
-    /**
-     * body to send update data
-     */
-      private body: string;
-
-      private httpOptions = {
-        headers: new HttpHeaders({'Content-Type': 'application/json'}),
-        observe: 'response' as 'body'
-      }
-  
+    showAllUser(): Observable<any> {
+        return this.http.get(this.url);
+    }
     /**
      * A function that bans users.
      */
     banUser(user: User) {
       this.body = JSON.stringify(user);
       this.http.put(`${this.url + user.userId}`,this.body,this.httpOptions).subscribe();
-	}
-	
-	getRidersForLocation1(location: string): Observable <any> {
-		return this.http.get(this.url + 'driver/'+ location)
-	}
+    }
 
-	getRidersForLocation2(location: string): Observable <any>{
-		return this.http.get(this.carUrl + 'driver/' + location);
-	}
+    getRidersForLocation1(location: string): Observable <any> {
+        return this.http.get(this.url + 'driver/'+ location);
+    }
+
+    getRidersForLocation2(location: string): Observable <any>{
+        return this.http.get(this.carUrl + 'driver/' + location);
+    }
 }

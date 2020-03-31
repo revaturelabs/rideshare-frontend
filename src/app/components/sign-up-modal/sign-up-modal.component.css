@@ -122,6 +122,10 @@ h3{
     font-size: 16px;
 }
 
+.check {
+    transform:scale(2, 2);
+}
+
 /*----------------Removes up/down input arrows for zipcode input field--------------*/
 
 /* Chrome, Safari, Edge, Opera */

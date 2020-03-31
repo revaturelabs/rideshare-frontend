@@ -63,19 +63,17 @@
     <input id="hZipInput" type="number" [(ngModel)]="user.hZip" class="form-control" (change)="onZipChange()"/>
     <!--JL: added id="hZipInput" for my needs when developping the e2e tests -->
 
-    <div class="radiobody">
-    <div class="btn-group" data-toggle="buttons">
-        <label class="btn btn-primary">
-          <input type="checkbox"  id="driver" [(ngModel)]="isDriver" /> Driver
+    <div class="radiobody mx-auto w-50 mt-4 mb-2">
+        <label class="btn btn-primary mx-auto w-100">
+          <input type="checkbox" class="check" id="driver" [(ngModel)]="this.user.isDriver"/>&nbsp; Driver
         </label>
         <br>
-        <label class="btn btn-primary">
-          <input type="checkbox"  id="rider" [(ngModel)]="isRider"/> Rider
-        </label>
-  </div>
     </div>
 
+<<<<<<< HEAD
     <!--JL: added id="signupSubmit" for my needs when developping the e2e tests -->
+=======
+>>>>>>> 88bc52de85b90ad252792ac87a5254186e18ea79
     <div class="btn-container">
       <button id="signupSubmit" type="submit" class="btn btn-primary register" (click)="submitUser()">Submit</button>
       <p class="mt-2" [ngStyle]="{'color': submitMessageColor, 'visibility': submitMessageVisible}">{{submitMessage}}</p>

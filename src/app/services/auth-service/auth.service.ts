@@ -38,7 +38,7 @@ export class AuthService {
 	login(user: User, chosenUserName: string) {
 		if (user.userName === chosenUserName) {
 			this.user = user;
-			if(this.user.driver){
+			if(this.user.isDriver){
 				this.router.navigate(['/home/riders']);
 			}
 			else{

@@ -85,7 +85,7 @@ export class LoginComponent implements OnInit {
 		this.curPage = 1;
 		this.totalPage = Math.ceil(this.allUsers.length / 5);
 		this.users = this.allUsers.slice(this.curPage * 5 - 5, this.curPage * 5);
-		this.chosenUserFullName = `${user.firstName} ${user.lastName}: ${user.driver ? 'Driver' : 'Rider'}`;
+		this.chosenUserFullName = `${user.firstName} ${user.lastName}: ${user.isDriver ? 'Driver' : 'Rider'}`;
 		this.chosenUser = user;
 	}
 

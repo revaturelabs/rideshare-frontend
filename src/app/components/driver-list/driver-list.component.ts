@@ -120,10 +120,19 @@ export class DriverListComponent implements OnInit {
     );
   }
 
+  //making new method for getting seats from the backend
+  displayNumberOfSeats (userId): Car {
+    var userCar = new Car();
+    this.carService.getCarByUserId2(userId).subscribe(response => {userCar = response});
+    console.log(userCar);
+    return userCar;
+  };
+
   displayDriversList(origin, drivers) {
     let origins = [];
     // set origin
     origins.push(origin);
+
 
     // var seatservice = this.carService
     // this.carService.getCarByUserId(element.getCarByUserId)
@@ -141,6 +150,7 @@ export class DriverListComponent implements OnInit {
       // });
 
       var service = new google.maps.DistanceMatrixService();
+      let carService: CarService;
       service.getDistanceMatrix(
         {
           origins: origins,
@@ -158,16 +168,19 @@ export class DriverListComponent implements OnInit {
             var destinationList = response.destinationAddresses;
             var results = response.rows[0].elements;
             // console.log(results[0].distance.text);
-            var name = element.name;
 
-            var seats = element.seats; // TODO: Does var pull seats?
-            console.log(seats);
-            // TODO:  Added TD COLUMN at line 156; Will be SEATS column
+            //this is the same method that I abstracted away in the displayNumberOfSeats method from above
+            var name = element.name;
+            let userCar = new Car();
+            console.log(element.id); // <----- that works
+            carService.getCarByUserId2(element.id).subscribe(response => {userCar = response});
+            console.log(userCar);
+
             outputDiv.innerHTML += `<tr><td class="col">${name}</td>
                                   <td class="col">${results[0].distance.text}</td>
                                   <td class="col">${results[0].duration.text}</td>
 
-                                  <td class="col">${seats}</td>
+                                  <td class="col">${userCar}</td>
 
                                   <td class="col">
                                   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCentered${element.id}"> View</button>

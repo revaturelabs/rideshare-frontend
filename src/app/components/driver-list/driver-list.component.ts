@@ -32,7 +32,7 @@ export class DriverListComponent implements OnInit {
 
 
 
-  @ViewChild('map',null) mapElement: any;
+  @ViewChild('map', null) mapElement: any;
   map: google.maps.Map;
 
   constructor(private http: HttpClient,private userService: UserService,
@@ -60,7 +60,7 @@ export class DriverListComponent implements OnInit {
 
 
 
-   searchDriver(sorter: string){
+   searchDriver(sorter: string) {
     //call service search algorithm ()
     console.log("searching for Drivers");
     this.drivers = [];
@@ -68,8 +68,8 @@ export class DriverListComponent implements OnInit {
     this.userService.getRidersForLocation1(this.homeLocation, this.workLocation, sorter).subscribe(
       res => {
            res.forEach(element => {
-            console.log("Driver: "+res);
-              this.drivers.push({
+            console.log("Driver: " + res);
+            this.drivers.push({
                    'id': element.userId,
                  'name': element.firstName+" "+element.lastName,
                'origin':element.hAddress+","+element.hCity+","+element.hState,
@@ -77,7 +77,9 @@ export class DriverListComponent implements OnInit {
                 'phone':element.phoneNumber
               });
           });
-          console.log(this.drivers);
+           console.log(this.drivers);
+
+           this.emptyDriversList();
 
           this.emptyDriversList();
 
@@ -101,7 +103,7 @@ export class DriverListComponent implements OnInit {
 
    }
 
-  showDriversOnMap(origin, drivers){
+  showDriversOnMap(origin, drivers) {
      drivers.forEach(element => {
       var directionsService = new google.maps.DirectionsService;
       var directionsRenderer = new google.maps.DirectionsRenderer({
@@ -144,7 +146,7 @@ displayDriversList(origin, drivers) {
 
 
       // this.sleep(2000).then(() => {
-        var service = new google.maps.DistanceMatrixService;
+      var service = new google.maps.DistanceMatrixService;
       service.getDistanceMatrix(
         {
         origins: origins,
@@ -155,7 +157,7 @@ displayDriversList(origin, drivers) {
         avoidTolls: false
       }, callback);
 
-     function callback(response, status) {
+      function callback(response, status) {
         if (status !== 'OK') {
           alert('Google API Error: ' + status);
         } else {
@@ -206,9 +208,14 @@ displayDriversList(origin, drivers) {
 
 
     });
-    console.log (list);
-    console.log(distance);
-    console.log(time);
+  console.log (list);
+  console.log(distance);
+  console.log(time);
+
+  this.time = time;
+  this.distance = distance;
+  this.driversList = list;
+
 
     this.time = time;
     this.distance = distance;
@@ -230,7 +237,7 @@ emptyDriversList() {
 
 }
 
-sortByName(){
+sortByName() {
   console.log("Sorting By Name");
   this.emptyDriversList();
 
@@ -244,20 +251,20 @@ sortByName(){
   console.log("Unsorted: " +dr);
 
   const drClone  = Object.assign([], dr);
-  console.log("Clone: "+drClone);
+  console.log("Clone: " + drClone);
 
 
   let sortDr = dr.sort();
   console.log(sortDr);
 
   let index = [];
-  sortDr.forEach(s =>{ index.push(drClone.indexOf(s));})
+  sortDr.forEach(s => { index.push(drClone.indexOf(s)); });
   console.log(index);
 
 
   let mark = 0;
   var outputDiv = document.getElementById('output');
-  sortDr.forEach(sDr =>{
+  sortDr.forEach(sDr => {
 
 
       outputDiv.innerHTML += `<tr><td class="col">${sDr}</td>
@@ -301,7 +308,7 @@ sortByName(){
 
 }
 
-sortByDistance(){
+sortByDistance() {
   this.emptyDriversList();
 
   console.log(this.driversList);
@@ -314,18 +321,18 @@ sortByDistance(){
   console.log("Unsorted: " +ds);
 
   const dsClone  = Object.assign([], ds);
-  console.log("Clone: "+dsClone);
+  console.log("Clone: " + dsClone);
 
   let sortDs = ds.sort((a, b) => a - b); // For ascending sort
   console.log(sortDs);
 
   let index = [];
-  sortDs.forEach(s =>{ index.push(dsClone.indexOf(s));})
+  sortDs.forEach(s => { index.push(dsClone.indexOf(s)); });
   console.log(index);
 
   let mark = 0;
   var outputDiv = document.getElementById('output');
-  sortDs.forEach(sDr =>{
+  sortDs.forEach(sDr => {
 
 
       outputDiv.innerHTML += `<tr><td class="col">${this.driversList[index[mark]].name}</td>

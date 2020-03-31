@@ -54,10 +54,10 @@ export class UserService {
 	 * A GET method for one user
 	 * @param idParam
 	 */
-	getUserById(idParam: number){
+	getUserById(idParam: number) {
 
-		console.log(this.url)
-		return this.http.get<User>(this.url+idParam).toPromise();
+		console.log(this.url);
+		return this.http.get<User>(this.url + idParam).toPromise();
 
 
 	}
@@ -66,7 +66,7 @@ export class UserService {
 	getUserById2(idParam2: String): Observable<User>{
 
 		//console.log(this.url)
-		return this.http.get<User>(this.url+idParam2);
+		return this.http.get<User>(this.url + idParam2);
 
 
 	}
@@ -194,18 +194,18 @@ export class UserService {
 	 */
 
 	changeDriverIsAccepting(data) {
-		let id=data.userId;
-		return this.http.put(this.url+id, data).toPromise()
+		let id = data.userId;
+		return this.http.put(this.url + id, data).toPromise();
 
 	  }
 
 	  getRidersForLocation(location: string): Observable <any>{
-		return this.http.get(this.url + '?is-driver=false&location='+ location)
+		return this.http.get(this.url + '?is-driver=false&location=' + location);
 	  }
     /**
      * A GET method that shows all users
      */
-		showAllUser(): Observable<any>{
+		showAllUser(): Observable<any> {
 		  return this.http.get(this.url);
 		}
 
@@ -222,12 +222,12 @@ export class UserService {
     /**
      * A function that bans users.
      */
-    banUser(user: User){
+    banUser(user: User) {
       this.body = JSON.stringify(user);
-      this.http.put(`${this.url + user.userId}`,this.body,this.httpOptions).subscribe();
+      this.http.put(`${this.url + user.userId}`, this.body, this.httpOptions).subscribe();
 	}
 
-	getRidersForLocation1(location: string): Observable <any>{
-		return this.http.get(this.url + 'driver/'+ location)
+	getRidersForLocation1(location: string): Observable <any> {
+		return this.http.get(this.url + 'driver/' + location);
 	}
 }

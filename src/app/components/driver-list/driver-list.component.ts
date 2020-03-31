@@ -15,11 +15,11 @@ import { element } from 'protractor';
 
 export class Drivers {
     id: string;
-    firstName: string;
-    lastName: string;
+    name: string;
     origin: string;
+    address: string;
     email: string;
-    phone;
+    phone: any;
 
 }
 
@@ -28,14 +28,16 @@ export class Drivers {
   templateUrl: './driver-list.component.html',
   styleUrls: ['./driver-list.component.css']
 })
+
 export class DriverListComponent implements OnInit {
 
-  location: string = 'Morgantown, WV';
+  location = 'Morgantown, WV';
   mapProperties: {};
-  availableCars: Array<any> = [];
   drivers: Array<any> = [];
   arr = [];
+  tableColumns: string[] = ['name', 'distance', 'time', 'view'];
   reverseClicked = false;
+  sortNumber = 0;
 
   @ViewChild('map', null) mapElement: any;
   map: google.maps.Map;
@@ -48,7 +50,8 @@ export class DriverListComponent implements OnInit {
     this.userService.getRidersForLocation1(this.location).subscribe(
       res => {
            // console.log(res);
-           res.forEach(element => {
+           res.forEach((element: { userId: any; firstName: string; lastName: string; hCity: string; hState: string;
+             email: any; phoneNumber: any; }) => {
               this.drivers.push({
                  id: element.userId,
                  name: element.firstName + " " + element.lastName,
@@ -83,7 +86,8 @@ export class DriverListComponent implements OnInit {
   }
 
 
-  sleep(ms) {
+
+  sleep(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
@@ -104,8 +108,8 @@ getGoogleApi()  {
        );
    }
 
-  showDriversOnMap(origin, drivers) {
-     drivers.forEach(element => {
+  showDriversOnMap(origin: string, drivers: any[]) {
+     drivers.forEach((element: { origin: any; }) => {
       var directionsService = new google.maps.DirectionsService();
       var directionsRenderer = new google.maps.DirectionsRenderer({
          draggable: true,
@@ -116,13 +120,13 @@ getGoogleApi()  {
   }
 
 
-displayRoute(origin, destination, service, display) {
+displayRoute(origin: any, destination: any, service: google.maps.DirectionsService, display: google.maps.DirectionsRenderer) {
     service.route({
-      origin: origin,
-      destination: destination,
+      origin,
+      destination,
       travelMode: 'DRIVING',
       // avoidTolls: true
-    }, function(response, status) {
+    }, function(response: any, status: string) {
       if (status === 'OK') {
         display.setDirections(response);
       } else {
@@ -132,23 +136,25 @@ displayRoute(origin, destination, service, display) {
   }
 
 
-  displayDriversList(origin, drivers) {
+  displayDriversList(origin: string, drivers: any[]) {
 
+    console.log(drivers);
     let thingy = [];
-    let  origins = [];
+    let origins = [];
 
     // set origin
     origins.push(origin);
 
     // const outputDiv = document.getElementById('output');
 
-    drivers.forEach(element => {
+    drivers.forEach((element: { origin: string | google.maps.LatLng | google.maps.LatLngLiteral | google.maps.Place;
+      name: any; id: any; email: any; phone: any; }) => {
 
         const service = new google.maps.DistanceMatrixService();
 
         service.getDistanceMatrix(
           {
-            origins: origins,
+            origins,
             destinations: [element.origin],
             travelMode: google.maps.TravelMode.DRIVING,
             unitSystem: google.maps.UnitSystem.IMPERIAL,
@@ -160,15 +166,15 @@ displayRoute(origin, destination, service, display) {
             if (status !== 'OK') {
               alert('Error was: ' + status);
             } else {
-              let originList = response.originAddresses;
-              let destinationList = response.destinationAddresses;
-              let results = response.rows[0].elements;
-              let name =  element.name;
+              this.drivers.address = response.originAddresses;
+              this.drivers.destination = response.destinationAddresses;
+              this.drivers.results = response.rows[0].elements;
+              this.drivers.name =  element.name;
 
               const temp = {
                 "html": `<tr><td class="col">${name}</td>
-                                      <td class="col">${results[0].distance.text}</td>
-                                      <td class="col">${results[0].duration.text}</td>
+                                      <td class="col">${drivers.results[0].distance.text}</td>
+                                      <td class="col">${drivers.results[0].duration.text}</td>
                                       <td class="col">
                                       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCentered${element.id}"> View</button>
                                         <div class="col-lg-5">
@@ -197,7 +203,7 @@ displayRoute(origin, destination, service, display) {
                                           <div #maps id="gmap" class="img-responsive"></div>
                                       </div>
                                     </td></tr>`,
-                "time": results[0].duration.value,
+                "time": drivers.results[0].duration.value,
               }
 
               // console.log(temp.time);
@@ -206,35 +212,35 @@ displayRoute(origin, destination, service, display) {
               this.arr = thingy;
             } // else
           }
-        ) // distance matrix param
+        ); // distance matrix param
       } // anon func
-    ) // for each
+    ); // for each
 
     this.sleep(2000).then(() => {
-        thingy = this.quickSort(thingy, true);
+        thingy = this.quickSort(thingy, true, this.sortNumber);
         this.sleep(1000).then(() => {
           this.show(thingy);
           this.arr = thingy;
-        })
-    })
+        });
+    });
   } //display function
 
-  show(arr) {
+  show(arr: any[]) {
     let outputDiv = document.getElementById('output');
-    outputDiv.innerHTML = "";
-    arr.forEach(ele => {
+    outputDiv.innerHTML = '';
+    arr.forEach((ele: { [x: string]: string; }) => {
       outputDiv.innerHTML += ele["html"];
     });
 
   }
 
-  reverse() {
+  reverse(sortNumber) {
     if (this.reverseClicked === false) {
       this.reverseClicked = true;
-      this.arr = this.quickSort(this.arr, false);
+      this.arr = this.quickSort(this.arr, false, sortNumber);
     } else {
       this.reverseClicked = false;
-      this.arr = this.quickSort(this.arr, true);
+      this.arr = this.quickSort(this.arr, true, sortNumber);
     }
 
     this.sleep(2000).then(() => {
@@ -242,37 +248,55 @@ displayRoute(origin, destination, service, display) {
     });
   }
 
-  quickSort(array, desc) {
+  quickSort(array: any[], desc: boolean, sortNumber: number) {
 
-    if (array.length <= 1) {return array;}
+    if (array.length <= 1) { return array; }
 
     let pivot = array.shift();
 
-    let left=[];
-    let right=[];
-
-    if(desc === true) {
-      left = array.filter(el => {
+    let left = [];
+    let right = [];
+    if (sortNumber === 1) {
+    if (desc === true) {
+      left = array.filter((el: { [x: string]: string; }) => {
         return parseInt(el["time"]) < parseInt(pivot["time"]);
-      })
-      right = array.filter(el => {
+      });
+      right = array.filter((el: { [x: string]: string; }) => {
         return parseInt(el["time"]) >= parseInt(pivot["time"]);
       });
     } else {
-      left = array.filter(el => {
+      left = array.filter((el: { [x: string]: string; }) => {
         return parseInt(el["time"]) > parseInt(pivot["time"]);
-      })
-      right = array.filter(el => {
+      });
+      right = array.filter((el: { [x: string]: string; }) => {
         return parseInt(el["time"]) <= parseInt(pivot["time"]);
       });
     }
+  } else {
+    if (desc === true) {
+      left = array.filter((el: { [x: string]: string; }) => {
+        return parseInt(el["distance"]) < parseInt(pivot["distance"]);
+      });
+      right = array.filter((el: { [x: string]: string; }) => {
+        return parseInt(el["distance"]) >= parseInt(pivot["distance"]);
+      });
+    } else {
+      left = array.filter((el: { [x: string]: string; }) => {
+        return parseInt(el["distance"]) > parseInt(pivot["distance"]);
+      });
+      right = array.filter((el: { [x: string]: string; }) => {
+        return parseInt(el["distance"]) <= parseInt(pivot["distance"]);
+      });
+    }
+
+  }
 
 
     // right is larger numbers or equal
     // left is strictly less than pivot
 
-    let leftSorted = this.quickSort(left, desc);
-    let rightSorted = this.quickSort(right, desc);
+    let leftSorted = this.quickSort(left, desc, sortNumber);
+    let rightSorted = this.quickSort(right, desc, sortNumber);
 
     // console.log("left: " + leftSorted);
     // console.log("right: " + rightSorted);

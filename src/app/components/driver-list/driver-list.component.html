@@ -21,29 +21,34 @@
        <thead class="thead-dark">
          <tr>
            <th scope="col">Name</th>
-           <th scope="col">Distance</th>
-           <th scope="col" (click)="reverse()">Time</th>
+           <th scope="col" (click)="reverse(2)">Distance</th>
+           <th scope="col" (click)="reverse(1)">Time</th>
            <th scope="col">View Info</th>
          </tr>
        </thead>
        <tbody id="output"></tbody>
       </table>
-      <table mat-table [dataSource] = "drivers">
+      <mat-table [dataSource] = "drivers">
         <mat-header-row *matHeaderRowDef="tableColumns"></mat-header-row>
-        <mat-row *matRowDef = "let row; columns: tableColumns"></mat-row>
-        <ng-container matColumnDef = "Name">
-          <th mat-header-cell *matHeaderCellDef>Name</th>
-          <td mat-cell *matCellDef = "let name">{{driver.name}}</td>
+        <mat-row *matRowDef="let row; columns: tableColumns"></mat-row>
+        <ng-container matColumnDef = "name">
+          <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+          <mat-cell *matCellDef = "let name"></mat-cell>
         </ng-container>
-        <ng-container matColumnDef = "Distance">
+        <ng-container matColumnDef = "distance">
           <mat-header-cell *matHeaderCellDef>Distance</mat-header-cell>
           <mat-cell *matCellDef = "let distance"></mat-cell>
         </ng-container>
-        <ng-container matColumnDef = "Time">
+        <ng-container matColumnDef = "time">
           <mat-header-cell *matHeaderCellDef>Time</mat-header-cell>
-          <mat-cell *matCellDef = "let time">working</mat-cell>
+          <mat-cell *matCellDef = "let time"></mat-cell>
         </ng-container>
-      </table>
+        <ng-container matColumnDef = "view">
+          <mat-header-cell *matHeaderCellDef>View Info</mat-header-cell>
+          <mat-cell *matCellDef = "let view"></mat-cell>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCentered${element.id}"> View</button>
+        </ng-container>
+      </mat-table>
      </div>
      <div class="col-lg-6">
        <h4>Directions:</h4>

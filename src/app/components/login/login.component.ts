@@ -145,7 +145,7 @@ export class LoginComponent implements OnInit {
 		this.modalRef = this.modalService.show(template);
 	}
 
-	//validate the username
+	// validate the username
 	validateUsername() {
 		this.userName = this.userName.trim();
 		if(!this.userName) {
@@ -154,8 +154,8 @@ export class LoginComponent implements OnInit {
 			return false;
 		}
 		else {
-			//don't set to empty string else the element is removed from the page which changes the spacing
-			//this.usernameError = ""
+			// don't set to empty string else the element is removed from the page which changes the spacing
+			// this.usernameError = ""
 			this.usernameErrorVisible = "hidden"; //instead make hidden
 			return true;
 		}
@@ -171,22 +171,22 @@ export class LoginComponent implements OnInit {
 
 	login() {
 
-		//if username not valid, return
-		if(!this.validateUsername()) {
+		// if username not valid, return
+		if (!this.validateUsername()) {
 			return;
 		}
 
-		this.pwdError ='';
+		this.pwdError = '';
 		this.usernameErrorVisible = "hidden";
 
-		this.http.get<IUserLoginResponse>(`${environment.loginUri}?userName=${this.userName}&passWord=${this.passWord}`)
+		this.http.get/*<IUserLoginResponse>*/(`${environment.loginUri}?userName=${this.userName}&passWord=${this.passWord}`)
 			.subscribe(
                   (response) => {
                      //console.log(response);
-                      if(response["userName"] != undefined){
+                      if (response["userName"] != undefined) {
                          this.usernameError=  response["userName"][0];
                       }
-                      if(response["passWord"] != undefined){
+                      if (response["passWord"] != undefined) {
                          this.pwdError = response["pwdError"][0];
 					  }
 					  if((response["name"] != undefined) && (response["userid"] != undefined)){

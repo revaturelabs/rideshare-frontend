@@ -12,7 +12,7 @@ export class ProfileLocationComponent implements OnInit {
   zipcode: number;
   city:string;
   address:string;
-  address2:any;
+  address2:string;
   hState: string;
   currentUser: User;
   success :string;
@@ -37,7 +37,6 @@ export class ProfileLocationComponent implements OnInit {
     this.currentUser.hAddress = this.address;
     this.currentUser.wAddress = this.address2;
     this.currentUser.hState = this.hState;
-    //console.log(this.currentUser);
     this.userService.updateUserInfo(this.currentUser);
     this.success = "Updated Successfully!";
   }

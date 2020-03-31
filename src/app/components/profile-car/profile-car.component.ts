@@ -31,13 +31,11 @@ ngOnInit() {
       this.color = response.color;
       this.year = response.year;
       this.nrSeats = response.seats;
-      console.log(this.currentCar);
     });
 
 
     this.userService.getUserById2(sessionStorage.getItem("userid")).subscribe((response)=>{
       this.currentUser = response;
-      console.log(this.currentUser);
     });
 
 
@@ -55,8 +53,6 @@ createCarInfo(){
     this.currentCar.year = this.year;
     this.currentCar.seats = this.nrSeats;
     this.currentCar.user = this.currentUser
-    console.log(this.currentCar.user.batch);
-    console.log(this.currentUser);
     this.carService.createCar(this.currentCar,this.currentCar.user.userId);
     this.success = "Updated Successfully!";
   }
@@ -84,10 +80,8 @@ updatesCarInfo(){
 onSubmit() {
     if(this.currentCar) {
       return this.updatesCarInfo();
-      console.log(this.currentCar);
     } else {
       return this.createCarInfo();
-      console.log(this.currentUser)
     }
   }
 }

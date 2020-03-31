@@ -25,7 +25,6 @@ import { AdminLoginComponent } from './components/admin-login/admin-login.compon
 import { DriverInfoComponent } from './components/driver-info/driver-info.component';
 import { LandingComponent } from './components/landing/landing.component';
 import { SignupModalComponent } from './components/sign-up-modal/sign-up-modal.component';
-import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { ProfileContactComponent } from './components/profile-contact/profile-contact.component';
 import { ProfileCarComponent } from './components/profile-car/profile-car.component';
 import { ProfileLocationComponent } from './components/profile-location/profile-location.component';
@@ -38,6 +37,7 @@ import { HomePageComponent } from './components/home-page/home-page.component';
 import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
 import { DriverListEntryComponent } from './components/driver-list-entry/driver-list-entry.component';
 
+import { SessionService } from './services/session-service/session.service';
 
 
 @NgModule({
@@ -57,7 +57,6 @@ import { DriverListEntryComponent } from './components/driver-list-entry/driver-
     DriverInfoComponent,
     LandingComponent,
     SignupModalComponent,
-    LandingPageComponent,
     ProfileContactComponent,
     ProfileCarComponent,
     ProfileLocationComponent,
@@ -87,7 +86,8 @@ import { DriverListEntryComponent } from './components/driver-list-entry/driver-
     AuthService,
     ValidationService,
     BsModalService,
-    LogService
+    LogService,
+    SessionService
   ],
   bootstrap: [AppComponent]
 })

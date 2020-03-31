@@ -11,7 +11,6 @@ import { PreferenceComponent } from './components/preference/preference.componen
 import { AdminLoginComponent } from './components/admin-login/admin-login.component';
 import { DriverInfoComponent } from './components/driver-info/driver-info.component';
 import { SignupModalComponent } from './components/sign-up-modal/sign-up-modal.component';
-import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { ProfileContactComponent } from './components/profile-contact/profile-contact.component';
 import { ProfileCarComponent } from './components/profile-car/profile-car.component';
 import { ProfileMembershipComponent } from './components/profile-membership/profile-membership.component';
@@ -35,16 +34,16 @@ const routes: Routes = [
   {path: 'profile', component: ProfileComponent},
   {path: 'preference', component: PreferenceComponent},
   {path: 'signup', component: SignupModalComponent},
-  {path: 'landingPage', component: LandingPageComponent},
   {path: 'drivers', component: DriverListComponent},
-{path: 'profile/contact', component: ProfileContactComponent},
-{path: 'profile/car', component: ProfileCarComponent},
-{path: 'profile/membership', component: ProfileMembershipComponent},
-{path: 'profile/location', component: ProfileLocationComponent},
-{path: 'driver', component: DriverContactModalComponent},
-{path: 'navbar', component: NavbarComponent},
-{path: '', component: HomePageComponent},
-{path: '**', pathMatch: 'full', redirectTo: ''}];
+  {path: 'profile/contact', component: ProfileContactComponent},
+  {path: 'profile/car', component: ProfileCarComponent},
+  {path: 'profile/membership', component: ProfileMembershipComponent},
+  {path: 'profile/location', component: ProfileLocationComponent},
+  {path: 'driver', component: DriverContactModalComponent},
+  {path: 'navbar', component: NavbarComponent},
+  {path: '', component: HomePageComponent},
+  {path: '**', pathMatch: 'full', redirectTo: ''}
+];
 
 
 @NgModule({

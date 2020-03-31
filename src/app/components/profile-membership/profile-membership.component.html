@@ -20,8 +20,9 @@
                     <select class="form-control mySelect" name="active" id="active" [(ngModel)]=active value="{{profileObject.active}}">
                         <option value="true">Active</option>
                         <option value="false">Disabled</option>
-                    </select>            
-                <button type="submit" class="btn btn-primary myBtn">Save</button>
+                    </select>
+           
+                <button type="submit" class="btn btn-primary myBtn" (click)='updatesMembershipInfo()' >Save</button>
                 </div>
             </div>
         </div>

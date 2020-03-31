@@ -1,31 +1,47 @@
 <div class="container mainContainer">
-    
+
         <i class="fa fa-car" style="font-family:'FontAwesome';"></i>
-        
-    
+
+
         <h4>Car Information:</h4>
-        
+
         <div class="form-group row">
             <div class="col-sm-1"></div>
                 <label for="make" class="col-sm-4 col-form-label">Make:</label>
                 <div class="col-sm-4">
-                    <input type="text" class="form-control" id="make" [(ngModel)]=make>
+                    <input type="text" class="form-control" id="make" [(ngModel)]=make value="{{currentCar?.make}}">
                 </div>
         </div>
-        
+
         <div class="form-group row">
                 <div class="col-sm-1"></div>
             <label for="model" class="col-sm-4 col-form-label">Model:</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" id="model" [(ngModel)]=model>
+                <input type="text" class="form-control" id="model" [(ngModel)]=model value="{{currentCar?.model}}">
             </div>
+        </div>
+
+        <div class="form-group row">
+          <div class="col-sm-1"></div>
+              <label for="color" class="col-sm-4 col-form-label">Color:</label>
+              <div class="col-sm-4">
+                  <input type="text" class="form-control" id="color" [(ngModel)]=color value="{{currentCar?.color}}">
+              </div>
+        </div>
+
+        <div class="form-group row">
+          <div class="col-sm-1"></div>
+              <label for="year" class="col-sm-4 col-form-label">Year:</label>
+              <div class="col-sm-4">
+                  <input type="text" class="form-control" id="year" [(ngModel)]=year value="{{currentCar?.year}}">
+              </div>
         </div>
 
         <div class="form-group row">
             <div class="col-sm-1"></div>
                 <label for="Nrseats" class="col-sm-4 col-form-label ">Number of seats:</label>
                 <div class="col-sm-4">
-                <select class="form-control" id="Nrseats" [(ngModel)]=nrSeats>
+                <select class="form-control" id="Nrseats" [(ngModel)]=nrSeats value="{{currentCar?.seats}}">
                     <option>Choose the number of seats</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -36,9 +52,8 @@
                 <p *ngIf="success != ''" class="success">{{success}}</p>
             </div>
         </div>
-        
-        <button type="submit" class="btn btn-primary myBtn" (click)="updatesCarInfo()">Save</button>
+
+        <button type="submit" class="btn btn-primary myBtn" (click)="onSubmit()">Save</button>
     </div>
-    
-        
-    
+
+

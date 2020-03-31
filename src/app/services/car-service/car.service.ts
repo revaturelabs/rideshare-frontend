@@ -62,17 +62,19 @@ export class CarService {
 	 */
 	updateCarInfo(car: Car) {
 		//console.log(user);
-		return this.http.put(this.url, car).toPromise();
+		return this.http.put(`${this.url}${car.user.userId}`, car).subscribe(response => {
+      console.log(response);
+    });
 	}
 
 
 
 	/**
 	 * This function creates a car.
-	 * @param car 
-	 * @param userId 
+	 * @param car
+	 * @param userId
 	 */
-	
+
 	createCar(car, userId) {
 
 		this.user.userId = userId;
@@ -82,7 +84,6 @@ export class CarService {
 			(response) => {
 				if (response) {
 					this.userService.updateIsDriver(true, userId);
-					this.router.navigate(['car']);
 				}
 			},
 			(error) => {
@@ -93,7 +94,7 @@ export class CarService {
 
 	/**
 	 * This function removes a Car.
-	 * @param carId 
+	 * @param carId
 	 */
 
 	removeCar(carId: number) {

@@ -80,6 +80,7 @@ export class User {
     /**
      * User: work city
      */
+
     wCity: string;
 
     /**

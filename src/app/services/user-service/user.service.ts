@@ -123,7 +123,7 @@ export class UserService {
      * if an exact match isn't met
      * @param user 
      */
-    private async addressValidation(user:User): Promise<any> {
+    private async addressValidation(user: User): Promise<any> {
         const numAndStreetName = user.hAddress.split(' '); // ensures user placed a space between the street number and street name
         let valid = true;
         console.log(`google api key is: ${this.googleApiKey}`)
@@ -135,7 +135,6 @@ export class UserService {
             console.log('Number of parts in haddress is: ' + numAndStreetName.length);
             // construct url with needed number of +'s based on length of numAndStreetName...
             let googleConstructedUrl = this.constructGoogleUrl(numAndStreetName, user);
-        
             const data = await this.googleApiResult(googleConstructedUrl);
             valid = (this.partialMatch(data) || this.parseAndValidate(data, user));
             console.log('valid after "or" logic is: ' + valid);
@@ -159,10 +158,17 @@ export class UserService {
 
         } catch (error) {// Another invalid pathway in the case that google api is not set up properly/api is no longer in expected format
             console.log(error);
-            console.log('error caught when trying to send api google request')
+            console.log('Invalid/no gapi geocode compatible key or no "partial_match" at position 0 of result data')
             return false;
         }
     }
+
+    /**
+     * A stage of address validation that parses the formatted address element given by google geocode api and 
+     * checks if consistent with user's input address elements
+     * @param data 
+     * @param user 
+     */
     private parseAndValidate(data: any, user: User): boolean {
         // The api will always return a particular format for an 
             // address if it makes a best effort delivery; therefore, we can parse and compare to user input
@@ -195,7 +201,7 @@ export class UserService {
             console.log(`user.hCity:${user.hCity}`);
             console.log(`user.hState:${user.hState}`);
             console.log(`user.hZip:${user.hZip}`);
-            const lastIndex = user.hAddress.lastIndexOf(' ');// ensures that the user added the suffix, if not will fail
+            const lastIndex = user.hAddress.lastIndexOf(' '); // ensures that the user added the suffix, if not will fail
             const tempUserHaddress = user.hAddress.substring(0, lastIndex);
             console.log(`tempUserHaddress: ${tempUserHaddress}`);
             // temporarily remove suffix from user supplied address and confirm all parts of address with response from google
@@ -216,10 +222,16 @@ export class UserService {
                 return false;
             }
         } catch (error){
-            console.log(' Error likely to be on parsing data returned by geocode api (no \'formatted_address\' element at position [0])')
+            console.log(' Invalid/no gapi geocode compatible key or no "formatted_address" element at position [0])')
             return false;
         }
     }
+
+    /**
+     * Constructs googleUrl based off of user inputted address elements
+     * @param numAndStreetName 
+     * @param user 
+     */
     private constructGoogleUrl(numAndStreetName: string[], user: User): string {
         let googleConstructedUrl = `${this.googleBaseUrl}`;
         numAndStreetName.forEach(numAndStreetNamePart => {
@@ -235,13 +247,17 @@ export class UserService {
         return googleConstructedUrl;
     }
 
-        
-    googleApiResult(constructedUrl: string): Promise<any> {
+    /**
+     * Uses a constructed url to send an api request to google geocode api and return the result as a promise
+     * @param constructedUrl 
+     */
+    private googleApiResult(constructedUrl: string): Promise<any> {
             return this.http.get(constructedUrl).toPromise();
     }
-	/**
-	 * This function sets the location to empty string for back-end invalidation response
-	 */
+    /**
+     * This function sets the location to empty string for back-end invalidation response
+     * @param user 
+     */
     private setInvalidAddress(user: User) {
         console.log('invalidated...');
         user.hAddress = '';

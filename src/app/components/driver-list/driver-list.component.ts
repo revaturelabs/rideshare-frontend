@@ -3,8 +3,9 @@ import { UserService } from 'src/app/services/user-service/user.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { } from 'googlemaps';
+import {MatSortModule} from '@angular/material/sort';
 
-interface IGoogleMapsAPIResponse {
+interface IGoogleMapsAPIResponse { 
   googleMapAPIKey: string;
 }
 

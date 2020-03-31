@@ -147,6 +147,7 @@ export class LoginComponent implements OnInit {
 	/**
 	 * Function that doesnt let banned users login
 	 */
+
 	loginBanned() {
 		this.userName = '';
 		this.banned = true;
@@ -155,6 +156,7 @@ export class LoginComponent implements OnInit {
 	 * Function that opens modal template
 	 * @param template 
 	 */
+
 	openModal(template: TemplateRef<any>) {
 		this.modalRef = this.modalService.show(template);
 	}

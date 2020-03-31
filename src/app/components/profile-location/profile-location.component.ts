@@ -1,25 +1,44 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user-service/user.service';
 import { User } from 'src/app/models/user';
-
+/**
+ *
+ *
+ * @export
+ * @class ProfileLocationComponent
+ * @implements {OnInit}
+ */
 @Component({
   selector: 'app-profile-location',
   templateUrl: './profile-location.component.html',
   styleUrls: ['./profile-location.component.css']
 })
 export class ProfileLocationComponent implements OnInit {
-
-  zipcode: number;
+/**
+ *
+ *
+ * @type {number}
+ * @memberof ProfileLocationComponent
+ */
+zipcode: number;
   city:string;
   address:string;
   address2:string;
   hState: string;
   currentUser: User;
   success :string;
-
-  constructor(private userService: UserService) { }
-
-  ngOnInit() {
+/**
+ *Creates an instance of ProfileLocationComponent.
+ * @param {UserService} userService
+ * @memberof ProfileLocationComponent
+ */
+constructor(private userService: UserService) { }
+/**
+ * OnInit function
+ *
+ * @memberof ProfileLocationComponent
+ */
+ngOnInit() {
    this.userService.getUserById2(sessionStorage.getItem("userid")).subscribe((response)=>{
       this.currentUser = response;
       this.zipcode = response.hZip;
@@ -30,8 +49,12 @@ export class ProfileLocationComponent implements OnInit {
 
     });
   }
-
-  updatesContactInfo(){
+/**
+ * Function that updates contact information
+ *
+ * @memberof ProfileLocationComponent
+ */
+updatesContactInfo(){
     this.currentUser.hZip = this.zipcode;
     this.currentUser.hCity = this.city;
     this.currentUser.hAddress = this.address;

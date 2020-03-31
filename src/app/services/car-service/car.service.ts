@@ -40,18 +40,26 @@ export class CarService {
 	}
 
 	/**
-	 * This function returns an car by user ID.
-	 * @param userId
+	 * This function returns a car by numeric user ID
+	 * @param userId 
 	 */
 
 	getCarByUserId(userId: number) {
 		return this.http.get<Car>(`${this.url}users/${userId}`).toPromise();
 	}
 
+	/**
+	 * This function returns a car by string user ID
+	 * @param userId 
+	 */
 	getCarByUserId2(userId: string): Observable<Car> {
 		return this.http.get<Car>(`${this.url}users/${userId}`);
 	}
 
+	/**
+	 * This function returns response as a promise
+	 * @param car
+	 */
 	updateCarInfo(car: Car) {
 		//console.log(user);
 		return this.http.put(`${this.url}${car.user.userId}`, car).subscribe(response => {

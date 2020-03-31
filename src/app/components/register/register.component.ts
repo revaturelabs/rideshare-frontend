@@ -5,7 +5,13 @@ import { Batch } from 'src/app/models/batch';
 import { Router, RouterModule } from '@angular/router';
 import { ValidationService } from 'src/app/services/validation-service/validation.service';
 import { User } from 'src/app/models/user';
-
+/**
+ *
+ *
+ * @export
+ * @class RegisterComponent
+ * @implements {OnInit}
+ */
 @Component({
 	selector: 'app-user-register',
 	templateUrl: './register.component.html',
@@ -22,12 +28,17 @@ import { User } from 'src/app/models/user';
  */
 
 export class RegisterComponent implements OnInit {
-
+/**
+ *
+ *
+ * @type {Batch[]}
+ * @memberof RegisterComponent
+ */
 	batches: Batch[] = [];
 	user: User = new User();
 
   /**
-   * @constructor 
+   * @constructor
    * @param router Provides an instance of a router.
    * @param userService A dependency of an user service is injected.
    * @param batchService A dependency of a batch service is injected.
@@ -43,12 +54,6 @@ export class RegisterComponent implements OnInit {
 	ngOnInit() {
 		if (sessionStorage.getItem('auth')) {
 			this.router.navigate(['home']);
-		} else {
-			/*this.batchService.getAllBatches()
-				.subscribe(allBatches => {
-					this.batches = allBatches;
-					this.user.batch.batchNumber = this.batches[0].batchNumber;
-			});*/
 		}
 	}
 
@@ -64,11 +69,14 @@ export class RegisterComponent implements OnInit {
 	 * This function creates a driver if all the validations are true.
 	 */
 	signUpDriver() {
-		//if (this.validationService.validateUserName(this.user.userName) && this.validationService.validateName(this.user.firstName) && this.validationService.validateName(this.user.lastName) && this.validationService.validateEmail(this.user.email) && this.validationService.validatePhone(this.user.phoneNumber)) {
-			this.userService.createDriver(this.user, 'driver');
-		//}
-	}
-	signUpRider() {
+		this.userService.createDriver(this.user, 'driver');
+  }
+ /**
+  * This function validates, then registers a rider
+  *
+  * @memberof RegisterComponent
+  */
+ signUpRider() {
 		if (this.validationService.validateUserName(this.user.userName) && this.validationService.validateName(this.user.firstName) && this.validationService.validateName(this.user.lastName) && this.validationService.validateEmail(this.user.email) && this.validationService.validatePhone(this.user.phoneNumber)) {
 			this.userService.createDriver(this.user, 'rider');
 		}

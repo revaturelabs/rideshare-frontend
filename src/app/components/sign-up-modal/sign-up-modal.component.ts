@@ -6,12 +6,21 @@ import { Batch } from 'src/app/models/batch';
 import { BatchService } from 'src/app/services/batch-service/batch.service';
 import { ValidationService } from 'src/app/services/validation-service/validation.service';
 
+/**
+ * @export
+ * @class SignupModalComponent
+ * @implements {OnInit}
+ */
 @Component({
   selector: 'signupmodal',
   templateUrl: './sign-up-modal.component.html',
   styleUrls: ['./sign-up-modal.component.css']
 })
 export class SignupModalComponent implements OnInit {
+  /**
+   * @type {string}
+   * @memberof SignupModalComponent
+   */
   fname :string;
   lname :string;
   username :string;
@@ -20,11 +29,16 @@ export class SignupModalComponent implements OnInit {
   address :string;
   isDriver: boolean;
   isRider: boolean;
-
+/**
+ * @type {User}
+ * @memberof SignupModalComponent
+ */
   user :User = new User();
   batch: Batch = new Batch();
   batches: Batch[];
-  // validation
+  /**
+   * Fields for validation
+   */
   firstNameError :string;
   lastNameError :string;
   emailError :string;
@@ -34,20 +48,38 @@ export class SignupModalComponent implements OnInit {
   hStateError :string;
   hCityError :string;
   hZipError :string;
-  
+  /**
+   *
+   *
+   * @type {string}
+   * @memberof SignupModalComponent
+   */
   success :string;
-  //Store the retrieved template from the 'openModal' method for future use cases.
+  /**
+   * Store the retrieved template from the 'openModal' method for future use cases.
+   */
   modalRef :BsModalRef;
   states = ['AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA','KS',
             'KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY',
             'NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV',
             'WI','WY'];
+  /**
+   *Creates an instance of SignupModalComponent.
+   * @param {BsModalService} modalService
+   * @param {UserService} userService
+   * @param {BatchService} batchService
+   * @param {ValidationService} validationService
+   * @memberof SignupModalComponent
+   */
   constructor(private modalService :BsModalService, private userService :UserService, private batchService :BatchService, private validationService :ValidationService) { }
-
-  ngOnInit() {
+/**
+ * OnInit function
+ *
+ * @memberof SignupModalComponent
+ */
+ngOnInit() {
     this.userService.getAllUsers().subscribe(
       res => {
-        //console.log(res);
       }
     );
 
@@ -57,13 +89,21 @@ export class SignupModalComponent implements OnInit {
           },
       );
   }
-  //Opens 'sign up' modal that takes in a template of type 'ng-template'.
-
-  openModal(template :TemplateRef<any>){
+/**
+ *
+ * Function that opens 'sign up' modal that takes in a template of type 'ng-template'.
+ * @param {TemplateRef<any>} template
+ * @memberof SignupModalComponent
+ */
+openModal(template :TemplateRef<any>){
     this.modalRef = this.modalService.show(template);
   }
-
-  submitUser() {
+/**
+ * Function that submits user information and status
+ *
+ * @memberof SignupModalComponent
+ */
+submitUser() {
     this.user.userId = 0;
     this.firstNameError = '';
     this.lastNameError = '';
@@ -79,8 +119,8 @@ export class SignupModalComponent implements OnInit {
     this.user.wState = this.user.hState;
     this.user.wCity = this.user.hCity;
     this.user.wZip = this.user.hZip;
-    let driver = <HTMLInputElement> document.getElementById("driver");  
-    let rider = <HTMLInputElement> document.getElementById("rider");  
+    let driver = <HTMLInputElement> document.getElementById("driver");
+    let rider = <HTMLInputElement> document.getElementById("rider");
 
     if(driver.checked == true){
       this.user.isDriver =  true;
@@ -88,7 +128,6 @@ export class SignupModalComponent implements OnInit {
     if(rider.checked == true){
       this.user.isDriver =  false;
     }
-    //console.log(this.user);
     this.userService.addUser(this.user).subscribe(
       res => {
         console.log(res);
@@ -100,7 +139,7 @@ export class SignupModalComponent implements OnInit {
         if(res.lastName != undefined){
           this.lastNameError = res.lastName[0];
           i = 1;
-          
+
         }
         if(res.phoneNumber != undefined){
           this.phoneNumberError = res.phoneNumber[0];
@@ -141,12 +180,8 @@ export class SignupModalComponent implements OnInit {
           i = 0;
           this.success = "Registered successfully!";
         }
-      } 
-      /*res => {
-        console.log("failed to add user");
-        console.log(res);
-      }*/
+      }
     );
-  
-    }
-    }
+
+  }
+}

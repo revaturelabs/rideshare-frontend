@@ -1,52 +1,95 @@
 import { Batch } from './batch';
 
 export class User {
+
     /**
-     * Set User model
+     * User: user id
      */
     userId: number;
+
     /**
-     * Set username as a string
+     * User: username
      */
     userName: string;
+
     /**
-     * Attached a batch object
+     * User: batch-> calls Batch constructor, Batch()
      */
     batch: Batch = new Batch();
+
     /**
-     * Set first name as a string
+     * User: first name
      */
     firstName: string;
+
     /**
-     * Set last name as a string
+     * User: last name
      */
     lastName: string;
+
     /**
-     * Set email as a string
+     * User: email
      */
     email: string;
+
     /**
-     * Set phone number as a string
+     * User: phone number as string
      */
     phoneNumber: string;
+
     /**
-     * Set active as a boolean
+     * User: is the user active
      */
     active: boolean;
+
     /**
-     * Set driver as a boolean
+     * User: is the user a driver
      */
     isDriver: boolean;
+
     /**
-     * Set accepting ride as a boolean
+     * User: is the user accepting rides
      */
     isAcceptingRides: boolean;
+
+    /**
+     * User: home state
+     */
     hState: string;
+
+    /**
+     * User: home address
+     */
     hAddress: string;
+
+    /**
+     * User: home city
+     */
     hCity: string;
+
+    /**
+     * User: home zipcode
+     */
     hZip: number;
-    wAddress: any;
+
+    /**
+     * User: work address
+     */
+    wAddress: string;
+
+    /**
+     * User: work city
+     */
+
     wCity: string;
+
+    /**
+     * User: work state
+     */
     wState: string;
+
+    /**
+     * User: work zipcode
+     */
     wZip: number;
 }

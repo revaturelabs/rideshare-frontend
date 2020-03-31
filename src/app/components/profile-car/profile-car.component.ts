@@ -9,8 +9,20 @@ import { UserService } from 'src/app/services/user-service/user.service';
   templateUrl: './profile-car.component.html',
   styleUrls: ['./profile-car.component.css']
 })
+/**
+ *
+ *
+ * @export
+ * @class ProfileCarComponent
+ * @implements {OnInit}
+ */
 export class ProfileCarComponent implements OnInit {
-
+ /**
+ *
+ *
+ * @type {string}
+ * @memberof ProfileCarComponent
+ */
   make: string = "";
   model:string = "";
   color: string = "";
@@ -19,9 +31,19 @@ export class ProfileCarComponent implements OnInit {
   currentCar: Car;
   success :string;
   currentUser: User;
-
+/**
+ *Creates an instance of ProfileCarComponent.
+ * @param {CarService} carService
+ * @param {UserService} userService
+ * @memberof ProfileCarComponent
+ */
   constructor(private carService: CarService, private userService: UserService) { }
 
+/**
+ * OnInit function
+ *
+ * @memberof ProfileCarComponent
+ */
 ngOnInit() {
 
     this.carService.getCarByUserId2(sessionStorage.getItem("userid")).subscribe((response)=>{
@@ -37,8 +59,6 @@ ngOnInit() {
     this.userService.getUserById2(sessionStorage.getItem("userid")).subscribe((response)=>{
       this.currentUser = response;
     });
-
-
   }
 /**
  *
@@ -58,6 +78,7 @@ createCarInfo(){
   }
 /**
  *allows user to update existing car
+ * Function that updates car info
  *
  * @memberof ProfileCarComponent
  */

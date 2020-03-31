@@ -33,6 +33,10 @@ export class DriverComponent implements OnInit {
   
   constructor(private userService: UserService, private router: Router, private authService: AuthService) { }
 
+  /**
+   * This function checks if a user is logged in and fetches driver data
+   * as well as rider data according to driver location
+   */
   ngOnInit() {
     let userId = this.authService.user.userId;
     if (userId) {

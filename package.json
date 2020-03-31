@@ -9,7 +9,8 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "sonar": "sonarcloud/scan",
-    "compodoc": "./node_modules/.bin/compodoc -p tsconfig.app.json --theme vagrant"
+    "compodoc": "./node_modules/.bin/compodoc -p tsconfig.app.json --theme vagrant",
+    "compodoc-serve": "compodoc -s tsconfig.json"
   },
   "private": true,
   "dependencies": {

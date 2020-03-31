@@ -1,22 +1,7 @@
 <a (click)="openModal(template)">Login</a >
 <ng-template #template >
 <div class="container">
-    <div class="text-center" id="login-form">
-  <!-- <div class="form-group">
-             <div class="dropdown">
-                <label for="users">Select Account:</label><br>
-                <input type="text" placeholder="Select An Account" name="chosenUserFullName" [(ngModel)]="chosenUserFullName" (click)="toggleDropDown()" (ngModelChange)="searchAccount()" autocomplete="off"/>
-                <button type="button" class="dropbtn" (click)="toggleDropDown()"><small>▼</small></button>
-                <div class="dropdown-content" [ngStyle]="showDropDown? {'display': 'block'} : {'display': 'none'}">
-                    <button type="button" id="prev-btn" *ngIf="curPage>1" (click)="prevPage()">^</button>
-                    <div *ngFor="let user of users">
-                        <p (click)="changeUser(user)">{{user.firstName}} {{user.lastName}}: {{user.driver? "Driver" : "Rider"}}</p>
-                    </div>
-                    <button type="button" id="next-btn" *ngIf="curPage<totalPage" (click)="nextPage()">v</button>
-                </div>
-            </div> 
-        </div> -->
-       
+    <div class="text-center" id="login-form">       
         <div class="modal-title-container">
         <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
           <span aria-hidden="true">&times;</span>

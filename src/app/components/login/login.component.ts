@@ -133,17 +133,23 @@ export class LoginComponent implements OnInit {
 	 * A function that indicate a fail to login
 	 */
 
-
 	loginFailed() {
 		this.userName = '';
 		this.failed = true;
 	}
-
+	
+	/**
+	 * Function that doesnt let banned users login
+	 */
 	loginBanned(){
 		this.userName = '';
 		this.banned = true;
 	}
 
+	/**
+	 * Function that opens modal template
+	 * @param template 
+	 */
 	openModal(template :TemplateRef<any>){
 		this.modalRef = this.modalService.show(template);
 	}
@@ -179,20 +185,6 @@ export class LoginComponent implements OnInit {
 					  }
                  }
         );
-		/*this.http.get<User[]>(`${environment.userUri}?username=${this.userName}`)
-			.subscribe((user: User[]) => {
-				if (!user.length) {
-					this.loginFailed();
-				}
-				else if(this.chosenUser.active == false){
-					this.loginBanned();
-				}
-				else {
-					if (!this.authService.login(user[0], this.chosenUser.userName)) {
-						this.loginFailed();
-					}
-				}
-			});*/
 	}
 
 

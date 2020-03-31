@@ -41,7 +41,7 @@ describe('E2E Testing: Signing up as Driver', function(){
 
     //TODO: testing that the contact information stored 
     it("3. Testing that the contact information data has been stored in the database", function(){
-        
+        browser.driver.findElement(By.id("signupSubmit")).click();
 
     });
 

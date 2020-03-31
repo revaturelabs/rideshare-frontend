@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user-service/user.service';
 import { AuthService } from 'src/app/services/auth-service/auth.service';
@@ -21,41 +21,31 @@ import { listenToTriggers } from 'ngx-bootstrap/utils/triggers';
 })
 export class DriverListComponent implements OnInit {
 
-  homeLocation : string = '';
+  homeLocation: string = '';
   workLocation: string = '';
-  mapProperties :{};
-  availableCars : Array<any> = [];
-  drivers : Array<any> = [];
+  mapProperties: {};
+  availableCars: Array<any> = [];
+  drivers: Array<any> = [];
   driversList: Array<any> = [];
   distance: Array<any> = [];
   time: Array<any> = [];
 
 
-  // TODO: Added variables to make getCarByUserId2 work?
-  make: string;
-  model: string;
-  nrSeats: number;
-  currentCar: Car;
-  success: string;
 
   @ViewChild('map', null) mapElement: any;
   map: google.maps.Map;
 
-  constructor(
-    private http: HttpClient,
-    private userService: UserService,
-    private googleService: GoogleService,
-    private carService: CarService
-  ) {}
+  constructor(private http: HttpClient, private userService: UserService,
+              private googleService: GoogleService) { }
 
   ngOnInit() {
 
-    //Retriving 
+    //Retriving
 
-    console.log("User Id: "+sessionStorage.getItem('userid'));
-    console.log("Home: "+sessionStorage.getItem('hAddress'));
-    console.log("Work: "+sessionStorage.getItem('wAddress'));
-  
+    console.log("User Id: " + sessionStorage.getItem('userid'));
+    console.log("Home: " + sessionStorage.getItem('hAddress'));
+    console.log("Work: " + sessionStorage.getItem('wAddress'));
+
     this.homeLocation = sessionStorage.getItem('hAddress');
     this.workLocation = sessionStorage.getItem('wAddress');
 
@@ -67,10 +57,10 @@ export class DriverListComponent implements OnInit {
   sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
-  
 
 
-   searchDriver(sorter: string){
+
+   searchDriver(sorter: string) {
     //call service search algorithm ()
     console.log("searching for Drivers");
     this.drivers = [];
@@ -78,27 +68,26 @@ export class DriverListComponent implements OnInit {
     this.userService.getRidersForLocation1(this.homeLocation, this.workLocation, sorter).subscribe(
       res => {
            res.forEach(element => {
-            console.log("Driver: "+res);
-              this.drivers.push({
+            console.log("Driver: " + res);
+            this.drivers.push({
                    'id': element.userId,
-                 'name': element.firstName+" "+element.lastName,
-               'origin':element.hAddress+","+element.hCity+","+element.hState, 
-                'email': element.email, 
-                'phone':element.phoneNumber
+                 'name': element.firstName + " " + element.lastName,
+               'origin': element.hAddress + "," + element.hCity + "," + element.hState,
+                'email': element.email,
+                'phone': element.phoneNumber
               });
           });
-          console.log(this.drivers);
+           console.log(this.drivers);
 
-          this.emptyDriversList();
-  
-          this.displayDriversList(this.homeLocation, this.drivers);
+           this.emptyDriversList();
+
+           this.displayDriversList(this.homeLocation, this.drivers);
 
       });
-    });
 
 
-      //get all routes 
-      this.sleep(2000).then(() => {
+      //get all routes
+    this.sleep(2000).then(() => {
         this.mapProperties = {
            center: new google.maps.LatLng(Number(sessionStorage.getItem("lat")), Number(sessionStorage.getItem("lng"))),
            zoom: 15,
@@ -113,37 +102,30 @@ export class DriverListComponent implements OnInit {
    }
 
   showDriversOnMap(origin, drivers) {
-    drivers.forEach(element => {
-      var directionsService = new google.maps.DirectionsService();
+     drivers.forEach(element => {
+      var directionsService = new google.maps.DirectionsService;
       var directionsRenderer = new google.maps.DirectionsRenderer({
-        draggable: true,
-        map: this.map
-      });
-      this.displayRoute(
-        origin,
-        element.origin,
-        directionsService,
-        directionsRenderer
-      );
+         draggable: true,
+         map: this.map
+       });
+      this.displayRoute(origin, element.origin, directionsService, directionsRenderer);
     });
   }
 
-  displayRoute(origin, destination, service, display) {
-    service.route(
-      {
-        origin: origin,
-        destination: destination,
-        travelMode: 'DRIVING'
-        // avoidTolls: true
-      },
-      function(response, status) {
-        if (status === 'OK') {
-          display.setDirections(response);
-        } else {
-          alert('Could not display directions due to: ' + status);
-        }
+
+displayRoute(origin, destination, service, display) {
+    service.route({
+      origin: origin,
+      destination: destination,
+      travelMode: 'DRIVING',
+      //avoidTolls: true
+    }, function(response, status) {
+      if (status === 'OK') {
+        display.setDirections(response);
+      } else {
+        alert('Could not display directions due to: ' + status);
       }
-    );
+    });
   }
 
 displayDriversList(origin, drivers) {
@@ -151,18 +133,18 @@ displayDriversList(origin, drivers) {
   let distance = [];
   let time = [];
 
-    let  origins = [];
+  let  origins = [];
     //set origin
-    origins.push(origin)
+  origins.push(origin);
 
-    var outputDiv = document.getElementById('output');
-    drivers.forEach(element => {
+  var outputDiv = document.getElementById('output');
+  drivers.forEach(element => {
 
-      console.log("Element "+element.name);
+      console.log("Element " + element.name);
 
 
       // this.sleep(2000).then(() => {
-        var service = new google.maps.DistanceMatrixService;
+      var service = new google.maps.DistanceMatrixService;
       service.getDistanceMatrix(
         {
         origins: origins,
@@ -173,15 +155,15 @@ displayDriversList(origin, drivers) {
         avoidTolls: false
       }, callback);
 
-     function callback(response, status) {
+      function callback(response, status) {
         if (status !== 'OK') {
           alert('Google API Error: ' + status);
         } else {
           var originList = response.originAddresses;
           var destinationList = response.destinationAddresses;
           var results = response.rows[0].elements;
-          
-          console.log("Element After "+element.name);
+
+          console.log("Element After " + element.name);
           list.push(element);
           distance.push(results[0].distance);
           time.push(results[0].duration);
@@ -190,9 +172,6 @@ displayDriversList(origin, drivers) {
           outputDiv.innerHTML += `<tr><td class="col">${name}</td>
                                   <td class="col">${results[0].distance.text}</td>
                                   <td class="col">${results[0].duration.text}</td>
-
-                                  <td class="col">${seats}</td>
-
                                   <td class="col">
                                   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCentered${element.id}"> View</button>
                                     <div class="col-lg-5">
@@ -224,34 +203,34 @@ displayDriversList(origin, drivers) {
       }
     }
 
-    
-      
+
+
     });
-    console.log (list);
-    console.log(distance);
-    console.log(time);
+  console.log (list);
+  console.log(distance);
+  console.log(time);
 
-    this.time = time;
-    this.distance = distance; 
-    this.driversList = list;
+  this.time = time;
+  this.distance = distance;
+  this.driversList = list;
 
-    
-  
+
+
     // });
 
-  
+
 }
 
 emptyDriversList() {
 
 
   var outputDiv = document.getElementById('output');
-        outputDiv.innerHTML = ``;
-    
-  
+  outputDiv.innerHTML = ``;
+
+
 }
 
-sortByName(){
+sortByName() {
   console.log("Sorting By Name");
   this.emptyDriversList();
 
@@ -260,25 +239,25 @@ sortByName(){
   console.log(this.distance);
 
   let dr = [];
-  //CREATE ARRAY OF NAMES. 
-  this.driversList.forEach(d =>{ dr.push(d.name);})
-  console.log("Unsorted: " +dr);
+  //CREATE ARRAY OF NAMES.
+  this.driversList.forEach(d => { dr.push(d.name); });
+  console.log("Unsorted: " + dr);
 
   const drClone  = Object.assign([], dr);
-  console.log("Clone: "+drClone);
+  console.log("Clone: " + drClone);
 
 
   let sortDr = dr.sort();
   console.log(sortDr);
 
   let index = [];
-  sortDr.forEach(s =>{ index.push(drClone.indexOf(s));})
+  sortDr.forEach(s => { index.push(drClone.indexOf(s)); });
   console.log(index);
 
 
   let mark = 0;
   var outputDiv = document.getElementById('output');
-  sortDr.forEach(sDr =>{
+  sortDr.forEach(sDr => {
 
 
       outputDiv.innerHTML += `<tr><td class="col">${sDr}</td>
@@ -298,8 +277,8 @@ sortByName(){
                   </div>
                   <div class="modal-body">
                   <h1>${this.driversList[index[mark]].name}</h1>
-                  <h3>Email: ${this.driversList[index[mark]].email}</h3>         
-                  <h3>Phone: ${this.driversList[index[mark]].phone}</h3>                 
+                  <h3>Email: ${this.driversList[index[mark]].email}</h3>
+                  <h3>Phone: ${this.driversList[index[mark]].phone}</h3>
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -312,17 +291,17 @@ sortByName(){
           <div #maps id="gmap" class="img-responsive"></div>
       </div>
     </td></tr>`;
-    mark++
-    
-  })
-      
+      mark++;
+
+  });
+
 
 
 
 
 }
 
-sortByDistance(){
+sortByDistance() {
   this.emptyDriversList();
 
   console.log(this.driversList);
@@ -330,23 +309,23 @@ sortByDistance(){
   console.log(this.distance);
 
   let ds = [];
-  //CREATE ARRAY OF Distances. 
-  this.distance.forEach(d =>{ ds.push(Number(d.value));})
-  console.log("Unsorted: " +ds);
+  //CREATE ARRAY OF Distances.
+  this.distance.forEach(d => { ds.push(Number(d.value)); });
+  console.log("Unsorted: " + ds);
 
   const dsClone  = Object.assign([], ds);
-  console.log("Clone: "+dsClone);
+  console.log("Clone: " + dsClone);
 
   let sortDs = ds.sort((a, b) => a - b); // For ascending sort
   console.log(sortDs);
 
   let index = [];
-  sortDs.forEach(s =>{ index.push(dsClone.indexOf(s));})
+  sortDs.forEach(s => { index.push(dsClone.indexOf(s)); });
   console.log(index);
 
   let mark = 0;
   var outputDiv = document.getElementById('output');
-  sortDs.forEach(sDr =>{
+  sortDs.forEach(sDr => {
 
 
       outputDiv.innerHTML += `<tr><td class="col">${this.driversList[index[mark]].name}</td>
@@ -366,8 +345,8 @@ sortByDistance(){
                   </div>
                   <div class="modal-body">
                       <h1>${this.driversList[index[mark]].name}</h1>
-                      <h3>Email: ${this.driversList[index[mark]].email}</h3>         
-                      <h3>Phone: ${this.driversList[index[mark]].phone}</h3>                 
+                      <h3>Email: ${this.driversList[index[mark]].email}</h3>
+                      <h3>Phone: ${this.driversList[index[mark]].phone}</h3>
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -380,9 +359,9 @@ sortByDistance(){
           <div #maps id="gmap" class="img-responsive"></div>
       </div>
     </td></tr>`;
-    mark++
-    
-  })
+      mark++;
+
+  });
 
 
 

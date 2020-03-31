@@ -20,7 +20,7 @@ export class GoogleService {
                 new Promise((resolve) => {
                   let script: HTMLScriptElement = document.createElement('script');
                   script.addEventListener('load', r => resolve());
-                  script.src = `http://maps.googleapis.com/maps/api/js?key=${response["googleMapsApiKey"]}`;
+                  script.src = `http://maps.googleapis.com/maps/api/js?libraries=places&key=${response["googleMapsApiKey"]}`;
                   document.head.appendChild(script);      
                   }); 
                }    

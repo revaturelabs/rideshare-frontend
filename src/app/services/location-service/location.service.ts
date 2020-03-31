@@ -1,16 +1,23 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, } from '@angular/common/http';
+//import { environment } from 'src/environments/environment';
+import { GoogleService } from "../google-service/google.service";
 import { LogService } from "../log.service";
-import { Autocomplete } from 'googlemaps';
+//import { Autocomplete } from 'googlemaps';
+import { Address } from 'src/app/models/address';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LocationService {
-  constructor(private http: HttpClient, private log: LogService) { }
+  constructor(private http: HttpClient, private log: LogService, private googleService: GoogleService) {
+    this.googleService.getGoogleApi();
+  }
 
   placeSearch: any;
-  autocomplete: any;
+  autocomplete: google.maps.places.Autocomplete;
+
+  address: Address;
 
   componentForm = {
     street_number: 'short_name',
@@ -22,6 +29,7 @@ export class LocationService {
   };
   
   initAutocomplete() {
+    console.log('started initAutocomplete');
     // Create the autocomplete object, restricting the search predictions to
     // geographical location types.
     this.autocomplete = new google.maps.places.Autocomplete(
@@ -34,6 +42,8 @@ export class LocationService {
     // When the user selects an address from the drop-down, populate the
     // address fields in the form.
     this.autocomplete.addListener('place_changed', this.fillInAddress);
+
+    console.log('finished initAutocomplete');
   }
 
   fillInAddress() {
@@ -42,7 +52,6 @@ export class LocationService {
   
     for (var component in this.componentForm) {
       (<HTMLInputElement>document.getElementById(component)).value = '';
-      (<HTMLInputElement>document.getElementById(component)).disabled = false;
     }
   
     // Get each component of the address from the place details,
@@ -51,9 +60,25 @@ export class LocationService {
       var addressType = place.address_components[i].types[0];
       if (this.componentForm[addressType]) {
         var val = place.address_components[i][this.componentForm[addressType]];
-        (<HTMLInputElement>document.getElementById(addressType)).value = val;
+        (<HTMLInputElement> document.getElementById(addressType)).value = val;
+        switch (addressType) {
+          case "locality":
+            this.address.city = val;
+            break;
+          case "administrative_area_level_1":
+            this.address.hState = val;
+            break;
+          case "postal_code":
+            this.address.zipcode = val;
+            break;
+        }
       }
     }
+    // Create a proper address by combining street_number and route
+    this.address.address = place.address_components[0]['long_name'] + ' ' + place.address_components[1]['long_name'];
+    (<HTMLInputElement> document.getElementById('address')).value = place.address_components[0]['long_name'] + ' ' +
+                                                                    place.address_components[1]['long_name'];
+    return this.address;
   }
   
   // Bias the autocomplete object to the user's geographical location,

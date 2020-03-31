@@ -12,6 +12,11 @@ import { Batch } from 'src/app/models/batch';
   templateUrl: './driver-info.component.html',
   styleUrls: ['./driver-info.component.css']
 })
+
+/**
+ * The DriverInfo component
+ */
+
 export class DriverInfoComponent implements OnInit {
 
   /**
@@ -46,7 +51,7 @@ export class DriverInfoComponent implements OnInit {
 
   noUserFound: boolean = false;
   /**
-   * A constructor 
+   * A constructor
    * @param carService A car service is injected.
    * @param authService An auth service is injected.
    * @param router  A router service is injected.
@@ -56,7 +61,7 @@ export class DriverInfoComponent implements OnInit {
   constructor(private carService: CarService, private authService: AuthService, private router: Router, private batchService: BatchService) { }
 
   /**
-   * A function that set the component
+   * This function sets the component
    */
   ngOnInit() {
     let userId = this.authService.user.userId;
@@ -129,14 +134,14 @@ export class DriverInfoComponent implements OnInit {
    */
 
   searchDriverByLocation() {
-    this.availableCars = this.allAvailableCars.filter(car => 
+    this.availableCars = this.allAvailableCars.filter(car =>
      car.user.batch.batchLocation.toLowerCase().includes(this.searchLocation.toLowerCase()))
     }
   /**
    * A function that filters by location
    *
    */
-  
+
   filterDriverByLocation(event) {
     this.noUserFound = false;
     this.availableCars = this.allAvailableCars.filter(car => car.user.batch.batchLocation == event.target.value);
@@ -147,13 +152,16 @@ export class DriverInfoComponent implements OnInit {
   }
 
   /**
-   * A GET method that retrieves all driver
+   * A GET method that retrieves all drivers
    */
   showAllDrivers() {
     this.searchName = '';
     this.orderByLocation();
   }
 
+  /**
+   * A function that hides the no user found message
+   */
   hideMessage() {
     this.noUserFound = false;
   }

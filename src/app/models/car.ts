@@ -1,32 +1,39 @@
 import { User } from './user';
 
 export class Car {
+
     /**
-     * Set Car model
+     * Car: car id
      */
     carId: number;
+
     /**
-     * Set color as a string 
+     * Car: car color  
      */
     color: string;
+
     /**
-     * Set set as a number
+     * Car: number of seats
      */
     seats: number;
+
     /**
-     * Set make as a string
+     * Car: car make
      */
     make: string;
+
     /**
-     * Set model as a string
+     * Car: car model
      */
     model: string;
+
     /**
-     * Set year as a number
+     * Car: year of the car
      */
     year: number;
+
     /**
-     * Attached a user object
+     * Car: user-> calls User constructor, User()
      */
     user: User = new User();
 }

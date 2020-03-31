@@ -16,8 +16,21 @@ import { environment } from '../../../environments/environment';
   templateUrl: './driver-list.component.html',
   styleUrls: ['./driver-list.component.css']
 })
+
+/**
+ * The DriverContactModel component
+ */
+
 export class DriverListComponent implements OnInit {
 
+  /**
+   * sets location to string
+   * sets mapProperties
+   * sets avaibleCars to Array
+   * sets drivers to Array
+   * @type {string}
+   * @memberof DriverListComponent
+   */
   location : string = 'Morgantown, WV';
   mapProperties :{};
   availableCars : Array<any> = [];
@@ -27,8 +40,20 @@ export class DriverListComponent implements OnInit {
   @ViewChild('map',null) mapElement: any;
   map: google.maps.Map;
 
+  /**
+   * This is a constructor
+   * Creates an instance of DriverListComponent.
+   * @param {HttpClient} http
+   * @param {UserService} userService
+   * @memberof DriverListComponent
+   */
   constructor(private http: HttpClient,private userService: UserService) { }
 
+  /**
+   * on init is calls on location of user
+   * pushes information to driver
+   * @memberof DriverListComponent
+   */
   ngOnInit() {
     this.drivers = [];
 
@@ -39,18 +64,12 @@ export class DriverListComponent implements OnInit {
               this.drivers.push({
                    'id': element.userId,
                  'name': element.firstName+" "+element.lastName,
-               'origin':element.hCity+","+element.hState, 
-                'email': element.email, 
+               'origin':element.hCity+","+element.hState,
+                'email': element.email,
                 'phone':element.phoneNumber
               });
           });
       });
-    /*this.drivers.push({'id': '1','name': 'Ed Ogeron','origin':'Reston, VA', 'email': 'ed@gmail.com', 'phone':'555-555-5555'});
-    this.drivers.push({'id': '2','name': 'Nick Saban','origin':'Oklahoma, OK', 'email': 'nick@gmail.com', 'phone':'555-555-5555'});
-    this.drivers.push({'id': '3','name': 'Bobbie sfsBowden','origin':'Texas, TX', 'email': 'bobbie@gmail.com', 'phone':'555-555-5555'});
-    this.drivers.push({'id': '4','name': 'Les Miles','origin':'New York, NY', 'email': 'les@gmail.com', 'phone':'555-555-5555'});
-    this.drivers.push({'id': '5','name': 'Bear Bryant','origin':'Arkansas, AR', 'email': 'bear@gmail.com', 'phone':'555-555-5555'});*/
-    //console.log(this.drivers);
     this.getGoogleApi();
 
     this.sleep(2000).then(() => {
@@ -60,34 +79,49 @@ export class DriverListComponent implements OnInit {
          mapTypeId: google.maps.MapTypeId.ROADMAP
       };
       this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapProperties);
-      //get all routes 
       this.displayDriversList(this.location, this.drivers);
-      //show drivers on map
       this.showDriversOnMap(this.location, this.drivers);
     });
   }
-
+  /**
+   *
+   *
+   * @param {*} ms
+   * @returns
+   * @memberof DriverListComponent
+   */
   sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
-  
+
+/**
+ * This function calls the Google api
+ *
+ * @memberof DriverListComponent
+ */
 getGoogleApi()  {
     this.http.get(`${environment.loginUri}getGoogleApi`)
        .subscribe(
                  (response) => {
-                     //console.log(response);
                      if(response["googleMapAPIKey"] != undefined){
                          new Promise((resolve) => {
                            let script: HTMLScriptElement = document.createElement('script');
                            script.addEventListener('load', r => resolve());
                            script.src = `http://maps.googleapis.com/maps/api/js?key=${response["googleMapAPIKey"][0]}`;
-                           document.head.appendChild(script);      
-                     }); 
-               }    
+                           document.head.appendChild(script);
+                     });
+               }
            }
        );
    }
 
+  /**
+   * This function shows drivers on the map
+   *
+   * @param {*} origin
+   * @param {*} drivers
+   * @memberof DriverListComponent
+   */
   showDriversOnMap(origin, drivers){
      drivers.forEach(element => {
       var directionsService = new google.maps.DirectionsService;
@@ -99,13 +133,20 @@ getGoogleApi()  {
     });
   }
 
-
+/**
+ * This function shows the route from the driver to endpoint
+ *
+ * @param {*} origin
+ * @param {*} destination
+ * @param {*} service
+ * @param {*} display
+ * @memberof DriverListComponent
+ */
 displayRoute(origin, destination, service, display) {
     service.route({
       origin: origin,
       destination: destination,
       travelMode: 'DRIVING',
-      //avoidTolls: true
     }, function(response, status) {
       if (status === 'OK') {
         display.setDirections(response);
@@ -115,10 +156,15 @@ displayRoute(origin, destination, service, display) {
     });
   }
 
-
+/**
+ * This function populates a list of drivers on the page
+ *
+ * @param {*} origin
+ * @param {*} drivers
+ * @memberof DriverListComponent
+ */
 displayDriversList(origin, drivers) {
     let  origins = [];
-    //set origin
     origins.push(origin)
 
     var outputDiv = document.getElementById('output');
@@ -139,7 +185,6 @@ displayDriversList(origin, drivers) {
           var originList = response.originAddresses;
           var destinationList = response.destinationAddresses;
           var results = response.rows[0].elements;
-          //console.log(results[0].distance.text);
           var name =  element.name;
           outputDiv.innerHTML += `<tr><td class="col">${name}</td>
                                   <td class="col">${results[0].distance.text}</td>
@@ -158,8 +203,8 @@ displayDriversList(origin, drivers) {
                                               </div>
                                               <div class="modal-body">
                                                   <h1>${name}</h1>
-                                                  <h3>Email: ${element.email}</h3>         
-                                                  <h3>Phone: ${element.phone}</h3>                 
+                                                  <h3>Email: ${element.email}</h3>
+                                                  <h3>Phone: ${element.phone}</h3>
                                               </div>
                                               <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -174,7 +219,7 @@ displayDriversList(origin, drivers) {
                                 </td></tr>`;
       }
     });
-    
+
    });
 }
 

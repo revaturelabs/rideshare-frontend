@@ -5,6 +5,7 @@ import { User } from 'src/app/models/user';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { } from 'googlemaps';
+import { Address } from 'src/app/models/address';
 declare var google: any;
 
 @Component({
@@ -14,29 +15,34 @@ declare var google: any;
 })
 export class ProfileLocationComponent implements OnInit {
 
-  zipcode: number;
-  city:string;
-  address:string;
-  street_number: string;
-  route: string;
-  address2:string;
-  hState: string;
   currentUser: User;
   success :string;
   autocomplete: google.maps.places.Autocomplete;
+  placeSearch: any;
+
+  address: Address = new Address;
+
+  componentForm = {
+    street_number: 'short_name',
+    route: 'long_name',
+    locality: 'long_name',
+    administrative_area_level_1: 'short_name',
+    country: 'long_name',
+    postal_code: 'short_name'
+  };
 
   constructor(private userService: UserService,
     private http: HttpClient, private locationService: LocationService) { }
 
   ngOnInit() {
-    this.locationService.initAutocomplete();
+    this.locationService.initAutocomplete(<HTMLInputElement>document.getElementById('autocomplete'));
     this.userService.getUserById2(sessionStorage.getItem("userid")).subscribe((response)=>{
       this.currentUser = response;
-      this.zipcode = response.hZip;
-      this.city = response.hCity;
-      this.address = response.hAddress;
-      this.address2 = response.wAddress;
-      this.hState = response.hState;
+      this.address.zipcode = response.hZip;
+      this.address.city = response.hCity;
+      this.address.address = response.hAddress;
+      this.address.address2 = response.wAddress;
+      this.address.hState = response.hState;
     });
   }
 
@@ -46,12 +52,8 @@ export class ProfileLocationComponent implements OnInit {
     this.locationService.geolocate();
   }
 
-  updatesContactInfo(){
-    this.currentUser.hZip = this.zipcode;
-    this.currentUser.hCity = this.city;
-    this.currentUser.hAddress = this.address;
-    this.currentUser.wAddress = this.address2;
-    this.currentUser.hState = this.hState;
+  updatesContactInfo() {
+    this.currentUser = this.locationService.updatesContactInfo(this.currentUser)
     this.userService.updateUserInfo(this.currentUser);
     this.success = "Updated Successfully!";
   }

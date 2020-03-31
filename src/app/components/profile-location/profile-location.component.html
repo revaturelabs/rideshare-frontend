@@ -17,7 +17,7 @@
         <div class="col-sm-1"></div>
         <label for="address" class="col-sm-4 col-form-label">Address:</label>
         <div class="col-sm-4">
-            <input [(ngModel)]=address type="text" class="form-control" id="address" disabled="true">
+            <input [(ngModel)]=address.address type="text" class="form-control" id="address" disabled="true">
         </div>
     </div>
 
@@ -33,7 +33,7 @@
         <div class="col-sm-1"></div>
         <label for="city" class="col-sm-4 col-form-label">City:</label>
         <div class="col-sm-4">
-            <input [(ngModel)]=city type="text" class="form-control" id="locality" disabled="true">
+            <input [(ngModel)]=address.city type="text" class="form-control" id="locality" disabled="true">
         </div>
     </div>
 
@@ -41,7 +41,7 @@
         <div class="col-sm-1"></div>
         <label for="state" class="col-sm-4 col-form-label">State:</label>
         <div class="col-sm-4">
-            <select class="form-control" name="administrative_area_level_1" id="administrative_area_level_1" [(ngModel)]=hState disabled="true"
+            <select class="form-control" name="administrative_area_level_1" id="administrative_area_level_1" [(ngModel)]=address.hState disabled="true"
                 required>
                 <option value="" selected disabled>Select a state</option>
                 <option value="AL">Alabama</option>
@@ -103,7 +103,7 @@
         <div class="col-sm-1"></div>
         <label for="postal_code" class="col-sm-4 col-form-label">Zipcode:</label>
         <div class="col-sm-4">
-            <input [(ngModel)]=zipcode type="text" class="form-control" id="postal_code" disabled="true">
+            <input [(ngModel)]=address.zipcode type="text" class="form-control" id="postal_code" disabled="true">
             <p *ngIf="success != ''" class="success">{{success}}</p>
         </div>
     </div>

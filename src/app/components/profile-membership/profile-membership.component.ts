@@ -21,7 +21,7 @@ export class ProfileMembershipComponent implements OnInit {
     });
     this.carService.getCarByUserId2(sessionStorage.getItem("userid")).subscribe((response)=>{
       this.carObject = response;
-      this.possibleSeats = new Array(this.carObject.seats).fill(0).map((x,i)=>i+1);
+      this.possibleSeats = new Array(this.carObject.seats + 1).fill(0).map((x,i)=>i);
     });
   }
 

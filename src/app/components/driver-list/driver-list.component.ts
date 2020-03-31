@@ -29,6 +29,8 @@ export class DriverListComponent implements OnInit {
   driversList: Array<any> = [];
   distance: Array<any> = [];
   time: Array<any> = [];
+  range: number = 5;
+  sameOffice: boolean = true;
 
 
 
@@ -51,7 +53,7 @@ export class DriverListComponent implements OnInit {
 
     this.googleService.getGoogleApi();
 
-    this.searchDriver("none");
+    this.searchDriver();
   }
 
   sleep(ms) {
@@ -60,12 +62,14 @@ export class DriverListComponent implements OnInit {
   
 
 
-   searchDriver(sorter: string){
+   searchDriver(){
     //call service search algorithm ()
     console.log("searching for Drivers");
+    console.log("Range "+ this.range);
+    console.log("Same Office "+ this.sameOffice);
     this.drivers = [];
 
-    this.userService.getRidersForLocation1(this.homeLocation, this.workLocation, sorter).subscribe(
+    this.userService.getRidersForLocation1(this.homeLocation, this.workLocation, this.range, this.sameOffice).subscribe(
       res => {
            res.forEach(element => {
             console.log("Driver: "+res);

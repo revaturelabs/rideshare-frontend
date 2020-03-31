@@ -10,13 +10,13 @@
   </div>
 <div class = "container">
     <div class="row">
-    <div class="col-lg-5">
+    <div class="col-lg-4">
       <h4>Drivers</h4>
       
      <table class="table table-striped">
-       <thead class="thead-dark">
-         <tr>
-           <th scope="col" id="nameColumn" (click)="sortByName()">Name</th>
+       <thead class="thead-dark borderYtoX">
+         <tr >
+           <th scope="col" id="nameColumn" (click)="sortByName()">  Name</th>
            <th scope="col" id="distanceColumn" (click)="sortByDistance()">Distance</th>
            <th scope="col" id="timeColumn" (click)="sortByDistance()">Time</th>
            <th scope="col">View Info</th>
@@ -25,8 +25,8 @@
        <tbody id="output"></tbody>
       </table>
      </div>
-     <div class="col-lg-6">
-       <h4>Directions:</h4>
+     <div class="col-lg-8">
+       <h4 class="text-center">Directions:</h4>
        <div #map id="gmap" class="img-responsive"></div>
      </div>
     </div>

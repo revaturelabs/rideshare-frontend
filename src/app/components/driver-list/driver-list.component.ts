@@ -8,6 +8,24 @@ import {MatSortModule} from '@angular/material/sort';
 interface IGoogleMapsAPIResponse { 
   googleMapAPIKey: string;
 } 
+         
+// interface ApiCallResult {
+//   originAddress: [],
+//   destinationAddress: [],
+//   rows: [
+//     {
+//         status: string,
+//         duration: {
+//           value: number,
+//           text: string
+//         },
+//         distance: {
+//           value: number,
+//           text: string
+//         }
+//     }
+//   ]
+// }
 
 @Component({
   selector: 'app-driver-list',
@@ -153,7 +171,7 @@ export class DriverListComponent implements OnInit {
         avoidHighways: false,
         avoidTolls: false
         // this is a CB that gets called once Google responds
-      }, (response, status) => {
+      }, (response: google.maps.DistanceMatrixResponse, status) => {
           if (status !== 'OK') {
             alert('Error was: ' + status);
           } 

@@ -16,9 +16,9 @@ export class AuthService {
      * This is the Authorization Service
      */
     @Output() fireIsLoggedIn: EventEmitter<any> = new EventEmitter<any>();
-    loggedIn: boolean = false;
+    loggedIn = false;
 
-    private authenticatedUserSubject = new ReplaySubject<User>(undefined);
+    public authenticatedUserSubject = new ReplaySubject<User>(undefined);
     public authenticatedUser$ = this.authenticatedUserSubject.asObservable();
 
     private loginErrorsSubject = new ReplaySubject<Array<RequestError>>(undefined);
@@ -38,13 +38,15 @@ export class AuthService {
 
     /**
      * This function logs the user into the application
-     * @param user
-     * @param chosenUserName
      */
-
     login(username: string, password: string) {
+        // Get Login API URL from environment
         const { loginV2Uri: api } = environment;
+
+        // Create credentials object to pass as request body
         const credentials = { username, password };
+
+        // Sends post request with login credentials
         this.httpClient.post<User>(`${api}`, credentials, {
             observe: 'response'
         }).subscribe(response => {
@@ -52,7 +54,7 @@ export class AuthService {
             const user: User = response.body;
             this.authenticatedUserSubject.next(user);
         }, errResponse => {
-            console.log(errResponse);
+            // Process possible errors
             switch (errResponse.status) {
                 case 400:
                     const errorMessages = errResponse.error.errors.map(e => ({

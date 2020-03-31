@@ -86,6 +86,6 @@ export class PreferenceComponent implements OnInit {
 
   toggleAcceptRider() {
     this.user.isAcceptingRides = !this.user.isAcceptingRides;
-    this.userService.updatePreference('acceptingRides', this.user.isAcceptingRides, this.user.userId);
+    this.userService.updatePreference('isAcceptingRides', this.user.isAcceptingRides, this.user.userId);
   }
 }

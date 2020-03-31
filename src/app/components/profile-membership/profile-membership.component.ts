@@ -1,55 +1,47 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user-service/user.service';
 import { User } from 'src/app/models/user';
+import { AuthService } from 'src/app/services/auth-service/auth.service';
 @Component({
-  selector: 'app-profile-membership',
-  templateUrl: './profile-membership.component.html',
-  styleUrls: ['./profile-membership.component.css']
+    selector: 'app-profile-membership',
+    templateUrl: './profile-membership.component.html',
+    styleUrls: ['./profile-membership.component.css']
 })
 export class ProfileMembershipComponent implements OnInit {
-  profileObject: any; //note: changing this from 'User' to 'any' because the object returned by getUserById2() has different class members than User. ie: User has "isDriver" but the obj returned has "driver". this causes errors and the component to not work correctly
-  currentUser: any = '';
-  isDriver: boolean;
-  active: boolean;
-  success: string;
+    profileObject: User;
+    currentUser: any = '';
+    batchNumber = 'Not Set';
+    batchLocation = '';
 
-  result: string = "Updated Successfully!";
-  resultColor: string = "";
-  resultVisible: string = "hidden";
+    result = 'Updated Successfully!';
+    resultColor = '';
+    resultVisible = 'hidden';
 
-  constructor(private userService: UserService) { }
+    constructor(private userService: UserService, private authService: AuthService) { }
 
-  ngOnInit() {
-    this.currentUser = this.userService.getUserById2(sessionStorage.getItem('userid')).subscribe((response) => {
-      this.profileObject = response;
-      this.isDriver = this.profileObject.driver;
-      this.active = this.profileObject.active;
-    });
-  }
+    ngOnInit() {
+        this.authService.authenticatedUserSubject.subscribe((response) => {
+            this.profileObject = response;
 
-  updatesMembershipInfo() {
-    this.profileObject.driver = this.isDriver;
-    this.profileObject.active = this.active;
-    this.userService.updateUserInfo(this.profileObject).subscribe((response)=>{
+            if (this.profileObject.batch != null) {
+                this.batchLocation = this.profileObject.batch.batchLocation;
+                this.batchNumber = this.profileObject.batch.batchNumber.toString();
+            }
+        });
+    }
 
-      this.result = "Updated Successfully!";
-      this.resultColor="green";
-      this.resultVisible="visible";
-    }, error =>{
+    updatesMembershipInfo() {
+        this.userService.updateUserInfo(this.profileObject).subscribe((response) => {
 
-      //likely server error
-      this.result = "Error " + error.status;
-      this.resultColor="red";
-      this.resultVisible="visible";
-    });
-  }
+            this.result = 'Updated Successfully!';
+            this.resultColor = 'green';
+            this.resultVisible = 'visible';
+        }, error => {
 
-  onActiveChange() {
-    //no validation because fields are optional in database
-    this.resultVisible="hidden";
-  }
-
-  onDriverChange() {
-    this.resultVisible="hidden";
-  }
+            // likely server error
+            this.result = 'Error ' + error.status;
+            this.resultColor = 'red';
+            this.resultVisible = 'visible';
+        });
+    }
 }

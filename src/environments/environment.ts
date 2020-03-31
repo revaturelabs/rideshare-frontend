@@ -11,24 +11,23 @@ const baseUri = `http://localhost`;
 const port = '8080';
 
 /**
- * google map api key 
+ * google map api key
  */
 const googleKey = '';
+
 /**
-  * This is the environment config.
-  */
-
+ * This is the environment config.
+ */
 export const environment = {
-
-  production: false,
-  environmentName: 'Default Environment',
-  userUri: `${baseUri}:${port}/users/`,
-  loginUri: `${baseUri}:${port}/login/`,
-  batchesUri: `${baseUri}:${port}/batches/`,
-  carUri: `${baseUri}:${port}/cars/`,
-  adminUri: `${baseUri}:${port}/admins/`,
-  googleMapKey: `${googleKey}`,
-  loginV2Uri: `${baseUri}:${port}/v2/login/`
+    production: false,
+    environmentName: 'Default Environment',
+    userUri: `${baseUri}:${port}/users/`,
+    loginUri: `${baseUri}:${port}/login/`,
+    batchesUri: `${baseUri}:${port}/batches/`,
+    carUri: `${baseUri}:${port}/cars/`,
+    adminUri: `${baseUri}:${port}/admins/`,
+    googleMapKey: `${googleKey}`,
+    loginV2Uri: `${baseUri}:${port}/v2/login/`
 };
 
 /*

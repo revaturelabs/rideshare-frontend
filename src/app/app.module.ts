@@ -37,6 +37,7 @@ import { HomePageComponent } from './components/home-page/home-page.component';
 import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
 import { DriverListEntryComponent } from './components/driver-list-entry/driver-list-entry.component';
 
+import { SessionService } from './services/session-service/session.service';
 
 
 @NgModule({
@@ -85,7 +86,8 @@ import { DriverListEntryComponent } from './components/driver-list-entry/driver-
     AuthService,
     ValidationService,
     BsModalService,
-    LogService
+    LogService,
+    SessionService
   ],
   bootstrap: [AppComponent]
 })

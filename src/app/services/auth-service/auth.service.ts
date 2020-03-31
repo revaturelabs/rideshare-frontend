@@ -24,7 +24,7 @@ export class AuthService {
 	constructor(private router: Router) { }
 
 	/**
-	 * An user object is created
+	 * A user object is created
 	 */
 	public user: any = {};
 	public admin: Admin = new Admin();
@@ -53,6 +53,8 @@ export class AuthService {
 
 	/**
 	 * This function returns an emitter.
+	 * @param admin
+	 * @param userName
 	 */
 
 	loginAsAdmin(admin: Admin, userName: string) {

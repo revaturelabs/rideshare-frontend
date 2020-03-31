@@ -72,7 +72,6 @@ export class UserService {
      * @param idParam 
      */
     getUserById(idParam: number) {
-        console.log(this.url);
         return this.http.get<User>(this.url+idParam).toPromise();
 
 
@@ -81,7 +80,6 @@ export class UserService {
 
     getUserById2(idParam2: String): Observable<User> {
 
-        // console.log(this.url)
         return this.http.get<User>(this.url+idParam2);
 
 
@@ -97,7 +95,6 @@ export class UserService {
         user.active = true;
         user.isDriver = false;
         user.isAcceptingRides = false;
-        console.log(user);
 
         this.http.post(this.url, user, {observe: 'response'}).subscribe(
             (response) => {
@@ -120,8 +117,6 @@ export class UserService {
     // adds user if form is filled out and user input matches a real address
     async addUser(user :User) : Promise<User> {
         const addressValid = await this.addressValidation(user);//waits for validation to edit fields before post request
-        console.log(`User location info log(location modifying to '' on failure)
-        happens first: ${user.hAddress}, ${user.hCity}, ${user.hState}, ${user.hZip}`);
         return this.http.post<User>(this.url, user, {headers: this.headers}).toPromise();
     }
 
@@ -134,24 +129,18 @@ export class UserService {
     private async addressValidation(user: User): Promise<any> {
         const numAndStreetName = user.hAddress.split(' '); // ensures user placed a space between the street number and street name
         let valid = true;
-        console.log(`google api key is: ${this.googleApiKey}`);
         if ( isNaN(Number(numAndStreetName[0]))){
-            console.log('first part of haddress is not a number!');
             valid = false;
         }else{
-            console.log('Number of parts in haddress is: ' + numAndStreetName.length);
             // construct url with needed number of +'s based on length of numAndStreetName...
             const googleConstructedUrl = this.constructGoogleUrl(numAndStreetName, user);
             const data = await this.googleApiResult(googleConstructedUrl);
             valid = (this.partialMatch(data) || this.parseAndValidate(data, user));
-            console.log('valid after "or" logic is: ' + valid);
-
         }
         if (valid === false){
             this.setInvalidAddress(user);
         }
-        const promise1 = new Promise(function(resolve, reject){
-            resolve('Address validation complete');
+        const promise1 = new Promise(() => {
         });
         return promise1;
     }

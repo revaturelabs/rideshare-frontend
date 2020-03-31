@@ -159,7 +159,7 @@ export class LoginComponent implements OnInit {
         this.http.get(`${environment.loginUri}?userName=${this.userName}&passWord=${this.passWord}`)
 			.subscribe(
                   (response) => {
-                     //console.log(response);
+                     console.log(response);
                       if(response["userName"] != undefined){
                          this.usernameError=  response["userName"][0];
                       }
@@ -169,10 +169,17 @@ export class LoginComponent implements OnInit {
 					  if((response["name"] != undefined) && (response["userid"] != undefined)){
 						sessionStorage.setItem("name", response["name"]);
 						sessionStorage.setItem("userid", response["userid"]);
+
+						sessionStorage.setItem("wAddress", response["wAddress"]);
+						sessionStorage.setItem("hAddress", response["hAddress"]);
+						
+				
+
+
 						
 						//call landing page
 						//this.router.navigate(['landingPage']);
-						location.replace('landingPage');
+						location.replace('drivers');
 					  }
 					  if(response["userNotFound"] != undefined){
 						this.userNotFound = response["userNotFound"][0];

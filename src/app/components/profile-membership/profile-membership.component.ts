@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user-service/user.service';
 import { User } from 'src/app/models/user';
+import { Car } from 'src/app/models/car';
+import { CarService } from 'src/app/services/car-service/car.service';
 /**
  *
  *
@@ -8,37 +10,44 @@ import { User } from 'src/app/models/user';
  * @class ProfileMembershipComponent
  * @implements {OnInit}
  */
+
 @Component({
   selector: 'app-profile-membership',
   templateUrl: './profile-membership.component.html',
   styleUrls: ['./profile-membership.component.css']
 })
 export class ProfileMembershipComponent implements OnInit {
+  
   /**
    *
    *
    * @type {User}
    * @memberof ProfileMembershipComponent
    */
-  profileObject : User;
-  currentUser: any = '';
-  isDriver: boolean;
-  active: boolean;
+  profileObject: User;
+  carObject: Car;
   success: string;
-  /**
+  possibleSeats: Array<Number>;
+
+    /**
    *Creates an instance of ProfileMembershipComponent.
    * @param {UserService} userService
    * @memberof ProfileMembershipComponent
    */
-  constructor(private userService: UserService) { }
- /**
+  constructor(private userService: UserService, private carService: CarService) { }
+
+  /**
   * OnInit function
   *
   * @memberof ProfileMembershipComponent
   */
- ngOnInit() {
-    this.currentUser = this.userService.getUserById2(sessionStorage.getItem("userid")).subscribe((response)=>{
-      this.profileObject = response;
+  ngOnInit() {
+    this.userService.getUserById2(sessionStorage.getItem("userid")).subscribe((response)=>{
+    this.profileObject = response;
+    });
+    this.carService.getCarByUserId2(sessionStorage.getItem("userid")).subscribe((response)=>{
+      this.carObject = response;
+      this.possibleSeats = new Array(this.carObject.seats + 1).fill(0).map((x,i)=>i);
     });
   }
   /**
@@ -47,8 +56,7 @@ export class ProfileMembershipComponent implements OnInit {
    * @memberof ProfileMembershipComponent
    */
   updatesMembershipInfo(){
-    this.profileObject.isDriver = this.isDriver;
-    this.profileObject.active = this.active;
+    this.carService.updateCarInfo(this.carObject);
     this.userService.updateUserInfo(this.profileObject);
     this.success = "Updated Successfully!";
     console.log(this.isDriver);

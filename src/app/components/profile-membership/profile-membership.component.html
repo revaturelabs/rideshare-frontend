@@ -1,29 +1,46 @@
 <div class="container mainContainer">
-        <i class="fa fa-users" style="font-family:'FontAwesome';"></i>
-            <h4 class="title">Membership:</h4>
-            <div class="innercontainer">
+    <i class="fa fa-users" style="font-family:'FontAwesome';"></i>
+    <h4>Membership:</h4>
+    <div *ngIf='profileObject'>
+        <div class="form-group row">
+            <div class="col-sm-1"></div>
+            <label for="batch-name" class="col-sm-4 col-form-label">Batch:</label>
+            <div class="col-sm-4">
+                <span> {{profileObject.batch.batchNumber}} - {{profileObject.batch.batchLocation}}</span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-1"></div>
+            <label for="select-role" class="col-sm-4 col-form-label">Role:</label>
+            <div class="col-sm-4">
+                <select class="form-control mySelect" name="role" id="select-role" [(ngModel)]="profileObject.isDriver">
+                    <option value="true">Driver</option>
+                    <option value="false">Rider</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-1"></div>
+            <label for="select-status" class="col-sm-4 col-form-label">Status:</label>
+            <div class="col-sm-4">
+                <select class="form-control mySelect" name="status" id="select-status" [(ngModel)]="profileObject.active">
+                    <option value="true">Active</option>
+                    <option value="false">Disabled</option>
+                </select>
+            </div>
+        </div>
+        <div *ngIf='carObject' >
             <div class="form-group row">
-            
-                    <div class="col-sm-12">
-                       <h5>Batch:</h5>
-                       <span> {{profileObject.batch.batchNumber}} - {{profileObject.batch.batchLocation}}</span>
-                    </div>
-                </div>
-                
-                <div class="form-group row">
-                     <div class="col-sm-4 t">
-                    <h6>Status:</h6>
-                    <select class="form-control mySelect" name="rider" id="rider" [(ngModel)]=isDriver value="{{profileObject.isDriver}}">
-                        <option value="true">Driver</option>
-                        <option value="false">Rider</option>
+                <div class="col-sm-1"></div>
+                <label for="seats-available-input" class="col-sm-4 col-form-label">Seats Available:</label>
+                <div class="col-sm-4">
+                    <select class="form-control" name="seats-available" id="seats-available-select" [(ngModel)]="carObject.seatsAvailable"  [disabled]="profileObject.active == 'false' || profileObject.active == false">
+                        <option *ngFor="let seat of possibleSeats; let x = index" [ngValue]="seat">{{seat}}</option>
                     </select>
-                    <select class="form-control mySelect" name="active" id="active" [(ngModel)]=active value="{{profileObject.active}}">
-                        <option value="true">Active</option>
-                        <option value="false">Disabled</option>
-                    </select>
-           
-                <button type="submit" class="btn btn-primary myBtn" (click)='updatesMembershipInfo()' >Save</button>
+                    <p *ngIf="success != ''" class="success">{{success}}</p>
                 </div>
             </div>
         </div>
     </div>
+    <button type="submit" class="btn btn-primary myBtn" (click)='updatesMembershipInfo()'>Save</button>
+</div>

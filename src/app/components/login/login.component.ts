@@ -5,7 +5,8 @@ import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from 'src/app/services/auth-service/auth.service';
 import { Router, RouterModule } from '@angular/router';
-import { BsModalService, BsModalRef} from 'ngx-bootstrap';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap';
+import { SessionService } from 'src/app/services/session-service/session.service';
 
 @Component({
 	selector: 'app-login',
@@ -35,16 +36,16 @@ export class LoginComponent implements OnInit {
 	userName: string = '';
 	passWord: string = '';
 	totalPage: number = 1;
-  	curPage: number = 1;
+	curPage: number = 1;
 
 	showDropDown: boolean = false;
 	failed: boolean = false;
 	banned: boolean = false;
 
 	pwdError: string;
-    usernameError: string;
+	usernameError: string;
 	userNotFound: string;
-	modalRef :BsModalRef;
+	modalRef: BsModalRef;
 	/**
 	 * This is a constructor
 	 * @param userService An user service is instantiated.
@@ -54,11 +55,12 @@ export class LoginComponent implements OnInit {
 	 *
 	 */
 	constructor(
-		private modalService :BsModalService,
-		private userService: UserService, 
+		private modalService: BsModalService,
+		private userService: UserService,
 		private http: HttpClient,
-		private authService: AuthService, 
-		public router: Router) { }
+		private authService: AuthService,
+		private router: Router,
+		private sessionService: SessionService) { }
 
 	/**
 	 * When the component is initialized, the system checks for the session storage to validate. Once validated, the user service is called to retrieve all users.
@@ -69,7 +71,7 @@ export class LoginComponent implements OnInit {
 				this.allUsers = allUsers;
 				this.totalPage = Math.ceil(this.allUsers.length / 5);
 				this.users = this.allUsers.slice(0, 5);
-		});
+			});
 	}
 
 	/**
@@ -144,12 +146,12 @@ export class LoginComponent implements OnInit {
 		this.failed = true;
 	}
 
-	loginBanned(){
+	loginBanned() {
 		this.userName = '';
 		this.banned = true;
 	}
 
-	openModal(template :TemplateRef<any>){
+	openModal(template: TemplateRef<any>) {
 		this.modalRef = this.modalService.show(template);
 	}
 
@@ -158,33 +160,30 @@ export class LoginComponent implements OnInit {
 	 */
 
 	login() {
-		this.pwdError ='';
-		this.usernameError= '';
-		
-        this.http.get(`${environment.loginUri}?userName=${this.userName}&passWord=${this.passWord}`)
+		this.pwdError = '';
+		this.usernameError = '';
+
+		this.http.get(`${environment.loginUri}?userName=${this.userName}&passWord=${this.passWord}`)
 			.subscribe(
-                  (response) => {
-                     //console.log(response);
-                      if(response["userName"] != undefined){
-                         this.usernameError=  response["userName"][0];
-                      }
-                      if(response["passWord"] != undefined){
-                         this.pwdError = response["pwdError"][0];
-					  }
-					  if((response["name"] != undefined) && (response["userid"] != undefined)){
+				(response) => {
+					if (response["userName"] != undefined) {
+						this.usernameError = response["userName"][0];
+					}
+					if (response["passWord"] != undefined) {
+						this.pwdError = response["pwdError"][0];
+					}
+					if ((response["name"] != undefined) && (response["userid"] != undefined)) {
 						sessionStorage.setItem("name", response["name"]);
 						sessionStorage.setItem("userid", response["userid"]);
-						
-						// removed landingPage (research)
-						// call drivers
-						// new location after login is: drivers
-						location.replace('drivers');
-					  }
-					  if(response["userNotFound"] != undefined){
+						this.modalRef.hide();
+						this.sessionService.loggedIn();
+            this.router.navigate(['drivers']);
+					}
+					if (response["userNotFound"] != undefined) {
 						this.userNotFound = response["userNotFound"][0];
-					  }
-                 }
-        );
+					}
+				}
+			);
 		/*this.http.get<User[]>(`${environment.userUri}?username=${this.userName}`)
 			.subscribe((user: User[]) => {
 				if (!user.length) {

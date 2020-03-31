@@ -36,7 +36,7 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { UserRegisterComponent } from './components/user-register/user-register.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
-
+import { SessionService } from './services/session-service/session.service';
 
 
 @NgModule({
@@ -83,7 +83,8 @@ import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
     BatchService,
     AuthService,
     ValidationService,
-    BsModalService
+    BsModalService,
+    SessionService
   ],
   bootstrap: [AppComponent]
 })

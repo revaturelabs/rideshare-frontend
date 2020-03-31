@@ -51,7 +51,7 @@ describe('LoginComponent', () => {
       active: true,
       driver: true,
       acceptingRides: true}]
-    // fixture.detectChanges();
+      //fixture.detectChanges();
   });
 
   it('should create', () => {

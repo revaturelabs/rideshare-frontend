@@ -145,16 +145,13 @@ export class UserService {
         return promise1;
     }
     private partialMatch(data: any): boolean {
-        console.log(data);
         try {// throws an error if we try to access data/compare data that isn't there
             if (data.results[0].partial_match == true){
-                console.log('partial match only');
                 return false;
             }
 
-        } catch (error) {// Another invalid pathway in the case that google api is not set up properly/api is no longer in expected format
+        } catch (error) {// Invalid/no gapi geocode compatible key or no "partial_match" at position 0 of result data
             console.log(error);
-            console.log('Invalid/no gapi geocode compatible key or no "partial_match" at position 0 of result data');
             return false;
         }
     }
@@ -170,10 +167,8 @@ export class UserService {
             // address if it makes a best effort delivery; therefore, we can parse and compare to user input
         try {
             const googleGeoResult = data.results[0].formatted_address;
-            console.log(googleGeoResult);// prints formatted address
             // splits into address, city, state with zip, and country portions respectively
             const googleGeoArrv1 = googleGeoResult.split(',');
-            console.log(googleGeoArrv1);
             const gStateandZip = googleGeoArrv1[2].split(' ');// array of state and zip
             const gStreetNameAndNumber = googleGeoArrv1[0].split(' ');
             // Breaking the formatted address into the strings required to compare to user input
@@ -189,24 +184,14 @@ export class UserService {
 
             }
             const gFormattedStrtNameAndNum = gStreetNumber + ' ' + gStreetName;
-            console.log(`gFormattedStrtNameAndNum:${gFormattedStrtNameAndNum}`);
-            console.log(`gCity:${gCity}`);
-            console.log(`gState:${gState}`);
-            console.log(`gZip:${gZip}`);
-            console.log(`user.hAddress:${user.hAddress}`);
-            console.log(`user.hCity:${user.hCity}`);
-            console.log(`user.hState:${user.hState}`);
-            console.log(`user.hZip:${user.hZip}`);
             const lastIndex = user.hAddress.lastIndexOf(' '); // ensures that the user added the suffix, if not will fail
             const tempUserHaddress = user.hAddress.substring(0, lastIndex);
-            console.log(`tempUserHaddress: ${tempUserHaddress}`);
             // temporarily remove suffix from user supplied address and confirm all parts of address with response from google
 
             if((tempUserHaddress.toUpperCase() === gFormattedStrtNameAndNum.toUpperCase())
                 && (user.hCity.toUpperCase() === gCity.toUpperCase())
                 && (user.hState.toUpperCase() === gState.toUpperCase())
                 && (user.hZip == gZip)){
-                console.log('User input confirmed with a google location');
                 // add suffix back in for accurate address stored in db, as well as capitalizing every8thing
                 user.hAddress = gStreetNameAndNumber.join(' ').toUpperCase();
                 user.hCity = gCity.toUpperCase();
@@ -214,11 +199,9 @@ export class UserService {
                 return true; // validated
 
             } else { // user's inputted address elements don't match the google address elements
-                console.log('else condition regarding failed comparisons to google output trigger');
                 return false;
             }
         } catch (error){
-            console.log(' Invalid/no gapi geocode compatible key or no "formatted_address" element at position [0])');
             return false;
         }
     }
@@ -239,7 +222,6 @@ export class UserService {
             }
         });
         googleConstructedUrl += `,+${user.hCity},+${user.hState}&key=${this.googleApiKey}`;
-        console.log('the google constructed url is: ' + googleConstructedUrl);
         return googleConstructedUrl;
     }
 
@@ -255,12 +237,10 @@ export class UserService {
      * @param user 
      */
     private setInvalidAddress(user: User) {
-        console.log('invalidated...');
         user.hAddress = '';
         user.hState = '';
         user.hCity = '';
         user.hZip = null;
-
     }
 
     /**
@@ -334,8 +314,6 @@ export class UserService {
 
     async updateUserInfo(user: User): Promise<Object> {
         const addressValid = await this.addressValidation(user); // waits for validation to edit fields before put request
-        console.log(`USER UPDATE: User location info log
-        (location modifying to '' on failure) happens first: ${user.hAddress}, ${user.hCity}, ${user.hState}, ${user.hZip}`);
         return this.http.put(this.url, user).toPromise();
     }
     /**

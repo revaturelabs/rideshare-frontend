@@ -22,11 +22,9 @@ export class HomePageComponent implements OnInit {
     this.http.get(`${environment.loginUri}getGoogleApi`)
        .subscribe(
                  (response) => {
-                     //console.log(response);
                      if(response["googleMapAPIKey"] != undefined){
                          new Promise(() => {
                          this.userService.googleApiKey = response['googleMapAPIKey'][0];
-                         console.log(`google api key obtained is: ${this.userService.googleApiKey}`);
                      }); 
                }
            }

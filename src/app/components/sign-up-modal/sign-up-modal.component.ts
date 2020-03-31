@@ -60,7 +60,6 @@ export class SignupModalComponent implements OnInit {
 
     this.userService.getAllUsers().subscribe(
       res => {
-        //console.log(res);
       }
     );
 
@@ -106,12 +105,11 @@ export class SignupModalComponent implements OnInit {
     this.user.wCity = this.user.hCity;
     this.user.wZip = this.user.hZip;
 
-    //console.log(this.user);
 
 
     const res = await this.userService.addUser(this.user);
 
-    console.log(res);
+
     let i = 0;
     if (res.firstName != undefined) {
         this.firstNameError = res.firstName[0]; //additional server validation

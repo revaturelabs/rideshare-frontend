@@ -25,7 +25,6 @@ export class ProfileLocationComponent implements OnInit {
   ngOnInit() {
     //TODO should be removed once navbar on login bug is fixed, as this method is already called on homepage retrieving key
     this.getGoogleApiKey();
-    // console.log('google api key is' + this.userService.googleApiKey);
    
    this.userService.getUserById2(sessionStorage.getItem("userid")).subscribe((response)=>{
       this.currentUser = response;
@@ -42,11 +41,10 @@ export class ProfileLocationComponent implements OnInit {
     this.http.get(`${environment.loginUri}getGoogleApi`)
        .subscribe(
                  (response) => {
-                     //console.log(response);
+
                      if(response["googleMapAPIKey"] != undefined){
                          new Promise(() => {
                          this.userService.googleApiKey = response['googleMapAPIKey'][0];
-                         console.log(`google api key obtained is: ${this.userService.googleApiKey}`);
                      }); 
                }
            }
@@ -59,7 +57,7 @@ export class ProfileLocationComponent implements OnInit {
     this.currentUser.hAddress = this.address;
     this.currentUser.wAddress = this.address2;
     this.currentUser.hState = this.hState;
-    //console.log(this.currentUser);
+
     let didSucceed = true;
     const result = await this.userService.updateUserInfo(this.currentUser).then(function(response){
         didSucceed = true;

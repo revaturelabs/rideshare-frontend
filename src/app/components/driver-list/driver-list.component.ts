@@ -7,7 +7,7 @@ import {MatSortModule} from '@angular/material/sort';
 
 interface IGoogleMapsAPIResponse { 
   googleMapAPIKey: string;
-}
+} 
 
 @Component({
   selector: 'app-driver-list',
@@ -39,7 +39,6 @@ export class DriverListComponent implements OnInit {
         // Data is array of objects. Each object has keys relevant to car and users key that holds user object
         (data) => {
           data.forEach(carOwner => {
-            // console.log("data: " + JSON.stringify(carOwner))
             this.drivers.push({
               id: carOwner.user.userId,
               name: carOwner.user.firstName + ' ' + carOwner.user.lastName,
@@ -162,37 +161,6 @@ export class DriverListComponent implements OnInit {
             
             // on success, for each driver, do this:
           
-            /**
-             * 
-             * The architecture of Response is as following:
-             * 
-             * NOTE: 'rows' is an array where each row corresponds to an origin.
-             *        Since we are dealing with SINGLE origin, we can only have 
-             *        value at rows[0]. 
-             * 
-             * {
-             *  originAddress: [],
-             *  destinationAddress: [],
-             *  rows: [
-             *       {
-                *        status: OK,
-                *        duration: {
-                *            value: 123123,
-                *            text: 19 hours 40 mins
-                *        },
-                *        distance: {
-                *            value: 123,
-                *            text: 50 mi
-                *        }
-            *        },
-            * 
-            *        {},
-            *        {},
-            *        etc
-            *    ]
-            * }
-            */
-
             const originList = response.originAddresses;
             const destinationList = response.destinationAddresses;
             // results is Array of objects. Each object has status, duration, and distance.
@@ -202,20 +170,19 @@ export class DriverListComponent implements OnInit {
             const name = element.name;
             // driver's car's number of seats
             const seats = element.seats;
-            // console.log("seats: " + seats);
 
             this.dataToDisplay.push({
-              "itemLabel": `exampleModalCentered${element.id}`,
-              "origin": originList,
-              "destinationList": destinationList,
-              "results": results,
-              "user": {
-                "id": element.id,
-                "name": name,
-                "email": element.email,
-                "phone": element.phone
+              itemLabel: `exampleModalCentered${element.id}`,
+              origin: originList,
+              destinationList: destinationList,
+              results: results,
+              user: {
+                id: element.id,
+                name: name,
+                email: element.email,
+                phone: element.phone
               },
-              "seats": seats,
+              seats: seats,
             });
           }
         }

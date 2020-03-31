@@ -22,7 +22,7 @@ export class UserRegisterComponent implements OnInit {
 	user: User = new User();
 
   /**
-   * @constructor 
+   * @constructor
    * @param router Provides an instance of a router.
    * @param userService A dependency of an user service is injected.
    * @param batchService A dependency of a batch service is injected.
@@ -36,15 +36,7 @@ export class UserRegisterComponent implements OnInit {
    * The system will check if the token is valid; once validated a batch service is called.
    */
 	ngOnInit() {
-		// if (sessionStorage.getItem('auth')) {
-		// 	this.router.navigate(['home']);
-		// } else {
-		// 	this.batchService.getAllBatches()
-		// 		.subscribe(allBatches => {
-		// 			this.batches = allBatches;
-		// 			this.user.batch.batchNumber = this.batches[0].batchNumber;
-		// 	});
-		// }
+
 	}
 
 	/**

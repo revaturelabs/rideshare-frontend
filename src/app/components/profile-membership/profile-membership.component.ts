@@ -59,7 +59,5 @@ export class ProfileMembershipComponent implements OnInit {
     this.carService.updateCarInfo(this.carObject);
     this.userService.updateUserInfo(this.profileObject);
     this.success = "Updated Successfully!";
-    console.log(this.isDriver);
-    console.log(this.profileObject);
   }
 }

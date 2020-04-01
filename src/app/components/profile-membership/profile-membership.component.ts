@@ -30,15 +30,15 @@ export class ProfileMembershipComponent implements OnInit {
   }
 
   updatesMembershipInfo() {
-    this.userService.updateUserInfo(this.profileObject).subscribe((response)=>{
+    this.userService.updateUserInfo(this.profileObject).then(function(response){
 
       this.result = "Updated Successfully!";
       this.resultColor="green";
       this.resultVisible="visible";
-    }, error =>{
+    }).catch(function(e){
 
       //likely server error
-      this.result = "Error " + error.status;
+      this.result = "Error " + e.status;
       this.resultColor="red";
       this.resultVisible="visible";
     });

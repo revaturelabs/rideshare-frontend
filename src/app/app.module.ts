@@ -38,6 +38,7 @@ import { UserRegisterComponent } from './components/user-register/user-register.
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
 import { AgmCoreModule } from '@agm/core';
+import { SignupComponent } from './components/signup/signup.component';
 
 
 @NgModule({
@@ -66,8 +67,8 @@ import { AgmCoreModule } from '@agm/core';
     DriverListComponent,
     UserRegisterComponent,
     HomePageComponent,
-    BsNavbarComponent
-    
+    BsNavbarComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,

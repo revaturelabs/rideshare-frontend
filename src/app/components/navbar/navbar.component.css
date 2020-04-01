@@ -4,7 +4,6 @@
 
 .userimg {
     width: 7%;
-    height: 7%;
     cursor: pointer; 
 }
 
@@ -32,6 +31,7 @@ nav {
 
 a.nav-link{
     color:black !important;
+    display: inline;
 }
 
 .nav-link{
@@ -76,6 +76,7 @@ a.nav-link{
     font-size:23px;
 }
 .dropdown-item {
+    border: 3px solid white;
     padding: 0.25rem 4.5rem;
 }
 .dropdown-item:hover{
@@ -106,7 +107,6 @@ a.nav-link{
     }
     .userimg {
         width: 20%;
-        height: 20%;
     }
 
     /* .myDropDown{

@@ -190,7 +190,7 @@ displayDriversList(origin, drivers) {
                                               </div>
                                               <div class="modal-body">
                                                   <h1 style="color: #f16a2c;">${name}</h1>
-                                                  <span class="text-muted">Email: ${element.email}</h3>
+                                                  <span class="text-muted">Email: </span><h3>${element.email}</h3>
 		                                              <span class="text-muted">Phone: </span><h3>${element.phone}</h3>                             
                                               </div>
                                               <div class="modal-footer">

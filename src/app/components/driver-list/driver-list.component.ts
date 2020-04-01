@@ -95,10 +95,9 @@ export class DriverListComponent implements OnInit {
     this.dataToDisplay = data.sort((a, b) => {
       const isAsc = sort.direction === 'asc';
       switch (sort.active) {
-        case 'name': {
+        case 'name':
           return compare(a.user.name, b.user.name, isAsc);
-        }
-          case 'distance': 
+        case 'distance': 
             return compare(a.results[0].distance.value, b.results[0].distance.value, isAsc);
         case 'time': 
           return compare(a.results[0].duration.value, b.results[0].duration.value, isAsc);

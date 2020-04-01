@@ -76,6 +76,7 @@ export class UserService {
 
     }
 
+    
     getUserById2(idParam2: String): Observable<User> {
 
         return this.http.get<User>(this.url+idParam2);
@@ -97,11 +98,6 @@ export class UserService {
 		//notify navbar user has changed
 		this.getEmitter().emit(this.user);
 	}
-
-	/**
-	 * A GET method that retrieves a driver by Id
-	 * @param id 
-	 */
 
     /**
      * A POST method that switch an Rider to a Driver

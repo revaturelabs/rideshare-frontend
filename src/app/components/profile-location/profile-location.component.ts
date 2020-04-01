@@ -23,7 +23,10 @@ export class ProfileLocationComponent implements OnInit {
   hState: string;
   currentUser: User;
   success :string;
-  autocomplete: google.maps.places.Autocomplete;
+  failed: string;
+  emptyAddress: string;
+  emptyCity: string;
+  emptyZip: string;
 
   constructor(private userService: UserService,
     private http: HttpClient,
@@ -124,7 +127,34 @@ export class ProfileLocationComponent implements OnInit {
     this.currentUser.hAddress = this.address;
     this.currentUser.wAddress = this.address2;
     this.currentUser.hState = this.hState;
-    this.userService.updateUserInfo(this.currentUser);
-    this.success = "Updated Successfully!";
+    //console.log(this.currentUser);
+    switch(this.currentUser.hCity){
+      case '': this.emptyCity = "Invalid Input! Cannot be empty";
+              this.failed = "CANNOT UPDATE CONTACT INFORMATION!"
+              this.success = "";
+              break;
+      default: this.emptyCity = "";
+    }
+    switch(this.currentUser.hAddress){
+      case '': this.emptyAddress = "Invalid Input! Cannot be empty";
+              this.failed = "CANNOT UPDATE CONTACT INFORMATION!"
+              this.success = "";
+              break;
+      default: this.emptyAddress = "";
+    }
+    switch(String(this.currentUser.hZip)){
+      case '': this.emptyZip = "Invalid Input! Cannot be empty";
+              this.failed = "CANNOT UPDATE CONTACT INFORMATION!"
+              this.success = "";
+              break;
+      default: this.emptyZip = "";
+    }
+    if ((this.currentUser.hAddress !== '') && (this.currentUser.hCity !== '') && (String(this.currentUser.hZip) !== '')) {
+      this.userService.updateUserInfo(this.currentUser);
+      this.success = "Updated Successfully!";
+      this.failed = "";
+    }
+
   }
+
 }

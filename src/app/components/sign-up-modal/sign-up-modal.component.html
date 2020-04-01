@@ -1,14 +1,20 @@
+<<<<<<< HEAD
 <a (click)="openModal(template)">Sign up</a>
 
 <ng-template #template>
   <p *ngIf="success != ''" class="success">{{success}}</p>
+=======
+<a (click)="openModal(template)">Sign up</a >
+  
+<ng-template #template>
+>>>>>>> 33242cdffa859fc6c35ea080612a7b24f26af8fe
   <div class="modal-header">
     <h4 class="modal-title">Sign Up</h4>
     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
-  <div class="modal-body">
+  <div class="modal-body" (keydown.enter)="submitUser()">
     <label for="firstname">First Name</label>
     <input (keydown)="firstNameError = ''" id="firstname" type="text" [(ngModel)]="user.firstName" class="form-control" />
     <p *ngIf="firstNameError != ''" class="error">{{firstNameError}}</p>
@@ -22,12 +28,16 @@
     <p *ngIf="emailError != ''" class="error">{{emailError}}</p>
 
     <label for="phoneNumber">Phone Number</label>
+<<<<<<< HEAD
     <input (keydown)="phoneNumberError = ''" id="phoneNumber" type="text" [(ngModel)]="user.phoneNumber" class="form-control"
     />
+=======
+    <input (keydown)="phoneNumberError = ''" id="phoneNumber" type="text" [(ngModel)]="user.phoneNumber" class="form-control" maxlength="12"/>
+>>>>>>> 33242cdffa859fc6c35ea080612a7b24f26af8fe
     <p *ngIf="phoneNumberError != ''" class="error">{{phoneNumberError}}</p>
 
     <label for="userName">User Name</label>
-    <input (keydown)="userNameError = ''" id="userName" type="text" [(ngModel)]="user.userName" class="form-control" />
+    <input (keydown)="userNameError = ''" id="userName" type="text" [(ngModel)]="user.userName" class="form-control" maxlength="12"/>
     <p *ngIf="userNameError != ''" class="error">{{userNameError}}</p>
 
     <!--<label for="password">Password</label>
@@ -78,12 +88,14 @@
         </label>
         <br>
         <label class="btn btn-primary">
-          <input type="checkbox" id="rider" [(ngModel)]="isRider" /> Rider
+          <input type="checkbox" id="rider" [(ngModel)]="isRider"/> Rider
         </label>
       </div>
     </div>
     <div class="btn-container">
       <button type="submit" class="btn btn-primary register" (click)="submitUser()">Submit</button>
+      <p *ngIf="success != ''" class="success">{{success}}</p>
+      <p *ngIf="failed != ''" class="error">{{failed}}</p>
     </div>
   </div>
 </ng-template>

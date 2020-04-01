@@ -4,7 +4,6 @@
 
 .userimg {
     width: 7%;
-    height: 7%;
     cursor: pointer; 
 }
 
@@ -108,7 +107,6 @@ a.nav-link{
     }
     .userimg {
         width: 20%;
-        height: 100%;
     }
 
     /* .myDropDown{

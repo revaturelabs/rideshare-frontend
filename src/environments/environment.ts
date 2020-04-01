@@ -28,6 +28,7 @@ export const environment = {
   carUri: `${baseUri}:${port}/cars/`,
   adminUri: `${baseUri}:${port}/admins/`,
   googleMapKey: `${googleKey}`,
+  googleBaseUri: `https://maps.googleapis.com/maps/api/geocode/json?address=`,
 };
 
 /*

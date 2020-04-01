@@ -141,7 +141,7 @@ export class UserService {
         }
         const promise1 = new Promise((resolve, reject) => {
             setTimeout(()=>{
-                console.log("async work complete");
+                // console.log("async work complete");
                 resolve();
             }, 1000);
         });

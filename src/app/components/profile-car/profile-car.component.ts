@@ -45,7 +45,7 @@ export class ProfileCarComponent implements OnInit {
     this.failed='Update failed. Please resolve above error(s).';
     this.success='';
 
-
+    // If errors are sent back, they get displayed. If no errors
     this.carService.updateCarInfo(this.currentCar).subscribe(
       res => {
         console.log(res);

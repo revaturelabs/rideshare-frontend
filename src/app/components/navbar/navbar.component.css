@@ -32,6 +32,7 @@ nav {
 
 a.nav-link{
     color:black !important;
+    display: inline;
 }
 
 .nav-link{
@@ -107,7 +108,7 @@ a.nav-link{
     }
     .userimg {
         width: 20%;
-        height: 20%;
+        height: 100%;
     }
 
     /* .myDropDown{

@@ -10,7 +10,6 @@ import { HttpClient } from '@angular/common/http';
 import { } from 'googlemaps';
 import { GoogleService } from 'src/app/services/google-service/google.service';
 import { Promise } from 'q';
-declare var google: any;
 
 @Component({
   selector: 'signupmodal',

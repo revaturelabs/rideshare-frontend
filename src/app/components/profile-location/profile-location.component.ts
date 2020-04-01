@@ -4,6 +4,7 @@ import { User } from 'src/app/models/user';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { } from 'googlemaps';
+import { GoogleService } from 'src/app/services/google-service/google.service';
 declare var google: any;
 
 @Component({
@@ -25,10 +26,12 @@ export class ProfileLocationComponent implements OnInit {
   autocomplete: google.maps.places.Autocomplete;
 
   constructor(private userService: UserService,
-    private http: HttpClient) { }
+    private http: HttpClient,
+    private googleService: GoogleService) { }
 
   ngOnInit() {
-    this.getGoogleApi();
+    // this.googleService.getGoogleApi();
+    this.initAutocomplete();
     this.userService.getUserById2(sessionStorage.getItem("userid")).subscribe((response)=>{
       this.currentUser = response;
       this.zipcode = response.hZip;
@@ -123,26 +126,5 @@ export class ProfileLocationComponent implements OnInit {
     this.currentUser.hState = this.hState;
     this.userService.updateUserInfo(this.currentUser);
     this.success = "Updated Successfully!";
-  }
-
-  getGoogleApi()  {
-    let self = this;
-    this.http.get(`${environment.loginUri}getGoogleApi`)
-      .subscribe(
-        (response) => {
-          //console.log(response);
-          if(response["googleMapAPIKey"] != undefined){
-            new Promise((resolve) => {
-              let script: HTMLScriptElement = document.createElement('script');
-              script.addEventListener('load', r => resolve());
-              script.src = `http://maps.googleapis.com/maps/api/js?libraries=places&key=${response["googleMapAPIKey"][0]}`;
-              document.head.appendChild(script);
-                   
-            }).then( resp => {
-              this.initAutocomplete();
-            });
-          }    
-        }
-      );
   }
 }

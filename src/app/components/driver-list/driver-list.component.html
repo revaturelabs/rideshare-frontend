@@ -1,14 +1,3 @@
-<<<<<<< HEAD
-  <div class = "content text-center col-md align-self-center ">
-    <div class="row d-flex justify-content-center">
-      <div class="col-md-6 ">
-        <h1>Revature RideForce</h1>
-        <input type="text" [(ngModel)]="homeLocation" class="form-control" id="">
-        <button  class="btn btn-primary register mt-2 mb-4" (click)="searchDriver('none')">Search</button>  
-      </div>
- 
-  </div>
-=======
   <div class = "content text-center col-md align-self-center">
     <h1>Revature RideForce</h1>
     <input type="text" [(ngModel)]="homeLocation" class="form-control" id="formGroupExampleInput2">
@@ -28,17 +17,16 @@
     </div>
 
 
->>>>>>> 912a49a13518deac3c25a05f277f109c5f1827f4
   </div>
 <div class = "container">
     <div class="row">
-    <div class="col-lg-4">
+    <div class="col-lg-5">
       <h4>Drivers</h4>
       
      <table class="table table-striped">
-       <thead class="thead-dark borderYtoX">
-         <tr >
-           <th scope="col" id="nameColumn" (click)="sortByName()">  Name</th>
+       <thead class="thead-dark">
+         <tr>
+           <th scope="col" id="nameColumn" (click)="sortByName()">Name</th>
            <th scope="col" id="distanceColumn" (click)="sortByDistance()">Distance</th>
            <th scope="col" id="timeColumn" (click)="sortByDistance()">Time</th>
            <th scope="col">View Info</th>
@@ -47,8 +35,8 @@
        <tbody id="output"></tbody>
       </table>
      </div>
-     <div class="col-lg-8">
-       <h4 class="text-center">Directions:</h4>
+     <div class="col-lg-6">
+       <h4>Directions:</h4>
        <div #map id="gmap" class="img-responsive"></div>
      </div>
     </div>

@@ -81,6 +81,8 @@ export class ValidationService {
 		return newName;
 	}
 
+
+
   /**
 	 * This function formats the phone number.
 	 */

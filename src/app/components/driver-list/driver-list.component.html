@@ -13,8 +13,8 @@
             <th mat-sort-header="name" scope="col">Name</th>
             <th mat-sort-header="distance" scope="col">Distance</th>
             <th mat-sort-header="time"scope="col">Time</th>
-            <th scope="col">View Info</th>
             <th mat-sort-header="seats" scope="col">Seats</th>
+            <th scope="col">View Info</th>
           </tr>
         </thead>
         <tbody id="output">
@@ -22,6 +22,7 @@
                     <td class="col">{{info.user.name}}</td>
                     <td class="col">{{info.results[0].distance.text}}</td>
                     <td class="col">{{info.results[0].duration.text}}</td>
+                    <td class="col">{{info.seats}}</td>
                       <td class="col"> 
                         <button type="button" class="btn btn-primary" data-toggle="modal" [attr.data-target]="'#' + info.itemLabel"> View</button>
                           <div class="col-lg-5">
@@ -47,7 +48,6 @@
                         </div>
                     </div>
                   </td>
-                  <td class="col">{{info.seats}}</td>
                   </tr>
           </tbody>
       </table>

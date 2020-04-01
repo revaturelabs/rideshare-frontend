@@ -180,6 +180,24 @@ export class UserService {
 		//console.log(user);
 		return this.http.put(this.url, user);
 	}
+
+	/**
+	 * update user name
+	 * @param fullName 
+	 */
+	updateUserName(fullName: string) {
+
+		//parse first and last name
+		const first = fullName.substr(0, fullName.indexOf(' '));
+		const last = fullName.substr(fullName.indexOf(' ') + 1);
+
+		this.user.firstName = first;
+		this.user.lastName = last;
+
+		//notify navbar user has changed
+		this.getEmitter().emit(this.user);
+	}
+
 	/**
 	 * A GET method that retrieves a driver by Id
 	 * @param id 

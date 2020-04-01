@@ -76,6 +76,7 @@ a.nav-link{
     font-size:23px;
 }
 .dropdown-item {
+    border: 3px solid white;
     padding: 0.25rem 4.5rem;
 }
 .dropdown-item:hover{

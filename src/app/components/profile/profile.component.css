@@ -1,6 +1,4 @@
 .pagebody {
-    width: 100vw;
-    height: 100vh;
     margin: 0 auto;
     padding-bottom:10px;
 }
@@ -33,8 +31,6 @@
         text-align:center;
     }
     .pagebody {
-        width: 100vw;
-        height: 100%;
         margin: 0 auto;
         padding-bottom:10px;
     }
@@ -51,8 +47,6 @@
         align-items: center;
     }
     .pagebody {
-        width: 100vw;
-        height: 100%;
         margin: 0 auto;
         padding-bottom:10px;
     }
@@ -64,8 +58,6 @@
         width:100%;
     }
     .pagebody {
-        width: 100vw;
-        height: 100%;
         margin: 0 auto;
         
         padding-bottom:10px;
@@ -79,8 +71,6 @@
         width:60%;
     }
     .pagebody {
-        width: 100vw;
-        height: 100%;
         margin: 0 auto;
        
         padding-bottom:10px;
@@ -89,8 +79,6 @@
 
 @media(max-height:1600px){
     .pagebody {
-        width: 100vw;
-        height: 100vh;
         margin: 0 auto;
         
         padding-bottom:10px;

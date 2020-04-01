@@ -200,6 +200,9 @@ export class LoginComponent implements OnInit {
 						sessionStorage.setItem('userid', response.userid);
 						this.modalRef.hide();
 						this.router.navigateByUrl('/drivers');
+
+						//update userService.user
+						this.userService.updateUserName(response.name.toString());
 					}
 					if (response.userNotFound !== undefined) {
 						this.userNotFound = response.userNotFound[0];

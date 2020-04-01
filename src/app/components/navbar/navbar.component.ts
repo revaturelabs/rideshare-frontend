@@ -66,6 +66,7 @@ export class NavbarComponent implements OnInit {
 
     this.userService.getEmitter().subscribe((user: User) => {
       this.name = user.firstName;
+      this.currentUser = user.firstName + " " + user.lastName;
     });
   }
 

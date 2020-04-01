@@ -4,28 +4,15 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { } from 'googlemaps';
 import {MatSortModule} from '@angular/material/sort';
+import {Sort} from '@angular/material/sort';
 
 interface IGoogleMapsAPIResponse { 
   googleMapAPIKey: string;
 } 
-         
-// interface ApiCallResult {
-//   originAddress: [],
-//   destinationAddress: [],
-//   rows: [
-//     {
-//         status: string,
-//         duration: {
-//           value: number,
-//           text: string
-//         },
-//         distance: {
-//           value: number,
-//           text: string
-//         }
-//     }
-//   ]
-// }
+
+function compare(a: number | string, b: number | string, isAsc: boolean) {
+  return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
+}
 
 @Component({
   selector: 'app-driver-list',
@@ -96,6 +83,31 @@ export class DriverListComponent implements OnInit {
           }
         }
       );
+  }
+
+  sortData(sort: Sort) {
+    const data = this.dataToDisplay.slice();
+    if (!sort.active || sort.direction === '') {
+      this.dataToDisplay = data;
+      return;
+    }
+
+    this.dataToDisplay = data.sort((a, b) => {
+      const isAsc = sort.direction === 'asc';
+      switch (sort.active) {
+        case 'name': {
+          return compare(a.user.name, b.user.name, isAsc);
+        }
+          case 'distance': 
+            return compare(a.results[0].distance.value, b.results[0].distance.value, isAsc);
+        case 'time': 
+          return compare(a.results[0].duration.value, b.results[0].duration.value, isAsc);
+        case 'seats': 
+          return compare(a.seats, b.seats, isAsc);
+        default: 
+          return 0;
+      }
+    });
   }
 
   searchDriver() {

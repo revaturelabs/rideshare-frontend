@@ -58,15 +58,13 @@ export class ProfileContactComponent implements OnInit {
     this.profileObject.email = this.email;
     this.profileObject.phoneNumber = this.phone;
 
-    this.userService.updateUserInfo(this.profileObject).subscribe(data => {
+    this.userService.updateUserInfo(this.profileObject).then(function(result) {
 
       this.result = "Updated Successfully!";
       this.resultColor = "green";
       this.resultVisible = "visible";
-    },
-    error => {
-
-      this.result = "Error " + error.status;
+    }).catch(function(e){
+      this.result = "Error " + e.status;
       this.resultColor = "red";
       this.resultVisible = "visible";
     });

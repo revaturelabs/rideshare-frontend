@@ -4,7 +4,6 @@
   text-align: center;
   margin: 20px 0px;
   justify-content: center;
-
 }
 
 .form-control {
@@ -66,6 +65,7 @@
 
 .col {
   margin-right: 3%;
+  height: 20px;
 }
 
 .btn-outline-secondary {

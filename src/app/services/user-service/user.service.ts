@@ -18,7 +18,6 @@ import { environment } from '../../../environments/environment';
 
 export class UserService {
 
-
     /**
      * Constructor
      * @param http An HTTP client object
@@ -140,7 +139,11 @@ export class UserService {
         if (valid === false){
             this.setInvalidAddress(user);
         }
-        const promise1 = new Promise(() => {
+        const promise1 = new Promise((resolve, reject) => {
+            setTimeout(()=>{
+                // console.log("async work complete");
+                resolve();
+            }, 1000);
         });
         return promise1;
     }
@@ -350,13 +353,13 @@ export class UserService {
     banUser(user: User) {
       this.body = JSON.stringify(user);
       this.http.put(`${this.url + user.userId}`,this.body,this.httpOptions).subscribe();
-    }
+	}
+	
+	getRidersForLocation1(location: string): Observable <any>{
+		return this.http.get(this.url + 'driver/'+ location);
+	}
 
-    getRidersForLocation1(location: string): Observable <any> {
-        return this.http.get(this.url + 'driver/'+ location);
-    }
-
-    getRidersForLocation2(location: string): Observable <any>{
-        return this.http.get(this.carUrl + 'driver/' + location);
-    }
+	getRidersForLocation2(location: string): Observable <any>{
+		return this.http.get(this.carUrl + 'driver/' + location);
+	}
 }

@@ -105,10 +105,7 @@ export class SignupModalComponent implements OnInit {
     this.user.wCity = this.user.hCity;
     this.user.wZip = this.user.hZip;
 
-
-
     const res = await this.userService.addUser(this.user);
-
 
     let i = 0;
     if (res.firstName != undefined) {

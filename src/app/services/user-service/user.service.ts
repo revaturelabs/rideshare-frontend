@@ -7,8 +7,6 @@ import { AuthService } from '../auth-service/auth.service';
 import { LogService } from '../log.service';
 import { environment } from '../../../environments/environment';
 
-
-
 @Injectable({
     providedIn: 'root'
 })
@@ -18,31 +16,6 @@ import { environment } from '../../../environments/environment';
 
 export class UserService {
 
-
-    /**
-     * Constructor
-     * @param http An HTTP client object
-     * @param router A router
-     * @param log A log service
-     * @param authService An authorization service
-     */
-
-    constructor(private http: HttpClient, private router: Router, private log: LogService, private authService: AuthService) { }
-
-    /**
-     * This is an user service
-     */
-    @Output() fireIsLoggedIn: EventEmitter<any> = new EventEmitter<any>();
-
-    // http headers
-    private headers = new HttpHeaders({'Content-Type': 'application/json'});
-
-
-
-    /**
-     * Set up the url string to the env var
-     * Creates a new user object
-     */
     url: string = environment.userUri;
     carUrl: string = environment.carUri;
     user: User = new User();
@@ -58,6 +31,21 @@ export class UserService {
         headers: new HttpHeaders({'Content-Type': 'application/json'}),
         observe: 'response' as 'body'
     };
+    /**
+     * Constructor
+     * @param http An HTTP client object
+     * @param router A router
+     * @param log A log service
+     * @param authService An authorization service
+     */
+
+    constructor(private http: HttpClient, private router: Router, private log: LogService, private authService: AuthService) { }
+
+    /**
+     * This is an user service
+     */
+    @Output() fireIsLoggedIn: EventEmitter<any> = new EventEmitter<any>();
+
 
     /**
      * A GET method for all users
@@ -348,15 +336,15 @@ export class UserService {
      * A function that bans users.
      */
     banUser(user: User) {
-      this.body = JSON.stringify(user);
-      this.http.put(`${this.url + user.userId}`,this.body,this.httpOptions).subscribe();
+        this.body = JSON.stringify(user);
+        this.http.put(`${this.url + user.userId}`, this.body, this.httpOptions).subscribe();
     }
 
-    getRidersForLocation1(location: string): Observable <any> {
-        return this.http.get(this.url + 'driver/'+ location);
+    getRidersForLocation1(location: string): Observable<any> {
+        return this.http.get(this.url + 'driver/' + location);
     }
 
-    getRidersForLocation2(location: string): Observable <any>{
+    getRidersForLocation2(location: string): Observable<any> {
         return this.http.get(this.carUrl + 'driver/' + location);
     }
 }

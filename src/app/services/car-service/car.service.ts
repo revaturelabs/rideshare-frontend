@@ -59,7 +59,7 @@ export class CarService {
 
 	updateCarInfo(car: Car): Observable<Car> {
 		//console.log(user);
-		return this.http.put<Car>(this.url, car);
+		return this.http.put<Car>(this.url + car.carId, car);
 	}
 
 

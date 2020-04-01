@@ -179,7 +179,7 @@ export class UserService {
 
 	updateUserInfo(user: User) :Observable<User> {
 		//console.log(user);
-		return this.http.put<User>(this.url, user);
+		return this.http.put<User>(this.url + user.userId, user);
 	}
 	/**
 	 * A GET method that retrieves a driver by Id

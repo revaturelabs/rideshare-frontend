@@ -1,20 +1,20 @@
 <a (click)="openModal(template)">Login</a >
 <ng-template #template >
-<div class="container">
+  <div class="container">
     <div class="text-center" id="login-form">       
-        <div class="modal-title-container">
+      <div class="modal-title-container">
         <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
           <span aria-hidden="true">&times;</span>
         </button>
-        <h4 class="modal-title">Login</h4>
+        <h4 id="login-modal-modal-title" class="modal-title">Login</h4>
       </div>
       <div class="content">
         <div class="form-group">
           <p class="error">{{userNotFound}}</p>
         </div>
         <div class="form-group">
-          <label for="formGroupExampleInput">Username</label><br>
-          <input type="text" [(ngModel)]="userName" class="form-control" id="formGroupExampleInput"
+          <label for="login-form-username-input">Username</label><br>
+          <input type="text" [(ngModel)]="userName" class="form-control" id="login-form-username-input"
             placeholder="Enter Username">
           <p class="error">{{usernameError}}</p>
         </div>

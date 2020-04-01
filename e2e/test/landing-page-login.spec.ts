@@ -1,5 +1,5 @@
 import { AppPage } from '../src/app.po';
-import { browser, logging } from 'protractor';
+import { browser, logging, element, by } from 'protractor';
 
 describe('test landing page login form', () => {
   let page: AppPage;
@@ -16,6 +16,7 @@ describe('test landing page login form', () => {
   it('click login button, open login form', () =>{
     page.navigateTo();
     page.getLoginButton().click();
+    expect(element(by.id("login-modal-modal-title")).getText()).toEqual('Login');
   });
 
   afterEach(async () => {

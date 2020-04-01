@@ -16,7 +16,8 @@ exports.config = {
         './test/signup-form.spec.ts',
         './test/register.spec.js',
         './test/usernav.spec.js',
-        './test/profile-landing-page.spec.ts'
+        './test/profile-landing-page.spec.ts',
+        './test/nav.spec.ts'
     ],
     capabilities: {
         browserName: 'chrome'

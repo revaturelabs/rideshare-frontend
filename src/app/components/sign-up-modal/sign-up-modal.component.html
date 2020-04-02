@@ -1,13 +1,6 @@
-<<<<<<< HEAD
 <a (click)="openModal(template)">Sign up</a>
 
 <ng-template #template>
-  <p *ngIf="success != ''" class="success">{{success}}</p>
-=======
-<a (click)="openModal(template)">Sign up</a >
-  
-<ng-template #template>
->>>>>>> b9b998ae6a8dcefe2560f2ef57c9ae6b74009e21
   <div class="modal-header">
     <h4 class="modal-title">Sign Up</h4>
     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
@@ -28,16 +21,13 @@
     <p *ngIf="emailError != ''" class="error">{{emailError}}</p>
 
     <label for="phoneNumber">Phone Number</label>
-<<<<<<< HEAD
     <input (keydown)="phoneNumberError = ''" id="phoneNumber" type="text" [(ngModel)]="user.phoneNumber" class="form-control"
-    />
-=======
-    <input (keydown)="phoneNumberError = ''" id="phoneNumber" type="text" [(ngModel)]="user.phoneNumber" class="form-control" maxlength="12"/>
->>>>>>> b9b998ae6a8dcefe2560f2ef57c9ae6b74009e21
+      maxlength="12" />
     <p *ngIf="phoneNumberError != ''" class="error">{{phoneNumberError}}</p>
 
     <label for="userName">User Name</label>
-    <input (keydown)="userNameError = ''" id="userName" type="text" [(ngModel)]="user.userName" class="form-control" maxlength="12"/>
+    <input (keydown)="userNameError = ''" id="userName" type="text" [(ngModel)]="user.userName" class="form-control" maxlength="12"
+    />
     <p *ngIf="userNameError != ''" class="error">{{userNameError}}</p>
 
     <!--<label for="password">Password</label>
@@ -50,10 +40,10 @@
       <option *ngFor="let batch of batches" [ngValue]="batch">{{batch.batchNumber}} {{batch.batchLocation}}</option>
     </select>
 
-   <div class="form-group">
+    <div class="form-group">
       <label for="address">Enter your address:</label>
 
-      <input type="text"  class="form-control"  id="autocomplete" autocomplete="off" value="" ng-focus="geolocate()">
+      <input type="text" class="form-control" id="autocomplete" autocomplete="off" value="" ng-focus="geolocate()">
 
     </div>
 
@@ -88,11 +78,7 @@
         </label>
         <br>
         <label class="btn btn-primary">
-<<<<<<< HEAD
           <input type="checkbox" id="rider" [(ngModel)]="isRider" /> Rider
-=======
-          <input type="checkbox" id="rider" [(ngModel)]="isRider"/> Rider
->>>>>>> b9b998ae6a8dcefe2560f2ef57c9ae6b74009e21
         </label>
       </div>
     </div>

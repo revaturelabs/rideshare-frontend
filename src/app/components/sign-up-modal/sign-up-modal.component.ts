@@ -95,7 +95,7 @@ export class SignupModalComponent implements OnInit {
   fixPlacesApi() {
     //allows the autofill address dropdown to show on top of the modal
     console.log(this.count);
-    (<HTMLElement>document.getElementsByClassName('pac-container')[this.count]).style.zIndex = '1051';
+    (<HTMLElement>document.getElementsByClassName('pac-container')[document.getElementsByClassName('pac-container').length - 1]).style.zIndex = '1051';
     this.count = this.locationService.counter();
 
   }

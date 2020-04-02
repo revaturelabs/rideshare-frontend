@@ -6,7 +6,6 @@ import { Batch } from 'src/app/models/batch';
 import { BatchService } from 'src/app/services/batch-service/batch.service';
 import { ValidationService } from 'src/app/services/validation-service/validation.service';
 import { environment } from 'src/environments/environment';
-import { HttpClient } from '@angular/common/http';
 import { } from 'googlemaps';
 import { GoogleService } from 'src/app/services/google-service/google.service';
 import { Promise } from 'q';

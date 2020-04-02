@@ -177,8 +177,8 @@ export class UserService {
 	 * @param user 
 	 */
 
-	updateUserInfo(user: User) {
-		return this.http.put(this.url, user).toPromise();
+	updateUserInfo(user: User) :Observable<User>{
+		return this.http.put<User>(this.url + user.userId, user);
 	}
 	/**
 	 * A GET method that retrieves a driver by Id

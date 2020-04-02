@@ -25,7 +25,12 @@ export class ProfileMembershipComponent implements OnInit {
   updatesMembershipInfo(){
     this.profileObject.driver = Boolean(JSON.parse(this.driver));
     this.profileObject.active = Boolean(JSON.parse(this.active));
-    this.userService.updateUserInfo(this.profileObject);
+    this.userService.updateUserInfo(this.profileObject).subscribe(
+      res => {
+        console.log(res);
+      } 
+    );;
     this.success = "Updated Successfully!";
+    console.log("success driver: "+this.driver+" active: "+this.active);
   }
 }

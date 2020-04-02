@@ -43,7 +43,7 @@ export class SignupModalComponent implements OnInit {
   hZipError: string;
   autocomplete: google.maps.places.Autocomplete;
 
-  count:number;
+  count: number;
 
   success: string;
   //Store the retrieved template from the 'openModal' method for future use cases.
@@ -53,8 +53,8 @@ export class SignupModalComponent implements OnInit {
     'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV',
     'WI', 'WY'];
   constructor(private googleApiKey: GoogleService, private http: HttpClient, private locationService: LocationService, private modalService: BsModalService, private userService: UserService, private batchService: BatchService, private validationService: ValidationService) {
-    
-   }
+
+  }
 
   ngOnInit() {
     //load google api
@@ -76,7 +76,6 @@ export class SignupModalComponent implements OnInit {
   //Opens 'sign up' modal that takes in a template of type 'ng-template'.
   openModal(template: TemplateRef<any>) {
     //shows ng template for this modal
-    
     this.modalRef = this.modalService.show(template);
     //creates googles autocomplete object to fill in address
     this.locationService.initAutocomplete(<HTMLInputElement>document.getElementById('autocomplete'));
@@ -180,6 +179,7 @@ export class SignupModalComponent implements OnInit {
         if (i === 0) {
           i = 0;
           this.success = "Registered successfully!";
+          this.sleep(5000).then(res => { this.modalRef.hide() });
         }
       }
     );

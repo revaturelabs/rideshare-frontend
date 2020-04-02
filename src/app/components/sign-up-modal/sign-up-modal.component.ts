@@ -56,7 +56,6 @@ export class SignupModalComponent implements OnInit {
     'WI', 'WY'];
   constructor(
     private googleApiKey: GoogleService,
-    private http: HttpClient,
     private locationService: LocationService,
     private modalService: BsModalService,
     private userService: UserService,

@@ -1,50 +1,46 @@
-
 <div class="container mainContainer" (keydown.enter)="updatesContactInfo()">
-    
+
     <i class="fa fa-user" style="font-family:'FontAwesome';"></i>
-       
-        <h4>Contact Information:</h4>
-    
-        <div class="form-group row">
-            <div class="col-sm-1"></div>
-                <label for="f_name" class="col-sm-4 col-form-label">First Name:</label>
-                <div class="col-sm-4">
-                    <input type="text" class="form-control" id="f_name" [(ngModel)]=firstName value="{{ profileObject?.firstName }}">
-                    <p *ngIf="firstNameError != ''" class="error">{{firstNameError}}</p>
-                </div>
+
+    <h4>Contact Information:</h4>
+
+    <div class="form-group row">
+        <div class="col-sm-1"></div>
+        <label for="f_name" class="col-sm-4 col-form-label">First Name:</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" id="f_name" [(ngModel)]=firstName value="{{ profileObject?.firstName }}">
+            <p *ngIf="firstNameError != ''" class="error">{{firstNameError}}</p>
         </div>
-        
-        <div class="form-group row">
-                <div class="col-sm-1"></div>
-            <label for="l_name" class="col-sm-4 col-form-label">Last Name:</label>
-            <div class="col-sm-4">
-                <input type="text" class="form-control" id="l_name" [(ngModel)]=lastName value="{{ profileObject?.lastName }}">
-                <p *ngIf="lastNameError != ''" class="error">{{lastNameError}}</p>
-            </div>
-        </div>
-    
-        <div class="form-group row">
-                <div class="col-sm-1"></div>
-            <label for="user_email" class="col-sm-4 col-form-label">Email:</label>
-            <div class="col-sm-4">
-                <input type="email" class="form-control" id="user_email" aria-describedby="emailHelp" [(ngModel)]=email value="{{ profileObject?.email }}">
-                <p *ngIf="emailError != ''" class="error">{{emailError}}</p>
-            </div>
-        </div>
-    
-        <div class="form-group row">
-                <div class="col-sm-1"></div>
-            <label for="phone" class="col-sm-4 col-form-label">Phone:</label>
-            <div class="col-sm-4">
-                <input type="text" class="form-control" id="phone" [(ngModel)]=phone value="{{ profileObject?.phoneNumber }}" maxlength="12">
-                <p *ngIf="phoneNumberError != ''" class="error">{{phoneNumberError}}</p>
-            </div>
-        </div>
-        
-        <button type="submit" class="btn btn-primary myBtn" (click)="updatesContactInfo()">Save</button>
-        <p *ngIf="success != ''" class="success">{{success}}</p>
-        <p *ngIf="failed != ''" class="failed">{{failed}}</p>
     </div>
-  
-        
-    
+
+    <div class="form-group row">
+        <div class="col-sm-1"></div>
+        <label for="l_name" class="col-sm-4 col-form-label">Last Name:</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" id="l_name" [(ngModel)]=lastName value="{{ profileObject?.lastName }}">
+            <p *ngIf="lastNameError != ''" class="error">{{lastNameError}}</p>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-sm-1"></div>
+        <label for="user_email" class="col-sm-4 col-form-label">Email:</label>
+        <div class="col-sm-4">
+            <input type="email" class="form-control" id="user_email" aria-describedby="emailHelp" [(ngModel)]=email value="{{ profileObject?.email }}">
+            <p *ngIf="emailError != ''" class="error">{{emailError}}</p>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-sm-1"></div>
+        <label for="phone" class="col-sm-4 col-form-label">Phone:</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" id="phone" [(ngModel)]=phone value="{{ profileObject?.phoneNumber }}" maxlength="12">
+            <p *ngIf="phoneNumberError != ''" class="error">{{phoneNumberError}}</p>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary myBtn" (click)="updatesContactInfo()">Save</button>
+    <p *ngIf="success != ''" class="success">{{success}}</p>
+    <p *ngIf="failed != ''" class="failed">{{failed}}</p>
+</div>

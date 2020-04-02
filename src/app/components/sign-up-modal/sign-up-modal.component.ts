@@ -1,10 +1,16 @@
-import { Component, OnInit, TemplateRef } from "@angular/core";
-import { BsModalService, BsModalRef } from "ngx-bootstrap";
-import { UserService } from "src/app/services/user-service/user.service";
-import { User } from "src/app/models/user";
-import { Batch } from "src/app/models/batch";
-import { BatchService } from "src/app/services/batch-service/batch.service";
-import { ValidationService } from "src/app/services/validation-service/validation.service";
+import { Component, OnInit, TemplateRef } from '@angular/core';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap';
+import { UserService } from 'src/app/services/user-service/user.service';
+import { User } from 'src/app/models/user';
+import { Batch } from 'src/app/models/batch';
+import { BatchService } from 'src/app/services/batch-service/batch.service';
+import { ValidationService } from 'src/app/services/validation-service/validation.service';
+import { environment } from 'src/environments/environment';
+import { } from 'googlemaps';
+import { GoogleService } from 'src/app/services/google-service/google.service';
+import { Promise } from 'q';
+import { LocationService } from 'src/app/services/location-service/location.service';
+declare var google: any;
 
 @Component({
   selector: "signupmodal",
@@ -12,10 +18,12 @@ import { ValidationService } from "src/app/services/validation-service/validatio
   styleUrls: ["./sign-up-modal.component.css"]
 })
 export class SignupModalComponent implements OnInit {
+  failed: string;
   fname: string;
   lname: string;
   username: string;
   email: string;
+  phone: string;
   phoneNumber: string;
   address: string;
   isDriver: boolean;
@@ -36,71 +44,29 @@ export class SignupModalComponent implements OnInit {
   hStateError: string;
   hCityError: string;
   hZipError: string;
+  autocomplete: google.maps.places.Autocomplete;
+
 
   success: string;
-  failed: string;
   //Store the retrieved template from the 'openModal' method for future use cases.
   modalRef: BsModalRef;
-  states = [
-    "AL",
-    "AK",
-    "AZ",
-    "AR",
-    "CA",
-    "CO",
-    "CT",
-    "DE",
-    "FL",
-    "GA",
-    "HI",
-    "ID",
-    "IL",
-    "IN",
-    "IA",
-    "KS",
-    "KY",
-    "LA",
-    "ME",
-    "MD",
-    "MA",
-    "MI",
-    "MN",
-    "MS",
-    "MO",
-    "MT",
-    "NE",
-    "NV",
-    "NH",
-    "NJ",
-    "NM",
-    "NY",
-    "NC",
-    "ND",
-    "OH",
-    "OK",
-    "OR",
-    "PA",
-    "RI",
-    "SC",
-    "SD",
-    "TN",
-    "TX",
-    "UT",
-    "VT",
-    "VA",
-    "WA",
-    "WV",
-    "WI",
-    "WY"
-  ];
+  states = ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS',
+    'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY',
+    'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV',
+    'WI', 'WY'];
   constructor(
+    private googleApiKey: GoogleService,
+    private locationService: LocationService,
     private modalService: BsModalService,
     private userService: UserService,
     private batchService: BatchService,
-    private validationService: ValidationService
-  ) {}
+    private validationService: ValidationService) {
+
+  }
 
   ngOnInit() {
+    //load google api
+    this.googleApiKey.getGoogleApi();
     this.userService.getAllUsers().subscribe(res => {
       this.users = res;
       console.log(this.users);
@@ -111,10 +77,30 @@ export class SignupModalComponent implements OnInit {
     });
   }
   //Opens 'sign up' modal that takes in a template of type 'ng-template'.
-
   openModal(template: TemplateRef<any>) {
+    //shows ng template for this modal
     this.modalRef = this.modalService.show(template);
+    //creates googles autocomplete object to fill in address
+    this.locationService.initAutocomplete(<HTMLInputElement>document.getElementById('autocomplete'));
+    //calls fixedPlacesApi after autocomplete object is created
+    this.sleep(1000).then(res => this.fixPlacesApi());
+
   }
+
+  sleep(ms) {
+    return Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  fixPlacesApi() {
+    //allows the autofill address dropdown to show on top of the modal
+    (<HTMLElement>document.getElementsByClassName('pac-container')[document.getElementsByClassName('pac-container').length - 1]).style.zIndex = '1051';
+
+  }
+
+  geolocate(): void {
+    this.locationService.geolocate();
+  }
+
 
   submitUser() {
     this.newUserName = true;
@@ -129,6 +115,7 @@ export class SignupModalComponent implements OnInit {
     this.hCityError = "";
     this.hZipError = "";
     this.success = "";
+    this.user = this.locationService.updatesContactInfo(this.user);
     this.failed = "Registration Unsuccessful!";
 
     //Format phone
@@ -160,6 +147,7 @@ export class SignupModalComponent implements OnInit {
         }
       }
     }
+    //update the address fields of the user
     this.user.wAddress = this.user.hAddress;
     this.user.wState = this.user.hState;
     this.user.wCity = this.user.hCity;
@@ -188,6 +176,7 @@ export class SignupModalComponent implements OnInit {
         if (res.lastName != undefined) {
           this.lastNameError = res.lastName[0];
           i = 1;
+
         }
         if (res.phoneNumber != undefined) {
           this.phoneNumberError = res.phoneNumber[0];
@@ -220,17 +209,15 @@ export class SignupModalComponent implements OnInit {
         if (i === 0) {
           i = 0;
           this.success = "Registered successfully!";
-          this.failed = "";
-          //Reload user list
-          this.userService.getAllUsers().subscribe(res => {
-            this.users = res;
-          });
+          this.sleep(5000).then(res => { this.modalRef.hide() });
         }
       }
-      /*res => {
-        console.log("failed to add user");
-        console.log(res);
-      }*/
     );
+
+    this.failed = "";
+    //Reload user list
+    this.userService.getAllUsers().subscribe(res => {
+      this.users = res;
+    });
   }
 }

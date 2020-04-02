@@ -65,7 +65,6 @@ export class ProfileLocationComponent implements OnInit {
     this.currentUser.wAddress = this.address.address2;
     this.currentUser.hState = this.address.hState;
     this.currentUser = this.locationService.updatesContactInfo(this.currentUser);
-    console.log(this.currentUser);
     //console.log(this.currentUser);
     switch (this.currentUser.hCity) {
       case '': this.emptyCity = "Invalid Input! Cannot be empty";
@@ -89,7 +88,6 @@ export class ProfileLocationComponent implements OnInit {
       default: this.emptyZip = "";
     }
     if ((this.currentUser.hAddress !== '') && (this.currentUser.hCity !== '') && (String(this.currentUser.hZip) !== '')) {
-      console.log(this.currentUser);
       this.userService.updateUserInfo(this.currentUser).subscribe();
       this.success = "Updated Successfully!";
       this.failed = "";

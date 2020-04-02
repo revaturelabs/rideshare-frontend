@@ -1,13 +1,6 @@
-<<<<<<< HEAD
-<a (click)="openModal(template)">Sign up</a>
-
-<ng-template #template>
-  <p *ngIf="success != ''" class="success">{{success}}</p>
-=======
 <a (click)="openModal(template)">Sign up</a >
   
 <ng-template #template>
->>>>>>> 33242cdffa859fc6c35ea080612a7b24f26af8fe
   <div class="modal-header">
     <h4 class="modal-title">Sign Up</h4>
     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
@@ -28,12 +21,7 @@
     <p *ngIf="emailError != ''" class="error">{{emailError}}</p>
 
     <label for="phoneNumber">Phone Number</label>
-<<<<<<< HEAD
-    <input (keydown)="phoneNumberError = ''" id="phoneNumber" type="text" [(ngModel)]="user.phoneNumber" class="form-control"
-    />
-=======
     <input (keydown)="phoneNumberError = ''" id="phoneNumber" type="text" [(ngModel)]="user.phoneNumber" class="form-control" maxlength="12"/>
->>>>>>> 33242cdffa859fc6c35ea080612a7b24f26af8fe
     <p *ngIf="phoneNumberError != ''" class="error">{{phoneNumberError}}</p>
 
     <label for="userName">User Name</label>

@@ -53,7 +53,7 @@ sleep(ms) {
   //call service search algorithm ()
   //console.log(this.location_s);
   this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapProperties);
-  this.userService.getRidersForLocation1(this.location_s, null, null)
+  this.userService.getRidersForLocation1(this.location_s, null, null, null)
   .subscribe(
             (response) => {
               response.forEach(element => {

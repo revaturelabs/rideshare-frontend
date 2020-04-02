@@ -3,7 +3,6 @@
             <h4 class="title">Membership:</h4>
             <div class="innercontainer">
             <div class="form-group row">
-            
                     <div class="col-sm-12">
                        <h5>Batch:</h5>
                        <span> {{profileObject.batch.batchNumber}} - {{profileObject.batch.batchLocation}}</span>
@@ -28,6 +27,8 @@
                     </div> -->
             
                 <button type="submit" class="btn btn-primary myBtn">Save</button>
+                <p *ngIf="success != ''" class="success">{{success}}</p>
+                <p *ngIf="failed != ''" class="failed">{{failed}}</p>
                 </div>
             </div>
         </div>

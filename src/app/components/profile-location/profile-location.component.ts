@@ -42,6 +42,7 @@ export class ProfileLocationComponent implements OnInit {
     this.locationService.initAutocomplete(<HTMLInputElement>document.getElementById('autocomplete'));
     this.userService.getUserById2(sessionStorage.getItem("userid")).subscribe((response) => {
       this.currentUser = response;
+      console.log(this.currentUser);
       this.address.zipcode = response.hZip;
       this.address.city = response.hCity;
       this.address.address = response.hAddress;
@@ -57,11 +58,14 @@ export class ProfileLocationComponent implements OnInit {
   }
 
   updatesContactInfo() {
+
     this.currentUser.hZip = this.address.zipcode;
     this.currentUser.hCity = this.address.city;
     this.currentUser.hAddress = this.address.address;
     this.currentUser.wAddress = this.address.address2;
     this.currentUser.hState = this.address.hState;
+    this.currentUser = this.locationService.updatesContactInfo(this.currentUser);
+    console.log(this.currentUser);
     //console.log(this.currentUser);
     switch (this.currentUser.hCity) {
       case '': this.emptyCity = "Invalid Input! Cannot be empty";
@@ -85,8 +89,8 @@ export class ProfileLocationComponent implements OnInit {
       default: this.emptyZip = "";
     }
     if ((this.currentUser.hAddress !== '') && (this.currentUser.hCity !== '') && (String(this.currentUser.hZip) !== '')) {
-      this.currentUser = this.locationService.updatesContactInfo(this.currentUser);
-      this.userService.updateUserInfo(this.currentUser);
+      console.log(this.currentUser);
+      this.userService.updateUserInfo(this.currentUser).subscribe();
       this.success = "Updated Successfully!";
       this.failed = "";
     }

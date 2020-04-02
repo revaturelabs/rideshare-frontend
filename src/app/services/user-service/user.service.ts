@@ -179,6 +179,8 @@ export class UserService {
 
 	updateUserInfo(user: User) :Observable<User> {
 		//console.log(user);
+		console.log(this.url);
+		console.log(user.userId);
 		return this.http.put<User>(this.url + user.userId, user);
 	}
 	/**

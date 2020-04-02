@@ -47,7 +47,6 @@ export class SignupModalComponent implements OnInit {
   hZipError: string;
   autocomplete: google.maps.places.Autocomplete;
 
-  count: number;
 
   success: string;
   //Store the retrieved template from the 'openModal' method for future use cases.
@@ -56,7 +55,14 @@ export class SignupModalComponent implements OnInit {
     'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY',
     'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV',
     'WI', 'WY'];
-  constructor(private googleApiKey: GoogleService, private http: HttpClient, private locationService: LocationService, private modalService: BsModalService, private userService: UserService, private batchService: BatchService, private validationService: ValidationService) {
+  constructor(
+    private googleApiKey: GoogleService,
+    private http: HttpClient,
+    private locationService: LocationService,
+    private modalService: BsModalService,
+    private userService: UserService,
+    private batchService: BatchService,
+    private validationService: ValidationService) {
 
   }
 
@@ -89,7 +95,6 @@ export class SignupModalComponent implements OnInit {
 
   fixPlacesApi() {
     //allows the autofill address dropdown to show on top of the modal
-    console.log(this.count);
     (<HTMLElement>document.getElementsByClassName('pac-container')[document.getElementsByClassName('pac-container').length - 1]).style.zIndex = '1051';
 
   }
@@ -209,8 +214,6 @@ export class SignupModalComponent implements OnInit {
         }
       }
     );
-
-
 
     this.failed = "";
     //Reload user list

@@ -90,7 +90,7 @@ export class ProfileContactComponent implements OnInit {
           i = 0;
           this.success = "Updated Successfully!";
           this.failed = '';
-          location.reload();
+          setTimeout(function(){ location.reload(); }, 1000);
         }
       } 
       /*res => {

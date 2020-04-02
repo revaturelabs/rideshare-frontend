@@ -178,9 +178,6 @@ export class UserService {
 	 */
 
 	updateUserInfo(user: User) {
-		console.log(user);
-		console.log(user.driver);
-		console.log(user.active);
 		return this.http.put(this.url, user).toPromise();
 	}
 	/**
@@ -231,8 +228,8 @@ export class UserService {
       this.http.put(`${this.url + user.userId}`,this.body,this.httpOptions).subscribe();
 	}
 	
-	getRidersForLocation1(homeLocation: string, workLocation: string, sort:string): Observable <any>{
-		return this.http.get(this.url + 'driver/'+ homeLocation +'/'+ workLocation + '/'+ sort 
+	getRidersForLocation1(homeLocation: string, workLocation: string, range:number, sameOffice: boolean): Observable <any>{
+		return this.http.get(this.url + 'driver/'+ homeLocation +'/'+ workLocation + '/'+ range + '/'+ sameOffice
 		)
 		
 		

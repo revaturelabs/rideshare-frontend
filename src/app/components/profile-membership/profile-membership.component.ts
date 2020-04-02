@@ -20,9 +20,6 @@ export class ProfileMembershipComponent implements OnInit {
       this.profileObject = response;
       this.driver = String(JSON.stringify(this.profileObject.driver));
       this.active = String(JSON.stringify(this.profileObject.active));
-      console.log(this.profileObject.driver);
-      console.log(this.profileObject.active);
-      console.log(this.profileObject);
     });
   }
   updatesMembershipInfo(){
@@ -30,9 +27,5 @@ export class ProfileMembershipComponent implements OnInit {
     this.profileObject.active = Boolean(JSON.parse(this.active));
     this.userService.updateUserInfo(this.profileObject);
     this.success = "Updated Successfully!";
-    console.log(this.profileObject.driver);
-    console.log(this.profileObject.active);
-    console.log(this.profileObject);
-    console.log("success driver: "+this.driver+" active: "+this.active);
   }
 }

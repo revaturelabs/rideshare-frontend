@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user-service/user.service';
 import { AuthService } from 'src/app/services/auth-service/auth.service';
@@ -20,12 +20,14 @@ import { listenToTriggers } from 'ngx-bootstrap/utils/triggers';
   styleUrls: ['./driver-list.component.css']
 })
 export class DriverListComponent implements OnInit {
+  //public driverUsers: User[];
+  //public userSeats: number[] = new Array();
 
-  homeLocation : string = '';
+  homeLocation: string = '';
   workLocation: string = '';
-  mapProperties :{};
-  availableCars : Array<any> = [];
-  drivers : Array<any> = [];
+  mapProperties: {};
+  availableCars: Array<any> = [];
+  drivers: Array<any> = [];
   driversList: Array<any> = [];
   distance: Array<any> = [];
   time: Array<any> = [];
@@ -37,16 +39,20 @@ export class DriverListComponent implements OnInit {
   @ViewChild('map', null) mapElement: any;
   map: google.maps.Map;
 
-  constructor(private http: HttpClient,private userService: UserService,
-    private googleService: GoogleService) { }
+  constructor(
+    private http: HttpClient,
+    private userService: UserService,
+    private googleService: GoogleService,
+    private carService: CarService
+  ) { }
 
   ngOnInit() {
 
     //Retriving
 
-    console.log("User Id: "+sessionStorage.getItem('userid'));
-    console.log("Home: "+sessionStorage.getItem('hAddress'));
-    console.log("Work: "+sessionStorage.getItem('wAddress'));
+    console.log("User Id: " + sessionStorage.getItem('userid'));
+    console.log("Home: " + sessionStorage.getItem('hAddress'));
+    console.log("Work: " + sessionStorage.getItem('wAddress'));
 
     this.homeLocation = sessionStorage.getItem('hAddress');
     this.workLocation = sessionStorage.getItem('wAddress');
@@ -61,70 +67,73 @@ export class DriverListComponent implements OnInit {
   }
 
 
-   searchDriver(){
+  searchDriver() {
     //call service search algorithm ()
-    console.log("searching for Drivers");
-    console.log("Range "+ this.range);
-    console.log("Same Office "+ this.sameOffice);
+    console.log("Searching for Drivers");
+    console.log("Range " + this.range);
+    console.log("Same Office " + this.sameOffice);
     this.drivers = [];
 
     this.userService.getRidersForLocation1(this.homeLocation, this.workLocation, this.range, this.sameOffice).subscribe(
-      res => {
-           res.forEach(element => {
-            console.log("Driver: " + res);
-            this.drivers.push({
-                   'id': element.userId,
-                 'name': element.firstName+" "+element.lastName,
-               'origin':element.hAddress+","+element.hCity+","+element.hState,
-                'email': element.email,
-                'phone':element.phoneNumber
-              });
-          });
-           console.log(this.drivers);
+      async res => {
+        res.forEach(async element => {
+          let driver = {
+            'id': element.userId,
+            'name': element.firstName + " " + element.lastName,
+            'origin': element.hAddress + "," + element.hCity + "," + element.hState,
+            'email': element.email,
+            'phone': element.phoneNumber,
+            'car': null
+          };
+          this.carService.getCarByUserId3(element.userId).subscribe(
+            resp=>{driver.car = resp;}
+          )
+          this.drivers.push(driver);
+        });
 
-           this.emptyDriversList();
+        this.emptyDriversList();
 
-          this.emptyDriversList();
+        this.emptyDriversList();
 
-          this.displayDriversList(this.homeLocation, this.drivers);
+        this.displayDriversList(this.homeLocation, this.drivers);
 
       });
 
 
-      //get all routes
-      this.sleep(2000).then(() => {
-        this.mapProperties = {
-           center: new google.maps.LatLng(Number(sessionStorage.getItem("lat")), Number(sessionStorage.getItem("lng"))),
-           zoom: 15,
-           mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
-        this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapProperties);
-        //empty drivers list
-        //show drivers on map
-        this.showDriversOnMap(this.homeLocation, this.drivers);
-      });
+    //get all routes
+    this.sleep(2000).then(() => {
+      this.mapProperties = {
+        center: new google.maps.LatLng(Number(sessionStorage.getItem("lat")), Number(sessionStorage.getItem("lng"))),
+        zoom: 15,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      };
+      this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapProperties);
+      //empty drivers list
+      //show drivers on map
+      this.showDriversOnMap(this.homeLocation, this.drivers);
+    });
 
-   }
+  }
 
   showDriversOnMap(origin, drivers) {
-     drivers.forEach(element => {
+    drivers.forEach(element => {
       var directionsService = new google.maps.DirectionsService;
       var directionsRenderer = new google.maps.DirectionsRenderer({
-         draggable: true,
-         map: this.map
-       });
-       this.displayRoute(origin, element.origin, directionsService, directionsRenderer);
+        draggable: true,
+        map: this.map
+      });
+      this.displayRoute(origin, element.origin, directionsService, directionsRenderer);
     });
   }
 
 
-displayRoute(origin, destination, service, display) {
+  displayRoute(origin, destination, service, display) {
     service.route({
       origin: origin,
       destination: destination,
       travelMode: 'DRIVING',
       //avoidTolls: true
-    }, function(response, status) {
+    }, function (response, status) {
       if (status === 'OK') {
         display.setDirections(response);
       } else {
@@ -133,32 +142,29 @@ displayRoute(origin, destination, service, display) {
     });
   }
 
-displayDriversList(origin, drivers) {
-  let list = [];
-  let distance = [];
-  let time = [];
+  displayDriversList(origin, drivers) {
+    let list = [];
+    let distance = [];
+    let time = [];
 
-    let  origins = [];
+    let origins = [];
     //set origin
     origins.push(origin)
 
     var outputDiv = document.getElementById('output');
-    drivers.forEach(element => {
-
-      console.log("Element "+element.name);
-
+    this.drivers.forEach(async element => {
 
       // this.sleep(2000).then(() => {
       var service = new google.maps.DistanceMatrixService;
       service.getDistanceMatrix(
         {
-        origins: origins,
-        destinations: [element.origin],
-        travelMode: google.maps.TravelMode.DRIVING,
-        unitSystem: google.maps.UnitSystem.IMPERIAL,
-        avoidHighways: false,
-        avoidTolls: false
-      }, callback);
+          origins: origins,
+          destinations: [element.origin],
+          travelMode: google.maps.TravelMode.DRIVING,
+          unitSystem: google.maps.UnitSystem.IMPERIAL,
+          avoidHighways: false,
+          avoidTolls: false
+        }, callback);
 
       function callback(response, status) {
         if (status !== 'OK') {
@@ -168,56 +174,57 @@ displayDriversList(origin, drivers) {
           var destinationList = response.destinationAddresses;
           var results = response.rows[0].elements;
 
-          console.log("Element After "+element.name);
+          console.log("Element After " + element.name);
           list.push(element);
           distance.push(results[0].distance);
           time.push(results[0].duration);
-
-          var name =  element.name;
+          var name = element.name;
+          console.log(element.car)
           outputDiv.innerHTML += `<tr><td class="col">${name}</td>
-                                  <td class="col">${results[0].distance.text}</td>
-                                  <td class="col">${results[0].duration.text}</td>
-                                  <td class="col">
-                                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCentered${element.id}"> View</button>
-                                    <div class="col-lg-5">
-                                     <div class="modal" id="exampleModalCentered${element.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true">
-                                      <div class="modal-dialog modal-dialog-centered" role="document">
-                                          <div class="modal-content">
-                                              <div class="modal-header">
-                                                  <h5 class="modal-title" id="exampleModalCenteredLabel">Contact Info:</h5>
-                                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                     <span aria-hidden="true">×</span>
-                                                   </button>
+                                    <td class="col">${results[0].distance.text}</td>
+                                    <td class="col">${results[0].duration.text}</td>
+                                    <td class="col">${element.car ? element.car.seats : 0}</td>
+                                    <td class="col">
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCentered${element.id}"> View</button>
+                                      <div class="col-lg-5">
+                                      <div class="modal" id="exampleModalCentered${element.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalCenteredLabel">Contact Info:</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                      <span aria-hidden="true">×</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <h1 style="color: #f16a2c;">${name}</h1>
+                                                    <span class="text-muted">Email: </span><h3>${element.email}</h3>
+                                                    <span class="text-muted">Phone: </span><h3>${element.phone}</h3>                             
+                                                </div>
+                                                <div class="modal-footer">
+                                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                </div>
                                               </div>
-                                              <div class="modal-body">
-                                                  <h1 style="color: #f16a2c;">${name}</h1>
-                                                  <span class="text-muted">Email: </span><h3>${element.email}</h3>
-		                                              <span class="text-muted">Phone: </span><h3>${element.phone}</h3>                             
-                                              </div>
-                                              <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                              </div>
-                                            </div>
-                                         </div>
-                                       </div>
-                                  </div>
-                                  <div class="col-lg-6">
-                                      <div #maps id="gmap" class="img-responsive"></div>
-                                  </div>
-                                </td></tr>`;
+                                          </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div #maps id="gmap" class="img-responsive"></div>
+                                    </div>
+                                  </td></tr>`;
+        }
       }
-    }
 
 
 
     });
-  console.log (list);
-  console.log(distance);
-  console.log(time);
+    // console.log (list);
+    // console.log(distance);
+    // console.log(time);
 
-  this.time = time;
-  this.distance = distance;
-  this.driversList = list;
+    this.time = time;
+    this.distance = distance;
+    this.driversList = list;
 
 
     this.time = time;
@@ -229,155 +236,157 @@ displayDriversList(origin, drivers) {
     // });
 
 
-}
+  }
 
-emptyDriversList() {
-
-
-  var outputDiv = document.getElementById('output');
-        outputDiv.innerHTML = ``;
+  emptyDriversList() {
 
 
-}
-
-sortByName() {
-  console.log("Sorting By Name");
-  this.emptyDriversList();
-
-  console.log(this.driversList);
-  console.log(this.time);
-  console.log(this.distance);
-
-  let dr = [];
-  //CREATE ARRAY OF NAMES.
-  this.driversList.forEach(d =>{ dr.push(d.name);})
-  console.log("Unsorted: " +dr);
-
-  const drClone  = Object.assign([], dr);
-  console.log("Clone: " + drClone);
+    var outputDiv = document.getElementById('output');
+    outputDiv.innerHTML = ``;
 
 
-  let sortDr = dr.sort();
-  console.log(sortDr);
+  }
 
-  let index = [];
-  sortDr.forEach(s => { index.push(drClone.indexOf(s)); });
-  console.log(index);
+  sortByName() {
+    console.log("Sorting By Name");
+    this.emptyDriversList();
+
+    console.log(this.driversList);
+    console.log(this.time);
+    console.log(this.distance);
+
+    let dr = [];
+    //CREATE ARRAY OF NAMES.
+    this.driversList.forEach(d => { dr.push(d.name); })
+    console.log("Unsorted: " + dr);
+
+    const drClone = Object.assign([], dr);
+    console.log("Clone: " + drClone);
 
 
-  let mark = 0;
-  var outputDiv = document.getElementById('output');
-  sortDr.forEach(sDr => {
+    let sortDr = dr.sort();
+    console.log(sortDr);
+
+    let index = [];
+    sortDr.forEach(s => { index.push(drClone.indexOf(s)); });
+    console.log(index);
+
+
+    let mark = 0;
+    var outputDiv = document.getElementById('output');
+    sortDr.forEach(sDr => {
 
 
       outputDiv.innerHTML += `<tr><td class="col">${sDr}</td>
-      <td class="col">${this.distance[index[mark]].text}</td>
-      <td class="col">${this.time[index[mark]].text}</td>
-      <td class="col">
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCentered${this.driversList[index[mark]].id}"> View</button>
-        <div class="col-lg-5">
-        <div class="modal " id="exampleModalCentered${this.driversList[index[mark]].id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered" role="document">
-              <div class="modal-content ">
-                  <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalCenteredLabel">Contact Info:</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                      </button>
+        <td class="col">${this.distance[index[mark]].text}</td>
+        <td class="col">${this.time[index[mark]].text}</td>
+        <td class="col">${this.driversList[index[mark]].car ? this.driversList[index[mark]].car.seats : 0}</td>
+        <td class="col">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCentered${this.driversList[index[mark]].id}"> View</button>
+          <div class="col-lg-5">
+          <div class="modal " id="exampleModalCentered${this.driversList[index[mark]].id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content ">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalCenteredLabel">Contact Info:</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                    <h1 style="color: #f16a2c;">${this.driversList[index[mark]].name}</h1>
+                    <span class="text-muted">Email: </span><h3>${this.driversList[index[mark]].email}</h3>
+                    <span class="text-muted">Phone: </span><h3>${this.driversList[index[mark]].phone}</h3>                
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
                   </div>
-                  <div class="modal-body">
-                  <h1 style="color: #f16a2c;">${this.driversList[index[mark]].name}</h1>
-                  <span class="text-muted">Email: </span><h3>${this.driversList[index[mark]].email}</h3>
-		              <span class="text-muted">Phone: </span><h3>${this.driversList[index[mark]].phone}</h3>                
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  </div>
-                </div>
+              </div>
             </div>
-          </div>
-      </div>
-      <div class="col-lg-6">
-          <div #maps id="gmap" class="img-responsive"></div>
-      </div>
-    </td></tr>`;
-    mark++
+        </div>
+        <div class="col-lg-6">
+            <div #maps id="gmap" class="img-responsive"></div>
+        </div>
+      </td></tr>`;
+      mark++
 
-  })
-
+    })
 
 
 
 
-}
 
-sortByDistance() {
-  this.emptyDriversList();
+  }
 
-  console.log(this.driversList);
-  console.log(this.time);
-  console.log(this.distance);
+  sortByDistance() {
+    this.emptyDriversList();
 
-  let ds = [];
-  //CREATE ARRAY OF Distances.
-  this.distance.forEach(d =>{ ds.push(Number(d.value));})
-  console.log("Unsorted: " +ds);
+    console.log(this.driversList);
+    console.log(this.time);
+    console.log(this.distance);
 
-  const dsClone  = Object.assign([], ds);
-  console.log("Clone: " + dsClone);
+    let ds = [];
+    //CREATE ARRAY OF Distances.
+    this.distance.forEach(d => { ds.push(Number(d.value)); })
+    console.log("Unsorted: " + ds);
 
-  let sortDs = ds.sort((a, b) => a - b); // For ascending sort
-  console.log(sortDs);
+    const dsClone = Object.assign([], ds);
+    console.log("Clone: " + dsClone);
 
-  let index = [];
-  sortDs.forEach(s => { index.push(dsClone.indexOf(s)); });
-  console.log(index);
+    let sortDs = ds.sort((a, b) => a - b); // For ascending sort
+    console.log(sortDs);
 
-  let mark = 0;
-  var outputDiv = document.getElementById('output');
-  sortDs.forEach(sDr => {
+    let index = [];
+    sortDs.forEach(s => { index.push(dsClone.indexOf(s)); });
+    console.log(index);
+
+    let mark = 0;
+    var outputDiv = document.getElementById('output');
+    sortDs.forEach(sDr => {
 
 
       outputDiv.innerHTML += `<tr><td class="col">${this.driversList[index[mark]].name}</td>
-      <td class="col">${this.distance[index[mark]].text}</td>
-      <td class="col">${this.time[index[mark]].text}</td>
-      <td class="col">
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCentered${this.driversList[index[mark]].id}"> View</button>
-        <div class="col-lg-5">
-        <div class="modal" id="exampleModalCentered${this.driversList[index[mark]].id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered" role="document">
-              <div class="modal-content">
-                  <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalCenteredLabel">Contact Info:</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                      </button>
+        <td class="col">${this.distance[index[mark]].text}</td>
+        <td class="col">${this.time[index[mark]].text}</td>
+        <td class="col">${this.driversList[index[mark]].car ? this.driversList[index[mark]].car.seats : 0}</td>
+        <td class="col">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCentered${this.driversList[index[mark]].id}"> View</button>
+          <div class="col-lg-5">
+          <div class="modal" id="exampleModalCentered${this.driversList[index[mark]].id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalCenteredLabel">Contact Info:</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                    <h1 style="color: #f16a2c;">${this.driversList[index[mark]].name}</h1>
+                    <span class="text-muted">Email: </span><h3>${this.driversList[index[mark]].email}</h3>
+                    <span class="text-muted">Phone: </span><h3>${this.driversList[index[mark]].phone}</h3>                
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
                   </div>
-                  <div class="modal-body">
-                  <h1 style="color: #f16a2c;">${this.driversList[index[mark]].name}</h1>
-                  <span class="text-muted">Email: </span><h3>${this.driversList[index[mark]].email}</h3>
-		              <span class="text-muted">Phone: </span><h3>${this.driversList[index[mark]].phone}</h3>                
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  </div>
-                </div>
+              </div>
             </div>
-          </div>
-      </div>
-      <div class="col-lg-6">
-          <div #maps id="gmap" class="img-responsive"></div>
-      </div>
-    </td></tr>`;
-    mark++
+        </div>
+        <div class="col-lg-6">
+            <div #maps id="gmap" class="img-responsive"></div>
+        </div>
+      </td></tr>`;
+      mark++
 
-  })
-
+    })
 
 
 
 
-}
+
+  }
 
 
 }

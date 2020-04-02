@@ -52,6 +52,10 @@ export class CarService {
 		return this.http.get<Car>(`${this.url}users/${userId}`);
 	}
 
+	getCarByUserId3(userId: number) {
+		return this.http.get<Car>(`${this.url}users/${userId}`);
+	}
+
 	/**
 	 * A PUT method that updates cars's information
 	 * @param car

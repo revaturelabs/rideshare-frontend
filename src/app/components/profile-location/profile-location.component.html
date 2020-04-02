@@ -1,5 +1,5 @@
 
-<div class="container mainContainer">
+<div class="container mainContainer" (keydown.enter) = "updatesContactInfo()">
     <i class="fa fa-home" style="font-family:'FontAwesome';"></i>
        
         <h4>Location:</h4>
@@ -9,6 +9,7 @@
                 <label for="address" class="col-sm-4 col-form-label">Address:</label>
                 <div class="col-sm-4">
                     <input [(ngModel)]=address type="text" class="form-control" id="address">
+                    <p *ngIf="emptyAddress != ''" class="failed">{{emptyAddress}}</p>
                 </div>
         </div>
         
@@ -25,6 +26,7 @@
                     <label for="city" class="col-sm-4 col-form-label">City:</label>
                     <div class="col-sm-4">
                     <input [(ngModel)]=city type="text" class="form-control" id="city">
+                    <p *ngIf="emptyCity != ''" class="failed">{{emptyCity}}</p>
                 </div>
         </div>
             
@@ -94,9 +96,11 @@
                         <label for="zipcode" class="col-sm-4 col-form-label">Zipcode:</label>
                         <div class="col-sm-4">
                         <input [(ngModel)]=zipcode type="text" class="form-control" id="zipcode">
-                        <p *ngIf="success != ''" class="success">{{success}}</p>
+                        <p *ngIf="emptyZip != ''" class="failed">{{emptyZip}}</p>
                     </div>
             </div>
         
         <button type="submit" class="btn btn-primary myBtn" (click)="updatesContactInfo()">Save</button>
+        <p *ngIf="success != ''" class="success">{{success}}</p>
+        <p *ngIf="failed != ''" class="failed">{{failed}}</p>
     </div>

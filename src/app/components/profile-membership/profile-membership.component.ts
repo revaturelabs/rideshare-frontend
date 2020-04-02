@@ -16,11 +16,13 @@ export class ProfileMembershipComponent implements OnInit {
   ngOnInit() {
     this.currentUser = this.userService.getUserById2(sessionStorage.getItem("userid")).subscribe((response)=>{
       this.profileObject = response;
+      console.log("This is profile Object: " + JSON.stringify(this.profileObject))
     });
   }
   updatesMembershipInfo(){
     this.profileObject.isDriver = this.isDriver;
     this.profileObject.active = this.active;
+    console.log(this.profileObject.isDriver);
     this.userService.updateUserInfo(this.profileObject);
     this.success = "Updated Successfully!";
   }

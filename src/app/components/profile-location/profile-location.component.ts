@@ -16,6 +16,10 @@ export class ProfileLocationComponent implements OnInit {
   hState: string;
   currentUser: User;
   success :string;
+  failed: string;
+  emptyAddress: string;
+  emptyCity: string;
+  emptyZip: string;
 
   constructor(private userService: UserService) { }
 
@@ -38,7 +42,33 @@ export class ProfileLocationComponent implements OnInit {
     this.currentUser.wAddress = this.address2;
     this.currentUser.hState = this.hState;
     //console.log(this.currentUser);
-    this.userService.updateUserInfo(this.currentUser);
-    this.success = "Updated Successfully!";
+    switch(this.currentUser.hCity){
+      case '': this.emptyCity = "Invalid Input! Cannot be empty";
+              this.failed = "CANNOT UPDATE CONTACT INFORMATION!"
+              this.success = "";
+              break;
+      default: this.emptyCity = "";
+    }
+    switch(this.currentUser.hAddress){
+      case '': this.emptyAddress = "Invalid Input! Cannot be empty";
+              this.failed = "CANNOT UPDATE CONTACT INFORMATION!"
+              this.success = "";
+              break;
+      default: this.emptyAddress = "";
+    }
+    switch(String(this.currentUser.hZip)){
+      case '': this.emptyZip = "Invalid Input! Cannot be empty";
+              this.failed = "CANNOT UPDATE CONTACT INFORMATION!"
+              this.success = "";
+              break;
+      default: this.emptyZip = "";
+    }
+    if ((this.currentUser.hAddress !== '') && (this.currentUser.hCity !== '') && (String(this.currentUser.hZip) !== '')) {
+      this.userService.updateUserInfo(this.currentUser);
+      this.success = "Updated Successfully!";
+      this.failed = "";
+    }
+
   }
+
 }

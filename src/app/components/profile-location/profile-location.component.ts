@@ -39,10 +39,12 @@ export class ProfileLocationComponent implements OnInit {
     private http: HttpClient, private locationService: LocationService) { }
 
   ngOnInit() {
+    //call location service to create autocomplete object
     this.locationService.initAutocomplete(<HTMLInputElement>document.getElementById('autocomplete'));
+    //get the user by id
     this.userService.getUserById2(sessionStorage.getItem("userid")).subscribe((response) => {
+      //set the address fields with updated info
       this.currentUser = response;
-      console.log(this.currentUser);
       this.address.zipcode = response.hZip;
       this.address.city = response.hCity;
       this.address.address = response.hAddress;
@@ -58,14 +60,15 @@ export class ProfileLocationComponent implements OnInit {
   }
 
   updatesContactInfo() {
-
+    //set address fields to info that user typed in
     this.currentUser.hZip = this.address.zipcode;
     this.currentUser.hCity = this.address.city;
     this.currentUser.hAddress = this.address.address;
     this.currentUser.wAddress = this.address.address2;
     this.currentUser.hState = this.address.hState;
+    //call location service to update address fields
     this.currentUser = this.locationService.updatesContactInfo(this.currentUser);
-    //console.log(this.currentUser);
+
     switch (this.currentUser.hCity) {
       case '': this.emptyCity = "Invalid Input! Cannot be empty";
         this.failed = "CANNOT UPDATE CONTACT INFORMATION!"
@@ -88,6 +91,7 @@ export class ProfileLocationComponent implements OnInit {
       default: this.emptyZip = "";
     }
     if ((this.currentUser.hAddress !== '') && (this.currentUser.hCity !== '') && (String(this.currentUser.hZip) !== '')) {
+      //update user
       this.userService.updateUserInfo(this.currentUser).subscribe();
       this.success = "Updated Successfully!";
       this.failed = "";

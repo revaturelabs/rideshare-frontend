@@ -177,14 +177,7 @@ export class UserService {
 	 * @param user 
 	 */
 
-<<<<<<< HEAD
-	updateUserInfo(user: User) :Observable<User> {
-		//console.log(user);
-		console.log(this.url);
-		console.log(user.userId);
-=======
 	updateUserInfo(user: User) :Observable<User>{
->>>>>>> 6ff8ea1386a37f32ecfcc10615482c2f1adfda42
 		return this.http.put<User>(this.url + user.userId, user);
 	}
 	/**

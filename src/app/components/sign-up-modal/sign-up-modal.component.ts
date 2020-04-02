@@ -149,6 +149,7 @@ export class SignupModalComponent implements OnInit {
         }
       }
     }
+    //update the address fields of the user
     this.user.wAddress = this.user.hAddress;
     this.user.wState = this.user.hState;
     this.user.wCity = this.user.hCity;

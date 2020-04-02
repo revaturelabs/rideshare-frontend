@@ -1,31 +1,20 @@
+  <div class = "content text-center col-md align-self-center">
+    <h1>Revature RideForce</h1>
+    <input type="text" [(ngModel)]="homeLocation" class="form-control" id="formGroupExampleInput2">
+    <button  class="btn btn-primary register" (click)="searchDriver('none')">Search</button>
+
+  </div>
 <div class = "container">
     <div class="row">
     <div class="col-lg-5">
-     <!--<div class="form-group">
-        <h4>Origin</h4>
-        <input [(ngModel)]="origin" id="origin" class="form-control" placeholder="Morgantown, WV"/>
-      </div>
-      <div class="form-group">
-        <h4>Destination</h4>
-        <input [(ngModel)]="destination" id="destination" class="form-control" placeholder="Reston, VA"/>
-      </div>
-      <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-8">
-          <button id = "search" class="btn btn-primary" (click)="getDirection()">Get Direction</button>
-        </div>
-      </div>
-      <p id="total"></p>-->
-
-  
-      <h4>Driver List</h4>
+      <h4>Drivers</h4>
 
      <table class="table table-striped">
        <thead class="thead-dark">
          <tr>
-           <th scope="col">Name</th>
-           <th scope="col">Distance</th>
-           <th scope="col">Time</th>
-           <th scope="col">Seats</th>
+           <th scope="col" id="nameColumn" (click)="sortByName()">Name</th>
+           <th scope="col" id="distanceColumn" (click)="sortByDistance()">Distance</th>
+           <th scope="col" id="timeColumn" (click)="sortByDistance()">Time</th>
            <th scope="col">View Info</th>
          </tr>
        </thead>
@@ -37,4 +26,4 @@
        <div #map id="gmap" class="img-responsive"></div>
      </div>
     </div>
-  </div>
+</div>

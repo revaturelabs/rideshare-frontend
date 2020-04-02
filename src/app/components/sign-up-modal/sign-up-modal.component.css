@@ -136,9 +136,9 @@ input[type=number] {
 }
 
 /* puts the google places autocomplete dropdown results above the bootstrap modal 1050 zindex.*/
-div.pac-container {
+/* div.pac-container {
     z-index: 1051 !important;
-}
+} */
 
 /*---------------------------------------------------------------------------------*/
 

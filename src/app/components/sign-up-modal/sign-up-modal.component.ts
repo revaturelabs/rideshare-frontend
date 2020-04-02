@@ -10,6 +10,8 @@ import { HttpClient } from '@angular/common/http';
 import { } from 'googlemaps';
 import { GoogleService } from 'src/app/services/google-service/google.service';
 import { Promise } from 'q';
+import { LocationService } from 'src/app/services/location-service/location.service';
+declare var google: any;
 
 @Component({
   selector: "signupmodal",
@@ -17,10 +19,12 @@ import { Promise } from 'q';
   styleUrls: ["./sign-up-modal.component.css"]
 })
 export class SignupModalComponent implements OnInit {
+  failed: string;
   fname: string;
   lname: string;
   username: string;
   email: string;
+  phone: string;
   phoneNumber: string;
   address: string;
   isDriver: boolean;
@@ -41,71 +45,24 @@ export class SignupModalComponent implements OnInit {
   hStateError: string;
   hCityError: string;
   hZipError: string;
+  autocomplete: google.maps.places.Autocomplete;
+
+  count: number;
 
   success: string;
-  failed: string;
   //Store the retrieved template from the 'openModal' method for future use cases.
   modalRef: BsModalRef;
-  states = [
-    "AL",
-    "AK",
-    "AZ",
-    "AR",
-    "CA",
-    "CO",
-    "CT",
-    "DE",
-    "FL",
-    "GA",
-    "HI",
-    "ID",
-    "IL",
-    "IN",
-    "IA",
-    "KS",
-    "KY",
-    "LA",
-    "ME",
-    "MD",
-    "MA",
-    "MI",
-    "MN",
-    "MS",
-    "MO",
-    "MT",
-    "NE",
-    "NV",
-    "NH",
-    "NJ",
-    "NM",
-    "NY",
-    "NC",
-    "ND",
-    "OH",
-    "OK",
-    "OR",
-    "PA",
-    "RI",
-    "SC",
-    "SD",
-    "TN",
-    "TX",
-    "UT",
-    "VT",
-    "VA",
-    "WA",
-    "WV",
-    "WI",
-    "WY"
-  ];
-  constructor(
-    private modalService: BsModalService,
-    private userService: UserService,
-    private batchService: BatchService,
-    private validationService: ValidationService
-  ) {}
+  states = ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS',
+    'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY',
+    'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV',
+    'WI', 'WY'];
+  constructor(private googleApiKey: GoogleService, private http: HttpClient, private locationService: LocationService, private modalService: BsModalService, private userService: UserService, private batchService: BatchService, private validationService: ValidationService) {
+
+  }
 
   ngOnInit() {
+    //load google api
+    this.googleApiKey.getGoogleApi();
     this.userService.getAllUsers().subscribe(res => {
       this.users = res;
       console.log(this.users);
@@ -116,10 +73,13 @@ export class SignupModalComponent implements OnInit {
     });
   }
   //Opens 'sign up' modal that takes in a template of type 'ng-template'.
-
   openModal(template: TemplateRef<any>) {
+    //shows ng template for this modal
     this.modalRef = this.modalService.show(template);
-    this.initAutocomplete();
+    //creates googles autocomplete object to fill in address
+    this.locationService.initAutocomplete(<HTMLInputElement>document.getElementById('autocomplete'));
+    //calls fixedPlacesApi after autocomplete object is created
+    this.sleep(1000).then(res => this.fixPlacesApi());
 
   }
 
@@ -128,91 +88,14 @@ export class SignupModalComponent implements OnInit {
   }
 
   fixPlacesApi() {
-    (<HTMLElement>document.getElementsByClassName('pac-container')[0]).style.zIndex = '1051';
+    //allows the autofill address dropdown to show on top of the modal
+    console.log(this.count);
+    (<HTMLElement>document.getElementsByClassName('pac-container')[document.getElementsByClassName('pac-container').length - 1]).style.zIndex = '1051';
+
   }
 
-  initAutocomplete(): void {
-
-    var self = this;
-    // Create the autocomplete object, restricting the search predictions to
-    // geographical location types.
-
-    var autocomplete = new google.maps.places.Autocomplete(<HTMLInputElement>document.getElementById('autocomplete'), { types: ['geocode'] });
-
-    //making the pac-container zIndex higher than the modal so it shows up.
-    this.sleep(1000).then(res => this.fixPlacesApi());
-
-    // Avoid paying for data that you don't need by restricting the set of
-    // place fields that are returned to just the address components.
-    autocomplete.setFields(['address_component']);
-
-    // When the user selects an address from the drop-down, populate the
-    // address fields in the form.
-    autocomplete.addListener('place_changed', fillInAddress);
-
-    function fillInAddress(): void {
-      // Get the place details from the autocomplete object.
-      var place = autocomplete.getPlace();
-
-      var componentForm = {
-        street_number: 'short_name',
-        route: 'long_name',
-        locality: 'long_name',
-        administrative_area_level_1: 'short_name',
-        postal_code: 'short_name'
-      };
-
-      for (var component in componentForm) {
-        (<HTMLInputElement>document.getElementById(component)).value = '';
-      }
-
-      // Get each component of the address from the place details,
-      // and then fill-in the corresponding field on the form.
-      for (var i = 0; i < place.address_components.length; i++) {
-        var addressType = place.address_components[i].types[0];
-        if (componentForm[addressType]) {
-          var val = place.address_components[i][componentForm[addressType]];
-          console.log(val);
-          (<HTMLInputElement>document.getElementById(addressType)).value = val;
-          switch (addressType) {
-            case "locality":
-              self.user.hCity = val;
-              break;
-            case "administrative_area_level_1":
-              self.user.hState = val;
-              break;
-            case "postal_code":
-              self.user.hZip = val;
-              break;
-          }
-        }
-      }
-      console.log(self.user.hState);
-      // Create a proper address by combining street_number and route
-      self.address = place.address_components[0]['long_name'] + ' ' +
-        place.address_components[1]['long_name'];
-      (<HTMLInputElement>document.getElementById('address')).value =
-        place.address_components[0]['long_name'] + ' ' +
-        place.address_components[1]['long_name'];
-      self.user.hAddress = place.address_components[0]['long_name'] + ' ' +
-        place.address_components[1]['long_name'];
-    }
-  }
-
-  // Bias the autocomplete object to the user's geographical location,
-  // as supplied by the browser's 'navigator.geolocation' object.
   geolocate(): void {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function (position) {
-        var geolocation = {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude
-        };
-        var circle = new google.maps.Circle(
-          { center: geolocation, radius: position.coords.accuracy });
-        this.autocomplete.setBounds(circle.getBounds());
-      });
-    }
+    this.locationService.geolocate();
   }
 
 
@@ -229,6 +112,7 @@ export class SignupModalComponent implements OnInit {
     this.hCityError = "";
     this.hZipError = "";
     this.success = "";
+    this.user = this.locationService.updatesContactInfo(this.user);
     this.failed = "Registration Unsuccessful!";
 
     //Format phone
@@ -320,17 +204,17 @@ export class SignupModalComponent implements OnInit {
         if (i === 0) {
           i = 0;
           this.success = "Registered successfully!";
-          this.failed = "";
-          //Reload user list
-          this.userService.getAllUsers().subscribe(res => {
-            this.users = res;
-          });
+          this.sleep(5000).then(res => { this.modalRef.hide() });
         }
       }
-      /*res => {
-        console.log("failed to add user");
-        console.log(res);
-      }*/
     );
+
+
+
+    this.failed = "";
+    //Reload user list
+    this.userService.getAllUsers().subscribe(res => {
+      this.users = res;
+    });
   }
 }

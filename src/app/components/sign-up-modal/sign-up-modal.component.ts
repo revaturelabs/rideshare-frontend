@@ -156,11 +156,11 @@ export class SignupModalComponent implements OnInit {
     let driver = <HTMLInputElement>document.getElementById("driver");
     let rider = <HTMLInputElement>document.getElementById("rider");
 
-    if (driver.checked == true) {
-      this.user.isDriver = true;
+    if(driver.checked == true){
+      this.user.driver =  true;
     }
-    if (rider.checked == true) {
-      this.user.isDriver = false;
+    if(rider.checked == true){
+      this.user.driver =  false;
     }
     //console.log(this.user);
     if (this.newUserName == false) {

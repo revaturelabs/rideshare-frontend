@@ -81,7 +81,7 @@ export class UserService {
 	createDriver(user: User, role) {
 
 		user.active = true;
-		user.isDriver = false;
+		user.driver = false;
 		user.isAcceptingRides = false;
 		console.log(user);
 
@@ -127,7 +127,7 @@ export class UserService {
 		this.getUserById(userId)
 			.then((response) => {
 				this.user = response;
-				this.user.isDriver = isDriver;
+				this.user.driver = isDriver;
 				this.user.isAcceptingRides = (this.user.active && isDriver);
 
 				this.http.put(this.url+userId, this.user).subscribe(
@@ -177,10 +177,14 @@ export class UserService {
 	 * @param user 
 	 */
 
+<<<<<<< HEAD
 	updateUserInfo(user: User) :Observable<User> {
 		//console.log(user);
 		console.log(this.url);
 		console.log(user.userId);
+=======
+	updateUserInfo(user: User) :Observable<User>{
+>>>>>>> 6ff8ea1386a37f32ecfcc10615482c2f1adfda42
 		return this.http.put<User>(this.url + user.userId, user);
 	}
 	/**

@@ -18,22 +18,16 @@
         <label for="address" class="col-sm-4 col-form-label">Address:</label>
         <div class="col-sm-4">
             <input [(ngModel)]=address.address type="text" class="form-control" id="address" disabled="true">
+            <p *ngIf="emptyAddress != ''" class="failed">{{emptyAddress}}</p>
         </div>
     </div>
-
-    <!-- <div class="form-group row">
-                <div class="col-sm-1"></div>
-            <label for="address2" class="col-sm-4 col-form-label">Address 2:</label>
-            <div class="col-sm-4">
-                <input [(ngModel)]=address2 type="text" class="form-control" id="address2">
-            </div>
-        </div> -->
 
     <div class="form-group row">
         <div class="col-sm-1"></div>
         <label for="city" class="col-sm-4 col-form-label">City:</label>
         <div class="col-sm-4">
             <input [(ngModel)]=address.city type="text" class="form-control" id="locality" disabled="true">
+            <p *ngIf="emptyCity != ''" class="failed">{{emptyCity}}</p>
         </div>
     </div>
 
@@ -41,8 +35,8 @@
         <div class="col-sm-1"></div>
         <label for="state" class="col-sm-4 col-form-label">State:</label>
         <div class="col-sm-4">
-            <select class="form-control" name="administrative_area_level_1" id="administrative_area_level_1" [(ngModel)]=address.hState disabled="true"
-                required>
+            <select class="form-control" name="administrative_area_level_1" id="administrative_area_level_1" [(ngModel)]=address.hState
+                disabled="true" required>
                 <option value="" selected disabled>Select a state</option>
                 <option value="AL">Alabama</option>
                 <option value="AK">Alaska</option>
@@ -101,12 +95,17 @@
 
     <div class="form-group row">
         <div class="col-sm-1"></div>
-        <label for="postal_code" class="col-sm-4 col-form-label">Zipcode:</label>
+        <label for="zipcode" class="col-sm-4 col-form-label">Zipcode:</label>
         <div class="col-sm-4">
             <input [(ngModel)]=address.zipcode type="text" class="form-control" id="postal_code" disabled="true">
-            <p *ngIf="success != ''" class="success">{{success}}</p>
+            <p *ngIf="emptyZip != ''" class="failed">{{emptyZip}}</p>
         </div>
     </div>
 
     <button type="submit" class="btn btn-primary myBtn" (click)="updatesContactInfo()">Save</button>
+    <p *ngIf="success != ''" class="success">{{success}}</p>
+    <p *ngIf="failed != ''" class="failed">{{failed}}</p>
+</div>
+
+<button type="submit" class="btn btn-primary myBtn" (click)="updatesContactInfo()">Save</button>
 </div>

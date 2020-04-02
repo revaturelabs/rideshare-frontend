@@ -16,9 +16,13 @@ declare var google: any;
 export class ProfileLocationComponent implements OnInit {
 
   currentUser: User;
-  success :string;
+  success: string;
   autocomplete: google.maps.places.Autocomplete;
   placeSearch: any;
+  failed: string;
+  emptyAddress: string;
+  emptyCity: string;
+  emptyZip: string;
 
   address: Address = new Address;
 
@@ -36,7 +40,7 @@ export class ProfileLocationComponent implements OnInit {
 
   ngOnInit() {
     this.locationService.initAutocomplete(<HTMLInputElement>document.getElementById('autocomplete'));
-    this.userService.getUserById2(sessionStorage.getItem("userid")).subscribe((response)=>{
+    this.userService.getUserById2(sessionStorage.getItem("userid")).subscribe((response) => {
       this.currentUser = response;
       this.address.zipcode = response.hZip;
       this.address.city = response.hCity;
@@ -53,8 +57,40 @@ export class ProfileLocationComponent implements OnInit {
   }
 
   updatesContactInfo() {
-    this.currentUser = this.locationService.updatesContactInfo(this.currentUser);
-    this.userService.updateUserInfo(this.currentUser);
-    this.success = "Updated Successfully!";
+    this.currentUser.hZip = this.address.zipcode;
+    this.currentUser.hCity = this.address.city;
+    this.currentUser.hAddress = this.address.address;
+    this.currentUser.wAddress = this.address.address2;
+    this.currentUser.hState = this.address.hState;
+    //console.log(this.currentUser);
+    switch (this.currentUser.hCity) {
+      case '': this.emptyCity = "Invalid Input! Cannot be empty";
+        this.failed = "CANNOT UPDATE CONTACT INFORMATION!"
+        this.success = "";
+        break;
+      default: this.emptyCity = "";
+    }
+    switch (this.currentUser.hAddress) {
+      case '': this.emptyAddress = "Invalid Input! Cannot be empty";
+        this.failed = "CANNOT UPDATE CONTACT INFORMATION!"
+        this.success = "";
+        break;
+      default: this.emptyAddress = "";
+    }
+    switch (String(this.currentUser.hZip)) {
+      case '': this.emptyZip = "Invalid Input! Cannot be empty";
+        this.failed = "CANNOT UPDATE CONTACT INFORMATION!"
+        this.success = "";
+        break;
+      default: this.emptyZip = "";
+    }
+    if ((this.currentUser.hAddress !== '') && (this.currentUser.hCity !== '') && (String(this.currentUser.hZip) !== '')) {
+      this.currentUser = this.locationService.updatesContactInfo(this.currentUser);
+      this.userService.updateUserInfo(this.currentUser);
+      this.success = "Updated Successfully!";
+      this.failed = "";
+    }
+
   }
+
 }

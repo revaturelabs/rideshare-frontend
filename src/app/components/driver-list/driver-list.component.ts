@@ -167,7 +167,7 @@ displayDriversList(origin, drivers) {
           var originList = response.originAddresses;
           var destinationList = response.destinationAddresses;
           var results = response.rows[0].elements;
-
+          var seats;
           console.log("Element After "+element.name);
           list.push(element);
           distance.push(results[0].distance);
@@ -177,6 +177,7 @@ displayDriversList(origin, drivers) {
           outputDiv.innerHTML += `<tr><td class="col">${name}</td>
                                   <td class="col">${results[0].distance.text}</td>
                                   <td class="col">${results[0].duration.text}</td>
+                                  <td class="col">${seats}</td>
                                   <td class="col">
                                   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCentered${element.id}"> View</button>
                                     <div class="col-lg-5">
@@ -192,7 +193,7 @@ displayDriversList(origin, drivers) {
                                               <div class="modal-body">
                                                   <h1 style="color: #f16a2c;">${name}</h1>
                                                   <span class="text-muted">Email: </span><h3>${element.email}</h3>
-		                                              <span class="text-muted">Phone: </span><h3>${element.phone}</h3>                             
+		                                              <span class="text-muted">Phone: </span><h3>${element.phone}</h3>
                                               </div>
                                               <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -288,7 +289,7 @@ sortByName() {
                   <div class="modal-body">
                   <h1 style="color: #f16a2c;">${this.driversList[index[mark]].name}</h1>
                   <span class="text-muted">Email: </span><h3>${this.driversList[index[mark]].email}</h3>
-		              <span class="text-muted">Phone: </span><h3>${this.driversList[index[mark]].phone}</h3>                
+		              <span class="text-muted">Phone: </span><h3>${this.driversList[index[mark]].phone}</h3>
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -356,7 +357,7 @@ sortByDistance() {
                   <div class="modal-body">
                   <h1 style="color: #f16a2c;">${this.driversList[index[mark]].name}</h1>
                   <span class="text-muted">Email: </span><h3>${this.driversList[index[mark]].email}</h3>
-		              <span class="text-muted">Phone: </span><h3>${this.driversList[index[mark]].phone}</h3>                
+		              <span class="text-muted">Phone: </span><h3>${this.driversList[index[mark]].phone}</h3>
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

@@ -62,20 +62,15 @@ export class SignupModalComponent implements OnInit {
 
   ngOnInit() {
     //load google api
-    this.count = this.locationService.getCount();
     this.googleApiKey.getGoogleApi();
-    this.userService.getAllUsers().subscribe(
-      res => {
-
-        //console.log(res);
-      }
-    );
-
-    this.batchService.getAllBatchesByLocation1().subscribe(
-      res => {
-        this.batches = res;
-      },
-    );
+    this.userService.getAllUsers().subscribe(res => {
+      this.users = res;
+      console.log(this.users);
+    });
+    this.failed = "";
+    this.batchService.getAllBatchesByLocation1().subscribe(res => {
+      this.batches = res;
+    });
   }
   //Opens 'sign up' modal that takes in a template of type 'ng-template'.
   openModal(template: TemplateRef<any>) {
@@ -96,7 +91,6 @@ export class SignupModalComponent implements OnInit {
     //allows the autofill address dropdown to show on top of the modal
     console.log(this.count);
     (<HTMLElement>document.getElementsByClassName('pac-container')[document.getElementsByClassName('pac-container').length - 1]).style.zIndex = '1051';
-    this.count = this.locationService.counter();
 
   }
 

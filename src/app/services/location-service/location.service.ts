@@ -109,13 +109,4 @@ export class LocationService {
     return currentUser;
   }
 
-  getCount():number{
-    return this.count;
-  }
-
-  counter():number{
-    this.count++;
-    return this.count;
-  }
-
 }

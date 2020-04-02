@@ -372,6 +372,15 @@ export class DriverListComponent implements OnInit {
                     </div>
                   </div>
               </div>
+                  <div class="modal-body">
+                  <h1 style="color: #f16a2c;">${this.driversList[index[mark]].name}</h1>
+                  <span class="text-muted">Email: </span><h3>${this.driversList[index[mark]].email}</h3>
+		              <span class="text-muted">Phone: </span><h3>${this.driversList[index[mark]].phone}</h3>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
             </div>
         </div>
         <div class="col-lg-6">

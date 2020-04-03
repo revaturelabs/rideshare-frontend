@@ -90,7 +90,7 @@ export class ProfileLocationComponent implements OnInit {
     }
     if ((this.currentUser.hAddress !== '') && (this.currentUser.hCity !== '') && (String(this.currentUser.hZip) !== '')) {
       this.currentUser = this.locationService.updatesContactInfo(this.currentUser);
-      this.userService.updateUserInfo(this.currentUser);
+      this.userService.updateUserInfo(this.currentUser).subscribe();
       this.success = "Updated Successfully!";
       this.failed = "";
     }

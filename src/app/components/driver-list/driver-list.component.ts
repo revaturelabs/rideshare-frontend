@@ -1,18 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user-service/user.service';
-import { AuthService } from 'src/app/services/auth-service/auth.service';
-import { Batch } from 'src/app/models/batch';
-import { Car } from 'src/app/models/car';
 import { CarService } from 'src/app/services/car-service/car.service';
-import { Router } from '@angular/router';
-import { BatchService } from 'src/app/services/batch-service/batch.service';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../environments/environment';
 import { GoogleService } from 'src/app/services/google-service/google.service';
-import { SelectMultipleControlValueAccessor } from '@angular/forms';
-import { listenToTriggers } from 'ngx-bootstrap/utils/triggers';
 
 @Component({
   selector: 'app-driver-list',

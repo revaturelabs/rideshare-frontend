@@ -15,7 +15,7 @@ export class AppComponent {
    * This is the title of the Application.
    */
   title = 'rideshare-frontend';
-  googleMapAPIKey: "AIzaSyCFCwp_Ef8hDVvIEsqXcnowl78_iI7kRU4";
+  googleMapAPIKey: string;
 
   constructor() { }
 

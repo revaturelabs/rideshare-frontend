@@ -1,62 +1,60 @@
-<div class = "container">
-    <div class="row">
+<div class="search col-5-content">
+  <input type="text" [(ngModel)]="location_s" class=" form-control" id="formGroupExampleInput2"
+    placeholder="Brooklyn, NY">
+  <button class="btn btn-primary register" (click)="searchDriver()">Search</button>
+</div>
+<div class="container">
+  <div class="row">
     <div class="col-lg-5">
-     <!--<div class="form-group">
-        <h4>Origin</h4>
-        <input [(ngModel)]="origin" id="origin" class="form-control" placeholder="Morgantown, WV"/>
-      </div>
-      <div class="form-group">
-        <h4>Destination</h4>
-        <input [(ngModel)]="destination" id="destination" class="form-control" placeholder="Reston, VA"/>
-      </div>
-      <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-8">
-          <button id = "search" class="btn btn-primary" (click)="getDirection()">Get Direction</button>
-        </div>
-      </div>
-      <p id="total"></p>-->
-      <h4>Driver's List</h4>
-
-     <table class="table table-striped">
-       <thead class="thead-dark">
-         <tr>
-           <th scope="col">Name</th>
-           <th scope="col" (click)="reverse(2)">Distance</th>
-           <th scope="col" (click)="reverse(1)">Time</th>
-           <th scope="col">View Info</th>
-         </tr>
-       </thead>
-       <tbody id="output"></tbody>
+      <h4>Drivers List</h4>
+      <table matSort (matSortChange)="sortData($event)" class="table table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th mat-sort-header="name" scope="col">Name</th>
+            <th mat-sort-header="distance" scope="col">Distance</th>
+            <th mat-sort-header="time"scope="col">Time</th>
+            <th mat-sort-header="seats" scope="col">Seats</th>
+            <th scope="col">View Info</th>
+          </tr>
+        </thead>
+        <tbody id="output">
+          <tr *ngFor="let info of dataToDisplay">
+            <td class="col">{{info.user.name}}</td>
+            <td class="col">{{info.results[0].distance.text}}</td>
+            <td class="col">{{info.results[0].duration.text}}</td>
+            <td class="col">{{info.seats}}</td>
+              <td class="col"> 
+                <button type="button" class="btn btn-primary" data-toggle="modal" [attr.data-target]="'#' + info.itemLabel"> View</button>
+                  <div class="col-lg-5">
+                    <div class="modal" [attr.id]="info.itemLabel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalCenteredLabel">Contact Info:</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <h1>{{info.user.name}}</h1>
+                            <h3>Email: {{info.user.email}}</h3>
+                            <h3>Phone: {{info.user.phone}}</h3>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                      </div>
+                  </div>
+                </div>
+            </div>
+          </td>
+          </tr>
+        </tbody>
       </table>
-      <mat-table [dataSource] = "drivers">
-        <ng-container matColumnDef = "name">
-          <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
-          <mat-cell *matCellDef = "let name"></mat-cell>
-        </ng-container>
-        <ng-container matColumnDef = "distance">
-          <mat-header-cell *matHeaderCellDef>Distance</mat-header-cell>
-          <mat-cell *matCellDef = "let distance"></mat-cell>
-        </ng-container>
-        <ng-container matColumnDef = "time">
-          <mat-header-cell *matHeaderCellDef>Time</mat-header-cell>
-          <mat-cell *matCellDef = "let time"></mat-cell>
-        </ng-container>
-        <ng-container matColumnDef = "seats">
-          <mat-header-cell *matHeaderCellDef>Seats</mat-header-cell>
-          <mat-cell *matCellDef = "let seats"></mat-cell>
-        </ng-container>
-        <ng-container matColumnDef = "view">
-          <mat-header-cell *matHeaderCellDef>View Info</mat-header-cell>
-          <mat-cell *matCellDef = "let view"></mat-cell>
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCentered${element.id}"> View</button>
-        </ng-container>
-        <mat-header-row *matHeaderRowDef="tableColumns"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: tableColumns"></mat-row>
-      </mat-table>
-     </div>
-     <div class="col-lg-6">
-       <h4>Directions:</h4>
-       <div #map id="gmap" class="img-responsive"></div>
-     </div>
+    </div>
+    <div class="col-lg-6">
+      <h4>Directions:</h4>
+      <div #map id="gmap" class="img-responsive"></div>
     </div>
   </div>
+</div>

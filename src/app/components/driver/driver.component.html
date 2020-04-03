@@ -1,20 +1,23 @@
 <br>
 
 <div class="container-fluid">
-    <div class="row" >
+    <div class="row">
         <div class="col-md-auto">
-            <h2 class="align-bottom float-center">Driver: {{userDriver?.firstName}}&nbsp;<span>{{userDriver?.lastName}} &nbsp;</span></h2>
+            <h2 class="align-bottom float-center">Driver: {{userDriver?.firstName}}&nbsp;<span>{{userDriver?.lastName}}
+                    &nbsp;</span></h2>
         </div>
-</div>
-<br>
+    </div>
+    <br>
 
 
 
-<div class="container-fluid">
-    <div class="row" *ngIf="userDriver" >
-        <div class="col">
-            <h2 >Location:  &nbsp;<span>{{userDriver?.batch.batchLocation}}</span></h2>
+    <div class="container-fluid">
+        <div class="row" *ngIf="userDriver">
+            <div class="col">
+                <h2>Location: &nbsp;<span>{{userDriver?.batch.batchLocation}}</span></h2>
+            </div>
         </div>
+
     </div>
     <br>
 

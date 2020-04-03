@@ -22,7 +22,7 @@ export class UserService {
 
 	// http headers
 	private headers = new HttpHeaders({'Content-Type': 'application/json'});
-
+	
 
 
 	/**
@@ -30,6 +30,7 @@ export class UserService {
 	 * Creates a new user object
 	 */
 	url: string = environment.userUri;
+	carUrl: string = environment.carUri;
 	user: User = new User();
 
 	/**
@@ -41,7 +42,7 @@ export class UserService {
 	 */
 
 	constructor(private http: HttpClient, private router: Router, private log: LogService, private authService: AuthService) { }
-
+  
 	/**
 	 * A GET method for all users
 	 */
@@ -49,39 +50,34 @@ export class UserService {
 	getAllUsers() {
 		return this.http.get<User[]>(this.url);
 	}
-
+	
 	/**
 	 * A GET method for one user
-	 * @param idParam
+	 * @param idParam 
 	 */
-	getUserById(idParam: number) {
-
-		console.log(this.url);
-		return this.http.get<User>(this.url + idParam).toPromise();
-
+	getUserById(idParam: number){
+		
+		return this.http.get<User>(this.url+idParam).toPromise();
 
 	}
 
-
+	 
 	getUserById2(idParam2: String): Observable<User>{
-
-		//console.log(this.url)
-		return this.http.get<User>(this.url + idParam2);
-
+		
+		return this.http.get<User>(this.url+idParam2);
 
 	}
 
 	/**
 	 * A POST method that switch an Rider to a Driver
-	 * @param user
-	 * @param role
+	 * @param user 
+	 * @param role 
 	 */
 	createDriver(user: User, role) {
 
 		user.active = true;
 		user.isDriver = false;
 		user.isAcceptingRides = false;
-		console.log(user);
 
 		this.http.post(this.url, user, {observe: 'response'}).subscribe(
 			(response) => {
@@ -116,8 +112,8 @@ export class UserService {
 
 	/**
 	 * A PUT method that updates the user information
-	 * @param isDriver
-	 * @param userId
+	 * @param isDriver 
+	 * @param userId 
 	 */
 
 	updateIsDriver(isDriver, userId) {
@@ -143,9 +139,9 @@ export class UserService {
 
 	/**
 	 * A PUT method that updates the preference of the user
-	 * @param property
-	 * @param bool
-	 * @param userId
+	 * @param property 
+	 * @param bool 
+	 * @param userId 
 	 */
 
 	updatePreference(property, bool, userId) {
@@ -172,40 +168,39 @@ export class UserService {
 
 	/**
 	 * A PUT method that updates user's information
-	 * @param user
+	 * @param user 
 	 */
 
 	updateUserInfo(user: User): Observable<Object> {
-		//console.log(user);
 		return this.http.put(this.url, user);
 	}
 	/**
 	 * A GET method that retrieves a driver by Id
-	 * @param id
+	 * @param id 
 	 */
 
 	getDriverById(id: number): Observable <any>{
 		return this.http.get(this.url + id);
 	}
-
+	
 	/**
 	 * A PUT method that changes the isAcceptingRide variable
-	 * @param data
+	 * @param data 
 	 */
 
 	changeDriverIsAccepting(data) {
-		let id = data.userId;
-		return this.http.put(this.url + id, data).toPromise();
-
+		let id=data.userId;
+		return this.http.put(this.url+id, data).toPromise()
+		
 	  }
-
+	  
 	  getRidersForLocation(location: string): Observable <any>{
-		return this.http.get(this.url + '?is-driver=false&location=' + location);
+		return this.http.get(this.url + '?is-driver=false&location='+ location)
 	  }
     /**
      * A GET method that shows all users
      */
-		showAllUser(): Observable<any> {
+		showAllUser(): Observable<any>{
 		  return this.http.get(this.url);
 		}
 
@@ -218,16 +213,20 @@ export class UserService {
         headers: new HttpHeaders({"Content-Type": "application/json"}),
         observe: "response" as "body"
       }
-
+  
     /**
      * A function that bans users.
      */
-    banUser(user: User) {
+    banUser(user: User){
       this.body = JSON.stringify(user);
-      this.http.put(`${this.url + user.userId}`, this.body, this.httpOptions).subscribe();
+      this.http.put(`${this.url + user.userId}`,this.body,this.httpOptions).subscribe();
+	}
+	
+	getRidersForLocation1(location: string): Observable <any>{
+		return this.http.get(this.url + 'driver/'+ location);
 	}
 
-	getRidersForLocation1(location: string): Observable <any> {
-		return this.http.get(this.url + 'driver/' + location);
+	getRidersForLocation2(location: string): Observable <any>{
+		return this.http.get(this.carUrl + 'driver/' + location);
 	}
 }

@@ -41,16 +41,18 @@ describe('LoginComponent', () => {
         { provide: APP_BASE_HREF, useValue: '/my/app' },
         { provide: BsModalService, useValue: mockBsModalService }]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
-   const fixture = TestBed.createComponent(LoginComponent);
-   component = fixture.componentInstance;
-   component.showDropDown = false;
-   component.curPage = 1;
-   component.totalPage = 10;
-   component.users = [{ userId: 1,
+    const fixture = TestBed.createComponent(LoginComponent);
+
+    component = fixture.componentInstance;
+    component.showDropDown = false;
+    component.curPage = 1;
+    component.totalPage = 10;
+    component.users = [{
+      userId: 1,
       userName: 'username',
       batch: {
         batchNumber: 1,
@@ -60,9 +62,8 @@ describe('LoginComponent', () => {
       lastName: 'Smith',
       email: 'john.smith@gmail.com',
       phoneNumber: '9171234567',
-      active: true,
-      driver: true,
-      acceptingRides: true}]
+      ...genericUserData
+    }];
     // fixture.detectChanges();
   });
 

@@ -29,6 +29,8 @@ export class DriverListComponent implements OnInit {
   driversList: Array<any> = [];
   distance: Array<any> = [];
   time: Array<any> = [];
+  range: number = 5;
+  sameOffice: boolean = true;
 
 
 
@@ -51,7 +53,7 @@ export class DriverListComponent implements OnInit {
 
     this.googleService.getGoogleApi();
 
-    this.searchDriver("none");
+    this.searchDriver();
   }
 
   sleep(ms) {
@@ -60,12 +62,14 @@ export class DriverListComponent implements OnInit {
   
 
 
-   searchDriver(sorter: string){
+   searchDriver(){
     //call service search algorithm ()
     console.log("searching for Drivers");
+    console.log("Range "+ this.range);
+    console.log("Same Office "+ this.sameOffice);
     this.drivers = [];
 
-    this.userService.getRidersForLocation1(this.homeLocation, this.workLocation, sorter).subscribe(
+    this.userService.getRidersForLocation1(this.homeLocation, this.workLocation, this.range, this.sameOffice).subscribe(
       res => {
            res.forEach(element => {
             console.log("Driver: "+res);
@@ -185,9 +189,9 @@ displayDriversList(origin, drivers) {
                                                    </button>
                                               </div>
                                               <div class="modal-body">
-                                                  <h1>${name}</h1>
-                                                  <h3>Email: ${element.email}</h3>         
-                                                  <h3>Phone: ${element.phone}</h3>                 
+                                                  <h1 style="color: #f16a2c;">${name}</h1>
+                                                  <span class="text-muted">Email: </span><h3>${element.email}</h3>
+		                                              <span class="text-muted">Phone: </span><h3>${element.phone}</h3>                             
                                               </div>
                                               <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -266,9 +270,9 @@ sortByName(){
       <td class="col">
       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCentered${this.driversList[index[mark]].id}"> View</button>
         <div class="col-lg-5">
-        <div class="modal" id="exampleModalCentered${this.driversList[index[mark]].id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true">
+        <div class="modal " id="exampleModalCentered${this.driversList[index[mark]].id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered" role="document">
-              <div class="modal-content">
+              <div class="modal-content ">
                   <div class="modal-header">
                       <h5 class="modal-title" id="exampleModalCenteredLabel">Contact Info:</h5>
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -276,9 +280,9 @@ sortByName(){
                       </button>
                   </div>
                   <div class="modal-body">
-                  <h1>${this.driversList[index[mark]].name}</h1>
-                  <h3>Email: ${this.driversList[index[mark]].email}</h3>         
-                  <h3>Phone: ${this.driversList[index[mark]].phone}</h3>                 
+                  <h1 style="color: #f16a2c;">${this.driversList[index[mark]].name}</h1>
+                  <span class="text-muted">Email: </span><h3>${this.driversList[index[mark]].email}</h3>
+		              <span class="text-muted">Phone: </span><h3>${this.driversList[index[mark]].phone}</h3>                
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -344,9 +348,9 @@ sortByDistance(){
                       </button>
                   </div>
                   <div class="modal-body">
-                      <h1>${this.driversList[index[mark]].name}</h1>
-                      <h3>Email: ${this.driversList[index[mark]].email}</h3>         
-                      <h3>Phone: ${this.driversList[index[mark]].phone}</h3>                 
+                  <h1 style="color: #f16a2c;">${this.driversList[index[mark]].name}</h1>
+                  <span class="text-muted">Email: </span><h3>${this.driversList[index[mark]].email}</h3>
+		              <span class="text-muted">Phone: </span><h3>${this.driversList[index[mark]].phone}</h3>                
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

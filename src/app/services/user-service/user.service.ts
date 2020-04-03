@@ -81,7 +81,7 @@ export class UserService {
 	createDriver(user: User, role) {
 
 		user.active = true;
-		user.isDriver = false;
+		user.driver = false;
 		user.isAcceptingRides = false;
 		console.log(user);
 
@@ -127,7 +127,7 @@ export class UserService {
 		this.getUserById(userId)
 			.then((response) => {
 				this.user = response;
-				this.user.isDriver = isDriver;
+				this.user.driver = isDriver;
 				this.user.isAcceptingRides = (this.user.active && isDriver);
 
 				this.http.put(this.url+userId, this.user).subscribe(
@@ -177,9 +177,8 @@ export class UserService {
 	 * @param user 
 	 */
 
-	updateUserInfo(user: User) :Observable<User> {
-		//console.log(user);
-		return this.http.put<User>(this.url, user);
+	updateUserInfo(user: User) :Observable<User>{
+		return this.http.put<User>(this.url + user.userId, user);
 	}
 	/**
 	 * A GET method that retrieves a driver by Id
@@ -229,8 +228,8 @@ export class UserService {
       this.http.put(`${this.url + user.userId}`,this.body,this.httpOptions).subscribe();
 	}
 	
-	getRidersForLocation1(homeLocation: string, workLocation: string, sort:string): Observable <any>{
-		return this.http.get(this.url + 'driver/'+ homeLocation +'/'+ workLocation + '/'+ sort 
+	getRidersForLocation1(homeLocation: string, workLocation: string, range:number, sameOffice: boolean): Observable <any>{
+		return this.http.get(this.url + 'driver/'+ homeLocation +'/'+ workLocation + '/'+ range + '/'+ sameOffice
 		)
 		
 		

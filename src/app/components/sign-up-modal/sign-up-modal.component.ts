@@ -60,7 +60,6 @@ export class SignupModalComponent implements OnInit {
 
     this.userService.getAllUsers().subscribe(
       res => {
-        //console.log(res);
       }
     );
 
@@ -76,7 +75,9 @@ export class SignupModalComponent implements OnInit {
     this.modalRef = this.modalService.show(template);
   }
 
-  submitUser() {
+  
+
+  async submitUser() {
 
     //if failed client validation, return
     if(!this.validateForm()) {
@@ -104,69 +105,64 @@ export class SignupModalComponent implements OnInit {
     this.user.wCity = this.user.hCity;
     this.user.wZip = this.user.hZip;
 
-    this.userService.addUser(this.user).subscribe(
-      res => {
-        
-        // console.log(res);
-        let i = 0;
-        if (res.firstName != undefined) {
-          this.firstNameError = res.firstName[0]; //additional server validation
-          i = 1;
-        }
-        if (res.lastName != undefined) {
-          this.lastNameError = res.lastName[0];
-          i = 1;
+    const res = await this.userService.addUser(this.user);
 
-        }
-        if (res.phoneNumber != undefined) {
-          this.phoneNumberError = res.phoneNumber[0];
-          i = 1;
+    let i = 0;
+    if (res.firstName != undefined) {
+        this.firstNameError = res.firstName[0]; //additional server validation
+        i = 1;
+    }
+    if (res.lastName != undefined) {
+        this.lastNameError = res.lastName[0];
+        i = 1;
 
-        }
-        if (res.email != undefined) {
-          this.emailError = res.email[0];
-          i = 1;
+    }
+    if (res.phoneNumber != undefined) {
+        this.phoneNumberError = res.phoneNumber[0];
+        i = 1;
 
-        }
-        if (res.userName != undefined) {
-          this.userNameError = res.userName[0];
-          i = 1;
+    }
+    if (res.email != undefined) {
+        this.emailError = res.email[0];
+        i = 1;
 
-        }
-        if (res.hState != undefined) {
-          this.hStateError = res.hState[0];
-          i = 1;
+    }
+    if (res.userName != undefined) {
+        this.userNameError = res.userName[0];
+        i = 1;
 
-        }
-        if (res.hAddress != undefined) {
-          this.hAddressError = res.hAddress[0];
-          i = 1;
+    }
+    if (res.hState != undefined) {
+        this.hStateError = res.hState[0];
+        i = 1;
 
-        }
-        if (res.hCity != undefined) {
-          this.hCityError = res.hCity[0];
-          i = 1;
+    }
+    if (res.hAddress != undefined) {
+        this.hAddressError = res.hAddress[0];
+        i = 1;
 
-        }
-        if (res.hZip != undefined) {
-          this.hZipError = res.hZip[0];
-          i = 1;
+    }
+    if (res.hCity != undefined) {
+        this.hCityError = res.hCity[0];
+        i = 1;
 
-        }
-        if (i === 0) {
-          i = 0;
+    }
+    if (res.hZip != undefined) {
+        this.hZipError = res.hZip[0];
+        i = 1;
 
-          this.submitMessage = "Registered successfully";
-          this.submitMessageColor = "green";
-          this.submitMessageVisible = "visible";
-        }
-      },
-      error => {
-        this.submitMessage = "Error: " + error.status;
-        this.submitMessageColor = "red";
+    }
+    if (i === 0) {
+        i = 0;
+
+        this.submitMessage = "Registered successfully";
+        this.submitMessageColor = "green";
         this.submitMessageVisible = "visible";
-      }
-    );
+    }
+
+
+
+    
   }
 
   //validate the entire form

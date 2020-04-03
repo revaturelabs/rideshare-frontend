@@ -1,0 +1,24 @@
+p {
+    font-size: smaller;
+    color: gray;
+}
+
+select {
+    margin-left: 8px;
+}
+
+#login-form {
+    border: 1px solid #dddddd;
+    border-radius: 7px;
+    padding: 3%;
+    margin-top: 8%;
+    margin-left: 30%;
+    margin-right: 30%;
+}
+
+#next-btn, #prev-btn {
+    background-color: white;
+    color: black;
+    width: 100%;
+    font-size: small;
+}

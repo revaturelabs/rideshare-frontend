@@ -18,7 +18,7 @@
       <h4 for="customRange3">Distance Range</h4>
       <!-- <label for="customRange3">{{this.range}}</label> -->
       <ng-template #popContent>{{this.range}}</ng-template>
-        <input type="range" class="custom-range" min="0" max="500" step="1" id="customRange3" [(ngModel)]="range" (change)="searchDriver()" [ngbPopover]="popContent" triggers="mouseenter:mouseleave" placement="right">
+        <input type="range" class="custom-range" min="0" max="250" step="1" id="customRange3" [(ngModel)]="range" (change)="searchDriver()" [ngbPopover]="popContent" triggers="mouseenter:mouseleave" placement="right">
       <div class="custom-control custom-checkbox">
         <input type="checkbox" class="custom-control-input" id="defaultChecked2" [(ngModel)]="sameOffice" (change)="searchDriver()">
         <label class="custom-control-label" for="defaultChecked2">Same Office</label>

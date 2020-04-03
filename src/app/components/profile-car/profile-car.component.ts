@@ -93,19 +93,3 @@ export class ProfileCarComponent implements OnInit {
   }
 
 }
-
-// //console.log(this.currentUser);
-// switch(this.currentCar.make){
-//   case '': this.emptyMake = "Make field required.";
-//           this.failed = "CANNOT UPDATE CAR INFORMATION!";
-//           this.success = "";
-//           break;
-//   default: this.emptyMake = "";
-// }
-// switch(this.currentCar.model){
-//   case '': this.emptyModel = "Model field required.";
-//           this.failed = "CANNOT UPDATE CAR INFORMATION!";
-//           this.success = "";
-//           break;
-//   default: this.emptyModel = "";
-// }

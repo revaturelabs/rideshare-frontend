@@ -16,9 +16,12 @@ import { PreferenceComponent } from 'src/app/components/preference/preference.co
 import { ProfileComponent } from 'src/app/components/profile/profile.component';
 import { RegisterComponent } from 'src/app/components/register/register.component';
 import { User } from 'src/app/models/user';
+import { environment } from 'src/environments/environment';
 
 describe('UserService', () => {
+  let http = new HttpClientModule();
   beforeEach(() => TestBed.configureTestingModule({
+      imports: [HttpClientModule],
     declarations: [
       ...getRoutableComponents()
     ],
@@ -29,4 +32,13 @@ describe('UserService', () => {
     const service: UserService = TestBed.get(UserService);
     expect(service).toBeTruthy();
   });
+
+  it('User creation rejected if number is not given as the first element', () => {
+      const service: UserService = TestBed.get(UserService);
+      const user: User = new User();
+      user.hAddress = "NOTNUMBER Springdale Ave";
+      service.addUser(user);
+      expect(user.hState).toEqual('');
+  });
+
 });

@@ -270,12 +270,16 @@ export class DriverListComponent implements OnInit {
     let index = [];
     sortDr.forEach(s => { index.push(drClone.indexOf(s)); });
     console.log(index);
-
+    let tempDistance: Array<any> = [];
+    let tempTime: Array<any> = [];
+    let tempDriverList: Array<any> = [];
 
     let mark = 0;
     var outputDiv = document.getElementById('output');
     sortDr.forEach(sDr => {
-
+      tempDistance.push(this.distance[index[mark]]);
+      tempTime.push(this.time[index[mark]]);
+      tempDriverList.push(this.driversList[index[mark]]);
 
       outputDiv.innerHTML += `<tr><td class="col">${sDr}</td>
         <td class="col">${this.distance[index[mark]].text}</td>
@@ -313,10 +317,9 @@ export class DriverListComponent implements OnInit {
 
     })
 
-
-
-
-
+    this.distance = tempDistance;
+    this.time = tempTime;
+    this.driversList = tempDriverList;
   }
 
   sortByDistance() {
@@ -327,7 +330,7 @@ export class DriverListComponent implements OnInit {
     console.log(this.distance);
 
     let ds = [];
-    //CREATE ARRAY OF Distances.
+    //CREATE ARRAY OF Distances. 
     this.distance.forEach(d => { ds.push(Number(d.value)); })
     console.log("Unsorted: " + ds);
 
@@ -340,11 +343,16 @@ export class DriverListComponent implements OnInit {
     let index = [];
     sortDs.forEach(s => { index.push(dsClone.indexOf(s)); });
     console.log(index);
+    let tempDistance: Array<any> = [];
+    let tempTime: Array<any> = [];
+    let tempDriverList: Array<any> = [];
 
     let mark = 0;
     var outputDiv = document.getElementById('output');
     sortDs.forEach(sDr => {
-
+      tempDistance.push(this.distance[index[mark]]);
+      tempTime.push(this.time[index[mark]]);
+      tempDriverList.push(this.driversList[index[mark]]);
 
       outputDiv.innerHTML += `<tr><td class="col">${this.driversList[index[mark]].name}</td>
         <td class="col">${this.distance[index[mark]].text}</td>
@@ -391,11 +399,92 @@ export class DriverListComponent implements OnInit {
 
     })
 
-
-
-
-
+    this.distance = tempDistance;
+    this.time = tempTime;
+    this.driversList = tempDriverList;
   }
 
+  sortBySeats() {
+    this.emptyDriversList();
+
+    console.log(this.driversList);
+    console.log(this.time);
+    console.log(this.distance);
+
+    let ds = [];
+    //CREATE ARRAY OF Distances.
+    this.driversList.forEach(d => {ds.push(d);});
+    console.log("Unsorted: ");
+    console.log(ds);
+
+    const dsClone = Object.assign([], ds);
+    console.log("Clone: " + dsClone);
+
+    let sortDs = ds.sort((a, b) => (b.car ? b.car.seats : 0) - (a.car ? a.car.seats : 0)); // For descending sort
+    console.log(sortDs);
+
+    let index = [];
+    sortDs.forEach(s => { index.push(dsClone.indexOf(s)); });
+    console.log(index);
+    let tempDistance: Array<any> = [];
+    let tempTime: Array<any> = [];
+    let tempDriverList: Array<any> = [];
+
+    let mark = 0;
+    var outputDiv = document.getElementById('output');
+    sortDs.forEach(sDr => {
+      tempDistance.push(this.distance[index[mark]]);
+      tempTime.push(this.time[index[mark]]);
+      tempDriverList.push(this.driversList[index[mark]]);
+
+      outputDiv.innerHTML += `<tr><td class="col">${this.driversList[index[mark]].name}</td>
+        <td class="col">${this.distance[index[mark]].text}</td>
+        <td class="col">${this.time[index[mark]].text}</td>
+        <td class="col">${this.driversList[index[mark]].car ? this.driversList[index[mark]].car.seats : 0}</td>
+        <td class="col">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCentered${this.driversList[index[mark]].id}"> View</button>
+          <div class="col-lg-5">
+          <div class="modal" id="exampleModalCentered${this.driversList[index[mark]].id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalCenteredLabel">Contact Info:</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                    <h1 style="color: #f16a2c;">${this.driversList[index[mark]].name}</h1>
+                    <span class="text-muted">Email: </span><h3>${this.driversList[index[mark]].email}</h3>
+                    <span class="text-muted">Phone: </span><h3>${this.driversList[index[mark]].phone}</h3>                
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+              </div>
+                  <div class="modal-body">
+                  <h1 style="color: #f16a2c;">${this.driversList[index[mark]].name}</h1>
+                  <span class="text-muted">Email: </span><h3>${this.driversList[index[mark]].email}</h3>
+		              <span class="text-muted">Phone: </span><h3>${this.driversList[index[mark]].phone}</h3>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div #maps id="gmap" class="img-responsive"></div>
+        </div>
+      </td></tr>`;
+      mark++
+
+    })
+    
+    this.distance = tempDistance;
+    this.time = tempTime;
+    this.driversList = tempDriverList;
+  }
 
 }

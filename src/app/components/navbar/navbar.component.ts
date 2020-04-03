@@ -21,11 +21,12 @@ export class NavbarComponent implements OnInit {
   /**
    * This is a name string.
    */
-
+  profileObject : User;
   name: string = '';
   admin: string = '';
-
-  currentUser: string = '';
+  firstName: string;
+  lastName: string;
+  currentUser: any = '';
 
   /**
    * This is a constructor
@@ -44,12 +45,18 @@ export class NavbarComponent implements OnInit {
    */
 
   ngOnInit() {
+    this.currentUser = this.userService.getUserById2(sessionStorage.getItem("userid")).subscribe((response)=>{
+      this.profileObject = response;
 
-    if(sessionStorage.getItem("userid") != null){
-      this.currentUser =sessionStorage.getItem("name");
-    }else{
-      this.currentUser ='';
-    }
+      this.firstName = this.profileObject.firstName;
+      this.lastName = this.profileObject.lastName;
+    });
+    // if(sessionStorage.getItem("userid") != null){
+    //   this.currentUser =sessionStorage.getItem("name");
+  
+    // }else{
+    //   this.currentUser ='';
+    // }
     if (this.authService.user.userId) {
       this.userService.getUserById(this.authService.user.userId).then((response)=>{
         this.name = response.firstName;

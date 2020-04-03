@@ -42,9 +42,11 @@ export class ProfileLocationComponent implements OnInit {
     private locationService: LocationService) { }
 
   ngOnInit() {
-    // this.googleService.getGoogleApi();
+    //call location service to create autocomplete object
     this.locationService.initAutocomplete(<HTMLInputElement>document.getElementById('autocomplete'));
+    //get the user by id
     this.userService.getUserById2(sessionStorage.getItem("userid")).subscribe((response) => {
+      //set the address fields with updated info
       this.currentUser = response;
       this.address.zipcode = response.hZip;
       this.address.city = response.hCity;
@@ -61,12 +63,15 @@ export class ProfileLocationComponent implements OnInit {
   }
 
   updatesContactInfo() {
+    //set address fields to info that user typed in
     this.currentUser.hZip = this.address.zipcode;
     this.currentUser.hCity = this.address.city;
     this.currentUser.hAddress = this.address.address;
     this.currentUser.wAddress = this.address.address2;
     this.currentUser.hState = this.address.hState;
-    //console.log(this.currentUser);
+    //call location service to update address fields
+    this.currentUser = this.locationService.updatesContactInfo(this.currentUser);
+
     switch (this.currentUser.hCity) {
       case '': this.emptyCity = "Invalid Input! Cannot be empty";
         this.failed = "CANNOT UPDATE CONTACT INFORMATION!"

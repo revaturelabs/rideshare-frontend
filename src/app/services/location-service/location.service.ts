@@ -28,7 +28,6 @@ export class LocationService {
   };
 
   initAutocomplete(autocompleteElement: HTMLInputElement) {
-    console.log('started initAutocomplete');
     var self = this;
 
     this.address = new Address;
@@ -80,7 +79,6 @@ export class LocationService {
         place.address_components[1]['long_name'];
     }
 
-    console.log('finished initAutocomplete');
   }
 
   // Bias the autocomplete object to the user's geographical location,

@@ -6,7 +6,6 @@ import { Batch } from 'src/app/models/batch';
 import { BatchService } from 'src/app/services/batch-service/batch.service';
 import { ValidationService } from 'src/app/services/validation-service/validation.service';
 import { environment } from 'src/environments/environment';
-import { HttpClient } from '@angular/common/http';
 import { } from 'googlemaps';
 import { GoogleService } from 'src/app/services/google-service/google.service';
 import { Promise } from 'q';
@@ -47,7 +46,6 @@ export class SignupModalComponent implements OnInit {
   hZipError: string;
   autocomplete: google.maps.places.Autocomplete;
 
-  count: number;
 
   success: string;
   //Store the retrieved template from the 'openModal' method for future use cases.
@@ -56,7 +54,13 @@ export class SignupModalComponent implements OnInit {
     'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY',
     'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV',
     'WI', 'WY'];
-  constructor(private googleApiKey: GoogleService, private http: HttpClient, private locationService: LocationService, private modalService: BsModalService, private userService: UserService, private batchService: BatchService, private validationService: ValidationService) {
+  constructor(
+    private googleApiKey: GoogleService,
+    private locationService: LocationService,
+    private modalService: BsModalService,
+    private userService: UserService,
+    private batchService: BatchService,
+    private validationService: ValidationService) {
 
   }
 
@@ -89,7 +93,6 @@ export class SignupModalComponent implements OnInit {
 
   fixPlacesApi() {
     //allows the autofill address dropdown to show on top of the modal
-    console.log(this.count);
     (<HTMLElement>document.getElementsByClassName('pac-container')[document.getElementsByClassName('pac-container').length - 1]).style.zIndex = '1051';
 
   }
@@ -144,6 +147,7 @@ export class SignupModalComponent implements OnInit {
         }
       }
     }
+    //update the address fields of the user
     this.user.wAddress = this.user.hAddress;
     this.user.wState = this.user.hState;
     this.user.wCity = this.user.hCity;
@@ -151,11 +155,11 @@ export class SignupModalComponent implements OnInit {
     let driver = <HTMLInputElement>document.getElementById("driver");
     let rider = <HTMLInputElement>document.getElementById("rider");
 
-    if (driver.checked == true) {
-      this.user.isDriver = true;
+    if(driver.checked == true){
+      this.user.driver =  true;
     }
-    if (rider.checked == true) {
-      this.user.isDriver = false;
+    if(rider.checked == true){
+      this.user.driver =  false;
     }
     //console.log(this.user);
     if (this.newUserName == false) {
@@ -208,8 +212,6 @@ export class SignupModalComponent implements OnInit {
         }
       }
     );
-
-
 
     this.failed = "";
     //Reload user list

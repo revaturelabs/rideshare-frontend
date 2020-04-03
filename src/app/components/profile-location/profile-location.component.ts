@@ -31,7 +31,7 @@ export class ProfileLocationComponent implements OnInit {
       this.address = response.hAddress;
       this.address2 = response.wAddress;
       this.hState = response.hState;
-
+      
     });
   }
 

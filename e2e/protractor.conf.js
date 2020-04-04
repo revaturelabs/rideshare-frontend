@@ -12,7 +12,7 @@ exports.config = {
   specs: [
     // './src/**/*.e2e-spec.ts'
     // './test/homepage.spec.js',
-    './test/register.spec.js',
+    './test/registerAndLogin.spec.js',
     // './test/usernav.spec.js'
   ],
   capabilities: {

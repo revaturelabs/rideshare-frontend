@@ -28,10 +28,7 @@
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/font-awesome/css/font-awesome.min.css"
             ],
-            "scripts": [
-              
-              
-            ]
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -154,6 +151,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "rideshare-frontend"
+    }
+  },
+  "defaultProject": "rideshare-frontend",
+  "cli": {
+    "analytics": false
+  }
 }

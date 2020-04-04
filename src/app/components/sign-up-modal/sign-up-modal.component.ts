@@ -103,6 +103,10 @@ export class SignupModalComponent implements OnInit {
 
 
   submitUser() {
+
+
+
+
     this.newUserName = true;
     this.user.userId = 0;
     this.firstNameError = "";
@@ -116,7 +120,13 @@ export class SignupModalComponent implements OnInit {
     this.hZipError = "";
     this.success = "";
     this.user = this.locationService.updatesContactInfo(this.user);
+
+    if(!this.user.hZip){
+      return;
+    }
     this.failed = "Registration Unsuccessful!";
+
+    
 
     //Format phone
     let phone = this.user.phoneNumber.replace(/[^\w\s]/gi, "");

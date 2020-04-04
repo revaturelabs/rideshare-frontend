@@ -33,11 +33,11 @@
     <!--<label for="password">Password</label>
     <input id="password" type="password" [(ngModel)]="password" class="form-control" />-->
 
-    <label id="state">Batch</label>
-    <select class="form-control" [(ngModel)]="user.batch">
+    <label>Batch</label>
+    <select class="form-control" id="state" [(ngModel)]="user.batch">
       <option value="none">
       </option>
-      <option *ngFor="let batch of batches" [ngValue]="batch">{{batch.batchNumber}} {{batch.batchLocation}}</option>
+      <option *ngFor="let batch of batches" [ngValue]="batch" name = "batchLocation" >{{batch.batchNumber}} {{batch.batchLocation}}</option>
     </select>
 
     <div class="form-group">
@@ -59,7 +59,7 @@
     <input (keydown)="hCityError = ''" id="locality" type="text" [(ngModel)]="user.hCity" class="form-control" disabled/>
     <p *ngIf="hCityError != ''" class="error">{{hCityError}}</p>
 
-    <label id="hState">State</label>
+    <label>State</label>
     <select (keydown)="hStateError = ''" class="form-control" [(ngModel)]="user.hState" id="administrative_area_level_1" disabled>
       <option value="none" selected disabled hidden>
       </option>
@@ -73,17 +73,17 @@
 
     <div class="radiobody">
       <div class="btn-group" data-toggle="buttons">
-        <label class="btn btn-primary">
+        <label class="btn btn-primary" id = "driverReg">
           <input type="checkbox" id="driver" [(ngModel)]="isDriver" /> Driver
         </label>
         <br>
-        <label class="btn btn-primary">
+        <label class="btn btn-primary" id = "riderReg">
           <input type="checkbox" id="rider" [(ngModel)]="isRider" /> Rider
         </label>
       </div>
     </div>
     <div class="btn-container">
-      <button type="submit" class="btn btn-primary register" (click)="submitUser()">Submit</button>
+      <button type="submit" class="btn btn-primary register" id= "submit" (click)="submitUser()">Submit</button>
       <p *ngIf="success != ''" class="success">{{success}}</p>
       <p *ngIf="failed != ''" class="error">{{failed}}</p>
     </div>

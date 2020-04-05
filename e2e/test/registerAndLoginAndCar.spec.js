@@ -117,7 +117,7 @@ describe('Sign Up tests', function(){
         profileOption.click();
         browser.sleep(500);                                     //Nav
         carInfoButton.click();
-        browser.sleep(500);                                     //Nav
+        browser.sleep(500);                                     
  
     });
 });

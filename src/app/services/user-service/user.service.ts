@@ -6,7 +6,7 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { AuthService } from '../auth-service/auth.service';
 import { LogService } from "../log.service"
 import { environment } from '../../../environments/environment';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 
 
@@ -38,9 +38,12 @@ export class UserService {
 	 * @param authService An authorization service
 	 */
 
-	constructor(private http: HttpClient, private router: Router, private log: LogService, private authService: AuthService) {
-		let userId: string = sessionStorage.getItem("userid");
-		if (userId) this.getUserById2(userId).subscribe(
+	constructor(private http: HttpClient, private router: Router,
+		 private log: LogService, private authService: AuthService) {
+		// If a user's info is already in session storage, then the service
+		// will try to obtain the user's information on instantiation
+		let startingUser: Observable<User> = this.getUserFromSessionStorage();
+		if (startingUser) startingUser.subscribe(
 			resp => {
 				this.currentUserSubject.next(resp);
 			}
@@ -83,12 +86,10 @@ export class UserService {
 	}
 
 
-	getUserById2(idParam2: String): Observable<User>{
-
-		//console.log(this.url)
-		return this.http.get<User>(this.url+idParam2);
-
-
+	getUserFromSessionStorage(): Observable<User>{
+		let id: string = sessionStorage.getItem("userid");
+		if (id) return this.http.get<User>(this.url + id);
+		else return null;
 	}
 
 	/**
@@ -121,7 +122,7 @@ export class UserService {
 	}
 
 	// add user method
-	addUser(user :User) :Observable<User> {
+	addUser(user: User): Observable<User> {
 		return this.http.post<User>(this.url, user, {headers: this.headers});
 	}
 
@@ -183,11 +184,21 @@ export class UserService {
 
 	/**
 	 * A PUT method that updates user's information
+	 * 
+	 * Automatically updates the logged in user if the returned object
+	 * from the server matches the current user's info
+	 * 
 	 * @param user
 	 */
 
 	updateUserInfo(user: User): Observable<User>{
-		return this.http.put<User>(this.url + user.userId, user);
+		return this.http.put<User>(this.url + user.userId, user).pipe(
+			tap( (resp: User) => {
+				if (resp && String(resp.userId) == sessionStorage.getItem("userid")){
+					this.currentUserSubject.next(resp);
+				}
+			})
+		);
 	}
 	/**
 	 * A GET method that retrieves a driver by Id

@@ -16,7 +16,7 @@ export class ProfileMembershipComponent implements OnInit {
   
   constructor(private userService: UserService) { }
   ngOnInit() {
-    this.currentUser = this.userService.getUserById2(sessionStorage.getItem("userid")).subscribe((response)=>{
+    this.currentUser = this.userService.getLoggedInUser().subscribe((response)=>{
       this.profileObject = response;
       this.driver = String(JSON.stringify(this.profileObject.driver));
       this.active = String(JSON.stringify(this.profileObject.active));

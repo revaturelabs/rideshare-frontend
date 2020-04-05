@@ -10,6 +10,7 @@ import { } from 'googlemaps';
 import { GoogleService } from 'src/app/services/google-service/google.service';
 import { Promise } from 'q';
 import { LocationService } from 'src/app/services/location-service/location.service';
+import { HttpErrorResponse } from '@angular/common/http';
 declare var google: any;
 
 @Component({
@@ -166,50 +167,26 @@ export class SignupModalComponent implements OnInit {
       this.userNameError = "Username already in use";
     }
     this.userService.addUser(this.user).subscribe(
-      res => {
-        console.log(res);
-        let i = 0;
-        if (res.firstName != undefined) {
-          this.firstNameError = res.firstName[0];
-          i = 1;
-        }
-        if (res.lastName != undefined) {
-          this.lastNameError = res.lastName[0];
-          i = 1;
-
-        }
-        if (res.phoneNumber != undefined) {
-          this.phoneNumberError = res.phoneNumber[0];
-          i = 1;
-        }
-        if (res.email != undefined) {
-          this.emailError = res.email[0];
-          i = 1;
-        }
-        if (res.userName != undefined) {
-          this.userNameError = res.userName[0];
-          i = 1;
-        }
-        if (res.hState != undefined) {
-          this.hStateError = res.hState[0];
-          i = 1;
-        }
-        if (res.hAddress != undefined) {
-          this.hAddressError = res.hAddress[0];
-          i = 1;
-        }
-        if (res.hCity != undefined) {
-          this.hCityError = res.hCity[0];
-          i = 1;
-        }
-        if (res.hZip != undefined) {
-          this.hZipError = res.hZip[0];
-          i = 1;
-        }
-        if (i === 0) {
-          i = 0;
-          this.success = "Registered successfully!";
-          this.sleep(5000).then(res => { this.modalRef.hide() });
+      resp => {
+        console.log("Registered user: ");
+        console.log(resp);
+        this.success = "Registered successfully!";
+        this.sleep(5000).then(() => { this.modalRef.hide() });
+      },
+      (err: HttpErrorResponse) => {
+        if (err.status === 400){
+          let errors = err.error;
+          if (errors.firstName) this.firstNameError = errors.firstName[0];
+          if (errors.lastName) this.lastNameError = errors.lastName[0];
+          if (errors.phoneNumber) this.phoneNumberError = errors.phoneNumber[0];
+          if (errors.email) this.emailError = errors.email[0];
+          if (errors.userName) this.userNameError = errors.userName[0];
+          if (errors.hAddress) this.hAddressError = errors.hAddress[0];
+          if (errors.hCity) this.hCityError = errors.hCity[0];
+          if (errors.hState) this.hStateError = errors.hState[0];
+          if (errors.hZip) this.hZipError = errors.hZip[0];
+        } else {
+          console.error(err);
         }
       }
     );

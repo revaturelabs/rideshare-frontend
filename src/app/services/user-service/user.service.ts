@@ -2,7 +2,7 @@ import { Injectable, Output, EventEmitter } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from 'src/app/models/user';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { AuthService } from '../auth-service/auth.service';
 import { LogService } from "../log.service"
 import { environment } from '../../../environments/environment';
@@ -17,14 +17,10 @@ import { map } from 'rxjs/operators';
 
 export class UserService {
 
-	/**
-	 * This is an user service
-	 */
-	@Output() fireIsLoggedIn: EventEmitter<any> = new EventEmitter<any>();
-
 	// http headers
 	private headers = new HttpHeaders({'Content-Type': 'application/json'});
 
+	private currentUserSubject = new BehaviorSubject<User>(null);
 
 
 	/**
@@ -42,7 +38,29 @@ export class UserService {
 	 * @param authService An authorization service
 	 */
 
-	constructor(private http: HttpClient, private router: Router, private log: LogService, private authService: AuthService) { }
+	constructor(private http: HttpClient, private router: Router, private log: LogService, private authService: AuthService) {
+		let userId: string = sessionStorage.getItem("userid");
+		if (userId) this.getUserById2(userId).subscribe(
+			resp => {
+				this.currentUserSubject.next(resp);
+			}
+		)
+	 }
+
+	 /**
+	  * Provides an Observable which can be subscribed to by
+	  * components that need the currently logged in user.
+	  * 
+	  * This will reduce the number of GET requests being sent
+	  * by every single component that needs the current user,
+	  * and will update for all subscribers when the Subject
+	  * is updated.
+	  * 
+	  * @returns Observable for the currently logged in user.
+	  */
+	 getLoggedInUser(): Observable<User>{
+		 return this.currentUserSubject.asObservable();
+	 }
 
 	/**
 	 * A GET method for all users
@@ -88,7 +106,6 @@ export class UserService {
 		this.http.post(this.url, user, {observe: 'response'}).subscribe(
 			(response) => {
 				this.authService.user = response.body;
-				this.fireIsLoggedIn.emit(response.body);
 
 				if (role === 'driver') {
 					this.router.navigate(['new/car']);
@@ -106,14 +123,6 @@ export class UserService {
 	// add user method
 	addUser(user :User) :Observable<User> {
 		return this.http.post<User>(this.url, user, {headers: this.headers});
-	}
-
-	/**
-	 * This function returns the fireIsLoggedIn variable
-	 */
-
-	getEmitter() {
-		return this.fireIsLoggedIn;
 	}
 
 	/**
@@ -177,7 +186,7 @@ export class UserService {
 	 * @param user
 	 */
 
-	updateUserInfo(user: User) :Observable<User>{
+	updateUserInfo(user: User): Observable<User>{
 		return this.http.put<User>(this.url + user.userId, user);
 	}
 	/**

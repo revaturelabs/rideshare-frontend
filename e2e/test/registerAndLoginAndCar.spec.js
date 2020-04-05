@@ -17,6 +17,17 @@ describe('Sign Up tests', function(){
     let riderOption = element(by.id('riderReg'));
     let submitBtn = element(by.id('submit'));
     let modalClose = element(by.className('close pull-right'));
+    let userDropdown = element(by.id('user-dropa'));
+    let profileOption = element(by.className('dropdown-item'));
+    let carInfoButton = element(by.id('carInfo'));
+    let carYear = element(by.id('year'));
+    let carMake = element(by.id('make'));
+    let carModel = element(by.id('model'));
+    let carSeats = element(by.id('Nrseats'));
+    let carSave = element(by.id('save'));
+    let elLogoutButton = element(by.id('logout-btn')); 
+
+
     
     
     it('Sign up link on home page opens Sign up modal', function() {
@@ -47,7 +58,6 @@ describe('Sign Up tests', function(){
 
         browser.actions().sendKeys(protractor.Key.ENTER).perform();
 
-        browser.sleep(2000);
 
 
         
@@ -62,9 +72,52 @@ describe('Sign Up tests', function(){
         elSignInButton.click();
         browser.sleep(500);                                     //Nav
         expect(elUserBorder.getText()).toEqual('test user');
-        browser.sleep(2000);                                     //Nav
 
 
+ 
+    });
+
+    it ('Adds a new car to the DB', function() {
+
+        //create the car
+        browser.get('http://localhost:4200/'); 
+        browser.sleep(500);                                     //Nav
+        elLoginButton.click();                                 //Click signup button
+        LoginUserNameInput.sendKeys('tUser');                        //input 'tUser' as username
+        elSignInButton.click();
+        browser.sleep(500);                                     //Nav
+        browser.sleep(500);                                     //Nav
+        userDropdown.click();
+        profileOption.click();
+        browser.sleep(500);                                     //Nav
+        carInfoButton.click();
+        browser.sleep(500);                                     //Nav
+        carYear.sendKeys('2020');
+        carMake.sendKeys('Testla');
+        carModel.sendKeys('Test');
+        carSeats.click();
+        browser.actions().sendKeys(protractor.Key.DOWN).perform();
+        browser.actions().sendKeys(protractor.Key.DOWN).perform();
+        browser.actions().sendKeys(protractor.Key.DOWN).perform();
+        browser.actions().sendKeys(protractor.Key.DOWN).perform();
+        browser.actions().sendKeys(protractor.Key.ENTER).perform();
+        browser.sleep(500);                                     //Nav
+        carSave.click();
+        userDropdown.click();
+        elLogoutButton.click();
+
+        //Log back in and make sure the car info is there.
+        browser.get('http://localhost:4200/'); 
+        browser.sleep(500);                                     //Nav
+        elLoginButton.click();                                 //Click signup button
+        LoginUserNameInput.sendKeys('tUser');                        //input 'tUser' as username
+        elSignInButton.click();
+        browser.sleep(500);                                     //Nav
+        userDropdown.click();
+        profileOption.click();
+        browser.sleep(500);                                     //Nav
+        carInfoButton.click();
+        browser.sleep(500);                                     //Nav
  
     });
 });

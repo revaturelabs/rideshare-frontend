@@ -16,8 +16,8 @@ exports.config = {
     // './test/driverslist-nearby.spec.js',
     //'./test/otherDriversAndrange.spec.js',
     // './test/driverslist-sorting.spec.js',
-    './test/userStatus.spec.js'
-
+    //'./test/userStatus.spec.js',
+    './test/profile-location.spec.js'
 
 
 

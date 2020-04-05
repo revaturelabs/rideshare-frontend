@@ -13,7 +13,8 @@ exports.config = {
     // './src/**/*.e2e-spec.ts'
     //'./test/registerAndLogin.spec.js',
     './test/driverslist-nearby.spec.js',
-    // './test/usernav.spec.js'
+    // './test/usernav.spec.js',
+    //'./test/driverslist-sorting.spec.js'
   ],
   capabilities: {
     browserName: 'chrome'

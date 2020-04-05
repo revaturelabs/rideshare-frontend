@@ -5,6 +5,7 @@ import { User } from 'src/app/models/user';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { } from 'googlemaps';
+import { GoogleService } from 'src/app/services/google-service/google.service';
 import { Address } from 'src/app/models/address';
 declare var google: any;
 
@@ -36,7 +37,9 @@ export class ProfileLocationComponent implements OnInit {
   };
 
   constructor(private userService: UserService,
-    private http: HttpClient, private locationService: LocationService) { }
+    private http: HttpClient,
+    private googleService: GoogleService,
+    private locationService: LocationService) { }
 
   ngOnInit() {
     //call location service to create autocomplete object
@@ -91,7 +94,7 @@ export class ProfileLocationComponent implements OnInit {
       default: this.emptyZip = "";
     }
     if ((this.currentUser.hAddress !== '') && (this.currentUser.hCity !== '') && (String(this.currentUser.hZip) !== '')) {
-      //update user
+      this.currentUser = this.locationService.updatesContactInfo(this.currentUser);
       this.userService.updateUserInfo(this.currentUser).subscribe();
       this.success = "Updated Successfully!";
       this.failed = "";

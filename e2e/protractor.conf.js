@@ -10,16 +10,25 @@ const { SpecReporter } = require('jasmine-spec-reporter');
 exports.config = {
   allScriptsTimeout: 11000,
   specs: [
-    // './src/**/*.e2e-spec.ts'
-    './test/landingpage.spec.js',
-    './test/register.spec.js',
-    './test/usernav.spec.js'
+
+    //'./test/homepage.spec.js',
+    // './test/registerAndLoginAndCar.spec.js',
+    // './test/driverslist-nearby.spec.js',
+    //'./test/otherDriversAndrange.spec.js',
+    // './test/driverslist-sorting.spec.js',
+    './test/userStatus.spec.js'
+
+
+
+
+
+
   ],
   capabilities: {
     browserName: 'chrome'
   },
   directConnect: true,
-  baseUrl: 'http://http://localhost:4200/',
+  baseUrl: 'http://localhost:4200/',
   framework: 'jasmine',
   jasmineNodeOpts: {
     showColors: true,

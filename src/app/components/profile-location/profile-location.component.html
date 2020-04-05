@@ -1,4 +1,4 @@
-<div class="container mainContainer">
+<div class="container mainContainer" (keydown.enter)="updatesContactInfo()">
     <i class="fa fa-home" style="font-family:'FontAwesome';"></i>
 
     <h4>Location:</h4>
@@ -106,5 +106,3 @@
     <p *ngIf="success != ''" class="success">{{success}}</p>
     <p *ngIf="failed != ''" class="failed">{{failed}}</p>
 </div>
-
-

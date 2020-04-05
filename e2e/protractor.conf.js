@@ -11,8 +11,8 @@ exports.config = {
   allScriptsTimeout: 11000,
   specs: [
     // './src/**/*.e2e-spec.ts'
-    // './test/homepage.spec.js',
     './test/registerAndLogin.spec.js',
+    './test/driverslist-nearby.spec.js',
     // './test/usernav.spec.js'
   ],
   capabilities: {
@@ -23,7 +23,7 @@ exports.config = {
   framework: 'jasmine',
   jasmineNodeOpts: {
     showColors: true,
-    defaultTimeoutInterval: 30000,
+    defaultTimeoutInterval: 60000,
     print: function() {}
   },
   onPrepare() {

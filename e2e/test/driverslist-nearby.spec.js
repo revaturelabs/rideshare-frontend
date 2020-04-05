@@ -10,7 +10,7 @@ describe('View Nearby Drivers\'s Info', function(){
         elLoginButton.click();
         loginUserNameInput.sendKeys('tcurd9');
         elSignInButton.click();
-        browser.sleep(27000);
+        browser.sleep(2000);
         expect(elUserBorder.getText()).toEqual('Tobe Curd');
     });
 

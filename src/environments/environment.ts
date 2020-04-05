@@ -14,7 +14,7 @@ const port = '8080';
 const url = `${baseUrl}:${port}`;
 
 /**
- * google map api key 
+ * google map api key
  */
 const googleKey = '';
  /**
@@ -22,7 +22,7 @@ const googleKey = '';
    */
 
 export const environment = {
- 
+
   production: false,
   environmentName: 'Default Environment',
   userUri: `${url}/users/`,

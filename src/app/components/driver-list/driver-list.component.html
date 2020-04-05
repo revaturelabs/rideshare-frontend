@@ -8,17 +8,17 @@
         <!-- <input type="text" [(ngModel)]="homeLocation" class="form-control" id=""> -->
         <input class="search_input " type="text" name="" [(ngModel)]="homeLocation">
         <!-- <a href="#" class="search_icon" (click)="searchDriver('none')"><i class="fas fa-search"></i></a> -->
-        <button  class="search_icon" (click)="searchDriver()"><i class="fa fa-search"></i></button>  
+        <button  class="search_icon" (click)="searchDriver()"><i class="fa fa-search"></i></button>
         <!-- <button  class="btn btn-primary register mt-2 mb-4" (click)="searchDriver('none')">Search</button>   -->
       </div>
-    
-  </div>  
+
+  </div>
   <div class="row d-flex justify-content-center mt-3">
     <div class = "content text-center col-md align-self-center col-lg-3">
       <h4 for="customRange3">Distance Range</h4>
       <!-- <label for="customRange3">{{this.range}}</label> -->
       <ng-template #popContent>{{this.range}}</ng-template>
-        <input type="range" class="custom-range" min="0" max="1300" step="1" id="customRange3" [(ngModel)]="range" (change)="searchDriver()" [ngbPopover]="popContent" triggers="mouseenter:mouseleave" placement="right">
+        <input type="range" class="custom-range" min="0" max="250" step="1" id="customRange3" [(ngModel)]="range" (change)="searchDriver()" [ngbPopover]="popContent" triggers="mouseenter:mouseleave" placement="right">
       <div class="custom-control custom-checkbox">
         <input type="checkbox" class="custom-control-input" id="defaultChecked2" [(ngModel)]="sameOffice" (change)="searchDriver()">
         <label class="custom-control-label" for="defaultChecked2">Same Office</label>
@@ -30,13 +30,14 @@
     <div class="row ">
     <div class="col-lg-6 filtered_list">
       <h4 class="text-center">Drivers</h4>
-      
+
      <table class="table table-striped ">
        <thead class="thead-dark borderYtoX">
          <tr >
            <th scope="col" id="nameColumn" (click)="sortByName()">  Name</th>
            <th scope="col" id="distanceColumn" (click)="sortByDistance()">Distance</th>
-           <th scope="col" id="timeColumn" (click)="sortByDistance()">Time</th>
+           <th scope="col" id="timeColumn" (click)="sortByTime()">Time</th>
+           <th scope="col" id="seatsColumn" (click)="sortBySeats()">Seats</th>
            <th scope="col">View Info</th>
          </tr>
        </thead>

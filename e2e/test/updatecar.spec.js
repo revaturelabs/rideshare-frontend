@@ -17,7 +17,7 @@ describe('Updating car information', function(){
         expect(elUserBorder.getText()).toEqual('Tobe Curd');
     });
 
-    it('User goes to profile then car information and updates car information', function(){
+    it('User goes to profile -> car information and updates car information', function(){
         elUserBorder.click();
         element(by.id('profile')).click();
         element(by.id('carInfo')).click();

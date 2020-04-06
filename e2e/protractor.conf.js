@@ -11,13 +11,14 @@ exports.config = {
   allScriptsTimeout: 11000,
   specs: [
 
-    //'./test/homepage.spec.js',
-    // './test/registerAndLoginAndCar.spec.js',
-    // './test/driverslist-nearby.spec.js',
-    //'./test/otherDriversAndrange.spec.js',
-    // './test/driverslist-sorting.spec.js',
-    //'./test/userStatus.spec.js',
-    './test/profile-location.spec.js'
+    './test/homepage.spec.js',
+     './test/registerAndLoginAndCar.spec.js',
+     './test/driverslist-nearby.spec.js',
+    './test/otherDriversAndrange.spec.js',
+     './test/driverslist-sorting.spec.js',
+    './test/userStatus.spec.js',
+    './test/profile-location.spec.js',
+    './test/update-address.spec.js'
 
 
 

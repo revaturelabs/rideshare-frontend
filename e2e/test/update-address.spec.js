@@ -18,7 +18,6 @@ describe('User can Update Address', function () {
     it('check update address', function () {
         // Start the test at the homepage
         browser.get('http://localhost:4200/');
-        browser.sleep(2000);
         //maximize window so I don't have to deal with bootstrap dropdown
         browser.manage().window().maximize();
         // Click the Login button

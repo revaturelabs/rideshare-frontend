@@ -32,6 +32,7 @@ describe('Sign Up tests', function(){
         browser.actions().sendKeys(protractor.Key.DOWN).perform();
         browser.actions().sendKeys(protractor.Key.ENTER).perform();
         saveStatus.click();
+        expect(riderOrDriver.getAttribute('value')).toEqual('false');
         userDropdown.click();
         elLogoutButton.click();
 
@@ -54,6 +55,7 @@ describe('Sign Up tests', function(){
         browser.actions().sendKeys(protractor.Key.UP).perform();
         browser.actions().sendKeys(protractor.Key.ENTER).perform();
         saveStatus.click();
+        expect(riderOrDriver.getAttribute('value')).toEqual('true');
         userDropdown.click();
         elLogoutButton.click();
 
@@ -76,6 +78,7 @@ describe('Sign Up tests', function(){
         browser.actions().sendKeys(protractor.Key.DOWN).perform();
         browser.actions().sendKeys(protractor.Key.ENTER).perform();
         saveStatus.click();
+        expect(riderOrDriver.getAttribute('value')).toEqual('true');
         userDropdown.click();
         elLogoutButton.click();
 
@@ -98,6 +101,7 @@ describe('Sign Up tests', function(){
         browser.actions().sendKeys(protractor.Key.UP).perform();
         browser.actions().sendKeys(protractor.Key.ENTER).perform();
         saveStatus.click();
+        expect(riderOrDriver.getAttribute('value')).toEqual('true');
         userDropdown.click();
         elLogoutButton.click();
 

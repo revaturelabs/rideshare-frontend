@@ -117,7 +117,11 @@ describe('Sign Up tests', function(){
         profileOption.click();
         browser.sleep(500);                                     //Nav
         carInfoButton.click();
-        browser.sleep(500);                                     
+        browser.sleep(500);   
+        expect(carYear.getAttribute('value')).toEqual('2020');
+        expect(carMake.getAttribute('value')).toEqual('Testla');
+
+                                  
  
     });
 });

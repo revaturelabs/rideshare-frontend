@@ -69,6 +69,10 @@ export class ProfileLocationComponent implements OnInit {
     this.currentUser.hAddress = this.address.address;
     this.currentUser.wAddress = this.address.address2;
     this.currentUser.hState = this.address.hState;
+    console.log('address ' + this.address.address);
+    console.log('city ' + this.address.city);
+    console.log('state ' + this.address.hState);
+    console.log('zip ' + this.address.zipcode);
     //call location service to update address fields
     this.currentUser = this.locationService.updatesContactInfo(this.currentUser);
 

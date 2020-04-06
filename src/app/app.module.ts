@@ -35,7 +35,6 @@ import { DriverListComponent } from './components/driver-list/driver-list.compon
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { UserRegisterComponent } from './components/user-register/user-register.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
-import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
 import { GoogleService } from './services/google-service/google.service';
 import { ValidationService } from './services/validation-service/validation.service';
 import { LocationService } from './services/location-service/location.service';
@@ -67,9 +66,7 @@ import { LocationService } from './services/location-service/location.service';
     DriverContactModalComponent,
     DriverListComponent,
     UserRegisterComponent,
-    HomePageComponent,
-    BsNavbarComponent
-    
+    HomePageComponent    
   ],
   imports: [
     BrowserModule,

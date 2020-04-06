@@ -246,6 +246,10 @@ export class DriverListComponent implements OnInit {
   }
 
   sortByName() {
+    document.getElementById('distanceColumn').style.cssText = 'background-color: #343a40';
+    document.getElementById('nameColumn').style.cssText = 'background-color: orange';
+    document.getElementById('timeColumn').style.cssText = 'background-color: #343a40';
+    document.getElementById('seatsColumn').style.cssText = 'background-color: #343a40';
     console.log("Sorting By Name");
     this.emptyDriversList();
 
@@ -321,6 +325,10 @@ export class DriverListComponent implements OnInit {
   }
 
   sortByDistance() {
+    document.getElementById('distanceColumn').style.cssText = 'background-color: orange';
+    document.getElementById('nameColumn').style.cssText = 'background-color: #343a40';
+    document.getElementById('timeColumn').style.cssText = 'background-color: #343a40';
+    document.getElementById('seatsColumn').style.cssText = 'background-color: #343a40';
     this.emptyDriversList();
 
     console.log(this.driversList);
@@ -328,7 +336,7 @@ export class DriverListComponent implements OnInit {
     console.log(this.distance);
 
     let ds = [];
-    //CREATE ARRAY OF Distances. 
+    //CREATE ARRAY OF Distances.
     this.distance.forEach(d => { ds.push(Number(d.value)); })
     console.log("Unsorted: " + ds);
 
@@ -403,6 +411,10 @@ export class DriverListComponent implements OnInit {
   }
 
   sortByTime() {
+    document.getElementById('distanceColumn').style.cssText = 'background-color: #343a40';
+    document.getElementById('nameColumn').style.cssText = 'background-color: #343a40';
+    document.getElementById('timeColumn').style.cssText = 'background-color: orange';
+    document.getElementById('seatsColumn').style.cssText = 'background-color: #343a40';
     this.emptyDriversList();
 
     console.log(this.driversList);
@@ -410,7 +422,7 @@ export class DriverListComponent implements OnInit {
     console.log(this.distance);
 
     let ds = [];
-    //CREATE ARRAY OF Distances. 
+    //CREATE ARRAY OF Distances.
     this.time.forEach(d => { ds.push(Number(d.value)); })
     console.log("Unsorted: " + ds);
 
@@ -453,7 +465,7 @@ export class DriverListComponent implements OnInit {
                     <div class="modal-body">
                     <h1 style="color: #f16a2c;">${this.driversList[index[mark]].name}</h1>
                     <span class="text-muted">Email: </span><h3>${this.driversList[index[mark]].email}</h3>
-                    <span class="text-muted">Phone: </span><h3>${this.driversList[index[mark]].phone}</h3>                
+                    <span class="text-muted">Phone: </span><h3>${this.driversList[index[mark]].phone}</h3>
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -485,6 +497,10 @@ export class DriverListComponent implements OnInit {
   }
 
   sortBySeats() {
+    document.getElementById('distanceColumn').style.cssText = 'background-color: #343a40';
+    document.getElementById('nameColumn').style.cssText = 'background-color: #343a40';
+    document.getElementById('timeColumn').style.cssText = 'background-color: #343a40';
+    document.getElementById('seatsColumn').style.cssText = 'background-color: orange';
     this.emptyDriversList();
 
     console.log(this.driversList);
@@ -536,7 +552,7 @@ export class DriverListComponent implements OnInit {
                     <div class="modal-body">
                     <h1 style="color: #f16a2c;">${this.driversList[index[mark]].name}</h1>
                     <span class="text-muted">Email: </span><h3>${this.driversList[index[mark]].email}</h3>
-                    <span class="text-muted">Phone: </span><h3>${this.driversList[index[mark]].phone}</h3>                
+                    <span class="text-muted">Phone: </span><h3>${this.driversList[index[mark]].phone}</h3>
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -561,7 +577,7 @@ export class DriverListComponent implements OnInit {
       mark++
 
     })
-    
+
     this.distance = tempDistance;
     this.time = tempTime;
     this.driversList = tempDriverList;

@@ -9,7 +9,7 @@
             <div class="col-sm-1"></div>
                 <label for="year" class="col-sm-4 col-form-label">Year:</label>
                 <div class="col-sm-4">
-                    <input type="text" class="form-control" id="year" [(ngModel)]=year>
+                    <input type="number" class="form-control" id="year" [(ngModel)]=year>
                     <p *ngIf="carYearError != ''" class="failed">{{carYearError}}</p>
                 </div>
         </div>

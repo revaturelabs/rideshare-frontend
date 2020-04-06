@@ -27,12 +27,12 @@ export class GoogleService {
           (response) => {
             this.log.info("Received Google Maps API key: "+
               JSON.stringify(response));
-            if(response["googleMapsApiKey"]){
+            if(response["GOOGLE_MAPS_API_KEY"]){
                 this.keyNotLoaded = false;
                 new Promise((resolve) => {
                   let script: HTMLScriptElement = document.createElement('script');
                   script.addEventListener('load', r => resolve());
-                  script.src = `http://maps.googleapis.com/maps/api/js?key=${response["googleMapsApiKey"]}&libraries=places`;
+                  script.src = `http://maps.googleapis.com/maps/api/js?key=${response["GOOGLE_MAPS_API_KEY"]}&libraries=places`;
                   document.head.appendChild(script);      
                   }).then(()=>{
                     if (callback) callback();

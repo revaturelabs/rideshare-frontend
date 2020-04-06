@@ -3,7 +3,7 @@ import { HttpClient, } from '@angular/common/http';
 //import { environment } from 'src/environments/environment';
 import { GoogleService } from "../google-service/google.service";
 import { LogService } from "../log.service";
-//import { Autocomplete } from 'googlemaps';
+import {} from 'googlemaps';
 import { Address } from 'src/app/models/address';
 import { User } from 'src/app/models/user';
 

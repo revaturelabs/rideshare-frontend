@@ -41,6 +41,5 @@
     </div>
 
     <button type="submit" class="btn btn-primary myBtn" (click)="updatesContactInfo()">Save</button>
-    <p *ngIf="success != ''" class="success">{{success}}</p>
-    <p *ngIf="failed != ''" class="failed">{{failed}}</p>
+    <p *ngIf="statusMessage != ''" [class]="success ? 'success' : 'failed'">{{statusMessage}}</p>
 </div>

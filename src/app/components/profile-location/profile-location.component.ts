@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user-service/user.service';
 import { LocationService } from 'src/app/services/location-service/location.service';
 import { User } from 'src/app/models/user';
-import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
 import { } from 'googlemaps';
 import { GoogleService } from 'src/app/services/google-service/google.service';
 import { Address } from 'src/app/models/address';
@@ -37,22 +35,30 @@ export class ProfileLocationComponent implements OnInit {
   };
 
   constructor(private userService: UserService,
-    private http: HttpClient,
-    private googleService: GoogleService,
-    private locationService: LocationService) { }
+    private locationService: LocationService,
+    private googleService: GoogleService) { }
 
   ngOnInit() {
-    //call location service to create autocomplete object
-    this.locationService.initAutocomplete(<HTMLInputElement>document.getElementById('autocomplete'));
+    // The API needs to be loaded into the page script, but it might not
+    // already exist if /profile is the first page the user lands on
+    // (due to refreshing the page, etc.)
+    // Passes a callback function to add autocomplete after the API
+    // has been confirmed to have been loaded on the page.
+    this.googleService.getGoogleApi( ()=>{
+      this.locationService.initAutocomplete(<HTMLInputElement>document.getElementById('autocomplete'));
+    });
+    
     //get the user by id
-    this.userService.getUserById2(sessionStorage.getItem("userid")).subscribe((response) => {
+    this.userService.getLoggedInUser().subscribe((response) => {
       //set the address fields with updated info
-      this.currentUser = response;
-      this.address.zipcode = response.hZip;
-      this.address.city = response.hCity;
-      this.address.address = response.hAddress;
-      this.address.address2 = response.wAddress;
-      this.address.hState = response.hState;
+      if (response) {
+        this.currentUser = response;
+        this.address.zipcode = response.hZip;
+        this.address.city = response.hCity;
+        this.address.address = response.hAddress;
+        this.address.address2 = response.wAddress;
+        this.address.hState = response.hState;
+      }
     });
   }
 

@@ -10,6 +10,7 @@ import { } from 'googlemaps';
 import { GoogleService } from 'src/app/services/google-service/google.service';
 import { Promise } from 'q';
 import { LocationService } from 'src/app/services/location-service/location.service';
+import { HttpErrorResponse } from '@angular/common/http';
 declare var google: any;
 
 @Component({
@@ -166,6 +167,7 @@ export class SignupModalComponent implements OnInit {
       this.userNameError = "Username already in use";
     }
     this.userService.addUser(this.user).subscribe(
+<<<<<<< HEAD
       res => {
         console.log(res);
         let i = 0;
@@ -209,6 +211,28 @@ export class SignupModalComponent implements OnInit {
           i = 0;
           this.success = "Registered successfully!";
           this.sleep(5000).then(res => { this.modalRef.hide() });
+=======
+      resp => {
+        console.log("Registered user: ");
+        console.log(resp);
+        this.success = "Registered successfully!";
+        this.sleep(5000).then(() => { this.modalRef.hide() });
+      },
+      (err: HttpErrorResponse) => {
+        if (err.status === 400){
+          let errors = err.error;
+          if (errors.firstName) this.firstNameError = errors.firstName[0];
+          if (errors.lastName) this.lastNameError = errors.lastName[0];
+          if (errors.phoneNumber) this.phoneNumberError = errors.phoneNumber[0];
+          if (errors.email) this.emailError = errors.email[0];
+          if (errors.userName) this.userNameError = errors.userName[0];
+          if (errors.hAddress) this.hAddressError = errors.hAddress[0];
+          if (errors.hCity) this.hCityError = errors.hCity[0];
+          if (errors.hState) this.hStateError = errors.hState[0];
+          if (errors.hZip) this.hZipError = errors.hZip[0];
+        } else {
+          console.error(err);
+>>>>>>> 0d23732424df8131b044cc4376071343bf3297bf
         }
       }
     );

@@ -49,7 +49,7 @@ describe('User can update their contact information', function () {
         saveBtn.click();
         // Check that the message is 'Updated Successfully!'
         browser.sleep(500);
-        expect(element(by.id('successText')).getText()).toEqual('Updated Successfully!');
+        expect(element(by.id('successStatus')).getText()).toEqual('Updated Successfully!');
     });
 
 });

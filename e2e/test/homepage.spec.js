@@ -14,6 +14,8 @@ describe('landing page tests', function(){
     //checks to make sure that the user reaches the landing page correctly
     //change when the front end is being hosted
     it('Make sure user is on the landing page', function(){
+        //maximize window so I don't have to deal with bootstrap dropdown
+        browser.manage().window().maximize();
         expect(elPageHead.getText()).toBe('RideForce');
     });
 

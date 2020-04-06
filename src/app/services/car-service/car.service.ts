@@ -8,7 +8,7 @@ import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 /**
  * This is a car service
@@ -49,6 +49,10 @@ export class CarService {
 	}
 
 	getCarByUserId2(userId: string): Observable<Car> {
+		return this.http.get<Car>(`${this.url}users/${userId}`);
+	}
+
+	getCarByUserId3(userId: number) {
 		return this.http.get<Car>(`${this.url}users/${userId}`);
 	}
 

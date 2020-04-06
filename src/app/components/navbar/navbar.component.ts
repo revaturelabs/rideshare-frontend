@@ -21,11 +21,12 @@ export class NavbarComponent implements OnInit {
   /**
    * This is a name string.
    */
-
+  profileObject : User;
   name: string = '';
   admin: string = '';
-
-  currentUser: string = '';
+  firstName: string;
+  lastName: string;
+  currentUser: boolean;
 
   /**
    * This is a constructor
@@ -44,12 +45,17 @@ export class NavbarComponent implements OnInit {
    */
 
   ngOnInit() {
+    this.userService.getLoggedInUser().subscribe(
+      (resp: User) => {
+        if (resp) {
+          this.profileObject = resp;
+          this.firstName = resp.firstName;
+          this.lastName = resp.lastName;
+          this.currentUser = true;
+        }
+      }
+    );
 
-    if(sessionStorage.getItem("userid") != null){
-      this.currentUser =sessionStorage.getItem("name");
-    }else{
-      this.currentUser ='';
-    }
     if (this.authService.user.userId) {
       this.userService.getUserById(this.authService.user.userId).then((response)=>{
         this.name = response.firstName;
@@ -64,14 +70,11 @@ export class NavbarComponent implements OnInit {
       }
     });
 
-    this.userService.getEmitter().subscribe((user: User) => {
-      this.name = user.firstName;
-    });
   }
 
    /**
    * Function that takes no parameters. 
-   * It will clear the sesssion storage.
+   * It will clear the session storage.
    * @return {void} 
    * 
    */
@@ -83,7 +86,7 @@ export class NavbarComponent implements OnInit {
     //clear all session
     this.name = '';
     this.admin = '';
-    this.currentUser = '';
+    this.currentUser = false;
     sessionStorage.removeItem("name");
     sessionStorage.removeItem("userid");
     //sessionStorage.clear(); 

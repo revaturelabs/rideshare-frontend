@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user-service/user.service';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user';
+import { catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-profile-contact',
@@ -16,8 +19,8 @@ export class ProfileContactComponent implements OnInit {
   lastName: string;
   email: string;
   phone: string;
-  success :string;
-  failed : string;
+  success: boolean;
+  statusMessage: string;
 
   // validation
   firstNameError :string;
@@ -28,23 +31,34 @@ export class ProfileContactComponent implements OnInit {
   constructor(private router: Router, private userService: UserService) { }
 
   ngOnInit() {
-    this.currentUser = this.userService.getUserById2(sessionStorage.getItem("userid")).subscribe((response)=>{
-      this.profileObject = response;
-
-      this.firstName = this.profileObject.firstName;
-      this.lastName = this.profileObject.lastName;
-      this.email = this.profileObject.email;
-      this.phone = this.profileObject.phoneNumber;
+    this.currentUser = this.userService.getLoggedInUser().subscribe((response)=>{
+      if (response){
+        this.profileObject = response;
+        this.firstName = this.profileObject.firstName;
+        this.lastName = this.profileObject.lastName;
+        this.email = this.profileObject.email;
+        this.phone = this.profileObject.phoneNumber;
+      }
 
     });
     
   }
+
+ resetStatusFields(){
+  this.firstNameError = '';
+  this.lastNameError = '';
+  this.phoneNumberError ='';
+  this.emailError ='';
+  this.statusMessage = '';
+ }
 
   updatesContactInfo(){
     this.profileObject.firstName = this.firstName;
     this.profileObject.lastName = this.lastName;
     this.profileObject.email = this.email;
     
+    this.resetStatusFields();
+
     //Format phone
     let phone = this.phone.replace(/[^\w\s]/gi, '');
     if(phone.length == 10){
@@ -56,47 +70,35 @@ export class ProfileContactComponent implements OnInit {
     }
 
 
-    this.firstNameError = '';
-    this.lastNameError = '';
-    this.phoneNumberError ='';
-    this.emailError ='';
-    this.failed='Update failed. Please resolve above error(s).';
-    this.success='';
-
     this.userService.updateUserInfo(this.profileObject).subscribe(
-      res => {
-        console.log(res);
-        let i = 0;
-        if(res.firstName != undefined){
-          this.firstNameError = res.firstName[0];
-          i = 1;
+      resp => {     
+        if (resp) {
+          this.statusMessage = "Updated Successfully!";
+          this.success = true;
+          setTimeout(() => { this.resetStatusFields(); }, 2500);
         }
-        if(res.lastName != undefined){
-          this.lastNameError = res.lastName[0];
-          i = 1;
-          
+      },
+      (err: HttpErrorResponse) => {
+        if (err.status === 400 && err.error){
+          this.statusMessage = 'Update failed. Please resolve above error(s).';
+          this.success = false;
+          let errors = err.error;
+          console.log(errors);
+          if(errors.firstName){
+            this.firstNameError = errors.firstName[0];
+          }
+          if(errors.lastName){
+            this.lastNameError = errors.lastName[0];           
+          }
+          if(errors.phoneNumber){
+            this.phoneNumberError = errors.phoneNumber[0];
+          }
+          if(errors.email){
+            this.emailError = errors.email[0];
+          }
         }
-        if(res.phoneNumber != undefined){
-          this.phoneNumberError = res.phoneNumber[0];
-          i = 1;
-
-        }
-        if(res.email != undefined){
-          this.emailError = res.email[0];
-          i = 1;
-
-        }
-        if(i === 0) {
-          i = 0;
-          this.success = "Updated Successfully!";
-          this.failed = '';
-        }
-      } 
-      /*res => {
-        console.log("failed to add user");
-        console.log(res);
-      }*/
-    );
+      }
+    ); // end of subscribe
   }
 
 

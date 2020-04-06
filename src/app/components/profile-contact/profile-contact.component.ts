@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { UserService } from 'src/app/services/user-service/user.service';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user';
@@ -28,7 +28,7 @@ export class ProfileContactComponent implements OnInit {
   emailError :string;
   phoneNumberError :string;
 
-  constructor(private router: Router, private userService: UserService) { }
+  constructor(private _ngZone: NgZone, private userService: UserService) { }
 
   ngOnInit() {
     this.currentUser = this.userService.getLoggedInUser().subscribe((response)=>{
@@ -75,7 +75,9 @@ export class ProfileContactComponent implements OnInit {
         if (resp) {
           this.statusMessage = "Updated Successfully!";
           this.success = true;
-          setTimeout(() => { this.resetStatusFields(); }, 2500);
+          this._ngZone.runOutsideAngular(() => {
+            setTimeout(() => { this.resetStatusFields(); }, 2500);
+          });
         }
       },
       (err: HttpErrorResponse) => {

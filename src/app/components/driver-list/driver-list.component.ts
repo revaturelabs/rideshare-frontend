@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, NgZone } from '@angular/core';
 import { UserService } from 'src/app/services/user-service/user.service';
 import { CarService } from 'src/app/services/car-service/car.service';
 import { HttpClient } from '@angular/common/http';
@@ -33,7 +33,8 @@ export class DriverListComponent implements OnInit {
     private http: HttpClient,
     private userService: UserService,
     private googleService: GoogleService,
-    private carService: CarService
+    private carService: CarService,
+    private _ngZone: NgZone
   ) { }
 
   ngOnInit() {
@@ -92,12 +93,15 @@ export class DriverListComponent implements OnInit {
 
     //get all routes
     this.sleep(2000).then(() => {
-      this.mapProperties = {
-        center: new google.maps.LatLng(Number(sessionStorage.getItem("lat")), Number(sessionStorage.getItem("lng"))),
-        zoom: 15,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-      };
-      this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapProperties);
+      let self = this;
+      this._ngZone.runOutsideAngular(() => {
+        self.mapProperties = {
+          center: new google.maps.LatLng(Number(sessionStorage.getItem("lat")), Number(sessionStorage.getItem("lng"))),
+          zoom: 15,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        self.map = new google.maps.Map(self.mapElement.nativeElement, self.mapProperties);
+      });
       //empty drivers list
       //show drivers on map
       this.showDriversOnMap(this.homeLocation, this.drivers);
@@ -118,17 +122,19 @@ export class DriverListComponent implements OnInit {
 
 
   displayRoute(origin, destination, service, display) {
-    service.route({
-      origin: origin,
-      destination: destination,
-      travelMode: 'DRIVING',
-      //avoidTolls: true
-    }, function (response, status) {
-      if (status === 'OK') {
-        display.setDirections(response);
-      } else {
-        alert('Could not display directions due to: ' + status);
-      }
+    this._ngZone.runOutsideAngular(() => {
+      service.route({
+        origin: origin,
+        destination: destination,
+        travelMode: 'DRIVING',
+        //avoidTolls: true
+      }, function (response, status) {
+        if (status === 'OK') {
+          display.setDirections(response);
+        } else {
+          alert('Could not display directions due to: ' + status);
+        }
+      });
     });
   }
 
@@ -146,15 +152,17 @@ export class DriverListComponent implements OnInit {
 
       // this.sleep(2000).then(() => {
       var service = new google.maps.DistanceMatrixService;
-      service.getDistanceMatrix(
-        {
-          origins: origins,
-          destinations: [element.origin],
-          travelMode: google.maps.TravelMode.DRIVING,
-          unitSystem: google.maps.UnitSystem.IMPERIAL,
-          avoidHighways: false,
-          avoidTolls: false
-        }, callback);
+      this._ngZone.runOutsideAngular(() => {
+        service.getDistanceMatrix(
+          {
+            origins: origins,
+            destinations: [element.origin],
+            travelMode: google.maps.TravelMode.DRIVING,
+            unitSystem: google.maps.UnitSystem.IMPERIAL,
+            avoidHighways: false,
+            avoidTolls: false
+          }, callback);
+      });
 
       function callback(response, status) {
         if (status !== 'OK') {

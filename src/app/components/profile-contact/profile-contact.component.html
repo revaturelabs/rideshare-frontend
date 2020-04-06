@@ -40,6 +40,6 @@
         </div>
     </div>
 
-    <button type="submit" class="btn btn-primary myBtn" (click)="updatesContactInfo()">Save</button>
-    <p *ngIf="statusMessage != ''" [class]="success ? 'success' : 'failed'">{{statusMessage}}</p>
+    <button id="save" type="submit" class="btn btn-primary myBtn" (click)="updatesContactInfo()">Save</button>
+    <p *ngIf="statusMessage != ''" id="successStatus" [class]="success ? 'success' : 'failed'">{{statusMessage}}</p>
 </div>

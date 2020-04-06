@@ -1,4 +1,4 @@
-<div class="container mainContainer">
+<div class="container mainContainer" (keydown.enter)="updatesContactInfo()">
     <i class="fa fa-home" style="font-family:'FontAwesome';"></i>
 
     <h4>Location:</h4>
@@ -102,9 +102,7 @@
         </div>
     </div>
 
-    <button type="submit" class="btn btn-primary myBtn" (click)="updatesContactInfo()">Save</button>
+    <button type="submit" class="btn btn-primary myBtn" id="save" (click)="updatesContactInfo()">Save</button>
     <p *ngIf="success != ''" class="success">{{success}}</p>
     <p *ngIf="failed != ''" class="failed">{{failed}}</p>
 </div>
-
-

@@ -74,22 +74,12 @@ export class CarService {
 	 * @param userId 
 	 */
 	
-	createCar(car, userId) {
+	createCar(car, userId): Observable<Car> {
 
 		this.user.userId = userId;
 		car.user = this.user;
 
-		this.http.post(this.url, car, {observe: 'response'}).subscribe(
-			(response) => {
-				if (response) {
-					this.userService.updateIsDriver(true, userId);
-					this.router.navigate(['car']);
-				}
-			},
-			(error) => {
-				console.warn(error);
-			}
-		);
+		return this.http.post<Car>(this.url, car);
 	}
 
 	/**

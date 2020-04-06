@@ -1,9 +1,4 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, } from '@angular/common/http';
-//import { environment } from 'src/environments/environment';
-import { GoogleService } from "../google-service/google.service";
-import { LogService } from "../log.service";
-import {} from 'googlemaps';
+import { Injectable, NgZone } from '@angular/core';
 import { Address } from 'src/app/models/address';
 import { User } from 'src/app/models/user';
 
@@ -11,7 +6,7 @@ import { User } from 'src/app/models/user';
   providedIn: 'root'
 })
 export class LocationService {
-  constructor(private http: HttpClient, private log: LogService, private googleService: GoogleService) { }
+  constructor(private _ngZone: NgZone) { }
 
   placeSearch: any;
   autocomplete: google.maps.places.Autocomplete;
@@ -34,16 +29,18 @@ export class LocationService {
 
     // Create the autocomplete object, restricting the search predictions to
     // geographical location types.
-    this.autocomplete = new google.maps.places.Autocomplete(
-      autocompleteElement, { types: ['geocode'] });
+    this._ngZone.runOutsideAngular(() => {
+      self.autocomplete = new google.maps.places.Autocomplete(
+        autocompleteElement, { types: ['geocode'] });
 
-    // Avoid paying for data that you don't need by restricting the set of
-    // place fields that are returned to just the address components.
-    this.autocomplete.setFields(['address_component']);
+      // Avoid paying for data that you don't need by restricting the set of
+      // place fields that are returned to just the address components.
+      self.autocomplete.setFields(['address_component']);
 
-    // When the user selects an address from the drop-down, populate the
-    // address fields in the form.
-    this.autocomplete.addListener('place_changed', fillInAddress);
+      // When the user selects an address from the drop-down, populate the
+      // address fields in the form.
+      self.autocomplete.addListener('place_changed', fillInAddress);
+    });
 
     function fillInAddress() {
       // Get the place details from the autocomplete object.
@@ -78,21 +75,22 @@ export class LocationService {
       (<HTMLInputElement>document.getElementById('address')).value = place.address_components[0]['long_name'] + ' ' +
         place.address_components[1]['long_name'];
     }
-
   }
 
   // Bias the autocomplete object to the user's geographical location,
   // as supplied by the browser's 'navigator.geolocation' object.
   geolocate() {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function (position) {
-        var geolocation = {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude
-        };
-        var circle = new google.maps.Circle(
-          { center: geolocation, radius: position.coords.accuracy });
-        this.autocomplete.setBounds(circle.getBounds());
+      this._ngZone.runOutsideAngular(() => {
+        navigator.geolocation.getCurrentPosition(function (position) {
+          var geolocation = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          };
+          var circle = new google.maps.Circle(
+            { center: geolocation, radius: position.coords.accuracy });
+          this.autocomplete.setBounds(circle.getBounds());
+        });
       });
     }
   }

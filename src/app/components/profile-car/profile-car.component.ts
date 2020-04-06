@@ -58,80 +58,34 @@ export class ProfileCarComponent implements OnInit {
     this.failed='Update failed. Please resolve above error(s).';
     this.success='';
 
-    // checking if year entered is a 4 digit number. If it is, send car info to the back end. 
-    var fourdigits = new RegExp(/\d{4}$/);
-    if(!fourdigits.test(String(this.year))) {
-      this.carYearError = "Year field must be a 4 digit number."
+    if (this.currentCar.carId) {
+      // If errors are sent back, they get displayed. If no errors
+      this.carService.updateCarInfo(this.currentCar).subscribe(
+        resp => {
+          this.success = "Updated Successfully!";
+          this.failed = '';
+        },
+        (err: HttpErrorResponse) => {
+          if (err.status == 400){
+            let errors = err.error;
+            if (errors.make) this.carMakeError = errors.make[0];
+            if (errors.model) this.carModelError = errors.model[0];
+          } else {
+            console.error(err);
+          }
+        }
+      );
+    } else {
+      // CurrentCar is not in the database so create a new one
+      this.carService.createCar(this.currentCar, sessionStorage.getItem('userid')).subscribe(
+        res => {
+          this.success = "Added Successfully!";
+          this.failed = '';
+          this.currentCar = res;
+        }
+      )
     }
-    else{
-      if (this.currentCar.carId) {
-        // If errors are sent back, they get displayed. If no errors, show a success message.
-        this.carService.updateCarInfo(this.currentCar).subscribe(
-          res => {
-            console.log(res);
-            let i = 0;
-            if(res.make != undefined){
-              this.carMakeError = res.make[0];
-              i = 1;
-            }
-            if(res.model != undefined){
-              this.carModelError = res.model[0];
-              i = 1;
-            }
-            if(res.year != undefined){
-              this.carYearError = res.year[0];
-              i = 1;
-            }
-            if(i === 0) {
-              i = 0;
-              this.success = "Updated Successfully!";
-              this.failed = '';
-            }
-          }
-        );
-      } else {
-        // CurrentCar is not in the database so create a new one
-        this.carService.createCar(this.currentCar, sessionStorage.getItem('userid')).subscribe(
-          res => {
-            console.log(res);
-            let i = 0;
-            if(res.make != undefined){
-              this.carMakeError = res.make[0];
-              i = 1;
-            }
-            if(res.model != undefined){
-              this.carModelError = res.model[0];
-              i = 1;
-            }
-            if(res.year != undefined){
-              this.carYearError = res.year[0];
-              i = 1;
-            }
-            if(i === 0) {
-              i = 0;
-              this.success = "Updated Successfully!";
-              this.failed = '';
-            }
-          }
-        )
-      }
-    // // If errors are sent back, they get displayed. If no errors
-    // this.carService.updateCarInfo(this.currentCar).subscribe(
-    //   resp => {
-    //     this.success = "Updated Successfully!";
-    //     this.failed = '';
-    //   },
-    //   (err: HttpErrorResponse) => {
-    //     if (err.status === 400){
-    //       let errors = err.error;
-    //       if (errors.make) this.carMakeError = errors.make[0];
-    //       if (errors.model) this.carModelError = errors.model[0];
-    //     } else {
-    //       console.error(err);
-    //     }
-    //   }
-
-    // );
+    
 
   }
-}}
+}

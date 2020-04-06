@@ -3,8 +3,8 @@ import { UserService } from 'src/app/services/user-service/user.service';
 import { LocationService } from 'src/app/services/location-service/location.service';
 import { User } from 'src/app/models/user';
 import { } from 'googlemaps';
-import { Address } from 'src/app/models/address';
 import { GoogleService } from 'src/app/services/google-service/google.service';
+import { Address } from 'src/app/models/address';
 declare var google: any;
 
 @Component({
@@ -75,6 +75,10 @@ export class ProfileLocationComponent implements OnInit {
     this.currentUser.hAddress = this.address.address;
     this.currentUser.wAddress = this.address.address2;
     this.currentUser.hState = this.address.hState;
+    console.log('address ' + this.address.address);
+    console.log('city ' + this.address.city);
+    console.log('state ' + this.address.hState);
+    console.log('zip ' + this.address.zipcode);
     //call location service to update address fields
     this.currentUser = this.locationService.updatesContactInfo(this.currentUser);
 
@@ -100,7 +104,7 @@ export class ProfileLocationComponent implements OnInit {
       default: this.emptyZip = "";
     }
     if ((this.currentUser.hAddress !== '') && (this.currentUser.hCity !== '') && (String(this.currentUser.hZip) !== '')) {
-      //update user
+      this.currentUser = this.locationService.updatesContactInfo(this.currentUser);
       this.userService.updateUserInfo(this.currentUser).subscribe();
       this.success = "Updated Successfully!";
       this.failed = "";

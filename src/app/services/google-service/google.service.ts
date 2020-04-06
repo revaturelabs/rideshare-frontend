@@ -7,6 +7,7 @@ import { LogService } from '../log.service';
   providedIn: 'root'
 })
 export class GoogleService {
+  apiLoaded: boolean = false;
 
   constructor(private http: HttpClient, private log: LogService) { }
 

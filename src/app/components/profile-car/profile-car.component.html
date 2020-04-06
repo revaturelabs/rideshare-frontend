@@ -4,6 +4,15 @@
         
     
         <h4>Car Information:</h4>
+
+        <div class="form-group row">
+            <div class="col-sm-1"></div>
+                <label for="year" class="col-sm-4 col-form-label">Year:</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" id="year" [(ngModel)]=year>
+                    <p *ngIf="carYearError != ''" class="failed">{{carYearError}}</p>
+                </div>
+        </div>
         
         <div class="form-group row">
             <div class="col-sm-1"></div>
@@ -39,9 +48,9 @@
                 </select>
             </div>
         </div>
-        <button type="submit" class="btn btn-primary myBtn" (click)="updatesCarInfo()">Save</button>
-        <p *ngIf="success != ''" class="success">{{success}}</p>
-        <p *ngIf="failed != ''" class="failed">{{failed}}</p>
+        <button type="submit" class="btn btn-primary myBtn" id="save" (click)="updatesCarInfo()">Save</button>
+        <p *ngIf="success != ''" class="success" id='success'>{{success}}</p>
+        <p *ngIf="failed != ''" class="failed" id='failed'>{{failed}}</p>
     </div>
     
         

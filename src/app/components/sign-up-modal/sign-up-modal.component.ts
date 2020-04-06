@@ -167,51 +167,6 @@ export class SignupModalComponent implements OnInit {
       this.userNameError = "Username already in use";
     }
     this.userService.addUser(this.user).subscribe(
-<<<<<<< HEAD
-      res => {
-        console.log(res);
-        let i = 0;
-        if (res.firstName != undefined) {
-          this.firstNameError = res.firstName[0];
-          i = 1;
-        }
-        if (res.lastName != undefined) {
-          this.lastNameError = res.lastName[0];
-          i = 1;
-        }
-        if (res.phoneNumber != undefined) {
-          this.phoneNumberError = res.phoneNumber[0];
-          i = 1;
-        }
-        if (res.email != undefined) {
-          this.emailError = res.email[0];
-          i = 1;
-        }
-        if (res.userName != undefined) {
-          this.userNameError = res.userName[0];
-          i = 1;
-        }
-        if (res.hState != undefined) {
-          this.hStateError = res.hState[0];
-          i = 1;
-        }
-        if (res.hAddress != undefined) {
-          this.hAddressError = res.hAddress[0];
-          i = 1;
-        }
-        if (res.hCity != undefined) {
-          this.hCityError = res.hCity[0];
-          i = 1;
-        }
-        if (res.hZip != undefined) {
-          this.hZipError = res.hZip[0];
-          i = 1;
-        }
-        if (i === 0) {
-          i = 0;
-          this.success = "Registered successfully!";
-          this.sleep(5000).then(res => { this.modalRef.hide() });
-=======
       resp => {
         console.log("Registered user: ");
         console.log(resp);
@@ -232,7 +187,6 @@ export class SignupModalComponent implements OnInit {
           if (errors.hZip) this.hZipError = errors.hZip[0];
         } else {
           console.error(err);
->>>>>>> 0d23732424df8131b044cc4376071343bf3297bf
         }
       }
     );

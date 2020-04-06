@@ -26,7 +26,6 @@ describe('User can Update Address', function () {
         loginUserNameInput.sendKeys('gpichmann0');
         // Click the button to Login with the info
         elSignInButton.click();
-        browser.sleep(1000);
         //dropdown
         userDropdown.click();
         //profile
@@ -43,7 +42,6 @@ describe('User can Update Address', function () {
         browser.sleep(500);
         //save
         saveBtn.click();
-        browser.sleep(2000);
         contactInfo.click();
         browser.sleep(500);
         profileLocation.click();

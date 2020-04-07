@@ -13,13 +13,15 @@
   
   <div class="modal-body">
 
-
   <!--
-    *** Cleaned up the code by adding more intuitive indentation, wrapping inputs in form groups, and
-    encapsulating the form groups within one form element.
-    *** This is all in preparation to utilize the FormGroup class of the ReactiveForms module.
+    In the html, you can see that I simply replaced all the remaining garbage in the 
+    input fields with more useful information (namely, the formControlName attribute).
+
+    I also synchronized the form here to the FormGroup by adding the formGroup binding
+    to the form tag.
   -->
-  <form>
+  
+  <form [formGroup]="signUpForm">
 
       <!-- This form group contains the DRIVER / RIDER radio button input. -->
       <div class="form-group">
@@ -27,14 +29,11 @@
           <div class="btn-group" data-toggle="buttons">
               <!--DRIVER button-->
               <label class="btn btn-primary">
-                <input type="checkbox"  id="driver" [(ngModel)]="isDriver" /> Driver
+                <input type="checkbox"  id="driver"/> Driver
               </label>
-              
-              <br>
-              
               <!--RIDER button-->
               <label class="btn btn-primary">
-                <input type="checkbox"  id="rider" [(ngModel)]="isRider"/> Rider
+                <input type="checkbox"  id="rider"/> Rider
               </label>
           </div>
         </div>
@@ -43,39 +42,51 @@
       <!-- This form group contains the FIRST NAME field input. -->
       <div class="form-group">
         <label for="firstname">First Name</label>
-        <input (keydown)="firstNameError = ''" id="firstname" type="text" [(ngModel)]="user.firstName" class="form-control" />
-        <p *ngIf="firstNameError != ''" class="error">{{firstNameError}}</p>
+        <input
+          type="text"
+          id="firstname"
+          formControlName="firstname"
+          class="form-control">
       </div>
 
       <!-- This form group contains the LAST NAME field input. -->
       <div class="form-group">
         <label for="lastname">Last Name</label>
-        <input (keydown)="lastNameError = ''" id="lastname" type="text" [(ngModel)]="user.lastName" class="form-control" />
-        <p *ngIf="lastNameError != ''" class="error">{{lastNameError}}</p>
+        <input
+          type="text"
+          id="lastname"
+          formControlName="lastname"
+          class="form-control">
       </div>
 
       <!-- This form group contains the EMAIL field input. -->
       <div class="form-group">
         <label for="email">Email</label>
-        <input (keydown)="emailError = ''" id="email" type="email" [(ngModel)]="user.email" class="form-control"/>
-        <p *ngIf="emailError != ''" class="error">{{emailError}}</p>
+        <input
+          type="text"
+          id="email"
+          formControlName="email"
+          class="form-control">
       </div>
 
       <!-- This form group contains the PHONE NUMBER field input. -->
       <div class="form-group">
         <label for="phoneNumber">Phone Number</label>
-        <input (keydown)="phoneNumberError = ''" id="phoneNumber" type="text" [(ngModel)]="user.phoneNumber" class="form-control" />
-        <p *ngIf="phoneNumberError != ''" class="error">{{phoneNumberError}}</p>
+        <input
+          type="text"
+          id="phonenumber"
+          formControlName="phonenumber"
+          class="form-control">
       </div>
 
       <!-- This form group contains the BATCH select input. -->
       <div class="form-group">
-        <label id="state">Batch</label>
-        <select class="form-control" [(ngModel)]="user.batch">
-              <option value="none" >  
-              </option>
-              <option *ngFor="let batch of batches" [ngValue]="batch">{{batch.batchNumber}} {{batch.batchLocation}}</option>
-        </select>
+        <label for="batch">Batch</label>
+        <input
+          type="text"
+          id="batch"
+          formControlName="batch"
+          class="form-control">
       </div>
 
 
@@ -90,33 +101,41 @@
       <!-- This form group contains the ADDRESS field input. -->
       <div class="form-group">
         <label for="hAddress">Address</label>
-        <input (keydown)="hAddressError = ''" id="hAddress" type="text" [(ngModel)]="user.hAddress" class="form-control" />
-        <p *ngIf="hAddressError != ''" class="error">{{hAddressError}}</p>
+        <input
+          type="text"
+          id="address"
+          formControlName="address"
+          class="form-control">
       </div>
 
       <!-- This form group contains the CITY field input. -->
       <div class="form-group">
         <label id="hCity">City</label>
-        <input (keydown)="hCityError = ''" type="text" [(ngModel)]="user.hCity" class="form-control" />
-        <p *ngIf="hCityError != ''" class="error">{{hCityError}}</p>
+        <input
+          type="text"
+          id="city"
+          formControlName="city"
+          class="form-control">
       </div>
 
       <!-- This form group contains the STATE field input. -->
       <div class="form-group">
         <label id="hState">State</label>
-        <select (keydown)="hStateError = ''" class="form-control" [(ngModel)]="user.hState" id="hState" >
-                <option value="none" selected disabled hidden>  
-                </option>
-                <option *ngFor="let state of states" value="{{state}}">{{state}}</option>
-        </select>
-        <p *ngIf="hStateError != ''" class="error">{{hStateError}}</p>
+        <input
+          type="text"
+          id="state"
+          formControlName="state"
+          class="form-control">
       </div>
 
       <!-- This form group contains the ZIP CODE field input. -->
       <div class="form-group">
         <label id="hZip">Zip Code</label>
-        <input (keydown)="hZipError = ''" type="number" [(ngModel)]="user.hZip" class="form-control" />
-        <p *ngIf="hZipError != ''" class="error">{{hZipError}}</p>
+        <input
+          type="text"
+          id="zipcode"
+          formControlName="zipcode"
+          class="form-control">
       </div>
 
 
@@ -131,18 +150,25 @@
       <!-- This form group contains the USERNAME field input. -->
       <div class="form-group">
         <label for="userName">User Name</label>
-        <input (keydown)="userNameError = ''" id="userName" type="text" [(ngModel)]="user.userName" class="form-control" />
-        <p *ngIf="userNameError != ''" class="error">{{userNameError}}</p>
+        <input
+          type="text"
+          id="username"
+          formControlName="username"
+          class="form-control">
       </div>
 
       <!-- This form group contains the PASSWORD field input. -->
       <div class="form-group">
         <label for="password">Password</label>
-        <input id="password" type="password" [(ngModel)]="password" class="form-control" />
+        <input
+          type="password"
+          id="password"
+          formControlName="password"
+          class="form-control">
       </div>
 
       <div class="btn-container">
-        <button type="submit" class="btn btn-primary register" (click)="submitUser()">Submit</button>
+        <button class="btn btn-primary register" type="submit">Submit</button>
       </div>
     
     </form>

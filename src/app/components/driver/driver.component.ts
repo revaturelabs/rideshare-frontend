@@ -22,6 +22,8 @@ export class DriverComponent implements OnInit {
 
   riders: User[];
   location = '';   
+
+  currentUser: any;
    
   /**
    * Constructor 
@@ -34,6 +36,9 @@ export class DriverComponent implements OnInit {
   constructor(private userService: UserService, private router: Router, private authService: AuthService) { }
 
   ngOnInit() {
+    
+    this.currentUser = sessionStorage.getItem("userId");
+
     let userId = this.authService.user.userId;
     if (userId) {
       this.userService.getDriverById(userId).
@@ -61,12 +66,12 @@ export class DriverComponent implements OnInit {
     changeAcceptingRides(userdriver){
        if(userdriver.acceptingRides == true){
         userdriver.acceptingRides = false;
-      this.userService.updateUserInfo(this.userDriver);
+      this.userService.updateUserInfo(this.currentUser, this.userDriver);
       
     }
     else {
       userdriver.acceptingRides = true;
-      this.userService.updateUserInfo(this.userDriver);
+      this.userService.updateUserInfo(this.currentUser, this.userDriver);
             
     }
   }

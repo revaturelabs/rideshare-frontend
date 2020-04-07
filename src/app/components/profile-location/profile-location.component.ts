@@ -17,9 +17,13 @@ export class ProfileLocationComponent implements OnInit {
   currentUser: User;
   success :string;
 
+  currentUserId: any;
+
   constructor(private userService: UserService) { }
 
   ngOnInit() {
+
+    this.currentUserId = sessionStorage.getItem("userId");
    this.userService.getUserById2(sessionStorage.getItem("userid")).subscribe((response)=>{
       this.currentUser = response;
       this.zipcode = response.hZip;
@@ -38,7 +42,7 @@ export class ProfileLocationComponent implements OnInit {
     this.currentUser.wAddress = this.address2;
     this.currentUser.hState = this.hState;
     //console.log(this.currentUser);
-    this.userService.updateUserInfo(this.currentUser);
+    this.userService.updateUserInfo(this.currentUserId, this.currentUser);
     this.success = "Updated Successfully!";
   }
 }

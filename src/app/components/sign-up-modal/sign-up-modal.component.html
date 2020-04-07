@@ -13,15 +13,13 @@
   
   <div class="modal-body">
 
-  <!--
-    In the html, you can see that I simply replaced all the remaining garbage in the 
-    input fields with more useful information (namely, the formControlName attribute).
 
-    I also synchronized the form here to the FormGroup by adding the formGroup binding
-    to the form tag.
-  -->
-  
-  <form [formGroup]="signUpForm">
+  <!-- Added the ngSubmit directive here, which calls the onSubmit() function
+  whenever the form is submitted. Because we are using the reactive form, onSubmit 
+  does not require any sort of reference to this form. The synchronized implementation 
+  means that we can access the form from anywhere in the component. Remember that it is 
+  accessed via the 'signUpForm' variable of type FormGroup.-->
+  <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
 
       <!-- This form group contains the DRIVER / RIDER radio button input. -->
       <div class="form-group">

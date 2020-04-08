@@ -1,7 +1,9 @@
+
 <a (click)="openModal(template)">Sign up</a >
   
 <!-- Maintain this template so that we may reference it without having to refactor the way the page works -->
 <ng-template #template >
+
   <p *ngIf="success != ''" class="success">{{success}}</p>
   
   <div class="modal-header">

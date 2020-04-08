@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { BatchService } from 'src/app/services/batch-service/batch.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
+import { GoogleApiService } from 'src/app/services/google-api.service';
 
 @Component({
   selector: 'app-driver-list',
@@ -27,7 +28,7 @@ export class DriverListComponent implements OnInit {
   @ViewChild('map',null) mapElement: any;
   map: google.maps.Map;
 
-  constructor(private http: HttpClient,private userService: UserService) { }
+  constructor(private http: HttpClient,private userService: UserService, private googleApi:GoogleApiService) { }
 
   ngOnInit() {
     this.drivers = [];
@@ -72,20 +73,22 @@ export class DriverListComponent implements OnInit {
   }
   
 getGoogleApi()  {
-    this.http.get(`${environment.loginUri}getGoogleApi`)
-       .subscribe(
-                 (response) => {
-                     //console.log(response);
-                     if(response["googleMapAPIKey"] != undefined){
-                         new Promise((resolve) => {
-                           let script: HTMLScriptElement = document.createElement('script');
-                           script.addEventListener('load', r => resolve());
-                           script.src = `http://maps.googleapis.com/maps/api/js?key=${response["googleMapAPIKey"][0]}`;
-                           document.head.appendChild(script);      
-                     }); 
-               }    
-           }
-       );
+
+  this.googleApi.getGoogleApi();
+    // this.http.get(`${environment.loginUri}getGoogleApi`)
+    //    .subscribe(
+    //              (response) => {
+    //                  //console.log(response);
+    //                  if(response["googleMapAPIKey"] != undefined){
+    //                      new Promise((resolve) => {
+    //                        let script: HTMLScriptElement = document.createElement('script');
+    //                        script.addEventListener('load', r => resolve());
+    //                        script.src = `http://maps.googleapis.com/maps/api/js?key=${response["googleMapAPIKey"][0]}`;
+    //                        document.head.appendChild(script);      
+    //                  }); 
+    //            }    
+    //        }
+    //    );
    }
 
   showDriversOnMap(origin, drivers){

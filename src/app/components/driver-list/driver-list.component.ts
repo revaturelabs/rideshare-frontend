@@ -153,6 +153,7 @@ displayDriversList(origin, drivers) {
           //console.log(results[0].distance.text);
           var name =  element.name;
           
+          // probably to refactor this whole table business
           outputDiv.innerHTML += `<tr><td class="col">${name}</td>
                                   <td class="col">${results[0].distance.text}</td>
                                   <td class="col">${element.seats}</td>

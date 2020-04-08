@@ -4,16 +4,11 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 
 
-/*** In this commit, I really only implemented the onSubmit method 
-  (called by the submit button of the FormGroup) and a few basic 
-  built-in validators.
-
-  NOTE: We are not calling the methods in the constructors, we are
-  simply passing a reference to the methods, which gives angular 
-  access to them when the user tries to submit the forms.
-  
-  TLDR: IF YOU WANT TO ADD A VALIDATOR, IT WONT WORK IF YOU CALL THE 
-  METHOD DIRECTLY.
+/*** In this commit, I:
+  -downloaded the google places package by issuing "npm install ngx-google-places-autocomplete",
+  -imported GooglePlaceModule from "ngx-google-places-autocomplete",
+  -implemented the appropriate directive/event attributes/bindings in the address field input,
+  -and implemented the options object and the handleAddressChange() method, found below.
  ***/
 
 
@@ -25,25 +20,24 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class SignupModalComponent implements OnInit {
 
-  signUpForm: FormGroup;//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< REMEMBER: This is the reference to the form.
+  signUpForm: FormGroup;
   modalRef :BsModalRef;
-  
+
+  //This is where we are storing the address taken from the API.
+  formattedAddress = "";
+
+  //These options are not required, but they allow us to restrict the 
+  //search to our preferences.
+  options = {
+    componentRestrictions : {
+      country: ['US']
+    }
+  }
+
   constructor(private modalService :BsModalService) { }
 
-  /*** Check out the object that is emitted int hte web console if you want 
-    to see how this is a big step forward.
-
-    Notice that the 'controls' attribute of the object contains many details
-    about the submitted form that is being created programmatically. It's 
-    much more detailed than the template driven approach, and whatever the 
-    hell we were working with before.
-   ***/
   ngOnInit() {
     this.signUpForm = new FormGroup({
-      //Remember that the first parameter to this constructor is the default 
-      //value. It could be anything, I've only set it to null here. Also 
-      //remmeber that we can add as many validators as we please, including 
-      //those which we create ourselves.
       'firstname': new FormControl(null, Validators.required),
       'lastname': new FormControl(null, Validators.required),
       'email': new FormControl(null, Validators.required),
@@ -62,9 +56,17 @@ export class SignupModalComponent implements OnInit {
     this.modalRef = this.modalService.show(template);
   }
 
-  //NOTE: We can access the signUpForm from any method because it is a 
-  //declared reference in this component. Angular is basically taking care 
-  //of the form input and validation for us, we just have to implement and configure.
+  //This method is called every time the change detection detects that 
+  //the address input field has changed.
+  public handleAddressChange(address: any) {
+    //The 'address.formattedAddress' is referenced directly from the 
+    //Google places API.
+    //You can see that we are setting our own variable 'formattedAddress' 
+    //equal to the value of the API's formattedAddress.
+    this.formattedAddress = address.formattedAddress;
+    console.log(this.formattedAddress);
+  }
+
   onSubmit() {
     console.log(this.signUpForm);
   }

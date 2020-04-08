@@ -99,11 +99,9 @@
       <!-- This form group contains the ADDRESS field input. -->
       <div class="form-group">
         <label for="hAddress">Address</label>
-        <input
-          type="text"
-          id="address"
-          formControlName="address"
-          class="form-control">
+        <!-- Added OPTIONS binding, #PLACESREF reference, and ONADDRESSCHANGE event. -->
+        <input ngx-google-places-autocomplete [options]='options' #placesRef="ngx-places" (change)="handleAddressChange($event)"/>
+        <p>{{formattedAddress}}</p>
       </div>
 
       <!-- This form group contains the CITY field input. -->

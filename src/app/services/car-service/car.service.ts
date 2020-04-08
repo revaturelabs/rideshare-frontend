@@ -52,9 +52,10 @@ export class CarService {
 		return this.http.get<Car>(`${this.url}users/${userId}`);
 	}
 
+	//concat car.carId with this.url to update a specific car.
 	updateCarInfo(car: Car) {
 		//console.log(user);
-		return this.http.put(this.url, car).toPromise();
+		return this.http.put(this.url+car.carId, car).toPromise();
 	}
 
 

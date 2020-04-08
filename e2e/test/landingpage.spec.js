@@ -10,7 +10,7 @@ describe('landing page tests', function(){
     let elRegisterHeader = element(by.xpath('/html/body/modal-container/div/div/div[1]/h4'));
     let elRegisterExit = element(by.xpath('/html/body/modal-container/div/div/div[1]/button'));
     
-    browser.get('http://http://54.174.82.153:4200/');
+    browser.get('http://localhost:4200/');
     //checks to make sure that the user reaches the landing page correctly
     //change when the front end is being hosted
     it('Make sure user is on the landing page', function(){

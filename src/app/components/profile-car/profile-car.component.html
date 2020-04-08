@@ -4,12 +4,12 @@
         
     
         <h4>Car Information:</h4>
-        <form [formGroup] = "carForm" (ngSubmit)="updatesCarInfo()">
+        <form [formGroup] = "profileForm" (ngSubmit)="updatesCarInfo()">
         <div class="form-group row">
             <div class="col-sm-1"></div>
                 <label for="make" class="col-sm-4 col-form-label">Make:</label>
                 <div class="col-sm-4">
-                    <input type="text" class="form-control" id="make" [(ngModel)]=carForm.value.make formControlName="make" required>
+                    <input type="text" class="form-control" id="make" [(ngModel)]=profileForm.value.make formControlName="make" required>
                     <div *ngIf="!validInput.make.valid" class="text-danger">Maker required</div>
                 </div>
         </div>
@@ -18,7 +18,7 @@
                 <div class="col-sm-1"></div>
             <label for="model" class="col-sm-4 col-form-label">Model:</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" id="model" [(ngModel)]=carForm.value.model formControlName="model" required>
+                <input type="text" class="form-control" id="model" [(ngModel)]=profileForm.value.model formControlName="model" required>
                 <div *ngIf="!validInput.model.valid" class="text-danger">Model required</div>
             </div>
         </div>
@@ -27,7 +27,7 @@
             <div class="col-sm-1"></div>
                 <label for="Nrseats" class="col-sm-4 col-form-label ">Number of seats:</label>
                 <div class="col-sm-4">
-                <select class="form-control" id="Nrseats" [(ngModel)]=carForm.value.nrSeats formControlName="nrSeats" required>
+                <select class="form-control" id="Nrseats" [(ngModel)]=profileForm.value.nrSeats formControlName="nrSeats" required>
                     <option>Choose the number of seats</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -35,9 +35,9 @@
                     <option value="4">4</option>
                     <option value="5">5</option>
                 </select>
-                <div *ngIf="carForm.value.nrSeats.length >1" class="text-danger">Seats required</div>
+                <div *ngIf="profileForm.value.nrSeats.length >1" class="text-danger">Seats required</div>
                 <p *ngIf="success != ''" class="success">{{success}}</p>
-                <p *ngIf="errorMessage != ''" class="text-danger">{{errorMessage}}</p>
+                
             </div>
         </div>
         

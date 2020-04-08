@@ -1,7 +1,8 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit, TemplateRef,Renderer2, Inject} from '@angular/core';
 import { BsModalService, BsModalRef} from 'ngx-bootstrap';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-
+import { GoogleApiService } from 'src/app/services/google-api.service';
+import { DOCUMENT } from '@angular/common';
 
 
 /*** In this commit, I:
@@ -22,9 +23,9 @@ export class SignupModalComponent implements OnInit {
 
   signUpForm: FormGroup;
   modalRef :BsModalRef;
-
+  apiKey;
   //This is where we are storing the address taken from the API.
-  formattedAddress = "";
+  formattedAddress: string;
 
   //These options are not required, but they allow us to restrict the 
   //search to our preferences.
@@ -34,9 +35,17 @@ export class SignupModalComponent implements OnInit {
     }
   }
 
-  constructor(private modalService :BsModalService) { }
+  constructor(private modalService :BsModalService, private googleApi:GoogleApiService,  private renderer2: Renderer2,@Inject(DOCUMENT) private _document: Document ) { }
 
   ngOnInit() {
+  
+
+  //   const s = this.renderer2.createElement('script');
+  //   s.type = 'text/javascript';
+  // s.src = 'https://maps.googleapis.com/maps/api/js?key='+this.apiKey+'&libraries=places&language=en';
+  //   s.text = ``;
+  //   this.renderer2.appendChild(this._document.body, s);
+   
     this.signUpForm = new FormGroup({
       'firstname': new FormControl(null, Validators.required),
       'lastname': new FormControl(null, Validators.required),
@@ -64,7 +73,6 @@ export class SignupModalComponent implements OnInit {
     //You can see that we are setting our own variable 'formattedAddress' 
     //equal to the value of the API's formattedAddress.
     this.formattedAddress = address.formattedAddress;
-    console.log(this.formattedAddress);
   }
 
   onSubmit() {

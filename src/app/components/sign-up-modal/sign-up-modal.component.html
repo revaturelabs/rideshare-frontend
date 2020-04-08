@@ -1,7 +1,9 @@
+
 <a (click)="openModal(template)">Sign up</a >
   
 <!-- Maintain this template so that we may reference it without having to refactor the way the page works -->
 <ng-template #template >
+
   <p *ngIf="success != ''" class="success">{{success}}</p>
   
   <div class="modal-header">
@@ -100,7 +102,8 @@
       <div class="form-group">
         <label for="hAddress">Address</label>
         <!-- Added OPTIONS binding, #PLACESREF reference, and ONADDRESSCHANGE event. -->
-        <input ngx-google-places-autocomplete [options]='options' #placesRef="ngx-places" (change)="handleAddressChange($event)"/>
+        <input ngx-google-places-autocomplete [options]='options' #placesRef="ngx-places"
+        class="form-control" (change)="handleAddressChange($event)"/>
         <p>{{formattedAddress}}</p>
       </div>
 

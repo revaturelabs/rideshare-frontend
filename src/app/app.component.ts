@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {} from 'googlemaps';
+import { GoogleApiService } from './services/google-api.service';
 
 
 /**
@@ -17,15 +18,18 @@ export class AppComponent {
   title = 'rideshare-frontend';
   googleMapAPIKey: string;
 
-  constructor() { }
+  constructor(private googleApi:GoogleApiService) { }
 
   ngOnInit() {
+   
    if (navigator.geolocation) {
        navigator.geolocation.getCurrentPosition(function(position) {
         sessionStorage.setItem("lat", position.coords.latitude+""),
         sessionStorage.setItem("lng", position.coords.longitude+"")
      })
+     
   }
+  //this.googleApi.getGoogleApi();
  } 
 
 

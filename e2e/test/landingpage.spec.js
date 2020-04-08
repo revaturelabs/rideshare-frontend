@@ -2,6 +2,7 @@
 Testing the landing page of the application to ensure buttons work as intended
 */
 describe('landing page tests', function(){
+    // these are html elements for reference during testing
     let elPageHead = element(by.xpath('/html/body/app-root/app-home-page/div[1]/div/h1'));
     let elLoginPageTitle = element(by.xpath('//*[@id="login-form"]/div[1]/h4'));
     let elLoginButton = element(by.xpath('/html/body/app-root/app-home-page/div[1]/div/div/button[1]'));

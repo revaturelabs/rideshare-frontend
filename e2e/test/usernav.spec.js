@@ -1,4 +1,5 @@
 describe('User logged in nav bar tests', function(){
+     // these are html elements for reference during testing
     //beginning of elements for the login
     let elLoginButton = element(by.xpath('/html/body/app-root/app-home-page/div[1]/div/div/button[1]'));
     let elLoginUsername = element(by.xpath('//*[@id="formGroupExampleInput"]'));

@@ -1,8 +1,9 @@
-
 describe('Sign Up tests', function(){
+    // these are html elements for reference during testing
     let elSignUpLink = element(by.xpath('/html/body/app-root/app-home-page/div[1]/div/div/button[2]'));
     let elRegisterHeader = element(by.xpath('/html/body/modal-container/div/div/div[1]/h4'));
     let elClose = element(by.xpath('/html/body/modal-container/div/div/div[1]/button'));
+    let elPageHead = element(by.xpath('/html/body/app-root/app-home-page/div[1]/div/h1'));
     // let firstNameInput
     // let lastNameInput
     // let usernameInput
@@ -17,12 +18,14 @@ describe('Sign Up tests', function(){
     it('Sign up link on login page opens Sign up modal', function() {
         browser.get('http://localhost:4200/');
         elSignUpLink.click();
+        browser.waitForAngular();
+        browser.ignoreSynchronization=true
         expect(elRegisterHeader.getText()).toBe('Sign Up');
-        elClose.click();
     });
 
-    // it ('close sign up modal', function() {
-    //     //browser.get('http://localhost:4200/login');
-    //     elClose.click();
-    // });
+    it ('Close sign up modal', function() {
+        elClose.click();
+        expect(elPageHead.getText()).toBe('RideForce');
+
+    });
 });

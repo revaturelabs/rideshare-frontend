@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CarService } from 'src/app/services/car-service/car.service';
 import { Car } from 'src/app/models/car';
-
+import { FormGroup, FormControl } from '@angular/forms';
 @Component({
   selector: 'app-profile-car',
   templateUrl: './profile-car.component.html',
@@ -14,27 +14,36 @@ export class ProfileCarComponent implements OnInit {
   nrSeats:number;
   currentCar: Car;
   success :string;
+  profileForm;
+
 
   constructor(private carService: CarService) { }
 
   ngOnInit() {
 
     this.carService.getCarByUserId2(sessionStorage.getItem("userid")).subscribe((response)=>{
+      this.profileForm = new FormGroup({
+        make: new FormControl(response.make),
+        model: new FormControl(response.model),
+        nrSeats: new FormControl(response.seats)
+      });
       this.currentCar = response;
-      this.make = response.make;
-      this.model = response.model;
-      this.nrSeats = response.seats;
-
     });
+
+
   }
 
   updatesCarInfo(){
-    this.currentCar.make = this.make;
-    this.currentCar.model= this.model;
-    this.currentCar.seats = this.nrSeats;
-    //console.log(this.currentUser);
-    this.carService.updateCarInfo(this.currentCar);
-    this.success = "Updated Successfully!";
+    this.currentCar.make = this.profileForm.value.make;
+    this.currentCar.model= this.profileForm.value.model;
+    this.currentCar.seats = this.profileForm.value.nrSeats;
+    console.log(this.currentCar);
+   this.carService.updateCarInfo(this.currentCar).then(res=>{
+     this.success = "Updated Successfully!";
+   }).catch(error=>{
+     this.success = "Error occurred, Update was unsucessful"
+   })
+    
   }
 
 }

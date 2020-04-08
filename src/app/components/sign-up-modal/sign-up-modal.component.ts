@@ -24,7 +24,7 @@ export class SignupModalComponent implements OnInit {
   modalRef :BsModalRef;
 
   //This is where we are storing the address taken from the API.
-  formattedAddress = "";
+  formattedAddress: string;
 
   //These options are not required, but they allow us to restrict the 
   //search to our preferences.
@@ -64,7 +64,6 @@ export class SignupModalComponent implements OnInit {
     //You can see that we are setting our own variable 'formattedAddress' 
     //equal to the value of the API's formattedAddress.
     this.formattedAddress = address.formattedAddress;
-    console.log(this.formattedAddress);
   }
 
   onSubmit() {

@@ -100,7 +100,8 @@
       <div class="form-group">
         <label for="hAddress">Address</label>
         <!-- Added OPTIONS binding, #PLACESREF reference, and ONADDRESSCHANGE event. -->
-        <input ngx-google-places-autocomplete [options]='options' #placesRef="ngx-places" (change)="handleAddressChange($event)"/>
+        <input ngx-google-places-autocomplete [options]='options' #placesRef="ngx-places"
+        class="form-control" (change)="handleAddressChange($event)"/>
         <p>{{formattedAddress}}</p>
       </div>
 

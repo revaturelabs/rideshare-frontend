@@ -14,13 +14,13 @@ describe('Sign Up tests', function(){
     let driverRadio
     
     it('Sign up link on login page opens Sign up modal', function() {
-        browser.get('http://http://54.174.82.153:4200/login');
+        browser.get('http://127.0.0.1:4200/login');
         elSignUpLink.click();
         expect(elRegisterHeader.getText()).toBe('Sign Up');
     });
 
     it ('After submit routes to landing page', function() {
-        browser.get('http://http://54.174.82.153:4200/login');
+        browser.get('http://127.0.0.1:4200/login');
         elSignUpLink.click();
     });
 });

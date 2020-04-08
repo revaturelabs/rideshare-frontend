@@ -9,9 +9,10 @@ import { User } from 'src/app/models/user';
 export class ProfileMembershipComponent implements OnInit {
   profileObject : User;
   currentUser: any = '';
-  isDriver: boolean;
-  active: boolean;
+  isDriver: any;
+  active: any;
   success: string;
+  
   constructor(private userService: UserService) { }
   ngOnInit() {
     this.currentUser = this.userService.getUserById2(sessionStorage.getItem("userid")).subscribe((response)=>{
@@ -20,8 +21,10 @@ export class ProfileMembershipComponent implements OnInit {
   }
   updatesMembershipInfo(){
     this.profileObject.isDriver = this.isDriver;
+    console.log(this.isDriver);
+    
     this.profileObject.active = this.active;
-    this.userService.updateUserInfo(this.profileObject);
+    this.userService.updateUserInfo(this.currentUser, this.profileObject);
     this.success = "Updated Successfully!";
   }
 }

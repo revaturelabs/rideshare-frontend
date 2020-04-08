@@ -13,11 +13,11 @@
                 <div class="form-group row">
                      <div class="col-sm-4 t">
                     <h6>Status:</h6>
-                    <select class="form-control mySelect" name="rider" id="rider" [(ngModel)]=isDriver value="{{profileObject.isDriver}}">
+                    <select class="form-control mySelect" name="rider" id="rider" [(ngModel)]=profileObject.isDriver value="{{profileObject.isDriver}}">
                         <option value="true">Driver</option>
                         <option value="false">Rider</option>
                     </select>
-                    <select class="form-control mySelect" name="active" id="active" [(ngModel)]=active value="{{profileObject.active}}">
+                    <select class="form-control mySelect" name="active" id="active" [(ngModel)]=profileObject.active value="{{profileObject.active}}">
                         <option value="true">Active</option>
                         <option value="false">Disabled</option>
                     </select>
@@ -27,7 +27,7 @@
                         <button type="button" class="btn btn-outline-danger mybtngroup">Off</button>
                     </div> -->
             
-                <button type="submit" class="btn btn-primary myBtn">Save</button>
+                <button type="submit" class="btn btn-primary myBtn" (click)="updatesMembershipInfo()">Save</button>
                 </div>
             </div>
         </div>

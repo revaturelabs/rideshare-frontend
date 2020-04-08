@@ -38,7 +38,7 @@ export class ProfileContactComponent implements OnInit {
     this.profileObject.email = this.email;
     this.profileObject.phoneNumber = this.phone;
 
-    this.userService.updateUserInfo(this.profileObject);
+    this.userService.updateUserInfo(this.currentUser, this.profileObject);
     this.success = "Updated Successfully!";
   }
 

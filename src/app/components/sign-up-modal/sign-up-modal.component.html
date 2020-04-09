@@ -21,8 +21,8 @@
 
       <!-- This is the DRIVER / RIDER button group. -->
       <div class="btn-group" role="group">
-        <button type="button" class="btn btn-primary">Driver</button>
-        <button type="button" class="btn btn-primary">Rider</button>
+        <button type="button" class="btn btn-primary" (click)="setDriver()">Driver</button>
+        <button type="button" class="btn btn-primary" (click)="setRider()">Rider</button>
       </div>
 
 
@@ -80,7 +80,7 @@
 
       <!-- This form group contains the PHONE NUMBER field input. -->
       <div class="form-group">
-        <label for="phoneNumber">Phone Number</label>
+        <label for="phonenumber">Phone Number</label>
         <input
           type="text"
           id="phonenumber"
@@ -96,6 +96,7 @@
 
 
       <!-- This form group contains the BATCH select input. -->
+      <!-- ADD SELECT ELEMENT IN INPUT AND GENERATE NESTED OPTION ELEMENTS FROM BATCHLIST WITH NGFOR -->
       <div class="form-group">
         <label for="batch">Batch</label>
         <input
@@ -121,8 +122,10 @@
 
       <!-- This form group contains the ADDRESS field input. -->
       <div class="form-group">
-        <label for="hAddress">Address</label>
+        <label for="autoplaces">Address</label>
         <input 
+          id="autoplaces" 
+          formControlName="address"
           ngx-google-places-autocomplete 
           [options]='options' 
           #placesRef="ngx-places"
@@ -130,8 +133,8 @@
           class="form-control"/>
         <!-- Validation. -->
         <span 
-          *ngIf="!signUpForm.get('city').valid && signUpForm.get('address').touched"
-          class="help-block">This field is required.
+          *ngIf="this.city==null && signUpForm.get('address').touched"
+          class="help-block">Use autocomplete to generate your address.
         </span>
       </div>
 
@@ -139,12 +142,11 @@
 
       <!-- This form group contains the CITY field input. -->
       <div class="form-group">
-        <label id="hCity">Address line</label>
+        <label for="address">Address line</label>
         <input
           readonly
           type="text"
           id="address"
-          formControlName="address"
           class="form-control" 
           placeholder="{{addressLine}}">
       </div>
@@ -153,7 +155,7 @@
 
       <!-- This form group contains the CITY field input. -->
       <div class="form-group">
-        <label id="hCity">City</label>
+        <label for="city">City</label>
         <input
           readonly
           type="text"
@@ -167,7 +169,7 @@
 
       <!-- This form group contains the STATE field input. -->
       <div class="form-group">
-        <label id="hState">State</label>
+        <label for="state">State</label>
         <input
           readonly
           type="text"
@@ -181,7 +183,7 @@
 
       <!-- This form group contains the ZIP CODE field input. -->
       <div class="form-group">
-        <label id="hZip">Zip Code</label>
+        <label for="zipcode">Zip Code</label>
         <input 
           type="text"
           id="zipcode"
@@ -205,7 +207,7 @@
 
       <!-- This form group contains the USERNAME field input. -->
       <div class="form-group">
-        <label for="userName">User Name</label>
+        <label for="username">User Name</label>
         <input
           type="text"
           id="username"
@@ -239,8 +241,7 @@
 
       <!-- This is the submit button. -->
       <div class="btn-container">
-        <button class="btn btn-primary register" type="submit">Submit</button>
-        <!-- [disabled]="!signUpForm.status -->
+        <button class="btn btn-primary register" type="submit" [disabled]="signUpForm.status=='VALID'">Submit</button>
         <br />
         <span *ngIf="signUpForm.status" class="help-block">*Required fields are not valid.</span>
       </div>

@@ -2,7 +2,7 @@ import { Batch } from './batch';
 
 export class User {
     
-    batch: Batch = new Batch();
+    batch: Batch;
 
     userId: number;
     userName: string;

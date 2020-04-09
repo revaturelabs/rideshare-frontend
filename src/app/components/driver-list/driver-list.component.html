@@ -30,10 +30,11 @@
        </thead>
        <tbody id="output">
          <tr *ngFor="let element of drivers">
-          <td class="col" class="w-25">{{element.name}}</td>
-          <td class="col" class="w-25">{{element.distance}}</td>
-          <td class="col" class="w-25">{{element.duration}}</td>
-          <td class="col" class="w-25">
+          <td class="col" class="w-20">{{element.name}}</td>
+          <td class="col" class="w-20">{{element.distance}}</td>
+          <td class="col" class="w-20">{{element.seats}}</td>
+          <td class="col" class="w-20">{{element.duration}}</td>
+          <td class="col" class="w-20">
           <button type="button" class="btn btn-primary" data-toggle="modal" [attr.data-target]="element.modalButtonId"> View</button>
             <div class="col-lg-5">
              <div class="modal" [attr.id]="element.modalId" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true">

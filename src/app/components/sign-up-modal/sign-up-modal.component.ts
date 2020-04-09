@@ -4,7 +4,8 @@ import { FormGroup, FormControl,FormBuilder, Validators } from '@angular/forms';
 import { GoogleApiService } from 'src/app/services/google-api.service';
 import { DOCUMENT } from '@angular/common';
 import { ValidationService } from '../../validation.service';
-
+import {Batch} from 'src/app/models/batch';
+import { BatchService } from 'src/app/services/batch-service/batch.service';
 /*** In this commit, I:
   -downloaded the google places package by issuing "npm install ngx-google-places-autocomplete",
   -imported GooglePlaceModule from "ngx-google-places-autocomplete",
@@ -31,55 +32,26 @@ export class SignupModalComponent implements OnInit {
   city: string;
   state: string;
 
+//for batch grabbing
+batches:Batch[];
 
-  options = {
+options = {
     componentRestrictions : {
       country: ['US']
     }
   }
 
-  constructor(private modalService :BsModalService, private googleApi:GoogleApiService,  private renderer2: Renderer2,@Inject(DOCUMENT) private _document: Document, private formBuilder: FormBuilder ) { }
+  constructor(private modalService :BsModalService, private googleApi:GoogleApiService,  private renderer2: Renderer2,@Inject(DOCUMENT) private _document: Document, private formBuilder: FormBuilder, private batchService:BatchService ) { }
 
   ngOnInit() {
-  
+  this.batchService.getAllBatches().subscribe(data => {
+    this.batches = data;
+    sessionStorage.setItem('Batches',JSON.stringify(this.batches));
+})
+  this.batches= JSON.parse(sessionStorage.getItem('Batches'));
+  console.log(this.batches)
 
-  //   const s = this.renderer2.createElement('script');
-  //   s.type = 'text/javascript';
-  // s.src = 'https://maps.googleapis.com/maps/api/js?key='+this.apiKey+'&libraries=places&language=en';
-  //   s.text = ``;
-  //   this.renderer2.appendChild(this._document.body, s);
-   
-  //   this.signUpForm = this.formBuilder.group({
-  //     'firstname': ['',[ 
-  //       Validators.required,
-  //       Validators.minLength(5),
-  //       Validators.maxLength(35), 
-  //       ValidationService.stringValidator
-  //     ]],
-  //     'lastname':['', [
-  //       Validators.required,
-  //       Validators.minLength(5),
-  //       Validators.maxLength(35), 
-  //       ValidationService.stringValidator
-  //     ]],
-  //     'email': ['',[
-  //       Validators.required,
-  //       ValidationService.emailValidator  
-  //     ]],
-  //     'phonenumber': ['',[
-  //       Validators.required,
-  //       Validators.minLength(10) ,
-  //       ValidationService.phoneNumberValidator
-  //     ]],
-  //     'batch': ['', Validators.required],
-  //     'address': ['', Validators.required],
-  //     'city': ['', Validators.required],
-  //     'state': ['', Validators.required],
-  //     'zipcode': ['', Validators.required],
-  //     'username':['', Validators.required],
-  //     'password': ['', Validators.required],
-  //   })    
-  // }
+  
   this.signUpForm = new FormGroup({
     'firstname': new FormControl('', [Validators.required,Validators.minLength(2),
             Validators.maxLength(35), 
@@ -105,6 +77,8 @@ export class SignupModalComponent implements OnInit {
 
   openModal(template :TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
+    console.log(this.batches)
+    this.batches=this.batches;
   }
 
   /*** The handleAddressChange method is receiving the fleeting object of 
@@ -118,7 +92,8 @@ export class SignupModalComponent implements OnInit {
     //The 'address.formattedAddress' is referenced directly from the 
     //Google places API.
     //You can see that we are setting our own variable 'formattedAddress' 
-    //equal to the value of the API's formattedAddress.    
+    //equal to the value of the API's formattedAddress.
+
 //Capture the address source element value in a string.
     let addressVal = address.srcElement.value;
     
@@ -136,7 +111,7 @@ export class SignupModalComponent implements OnInit {
 
   onSubmit() {
     // this.submitted = true;
-    console.log("welcome!"+this.signUpForm.value.firstname);
+    console.log("welcome!"+this.signUpForm.value.address);
         // stop here if form is invalid
         // if (this.signUpForm.invalid) {
         //     return;

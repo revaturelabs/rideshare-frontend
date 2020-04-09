@@ -78,7 +78,7 @@
       </div>
 
       <!-- This form group contains the BATCH select input. -->
-      <div class="form-group">
+      <!-- <div class="form-group">
         <label for="batch">Batch</label>
         <input
           type="drop-down"
@@ -86,8 +86,15 @@
           formControlName="batch"
           class="form-control">
         <control-messages [control]="signUpForm.get('batch')"></control-messages>
+      </div> -->
+      <div class="form-group">
+        <select id="batch" formControlName="batch" class="form-control" >
+          <option value="" disabled>Choose your Batch</option>
+          <option *ngFor="let batch of batches">
+          {{batch.batchLocation}}</option>
+        </select>
+        <control-messages [control]="signUpForm.get('batch')"></control-messages>
       </div>
-
 
 
       <!-- This HORIZONTAL line spans 4 grids of the parent container to organize the form information into segments -->
@@ -107,7 +114,7 @@
           #placesRef="ngx-places"
           (change)="handleAddressChange($event)" 
           class="form-control"/>
-          <control-messages [control]="signUpForm.get('address')"></control-messages>
+          <!-- <control-messages [control]="signUpForm.get('address')"></control-messages> -->
       </div>
 
       <!-- This form group contains the CITY field input. -->

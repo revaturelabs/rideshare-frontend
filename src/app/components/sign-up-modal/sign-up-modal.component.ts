@@ -23,16 +23,23 @@ export class SignupModalComponent implements OnInit {
   signUpForm: FormGroup;
   modalRef :BsModalRef;
 
-  //This is where we are storing the address taken from the API.
-  formattedAddress: string;
-
-  //These options are not required, but they allow us to restrict the 
-  //search to our preferences.
   options = {
     componentRestrictions : {
       country: ['US']
     }
   }
+
+
+
+
+  //Here is where we are storing our collected ADDRESSLINE, CITY, and STATE
+  //from the address object emitted by 
+  addressLine: string;
+  city: string;
+  state: string;
+
+
+
 
   constructor(private modalService :BsModalService) { }
 
@@ -56,14 +63,27 @@ export class SignupModalComponent implements OnInit {
     this.modalRef = this.modalService.show(template);
   }
 
-  //This method is called every time the change detection detects that 
-  //the address input field has changed.
+  /*** The handleAddressChange method is receiving the fleeting object of 
+    type "changes" (some kind of google crap which I currently couldn't 
+    care less about).
+    When I examined the object as JSON in the console, I found (among 
+    the vast amount of data about our webpage that it collected) this 
+    srcElement's value field is the only pertinent data we can collect 
+    and use. ***/
   public handleAddressChange(address: any) {
-    //The 'address.formattedAddress' is referenced directly from the 
-    //Google places API.
-    //You can see that we are setting our own variable 'formattedAddress' 
-    //equal to the value of the API's formattedAddress.
-    this.formattedAddress = address.formattedAddress;
+    //Capture the address source element value in a string.
+    let addressVal = address.srcElement.value;
+    
+    //Split the string by comma followed by whitespace up to three times.
+    //Capture the resulting strings in SPLITTED string array.
+    let splitted = addressVal.split(", ", 3);
+    
+    //Capture the ADDRESSLINE in a variable.
+    this.addressLine = splitted[0];
+    //Capture the CITY in a variable.
+    this.city = splitted[1];
+    //Capture the STATE in a variable.
+    this.state = splitted[2];
   }
 
   onSubmit() {

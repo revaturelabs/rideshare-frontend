@@ -18,7 +18,7 @@ import { environment } from '../../../environments/environment';
 })
 export class DriverListComponent implements OnInit {
 
-  location : string = 'Morgantown, WV';
+  location : string = 'Houston, TX';
   mapProperties :{};
   availableCars : Array<any> = [];
   drivers : Array<any> = [];
@@ -32,7 +32,7 @@ export class DriverListComponent implements OnInit {
   ngOnInit() {
     this.drivers = [];
 
-    this.userService.getRidersForLocation1(this.location).subscribe(
+    this.userService.getAllDrivers().subscribe(
       res => {
            //console.log(res);
            res.forEach(element => {
@@ -45,6 +45,20 @@ export class DriverListComponent implements OnInit {
               });
           });
       });
+
+    // this.userService.getRidersForLocation1(this.location).subscribe(
+    //   res => {
+    //        //console.log(res);
+    //        res.forEach(element => {
+    //           this.drivers.push({
+    //                'id': element.userId,
+    //              'name': element.firstName+" "+element.lastName,
+    //            'origin':element.hCity+","+element.hState, 
+    //             'email': element.email, 
+    //             'phone':element.phoneNumber
+    //           });
+    //       });
+    //   });
     /*this.drivers.push({'id': '1','name': 'Ed Ogeron','origin':'Reston, VA', 'email': 'ed@gmail.com', 'phone':'555-555-5555'});
     this.drivers.push({'id': '2','name': 'Nick Saban','origin':'Oklahoma, OK', 'email': 'nick@gmail.com', 'phone':'555-555-5555'});
     this.drivers.push({'id': '3','name': 'Bobbie sfsBowden','origin':'Texas, TX', 'email': 'bobbie@gmail.com', 'phone':'555-555-5555'});

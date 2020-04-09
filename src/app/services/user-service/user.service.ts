@@ -230,4 +230,8 @@ export class UserService {
 	getRidersForLocation1(location: string): Observable <any>{
 		return this.http.get(this.url + 'driver/'+ location)
 	}
+
+	getAllDrivers(): Observable <any> {
+		return this.http.get(`${this.url}?is-driver=true`)
+	}
 }

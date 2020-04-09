@@ -11,6 +11,9 @@ import { BatchService } from 'src/app/services/batch-service/batch.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 
+import {MatSort} from '@angular/material/sort';
+import {MatTableDataSource} from '@angular/material/table';
+
 @Component({
   selector: 'app-driver-list',
   templateUrl: './driver-list.component.html',

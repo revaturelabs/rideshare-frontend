@@ -38,6 +38,8 @@ import { UserRegisterComponent } from './components/user-register/user-register.
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
 
+import {MatTableModule} from '@angular/material/table';
+
 
 
 @NgModule({
@@ -77,7 +79,8 @@ import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
     AppRoutingModule,
     FormsModule,
     ModalModule.forRoot(),
-    NgbModule
+    NgbModule,
+    MatTableModule
   ],
   providers: [
     UserService,

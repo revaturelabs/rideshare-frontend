@@ -2,6 +2,7 @@ describe('User logged in nav bar tests', function(){
      // these are html elements for reference during testing
     //beginning of elements for the login
     let elLoginButton = element(by.xpath('/html/body/app-root/app-home-page/div[1]/div/div/button[1]'));
+   // /html/body/app-root/app-home-page/div[1]/div/div/button[1]
     let elLoginUsername = element(by.xpath('//*[@id="formGroupExampleInput"]'));
     let elLoginPassword = element(by.xpath('//*[@id="formGroupExampleInput2"]'));
     let elLoginSubmit = element(by.xpath('//*[@id="sign-in-btn"]'));
@@ -32,6 +33,8 @@ describe('User logged in nav bar tests', function(){
         elLoginPassword.sendKeys('password');
         elLoginSubmit.click();
         //change this to reflect succesful login
+        browser.waitForAngular();
+        browser.ignoreSynchronization=true
         expect(elLoggedInHeader.getText()).toBe('Fabien Braunroth');
     });
 
@@ -69,6 +72,7 @@ describe('User logged in nav bar tests', function(){
         browser.waitForAngular();
         browser.ignoreSynchronization=true
         elProfileButton.click();
+        browser.driver.sleep(500);
         //enter expected toBe text when information is gained
         expect(elProfileHeader.getText()).toBe('First Name:');
     });
@@ -82,6 +86,7 @@ describe('User logged in nav bar tests', function(){
         browser.waitForAngular();
         browser.ignoreSynchronization=true
         elLogoutButton.click();
+        browser.driver.sleep(500);
         //enter expected toBe text when information is gained
         expect(elHomeHeader.getText()).toBe('RideForce');
     });

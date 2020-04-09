@@ -23,21 +23,16 @@ export class SignupModalComponent implements OnInit {
   signUpForm: FormGroup;
   modalRef :BsModalRef;
 
+
+  addressLine: string;
+  city: string;
+  state: string;
+
   options = {
     componentRestrictions : {
       country: ['US']
     }
   }
-
-
-
-
-  //Here is where we are storing our collected ADDRESSLINE, CITY, and STATE
-  //from the address object emitted by 
-  addressLine: string;
-  city: string;
-  state: string;
-
 
 
 
@@ -47,7 +42,7 @@ export class SignupModalComponent implements OnInit {
     this.signUpForm = new FormGroup({
       'firstname': new FormControl(null, Validators.required),
       'lastname': new FormControl(null, Validators.required),
-      'email': new FormControl(null, Validators.required),
+      'email': new FormControl(null, [Validators.required, Validators.email]),
       'phonenumber': new FormControl(null, Validators.required),
       'batch': new FormControl(null, Validators.required),
       'address': new FormControl(null, Validators.required),
@@ -63,31 +58,35 @@ export class SignupModalComponent implements OnInit {
     this.modalRef = this.modalService.show(template);
   }
 
-  /*** The handleAddressChange method is receiving the fleeting object of 
-    type "changes" (some kind of google crap which I currently couldn't 
-    care less about).
-    When I examined the object as JSON in the console, I found (among 
-    the vast amount of data about our webpage that it collected) this 
-    srcElement's value field is the only pertinent data we can collect 
-    and use. ***/
   public handleAddressChange(address: any) {
-    //Capture the address source element value in a string.
     let addressVal = address.srcElement.value;
     
-    //Split the string by comma followed by whitespace up to three times.
-    //Capture the resulting strings in SPLITTED string array.
     let splitted = addressVal.split(", ", 3);
     
-    //Capture the ADDRESSLINE in a variable.
     this.addressLine = splitted[0];
-    //Capture the CITY in a variable.
     this.city = splitted[1];
-    //Capture the STATE in a variable.
     this.state = splitted[2];
+    
+    //Set the value of fields in address-related formControl items.
+    console.log(this.signUpForm.value.address + " to " + this.addressLine);
+    console.log(this.signUpForm.value.city + " to " + this.city);
+    console.log(this.signUpForm.value.state + " to " + this.state);
+    
+    this.signUpForm.value.address = this.addressLine;
+    this.signUpForm.value.city = this.city;
+    this.signUpForm.value.state = this.state;
+
+    console.log("now is: " + this.signUpForm.value.address);
+    console.log("now is: " + this.signUpForm.value.city);
+    console.log("now is: " + this.signUpForm.value.state);
+    console.log(this.signUpForm);
   }
 
   onSubmit() {
+    //Display and reset the form.
     console.log(this.signUpForm);
+    console.log("This form is valid.");
+    this.signUpForm.reset();
   }
 
 }

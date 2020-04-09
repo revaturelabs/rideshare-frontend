@@ -1,8 +1,9 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit, TemplateRef,Renderer2, Inject} from '@angular/core';
 import { BsModalService, BsModalRef} from 'ngx-bootstrap';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-
-
+import { FormGroup, FormControl,FormBuilder, Validators } from '@angular/forms';
+import { GoogleApiService } from 'src/app/services/google-api.service';
+import { DOCUMENT } from '@angular/common';
+import { ValidationService } from '../../validation.service';
 
 /*** In this commit, I:
   -downloaded the google places package by issuing "npm install ngx-google-places-autocomplete",
@@ -20,11 +21,12 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class SignupModalComponent implements OnInit {
 
+  submitted = false;
   signUpForm: FormGroup;
   modalRef :BsModalRef;
 
   //This is where we are storing the address taken from the API.
-  formattedAddress = "";
+  formattedAddress: string;
 
   //These options are not required, but they allow us to restrict the 
   //search to our preferences.
@@ -34,23 +36,64 @@ export class SignupModalComponent implements OnInit {
     }
   }
 
-  constructor(private modalService :BsModalService) { }
+  constructor(private modalService :BsModalService, private googleApi:GoogleApiService,  private renderer2: Renderer2,@Inject(DOCUMENT) private _document: Document, private formBuilder: FormBuilder ) { }
 
   ngOnInit() {
-    this.signUpForm = new FormGroup({
-      'firstname': new FormControl(null, Validators.required),
-      'lastname': new FormControl(null, Validators.required),
-      'email': new FormControl(null, Validators.required),
-      'phonenumber': new FormControl(null, Validators.required),
-      'batch': new FormControl(null, Validators.required),
-      'address': new FormControl(null, Validators.required),
-      'city': new FormControl(null, Validators.required),
-      'state': new FormControl(null, Validators.required),
-      'zipcode': new FormControl(null, Validators.required),
-      'username': new FormControl(null, Validators.required),
-      'password': new FormControl(null, Validators.required)
-    })    
-  }
+  
+
+  //   const s = this.renderer2.createElement('script');
+  //   s.type = 'text/javascript';
+  // s.src = 'https://maps.googleapis.com/maps/api/js?key='+this.apiKey+'&libraries=places&language=en';
+  //   s.text = ``;
+  //   this.renderer2.appendChild(this._document.body, s);
+   
+  //   this.signUpForm = this.formBuilder.group({
+  //     'firstname': ['',[ 
+  //       Validators.required,
+  //       Validators.minLength(5),
+  //       Validators.maxLength(35), 
+  //       ValidationService.stringValidator
+  //     ]],
+  //     'lastname':['', [
+  //       Validators.required,
+  //       Validators.minLength(5),
+  //       Validators.maxLength(35), 
+  //       ValidationService.stringValidator
+  //     ]],
+  //     'email': ['',[
+  //       Validators.required,
+  //       ValidationService.emailValidator  
+  //     ]],
+  //     'phonenumber': ['',[
+  //       Validators.required,
+  //       Validators.minLength(10) ,
+  //       ValidationService.phoneNumberValidator
+  //     ]],
+  //     'batch': ['', Validators.required],
+  //     'address': ['', Validators.required],
+  //     'city': ['', Validators.required],
+  //     'state': ['', Validators.required],
+  //     'zipcode': ['', Validators.required],
+  //     'username':['', Validators.required],
+  //     'password': ['', Validators.required],
+  //   })    
+  // }
+  this.signUpForm = new FormGroup({
+    'firstname': new FormControl('', Validators.required),
+    'lastname': new FormControl('', Validators.required),
+    'email': new FormControl('', Validators.required),
+    'phonenumber': new FormControl('', [Validators.required,ValidationService.phoneNumberValidator]),
+    'batch': new FormControl('', Validators.required),
+    'address': new FormControl('', Validators.required),
+    'city': new FormControl('', Validators.required),
+   'state': new FormControl('', Validators.required),
+    'zipcode': new FormControl('', Validators.required),
+    'username': new FormControl('', Validators.required),
+    'password': new FormControl('', Validators.required)
+  })    
+}
+
+  // get f() { return this.signUpForm.controls; }
 
   openModal(template :TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
@@ -64,11 +107,21 @@ export class SignupModalComponent implements OnInit {
     //You can see that we are setting our own variable 'formattedAddress' 
     //equal to the value of the API's formattedAddress.
     this.formattedAddress = address.formattedAddress;
-    console.log(this.formattedAddress);
+
+
   }
 
   onSubmit() {
-    console.log(this.signUpForm);
+    // this.submitted = true;
+    console.log("welcome!"+this.signUpForm.value.firstname);
+        // stop here if form is invalid
+        if (this.signUpForm.invalid) {
+            return;
+        }
+
+        // display form values on success
+        alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.signUpForm.value, null, 4));
+    
   }
 
 }

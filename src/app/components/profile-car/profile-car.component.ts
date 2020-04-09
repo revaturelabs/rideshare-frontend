@@ -28,18 +28,33 @@ export class ProfileCarComponent implements OnInit {
   ngOnInit() {
 
     this.carService.getCarByUserId2(sessionStorage.getItem("userid")).subscribe((response)=>{
-      this.profileForm = new FormGroup({
-        make: new FormControl(response.make, Validators.required),
-        model: new FormControl(response.model),
-        nrSeats: new FormControl(response.seats)
-      });
+
+      if(response != null){
+        this.profileForm = new FormGroup({
+          make: new FormControl(response.make, Validators.required),
+          model: new FormControl(response.model),
+          nrSeats: new FormControl(response.seats)
+        });
+      }
+      else{
+        this.success ="No car information is found"
+      }
+ 
+      
       this.currentCar = response;
+    }, error=>{
+
     });
+
+
+    console.log(this.validInput)
 
 
   }
 
   updatesCarInfo(){
+
+    console.log(this.validInput)
     this.success ="";
     this.currentCar.make = this.profileForm.value.make;
     this.currentCar.model= this.profileForm.value.model;

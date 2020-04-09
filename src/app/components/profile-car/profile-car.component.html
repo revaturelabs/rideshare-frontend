@@ -10,7 +10,7 @@
                 <label for="make" class="col-sm-4 col-form-label">Make:</label>
                 <div class="col-sm-4">
                     <input type="text" class="form-control" id="make" [(ngModel)]=profileForm.value.make formControlName="make" required>
-                    <div *ngIf="!validInput.make.valid" class="text-danger">Maker required</div>
+                    <div *ngIf="!validInput.make.valid && !validInput.make.untouched" class="text-danger">Maker required</div>
                 </div>
         </div>
         
@@ -19,7 +19,7 @@
             <label for="model" class="col-sm-4 col-form-label">Model:</label>
             <div class="col-sm-4">
                 <input type="text" class="form-control" id="model" [(ngModel)]=profileForm.value.model formControlName="model" required>
-                <div *ngIf="!validInput.model.valid" class="text-danger">Model required</div>
+                <div *ngIf="!validInput.model.valid && !validInput.model.untouched" class="text-danger">Model required</div>
             </div>
         </div>
         

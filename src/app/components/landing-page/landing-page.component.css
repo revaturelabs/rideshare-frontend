@@ -1,0 +1,52 @@
+.content{
+    text-align: center;
+}
+
+.form-control{
+    margin:auto;
+    width: 30%;
+}
+
+.register{
+    margin-top:15px;
+}
+
+#search{
+    margin-top:10px;
+    background-color: #F26925;
+    color:white;
+    width:30%;
+    font-family:"Overpass",sans-serif;
+    font-weight:bold;
+    font-size:22px;
+    border-radius:27px;
+    letter-spacing:1px;
+    height:45px;
+    display:inline-block;
+    
+}
+ 
+#search:hover{
+    background-color:white;
+    color:#F26925;
+    border: 2px solid #F26925;
+    border-radius: 22px ;
+    font-family:"Overpass",sans-serif;
+    font-size:23px;
+}
+
+.googleapi {
+    margin-top: 25px;
+}
+
+
+#map{
+    margin: auto;
+    height: 369px; 
+    width: 60vw;
+}
+@media (min-width : 1000px) {
+    #map{
+        width: 40vw;
+    }
+}

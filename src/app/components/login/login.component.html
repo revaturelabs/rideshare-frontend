@@ -1,0 +1,46 @@
+<a (click)="openModal(template)">Login</a >
+<ng-template #template >
+<div class="container">
+    <div class="text-center" id="login-form">
+  <!-- <div class="form-group">
+             <div class="dropdown">
+                <label for="users">Select Account:</label><br>
+                <input type="text" placeholder="Select An Account" name="chosenUserFullName" [(ngModel)]="chosenUserFullName" (click)="toggleDropDown()" (ngModelChange)="searchAccount()" autocomplete="off"/>
+                <button type="button" class="dropbtn" (click)="toggleDropDown()"><small>▼</small></button>
+                <div class="dropdown-content" [ngStyle]="showDropDown? {'display': 'block'} : {'display': 'none'}">
+                    <button type="button" id="prev-btn" *ngIf="curPage>1" (click)="prevPage()">^</button>
+                    <div *ngFor="let user of users">
+                        <p (click)="changeUser(user)">{{user.firstName}} {{user.lastName}}: {{user.driver? "Driver" : "Rider"}}</p>
+                    </div>
+                    <button type="button" id="next-btn" *ngIf="curPage<totalPage" (click)="nextPage()">v</button>
+                </div>
+            </div> 
+        </div> -->
+       
+        <div class="modal-title-container">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+            <h4 class="modal-title">Login</h4>
+    </div>
+            <div class = "content">
+            <div class="form-group"><p  class="error">{{userNotFound}}</p></div>
+            <div class="form-group">
+              <label for="formGroupExampleInput">Username</label><br>
+              <input type="text" [(ngModel)]="userName" class="form-control" id="formGroupExampleInput" placeholder="Enter Username">
+              <p  class="error">{{usernameError}}</p>
+            </div>
+            <div class="form-group">
+              <label for="formGroupExampleInput2">Password</label><br>
+              <input type="password" [(ngModel)]="passWord" class="form-control" id="formGroupExampleInput2" placeholder="Enter Password">
+              <p  class="error">{{pwdError}}</p>
+            </div>
+          
+        <p class="alert alert-danger" *ngIf="failed"><strong>Login Failed!</strong></p>
+        <p class="alert alert-danger" *ngIf="banned"><strong>You are banned</strong></p>
+          <button type="submit" class="btn btn-primary" id="sign-in-btn" (click)="login()">Login</button>
+        <br><br>
+    </div>
+</div>
+</div>
+</ng-template> 

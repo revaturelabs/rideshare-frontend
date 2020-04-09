@@ -1,0 +1,77 @@
+<a (click)="openModal(template)">Sign up</a >
+  
+<ng-template #template >
+  <p *ngIf="success != ''" class="success">{{success}}</p>
+  <div class="modal-header">
+    <h4 class="modal-title">Sign Up</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <label for="firstname">First Name</label>
+    <input (keydown)="firstNameError = ''" id="firstname" type="text" [(ngModel)]="user.firstName" class="form-control" />
+    <p *ngIf="firstNameError != ''" class="error">{{firstNameError}}</p>
+
+    <label for="lastname">Last Name</label>
+    <input (keydown)="lastNameError = ''" id="lastname" type="text" [(ngModel)]="user.lastName" class="form-control" />
+    <p *ngIf="lastNameError != ''" class="error">{{lastNameError}}</p>
+
+    <label for="email">Email</label>
+    <input (keydown)="emailError = ''" id="email" type="email" [(ngModel)]="user.email" class="form-control"/>
+    <p *ngIf="emailError != ''" class="error">{{emailError}}</p>
+
+    <label for="phoneNumber">Phone Number</label>
+    <input (keydown)="phoneNumberError = ''" id="phoneNumber" type="text" [(ngModel)]="user.phoneNumber" class="form-control" />
+    <p *ngIf="phoneNumberError != ''" class="error">{{phoneNumberError}}</p>
+
+    <label for="userName">User Name</label>
+    <input (keydown)="userNameError = ''" id="userName" type="text" [(ngModel)]="user.userName" class="form-control" />
+    <p *ngIf="userNameError != ''" class="error">{{userNameError}}</p>
+
+    <!--<label for="password">Password</label>
+    <input id="password" type="password" [(ngModel)]="password" class="form-control" />-->
+
+    <label id="state">Batch</label>
+    <select class="form-control" [(ngModel)]="user.batch">
+          <option value="none" >  
+          </option>
+          <option *ngFor="let batch of batches" [ngValue]="batch">{{batch.batchNumber}} {{batch.batchLocation}}</option>
+    </select>
+
+    <label for="hAddress">Address</label>
+    <input (keydown)="hAddressError = ''" id="hAddress" type="text" [(ngModel)]="user.hAddress" class="form-control" />
+    <p *ngIf="hAddressError != ''" class="error">{{hAddressError}}</p>
+
+    <label id="hCity">City</label>
+    <input (keydown)="hCityError = ''" type="text" [(ngModel)]="user.hCity" class="form-control" />
+    <p *ngIf="hCityError != ''" class="error">{{hCityError}}</p>
+
+    <label id="hState">State</label>
+    <select (keydown)="hStateError = ''" class="form-control" [(ngModel)]="user.hState" id="hState" >
+            <option value="none" selected disabled hidden>  
+            </option>
+            <option *ngFor="let state of states" value="{{state}}">{{state}}</option>
+    </select>
+    <p *ngIf="hStateError != ''" class="error">{{hStateError}}</p>
+
+    <label id="hZip">Zip Code</label>
+    <input (keydown)="hZipError = ''" type="number" [(ngModel)]="user.hZip" class="form-control" />
+    <p *ngIf="hZipError != ''" class="error">{{hZipError}}</p>
+
+    <div class="radiobody">
+    <div class="btn-group" data-toggle="buttons">
+        <label class="btn btn-primary">
+          <input type="checkbox"  id="driver" [(ngModel)]="isDriver" /> Driver
+        </label>
+        <br>
+        <label class="btn btn-primary">
+          <input type="checkbox"  id="rider" [(ngModel)]="isRider"/> Rider
+        </label>
+  </div>
+    </div>
+    <div class="btn-container">
+      <button type="submit" class="btn btn-primary register" (click)="submitUser()">Submit</button>
+    </div>
+  </div>
+</ng-template> 

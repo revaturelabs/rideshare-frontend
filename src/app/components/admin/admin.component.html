@@ -1,0 +1,45 @@
+<h1 class="text-center"> Admin Portal</h1>
+
+<div class="container">
+
+<div class="row">
+  <div class="offset-lg-1 offset-sm-1 col-lg-9 col-sm-10">
+   <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Search by Username">
+
+ </div>
+  <div class="col-lg-2 col-sm-1">
+     <button class="btn btn-primary" type="button" (click)="searchUser()">search</button>
+  </div>
+</div>
+
+<br>
+
+  <table class="table table-bordered">
+    <caption hidden>Admin Portal</caption>
+    <tr>
+      <th scope="ID"> ID </th>
+      <th scope="UserName"> UserName </th>
+      <th scope="FirstName"> First Name </th>
+      <th scope="LastName"> Last Name </th>
+      <th scope="email"> Email </th>
+      <th scope="PhoneNumber"> Phone Number </th>
+      <th scope="BatchNumber"> Batch Number</th>
+      <th scope="isActive"> is Active </th>
+      <th scope="Ban"> Ban </th>
+    </tr>
+
+    <tr *ngFor="let user of users">
+      <td>{{user.userId}}</td>
+      <td>{{user.userName}}</td>
+      <td>{{user.firstName}}</td>
+      <td>{{user.lastName}}</td>
+      <td>{{user.email}}</td>
+      <td>{{user.phoneNumber}}</td>
+      <td *ngIf="user.batch">{{user.batch.batchNumber}}</td>
+      <td *ngIf="!user.batch">N/A</td>
+      <td>{{user.active}}</td>
+      <td><button [ngClass]="user.active? falsy : truthy" (click)="banning(user)">{{user.active? "Ban" : "UnBan"}}</button></td>
+    </tr>
+
+  </table>
+</div>

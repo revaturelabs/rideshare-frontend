@@ -1,0 +1,42 @@
+<div class="container">
+    <form class="form-group" id="sign-up-form">
+        <h3>Your Information</h3>
+        <div class="form-group">
+            <label for="userName">User Name </label><br>
+            <input id="userName" type="text" placeholder="User Name" [(ngModel)]="user.userName" name="userName"  autocomplete="off"><br>
+            <small *ngIf="user.userName && !validationService.validateUserName(user.userName)">User Name Should Be 3 to 8 Characters</small>
+        </div>
+        <div class="form-group">
+            <label for="firstName">First Name </label><br>
+            <input id="firstName" type="text" placeholder="First Name" [(ngModel)]="user.firstName" name="firstName" ><br>
+            <small *ngIf="user.firstName && !validationService.validateName(user.firstName)">Invalid Name</small>
+        </div>
+        <div class="form-group">
+            <label for="lastName">Last Name </label><br>
+            <input id="lastName" type="text" placeholder="Last Name" [(ngModel)]="user.lastName" name="lastName" ><br>
+            <small *ngIf="user.lastName && !validationService.validateName(user.lastName)">Invalid Name</small>
+        </div>
+        <div class="form-group">
+            <label for="email">Email </label><br>
+            <input id="email" type="email" placeholder="Email" [(ngModel)]="user.email" name="email" ><br>
+            <small *ngIf="user.email && !validationService.validateEmail(user.email)">Invalid Email</small>
+        </div>
+        <div class="form-group">
+            <label for="phone">Phone </label><br>
+            <input id="phone" type="tel" placeholder="Phone #" [(ngModel)]="user.phoneNumber" name="phone" ><br>
+            <small *ngIf="user.phoneNumber && !validationService.validatePhone(user.phoneNumber)">Invalid Phone Number</small>
+        </div>
+        <div class="form-group">
+            <label for="location">Location </label><br>
+            <select id="location" (change)='changeLocation($event)'>
+                <option *ngFor="let batch of batches" [value]="batch.batchNumber">{{batch.batchLocation}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <button id="sign-up-btn-rider" class="btn btn-primary" type="submit" (click)="signUpRider()" (keyup.enter)="signUpRider()" [disabled]="!(user.userName && user.firstName && user.lastName && user.email && user.phoneNumber)">Sign Up As Rider</button>
+        </div>
+        <div class="form-group">
+            <button id="sign-up-btn-driver" class="btn btn-primary" type="submit" (click)="signUpDriver()" (keyup.enter)="signUpDriver()" [disabled]="!(user.userName && user.firstName && user.lastName && user.email && user.phoneNumber)">Sign Up As Driver</button>
+        </div>
+    </form>
+</div>

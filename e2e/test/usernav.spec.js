@@ -1,6 +1,8 @@
 describe('User logged in nav bar tests', function(){
+     // these are html elements for reference during testing
     //beginning of elements for the login
     let elLoginButton = element(by.xpath('/html/body/app-root/app-home-page/div[1]/div/div/button[1]'));
+   // /html/body/app-root/app-home-page/div[1]/div/div/button[1]
     let elLoginUsername = element(by.xpath('//*[@id="formGroupExampleInput"]'));
     let elLoginPassword = element(by.xpath('//*[@id="formGroupExampleInput2"]'));
     let elLoginSubmit = element(by.xpath('//*[@id="sign-in-btn"]'));
@@ -31,6 +33,8 @@ describe('User logged in nav bar tests', function(){
         elLoginPassword.sendKeys('password');
         elLoginSubmit.click();
         //change this to reflect succesful login
+        browser.waitForAngular();
+        browser.ignoreSynchronization=true
         expect(elLoggedInHeader.getText()).toBe('Fabien Braunroth');
     });
 
@@ -60,36 +64,6 @@ describe('User logged in nav bar tests', function(){
         expect(elDriverHeader.getText()).toBe("Driver's List");
     });
 
-    /*----------------------------------------------------------------------------------------------
-
-    checks to make sure that the search button takes the user to the search drivers page on a larger screen
-    change when the front end is being hosted
-    */
-    it('User Presses the Search Button and goes to the driver search page on a laptop', function(){
-        browser.waitForAngular();
-        browser.ignoreSynchronization=true
-        browser.driver.manage().window().setSize(xComp,y);
-        elSearchButton.click();
-        expect(elSearchHeader.getText()).toBe('Revature RideForce');
-    });
-
-    //checks to make sure that the search button takes the user to the search drivers page on a smaller screen
-    //change when the front end is being hosted
-    it('User Presses the Search Button and goes to the driver search page on a phone', function(){
-        browser.waitForAngular();
-        browser.ignoreSynchronization=true
-        browser.driver.manage().window().setSize(xPhone,y);
-        elHamburger.click();
-        browser.driver.sleep(500);
-        elSearchButton.click();
-        expect(elSearchHeader.getText()).toBe('Revature RideForce');
-    });
-
-    /*-----------------------------------------------------------------------------------------
-
-    checks to make sure that the profile button takes the user to the profile page on a larger screen
-    change when the front end is being hosted
-    */
     it('User Presses the Profile button and goes to the Profile page on a laptop', function(){
         browser.waitForAngular();
         browser.ignoreSynchronization=true
@@ -98,29 +72,12 @@ describe('User logged in nav bar tests', function(){
         browser.waitForAngular();
         browser.ignoreSynchronization=true
         elProfileButton.click();
-        //enter expected toBe text when information is gained
-        expect(elProfileHeader.getText()).toBe('First Name:');
-    });
-
-    //checks to make sure that the profile button takes the user to the profile page on a smaller screen
-    //change when the front end is being hosted
-    it('User Presses the Profile Button and goes to the Profile page on a phone', function(){
-        browser.waitForAngular();
-        browser.ignoreSynchronization=true
-        browser.driver.manage().window().setSize(xPhone,y);
-        elHamburger.click();
         browser.driver.sleep(500);
-        elProfileDrop.click();
-        elProfileButton.click();
         //enter expected toBe text when information is gained
         expect(elProfileHeader.getText()).toBe('First Name:');
     });
 
-    /*-----------------------------------------------------------------------------------------
 
-    checks to make sure that the logout button returns to the homescreen
-    change when the front end is being hosted
-    */
     it('User Presses the Logout Button and goes to the Home page on a laptop', function(){
         browser.waitForAngular();
         browser.ignoreSynchronization=true
@@ -129,6 +86,7 @@ describe('User logged in nav bar tests', function(){
         browser.waitForAngular();
         browser.ignoreSynchronization=true
         elLogoutButton.click();
+        browser.driver.sleep(500);
         //enter expected toBe text when information is gained
         expect(elHomeHeader.getText()).toBe('RideForce');
     });

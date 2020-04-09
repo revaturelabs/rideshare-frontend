@@ -241,9 +241,9 @@
 
       <!-- This is the submit button. -->
       <div class="btn-container">
-        <button class="btn btn-primary register" type="submit" [disabled]="signUpForm.status=='VALID'">Submit</button>
+        <button class="btn btn-primary register" type="submit" [disabled]="this.signUpForm.status == 'INVALID'">Submit</button>
         <br />
-        <span *ngIf="signUpForm.status" class="help-block">*Required fields are not valid.</span>
+        <span *ngIf="this.signUpForm.status == 'INVALID'" class="help-block">Submit disabled: *Required fields are not valid.</span>
       </div>
     
     </form>

@@ -6,10 +6,9 @@ import { Registration } from 'src/app/models/registration';
 
 
 
-/*** I've got this fragile piece of shit to the point where if you are careful, 
-  you may create a consumable/transferable registration object upon submitting.
-  There are comments in the FormGroup code below that show how to finish off the 
-  validation.
+/*** I've got this fragile piece of shit to the point where if you are careful, you 
+  may create a consumable/transferable registration object upon submitting. There are 
+  comments in the FormGroup code below that show how to finish off the validation. 
   Other than that, the batch select element in the template needs to be completed.
  ***/
 
@@ -88,8 +87,23 @@ export class SignupModalComponent implements OnInit {
   }
 
   onSubmit() {
+    this.printSubmitLogs();
+    this.prepareModels();
+    
+    //WE MUST SEND THE this.registration OBJECT IN AN HTTP REQUEST TO THE BACKEND HERE.
+
+    this.flushData();
+  }
+
+  printSubmitLogs() {
+    //(TESTING)Log FormGroup validity.
+    console.log(this.signUpForm.status);
+    console.log("This evaluates to: " + Boolean(this.signUpForm.status == "INVALID"));
     //(TESTING)Log the FormGroup.
     console.log(this.signUpForm);
+  }
+
+  prepareModels() {
     //Prepare the Batch model to inject into the Registration model.
     this.batch = new Batch(
       this.signUpForm.value.batch, 
@@ -111,9 +125,9 @@ export class SignupModalComponent implements OnInit {
     );
     //(TESTING)Log the Registration model.
     console.log(this.registration);
-    
-    //WE MUST SEND THE this.registration OBJECT IN AN HTTP REQUEST TO THE BACKEND HERE.
+  }
 
+  flushData() {
     //Reset the address strings.
     this.addressLine = null;
     this.city = null;

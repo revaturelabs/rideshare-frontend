@@ -23,6 +23,7 @@ export class DriverListComponent implements OnInit {
   availableCars : Array<any> = [];
   availableSeats: Array<any> = [];
   drivers : Array<any> = [];
+  toDisplay : Array<any>;
 
 
   @ViewChild('map',null) mapElement: any;
@@ -160,42 +161,44 @@ displayDriversList(origin, drivers) {
           var originList = response.originAddresses;
           var destinationList = response.destinationAddresses;
           var results = response.rows[0].elements;
+
+          element.distance = results[0].distance.text;
+          element.duration = results[0].duration.text;
           //console.log(results[0].distance.text);
-          var name =  element.name;
+          // var name =  element.name;
           
           // probably to refactor this whole table business
-          outputDiv.innerHTML += `<tr><td class="col">${name}</td>
-                                  <td class="col">${results[0].distance.text}</td>
-                                  <td class="col">${element.seats}</td>
-                                  <td class="col">${results[0].duration.text}</td>
-                                  <td class="col">
-                                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCentered${element.id}"> View</button>
-                                    <div class="col-lg-5">
-                                     <div class="modal" id="exampleModalCentered${element.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true">
-                                      <div class="modal-dialog modal-dialog-centered" role="document">
-                                          <div class="modal-content">
-                                              <div class="modal-header">
-                                                  <h5 class="modal-title" id="exampleModalCenteredLabel">Contact Info:</h5>
-                                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                     <span aria-hidden="true">×</span>
-                                                   </button>
-                                              </div>
-                                              <div class="modal-body">
-                                                  <h1>${name}</h1>
-                                                  <h3>Email: ${element.email}</h3>         
-                                                  <h3>Phone: ${element.phone}</h3>                 
-                                              </div>
-                                              <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                              </div>
-                                            </div>
-                                         </div>
-                                       </div>
-                                  </div>
-                                  <div class="col-lg-6">
-                                      <div #maps id="gmap" class="img-responsive"></div>
-                                  </div>
-                                </td></tr>`;
+          // outputDiv.innerHTML += `<tr><td class="col">${name}</td>
+          //                         <td class="col">${results[0].distance.text}</td>
+          //                         <td class="col">${results[0].duration.text}</td>
+          //                         <td class="col">
+          //                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCentered${element.id}"> View</button>
+          //                           <div class="col-lg-5">
+          //                            <div class="modal" id="exampleModalCentered${element.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true">
+          //                             <div class="modal-dialog modal-dialog-centered" role="document">
+          //                                 <div class="modal-content">
+          //                                     <div class="modal-header">
+          //                                         <h5 class="modal-title" id="exampleModalCenteredLabel">Contact Info:</h5>
+          //                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          //                                            <span aria-hidden="true">×</span>
+          //                                          </button>
+          //                                     </div>
+          //                                     <div class="modal-body">
+          //                                         <h1>${name}</h1>
+          //                                         <h3>Email: ${element.email}</h3>         
+          //                                         <h3>Phone: ${element.phone}</h3>                 
+          //                                     </div>
+          //                                     <div class="modal-footer">
+          //                                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          //                                     </div>
+          //                                   </div>
+          //                                </div>
+          //                              </div>
+          //                         </div>
+          //                         <div class="col-lg-6">
+          //                             <div #maps id="gmap" class="img-responsive"></div>
+          //                         </div>
+          //                       </td></tr>`;
       }
     });
     

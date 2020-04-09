@@ -1,5 +1,6 @@
-<div class = "container">
+<div class = "container-fluid">
     <div class="row">
+    <div class="col-lg-2">sidebar</div>
     <div class="col-lg-5">
      <!--<div class="form-group">
         <h4>Origin</h4>
@@ -20,17 +21,51 @@
      <table class="table table-striped">
        <thead class="thead-dark">
          <tr>
-           <th scope="col">Name</th>
-           <th scope="col">Distance</th>
-           <th scope="col">Seats</th>
-           <th scope="col">Time</th>
-           <th scope="col">View Info</th>
+           <th scope="col" class="w-20">Name</th>
+           <th scope="col" class="w-20">Distance</th>
+           <th scope="col" class="w-20">Seats</th>
+           <th scope="col" class="w-20">Time</th>
+           <th scope="col" class="w-20">View Info</th>
          </tr>
        </thead>
-       <tbody id="output"></tbody>
+       <tbody id="output">
+         <tr *ngFor="let element of drivers">
+          <td class="col" class="w-25">{{element.name}}</td>
+          <td class="col" class="w-25">{{element.distance}}</td>
+          <td class="col" class="w-25">{{element.duration}}</td>
+          <td class="col" class="w-25">
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCentered${element.id}"> View</button>
+            <div class="col-lg-5">
+             <div class="modal" id="exampleModalCentered${element.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalCenteredLabel">Contact Info:</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                             <span aria-hidden="true">×</span>
+                           </button>
+                      </div>
+                      <div class="modal-body">
+                          <h1>{{element.name}}</h1>
+                          <h3>Email: {{element.email}}</h3>         
+                          <h3>Phone: {{element.phone}}</h3>                 
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                 </div>
+               </div>
+          </div>
+          <!-- <div class="col-lg-6">
+              <div #maps id="gmap" class="img-responsive"></div>
+          </div> -->
+        </td>
+         </tr>
+       </tbody>
       </table>
      </div>
-     <div class="col-lg-6">
+     <div class="col-lg-5">
        <h4>Directions:</h4>
        <div #map id="gmap" class="img-responsive"></div>
      </div>

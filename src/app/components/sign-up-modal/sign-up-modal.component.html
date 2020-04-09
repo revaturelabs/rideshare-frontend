@@ -90,7 +90,7 @@
       <div class="form-group">
         <label for="batch">Batch</label>
         <input
-          type="text"
+          type="drop-down"
           id="batch"
           formControlName="batch"
           class="form-control">
@@ -110,9 +110,11 @@
       <div class="form-group">
         <label for="hAddress">Address</label>
         <!-- Added OPTIONS binding, #PLACESREF reference, and ONADDRESSCHANGE event. -->
-        <input ngx-google-places-autocomplete [options]='options' #placesRef="ngx-places"
+        <input id="address" ngx-google-places-autocomplete [options]='options' #placesRef="ngx-places"
         class="form-control" (change)="handleAddressChange($event)"/>
-        <p>{{formattedAddress}}</p>
+        <control-messages [control]="signUpForm.get('address')"></control-messages>
+  
+        <!-- <p>{{formattedAddress}}</p> -->
       </div>
 
       <!-- This form group contains the CITY field input. -->

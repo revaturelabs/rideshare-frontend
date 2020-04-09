@@ -79,11 +79,17 @@ export class SignupModalComponent implements OnInit {
   //   })    
   // }
   this.signUpForm = new FormGroup({
-    'firstname': new FormControl('', Validators.required),
-    'lastname': new FormControl('', Validators.required),
-    'email': new FormControl('', Validators.required),
-    'phonenumber': new FormControl('', [Validators.required,ValidationService.phoneNumberValidator]),
-    'batch': new FormControl('', Validators.required),
+    'firstname': new FormControl('', [Validators.required,Validators.minLength(2),
+            Validators.maxLength(35), 
+            ValidationService.stringValidator]),
+    'lastname': new FormControl('', [Validators.required,Validators.minLength(5),
+            Validators.maxLength(35), 
+            ValidationService.stringValidator]),
+    'email': new FormControl('', [Validators.required,ValidationService.emailValidator]),
+    'phonenumber': new FormControl('', [Validators.required,ValidationService.phoneNumberValidator,Validators.minLength(10) ]),
+    'batch': new FormControl('', [Validators.required,Validators.maxLength(3)]),
+
+    //to be addressed *budump-ts 
     'address': new FormControl('', Validators.required),
     'city': new FormControl('', Validators.required),
    'state': new FormControl('', Validators.required),
@@ -115,9 +121,9 @@ export class SignupModalComponent implements OnInit {
     // this.submitted = true;
     console.log("welcome!"+this.signUpForm.value.firstname);
         // stop here if form is invalid
-        if (this.signUpForm.invalid) {
-            return;
-        }
+        // if (this.signUpForm.invalid) {
+        //     return;
+        // }
 
         // display form values on success
         alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.signUpForm.value, null, 4));

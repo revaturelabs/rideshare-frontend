@@ -21,7 +21,7 @@
   does not require any sort of reference to this form. The synchronized implementation 
   means that we can access the form from anywhere in the component. Remember that it is 
   accessed via the 'signUpForm' variable of type FormGroup.-->
-  <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+  <form  [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
 
       <!-- This form group contains the DRIVER / RIDER radio button input. -->
       <div class="form-group">
@@ -45,8 +45,10 @@
         <input
           type="text"
           id="firstname"
-          formControlName="firstname"
-          class="form-control">
+          class="form-control" 
+          name="firstname" 
+          formControlName="firstname" />
+        <control-messages [control]="signUpForm.get('firstname')"></control-messages>
       </div>
 
       <!-- This form group contains the LAST NAME field input. -->
@@ -55,8 +57,10 @@
         <input
           type="text"
           id="lastname"
-          formControlName="lastname"
-          class="form-control">
+          class="form-control" 
+          name="lastname" 
+          formControlName="lastname" />
+          <control-messages [control]="signUpForm.get('lastname')"></control-messages>
       </div>
 
       <!-- This form group contains the EMAIL field input. -->
@@ -65,18 +69,21 @@
         <input
           type="text"
           id="email"
-          formControlName="email"
-          class="form-control">
+           class="form-control"  
+           name="email"  
+           formControlName="email"/>
+           <control-messages [control]="signUpForm.get('email')"></control-messages>
       </div>
 
       <!-- This form group contains the PHONE NUMBER field input. -->
       <div class="form-group">
-        <label for="phoneNumber">Phone Number</label>
+        <label for="phonenumber">Phone Number</label>
         <input
           type="text"
           id="phonenumber"
           formControlName="phonenumber"
           class="form-control">
+        <control-messages [control]="signUpForm.get('phonenumber')"></control-messages>
       </div>
 
       <!-- This form group contains the BATCH select input. -->
@@ -87,6 +94,7 @@
           id="batch"
           formControlName="batch"
           class="form-control">
+        <control-messages [control]="signUpForm.get('batch')"></control-messages>
       </div>
 
 

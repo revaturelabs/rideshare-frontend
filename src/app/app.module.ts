@@ -40,7 +40,7 @@ import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
 //Add the GooglePlaceModule for simplistic implementation and configuration of autocomplete.
 //It is also imported in the imports array below.
 import { GooglePlaceModule } from "ngx-google-places-autocomplete";
-
+import { ControlMessagesComponent } from './control-messages.component';
 
 @NgModule({
   declarations: [
@@ -68,8 +68,8 @@ import { GooglePlaceModule } from "ngx-google-places-autocomplete";
     DriverListComponent,
     UserRegisterComponent,
     HomePageComponent,
-    BsNavbarComponent
-    
+    BsNavbarComponent,
+    ControlMessagesComponent
   ],
   imports: [
     BrowserModule,

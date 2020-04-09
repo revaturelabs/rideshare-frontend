@@ -1,18 +1,10 @@
-import { Component, OnInit, TemplateRef,Renderer2, Inject} from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { BsModalService, BsModalRef} from 'ngx-bootstrap';
-import { FormGroup, FormControl,FormBuilder, Validators } from '@angular/forms';
-import { GoogleApiService } from 'src/app/services/google-api.service';
-import { DOCUMENT } from '@angular/common';
-import { ValidationService } from '../../validation.service';
-
-/*** In this commit, I:
-  -downloaded the google places package by issuing "npm install ngx-google-places-autocomplete",
-  -imported GooglePlaceModule from "ngx-google-places-autocomplete",
-  -implemented the appropriate directive/event attributes/bindings in the address field input,
-  -and implemented the options object and the handleAddressChange() method, found below.
- ***/
-
-
+import { UserService } from 'src/app/services/user-service/user.service';
+import { User } from 'src/app/models/user';
+import { Batch } from 'src/app/models/batch';
+import { BatchService } from 'src/app/services/batch-service/batch.service';
+import { ValidationService } from 'src/app/services/validation-service/validation.service';
 
 @Component({
   selector: 'signupmodal',
@@ -20,108 +12,141 @@ import { ValidationService } from '../../validation.service';
   styleUrls: ['./sign-up-modal.component.css']
 })
 export class SignupModalComponent implements OnInit {
+  fname :string;
+  lname :string;
+  username :string;
+  email :string;
+  phone :string;
+  address :string;
+  isDriver: boolean;
+  isRider: boolean;
 
-  submitted = false;
-  signUpForm: FormGroup;
+  user :User = new User();
+  batch: Batch = new Batch();
+  batches: Batch[];
+  // validation
+  firstNameError :string;
+  lastNameError :string;
+  emailError :string;
+  phoneNumberError :string;
+  userNameError :string;
+  hAddressError :string;
+  hStateError :string;
+  hCityError :string;
+  hZipError :string;
+  
+  success :string;
+  //Store the retrieved template from the 'openModal' method for future use cases.
   modalRef :BsModalRef;
-
-  //This is where we are storing the address taken from the API.
-  formattedAddress: string;
-
-  //These options are not required, but they allow us to restrict the 
-  //search to our preferences.
-  options = {
-    componentRestrictions : {
-      country: ['US']
-    }
-  }
-
-  constructor(private modalService :BsModalService, private googleApi:GoogleApiService,  private renderer2: Renderer2,@Inject(DOCUMENT) private _document: Document, private formBuilder: FormBuilder ) { }
+  states = ['AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA','KS',
+            'KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY',
+            'NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV',
+            'WI','WY'];
+  constructor(private modalService :BsModalService, private userService :UserService, private batchService :BatchService, private validationService :ValidationService) { }
 
   ngOnInit() {
-  
+    this.userService.getAllUsers().subscribe(
+      res => {
+        //console.log(res);
+      }
+    );
 
-  //   const s = this.renderer2.createElement('script');
-  //   s.type = 'text/javascript';
-  // s.src = 'https://maps.googleapis.com/maps/api/js?key='+this.apiKey+'&libraries=places&language=en';
-  //   s.text = ``;
-  //   this.renderer2.appendChild(this._document.body, s);
-   
-  //   this.signUpForm = this.formBuilder.group({
-  //     'firstname': ['',[ 
-  //       Validators.required,
-  //       Validators.minLength(5),
-  //       Validators.maxLength(35), 
-  //       ValidationService.stringValidator
-  //     ]],
-  //     'lastname':['', [
-  //       Validators.required,
-  //       Validators.minLength(5),
-  //       Validators.maxLength(35), 
-  //       ValidationService.stringValidator
-  //     ]],
-  //     'email': ['',[
-  //       Validators.required,
-  //       ValidationService.emailValidator  
-  //     ]],
-  //     'phonenumber': ['',[
-  //       Validators.required,
-  //       Validators.minLength(10) ,
-  //       ValidationService.phoneNumberValidator
-  //     ]],
-  //     'batch': ['', Validators.required],
-  //     'address': ['', Validators.required],
-  //     'city': ['', Validators.required],
-  //     'state': ['', Validators.required],
-  //     'zipcode': ['', Validators.required],
-  //     'username':['', Validators.required],
-  //     'password': ['', Validators.required],
-  //   })    
-  // }
-  this.signUpForm = new FormGroup({
-    'firstname': new FormControl('', Validators.required),
-    'lastname': new FormControl('', Validators.required),
-    'email': new FormControl('', Validators.required),
-    'phonenumber': new FormControl('', [Validators.required,ValidationService.phoneNumberValidator]),
-    'batch': new FormControl('', Validators.required),
-    'address': new FormControl('', Validators.required),
-    'city': new FormControl('', Validators.required),
-   'state': new FormControl('', Validators.required),
-    'zipcode': new FormControl('', Validators.required),
-    'username': new FormControl('', Validators.required),
-    'password': new FormControl('', Validators.required)
-  })    
-}
+  this.batchService.getAllBatchesByLocation1().subscribe(
+      res => {
+         this.batches = res;
+          },
+      );
+  }
+  //Opens 'sign up' modal that takes in a template of type 'ng-template'.
 
-  // get f() { return this.signUpForm.controls; }
-
-  openModal(template :TemplateRef<any>) {
+  openModal(template :TemplateRef<any>){
     this.modalRef = this.modalService.show(template);
   }
 
-  //This method is called every time the change detection detects that 
-  //the address input field has changed.
-  public handleAddressChange(address: any) {
-    //The 'address.formattedAddress' is referenced directly from the 
-    //Google places API.
-    //You can see that we are setting our own variable 'formattedAddress' 
-    //equal to the value of the API's formattedAddress.
-    this.formattedAddress = address.formattedAddress;
+  submitUser() {
+    this.user.userId = 0;
+    this.firstNameError = '';
+    this.lastNameError = '';
+    this.phoneNumberError ='';
+    this.userNameError ='';
+    this.emailError ='';
+    this.hStateError='';
+    this.hAddressError='';
+    this.hCityError='';
+    this.hZipError='';
+    this.success='';
+    this.user.wAddress = this.user.hAddress;
+    this.user.wState = this.user.hState;
+    this.user.wCity = this.user.hCity;
+    this.user.wZip = this.user.hZip;
+    let driver = <HTMLInputElement> document.getElementById("driver");  
+    let rider = <HTMLInputElement> document.getElementById("rider");  
 
-
-  }
-
-  onSubmit() {
-    // this.submitted = true;
-    console.log("welcome!"+this.signUpForm.value.firstname);
-        // stop here if form is invalid
-        if (this.signUpForm.invalid) {
-            return;
+    if(driver.checked == true){
+      this.user.isDriver =  true;
+    }
+    if(rider.checked == true){
+      this.user.isDriver =  false;
+    }
+    //console.log(this.user);
+    this.userService.addUser(this.user).subscribe(
+      res => {
+        console.log(res);
+        let i = 0;
+        if(res.firstName != undefined){
+          this.firstNameError = res.firstName[0];
+          i = 1;
         }
+        if(res.lastName != undefined){
+          this.lastNameError = res.lastName[0];
+          i = 1;
+          
+        }
+        if(res.phoneNumber != undefined){
+          this.phoneNumberError = res.phoneNumber[0];
+          i = 1;
 
-        // display form values on success
-        alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.signUpForm.value, null, 4));
-    
-  }
+        }
+        if(res.email != undefined){
+          this.emailError = res.email[0];
+          i = 1;
 
-}
+        }
+        if(res.userName != undefined){
+          this.userNameError = res.userName[0];
+          i = 1;
+
+        }
+        if(res.hState != undefined){
+          this.hStateError = res.hState[0];
+          i = 1;
+
+        }
+        if(res.hAddress != undefined){
+          this.hAddressError = res.hAddress[0];
+          i = 1;
+
+        }
+        if(res.hCity != undefined){
+          this.hCityError = res.hCity[0];
+          i = 1;
+
+        }
+        if(res.hZip != undefined){
+          this.hZipError = res.hZip[0];
+          i = 1;
+
+        }
+        if(i === 0) {
+          i = 0;
+          this.success = "Registered successfully!";
+        }
+      } 
+      /*res => {
+        console.log("failed to add user");
+        console.log(res);
+      }*/
+    );
+  
+    }
+    }

@@ -24,9 +24,9 @@ describe('Sign Up tests', function(){
         expect(elRegisterHeader.getText()).toBe('Sign Up');
     });
 
+
     it ('Close sign up modal', function() {
         elClose.click();
         expect(elPageHead.getText()).toBe('RideForce');
-
     });
 });

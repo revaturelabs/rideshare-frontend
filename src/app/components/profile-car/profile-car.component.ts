@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CarService } from 'src/app/services/car-service/car.service';
 import { Car } from 'src/app/models/car';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-profile-car',
@@ -9,6 +10,7 @@ import { Car } from 'src/app/models/car';
 })
 export class ProfileCarComponent implements OnInit {
 
+  carInfo: FormGroup;
   make: string;
   model:string;
   nrSeats:number;
@@ -32,9 +34,12 @@ export class ProfileCarComponent implements OnInit {
     this.currentCar.make = this.make;
     this.currentCar.model= this.model;
     this.currentCar.seats = this.nrSeats;
+    console.log(this.nrSeats);
     //console.log(this.currentUser);
-    this.carService.updateCarInfo(this.currentCar);
+    this.carService.updateCarInfo(this.currentCar.carId, this.currentCar);
     this.success = "Updated Successfully!";
   }
+
+  
 
 }

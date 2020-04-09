@@ -39,6 +39,8 @@ export class DriverListComponent implements OnInit {
            res.forEach(element => {
               this.drivers.push({
                    'id': element.userId,
+                   'modalButtonId': `#modal${element.userId}`,
+                   'modalId': `modal${element.userId}`,
                  'name': element.firstName+" "+element.lastName,
                'origin':element.hCity+","+element.hState, 
                 'email': element.email, 

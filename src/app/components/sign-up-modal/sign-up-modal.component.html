@@ -23,20 +23,11 @@
   accessed via the 'signUpForm' variable of type FormGroup.-->
   <form  [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
 
-      <!-- This form group contains the DRIVER / RIDER radio button input. -->
-      <div class="form-group">
-        <div class="radiobody">
-          <div class="btn-group" data-toggle="buttons">
-              <!--DRIVER button-->
-              <label class="btn btn-primary">
-                <input type="checkbox"  id="driver"/> Driver
-              </label>
-              <!--RIDER button-->
-              <label class="btn btn-primary">
-                <input type="checkbox"  id="rider"/> Rider
-              </label>
-          </div>
-        </div>
+      <!-- This is the DRIVER / RIDER button group. -->
+      <!-- It doesn't require validation, because it is boolean. -->
+      <div class="btn-group" role="group">
+        <button type="button" class="btn btn-primary">Driver</button>
+        <button type="button" class="btn btn-primary">Rider</button>
       </div>
 
       <!-- This form group contains the FIRST NAME field input. -->
@@ -110,37 +101,43 @@
       <div class="form-group">
         <label for="hAddress">Address</label>
         <!-- Added OPTIONS binding, #PLACESREF reference, and ONADDRESSCHANGE event. -->
-        <input id="address" ngx-google-places-autocomplete [options]='options' #placesRef="ngx-places"
-        class="form-control" (change)="handleAddressChange($event)"/>
-        <control-messages [control]="signUpForm.get('address')"></control-messages>
-  
-        <!-- <p>{{formattedAddress}}</p> -->
+        <input id="address"
+          ngx-google-places-autocomplete 
+          [options]='options' 
+          #placesRef="ngx-places"
+          (change)="handleAddressChange($event)" 
+          class="form-control"/>
+          <control-messages [control]="signUpForm.get('address')"></control-messages>
       </div>
 
       <!-- This form group contains the CITY field input. -->
       <div class="form-group">
         <label id="hCity">City</label>
         <input
+          readonly
           type="text"
           id="city"
           formControlName="city"
-          class="form-control">
+          class="form-control" 
+          value="{{city}}">
       </div>
 
       <!-- This form group contains the STATE field input. -->
       <div class="form-group">
         <label id="hState">State</label>
         <input
+          readonly
           type="text"
           id="state"
           formControlName="state"
-          class="form-control">
+          class="form-control" 
+          value="{{state}}">
       </div>
 
       <!-- This form group contains the ZIP CODE field input. -->
       <div class="form-group">
         <label id="hZip">Zip Code</label>
-        <input
+        <input 
           type="text"
           id="zipcode"
           formControlName="zipcode"

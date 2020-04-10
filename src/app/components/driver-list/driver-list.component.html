@@ -17,54 +17,67 @@
       </div>
       <p id="total"></p>-->
       <h4>Driver's List</h4>
-      
-     <table class="table table-striped">
-       <thead class="thead-dark">
-         <tr>
-           <th scope="col" class="w-20">Name</th>
-           <th scope="col" class="w-20">Distance</th>
-           <th scope="col" class="w-20">Seats</th>
-           <th scope="col" class="w-20">Time</th>
-           <th scope="col" class="w-20">View Info</th>
-         </tr>
-       </thead>
-       <tbody id="output">
-         <tr *ngFor="let element of drivers">
-          <td class="col" class="w-20">{{element.name}}</td>
-          <td class="col" class="w-20">{{element.distance}}</td>
-          <td class="col" class="w-20">{{element.seats}}</td>
-          <td class="col" class="w-20">{{element.duration}}</td>
-          <td class="col" class="w-20">
-          <button type="button" class="btn btn-primary" data-toggle="modal" [attr.data-target]="element.modalButtonId"> View</button>
-            <div class="col-lg-5">
-             <div class="modal" [attr.id]="element.modalId" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered" role="document">
-                  <div class="modal-content">
-                      <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalCenteredLabel">Contact Info:</h5>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                             <span aria-hidden="true">×</span>
-                           </button>
-                      </div>
-                      <div class="modal-body">
-                          <h1>{{element.name}}</h1>
-                          <h3>Email: {{element.email}}</h3>         
-                          <h3>Phone: {{element.phone}}</h3>                 
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                      </div>
-                    </div>
-                 </div>
-               </div>
-          </div>
-          <!-- <div class="col-lg-6">
-              <div #maps id="gmap" class="img-responsive"></div>
-          </div> -->
-        </td>
-         </tr>
-       </tbody>
-      </table>
+      <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" class="table table-striped">
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef class="bg-dark text-white"> Name </th>
+            <td mat-cell *matCellDef="let element">{{element.name}}</td>
+          </ng-container>
+    
+          <!-- Distance Column -->
+          <ng-container matColumnDef="distance">
+            <th mat-header-cell *matHeaderCellDef class="bg-dark text-white"> Distance </th>
+            <td mat-cell *matCellDef="let element">{{element.distance}}</td>
+          </ng-container>
+    
+          <!-- Seats Column -->
+          <ng-container matColumnDef="seats">
+            <th mat-header-cell *matHeaderCellDef class="bg-dark text-white"> Seats </th>
+            <td mat-cell *matCellDef="let element">{{element.seats}}</td>
+          </ng-container>
+    
+          <!-- Duration Column -->
+          <ng-container matColumnDef="duration">
+            <th mat-header-cell *matHeaderCellDef class="bg-dark text-white"> Duration </th>
+            <td mat-cell *matCellDef="let element">{{element.duration}}</td>
+          </ng-container>
+    
+          <!-- Modal Button Column -->
+          <ng-container matColumnDef="modal">
+            <th mat-header-cell *matHeaderCellDef class="bg-dark text-white"> Contact </th>
+            <td mat-cell *matCellDef="let element">
+              <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" [attr.data-target]="element.modalButtonId"> View</button>
+                <div class="col-lg-5">
+                 <div class="modal" [attr.id]="element.modalId" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalCenteredLabel">Contact Info:</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                 <span aria-hidden="true">×</span>
+                               </button>
+                          </div>
+                          <div class="modal-body">
+                              <h1>{{element.name}}</h1>
+                              <h3>Email: {{element.email}}</h3>         
+                              <h3>Phone: {{element.phone}}</h3>                 
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          </div>
+                        </div>
+                     </div>
+                   </div>
+              </div>
+            </td>
+          </ng-container>
+    
+          <tr mat-header-row *matHeaderRowDef="displayedColumns" class="bg-dark text-white"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+
      </div>
      <div class="col-lg-5">
        <h4>Directions:</h4>
@@ -72,3 +85,6 @@
      </div>
     </div>
   </div>
+
+
+

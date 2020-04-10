@@ -26,7 +26,10 @@ export class DriverListComponent implements OnInit {
   availableCars : Array<any> = [];
   availableSeats: Array<any> = [];
   drivers : Array<any> = [];
-  toDisplay : Array<any>;
+
+
+  displayedColumns: string[] = ['name', 'distance', 'seats', 'duration', 'modal'];
+  dataSource = new MatTableDataSource();
 
 
   @ViewChild('map',null) mapElement: any;
@@ -76,7 +79,7 @@ export class DriverListComponent implements OnInit {
     this.drivers.push({'id': '3','name': 'Bobbie sfsBowden','origin':'Texas, TX', 'email': 'bobbie@gmail.com', 'phone':'555-555-5555'});
     this.drivers.push({'id': '4','name': 'Les Miles','origin':'New York, NY', 'email': 'les@gmail.com', 'phone':'555-555-5555'});
     this.drivers.push({'id': '5','name': 'Bear Bryant','origin':'Arkansas, AR', 'email': 'bear@gmail.com', 'phone':'555-555-5555'});*/
-    console.log(this.drivers);
+    // console.log(this.drivers);
 
     this.getGoogleApi();
 
@@ -89,6 +92,9 @@ export class DriverListComponent implements OnInit {
       this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapProperties);
       //get all routes 
       this.displayDriversList(this.location, this.drivers);
+
+      this.dataSource.data = this.drivers;
+      
       //show drivers on map
       this.showDriversOnMap(this.location, this.drivers);
     });
@@ -169,6 +175,8 @@ displayDriversList(origin, drivers) {
 
           element.distance = results[0].distance.text;
           element.duration = results[0].duration.text;
+
+          
           //console.log(results[0].distance.text);
           // var name =  element.name;
           

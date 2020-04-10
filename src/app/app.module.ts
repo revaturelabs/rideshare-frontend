@@ -39,6 +39,7 @@ import { HomePageComponent } from './components/home-page/home-page.component';
 import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
 
 import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 
 
@@ -80,7 +81,8 @@ import {MatTableModule} from '@angular/material/table';
     FormsModule,
     ModalModule.forRoot(),
     NgbModule,
-    MatTableModule
+    MatTableModule,
+    MatPaginatorModule
   ],
   providers: [
     UserService,

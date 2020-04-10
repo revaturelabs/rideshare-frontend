@@ -34,6 +34,7 @@ export class DriverListComponent implements OnInit {
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild('map',null) mapElement: any;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
   map: google.maps.Map;
 
   constructor(private http: HttpClient,private userService: UserService, private carService: CarService) { }
@@ -41,6 +42,7 @@ export class DriverListComponent implements OnInit {
   ngOnInit() {
     this.drivers = [];
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
 
     this.userService.getAllDrivers().subscribe(
       res => {
@@ -97,6 +99,35 @@ export class DriverListComponent implements OnInit {
 
       this.dataSource.data = this.drivers;
       
+      // since all data is stored as a string, need to convert data in the column to a unified format when sorting
+      this.dataSource.sortingDataAccessor = (item, property) => {
+        switch(property) {
+          case 'distance': {
+            // remove everything that's not a number or decimal point, then convert to a number.
+            return Number(item[property].replace(/[^0-9.]/g, ''));
+          }
+          case 'duration': {
+            // split the trip duration into length and units of time
+            let splitDur = item[property].split(' ');
+            let durInMinutes = 0;
+            for(let i = 1; i < splitDur.length; i+=2) {
+              // splitDur[i] represents the unit of time, use this to determine how to convert the quantity into minutes.
+              if(splitDur[i].includes('d')) 
+                durInMinutes += Number(splitDur[i-1]) * 1440;
+              else if (splitDur[i].includes('h'))
+                durInMinutes += Number(splitDur[i-1]) * 60;
+              else
+                durInMinutes += Number(splitDur[i-1])
+            }
+            return durInMinutes;
+          }
+          default: {
+            // all other columns are readily sortable, don't change their format.
+            return item[property];
+          }
+        }
+      }
+
       //show drivers on map
       this.showDriversOnMap(this.location, this.drivers);
     });
@@ -219,5 +250,7 @@ displayDriversList(origin, drivers) {
     
    });
 }
+
+// sortDistance(distance: string) 
 
 }

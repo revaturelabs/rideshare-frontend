@@ -7,10 +7,7 @@ import { User } from 'src/app/models/user';
 
 
 
-/*** I've got this fragile piece of shit to the point where if you are careful, you 
-  may create a consumable/transferable registration object upon submitting. There are 
-  comments in the FormGroup code below that show how to finish off the validation. 
-  Other than that, the batch select element in the template needs to be completed.
+/*** 
  ***/
 
 
@@ -98,10 +95,7 @@ export class SignupModalComponent implements OnInit {
   onSubmit() {
     this.printSubmitLogs();
     this.prepareModels();
-    
-    //WE MUST SEND THE this.registration OBJECT IN AN HTTP REQUEST TO THE BACKEND HERE.
-    
-
+    this.sendFormHttpPost();
     this.flushData();
   }
 
@@ -146,6 +140,7 @@ export class SignupModalComponent implements OnInit {
       //      THE BACKEND IS EXPECTING A SPECIFIC OBJECT WITH SPECIFIC PARAMETERS.
       //      USER IS ALSO A DEPENDENCY OF OTHER COMPONENTS IN THE FRONTEND, SO DON'T ADD A PARAMETERIZED CONSTRUCTOR.
     //(TESTING)Log the Registration model.
+    console.log("Sending this user object: " + this.user);
     console.log(this.user);
   }
 

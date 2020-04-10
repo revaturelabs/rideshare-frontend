@@ -6,6 +6,7 @@ import { DOCUMENT } from '@angular/common';
 import { ValidationService } from '../../validation.service';
 import {Batch} from 'src/app/models/batch';
 import { BatchService } from 'src/app/services/batch-service/batch.service';
+import { Registration } from 'src/app/models/registration';
 /*** In this commit, I:
   -downloaded the google places package by issuing "npm install ngx-google-places-autocomplete",
   -imported GooglePlaceModule from "ngx-google-places-autocomplete",
@@ -22,20 +23,20 @@ import { BatchService } from 'src/app/services/batch-service/batch.service';
 })
 export class SignupModalComponent implements OnInit {
 
-  submitted = false;
+  //FormGroup and bootstrap css modal.
   signUpForm: FormGroup;
   modalRef :BsModalRef;
-
-   //Here is where we are storing our collected ADDRESSLINE, CITY, and STATE
-  //from the address object emitted by 
+  //Imported models to assemble a User.
+  batch: Batch;
+  registration: Registration;
+  //Non-FormGroup form items.
+  isDriver: boolean = null;
   addressLine: string;
   city: string;
   state: string;
-
-//for batch grabbing
-batches:Batch[];
-
-options = {
+  batches:Batch[];
+  //Google places autocomplete options.
+  options = {
     componentRestrictions : {
       country: ['US']
     }
@@ -64,10 +65,10 @@ options = {
     'batch': new FormControl('', [Validators.required,Validators.maxLength(3)]),
 
     //to be addressed *budump-ts 
-    'address': new FormControl('', Validators.required),
-    'city': new FormControl('', Validators.required),
-   'state': new FormControl('', Validators.required),
-    'zipcode': new FormControl('', Validators.required),
+    'address': new FormControl(''),
+    'city': new FormControl(''),
+   'state': new FormControl(''),
+    'zipcode': new FormControl('', [Validators.required,Validators.minLength(5)] ),
     'username': new FormControl('', Validators.required),
     'password': new FormControl('', Validators.required)
   })    
@@ -81,31 +82,23 @@ options = {
     this.batches=this.batches;
   }
 
-  /*** The handleAddressChange method is receiving the fleeting object of 
-    type "changes" (some kind of google crap which I currently couldn't 
-    care less about).
-    When I examined the object as JSON in the console, I found (among 
-    the vast amount of data about our webpage that it collected) this 
-    srcElement's value field is the only pertinent data we can collect 
-    and use. ***/
-  public handleAddressChange(address: any) {
-    //The 'address.formattedAddress' is referenced directly from the 
-    //Google places API.
-    //You can see that we are setting our own variable 'formattedAddress' 
-    //equal to the value of the API's formattedAddress.
+  setDriver(){
+    if(!this.isDriver){
+      this.isDriver=true;
+      console.log("Registerer is a driver.");
+    }
+  }
+  setRider(){
+    if(this.isDriver||this.isDriver==null){
+      this.isDriver=false;
+      console.log("Registerer is a rider.");
+    }
+  }
 
-//Capture the address source element value in a string.
-    let addressVal = address.srcElement.value;
-    
-    //Split the string by comma followed by whitespace up to three times.
-    //Capture the resulting strings in SPLITTED string array.
-    let splitted = addressVal.split(", ", 3);
-    
-    //Capture the ADDRESSLINE in a variable.
+  public handleAddressChange(address: any) {
+    let splitted = (address.srcElement.value).split(", ", 3);
     this.addressLine = splitted[0];
-    //Capture the CITY in a variable.
     this.city = splitted[1];
-    //Capture the STATE in a variable.
     this.state = splitted[2];
   }
 
@@ -118,8 +111,59 @@ options = {
         // }
 
         // display form values on success
-        alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.signUpForm.value, null, 4));
+       
     
+    this.printSubmitLogs();
+    this.prepareModels();
+    
+    //WE MUST SEND THE this.registration OBJECT IN AN HTTP REQUEST TO THE BACKEND HERE.
+    alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registration, null, 4));
+    // this.flushData();
+   
+  }
+
+  printSubmitLogs() {
+    //(TESTING)Log FormGroup validity.
+    console.log(this.signUpForm.status);
+    console.log("This evaluates to: " + Boolean(this.signUpForm.status == "INVALID"));
+    //(TESTING)Log the FormGroup.
+    console.log(this.signUpForm);
+  }
+
+  prepareModels() {
+    //Prepare the Batch model to inject into the Registration model.
+    this.batch =
+      this.signUpForm.value.batch;
+    //Prepare the Registration.
+    this.registration = new Registration(
+      this.batch,
+      this.isDriver,
+      this.signUpForm.value.firstname,
+      this.signUpForm.value.lastname,
+      this.signUpForm.value.email,
+      this.signUpForm.value.phonenumber,
+      this.addressLine,
+      this.city,
+      this.state,
+      this.signUpForm.value.zipcode,
+      this.signUpForm.value.username,
+      this.signUpForm.value.password
+    );
+    //(TESTING)Log the Registration model.
+    console.log(this.registration);
+    
+  }
+
+  flushData() {
+    //Reset the address strings.
+    this.addressLine = null;
+    this.city = null;
+    this.state = null;
+    //Reset the form.
+    this.signUpForm.reset();
+    //Free the models.
+    this.registration = null;
+    this.batch = null;
   }
 
 }

@@ -21,13 +21,13 @@
   does not require any sort of reference to this form. The synchronized implementation 
   means that we can access the form from anywhere in the component. Remember that it is 
   accessed via the 'signUpForm' variable of type FormGroup.-->
-  <form  [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+  <form  [formGroup]="signUpForm" ngValidate (ngSubmit)="onSubmit()">
 
       <!-- This is the DRIVER / RIDER button group. -->
       <!-- It doesn't require validation, because it is boolean. -->
       <div class="btn-group" role="group">
-        <button type="button" class="btn btn-primary">Driver</button>
-        <button type="button" class="btn btn-primary">Rider</button>
+        <button type="button" class="btn btn-primary" (click)="setDriver()">Driver</button>
+        <button type="button" class="btn btn-primary" (click)="setRider()">Rider</button>
       </div>
 
       <!-- This form group contains the FIRST NAME field input. -->
@@ -40,7 +40,11 @@
           name="firstname" 
           formControlName="firstname" />
         <control-messages [control]="signUpForm.get('firstname')"></control-messages>
-      </div>
+        <span 
+        *ngIf="!signUpForm.get('firstname').valid && signUpForm.get('firstname').touched"
+        class="help-block">This field is required.
+      </span>
+        </div>
 
       <!-- This form group contains the LAST NAME field input. -->
       <div class="form-group">
@@ -52,7 +56,11 @@
           name="lastname" 
           formControlName="lastname" />
           <control-messages [control]="signUpForm.get('lastname')"></control-messages>
-      </div>
+          <span 
+          *ngIf="!signUpForm.get('lastname').valid && signUpForm.get('lastname').touched"
+          class="help-block">This field is required.
+        </span>
+        </div>
 
       <!-- This form group contains the EMAIL field input. -->
       <div class="form-group">
@@ -64,7 +72,11 @@
            name="email"  
            formControlName="email"/>
            <control-messages [control]="signUpForm.get('email')"></control-messages>
-      </div>
+           <span 
+           *ngIf="!signUpForm.get('email').valid && signUpForm.get('email').touched"
+           class="help-block">This field is required.
+         </span>
+          </div>
 
       <!-- This form group contains the PHONE NUMBER field input. -->
       <div class="form-group">
@@ -75,18 +87,13 @@
           formControlName="phonenumber"
           class="form-control">
         <control-messages [control]="signUpForm.get('phonenumber')"></control-messages>
+        <span 
+        *ngIf="!signUpForm.get('phonenumber').valid && signUpForm.get('phonenumber').touched"
+        class="help-block">This field is required.
+      </span>
       </div>
 
-      <!-- This form group contains the BATCH select input. -->
-      <!-- <div class="form-group">
-        <label for="batch">Batch</label>
-        <input
-          type="drop-down"
-          id="batch"
-          formControlName="batch"
-          class="form-control">
-        <control-messages [control]="signUpForm.get('batch')"></control-messages>
-      </div> -->
+      
       <div class="form-group">
         <select id="batch" formControlName="batch" class="form-control" >
           <option value="" disabled>Choose your Batch</option>
@@ -94,6 +101,10 @@
           {{batch.batchLocation}}</option>
         </select>
         <control-messages [control]="signUpForm.get('batch')"></control-messages>
+        <span 
+        *ngIf="!signUpForm.get('batch').valid && signUpForm.get('batch').touched"
+        class="help-block">This field is required.
+      </span>
       </div>
 
 
@@ -106,15 +117,31 @@
 
       <!-- This form group contains the ADDRESS field input. -->
       <div class="form-group">
-        <label for="hAddress">Address</label>
-        <!-- Added OPTIONS binding, #PLACESREF reference, and ONADDRESSCHANGE event. -->
-        <input id="address"
+        <label for="autoplaces">Address</label>
+        <input 
+          id="autoplaces" 
+          formControlName="address"
           ngx-google-places-autocomplete 
           [options]='options' 
           #placesRef="ngx-places"
           (change)="handleAddressChange($event)" 
           class="form-control"/>
-          <!-- <control-messages [control]="signUpForm.get('address')"></control-messages> -->
+        <!-- Validation. -->
+        <span 
+          *ngIf="this.city==null && signUpForm.get('address').touched"
+          class="help-block">Use autocomplete to generate your address.
+        </span>
+      </div>
+
+
+      <div class="form-group">
+        <label for="address">Address line</label>
+        <input
+          readonly
+          type="text"
+          id="address"
+          class="form-control" 
+          placeholder="{{addressLine}}">
       </div>
 
       <!-- This form group contains the CITY field input. -->
@@ -131,24 +158,29 @@
 
       <!-- This form group contains the STATE field input. -->
       <div class="form-group">
-        <label id="hState">State</label>
+        <label for="state">State</label>
         <input
           readonly
           type="text"
           id="state"
           formControlName="state"
           class="form-control" 
-          value="{{state}}">
+          placeholder="{{state}}">
       </div>
 
       <!-- This form group contains the ZIP CODE field input. -->
       <div class="form-group">
-        <label id="hZip">Zip Code</label>
+        <label for="zipcode">Zip Code</label>
         <input 
           type="text"
           id="zipcode"
           formControlName="zipcode"
           class="form-control">
+        <!-- Validation. -->
+        <span 
+          *ngIf="!signUpForm.get('zipcode').valid && signUpForm.get('zipcode').touched"
+          class="help-block">This field is required.
+        </span>
       </div>
 
 
@@ -162,12 +194,17 @@
 
       <!-- This form group contains the USERNAME field input. -->
       <div class="form-group">
-        <label for="userName">User Name</label>
+        <label for="username">User Name</label>
         <input
           type="text"
           id="username"
           formControlName="username"
           class="form-control">
+        <!-- Validation. -->
+        <span 
+          *ngIf="!signUpForm.get('username').valid && signUpForm.get('username').touched"
+          class="help-block">This field is required.
+        </span>
       </div>
 
       <!-- This form group contains the PASSWORD field input. -->
@@ -178,11 +215,19 @@
           id="password"
           formControlName="password"
           class="form-control">
+        <!-- Validation. -->
+        <span 
+          *ngIf="!signUpForm.get('password').valid && signUpForm.get('password').touched"
+          class="help-block">This field is required.
+        </span>
       </div>
 
-      <div class="btn-container">
-        <input class="btn btn-primary register" type="submit" value="Submit"/>
-      </div>
+            <!-- This is the submit button. -->
+            <div class="btn-container">
+              <button class="btn btn-primary register" type="submit" [disabled]="this.signUpForm.status == 'INVALID'">Submit</button>
+              <br />
+              <span *ngIf="this.signUpForm.status == 'INVALID'" class="help-block">Submit disabled: *Required fields are not valid.</span>
+            </div>
     
     </form>
 

@@ -17,6 +17,12 @@
     z-index: 1055 !important;
 }
 
+/*  These styles are to format the help-block messages for form validation.*/
+.help-block {
+    font-size: 15px;
+    color: red;
+}
+
 .signup{
     cursor:pointer;
     display:inline-block;

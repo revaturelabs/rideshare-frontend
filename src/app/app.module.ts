@@ -40,6 +40,7 @@ import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
 
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -82,7 +83,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     ModalModule.forRoot(),
     NgbModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    BrowserAnimationsModule
   ],
   providers: [
     UserService,

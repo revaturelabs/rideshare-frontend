@@ -37,14 +37,15 @@ const routes: Routes = [
   {path: 'signup', component: SignupModalComponent},
   {path: 'landingPage', component: LandingPageComponent},
   {path: 'drivers', component: DriverListComponent},
-{path: 'profile/contact', component: ProfileContactComponent},
-{path: 'profile/car', component: ProfileCarComponent},
-{path: 'profile/membership', component: ProfileMembershipComponent},
-{path: 'profile/location', component: ProfileLocationComponent},
-{path: 'driver', component: DriverContactModalComponent},
-{path: 'navbar', component: NavbarComponent},
-{path: '', component: HomePageComponent},
-{path: '**', pathMatch: 'full', redirectTo: ''}];
+  {path: 'profile/contact', component: ProfileContactComponent},
+  {path: 'profile/car', component: ProfileCarComponent},
+  {path: 'profile/membership', component: ProfileMembershipComponent},
+  {path: 'profile/location', component: ProfileLocationComponent},
+  {path: 'driver', component: DriverContactModalComponent},
+  {path: 'navbar', component: NavbarComponent},
+  {path: '', component: HomePageComponent},
+  {path: '**', pathMatch: 'full', redirectTo: ''}
+];
 
 
 @NgModule({

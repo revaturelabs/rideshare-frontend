@@ -1,9 +1,7 @@
-
-<a (click)="openModal(template)">Sign up</a >
+<a (click)="openModal(template)">Sign up</a>
   
 <!-- Maintain this template so that we may reference it without having to refactor the way the page works -->
-<ng-template #template >
-
+<ng-template #template>
   <p *ngIf="success != ''" class="success">{{success}}</p>
   
   <div class="modal-header">
@@ -16,15 +14,14 @@
   <div class="modal-body">
 
 
-  <!-- Added the ngSubmit directive here, which calls the onSubmit() function
-  whenever the form is submitted. Because we are using the reactive form, onSubmit 
-  does not require any sort of reference to this form. The synchronized implementation 
-  means that we can access the form from anywhere in the component. Remember that it is 
-  accessed via the 'signUpForm' variable of type FormGroup.-->
-  <form  [formGroup]="signUpForm" ngValidate (ngSubmit)="onSubmit()">
+
+    <!-- THE CONTENT OF THE CODE WE ARE RESPONSIBLE FOR STARTS HERE.
+    NOTE THAT IT'S WITHIN THE MODAL BODY AND CAN BE TRANSFERRED EASILY IF WE OPT TO RID OURSELVES OF THE MODAL. -->
+    <form  [formGroup]="signUpForm" ngValidate (ngSubmit)="onSubmit()">
+
+
 
       <!-- This is the DRIVER / RIDER button group. -->
-      <!-- It doesn't require validation, because it is boolean. -->
       <div class="btn-group" role="group">
         <button type="button" class="btn btn-primary" (click)="setDriver()">Driver</button>
         <button type="button" class="btn btn-primary" (click)="setRider()">Rider</button>
@@ -39,12 +36,11 @@
           class="form-control" 
           name="firstname" 
           formControlName="firstname" />
-        <control-messages [control]="signUpForm.get('firstname')"></control-messages>
         <span 
-        *ngIf="!signUpForm.get('firstname').valid && signUpForm.get('firstname').touched"
-        class="help-block">This field is required.
-      </span>
-        </div>
+          *ngIf="!signUpForm.get('firstname').valid && signUpForm.get('firstname').touched"
+          class="help-block">This field is required.
+        </span>
+      </div>
 
       <!-- This form group contains the LAST NAME field input. -->
       <div class="form-group">
@@ -55,12 +51,11 @@
           class="form-control" 
           name="lastname" 
           formControlName="lastname" />
-          <control-messages [control]="signUpForm.get('lastname')"></control-messages>
-          <span 
+        <span 
           *ngIf="!signUpForm.get('lastname').valid && signUpForm.get('lastname').touched"
           class="help-block">This field is required.
         </span>
-        </div>
+      </div>
 
       <!-- This form group contains the EMAIL field input. -->
       <div class="form-group">
@@ -68,17 +63,16 @@
         <input
           type="text"
           id="email"
-           class="form-control"  
-           name="email"  
-           formControlName="email"/>
-           <control-messages [control]="signUpForm.get('email')"></control-messages>
-           <span 
-           *ngIf="!signUpForm.get('email').valid && signUpForm.get('email').touched"
-           class="help-block">This field is required.
-         </span>
-          </div>
+          class="form-control"  
+          name="email"  
+          formControlName="email"/>
+        <span 
+          *ngIf="!signUpForm.get('email').valid && signUpForm.get('email').touched"
+          class="help-block">This field is required.
+        </span>
+      </div>
 
-      <!-- This form group contains the PHONE NUMBER field input. -->
+      <!-- This form group contains the PHONENUMBER field input. -->
       <div class="form-group">
         <label for="phonenumber">Phone Number</label>
         <input
@@ -86,26 +80,32 @@
           id="phonenumber"
           formControlName="phonenumber"
           class="form-control">
-        <control-messages [control]="signUpForm.get('phonenumber')"></control-messages>
         <span 
-        *ngIf="!signUpForm.get('phonenumber').valid && signUpForm.get('phonenumber').touched"
-        class="help-block">This field is required.
-      </span>
+          *ngIf="!signUpForm.get('phonenumber').valid && signUpForm.get('phonenumber').touched"
+          class="help-block">This field is required.
+        </span>
       </div>
 
-      
+      <!-- This form group contains the BATCH select input. -->
       <div class="form-group">
-        <select id="batch" formControlName="batch" class="form-control" >
-          <option value="" disabled>Choose your Batch</option>
+        <select 
+          id="batch" 
+          formControlName="batch" 
+          class="form-control">
+          <!-- The nested option elements are generated via this ngFor directive. -->
+          <option value="" disabled>
+            Choose your Batch
+          </option>
           <option *ngFor="let batch of batches">
-          {{batch.batchNumber}}.{{batch.batchLocation}}</option>
+            {{batch.batchNumber}}. {{batch.batchLocation}}
+          </option>
         </select>
-        <control-messages [control]="signUpForm.get('batch')"></control-messages>
         <span 
-        *ngIf="!signUpForm.get('batch').valid && signUpForm.get('batch').touched"
-        class="help-block">This field is required.
-      </span>
+          *ngIf="!signUpForm.get('batch').valid && signUpForm.get('batch').touched"
+          class="help-block">This field is required.
+        </span>
       </div>
+
 
 
       <!-- This HORIZONTAL line spans 4 grids of the parent container to organize the form information into segments -->
@@ -134,9 +134,8 @@
         </span>
       </div>
 
-
-
       <!-- This form group contains the ADDRESS field input. -->
+      <!-- READONLY -->
       <div class="form-group">
         <label for="address">Address line</label>
         <input
@@ -148,6 +147,7 @@
       </div>
 
       <!-- This form group contains the CITY field input. -->
+      <!-- READONLY -->
       <div class="form-group">
         <label id="hCity">City</label>
         <input
@@ -160,6 +160,7 @@
       </div>
 
       <!-- This form group contains the STATE field input. -->
+      <!-- READONLY -->
       <div class="form-group">
         <label for="state">State</label>
         <input
@@ -179,7 +180,6 @@
           id="zipcode"
           formControlName="zipcode"
           class="form-control">
-        <!-- Validation. -->
         <span 
           *ngIf="!signUpForm.get('zipcode').valid && signUpForm.get('zipcode').touched"
           class="help-block">This field is required.
@@ -203,7 +203,6 @@
           id="username"
           formControlName="username"
           class="form-control">
-        <!-- Validation. -->
         <span 
           *ngIf="!signUpForm.get('username').valid && signUpForm.get('username').touched"
           class="help-block">This field is required.
@@ -218,24 +217,24 @@
           id="password"
           formControlName="password"
           class="form-control">
-        <!-- Validation. -->
         <span 
           *ngIf="!signUpForm.get('password').valid && signUpForm.get('password').touched"
           class="help-block">This field is required.
         </span>
       </div>
 
-            <!-- This is the submit button. -->
-            <div class="btn-container">
-              <button class="btn btn-primary register" type="submit" [disabled]="!this.signUpForm.status == 'INVALID'">Submit</button>
-              <br />
-              <span *ngIf="this.signUpForm.status == 'INVALID'" class="help-block">Submit disabled: *Required fields are not valid.</span>
-            </div>
+      <!-- This is the submit button. -->
+      <div class="btn-container">
+        <button class="btn btn-primary register" type="submit" [disabled]="this.signUpForm.status == 'INVALID'">Submit</button>
+        <br />
+        <span *ngIf="this.signUpForm.status == 'INVALID'" class="help-block">Submit disabled: *Required fields are not valid.</span>
+      </div>
     
+
+
     </form>
 
 
-
+    
   </div>
-</ng-template> 
-
+</ng-template>

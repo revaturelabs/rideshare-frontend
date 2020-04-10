@@ -13,6 +13,7 @@ import { environment } from '../../../environments/environment';
 
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
+import {MatPaginator} from '@angular/material/paginator';
 
 @Component({
   selector: 'app-driver-list',
@@ -31,7 +32,7 @@ export class DriverListComponent implements OnInit {
   displayedColumns: string[] = ['name', 'distance', 'seats', 'duration', 'modal'];
   dataSource = new MatTableDataSource();
 
-
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild('map',null) mapElement: any;
   map: google.maps.Map;
 
@@ -39,6 +40,7 @@ export class DriverListComponent implements OnInit {
 
   ngOnInit() {
     this.drivers = [];
+    this.dataSource.paginator = this.paginator;
 
     this.userService.getAllDrivers().subscribe(
       res => {

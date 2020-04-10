@@ -98,7 +98,7 @@
         <select id="batch" formControlName="batch" class="form-control" >
           <option value="" disabled>Choose your Batch</option>
           <option *ngFor="let batch of batches">
-          {{batch.batchLocation}}</option>
+          {{batch.batchNumber}}.{{batch.batchLocation}}</option>
         </select>
         <control-messages [control]="signUpForm.get('batch')"></control-messages>
         <span 
@@ -224,7 +224,7 @@
 
             <!-- This is the submit button. -->
             <div class="btn-container">
-              <button class="btn btn-primary register" type="submit" [disabled]="this.signUpForm.status == 'INVALID'">Submit</button>
+              <button class="btn btn-primary register" type="submit" [disabled]="!this.signUpForm.status == 'INVALID'">Submit</button>
               <br />
               <span *ngIf="this.signUpForm.status == 'INVALID'" class="help-block">Submit disabled: *Required fields are not valid.</span>
             </div>

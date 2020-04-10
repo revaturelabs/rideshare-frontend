@@ -5,6 +5,7 @@ import { GoogleApiService } from 'src/app/services/google-api.service';
 import { DOCUMENT } from '@angular/common';
 import { ValidationService } from '../../validation.service';
 import {Batch} from 'src/app/models/batch';
+import {User} from 'src/app/models/user';
 import { BatchService } from 'src/app/services/batch-service/batch.service';
 import { Registration } from 'src/app/models/registration';
 /*** In this commit, I:
@@ -28,6 +29,8 @@ export class SignupModalComponent implements OnInit {
   modalRef :BsModalRef;
   //Imported models to assemble a User.
   batch: Batch;
+  batchNumber: Number;
+  batchLocation:String;
   registration: Registration;
   //Non-FormGroup form items.
   isDriver: boolean = null;
@@ -57,17 +60,17 @@ export class SignupModalComponent implements OnInit {
     'firstname': new FormControl('', [Validators.required,Validators.minLength(2),
             Validators.maxLength(35), 
             ValidationService.stringValidator]),
-    'lastname': new FormControl('', [Validators.required,Validators.minLength(5),
+    'lastname': new FormControl('', [Validators.required,Validators.minLength(2),
             Validators.maxLength(35), 
             ValidationService.stringValidator]),
     'email': new FormControl('', [Validators.required,ValidationService.emailValidator]),
     'phonenumber': new FormControl('', [Validators.required,ValidationService.phoneNumberValidator,Validators.minLength(10) ]),
-    'batch': new FormControl('', [Validators.required,Validators.maxLength(3)]),
+    'batch': new FormControl('', [Validators.required]),
 
     //to be addressed *budump-ts 
     'address': new FormControl(''),
     'city': new FormControl(''),
-   'state': new FormControl(''),
+    'state': new FormControl(''),
     'zipcode': new FormControl('', [Validators.required,Validators.minLength(5)] ),
     'username': new FormControl('', Validators.required),
     'password': new FormControl('', Validators.required)
@@ -103,24 +106,16 @@ export class SignupModalComponent implements OnInit {
   }
 
   onSubmit() {
-    // this.submitted = true;
-    console.log("welcome!"+this.signUpForm.value.address);
-        // stop here if form is invalid
-        // if (this.signUpForm.invalid) {
-        //     return;
-        // }
+   let batchSplit = this.signUpForm.value.batch.split(".",2);
+   this.batchNumber=batchSplit[0];
+   this.batchLocation=batchSplit[1];
+    console.log(this.batchNumber);
+    console.log(this.batchLocation);
+   // this.printSubmitLogs();
+  //  this.prepareModels();
 
-        // display form values on success
-       
-    
-    this.printSubmitLogs();
-    this.prepareModels();
-    
-    //WE MUST SEND THE this.registration OBJECT IN AN HTTP REQUEST TO THE BACKEND HERE.
-    alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registration, null, 4));
-    // this.flushData();
    
-  }
+  } 
 
   printSubmitLogs() {
     //(TESTING)Log FormGroup validity.
@@ -130,29 +125,31 @@ export class SignupModalComponent implements OnInit {
     console.log(this.signUpForm);
   }
 
-  prepareModels() {
-    //Prepare the Batch model to inject into the Registration model.
-    this.batch =
-      this.signUpForm.value.batch;
-    //Prepare the Registration.
-    this.registration = new Registration(
-      this.batch,
-      this.isDriver,
-      this.signUpForm.value.firstname,
-      this.signUpForm.value.lastname,
-      this.signUpForm.value.email,
-      this.signUpForm.value.phonenumber,
-      this.addressLine,
-      this.city,
-      this.state,
-      this.signUpForm.value.zipcode,
-      this.signUpForm.value.username,
-      this.signUpForm.value.password
-    );
-    //(TESTING)Log the Registration model.
-    console.log(this.registration);
+  // prepareModels() {
+  //   //Prepare the Batch model to inject into the Registration model.
+  //   // this.batch.batchNumber =
+  //   //   this.signUpForm.value.batch;
+  //   //Prepare the Registration.
+  //   this.registration = new Registration(
+  //     this.batch,
+  //     this.isDriver,
+  //     this.signUpForm.value.firstname,
+  //     this.signUpForm.value.lastname,
+  //     this.signUpForm.value.email,
+  //     this.signUpForm.value.phonenumber,
+  //     this.addressLine,
+  //     this.city,
+  //     this.state,
+  //     this.signUpForm.value.zipcode,
+  //     this.signUpForm.value.username,
+  //     this.signUpForm.value.password
+  //   );
+
+
+  //   //(TESTING)Log the Registration model.
+  //   console.log(this.registration);
     
-  }
+  // }
 
   flushData() {
     //Reset the address strings.
@@ -165,5 +162,4 @@ export class SignupModalComponent implements OnInit {
     this.registration = null;
     this.batch = null;
   }
-
 }

@@ -19,7 +19,7 @@ export class Registration {
     password: string;
 
 
-
+/*
     constructor(a:Batch, b:boolean, c:string, d:string, e:string, f:string, g:string, h:string, i:string, j:string, k:string, l:string) {
         //Inject the batch... sigh*
         this.batch = a;
@@ -38,5 +38,5 @@ export class Registration {
         this.username = k;
         this.password = l;
     }
-
+*/
 }

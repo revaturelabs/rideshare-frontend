@@ -120,12 +120,13 @@
 
 
 
-      <!-- This form group contains the ADDRESS field input. -->
+      <!-- This form group contains the AUTOPLACES field input. -->
       <div class="form-group">
         <label for="autoplaces">Address</label>
         <input 
           id="autoplaces" 
-          formControlName="address"
+          formControlName="address" 
+          placeholder="{{addressLine}}" 
           ngx-google-places-autocomplete 
           [options]='options' 
           #placesRef="ngx-places"
@@ -140,7 +141,7 @@
 
 
 
-      <!-- This form group contains the CITY field input. -->
+      <!-- This form group contains the ADDRESS field input. -->
       <div class="form-group">
         <label for="address">Address line</label>
         <input

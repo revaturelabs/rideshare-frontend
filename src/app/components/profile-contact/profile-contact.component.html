@@ -1,15 +1,15 @@
-
 <div class="container mainContainer">
     
     <i class="fa fa-user" style="font-family:'FontAwesome';"></i>
        
         <h4>Contact Information:</h4>
-    
+        <form [formGroup] = "profileContact" (ngSubmit)="updatesContactInfo()">
         <div class="form-group row">
             <div class="col-sm-1"></div>
                 <label for="f_name" class="col-sm-4 col-form-label">First Name:</label>
                 <div class="col-sm-4">
-                    <input type="text" class="form-control" id="f_name" [(ngModel)]=firstName value="{{ profileObject?.firstName }}">
+                    <input type="text" class="form-control" id="f_name" [(ngModel)]=profileContact.value.firstName formControlName="firstName" required>
+                    <div *ngIf="!validInput.firstName.valid && !validInput.firstName.untouched" class="text-danger">Required</div>
                 </div>
         </div>
         
@@ -17,15 +17,17 @@
                 <div class="col-sm-1"></div>
             <label for="l_name" class="col-sm-4 col-form-label">Last Name:</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" id="l_name" [(ngModel)]=lastName value="{{ profileObject?.lastName }}">
+                <input type="text" class="form-control" id="l_name" [(ngModel)]=profileContact.value.lastName formControlName="lastName" required>
+                <div *ngIf="!validInput.lastName.valid && !validInput.lastName.untouched" class="text-danger">Required</div>
             </div>
         </div>
     
         <div class="form-group row">
                 <div class="col-sm-1"></div>
             <label for="user_email" class="col-sm-4 col-form-label">Email:</label>
-            <div class="col-sm-4">
-                <input type="email" class="form-control" id="user_email" aria-describedby="emailHelp" [(ngModel)]=email value="{{ profileObject?.email }}">
+            <div class="col-sm-4">  
+                <input type="text" class="form-control" id="user_email" [(ngModel)]=profileContact.value.email formControlName="email" required>
+                <div *ngIf="!validInput.email.valid && !validInput.email.untouched" class="text-danger">Required</div> 
             </div>
         </div>
     
@@ -33,13 +35,11 @@
                 <div class="col-sm-1"></div>
             <label for="phone" class="col-sm-4 col-form-label">Phone:</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" id="phone" [(ngModel)]=phone value="{{ profileObject?.phoneNumber }}">
-                <p *ngIf="success != ''" class="success">{{success}}</p>
+                <input type="text" class="form-control" id="phone" [(ngModel)]=profileContact.value.phone formControlName="phone" required>
+                <div *ngIf="!validInput.phone.valid && !validInput.phone.untouched" class="text-danger">Required</div> 
             </div>
         </div>
         
-        <button type="submit" class="btn btn-primary myBtn" (click)="updatesContactInfo()">Save</button>
+        <button type="submit" class="btn btn-primary myBtn">Save</button>
+    </form>
     </div>
-  
-        
-    

@@ -25,7 +25,7 @@ export class ProfileComponent implements OnInit {
   /**
    * A GET method that retrieves user's information
    */
-
+//bind the current user's driver status to this.isDriver
   this.userService.getUserById2(sessionStorage.getItem("userid")).subscribe((response)=>{
     this.isDriver = response.driver;
 })

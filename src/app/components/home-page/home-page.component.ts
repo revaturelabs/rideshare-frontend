@@ -14,4 +14,12 @@ export class HomePageComponent implements OnInit {
     
   }
 
+  changeInvoked() {
+
+  }
+  
+  keyupInvoked() {
+
+  }
+
 }

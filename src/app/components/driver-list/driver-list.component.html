@@ -76,6 +76,8 @@
           <tr mat-header-row *matHeaderRowDef="displayedColumns" class="bg-dark text-white"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
+        <!-- to add page size options simply put 5,10 inside the brackets or howerver many
+        you would like to add. -->
         <mat-paginator [pageSizeOptions]="[5]" showFirstLastButtons></mat-paginator>
       </div>
 

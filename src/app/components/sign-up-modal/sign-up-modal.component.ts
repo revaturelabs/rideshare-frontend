@@ -40,6 +40,8 @@ export class SignupModalComponent implements OnInit {
   city: string;
   state: string;
 
+
+
   constructor(private modalService :BsModalService, private userService: UserService, private batchService:BatchService ) { }
 
   ngOnInit() {
@@ -181,7 +183,7 @@ export class SignupModalComponent implements OnInit {
   prepareModels() {
     this.user = new User();
       this.user.batch = this.batch;
-      this.user.isDriver = this.isDriver;
+      this.user.driver = this.isDriver;
       this.user.firstName = this.signUpForm.value.firstname;
       this.user.lastName = this.signUpForm.value.lastname;
       this.user.email = this.signUpForm.value.email;

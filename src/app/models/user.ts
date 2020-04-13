@@ -10,7 +10,7 @@ export class User {
     lastName: string;
     email: string;
     phoneNumber: string;
-    isDriver: boolean;
+    driver: boolean;
     hState: string;
     hAddress: string;
     hCity: string;

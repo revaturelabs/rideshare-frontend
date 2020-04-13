@@ -24,6 +24,9 @@ import { AdminLoginComponent } from './components/admin-login/admin-login.compon
 import { DriverInfoComponent } from './components/driver-info/driver-info.component';
 import { LandingComponent } from './components/landing/landing.component';
 import { SignupModalComponent } from './components/sign-up-modal/sign-up-modal.component';
+//GOOGLE PLACES API ADDRESS FIELD.
+import { AutocompleteComponent } from './components/address-field/address-field.component';
+
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { ProfileContactComponent } from './components/profile-contact/profile-contact.component';
 import { ProfileCarComponent } from './components/profile-car/profile-car.component';
@@ -57,6 +60,7 @@ import { ControlMessagesComponent } from './control-messages.component';
     DriverInfoComponent,
     LandingComponent,
     SignupModalComponent,
+    AutocompleteComponent,
     LandingPageComponent,
     ProfileContactComponent,
     ProfileCarComponent,
@@ -79,7 +83,7 @@ import { ControlMessagesComponent } from './control-messages.component';
     FormsModule,
     ModalModule.forRoot(),
     NgbModule,
-    //Here.
+    //THIS MODULE IS FROM THE GOOGLE PLACES NGX WRAPPER.
     GooglePlaceModule
   ],
   providers: [

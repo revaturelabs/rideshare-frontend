@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user-service/user.service';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  constructor( private router: Router) { }
+  constructor( private router: Router, private userService: UserService) { }
   showCont :boolean = false;
   showCar :boolean = false;
   showLocation :boolean = false;
@@ -17,11 +18,17 @@ export class ProfileComponent implements OnInit {
   location :string = '';
   membership :string = '';
 
+  isDriver:boolean;
+
   ngOnInit() {
     this.showCont = true;
   /**
    * A GET method that retrieves user's information
    */
+
+  this.userService.getUserById2(sessionStorage.getItem("userid")).subscribe((response)=>{
+    this.isDriver = response.driver;
+})
 }
   showContact() {
     this.showCont = true;
@@ -62,6 +69,7 @@ export class ProfileComponent implements OnInit {
 
   showCarInfo(){
     this.showCont = false;
+    
     this.showCar = true;
     this.showLocation = false;
     this.showMemberInfo = false;

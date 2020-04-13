@@ -3,6 +3,7 @@ import { CarService } from 'src/app/services/car-service/car.service';
 import { Car } from 'src/app/models/car';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Validators } from '@angular/forms';
+import { UserService } from 'src/app/services/user-service/user.service';
 @Component({
   selector: 'app-profile-car',
   templateUrl: './profile-car.component.html',
@@ -22,34 +23,37 @@ export class ProfileCarComponent implements OnInit {
     nrSeats: new FormControl("", Validators.required )
   });
 
+  userHasCar = true;
 
-  constructor(private carService: CarService) { }
+
+  constructor(private carService: CarService, private userService: UserService) { }
 
   ngOnInit() {
 
-    this.carService.getCarByUserId2(sessionStorage.getItem("userid")).subscribe((response)=>{
+    this.userService.getUserById2(sessionStorage.getItem("userid")).subscribe((response)=>{
+        console.log(response)
+    })
 
+
+    this.carService.getCarByUserId2(sessionStorage.getItem("userid")).subscribe((response)=>{
+      
       if(response != null){
         this.profileForm = new FormGroup({
           make: new FormControl(response.make, Validators.required),
           model: new FormControl(response.model),
           nrSeats: new FormControl(response.seats)
         });
+
+        this.userHasCar=true;
       }
       else{
         this.success ="No car information is found"
-      }
- 
-      
+        this.userHasCar = false;
+      }   
       this.currentCar = response;
     }, error=>{
 
     });
-
-
-    console.log(this.validInput)
-
-
   }
 
   updatesCarInfo(){

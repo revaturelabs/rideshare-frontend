@@ -22,6 +22,25 @@
                 <div *ngIf="!validInput.model.valid && !validInput.model.untouched" class="text-danger">Model required</div>
             </div>
         </div>
+
+        <div class="form-group row">
+            <div class="col-sm-1"></div>
+        <label for="color" class="col-sm-4 col-form-label">Color:</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" id="color" [(ngModel)]=profileForm.value.color formControlName="color" required>
+            <div *ngIf="!validInput.color.valid && !validInput.color.untouched" class="text-danger">Color required</div>
+        </div>
+    </div>
+
+        <div class="form-group row">
+            <div class="col-sm-1"></div>
+        <label for="year" class="col-sm-4 col-form-label">Year:</label>
+        <div class="col-sm-4">
+            <input type="number" class="form-control" id="year" [(ngModel)]=profileForm.value.year formControlName="year" required>
+            <div *ngIf="!validInput.year.valid && !validInput.year.untouched" class="text-danger">Year required</div>
+            <div *ngIf="validInput.year.value.toString().length != 4 && !validInput.year.untouched" class="text-danger">Year must be 4 digits</div>
+        </div>
+    </div>
         
         <div class="form-group row">
             <div class="col-sm-1"></div>

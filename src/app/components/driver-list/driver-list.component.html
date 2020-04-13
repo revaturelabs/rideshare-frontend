@@ -18,28 +18,28 @@
       <p id="total"></p>-->
       <h4>Driver's List</h4>
       <div class="mat-elevation-z8">
-        <table mat-table [dataSource]="dataSource" class="table table-striped">
+        <table mat-table [dataSource]="dataSource" matSort class="table table-striped">
           <!-- Name Column -->
           <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef class="bg-dark text-white"> Name </th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="bg-dark text-white"> Name </th>
             <td mat-cell *matCellDef="let element">{{element.name}}</td>
           </ng-container>
     
           <!-- Distance Column -->
           <ng-container matColumnDef="distance">
-            <th mat-header-cell *matHeaderCellDef class="bg-dark text-white"> Distance </th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="bg-dark text-white"> Distance </th>
             <td mat-cell *matCellDef="let element">{{element.distance}}</td>
           </ng-container>
     
           <!-- Seats Column -->
           <ng-container matColumnDef="seats">
-            <th mat-header-cell *matHeaderCellDef class="bg-dark text-white"> Seats </th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="bg-dark text-white"> Seats </th>
             <td mat-cell *matCellDef="let element">{{element.seats}}</td>
           </ng-container>
     
           <!-- Duration Column -->
           <ng-container matColumnDef="duration">
-            <th mat-header-cell *matHeaderCellDef class="bg-dark text-white"> Duration </th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="bg-dark text-white"> Duration </th>
             <td mat-cell *matCellDef="let element">{{element.duration}}</td>
           </ng-container>
     

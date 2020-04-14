@@ -27,7 +27,11 @@ export class DriverListComponent implements OnInit {
   availableCars : Array<any> = [];
   availableSeats: Array<any> = [];
   drivers : Array<any> = [];
-
+  //In miles
+  maxDistance : number = 60;
+  //In mins
+  maxTime : number = 60;
+  minAvailableSeats: number = 1;
 
   displayedColumns: string[] = ['name', 'distance', 'seats', 'duration', 'modal'];
   dataSource = new MatTableDataSource();
@@ -49,41 +53,19 @@ export class DriverListComponent implements OnInit {
            //console.log(res);
            res.forEach(element => {
               this.drivers.push({
-                   'id': element.userId,
-                   'modalButtonId': `#modal${element.userId}`,
-                   'modalId': `modal${element.userId}`,
-                 'name': element.firstName+" "+element.lastName,
-               'origin':element.hCity+","+element.hState, 
-                'email': element.email, 
+                'id': element.userId,
+                'modalButtonId': `#modal${element.userId}`,
+                'modalId': `modal${element.userId}`,
+                'name': element.firstName+" "+element.lastName,
+                'origin':element.hCity+","+element.hState,
+                'email': element.email,
                 'phone':element.phoneNumber,
                 'seats': element.car.seats
-                
 
-                
               });
           });
 
       });
-
-    // this.userService.getRidersForLocation1(this.location).subscribe(
-    //   res => {
-    //        //console.log(res);
-    //        res.forEach(element => {
-    //           this.drivers.push({
-    //                'id': element.userId,
-    //              'name': element.firstName+" "+element.lastName,
-    //            'origin':element.hCity+","+element.hState, 
-    //             'email': element.email, 
-    //             'phone':element.phoneNumber
-    //           });
-    //       });
-    //   });
-    /*this.drivers.push({'id': '1','name': 'Ed Ogeron','origin':'Reston, VA', 'email': 'ed@gmail.com', 'phone':'555-555-5555'});
-    this.drivers.push({'id': '2','name': 'Nick Saban','origin':'Oklahoma, OK', 'email': 'nick@gmail.com', 'phone':'555-555-5555'});
-    this.drivers.push({'id': '3','name': 'Bobbie sfsBowden','origin':'Texas, TX', 'email': 'bobbie@gmail.com', 'phone':'555-555-5555'});
-    this.drivers.push({'id': '4','name': 'Les Miles','origin':'New York, NY', 'email': 'les@gmail.com', 'phone':'555-555-5555'});
-    this.drivers.push({'id': '5','name': 'Bear Bryant','origin':'Arkansas, AR', 'email': 'bear@gmail.com', 'phone':'555-555-5555'});*/
-    // console.log(this.drivers);
 
     this.getGoogleApi();
 
@@ -94,11 +76,11 @@ export class DriverListComponent implements OnInit {
          mapTypeId: google.maps.MapTypeId.ROADMAP
       };
       this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapProperties);
-      //get all routes 
+      //get all routes
       this.displayDriversList(this.location, this.drivers);
 
       this.dataSource.data = this.drivers;
-      
+
       // since all data is stored as a string, need to convert data in the column to a unified format when sorting
       this.dataSource.sortingDataAccessor = (item, property) => {
         switch(property) {
@@ -107,19 +89,7 @@ export class DriverListComponent implements OnInit {
             return Number(item[property].replace(/[^0-9.]/g, ''));
           }
           case 'duration': {
-            // split the trip duration into length and units of time
-            let splitDur = item[property].split(' ');
-            let durInMinutes = 0;
-            for(let i = 1; i < splitDur.length; i+=2) {
-              // splitDur[i] represents the unit of time, use this to determine how to convert the quantity into minutes.
-              if(splitDur[i].includes('d')) 
-                durInMinutes += Number(splitDur[i-1]) * 1440;
-              else if (splitDur[i].includes('h'))
-                durInMinutes += Number(splitDur[i-1]) * 60;
-              else
-                durInMinutes += Number(splitDur[i-1])
-            }
-            return durInMinutes;
+            return this.durationInMins(item)
           }
           default: {
             // all other columns are readily sortable, don't change their format.
@@ -131,12 +101,34 @@ export class DriverListComponent implements OnInit {
       //show drivers on map
       this.showDriversOnMap(this.location, this.drivers);
     });
+
+    this.dataSource.filterPredicate = (data, filter) => {
+
+      let values = filter.split(" ");
+      let maxDistance = Number(values[0]);
+      let maxTime = Number(values[1]);
+      let minAvailableSeats = Number(values[2]);
+
+      let value:boolean = true;
+
+      if (this.maxDistance > 0){
+        value = value && Number(data["distance"].replace(/[^0-9.]/g, '')) <= maxDistance;
+      }
+      if (this.maxTime > 0){
+        value = value && this.durationInMins(data) <= maxTime;
+      }
+      if(this.minAvailableSeats > 0){
+        value = value && data["seats"] >= minAvailableSeats;
+      }
+      return value;
+    }
+
   }
 
   sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
-  
+
 getGoogleApi()  {
     this.http.get(`${environment.loginUri}getGoogleApi`)
        .subscribe(
@@ -147,9 +139,9 @@ getGoogleApi()  {
                            let script: HTMLScriptElement = document.createElement('script');
                            script.addEventListener('load', r => resolve());
                            script.src = `http://maps.googleapis.com/maps/api/js?key=${response["googleMapAPIKey"][0]}`;
-                           document.head.appendChild(script);      
-                     }); 
-               }    
+                           document.head.appendChild(script);
+                     });
+               }
            }
        );
    }
@@ -181,6 +173,21 @@ displayRoute(origin, destination, service, display) {
     });
   }
 
+durationInMins(item){
+  // split the trip duration into length and units of time
+  let splitDur = item['duration'].split(' ');
+  let durInMinutes = 0;
+  for(let i = 1; i < splitDur.length; i+=2) {
+    // splitDur[i] represents the unit of time, use this to determine how to convert the quantity into minutes.
+    if(splitDur[i].includes('d'))
+      durInMinutes += Number(splitDur[i-1]) * 1440;
+    else if (splitDur[i].includes('h'))
+      durInMinutes += Number(splitDur[i-1]) * 60;
+    else
+      durInMinutes += Number(splitDur[i-1])
+  }
+  return durInMinutes;
+}
 
 displayDriversList(origin, drivers) {
     let  origins = [];
@@ -209,48 +216,13 @@ displayDriversList(origin, drivers) {
           element.distance = results[0].distance.text;
           element.duration = results[0].duration.text;
 
-          
-          //console.log(results[0].distance.text);
-          // var name =  element.name;
-          
-          // probably to refactor this whole table business
-          // outputDiv.innerHTML += `<tr><td class="col">${name}</td>
-          //                         <td class="col">${results[0].distance.text}</td>
-          //                         <td class="col">${results[0].duration.text}</td>
-          //                         <td class="col">
-          //                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCentered${element.id}"> View</button>
-          //                           <div class="col-lg-5">
-          //                            <div class="modal" id="exampleModalCentered${element.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true">
-          //                             <div class="modal-dialog modal-dialog-centered" role="document">
-          //                                 <div class="modal-content">
-          //                                     <div class="modal-header">
-          //                                         <h5 class="modal-title" id="exampleModalCenteredLabel">Contact Info:</h5>
-          //                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          //                                            <span aria-hidden="true">×</span>
-          //                                          </button>
-          //                                     </div>
-          //                                     <div class="modal-body">
-          //                                         <h1>${name}</h1>
-          //                                         <h3>Email: ${element.email}</h3>         
-          //                                         <h3>Phone: ${element.phone}</h3>                 
-          //                                     </div>
-          //                                     <div class="modal-footer">
-          //                                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          //                                     </div>
-          //                                   </div>
-          //                                </div>
-          //                              </div>
-          //                         </div>
-          //                         <div class="col-lg-6">
-          //                             <div #maps id="gmap" class="img-responsive"></div>
-          //                         </div>
-          //                       </td></tr>`;
       }
     });
-    
+
    });
 }
-
-// sortDistance(distance: string) 
+  applyFilter(){
+    this.dataSource.filter = this.maxDistance + " " + this.maxTime + " "+ this.minAvailableSeats;
+  }
 
 }

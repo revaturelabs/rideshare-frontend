@@ -17,9 +17,9 @@
     letter-spacing:1px;
     height:45px;
     display:inline-block;
-    
+
 }
- 
+
 #search:hover{
     background-color:white;
     color:#F26925;
@@ -31,7 +31,7 @@
 #right-panel {
     font-family: 'Roboto','sans-serif';
     line-height: 30px;
-    
+
   }
 #wrapper {
     width: 500px;
@@ -40,18 +40,18 @@
 }
 #side1 {
     width: 400px;
-    float:left; 
+    float:left;
     padding-left: 250px;
 }
 #side2 {
     background-color:white;
     padding-left: 300px;
 } */
-#gmap { 
-    height: 369px; 
+#gmap {
+    height: 369px;
 }
 .googleapi {
- 
+
 }
 #map{
 }
@@ -61,7 +61,9 @@
 .btn-outline-secondary{
     font-size:14px;
 }
-
+.short{
+  width:80px
+}
 thead {
     background-color: black!important;
     color: white!important;

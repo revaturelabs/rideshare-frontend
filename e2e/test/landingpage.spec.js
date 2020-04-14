@@ -2,6 +2,7 @@
 Testing the landing page of the application to ensure buttons work as intended
 */
 describe('landing page tests', function(){
+    // these are html elements for reference during testing
     let elPageHead = element(by.xpath('/html/body/app-root/app-home-page/div[1]/div/h1'));
     let elLoginPageTitle = element(by.xpath('//*[@id="login-form"]/div[1]/h4'));
     let elLoginButton = element(by.xpath('/html/body/app-root/app-home-page/div[1]/div/div/button[1]'));
@@ -10,7 +11,7 @@ describe('landing page tests', function(){
     let elRegisterHeader = element(by.xpath('/html/body/modal-container/div/div/div[1]/h4'));
     let elRegisterExit = element(by.xpath('/html/body/modal-container/div/div/div[1]/button'));
     
-    browser.get('http://127.0.0.1:4200/');
+    browser.get('http://localhost:4200/');
     //checks to make sure that the user reaches the landing page correctly
     //change when the front end is being hosted
     it('Make sure user is on the landing page', function(){

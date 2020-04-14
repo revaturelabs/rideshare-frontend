@@ -12,6 +12,7 @@ import { User } from 'src/app/models/user';
 })
 export class ProfileCarComponent implements OnInit {
 
+  carInfo: FormGroup;
   make: string;
   model:string;
   color:string;
@@ -75,8 +76,7 @@ export class ProfileCarComponent implements OnInit {
       //console.log("current car: "+this.currentCar.carId)
       if(this.userHasCar){
         //update car info here
-        console.log(this.currentCar)
-         this.carService.updateCarInfo(this.currentCar).then(res=>{
+         this.carService.updateCarInfo1(this.currentCar).then(res=>{
          this.success = "Updated Successfully!";
          }).catch(error=>{
           this.success = "Error occurred, Update was unsucessful"
@@ -103,6 +103,9 @@ export class ProfileCarComponent implements OnInit {
 
   get validInput(){
     return this.profileForm.controls;
+  
   }
+
+  
 
 }

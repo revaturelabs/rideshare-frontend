@@ -26,9 +26,11 @@ export class ProfileComponent implements OnInit {
   isActive:boolean;
   userId:number;
 
-    isTest:boolean;
+  isTest:boolean;
   ngOnInit() {
     this.showCont = true;
+
+   
   /**
    * A GET method that retrieves user's information
    */
@@ -93,6 +95,10 @@ export class ProfileComponent implements OnInit {
     this.location = ''; 
     this.membership = '';
 
+  }
+
+  isTesting(driverStatus){
+    this.isDriver = driverStatus;
   }
 }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit , Input} from '@angular/core';
+import { Component, OnInit , Input, Output, EventEmitter} from '@angular/core';
 import { UserService } from 'src/app/services/user-service/user.service';
 import { User } from 'src/app/models/user';
 @Component({
@@ -15,6 +15,8 @@ export class ProfileMembershipComponent implements OnInit {
   @Input() driverSelect: boolean;
   @Input() isActive:boolean;
   @Input() userId:number ;
+  @Output() onDriverStatus = new EventEmitter();
+  isDriver:boolean;
   constructor(private userService: UserService) { }
   ngOnInit() {
     this.userService.getUserById2(sessionStorage.getItem("userid")).subscribe((response)=>{
@@ -24,9 +26,14 @@ export class ProfileMembershipComponent implements OnInit {
     })
   }
   updatesMembershipInfo(){
-    console.log(this.user)
     this.userService.updateUserInfo2(this.user).then(res=>{
+      //this requests updates the most recent driver status after an update is submitted
+      this.userService.getUserById2(sessionStorage.getItem("userid")).subscribe((response)=>{
+        this.isDriver =response.driver;
+        this.onDriverStatus.emit(this.isDriver)
+      })
       this.success = "Update Successful"
+      
     }).catch(error=>{
       this.success = "Error Occurred, Update was cancelled"
     })

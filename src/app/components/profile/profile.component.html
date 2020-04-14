@@ -15,7 +15,7 @@
           <app-profile-car></app-profile-car>
     </div>
     <div *ngIf='showMemberInfo'>
-          <app-profile-membership [batchNumber]="batchNumber" [batchLocation]="batchLocation" [driverSelect]="driverSelect" [isActive]="isActive" [userId]="userId"></app-profile-membership>
+          <app-profile-membership [batchNumber]="batchNumber" [batchLocation]="batchLocation" [driverSelect]="driverSelect" [isActive]="isActive" [userId]="userId" (onDriverStatus)="isTesting($event)"></app-profile-membership>
     </div>
     <div *ngIf='showLocation'>
           <app-profile-location></app-profile-location>

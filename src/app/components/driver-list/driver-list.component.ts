@@ -22,16 +22,19 @@ export class DriverListComponent implements OnInit {
   location : string = 'Morgantown, WV';
   mapProperties :{};
   availableCars : Array<any> = [];
+  availableSeats: Array<any> = [];
   drivers : Array<any> = [];
 
 
   @ViewChild('map',null) mapElement: any;
   map: google.maps.Map;
 
-  constructor(private http: HttpClient,private userService: UserService, private googleApi:GoogleApiService) { }
+  constructor(private http: HttpClient,private userService: UserService, private carService: CarService,private googleApi:GoogleApiService) { }
 
   ngOnInit() {
     this.drivers = [];
+
+    
 
     this.userService.getRidersForLocation1(this.location).subscribe(
       res => {
@@ -42,16 +45,24 @@ export class DriverListComponent implements OnInit {
                  'name': element.firstName+" "+element.lastName,
                'origin':element.hCity+","+element.hState, 
                 'email': element.email, 
-                'phone':element.phoneNumber
+                'phone':element.phoneNumber,
+                'seats': element.car.seats
+                
+
+                
               });
           });
+
       });
+
+      
     /*this.drivers.push({'id': '1','name': 'Ed Ogeron','origin':'Reston, VA', 'email': 'ed@gmail.com', 'phone':'555-555-5555'});
     this.drivers.push({'id': '2','name': 'Nick Saban','origin':'Oklahoma, OK', 'email': 'nick@gmail.com', 'phone':'555-555-5555'});
     this.drivers.push({'id': '3','name': 'Bobbie sfsBowden','origin':'Texas, TX', 'email': 'bobbie@gmail.com', 'phone':'555-555-5555'});
     this.drivers.push({'id': '4','name': 'Les Miles','origin':'New York, NY', 'email': 'les@gmail.com', 'phone':'555-555-5555'});
     this.drivers.push({'id': '5','name': 'Bear Bryant','origin':'Arkansas, AR', 'email': 'bear@gmail.com', 'phone':'555-555-5555'});*/
-    //console.log(this.drivers);
+    console.log(this.drivers);
+
     this.getGoogleApi();
 
     this.sleep(2000).then(() => {
@@ -144,8 +155,10 @@ displayDriversList(origin, drivers) {
           var results = response.rows[0].elements;
           //console.log(results[0].distance.text);
           var name =  element.name;
+          
           outputDiv.innerHTML += `<tr><td class="col">${name}</td>
                                   <td class="col">${results[0].distance.text}</td>
+                                  <td class="col">${element.seats}</td>
                                   <td class="col">${results[0].duration.text}</td>
                                   <td class="col">
                                   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCentered${element.id}"> View</button>

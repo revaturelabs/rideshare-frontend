@@ -1,14 +1,15 @@
-
+<!-- refactored -->
 <div class="container mainContainer">
     <i class="fa fa-home" style="font-family:'FontAwesome';"></i>
        
         <h4>Location:</h4>
-        
+        <form [formGroup] = "profileLocation" (ngSubmit)="updatesLocationInfo()">
         <div class="form-group row">
             <div class="col-sm-1"></div>
                 <label for="address" class="col-sm-4 col-form-label">Address:</label>
                 <div class="col-sm-4">
-                    <input [(ngModel)]=address type="text" class="form-control" id="address">
+                    <input type="text" class="form-control" id="address" [(ngModel)]=profileLocation.value.address formControlName="address" required>
+                    <div *ngIf="!validInput.address.valid && !validInput.address.untouched" class="text-danger">Required</div>
                 </div>
         </div>
         
@@ -16,7 +17,8 @@
                 <div class="col-sm-1"></div>
             <label for="address2" class="col-sm-4 col-form-label">Address 2:</label>
             <div class="col-sm-4">
-                <input [(ngModel)]=address2 type="text" class="form-control" id="address2">
+                <input type="text" class="form-control" id="address2" [(ngModel)]=profileLocation.value.address2 formControlName="address2" required>
+                <div *ngIf="!validInput.address2.valid && !validInput.address2.untouched" class="text-danger">Required</div>
             </div>
         </div>
     
@@ -24,7 +26,8 @@
                 <div class="col-sm-1"></div>
                     <label for="city" class="col-sm-4 col-form-label">City:</label>
                     <div class="col-sm-4">
-                    <input [(ngModel)]=city type="text" class="form-control" id="city">
+                    <input type="text" class="form-control" id="city" [(ngModel)]=profileLocation.value.city formControlName="city" required>
+                    <div *ngIf="!validInput.city.valid && !validInput.city.untouched" class="text-danger">Required</div>
                 </div>
         </div>
             
@@ -32,7 +35,7 @@
                 <div class="col-sm-1"></div>
                 <label for="state" class="col-sm-4 col-form-label">State:</label>
                 <div class="col-sm-4">
-                    <select class="form-control" name="states" id="state" [(ngModel)]=hState required>
+                    <select class="form-control" name="states" id="state" [(ngModel)]=profileLocation.value.hState formControlName="hState"  required>
                         <option value="" selected disabled>Select a state</option>
                         <option value="AL">Alabama</option>
                         <option value="AK">Alaska</option>
@@ -93,10 +96,13 @@
                     <div class="col-sm-1"></div>
                         <label for="zipcode" class="col-sm-4 col-form-label">Zipcode:</label>
                         <div class="col-sm-4">
-                        <input [(ngModel)]=zipcode type="text" class="form-control" id="zipcode">
-                        <p *ngIf="success != ''" class="success">{{success}}</p>
+                
+                        <input type="text" class="form-control" id="zipcode" [(ngModel)]=profileLocation.value.zipcode formControlName="zipcode" required>
+                        <div *ngIf="!validInput.zipcode.valid && !validInput.zipcode.untouched" class="text-danger">Required</div>
+                     <!--    <p *ngIf="success != ''" class="success">{{success}}</p> -->
                     </div>
             </div>
         
-        <button type="submit" class="btn btn-primary myBtn" (click)="updatesContactInfo()">Save</button>
+          <button type="submit" class="btn btn-primary myBtn">Save</button>
+   </form>
     </div>

@@ -4,7 +4,7 @@
             <button type="button" class="btn btn-outline-warning btn-lg" (click)="showContact()">Contact Information</button>
             <button type="button" class="btn btn-outline-warning btn-lg" (click)="showLoc()">Location</button>
             <button type="button" class="btn btn-outline-warning btn-lg" (click)="showMembership()">Membership</button>
-            <button type="button" class="btn btn-outline-warning btn-lg" (click)="showCarInfo()">Car Information</button>
+            <button  *ngIf='isDriver' type="button" class="btn btn-outline-warning btn-lg" (click)="showCarInfo()">Car Information</button>
           </div>  
 
   
@@ -15,7 +15,7 @@
           <app-profile-car></app-profile-car>
     </div>
     <div *ngIf='showMemberInfo'>
-          <app-profile-membership></app-profile-membership>
+          <app-profile-membership [batchNumber]="batchNumber" [batchLocation]="batchLocation" [driverSelect]="driverSelect" [isActive]="isActive" [userId]="userId"></app-profile-membership>
     </div>
     <div *ngIf='showLocation'>
           <app-profile-location></app-profile-location>

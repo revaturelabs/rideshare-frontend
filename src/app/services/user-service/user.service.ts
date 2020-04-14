@@ -153,9 +153,21 @@ export class UserService {
 	 * A PUT method that updates user's information
 	 * @param user 
 	 */
-	updateUserInfo(user: User) {
-		//console.log(user);
-		return(this.http.put(this.url, user).toPromise());
+
+	updateUserInfo(id: Number, user: User) {
+		
+		return this.http.put(`${this.url}${id}`, user).toPromise();
+	}
+
+
+	// Using this one for profile
+	updateUserInfo1(user: User) {
+		console.log(user);
+		return(this.http.put(this.url+user.userId, user).toPromise());
+	}
+
+	updateUserInfo2(user: User) {
+		return(this.http.put(this.url+user.userId, user).toPromise());
 	}
 
 	/**

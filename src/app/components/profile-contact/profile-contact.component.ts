@@ -11,18 +11,20 @@ import { Validators } from '@angular/forms';
 })
 export class ProfileContactComponent implements OnInit {
 
-  profileObject : User;
+  profileObject : User = new User();
   currentUser: any = '';
   firstName: string;
   lastName: string;
   email: string;
   phone: string;
   success :string;
+  //set batch object
+  //set address
   profileContact = new FormGroup({
     firstName: new FormControl("", Validators.required),
     lastName: new FormControl("", Validators.required),
-    email: new FormControl("", Validators.required ),
-    phone: new FormControl("", Validators.required )
+    email: new FormControl("", [Validators.required, Validators.email] ),
+    phone: new FormControl("", [Validators.required, Validators.minLength(10)] )
   });
 
 
@@ -43,7 +45,7 @@ export class ProfileContactComponent implements OnInit {
         this.success ="No user information is found"
       }
 
-this.currentUser = response;
+   this.currentUser = response;
     }, error=>{
 
     });
@@ -51,20 +53,42 @@ this.currentUser = response;
   }
 
   updatesContactInfo(){
-  
-    this.profileObject.firstName = this.firstName;
-    this.profileObject.lastName = this.lastName;
-    this.profileObject.email = this.email;
-    this.profileObject.phoneNumber = this.phone;
+     
+    this.profileObject = this.currentUser;
+   
+    //this.profileObject.userId =Number(sessionStorage.getItem("userid"));
+    this.profileObject.firstName = this.profileContact.value.firstName;
+    this.profileObject.lastName = this.profileContact.value.lastName;
+    this.profileObject.email = this.profileContact.value.email;
+    this.profileObject.phoneNumber = this.profileContact.value.phone;
+    //add batch
+    //add address
 
-    this.userService.updateUserInfo(this.currentUser, this.profileObject);
-    this.success = "Updated Successfully!";
+    console.log(this.profileObject);
+    //this.userService.updateUserInfo1(this.profileObject);
+    console.log("fname " + this.validInput.firstName.valid)
+    console.log("lname " +this.validInput.lastName.valid)
+    console.log("email " +this.validInput.email.valid)
+    console.log("phone " +this.validInput.phone.valid)
+
+    if(this.validInput.firstName.valid && this.validInput.lastName.valid && this.validInput.email.valid && this.validInput.phone.valid)
+    {
+        //update user info here
+        this.userService.updateUserInfo1(this.profileObject).then(res=>{
+         this.success = "Updated Successfully!";
+         }).catch(error=>{
+          this.success = "Error occurred, Update was unsucessful"
+          })
+        
+    } else{
+      console.log("check invalid")
+      this.success ="Invalid Inputs";
+    }   
   }
 
   get validInput(){
     return this.profileContact.controls;
   }
 
-  
 
 }

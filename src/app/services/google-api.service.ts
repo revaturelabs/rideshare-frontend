@@ -17,10 +17,9 @@ export class GoogleApiService {
             new Promise((resolve) => {
               let script: HTMLScriptElement = document.createElement('script');
               script.addEventListener('load', r => resolve());
-              script.src = `http://maps.googleapis.com/maps/api/js?key=${response["googleMapAPIKey"][0]}&libraries=places&language=en`;
+              script.src = `https://maps.googleapis.com/maps/api/js?key=${response["googleMapAPIKey"][0]}&libraries=places&language=en`;
               document.head.appendChild(script);
-              console.log("Head Appended");
-              console.log(script);
+           
           });
         }
       });

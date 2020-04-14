@@ -20,14 +20,30 @@ export class ProfileComponent implements OnInit {
 
   isDriver:boolean;
 
+  batchNumber: any;
+  batchLocation: any;
+  driverSelect: boolean;
+  isActive:boolean;
+  userId:number;
+
+  isTest:boolean;
   ngOnInit() {
     this.showCont = true;
+
+   
   /**
    * A GET method that retrieves user's information
    */
 //bind the current user's driver status to this.isDriver
   this.userService.getUserById2(sessionStorage.getItem("userid")).subscribe((response)=>{
     this.isDriver = response.driver;
+    this.batchNumber = response.batch.batchNumber;
+    this.batchLocation = response.batch.batchLocation;
+    this.driverSelect = response.driver;
+    this.isActive = response.active;
+    this.userId = response.userId;
+
+
 })
 }
   showContact() {
@@ -79,6 +95,10 @@ export class ProfileComponent implements OnInit {
     this.location = ''; 
     this.membership = '';
 
+  }
+
+  isTesting(driverStatus){
+    this.isDriver = driverStatus;
   }
 }
 

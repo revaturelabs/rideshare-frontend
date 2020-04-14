@@ -1,5 +1,5 @@
 <div class="container mainContainer">
-    
+    <!-- refactored -->
     <i class="fa fa-user" style="font-family:'FontAwesome';"></i>
        
         <h4>Contact Information:</h4>
@@ -39,7 +39,7 @@
                 <div *ngIf="!validInput.phone.valid && !validInput.phone.untouched" class="text-danger">Required</div> 
             </div>
         </div>
-        
+        <p *ngIf="success != ''" class="success">{{success}}</p>
         <button type="submit" class="btn btn-primary myBtn">Save</button>
     </form>
     </div>

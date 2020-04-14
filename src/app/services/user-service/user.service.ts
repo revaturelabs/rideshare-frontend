@@ -155,11 +155,19 @@ export class UserService {
 	 */
 
 	updateUserInfo(id: Number, user: User) {
-		//console.log(user);
+		
 		return this.http.put(`${this.url}${id}`, user).toPromise();
 	}
+
+
+	// Using this one for profile
 	updateUserInfo1(user: User) {
-		return(this.http.patch(this.url+user.userId, user).toPromise());
+		console.log(user);
+		return(this.http.put(this.url+user.userId, user).toPromise());
+	}
+
+	updateUserInfo2(user: User) {
+		return(this.http.put(this.url+user.userId, user).toPromise());
 	}
 
 	/**

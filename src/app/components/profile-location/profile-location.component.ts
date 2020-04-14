@@ -18,7 +18,8 @@ export class ProfileLocationComponent implements OnInit {
   hState: string;
   currentUser: User;
   success :string;
-
+  driver: boolean;
+  currentUserId: any;
    profileLocation = new FormGroup({
     address: new FormControl("", Validators.required),
     address2: new FormControl("", Validators.required),
@@ -60,17 +61,6 @@ export class ProfileLocationComponent implements OnInit {
 
   }
 
-  updatesLocationInfo(){
-    this.currentUser.hZip = this.zipcode;
-    this.currentUser.hCity = this.city;
-    this.currentUser.hAddress = this.address;
-    this.currentUser.wAddress = this.address2;
-    this.currentUser.hState = this.hState;
-    //console.log(this.currentUser);
-    this.userService.updateUserInfo(this.currentUser);
-    this.success = "Updated Successfully!";
-  }
-
 
 
 
@@ -78,4 +68,14 @@ export class ProfileLocationComponent implements OnInit {
     return this.profileLocation.controls;
   }
 
+  updatesContactInfo(){
+    this.currentUser.hZip = this.zipcode;
+    this.currentUser.hCity = this.city;
+    this.currentUser.hAddress = this.address;
+    this.currentUser.wAddress = this.address2;
+    this.currentUser.hState = this.hState;
+    //console.log(this.currentUser);
+    this.userService.updateUserInfo(this.currentUserId, this.currentUser);
+    this.success = "Updated Successfully!";
+  }
 }

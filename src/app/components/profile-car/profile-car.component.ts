@@ -83,10 +83,12 @@ export class ProfileCarComponent implements OnInit {
           })
       }else{
         //create a car here
-        console.log("check valided")
+        //console.log("check valided")
         this.carService.addCar(this.currentCar).subscribe(res=>{
           this.carService.getCarByUserId2(sessionStorage.getItem("userid")).subscribe((response)=>{
+            //console.log(response);
             this.currentCar = response;
+            //user's carId can be added here using the response data from this block
           })
           //console.log(res)
           this.success = "Updated Successfully!";
@@ -96,7 +98,7 @@ export class ProfileCarComponent implements OnInit {
       }
    
     } else{
-      console.log("check invalid")
+      //console.log("check invalid")
       this.success ="Invalid Inputs";
     }   
   }

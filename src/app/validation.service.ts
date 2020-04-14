@@ -1,3 +1,5 @@
+import { invalid } from '@angular/compiler/src/render3/view/util';
+
 export class ValidationService {
 
 
@@ -8,7 +10,8 @@ export class ValidationService {
       'invalidEmailAddress': 'Invalid email address',
       'invalidPassword': 'Invalid password. Password must be at least 6 characters long, and contain a number.',
       'minlength': `Minimum length ${validatorValue.requiredLength}`,
-      'invalidPhoneNumber' : 'Invalid phone number'
+      'invalidPhoneNumber' : 'Invalid phone number',
+      'invalidData': 'Invalid Data'
     };
 
     return config[validatorName];

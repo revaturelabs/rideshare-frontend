@@ -1,7 +1,7 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { BsModalService, BsModalRef} from 'ngx-bootstrap';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-//import { ValidationService } from '../../validation.service';
+import { ValidationService } from '../../validation.service';
 import { Batch } from 'src/app/models/batch';
 import { User } from 'src/app/models/user';
 import { BatchService } from 'src/app/services/batch-service/batch.service';
@@ -41,8 +41,9 @@ export class SignupModalComponent implements OnInit {
   state: string;
 
 
+  constructor(private modalService :BsModalService, 
+    private userService: UserService, private batchService:BatchService ) { }
 
-  constructor(private modalService :BsModalService, private userService: UserService, private batchService:BatchService ) { }
 
   ngOnInit() {
     this.getBatchList();

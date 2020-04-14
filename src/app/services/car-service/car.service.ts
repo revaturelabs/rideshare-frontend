@@ -73,6 +73,11 @@ export class CarService {
 			}
 		);
 	}
+	
+	addCar(car){
+
+		return this.http.post(this.url, car, {observe: 'response'})
+	}
 
 	/**
 	 * This function removes a Car.

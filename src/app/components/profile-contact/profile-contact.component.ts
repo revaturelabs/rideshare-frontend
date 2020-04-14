@@ -51,6 +51,7 @@ this.currentUser = response;
   }
 
   updatesContactInfo(){
+  
     this.profileObject.firstName = this.firstName;
     this.profileObject.lastName = this.lastName;
     this.profileObject.email = this.email;

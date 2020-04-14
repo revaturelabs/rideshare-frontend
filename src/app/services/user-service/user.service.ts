@@ -162,6 +162,10 @@ export class UserService {
 		return(this.http.patch(this.url+user.userId, user).toPromise());
 	}
 
+	updateUserInfo2(user: User) {
+		return(this.http.put(this.url+user.userId, user).toPromise());
+	}
+
 	/**
 	 * A GET method that retrieves a driver by Id
 	 * @param id 

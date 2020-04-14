@@ -24,7 +24,9 @@ export class ProfileComponent implements OnInit {
   batchLocation: any;
   driverSelect: boolean;
   isActive:boolean;
+  userId:number;
 
+    isTest:boolean;
   ngOnInit() {
     this.showCont = true;
   /**
@@ -37,6 +39,7 @@ export class ProfileComponent implements OnInit {
     this.batchLocation = response.batch.batchLocation;
     this.driverSelect = response.driver;
     this.isActive = response.active;
+    this.userId = response.userId;
 
 
 })

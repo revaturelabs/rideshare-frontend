@@ -20,6 +20,9 @@ export class ProfileComponent implements OnInit {
 
   isDriver:boolean;
 
+  batchNumber: any;
+  batchLocation: any;
+
   ngOnInit() {
     this.showCont = true;
   /**
@@ -28,6 +31,9 @@ export class ProfileComponent implements OnInit {
 //bind the current user's driver status to this.isDriver
   this.userService.getUserById2(sessionStorage.getItem("userid")).subscribe((response)=>{
     this.isDriver = response.driver;
+    this.batchNumber = response.batch.batchNumber;
+    this.batchLocation = response.batch.batchLocation;
+
 })
 }
   showContact() {

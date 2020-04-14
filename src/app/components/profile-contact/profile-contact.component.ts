@@ -90,6 +90,5 @@ export class ProfileContactComponent implements OnInit {
     return this.profileContact.controls;
   }
 
-  
 
 }

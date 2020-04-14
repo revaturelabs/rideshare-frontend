@@ -3,7 +3,7 @@ import { UserService } from 'src/app/services/user-service/user.service';
 import { User } from 'src/app/models/user';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Validators } from '@angular/forms';
-
+// updated 4-14 - ryan
 @Component({
   selector: 'app-profile-location',
   templateUrl: './profile-location.component.html',
@@ -11,6 +11,7 @@ import { Validators } from '@angular/forms';
 })
 export class ProfileLocationComponent implements OnInit {
 
+  profileObject : User = new User();
   zipcode: number;
   city:string;
   address:string;
@@ -20,6 +21,7 @@ export class ProfileLocationComponent implements OnInit {
   success :string;
   driver: boolean;
   currentUserId: any;
+
    profileLocation = new FormGroup({
     address: new FormControl("", Validators.required),
     address2: new FormControl("", Validators.required),
@@ -68,14 +70,38 @@ export class ProfileLocationComponent implements OnInit {
     return this.profileLocation.controls;
   }
 
-  updatesContactInfo(){
-    this.currentUser.hZip = this.zipcode;
-    this.currentUser.hCity = this.city;
-    this.currentUser.hAddress = this.address;
-    this.currentUser.wAddress = this.address2;
-    this.currentUser.hState = this.hState;
+  updatesLocationInfo(){
+
+
+    this.profileObject = this.currentUser;
+
+    this.currentUser.hZip = this.profileLocation.value.zipcode;
+    this.currentUser.hCity = this.profileLocation.value.city;
+    this.currentUser.hAddress = this.profileLocation.value.address;
+    this.currentUser.wAddress = this.profileLocation.value.address2;
+    this.currentUser.hState = this.profileLocation.value.hState;
     //console.log(this.currentUser);
-    this.userService.updateUserInfo(this.currentUserId, this.currentUser);
-    this.success = "Updated Successfully!";
+
+    console.log(this.profileObject);
+
+    console.log("hAddress " + this.validInput.address.valid)
+    console.log("wAddress " +this.validInput.address2.valid)
+    console.log("hCity " +this.validInput.city.valid)
+    console.log("hState " +this.validInput.hState.valid)
+    console.log("hZip " +this.validInput.zipcode.valid)
+
+    if(this.validInput.address.valid && this.validInput.address2.valid && this.validInput.city.valid && this.validInput.hState.valid  && this.validInput.zipcode.valid)
+    {
+        //update user info here
+        this.userService.updateUserInfo1(this.profileObject).then(res=>{
+         this.success = "Updated Successfully!";
+         }).catch(error=>{
+          this.success = "Error occurred, Update was unsucessful"
+          })
+        
+    } else{
+      console.log("check invalid")
+      this.success ="Invalid Inputs";
+    }   
   }
 }

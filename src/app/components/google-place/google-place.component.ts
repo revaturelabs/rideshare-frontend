@@ -5,7 +5,7 @@ declare var google;
 
 
 @Component({
-    selector: 'AutocompleteComponent',
+    selector: 'app-google-place',
     template: `<input #addresstext class="input" type="text">`
 })
 export class GooglePlaceComponent implements AfterViewInit {

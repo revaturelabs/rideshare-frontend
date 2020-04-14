@@ -15,7 +15,7 @@
           return response.json();
         })
         .then((data) => {
-          document.getElementById("mapKey").setAttribute("src", `http://maps.googleapis.com/maps/api/js?key=${data.googleMapAPIKey[0]}&libraries=places&language=en`)
+          document.getElementById("mapKey").setAttribute("src", `https://maps.googleapis.com/maps/api/js?key=${data.googleMapAPIKey[0]}&libraries=places&language=en`)
         });
     </script>
     <script id = "mapKey"></script>

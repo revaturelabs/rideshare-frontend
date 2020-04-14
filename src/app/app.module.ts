@@ -25,7 +25,7 @@ import { DriverInfoComponent } from './components/driver-info/driver-info.compon
 import { LandingComponent } from './components/landing/landing.component';
 import { SignupModalComponent } from './components/sign-up-modal/sign-up-modal.component';
 //GOOGLE PLACES API ADDRESS FIELD.
-import { AutocompleteComponent } from './components/address-field/address-field.component';
+import { GooglePlaceComponent } from './components/google-place/google-place.component';
 
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { ProfileContactComponent } from './components/profile-contact/profile-contact.component';
@@ -60,7 +60,7 @@ import { ControlMessagesComponent } from './control-messages.component';
     DriverInfoComponent,
     LandingComponent,
     SignupModalComponent,
-    AutocompleteComponent,
+    GooglePlaceComponent,
     LandingPageComponent,
     ProfileContactComponent,
     ProfileCarComponent,

@@ -1,35 +1,57 @@
 import { Component, OnInit , Input} from '@angular/core';
 import { UserService } from 'src/app/services/user-service/user.service';
 import { User } from 'src/app/models/user';
-import { FormGroup, FormControl } from '@angular/forms';
-import { Validators } from '@angular/forms';
 @Component({
   selector: 'app-profile-membership',
   templateUrl: './profile-membership.component.html',
   styleUrls: ['./profile-membership.component.css']
 })
 export class ProfileMembershipComponent implements OnInit {
-  profileObject : User = new User();
-  currentUser: any = '';
-  isDriver: boolean;
-  active: boolean;
+  user : User = new User();
   success: string;
-
   //using @input to get batch data from profile component, the parent component
   @Input() batchNumber: any;
   @Input() batchLocation: any;
   @Input() driverSelect: boolean;
   @Input() isActive:boolean;
+  @Input() userId:number ;
   constructor(private userService: UserService) { }
   ngOnInit() {
-    console.log(this.isActive)
+    this.userService.getUserById2(sessionStorage.getItem("userid")).subscribe((response)=>{
+      this.user = response;
+      this.driverSelect = response.driver;
+      this.isActive = response.active;
+    })
   }
   updatesMembershipInfo(){
-    this.profileObject.driver = this.isDriver;
-    console.log(this.isDriver);
+    console.log(this.user)
+    this.userService.updateUserInfo2(this.user).then(res=>{
+      this.success = "Update Successful"
+    }).catch(error=>{
+      this.success = "Error Occurred, Update was cancelled"
+    })
+
+  }
+
+//this method binds the select option values
+  onSelectDriver(ev){
+    //console.log(ev.target.value)
+    if(ev.target.value == "true"){
+      this.user.driver = true;
+    }
+    if(ev.target.value == "false"){
+      this.user.driver = false;
+    }
     
-    // this.profileObject.active = this.active;
-    // this.userService.updateUserInfo(this.currentUser, this.profileObject);
-    // this.success = "Updated Successfully!";
+  }
+
+  onSelectActive(ev){
+    //console.log(ev.target.value)
+    if(ev.target.value == "true"){
+      this.user.active = true;
+    }
+    if(ev.target.value == "false"){
+      this.user.active = false;
+    }
   }
 }

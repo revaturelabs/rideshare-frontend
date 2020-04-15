@@ -99,7 +99,7 @@
                 
                         <input type="text" class="form-control" id="zipcode" [(ngModel)]=profileLocation.value.zipcode formControlName="zipcode" required>
                         <div *ngIf="!validInput.zipcode.valid && !validInput.zipcode.untouched" class="text-danger">Required</div>
-                         <p *ngIf="success != ''" class="success">{{success}}</p>
+                      <p *ngIf="success != ''" class="success">{{success}}</p>
                     </div>
             </div>
         

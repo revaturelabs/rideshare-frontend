@@ -1,7 +1,7 @@
 <!-- refactored -->
 <div class="container mainContainer">
     <i class="fa fa-home" style="font-family:'FontAwesome';"></i>
-       
+       <app-google-place (googlePlaceObj)="getGooglePlace($event)"></app-google-place>
         <h4>Location:</h4>
         <form [formGroup] = "profileLocation" (ngSubmit)="updatesLocationInfo()">
         <div class="form-group row">

@@ -64,6 +64,11 @@ export class ProfileLocationComponent implements OnInit {
   }
 
 
+  getGooglePlace(place){
+    console.log(place)
+    console.log("STREET NUMBER: " + place.address_components[0].long_name);
+    
+  }
 
 
   get validInput(){

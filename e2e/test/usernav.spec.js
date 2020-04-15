@@ -11,11 +11,11 @@ describe('User logged in nav bar tests', function(){
     let elProfileDrop = element(by.xpath('//*[@id="navbarDropdown"]'));
     let elSearchButton = element(by.xpath('//*[@id="navbarSupportedContent"]/ul/li[1]/a'));
     let elSearchHeader = element(by.xpath('/html/body/app-root/app-landing-page/div/h1'));
-    let elHamburger = element(by.xpath('/html/body/app-root/app-navbar/nav/button'));
+    let elHamburger = element(by.xpath('/html/body/app-root/app-navbar/nav/nav/button'));
     let elDriverButton = element(by.xpath('//*[@id="navbarSupportedContent"]/ul/li[2]/a'));
     let elDriverHeader = element(by.xpath('/html/body/app-root/app-driver-list/div/div/div[1]/h4'));
     let elProfileButton = element(by.xpath('//*[@id="navbarSupportedContent"]/ul/li[3]/div/a[1]'));
-    let elProfileHeader = element(by.xpath('/html/body/app-root/app-profile/div/div/div[2]/app-profile-contact/div/div[1]/label'));
+    let elProfileHeader = element(by.xpath('/html/body/app-root/app-profile/div/div/div[2]/app-profile-contact/div/form/div[1]/label'));
     let elLogoutButton = element(by.xpath('//*[@id="logout-btn"]'));
     let elHomeHeader = element(by.xpath('/html/body/app-root/app-home-page/div[1]/div/h1'));
     //End of xpaths needed for tests

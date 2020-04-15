@@ -1,4 +1,4 @@
-import { Component, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, AfterViewInit, Output,EventEmitter } from '@angular/core';
 
 declare var google;
 
@@ -12,6 +12,8 @@ export class GooglePlaceComponent implements AfterViewInit {
   @ViewChild('addresstext', {static: false}) addresstext: any;
 
   addressEntities: Array<any>;
+
+  @Output() googlePlaceObj = new EventEmitter();
 
   constructor() { }
 
@@ -31,6 +33,7 @@ export class GooglePlaceComponent implements AfterViewInit {
     //The function called will get the 'place' object of type <any> and captures from it the 'address_components' array into our 'addressEntities' <any> array.
     google.maps.event.addListener(autocomplete, 'place_changed', () => {
       const place = autocomplete.getPlace();
+      this.googlePlaceObj.emit(place);
       console.log("This place object of type <any>: ");
       console.log(place);
       console.log(place.formatted_address);

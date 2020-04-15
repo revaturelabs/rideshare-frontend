@@ -18,6 +18,7 @@ import { ProfileMembershipComponent } from './components/profile-membership/prof
 import { ProfileLocationComponent } from './components/profile-location/profile-location.component';
 import { DriverContactModalComponent } from './components/driver-contact-modal/driver-contact-modal.component';
 import { DriverListComponent } from './components/driver-list/driver-list.component';
+import { DriverRecommendationComponent } from './components/driver-recommendation/driver-recommendation.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 
@@ -37,6 +38,7 @@ const routes: Routes = [
   {path: 'signup', component: SignupModalComponent},
   {path: 'landingPage', component: LandingPageComponent},
   {path: 'drivers', component: DriverListComponent},
+  {path: 'driverrec', component: DriverRecommendationComponent},
 {path: 'profile/contact', component: ProfileContactComponent},
 {path: 'profile/car', component: ProfileCarComponent},
 {path: 'profile/membership', component: ProfileMembershipComponent},

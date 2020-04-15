@@ -102,10 +102,20 @@ export class SignupModalComponent implements OnInit {
   setBatch() {
     let batchField = <HTMLInputElement>document.getElementById('batch');
     let batchSplit = batchField.value.split(". ", 2);
-    this.batch.batchNumber = Number(batchSplit[0]);
-    this.batch.batchLocation = batchSplit[1];
-    console.log("Set batch to: ");
-    console.log(this.batch);
+
+   this.batchService.getBatchById(batchSplit[0]).subscribe((response)=>{
+        console.log("response"+response.batchNumber)
+        this.batch=response;
+        sessionStorage.setItem('Batch',JSON.stringify(this.batch))
+  })
+
+  this.batch =JSON.parse(sessionStorage.getItem('Batch'))
+  console.log("From storage:"+this.batch.batchNumber)
+  console.log("From storage:"+this.batch.batchLocation)
+  console.log("From storage:"+this.batch.bAddress)
+  console.log("From storage:"+this.batch.bCity)
+  console.log("From storage:"+this.batch.bState)
+  console.log("From storage:"+this.batch.bZip)
   }
 
   /** HANDLEUSERNAMECHANGE()
@@ -218,6 +228,7 @@ export class SignupModalComponent implements OnInit {
     }, error=>{
       console.log(error)
     })
+    sessionStorage.clear();
   }
 
   /** FLUSHDATA()

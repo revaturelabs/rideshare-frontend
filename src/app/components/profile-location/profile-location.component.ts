@@ -72,31 +72,28 @@ export class ProfileLocationComponent implements OnInit {
     console.log("array length " + arrLength)
     if (arrLength == 8) {
       statePlaceholder = place.address_components[5].short_name;
-      console.log("before : " + place.address_components[5].short_name  );
-   
 
-
-    console.log("STREET : " + place.address_components[0].long_name + ", " +place.address_components[1].long_name);
-    console.log("City : " + place.address_components[2].long_name  );
-    console.log("ZIP : " + place.address_components[6].long_name);
-
+     console.log("STREET : " + place.address_components[0].long_name + ", " +place.address_components[1].long_name);
+     console.log("City : " + place.address_components[2].long_name  );
+     console.log ("stateplaceholder "+statePlaceholder);
     if (statePlaceholder.match('US'))
        {
-        console.log("4STATE : " + place.address_components[4].short_name  );
         this.currentUser.hState = place.address_components[4].short_name ;
+        this.currentUser.hZip = place.address_components[6].long_name;
        }
        else
        {
-        console.log("5STATE : " + place.address_components[5].short_name  );
         this.currentUser.hState = place.address_components[5].short_name ;
+        this.currentUser.hZip = place.address_components[7].long_name;
        }
 
 
     this.currentUser.hAddress =  place.address_components[0].long_name + ", " +place.address_components[1].long_name;
     this.currentUser.hCity = place.address_components[2].long_name;
-    this.currentUser.hZip = place.address_components[6].long_name;
+    
 
-    }else
+    }
+    else if(arrLength == 7) 
     {
       console.log("STREET : " + place.address_components[0].long_name + ", " +place.address_components[1].long_name);
       console.log("City : " + place.address_components[2].long_name  );
@@ -107,10 +104,21 @@ export class ProfileLocationComponent implements OnInit {
       this.currentUser.hCity = place.address_components[2].long_name;
       this.currentUser.hState = place.address_components[4].short_name ;
       this.currentUser.hZip = place.address_components[6].long_name;  
+    }
+    else if(arrLength == 9) 
+    {
+      console.log("STREET : " + place.address_components[0].long_name + ", " +place.address_components[1].long_name);
+      console.log("City : " + place.address_components[2].long_name  );
+      console.log("STATE : " + place.address_components[5].short_name  );
+      console.log("ZIP : " + place.address_components[7].long_name);
+
+      this.currentUser.hAddress =  place.address_components[0].long_name + ", " +place.address_components[1].long_name;
+      this.currentUser.hCity = place.address_components[2].long_name;
+      this.currentUser.hState = place.address_components[5].short_name ;
+      this.currentUser.hZip = place.address_components[7].long_name;  
 
 
     }
-
     
 
 

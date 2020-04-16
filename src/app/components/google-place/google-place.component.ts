@@ -52,7 +52,7 @@ export class GooglePlaceComponent implements AfterViewInit {
       console.log("POSTAL/ZIP CODE: " + this.addressEntities[7].long_name);
       console.log("DELIVERY ROUTE: " + this.addressEntities[7].long_name);
      }
-   else{
+   else if(this.addressEntities.length==7) {
     console.log("STREET NUMBER: " + this.addressEntities[0].long_name);
     console.log("STREET NAME: " + this.addressEntities[1].long_name);
     console.log("CITY: " + this.addressEntities[2].long_name);
@@ -60,8 +60,20 @@ export class GooglePlaceComponent implements AfterViewInit {
     console.log("COUNTY: " + this.addressEntities[4].long_name);
     console.log("STATE: " + this.addressEntities[5].long_name);
     console.log("COUNTRY: " + this.addressEntities[6].long_name);
- 
    }
+    else if (this.addressEntities.length==9 ) 
+    {
+    console.log("STREET NUMBER: " + this.addressEntities[0].long_name);
+    console.log("STREET NAME: " + this.addressEntities[1].long_name);
+    console.log("CITY: " + this.addressEntities[2].long_name);
+    console.log("DISTRICT: " + this.addressEntities[3].long_name);
+    console.log("COUNTY: " + this.addressEntities[4].long_name);
+    console.log("STATE: " + this.addressEntities[5].long_name);
+    console.log("COUNTRY: " + this.addressEntities[6].long_name);
+    console.log("POSTAL/ZIP CODE: " + this.addressEntities[7].long_name);
+    console.log("DELIVERY ROUTE: " + this.addressEntities[7].long_name);
+   }
+   
 
 
     });

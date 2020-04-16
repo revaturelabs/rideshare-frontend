@@ -41,7 +41,7 @@ export class ProfileLocationComponent implements OnInit {
         address2: new FormControl(response.batch.bAddress, Validators.required),
         city: new FormControl(response.hCity, Validators.required),
         zipcode: new FormControl(response.hZip, Validators.required),
-        hState: new FormControl(response.hState, Validators.required)
+        hState: new FormControl(response.batch.bState, Validators.required)
       });
     }
     else{

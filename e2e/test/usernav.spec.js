@@ -1,4 +1,4 @@
-describe('User logged in nav bar tests', function(){
+describe('User logged in nav bar tests - ', function(){
      // these are html elements for reference during testing
     //beginning of elements for the login
     let elLoginButton = element(by.xpath('/html/body/app-root/app-home-page/div[1]/div/div/button[1]'));
@@ -12,9 +12,9 @@ describe('User logged in nav bar tests', function(){
     let elSearchButton = element(by.xpath('//*[@id="navbarSupportedContent"]/ul/li[1]/a'));
     let elSearchHeader = element(by.xpath('/html/body/app-root/app-landing-page/div/h1'));
     let elHamburger = element(by.xpath('/html/body/app-root/app-navbar/nav/button'));
-    let elDriverButton = element(by.xpath('//*[@id="navbarSupportedContent"]/ul/li[2]/a'));
-    let elDriverHeader = element(by.xpath('/html/body/app-root/app-driver-list/div/div/div[1]/h4'));
-    let elProfileButton = element(by.xpath('//*[@id="navbarSupportedContent"]/ul/li[3]/div/a[1]'));
+    let elDriverButton = element(by.xpath('//*[@id="navbarSupportedContent"]/ul/li[1]/a')); 
+    let elDriverHeader = element(by.xpath('/html/body/app-root/app-driver-list/div/div/div[2]/h4'));
+    let elProfileButton = element(by.xpath('//*[@id="navbarSupportedContent"]/ul/li[2]/div/a[1]'));
     let elProfileHeader = element(by.xpath('/html/body/app-root/app-profile/div/div/div[2]/app-profile-contact/div/div[1]/label'));
     let elLogoutButton = element(by.xpath('//*[@id="logout-btn"]'));
     let elHomeHeader = element(by.xpath('/html/body/app-root/app-home-page/div[1]/div/h1'));
@@ -33,8 +33,8 @@ describe('User logged in nav bar tests', function(){
         elLoginPassword.sendKeys('password');
         elLoginSubmit.click();
         //change this to reflect succesful login
-        browser.waitForAngular();
-        browser.ignoreSynchronization=true
+        // browser.ignoreSynchronization=false
+        browser.waitForAngularEnabled(false);
         expect(elLoggedInHeader.getText()).toBe('Fabien Braunroth');
     });
 
@@ -44,9 +44,10 @@ describe('User logged in nav bar tests', function(){
     change when the front end is being hosted
     */
     it('User Presses the Driver Button and goes to the driver page on a laptop', function(){
-        browser.waitForAngular();
-        browser.ignoreSynchronization=true
+        browser.waitForAngularEnabled(false);
+        // browser.ignoreSynchronization=false
         elDriverButton.click();
+
         //enter expected toBe text when information is gained
         expect(elDriverHeader.getText()).toBe("Driver's List");
     });

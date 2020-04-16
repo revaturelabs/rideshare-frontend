@@ -95,7 +95,7 @@ export class ProfileCarComponent implements OnInit {
             //console.log(this.user);
               //update the user's car model
               this.userService.updateUserInfo1(this.user).then(res=>{
-                console.log(res);
+               // console.log(res);
               })
             //user's carId can be added here using the response data from this block
           })

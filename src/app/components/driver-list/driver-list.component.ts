@@ -65,8 +65,8 @@ export class DriverListComponent implements OnInit {
                 'id': element.userId,
                 'modalButtonId': `#modal${element.userId}`,
                 'modalId': `modal${element.userId}`,
-                'name': element.firstName+" "+element.lastName,
-                'origin':element.hCity+","+element.hState,
+                'name': `${element.firstName} ${element.lastName}`,
+                'origin':`${element.hAddress},${element.hCity},${element.hState}`,
                 'email': element.email,
                 'phone':element.phoneNumber,
                 'seats': element.car.seats
@@ -86,7 +86,7 @@ export class DriverListComponent implements OnInit {
       };
       this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapProperties);
       //get all routes
-      this.displayDriversList(this.location, this.drivers);
+      // this.displayDriversList(this.location, this.drivers);
 
       this.dataSource.data = this.drivers;
 
@@ -108,7 +108,8 @@ export class DriverListComponent implements OnInit {
       }
 
       //show drivers on map
-      this.showDriversOnMap(this.location, this.drivers);
+      // this.showDriversOnMap(this.location, this.drivers);
+      this.separateApiCalls(this.location, this.drivers, 0);
     });
 
     this.dataSource.filterPredicate = (data, filter) => {
@@ -234,4 +235,21 @@ displayDriversList(origin, drivers) {
     this.dataSource.filter = this.maxDistance + " " + this.maxTime + " "+ this.minAvailableSeats;
   }
 
+  // the purpose of ths function is to display all the drivers' distance/duration on the table without going over GoogleMaps allotted queries per second limit
+  // the function runs recursively to make use of the sleep function defined above. starting index is where we start to slice the driver array from
+  separateApiCalls(origin, drivers, startingIndex) {
+    // calculate the end index for the slice. if it is longer than the length of drivers, slice will only take the remaining elements.
+    let endIndex = startingIndex+5;
+
+    // separate the array of drivers
+    let driversSlice = drivers.slice(startingIndex, endIndex);
+
+    // use API functions described above to calculate distance, duration, and display on the map.
+    this.showDriversOnMap(origin, driversSlice);
+    this.displayDriversList(origin, driversSlice);
+
+    // if there are more drivers in the array, call this function again with startingIndex equal to endIndex after 2.2 seconds.
+    if(endIndex < drivers.length)
+      this.sleep(2200).then(() => this.separateApiCalls(origin, drivers, endIndex));
+  }
 }

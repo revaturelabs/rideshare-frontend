@@ -38,8 +38,8 @@ export class ProfileCarComponent implements OnInit {
   ngOnInit() {
 
     this.userService.getUserById2(sessionStorage.getItem("userid")).subscribe((response)=>{
-       // console.log(response)
        this.user = response
+       //console.log(this.user)
     })
 
 
@@ -53,6 +53,7 @@ export class ProfileCarComponent implements OnInit {
           nrSeats: new FormControl(response.seats)
         });
         this.currentCar = response;
+       // console.log(this.currentCar)
         this.userHasCar=true;
       }
       else{
@@ -65,7 +66,6 @@ export class ProfileCarComponent implements OnInit {
   updatesCarInfo(){
    // console.log(this.validInput.year.value.toString().length)
     this.success ="";
-    this.currentCar.user = this.user;
     this.currentCar.make = this.profileForm.value.make;
     this.currentCar.model= this.profileForm.value.model;
     this.currentCar.color = this.profileForm.value.color;
@@ -76,6 +76,7 @@ export class ProfileCarComponent implements OnInit {
       //console.log("current car: "+this.currentCar.carId)
       if(this.userHasCar){
         //update car info here
+        //console.log(this.currentCar)
          this.carService.updateCarInfo1(this.currentCar).then(res=>{
          this.success = "Updated Successfully!";
          }).catch(error=>{
@@ -83,14 +84,20 @@ export class ProfileCarComponent implements OnInit {
           })
       }else{
         //create a car here
-        //console.log("check valided")
+       // console.log(this.currentCar);
+        this.currentCar.user = this.user;
         this.carService.addCar(this.currentCar).subscribe(res=>{
           this.carService.getCarByUserId2(sessionStorage.getItem("userid")).subscribe((response)=>{
             //console.log(response);
             this.currentCar = response;
+            this.user.car = this.currentCar;
+            //console.log(this.user);
+              //update the user's car model
+              this.userService.updateUserInfo1(this.user).then(res=>{
+                //console.log(res);
+              })
             //user's carId can be added here using the response data from this block
           })
-          //console.log(res)
           this.success = "Updated Successfully!";
         }, error=>{
           this.success = "Error occurred, Update was unsucessful"

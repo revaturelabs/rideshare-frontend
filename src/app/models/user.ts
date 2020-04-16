@@ -1,4 +1,5 @@
 import { Batch } from './batch';
+import { Car } from './car';
 
 export class User {
     
@@ -23,7 +24,7 @@ export class User {
     wCity: string;//will be null for register.
     wState: string;//will be null for register.
     wZip: number;//will be null for register.
-
+    car: Car;
 //Do not add a parameterized constructor here unless you enjoy wasting your time 
 //and being disappointed by this piece of shit application..
 

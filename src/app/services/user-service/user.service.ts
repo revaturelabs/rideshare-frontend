@@ -162,7 +162,7 @@ export class UserService {
 
 	// Using this one for profile
 	updateUserInfo1(user: User) {
-		console.log(user);
+		//console.log(user);
 		return(this.http.put(this.url+user.userId, user).toPromise());
 	}
 

@@ -1,11 +1,28 @@
 <div class = "container-fluid">
     <div class="row">
-    <div class="col-lg-2">
-      <form>
-        At least <input class="short" type="number" [(ngModel)]="minAvailableSeats" (keyup)="applyFilter()" name="minAvailableSeats" > Seats. <br/>
-        Less than <input class ="short" type="number" [(ngModel)]="maxTime" (keyup)="applyFilter()" name="maxTime"> minutes. <br/>
-        Less than <input class="short" type="number" [(ngModel)]="maxDistance" (keyup)="applyFilter()" name="maxDistance"> miles.
+
+    <div class="mat-elevation-z8">
+      <div class="modal-body">
+      <form >
+        <div class="form-group">
+        <label for="atleast"> At least  </label>
+       <input class="short" class="form-control"  type="number" [(ngModel)]="minAvailableSeats" (keyup)="applyFilter()" name="minAvailableSeats" >  
+       <label for="seats"> Seats  </label>
+       </div>
+
+       <div class="form-group">
+        <label for="minutes">Less than </label>
+        <input class ="short" class="form-control" type="number" [(ngModel)]="maxTime" (keyup)="applyFilter()" name="maxTime"> 
+        <label for="Minutes">minutes </label>
+      </div>
+
+      <div class="form-group">
+        <label for="miles">Less than </label>
+        <input class="short" class="form-control" type="number" [(ngModel)]="maxDistance" (keyup)="applyFilter()" name="maxDistance"> 
+        <label for="Miles">miles </label>
+      </div>
       </form>
+    </div>
     </div>
 
 

@@ -22,7 +22,7 @@ import {MatPaginator} from '@angular/material/paginator';
 })
 export class DriverListComponent implements OnInit {
 
-  location : string = 'Houston, TX';
+  location : String = 'Houston, TX';
   mapProperties :{};
   availableCars : Array<any> = [];
   availableSeats: Array<any> = [];
@@ -44,6 +44,15 @@ export class DriverListComponent implements OnInit {
   constructor(private http: HttpClient,private userService: UserService, private carService: CarService) { }
 
   ngOnInit() {
+
+    //set user location to home location
+    this.userService.getUserById2(sessionStorage.getItem("userid")).subscribe(
+      user => {
+        //this can be changed if needed
+        //to switch to batch location simply set location = user.batch.batchLocation
+        this.location = user.hAddress + "," +user.hCity + "," + user.hState;
+      }
+      );
     this.drivers = [];
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;

@@ -6,7 +6,7 @@ declare var google;
 
 @Component({
     selector: 'app-google-place',
-    template: `<input #addresstext class="form-control" type="text" style="width:230px;border-radius:15px;">`
+    template: `<input #addresstext style="border:none;outline:none" type="text">`
 })
 export class GooglePlaceComponent implements AfterViewInit {
   @ViewChild('addresstext', {static: false}) addresstext: any;

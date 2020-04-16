@@ -1,1 +1,19 @@
 @import url('https://fonts.googleapis.com/css?family=Overpass&display=swap');
+.form-control{
+    
+    font-size:20px;
+    margin-bottom:10px;
+    border:1px solid #F26925;
+    box-shadow:2px 2px 8px #F26925;
+    border-radius:18px;
+}
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/* Firefox */
+input[type=number] {
+  -moz-appearance:textfield;
+}

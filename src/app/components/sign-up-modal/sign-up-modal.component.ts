@@ -39,7 +39,7 @@ export class SignupModalComponent implements OnInit {
   addressLine: string;
   city: string;
   state: string;
-
+  zip: string;
 
   constructor(private modalService :BsModalService, 
     private userService: UserService, private batchService:BatchService ) { }
@@ -75,7 +75,7 @@ export class SignupModalComponent implements OnInit {
       'address': new FormControl(''),
       'city': new FormControl(''),
       'state': new FormControl(''),
-      'zipcode': new FormControl('', [Validators.required, Validators.minLength(5)]),
+      'zip': new FormControl('', [Validators.required, Validators.minLength(5)]),
       'username': new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(12)]),//These validators are required by the database.
       'password': new FormControl('', Validators.required)
     })
@@ -128,21 +128,87 @@ export class SignupModalComponent implements OnInit {
   /** HANDLEADDRESSCHANGE()
     This method is called on an event listener for when the autocomplete field is changed. It 
     updates the address values of the FormGroup.*/
-  public handleAddressChange(address: any) {
-    console.log("handleAddressChange() with address: " + address.srcElement.value);
-    let splitted = (address.srcElement.value).split(", ", 3);
-    this.addressLine = splitted[0];
-    this.city = splitted[1];
-    this.state = splitted[2];
-    if(this.city == null) {
-      this.addressLine = null;
-      this.city = null;
-      this.state = null;
-    }else {
-      return;
-    }
-  }
+  // public handleAddressChange(address: any) {
+  //   console.log("handleAddressChange() with address: " + address.srcElement.value);
+  //   let splitted = (address.srcElement.value).split(", ", 3);
+  //   this.addressLine = splitted[0];
+  //   this.city = splitted[1];
+  //   this.state = splitted[2];
+  //   if(this.city == null) {
+  //     this.addressLine = null;
+  //     this.city = null;
+  //     this.state = null;
+  //   }else {
+  //     return;
+  //   }
+  // }
+  getGooglePlace(place){
+    console.log(place)
+    let arrLength = place.address_components.length;
+    let statePlaceholder:string;
+    console.log("array length " + arrLength)
+    if (arrLength == 8) {
+      statePlaceholder = place.address_components[5].short_name;
 
+     console.log("STREET : " + place.address_components[0].long_name + ", " +place.address_components[1].long_name);
+     console.log("City : " + place.address_components[2].long_name  );
+     console.log ("stateplaceholder "+statePlaceholder);
+    if (statePlaceholder.match('US'))
+       {
+        this.state = place.address_components[4].short_name ;
+        this.zip = place.address_components[6].long_name;
+       }
+       else
+       {
+        this.state = place.address_components[5].short_name ;
+        this.zip = place.address_components[7].long_name;
+       }
+
+
+    this.addressLine =  place.address_components[0].long_name + ", " +place.address_components[1].long_name;
+    this.city = place.address_components[2].long_name;
+    
+
+    }
+    else if(arrLength == 7) 
+    {
+      console.log("STREET : " + place.address_components[0].long_name + ", " +place.address_components[1].long_name);
+      console.log("City : " + place.address_components[2].long_name  );
+      console.log("STATE : " + place.address_components[4].short_name  );
+      console.log("ZIP : " + place.address_components[6].long_name);
+
+      this.addressLine =  place.address_components[0].long_name + ", " +place.address_components[1].long_name;
+      this.city = place.address_components[2].long_name;
+      this.state = place.address_components[4].short_name ;
+      this.zip = place.address_components[6].long_name;  
+    }
+    else if(arrLength == 9) 
+    {
+      console.log("STREET : " + place.address_components[0].long_name + ", " +place.address_components[1].long_name);
+      console.log("City : " + place.address_components[2].long_name  );
+      console.log("STATE : " + place.address_components[5].short_name  );
+      console.log("ZIP : " + place.address_components[7].long_name);
+
+      this.addressLine =  place.address_components[0].long_name + ", " +place.address_components[1].long_name;
+      this.city = place.address_components[2].long_name;
+      this.state = place.address_components[5].short_name ;
+      this.zip = place.address_components[7].long_name;  
+
+
+    }
+    
+
+
+   this.signUpForm.controls['address'].setValue(this.addressLine);
+   this.signUpForm.controls['city'].setValue(this.city);
+   this.signUpForm.controls['state'].setValue(this.state);
+   this.signUpForm.controls['zip'].setValue(this.zip);
+    // this.currentUser.wAddress = this.profileLocation.value.address2;
+    // this.currentUser.hCity = this.profileLocation.value.city;
+    // this.currentUser.hState = this.profileLocation.value.hState;
+    // this.currentUser.hZip = this.profileLocation.value.zipcode;
+
+  }
   /** ONSUBMIT()
     This method is invoked when the FormGroup is submitted. We don't have to pass the form as a
     parameter because it is generated programmatically within this component.*/
@@ -202,12 +268,12 @@ export class SignupModalComponent implements OnInit {
       this.user.hAddress = this.addressLine;
       this.user.hCity = this.city;
       this.user.hState = this.state;
-      this.user.hZip = this.signUpForm.value.zipcode;
+      this.user.hZip = this.signUpForm.value.zip;
       //THESE WORK ADDRESS FIELDS ARE REQUIRED BY THE BACKEND FOR THE FORM TO SUBMIT SUCCESSFULLY.
       this.user.wAddress = this.addressLine;
       this.user.wCity = this.city;
       this.user.wState = this.state;
-      this.user.wZip = this.signUpForm.value.zipcode;
+      this.user.wZip = this.signUpForm.value.zip;
       //YOU WILL GET A 500 RETURN STATUS BECAUSE THERE WON'T BE ANY RESPONSE.
       this.user.userName = this.signUpForm.value.username;
       //NOTE: WE CANNOT PASS THE PASSWORD BECAUSE IT DOESNT EXIST IN THE SPRING USER MODEL.

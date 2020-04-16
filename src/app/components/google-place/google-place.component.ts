@@ -6,13 +6,13 @@ declare var google;
 
 @Component({
     selector: 'app-google-place',
-    template: `<input #addresstext class="input" type="text">`
+    template: `<input #addresstext class="form-control" type="text" style="width:230px;border-radius:15px;">`
 })
 export class GooglePlaceComponent implements AfterViewInit {
   @ViewChild('addresstext', {static: false}) addresstext: any;
 
   addressEntities: Array<any>;
-
+  
   @Output() googlePlaceObj = new EventEmitter();
 
   constructor() { }
@@ -40,6 +40,8 @@ export class GooglePlaceComponent implements AfterViewInit {
       this.addressEntities = place.address_components;
       console.log();
       console.log("****** length of address array is: " + this.addressEntities.length + " ******");
+      if (this.addressEntities.length==8 ) 
+      {
       console.log("STREET NUMBER: " + this.addressEntities[0].long_name);
       console.log("STREET NAME: " + this.addressEntities[1].long_name);
       console.log("CITY: " + this.addressEntities[2].long_name);
@@ -49,7 +51,19 @@ export class GooglePlaceComponent implements AfterViewInit {
       console.log("COUNTRY: " + this.addressEntities[6].long_name);
       console.log("POSTAL/ZIP CODE: " + this.addressEntities[7].long_name);
       console.log("DELIVERY ROUTE: " + this.addressEntities[7].long_name);
-      console.log();
+     }
+   else{
+    console.log("STREET NUMBER: " + this.addressEntities[0].long_name);
+    console.log("STREET NAME: " + this.addressEntities[1].long_name);
+    console.log("CITY: " + this.addressEntities[2].long_name);
+    console.log("DISTRICT: " + this.addressEntities[3].long_name);
+    console.log("COUNTY: " + this.addressEntities[4].long_name);
+    console.log("STATE: " + this.addressEntities[5].long_name);
+    console.log("COUNTRY: " + this.addressEntities[6].long_name);
+ 
+   }
+
+
     });
 
   }

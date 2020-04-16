@@ -7,14 +7,14 @@
            
             <div class="form-group row">
                 <div class="col-sm-1"></div>
-                    <label for="address" class="col-sm-4 col-form-label">Address:</label>
+                    <label for="address" class="col-sm-4 col-form-label">Update Housing Address:</label>
                     <div class="col-sm-4">
             <app-google-place (googlePlaceObj)="getGooglePlace($event)"></app-google-place>
         </div>
     </div>
         <div class="form-group row">
             <div class="col-sm-1"></div>
-                <label for="address" class="col-sm-4 col-form-label">Street:</label>
+                <label for="address" class="col-sm-4 col-form-label">Housing Address:</label>
                 <div class="col-sm-4">
                     <input type="text" class="form-control" id="address" [(ngModel)]=profileLocation.value.address formControlName="address" readonly>
                     <div *ngIf="!validInput.address.valid && !validInput.address.untouched" class="text-danger">Required</div>
@@ -23,7 +23,7 @@
         
         <div class="form-group row">
                 <div class="col-sm-1"></div>
-            <label for="address2" class="col-sm-4 col-form-label">Address 2:</label>
+            <label for="address2" class="col-sm-4 col-form-label">Workplace Address:</label>
             <div class="col-sm-4">
                 <input type="text" class="form-control" id="address2" [(ngModel)]=profileLocation.value.address2 formControlName="address2" readonly>
                 <div *ngIf="!validInput.address2.valid && !validInput.address2.untouched" class="text-danger">Required</div>

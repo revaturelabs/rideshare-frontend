@@ -1,6 +1,7 @@
 import { Component, OnInit , Input, Output, EventEmitter} from '@angular/core';
 import { UserService } from 'src/app/services/user-service/user.service';
 import { User } from 'src/app/models/user';
+import { Batch } from 'src/app/models/batch';
 @Component({
   selector: 'app-profile-membership',
   templateUrl: './profile-membership.component.html',
@@ -17,12 +18,14 @@ export class ProfileMembershipComponent implements OnInit {
   @Input() userId:number ;
   @Output() onDriverStatus = new EventEmitter();
   isDriver:boolean;
+  batchFAddress:string;
   constructor(private userService: UserService) { }
   ngOnInit() {
     this.userService.getUserById2(sessionStorage.getItem("userid")).subscribe((response)=>{
       this.user = response;
       this.driverSelect = response.driver;
       this.isActive = response.active;
+      this.batchFAddress=response.batch.bAddress+", "+response.batch.bCity+","+response.batch.bState +" "+response.batch.bZip
     })
   }
   updatesMembershipInfo(){

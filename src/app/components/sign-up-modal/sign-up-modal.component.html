@@ -119,7 +119,9 @@
       <!-- This form group contains the AUTOPLACES field input. -->
       <div class="form-group">
         <label for="autoplaces">Address</label>
-        <input 
+        <app-google-place class="form-control" (googlePlaceObj)="getGooglePlace($event)" (change)="handleAddressChange($event)"></app-google-place>
+
+        <!-- <input 
           id="autoplaces" 
           formControlName="address" 
           placeholder="{{addressLine}}" 
@@ -127,7 +129,7 @@
           [options]='options' 
           #placesRef="ngx-places"
           (change)="handleAddressChange($event)" 
-          class="form-control"/>
+          class="form-control"/> -->
         <!-- Validation. -->
         <span 
           *ngIf="this.city==null && signUpForm.get('address').touched"
@@ -150,7 +152,7 @@
       <!-- This form group contains the CITY field input. -->
       <!-- READONLY -->
       <div class="form-group">
-        <label id="hCity">City</label>
+        <label id="city">City</label>
         <input
           readonly
           type="text"
@@ -175,14 +177,16 @@
 
       <!-- This form group contains the ZIP CODE field input. -->
       <div class="form-group">
-        <label for="zipcode">Zip Code</label>
+        <label for="zip">Zip Code</label>
         <input 
+        readonly
           type="text"
-          id="zipcode"
-          formControlName="zipcode"
-          class="form-control">
+          id="zip"
+          formControlName="zip"
+          class="form-control"
+          placeholder="{{zip}}">
         <span 
-          *ngIf="!signUpForm.get('zipcode').valid && signUpForm.get('zipcode').touched"
+          *ngIf="!signUpForm.get('zip').valid && signUpForm.get('zip').touched"
           class="help-block">This field is required.
         </span>
       </div>

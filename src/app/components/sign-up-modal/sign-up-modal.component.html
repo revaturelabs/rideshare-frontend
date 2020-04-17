@@ -98,7 +98,7 @@
             Choose your Batch
           </option>
           <option *ngFor="let batch of batches">
-            {{batch.batchNumber}}. {{batch.batchLocation}}
+            {{batch.batchNumber}}: {{batch.batchLocation}}
           </option>
         </select>
         <span 
@@ -146,6 +146,7 @@
           type="text"
           id="address"
           class="form-control" 
+          formControlName="address"
           placeholder="{{addressLine}}">
       </div>
 

@@ -231,6 +231,10 @@ export class UserService {
 		return this.http.get(this.url + 'driver/'+ location)
 	}
 
+	/**
+	 * This GET function is used to get the top 5 drives best for the Rider
+	 * @param userId is used get the userID which provides user.location
+	 */
 	getRecommendedDrivers(userId: number): Observable <any> {
 		return this.http.get(this.url + 'driver/recommend/' + userId)
 	}

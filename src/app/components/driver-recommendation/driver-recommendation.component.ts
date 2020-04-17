@@ -11,16 +11,31 @@ import { element } from 'protractor';
 })
 export class DriverRecommendationComponent implements OnInit {
 
-  //location : string = driver.origin;
-  userId: number;
+  /**
+   * Create an array of Drivers
+   * Sets userId number variable to select location
+   */
   drivers : Array<any> = [];
+  userId: number;
+
+
+  /**
+   * 
+   * @param userService An user service is instantiated.
+   * @param http A HTTP Client is created.
+   * 
+   */
   constructor(private userService: UserService, private http: HttpClient) {}
 
+  /**
+   * Upon startup of this component, the userId i pulled from
+   * the sessionStorage to get the userId value.
+   * Populate the Drivers Array with the values from the back end
+   * through the userService getRecommendedDrivers(). 
+   */
   ngOnInit() { 
     this.drivers = [];
-    /*
-    this.userService.getRidersForLocation1(this.location).subscribe(
-      */
+    
      this.userId = JSON.parse(sessionStorage.getItem("userid"));
      this.userService.getRecommendedDrivers(this.userId).subscribe(
       res => {
@@ -42,19 +57,29 @@ export class DriverRecommendationComponent implements OnInit {
       this.displayDriverInfo(this.drivers);
       });
   }
+
+  /**
+   * This function is used to sync up the
+   * recommended drivers in tandem with driver-list
+   * 
+   * @param ms 
+   * ms is used to insert a wait time for the component
+   */
   sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
  
+  /**
+   * This function is used to display a modal to the user
+   * @param drivers 
+   */
    displayDriverInfo(drivers){
     var recOutput = document.getElementById('driverrec');
-    //console.log("Here I aM ");
     //console.log(drivers);
+
         drivers.forEach(element => 
           {
-            //alert("hello02");
-            console.log("I Made it!");
             recOutput.innerHTML += `
             <div class="driver-item">
             <div>

@@ -11,7 +11,7 @@ describe('membership form testing - ', function(){
    //End of xpaths needed for tests
    let xComp = 1800;
    let y = 720;
-   //browser.get('http://localhost:4200/');
+  // browser.get('http://localhost:4200/');
    //checks to make sure that the login button reroutes to the correct modal
    //change when the front end is being hosted
 
@@ -30,10 +30,10 @@ describe('membership form testing - ', function(){
        elLoginPassword.sendKeys('password');
        elLoginSubmit.click();
        //change this to reflect succesful login
-       browser.waitForAngular();
+       browser.driver.sleep(500);
        browser.ignoreSynchronization=true;
        elProfileDrop.click();
-       browser.waitForAngular();
+       browser.driver.sleep(500);
        browser.ignoreSynchronization=true
        elProfileButton.click();
        browser.driver.sleep(1000);

@@ -12,7 +12,7 @@ exports.config = {
   specs: [
     './test/register.spec.js',
     './test/usernav.spec.js',
-    './test/membership.spec.js'
+    './test/membership.spec.js',
   ],
   capabilities: {
     browserName: 'chrome'

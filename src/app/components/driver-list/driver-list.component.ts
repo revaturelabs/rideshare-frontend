@@ -88,7 +88,7 @@ export class DriverListComponent implements OnInit {
       };
       this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapProperties);
 
-      this.separateApiCalls(this.location, this.drivers, 0);
+      this.separateApiCalls(this.location, this.drivers);
     });
 
     // connect the paginator and sorting elements to the dataSource
@@ -281,8 +281,11 @@ export class DriverListComponent implements OnInit {
   /**
    * the purpose of ths function is to display all the drivers' distance/duration on the table without going over GoogleMaps allotted queries per second limit
    * the function runs recursively to make use of the sleep function defined above. starting index is where we start to slice the driver array from
+   * @param origin the starting point of the trip. taken from the user's home address
+   * @param drivers the list of drivers to calculate for
+   * @param startingIndex index of drivers to begin the slice from, starts at 0 for initial call
    */
-  separateApiCalls(origin, drivers, startingIndex) {
+  separateApiCalls(origin, drivers, startingIndex = 0) {
     // calculate the end index for the slice. if it is longer than the length of drivers, slice will only take the remaining elements.
     let endIndex = startingIndex + 5;
 

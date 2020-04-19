@@ -155,5 +155,8 @@
       }
     }
   },
-  "defaultProject": "rideshare-frontend"
+  "defaultProject": "rideshare-frontend",
+  "cli": {
+    "analytics": "13657fef-0be1-437b-817d-cf4bc4b7239c"
+  }
 }

@@ -38,6 +38,11 @@ import { UserRegisterComponent } from './components/user-register/user-register.
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
 
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 
 @NgModule({
@@ -73,11 +78,14 @@ import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    BrowserModule,
     AppRoutingModule,
     FormsModule,
     ModalModule.forRoot(),
-    NgbModule
+    NgbModule,
+    MatTableModule,
+    MatPaginatorModule,
+    BrowserAnimationsModule,
+    MatSortModule
   ],
   providers: [
     UserService,

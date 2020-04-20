@@ -12,8 +12,9 @@ exports.config = {
   specs: [
     // './src/**/*.e2e-spec.ts'
     './test/landingpage.spec.js',
-    './test/register.spec.js',
-    './test/usernav.spec.js'
+    //'./test/register.spec.js',
+    './test/driverlist.spec.js',
+    //'./test/usernav.spec.js'
   ],
   capabilities: {
     browserName: 'chrome'

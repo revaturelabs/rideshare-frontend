@@ -1,0 +1,15 @@
+.driver-item{
+    justify-content: center;
+    border: 2px, solid black;
+    padding: 2px;
+    width: 80px;
+    color: blue;
+    display:flex;
+    flex-direction:column;
+}
+.rowdrivers{
+    display:flex;
+    flex-direction:row;
+    justify-content: space-around;
+    width:100%;
+}

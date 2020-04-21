@@ -36,7 +36,7 @@ const routes: Routes = [
   {path: 'profile', component: ProfileComponent},
   {path: 'preference', component: PreferenceComponent},
   {path: 'signup', component: SignupModalComponent},
-  {path: 'landingPage', component: LandingPageComponent},
+  // {path: 'landingPage', component: LandingPageComponent},
   {path: 'drivers', component: DriverListComponent},
   {path: 'driverrec', component: DriverRecommendationComponent},
 {path: 'profile/contact', component: ProfileContactComponent},

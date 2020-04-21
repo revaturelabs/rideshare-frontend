@@ -175,9 +175,9 @@ export class UserService {
 	 * @param user 
 	 */
 
-	updateUserInfo(user: User) {
+	updateUserInfo(id: Number, user: User) {
 		//console.log(user);
-		return this.http.put(this.url, user).toPromise();
+		return this.http.put(`${this.url}${id}`, user).toPromise();
 	}
 	/**
 	 * A GET method that retrieves a driver by Id
@@ -231,11 +231,16 @@ export class UserService {
 		return this.http.get(this.url + 'driver/'+ location)
 	}
 
+
 	/**
 	 * This GET function is used to get the top 5 drives best for the Rider
 	 * @param userId is used get the userID which provides user.location
 	 */
 	getRecommendedDrivers(userId: number): Observable <any> {
 		return this.http.get(this.url + 'driver/recommend/' + userId)
+
+	getAllDrivers(): Observable <any> {
+		return this.http.get(`${this.url}?is-driver=true`)
+
 	}
 }

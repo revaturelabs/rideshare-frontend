@@ -8,7 +8,7 @@ const { SpecReporter } = require('jasmine-spec-reporter');
  * @type { import("protractor").Config }
  */
 exports.config = {
-  allScriptsTimeout: 11000,
+  allScriptsTimeout: 30000,
   specs: [
     // './src/**/*.e2e-spec.ts'
     './test/landingpage.spec.js',
@@ -20,7 +20,7 @@ exports.config = {
     browserName: 'chrome'
   },
   directConnect: true,
-  baseUrl: 'http://http://54.174.82.153:4200/',
+  baseUrl: 'http://localhost:4200/',
   framework: 'jasmine',
   jasmineNodeOpts: {
     showColors: true,

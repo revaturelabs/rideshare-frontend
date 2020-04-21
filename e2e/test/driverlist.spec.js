@@ -1,3 +1,4 @@
+
 describe('User logged in Driver-list tests', function(){
     // these are html elements for reference during testing
    //beginning of elements for the login
@@ -22,6 +23,7 @@ describe('User logged in Driver-list tests', function(){
    let elDriverFilterSeats = element(by.xpath('/html/body/app-root/app-driver-list/div/div/div[1]/div/form/div[1]/input'));
    let elDriverFilterDist = element(by.xpath('/html/body/app-root/app-driver-list/div/div/div[1]/div/form/div[2]/input'));
    let elDriverFilterDur = element(by.xpath('/html/body/app-root/app-driver-list/div/div/div[1]/div/form/div[3]/input'));
+
    let elDriverTabSelect = element(by.xpath('/html/body/app-root/app-navbar/nav/div/ul/li[2]/a/span'));
 
     //Start of Recommended Drivers
@@ -35,7 +37,7 @@ describe('User logged in Driver-list tests', function(){
    let y = 720;
    let xPhone = 800;
 
-   
+
     //checks to make sure that the login button reroutes to the correct modal
     //change when the front end is being hosted
     it('User Presses the login button and signs in as the logged in user', function(){

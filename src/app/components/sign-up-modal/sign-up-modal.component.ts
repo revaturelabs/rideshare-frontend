@@ -213,7 +213,7 @@ export class SignupModalComponent implements OnInit {
       this.user.email = this.signUpForm.value.email;
       this.user.phoneNumber = this.signUpForm.value.phonenumber;
       //HOME ADDRESS
-      this.user.hAddress = this.signUpForm.value.addressLine;
+      this.user.hAddress = this.signUpForm.value.address;
       this.user.hCity = this.signUpForm.value.city;
       this.user.hState = this.signUpForm.value.state;
       this.user.hZip = Number(this.signUpForm.value.zip);

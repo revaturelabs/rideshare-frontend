@@ -63,7 +63,7 @@ export class UserService {
 	}
 
 	 
-	getUserById2(idParam2: String): Observable<User>{
+	getUserById2(idParam2: string): Observable<User>{
 		
 		//console.log(this.url)
 		return this.http.get<User>(this.url+idParam2);
@@ -175,7 +175,7 @@ export class UserService {
 	 * @param user 
 	 */
 
-	updateUserInfo(id: Number, user: User) {
+	updateUserInfo(id: number, user: User) {
 		//console.log(user);
 		return this.http.put(`${this.url}${id}`, user).toPromise();
 	}
@@ -238,7 +238,7 @@ export class UserService {
 	 */
 	getRecommendedDrivers(userId: number): Observable <any> {
 		return this.http.get(this.url + 'driver/recommend/' + userId)
-
+	}
 	getAllDrivers(): Observable <any> {
 		return this.http.get(`${this.url}?is-driver=true`)
 

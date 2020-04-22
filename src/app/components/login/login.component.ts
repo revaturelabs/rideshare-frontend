@@ -62,6 +62,8 @@ export class LoginComponent implements OnInit {
 		this.userService.getAllUsers()
 			.subscribe(allUsers => {
 				this.allUsers = allUsers;
+				console.log(allUsers);
+				console.log(this.allUsers.length);
 				this.totalPage = Math.ceil(this.allUsers.length / 5);
 				this.users = this.allUsers.slice(0, 5);
 		});
@@ -159,7 +161,7 @@ export class LoginComponent implements OnInit {
         this.http.get(`${environment.loginUri}?userName=${this.userName}&passWord=${this.passWord}`)
 			.subscribe(
                   (response) => {
-                     //console.log(response);
+                     console.log(response);
                       if(response["userName"] != undefined){
                          this.usernameError=  response["userName"][0];
                       }

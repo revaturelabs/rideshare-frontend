@@ -33,6 +33,7 @@ import { ProfileLocationComponent } from './components/profile-location/profile-
 import { ProfileMembershipComponent } from './components/profile-membership/profile-membership.component';
 import { DriverContactModalComponent } from './components/driver-contact-modal/driver-contact-modal.component';
 import { DriverListComponent } from './components/driver-list/driver-list.component';
+import { DriverRecommendationComponent } from './components/driver-recommendation/driver-recommendation.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { UserRegisterComponent } from './components/user-register/user-register.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
@@ -69,6 +70,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ProfileMembershipComponent,
     DriverContactModalComponent,
     DriverListComponent,
+    DriverRecommendationComponent,
     UserRegisterComponent,
     HomePageComponent,
     BsNavbarComponent

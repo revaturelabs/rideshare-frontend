@@ -23,11 +23,20 @@ describe('User logged in Driver-list tests', function(){
    let elDriverFilterSeats = element(by.xpath('/html/body/app-root/app-driver-list/div/div/div[1]/div/form/div[1]/input'));
    let elDriverFilterDist = element(by.xpath('/html/body/app-root/app-driver-list/div/div/div[1]/div/form/div[2]/input'));
    let elDriverFilterDur = element(by.xpath('/html/body/app-root/app-driver-list/div/div/div[1]/div/form/div[3]/input'));
-   
-   //End of xpaths needed for tests
+
+   let elDriverTabSelect = element(by.xpath('/html/body/app-root/app-navbar/nav/div/ul/li[2]/a/span'));
+
+    //Start of Recommended Drivers
+    let elDriverRecAccordian = element(by.xpath('/html/body/app-root/app-driver-list/app-driver-recommendation/div/div/div/div[1]/a'));
+    let elDriverRecModalOpen = element(by.xpath('/html/body/app-root/app-driver-list/app-driver-recommendation/div/div/div/div[2]/div/div/div[1]/button'));
+    let elDriverRecModalClose = element(by.xpath('/html/body/app-root/app-driver-list/app-driver-recommendation/div/div/div/div[2]/div/div/div[1]/div[3]/div/div/div/div[1]/button'));
+    let elDriverRecModalName = element(by.xpath('/html/body/app-root/app-driver-list/app-driver-recommendation/div/div/div/div[2]/div/div/div[1]/div[3]/div/div/div/div[2]/h1'));
+
+    //End of xpaths needed for tests
    let xComp = 1800;
    let y = 720;
    let xPhone = 800;
+
 
     //checks to make sure that the login button reroutes to the correct modal
     //change when the front end is being hosted
@@ -43,13 +52,15 @@ describe('User logged in Driver-list tests', function(){
         browser.waitForAngular();
         browser.driver.sleep(500);
         expect(elLoggedInHeader.getText()).toBe('Fabien Braunroth');
+
+        elDriverTabSelect.click();
+
     });
    /*----------------------------------------------------------------------------------------------
 
    checks to make sure that the driver button takes the user to the nearby drivers page on a larger screen
    change when the front end is being hosted
-   */
-  
+    */
 
    //Checks to make sure that sorting button is working
    it('User Presses the header buttons and table sorts by first name, distance, and duration', function(){
@@ -101,6 +112,48 @@ describe('User logged in Driver-list tests', function(){
         elDriverFilterSeats.sendKeys(protractor.Key.NUMPAD3);
         browser.driver.sleep(500);
         expect(elDriverListNames.getText()).toBe("Lynn Ozintsev");
+    });
+
+        //Check to see if recommended driver modal is working and displaying correct information
+    //Default Login
+    //User name: fbraunroth2
+    it("User clicks on Recommended Driver Modal", function() {
+        
+        browser.waitForAngular();
+        //click to open modal
+        elDriverRecModalOpen.click();
+
+        //Look to Display the Correct Name
+        expect(elDriverRecModalName.getText()).toBe("Salvidor Migheli");
+
+        //click to close the modal
+        elDriverRecModalClose.click();
 
     });
+    
+    //Check to see if recommended driver accordian shows and hides
+    it("User clicks on Recommended Driver Accordian", function() {
+
+        var elAccordian = element(by.id('accordionEx'));
+
+        browser.waitForAngular();
+        
+        //Find the default setting
+        expect(elAccordian.isPresent.toBeTruthy);
+        
+        //Click to hide the information
+        elDriverRecAccordian.click();
+
+        //Find the new setting
+        expect(elAccordian.isPresent.toBeFalsy);
+
+        //Click to show the information
+        elDriverRecAccordian.click();
+
+        //Ensure it opens back up
+        expect(elAccordian.isPresent.toBeTruthy);
+
+    });
+
+
 });

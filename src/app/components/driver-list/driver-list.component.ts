@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { BatchService } from 'src/app/services/batch-service/batch.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
+import { GoogleApiService } from 'src/app/services/google-api.service';
 
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -41,7 +42,7 @@ export class DriverListComponent implements OnInit {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   map: google.maps.Map;
 
-  constructor(private http: HttpClient, private userService: UserService, private carService: CarService) { }
+  constructor(private http: HttpClient,private userService: UserService, private carService: CarService,private googleApi:GoogleApiService) { }
 
   ngOnInit() {
 
@@ -142,34 +143,28 @@ export class DriverListComponent implements OnInit {
   sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
+  
+getGoogleApi()  {
 
-  /**
-   * retrieve the Google Maps API key from the backend
-   */
-  getGoogleApi() {
-    this.http.get(`${environment.loginUri}getGoogleApi`)
-      .subscribe(
-        (response) => {
-          //console.log(response);
-          if (response["googleMapAPIKey"] != undefined) {
-            new Promise((resolve) => {
-              let script: HTMLScriptElement = document.createElement('script');
-              script.addEventListener('load', r => resolve());
-              script.src = `http://maps.googleapis.com/maps/api/js?key=${response["googleMapAPIKey"][0]}`;
-              document.head.appendChild(script);
-            });
-          }
-        }
-      );
-  }
+  this.googleApi.getGoogleApi();
+    // this.http.get(`${environment.loginUri}getGoogleApi`)
+    //    .subscribe(
+    //              (response) => {
+    //                  //console.log(response);
+    //                  if(response["googleMapAPIKey"] != undefined){
+    //                      new Promise((resolve) => {
+    //                        let script: HTMLScriptElement = document.createElement('script');
+    //                        script.addEventListener('load', r => resolve());
+    //                        script.src = `http://maps.googleapis.com/maps/api/js?key=${response["googleMapAPIKey"][0]}`;
+    //                        document.head.appendChild(script);      
+    //                  }); 
+    //            }    
+    //        }
+    //    );
+   }
 
-  /**
-   * set up the GoogleMaps API objects for each driver and display the route
-   * @param origin the starting point of the trip. taken from the user's home address
-   * @param drivers the list of drivers to calculate for
-   */
-  showDriversOnMap(origin, drivers) {
-    drivers.forEach(element => {
+  showDriversOnMap(origin, drivers){
+     drivers.forEach(element => {
       var directionsService = new google.maps.DirectionsService;
       var directionsRenderer = new google.maps.DirectionsRenderer({
         draggable: true,

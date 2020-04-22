@@ -16,6 +16,7 @@ import { ProfileComponent } from '../profile/profile.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Batch } from 'src/app/models/batch';
+import { User } from 'src/app/models/user';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -38,79 +39,13 @@ describe('LoginComponent', () => {
     component.showDropDown = false;
     component.curPage = 1;
     component.totalPage = 10;
-    component.users = [{ userId: 1,
-      userName: 'username',
-      batch: {
-        batchNumber: 1,
-        batchLocation: 'NYC'
-      },
-      firstName: 'John',
-      lastName: 'Smith',
-      email: 'john.smith@gmail.com',
-      phoneNumber: '9171234567',
-      active: true,
-      driver: true,
-      acceptingRides: true}]
+    let user: User;
+    component.users = [user]
     // fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-
-  it('should change user in login dropdown', () => {
-    
-    // arrange
-    const user = component.users = [{ userId: 1,
-      userName: 'username',
-      batch: {
-        batchNumber: 1,
-        batchLocation: 'NYC'
-      },
-      firstName: 'John',
-      lastName: 'Smith',
-      email: 'john.smith@gmail.com',
-      phoneNumber: '9171234567',
-      active: true,
-      driver: true,
-      acceptingRides: true}];
-      // act
-      component.changeUser(user);
-      // assert
-      expect(component.users).toMatch;
-  });
-
-  it('should search account and return a user', () => { 
-
-  });
-
-  it('should toggle dropdown', () => {
-    // arrange
-    component.showDropDown = false;
-    // act
-    component.toggleDropDown();
-    // assert
-    expect(component.showDropDown).toBe(true);
-  });
-
-  it('nextPage()', () => {
-    component.curPage = 1;
-    component.nextPage();
-    expect(component.curPage).toBeGreaterThanOrEqual(1);
-  });
-
-  it('prevPage()', () => {
-    component.curPage = 5;
-    component.prevPage();
-    expect(component.curPage).toBeLessThan(5);
-  });
-
-  it('loginFailed()', () => {
-    component.userName = '';
-    component.failed = true;
-    component.loginFailed();
-    expect(component.userName).toBe('');
-    expect(component.failed).toBe(true);
-  });
+  // it('should create', () => {
+  //   expect(component).toBeTruthy();
+  // });
   
 });

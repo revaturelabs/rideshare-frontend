@@ -1,11 +1,9 @@
-
-
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ModalModule } from 'node_modules/ngx-bootstrap';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { AppComponent } from './app.component';
 import { RegisterComponent } from './components/register/register.component';
 import { DriverComponent} from './components/driver/driver.component';
@@ -26,6 +24,9 @@ import { AdminLoginComponent } from './components/admin-login/admin-login.compon
 import { DriverInfoComponent } from './components/driver-info/driver-info.component';
 import { LandingComponent } from './components/landing/landing.component';
 import { SignupModalComponent } from './components/sign-up-modal/sign-up-modal.component';
+//GOOGLE PLACES API ADDRESS FIELD.
+import { GooglePlaceComponent } from './components/google-place/google-place.component';
+
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { ProfileContactComponent } from './components/profile-contact/profile-contact.component';
 import { ProfileCarComponent } from './components/profile-car/profile-car.component';
@@ -38,6 +39,10 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { UserRegisterComponent } from './components/user-register/user-register.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
+//Add the GooglePlaceModule for simplistic implementation and configuration of autocomplete.
+//It is also imported in the imports array below.
+import { GooglePlaceModule } from "ngx-google-places-autocomplete";
+import { ControlMessagesComponent } from './control-messages.component';
 
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
@@ -63,6 +68,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     DriverInfoComponent,
     LandingComponent,
     SignupModalComponent,
+    GooglePlaceComponent,
     LandingPageComponent,
     ProfileContactComponent,
     ProfileCarComponent,
@@ -73,17 +79,20 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     DriverRecommendationComponent,
     UserRegisterComponent,
     HomePageComponent,
-    BsNavbarComponent
-    
+    BsNavbarComponent,
+    ControlMessagesComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
+    ReactiveFormsModule,
     FormsModule,
     AppRoutingModule,
     FormsModule,
     ModalModule.forRoot(),
     NgbModule,
+    //THIS MODULE IS FROM THE GOOGLE PLACES NGX WRAPPER.
+    GooglePlaceModule,
     MatTableModule,
     MatPaginatorModule,
     BrowserAnimationsModule,

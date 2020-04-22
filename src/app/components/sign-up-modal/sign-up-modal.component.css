@@ -2,12 +2,32 @@
     font-family: "Overpass",sans-serif;
    
 }
+
+/*  These ng-deep styles are necessary to make the autocomplete functionality
+    visible above the bootstrap modal. */
+::ng-deep .modal {
+    z-index: 1001 !important;
+} 
+
+::ng-deep .modal-backdrop {
+    z-index: 1000 !important;
+}
+
+::ng-deep .pac-container {
+    z-index: 1055 !important;
+}
+
+/*  These styles are to format the help-block messages for form validation.*/
+.help-block {
+    font-size: 15px;
+    color: red;
+}
+
 .signup{
     cursor:pointer;
     display:inline-block;
     width: 70px;
 }
-
 
 label{
     margin-left:10px;
@@ -19,7 +39,7 @@ h3{
     font-size:30px;
 }
 .modal-title{
-    font-size:60px;
+    font-size:40px;
     font-weight:bold;
 }
 

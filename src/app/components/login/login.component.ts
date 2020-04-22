@@ -95,7 +95,7 @@ export class LoginComponent implements OnInit {
 					user.firstName.toLowerCase().startsWith(this.chosenUserFullName.toLowerCase()) ||
 					user.lastName.toLowerCase().startsWith(this.chosenUserFullName.toLowerCase()) ||
 					`${user.firstName} ${user.lastName}`.toLowerCase().startsWith(this.chosenUserFullName.toLowerCase()) ||
-					`${user.firstName} ${user.lastName}: ${user.isDriver ? 'Driver' : 'Rider'}`.toLowerCase().startsWith(this.chosenUserFullName.toLowerCase())
+					`${user.firstName} ${user.lastName}: ${user.driver ? 'Driver' : 'Rider'}`.toLowerCase().startsWith(this.chosenUserFullName.toLowerCase())
 				);
 			});
 			this.totalPage = Math.ceil(this.users.length / 5);

@@ -1,10 +1,13 @@
 import { Component, OnInit, NgModule } from '@angular/core';
+
 import { UserService } from 'src/app/services/user-service/user.service';
 import { BatchService } from 'src/app/services/batch-service/batch.service';
+import {  Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Batch } from 'src/app/models/batch';
 import { Router, RouterModule } from '@angular/router';
-import { ValidationService } from 'src/app/services/validation-service/validation.service';
 import { User } from 'src/app/models/user';
+import { ValidationService } from '../../validation.service';
+
 
 @Component({
 	selector: 'app-user-register',
@@ -23,6 +26,7 @@ import { User } from 'src/app/models/user';
 
 export class RegisterComponent implements OnInit {
 
+	signupform: FormGroup;
 	batches: Batch[] = [];
 	user: User = new User();
 
@@ -33,7 +37,32 @@ export class RegisterComponent implements OnInit {
    * @param batchService A dependency of a batch service is injected.
    */
 
-	constructor(private userService: UserService, private batchService: BatchService, private router: Router, public validationService: ValidationService) { }
+	constructor(private userService: UserService, 
+		private batchService: BatchService, 
+		private router: Router,
+		private formBuilder: FormBuilder) { 
+
+			this.signupform = this.formBuilder.group ({
+				'userName':  ['', [Validators.required, 
+					Validators.minLength(2), 
+					Validators.maxLength(35),
+					ValidationService.stringValidator]],
+				'firstname':  ['', [Validators.required, 
+					Validators.minLength(2), 
+					Validators.maxLength(35),
+					ValidationService.stringValidator]],
+				 'lastname':['', [Validators.required, 
+				 Validators.minLength(2), 
+				 Validators.maxLength(35),
+				 ValidationService.stringValidator]], 
+				 'email':['', [Validators.required, 
+					ValidationService.emailValidator]],
+				 'phonenumber':['', [Validators.required, 
+				 Validators.minLength(10),
+				 ValidationService.phoneNumberValidator]]
+			   })
+		}
+	
 
 
   /**
@@ -41,29 +70,26 @@ export class RegisterComponent implements OnInit {
    * The system will check if the token is valid; once validated a batch service is called.
    */
 	ngOnInit() {
-		if (sessionStorage.getItem('auth')) {
+		
+		/*if (sessionStorage.getItem('auth')) {
 			this.router.navigate(['home']);
-		} else {
-			/*this.batchService.getAllBatches()
-				.subscribe(allBatches => {
-					this.batches = allBatches;
-					this.user.batch.batchNumber = this.batches[0].batchNumber;
-			});*/
-		}
+		} */
 	}
+	
+	  
 
 	/**
 	 * This function allows the user to select the batch location.
 	 */
-	changeLocation(event) {
+	/*changeLocation(event) {
 		let option = event.target.options.selectedIndex;
 		this.user.batch.batchNumber = this.batches[option].batchNumber;
-	}
+	}*/
 
 	/**
 	 * This function creates a driver if all the validations are true.
 	 */
-	signUpDriver() {
+/*	signUpDriver() {
 		//if (this.validationService.validateUserName(this.user.userName) && this.validationService.validateName(this.user.firstName) && this.validationService.validateName(this.user.lastName) && this.validationService.validateEmail(this.user.email) && this.validationService.validatePhone(this.user.phoneNumber)) {
 			this.userService.createDriver(this.user, 'driver');
 		//}
@@ -72,6 +98,6 @@ export class RegisterComponent implements OnInit {
 		if (this.validationService.validateUserName(this.user.userName) && this.validationService.validateName(this.user.firstName) && this.validationService.validateName(this.user.lastName) && this.validationService.validateEmail(this.user.email) && this.validationService.validatePhone(this.user.phoneNumber)) {
 			this.userService.createDriver(this.user, 'rider');
 		}
-	}
+	}*/
 
-}
+	}

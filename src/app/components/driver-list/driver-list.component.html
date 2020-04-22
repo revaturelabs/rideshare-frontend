@@ -1,38 +1,117 @@
-<div class = "container">
-    <div class="row">
-    <div class="col-lg-5">
-     <!--<div class="form-group">
-        <h4>Origin</h4>
-        <input [(ngModel)]="origin" id="origin" class="form-control" placeholder="Morgantown, WV"/>
+
+<app-driver-recommendation></app-driver-recommendation>
+
+<div class="container-fluid">
+  <div class="row">
+
+    <div class="mat-elevation-z2 col-lg-2 z-depth-4">
+      <div class="modal-body w-100">
+        <form>
+          <div class="form-group">
+            <label for="atleast">At least</label>
+            <input class="short" class="form-control" type="number" [(ngModel)]="minAvailableSeats"
+              (keyup)="applyFilter()" name="minAvailableSeats">
+            <label for="seats"> Seats </label>
+          </div>
+
+          <div class="form-group">
+            <label for="minutes">Less than </label>
+            <input class="short" class="form-control" type="number" [(ngModel)]="maxTime" (keyup)="applyFilter()"
+              name="maxTime">
+            <label for="Minutes">minutes </label>
+          </div>
+
+          <div class="form-group">
+            <label for="miles">Less than </label>
+            <input class="short" class="form-control" type="number" [(ngModel)]="maxDistance" (keyup)="applyFilter()"
+              name="maxDistance">
+            <label for="Miles">miles </label>
+          </div>
+        </form>
+
       </div>
-      <div class="form-group">
-        <h4>Destination</h4>
-        <input [(ngModel)]="destination" id="destination" class="form-control" placeholder="Reston, VA"/>
-      </div>
-      <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-8">
-          <button id = "search" class="btn btn-primary" (click)="getDirection()">Get Direction</button>
+    </div>
+
+    <br />
+    <br />
+    
+      <div class="col-lg-5">
+
+        <h4>Driver's List</h4>
+        <div class="mat-elevation-z8">
+          <table mat-table [dataSource]="dataSource" matSort class="table table-striped">
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+              <th *matHeaderCellDef mat-sort-header class="bg-dark text-white mat-header-cell-left"> Name </th>
+              <td *matCellDef="let element" class="mat-cell-left">{{element.name}}</td>
+            </ng-container>
+
+            <!-- Distance Column -->
+            <ng-container matColumnDef="distance">
+              <th mat-header-cell-center *matHeaderCellDef mat-sort-header
+                class="bg-dark text-white mat-header-cell-center"> Distance </th>
+              <td mat-cell-center *matCellDef="let element" class="mat-header-cell-center">{{element.distance}}</td>
+            </ng-container>
+
+            <!-- Seats Column -->
+            <ng-container matColumnDef="seats">
+              <th *matHeaderCellDef mat-sort-header class="bg-dark text-white  mat-header-cell-center"> Seats </th>
+              <td *matCellDef="let element" class=".mat-cell-center">{{element.seats}}</td>
+            </ng-container>
+
+            <!-- Duration Column -->
+            <ng-container matColumnDef="duration">
+              <th *matHeaderCellDef mat-sort-header class="bg-dark text-white mat-header-cell-center"> Duration </th>
+              <td *matCellDef="let element" class="mat-header-cell-center">{{element.duration}}</td>
+            </ng-container>
+
+            <!-- Modal Button Column -->
+            <ng-container matColumnDef="modal">
+              <th *matHeaderCellDef class="bg-dark text-white mat-header-cell-center"> Contact </th>
+              <td *matCellDef="let element" class="mat-header-cell-center">
+                <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal"
+                  [attr.data-target]="element.modalButtonId"> View</button>
+                <div class="col-lg-5">
+                  <div class="modal" [attr.id]="element.modalId" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalCenteredLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalCenteredLabel">Contact Info:</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <h1>{{element.name}}</h1>
+                          <h3>Email: {{element.email}}</h3>
+                          <h3>Phone: {{element.phone}}</h3>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns" class="bg-dark text-white"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+          <!-- to add page size options simply put 5,10 inside the brackets or howerver many
+        you would like to add. -->
+          <mat-paginator [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
         </div>
       </div>
-      <p id="total"></p>-->
-      <h4>Driver's List</h4>
-      
-     <table class="table table-striped">
-       <thead class="thead-dark">
-         <tr>
-           <th scope="col">Name</th>
-           <th scope="col">Distance</th>
-           <th scope="col">Seats</th>
-           <th scope="col">Time</th>
-           <th scope="col">View Info</th>
-         </tr>
-       </thead>
-       <tbody id="output"></tbody>
-      </table>
-     </div>
-     <div class="col-lg-6">
-       <h4>Directions:</h4>
-       <div #map id="gmap" class="img-responsive"></div>
-     </div>
+  
+    <br />
+    <br />
+    
+      <div class="col-lg-5">
+        <h4>Directions:</h4>
+        <div #map id="gmap" class="img-responsive"></div>
+      </div>
     </div>
   </div>

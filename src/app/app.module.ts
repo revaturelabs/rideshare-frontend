@@ -34,6 +34,7 @@ import { ProfileLocationComponent } from './components/profile-location/profile-
 import { ProfileMembershipComponent } from './components/profile-membership/profile-membership.component';
 import { DriverContactModalComponent } from './components/driver-contact-modal/driver-contact-modal.component';
 import { DriverListComponent } from './components/driver-list/driver-list.component';
+import { DriverRecommendationComponent } from './components/driver-recommendation/driver-recommendation.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { UserRegisterComponent } from './components/user-register/user-register.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
@@ -42,6 +43,13 @@ import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
 //It is also imported in the imports array below.
 import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 import { ControlMessagesComponent } from './control-messages.component';
+
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+
 
 @NgModule({
   declarations: [
@@ -68,6 +76,7 @@ import { ControlMessagesComponent } from './control-messages.component';
     ProfileMembershipComponent,
     DriverContactModalComponent,
     DriverListComponent,
+    DriverRecommendationComponent,
     UserRegisterComponent,
     HomePageComponent,
     BsNavbarComponent,
@@ -78,13 +87,16 @@ import { ControlMessagesComponent } from './control-messages.component';
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
-    BrowserModule,
     AppRoutingModule,
     FormsModule,
     ModalModule.forRoot(),
     NgbModule,
     //THIS MODULE IS FROM THE GOOGLE PLACES NGX WRAPPER.
-    GooglePlaceModule
+    GooglePlaceModule,
+    MatTableModule,
+    MatPaginatorModule,
+    BrowserAnimationsModule,
+    MatSortModule
   ],
   providers: [
     UserService,

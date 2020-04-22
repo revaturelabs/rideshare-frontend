@@ -33,6 +33,7 @@ export class ProfileMembershipComponent implements OnInit {
       //this requests updates the most recent driver status after an update is submitted
       this.userService.getUserById2(sessionStorage.getItem("userid")).subscribe((response)=>{
         this.isDriver =response.driver;
+        
         this.onDriverStatus.emit(this.isDriver)
       })
       this.success = "Update Successful"

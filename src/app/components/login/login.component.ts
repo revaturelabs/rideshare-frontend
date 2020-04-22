@@ -172,7 +172,8 @@ export class LoginComponent implements OnInit {
 						
 						//call landing page
 						//this.router.navigate(['landingPage']);
-						location.replace('landingPage');
+						//removing landingPage/search page
+						location.replace('drivers');
 					  }
 					  if(response["userNotFound"] != undefined){
 						this.userNotFound = response["userNotFound"][0];

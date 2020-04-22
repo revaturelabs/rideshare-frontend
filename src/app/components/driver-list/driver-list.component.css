@@ -17,9 +17,9 @@
     letter-spacing:1px;
     height:45px;
     display:inline-block;
-    
+
 }
- 
+
 #search:hover{
     background-color:white;
     color:#F26925;
@@ -31,7 +31,7 @@
 #right-panel {
     font-family: 'Roboto','sans-serif';
     line-height: 30px;
-    
+
   }
 #wrapper {
     width: 500px;
@@ -40,24 +40,81 @@
 }
 #side1 {
     width: 400px;
-    float:left; 
+    float:left;
     padding-left: 250px;
 }
 #side2 {
     background-color:white;
     padding-left: 300px;
 } */
-#gmap { 
-    height: 369px; 
+
+#gmap {
+    height: 369px;
 }
 .googleapi {
- 
+
 }
 #map{
 }
-.col{
+/* .col{
     margin-right: 3%;
-}
+} */
 .btn-outline-secondary{
     font-size:14px;
+}
+.short{
+  width:80px
+}
+thead {
+    background-color: black!important;
+    color: white!important;
+}
+.mat-elevation-z8{
+    width:760px; 
+    display: inline-block;
+}
+
+.row {
+    width:100%;
+    align:center;
+}
+
+.z-depth-1 {
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+}
+  
+.z-depth-1-half {
+    box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.14), 0 1px 7px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -1px rgba(0, 0, 0, 0.2);
+}
+  
+.z-depth-2 {
+    box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+}
+  
+.z-depth-3 {
+    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.3);
+}
+  
+.z-depth-4 {
+    box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.3);
+}
+
+.z-depth-5 {
+    box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.3);
+}
+
+.mat-header-cell-center .mat-cell-center
+{    
+    display: flex;
+    align-items: center;    
+    justify-content: center;   
+    text-align:center;
+}
+
+.mat-header-cell-left .mat-cell-left
+{   
+    display: flex;
+    align-items: left;  
+    justify-content: left; 
+    text-align:left;
 }

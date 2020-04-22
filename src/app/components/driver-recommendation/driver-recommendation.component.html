@@ -1,0 +1,58 @@
+<div class="container my-4">
+    
+    <!--Accordion wrapper-->
+<div class="accordion md-accordion" id="accordionEx" role="tablist" aria-multiselectable="true">
+
+  <!-- Accordion card -->
+  <div class="card">
+
+    <!-- Card header -->
+    <div class="card-header" role="tab" id="headingOne1">
+      <a data-toggle="collapse" data-parent="#accordionEx" href="#collapseOne1" aria-expanded="false"
+        aria-controls="collapseOne1">
+        <h5 class="mb-0">
+          Recommended Drivers
+        </h5>
+      </a>
+    </div>
+
+    
+    <!-- Card body -->
+    <div id="collapseOne1" class="collapse show" role="tabpanel" aria-labelledby="headingOne1"
+      data-parent="#accordionEx">
+      <div class="card-body">
+          <div class="rowdrivers" id="driverrec"></div>
+          <!--
+          <div class="driver-item" *ngFor="let driver of drivers">
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCentered${driverID.id}"> View</button>
+            <div class="col-lg-5">
+              <div class="modal" id="exampleModalCentered${driverID.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalCenteredLabel">Contact Info:</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">×</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <h1>{{driver.name}}</h1>
+                        <h3>Email: {{driver.email}}</h3>         
+                        <h3>Phone: {{driver.phone}}</h3>                 
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          -->
+        </div>
+      </div>
+    </div>
+  <!-- Accordion card -->
+  </div>
+<!-- Accordion wrapper -->
+</div>

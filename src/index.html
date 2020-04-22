@@ -6,14 +6,29 @@
     <base href="/">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/x-icon" href="assets/revature-logo-600x219.png">
+    
+    
+    
+    <script defer>
+      fetch('http://localhost:8080/login/getGoogleApi')
+        .then((response) => {
+          return response.json();
+        })
+        .then((data) => {
+          document.getElementById("mapKey").setAttribute("src", `https://maps.googleapis.com/maps/api/js?key=${data.googleMapAPIKey[0]}&libraries=places&language=en`)
+        });
+    </script>
+    <script defer id = "mapKey"></script>
+      
       <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
   <body>
+    
     <app-root></app-root>
+    
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    
   </body>
 </html>

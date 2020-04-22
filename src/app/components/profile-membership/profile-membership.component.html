@@ -2,34 +2,34 @@
         <i class="fa fa-users" style="font-family:'FontAwesome';"></i>
             <h4 class="title">Membership:</h4>
             <div class="innercontainer">
+        <form (ngSubmit)="updatesMembershipInfo()">
             <div class="form-group row">
-            
                     <div class="col-sm-12">
-                       <h5>Batch:</h5>
-                       <span> {{profileObject.batch.batchNumber}} - {{profileObject.batch.batchLocation}}</span>
+                       <h5><strong>Batch:</strong></h5>
+                       <!-- batchNumber and batchLocation data is from profile component (parent component) -->
+                       <span>{{batchNumber}} - {{batchLocation}} Batch</span>
+                     
                     </div>
+                </div>   
+                <div class="form-group row">
+                    <br/><span>{{batchFAddress}}</span>
                 </div>
-                
                 <div class="form-group row">
                      <div class="col-sm-4 t">
                     <h6>Status:</h6>
-                    <select class="form-control mySelect" name="rider" id="rider" [(ngModel)]=profileObject.isDriver value="{{profileObject.isDriver}}">
-                        <option value="true">Driver</option>
-                        <option value="false">Rider</option>
+                    <select class="form-control" (change)="onSelectDriver($event)">
+                        <option value="true" [selected]="driverSelect">Driver</option>
+                        <option value="false" [selected]="!driverSelect">Rider</option>
                     </select>
-                    <select class="form-control mySelect" name="active" id="active" [(ngModel)]=profileObject.active value="{{profileObject.active}}">
-                        <option value="true">Active</option>
-                        <option value="false">Disabled</option>
-                    </select>
-                    <!-- <div class="btn-group" role="group" aria-label="Basic example">
-                        <button type="button" class="btn btn-outline-success mybtngroup">Rider</button>
-                        <button type="button" class="btn btn-outline-success mybtngroup">Driver</button>
-                        <button type="button" class="btn btn-outline-danger mybtngroup">Off</button>
-                    </div> -->
-            
-                <button type="submit" class="btn btn-primary myBtn" (click)="updatesMembershipInfo()">Save</button>
+                    <select class="form-control" (change)="onSelectActive($event)">
+                        <option value="true" [selected]="isActive">Active</option>
+                        <option value="false" [selected]="!isActive">Inactive</option>
+                    </select>      
+                    <p class="text-success">{{success}}</p> 
+                <button type="submit" class="btn btn-primary myBtn" >Save</button>
                 </div>
             </div>
+        </form>
         </div>
     </div>
             

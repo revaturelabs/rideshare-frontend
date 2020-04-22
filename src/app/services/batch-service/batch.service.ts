@@ -4,31 +4,32 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
 
-@Injectable({
-    providedIn: 'root'
-})
+
+
 /**
  * This is the batch service
  */
+
+
+
+@Injectable({
+    providedIn: 'root'
+})
+
 export class BatchService {
 
 	url: string = environment.batchesUri;
+	batches: Batch[];
 	
-	batches: Batch[] = [
-		{batchNumber: 1, batchLocation: 'VWU - Morgantown, WV'},
-		{batchNumber: 2, batchLocation: 'UTA - Arlington, TX'},
-		{batchNumber: 3, batchLocation: 'USF - Tampa, FL'},
-		{batchNumber: 4, batchLocation: 'Revature HQ - Reston, VA'},
-		{batchNumber: 5, batchLocation: 'CUNY SPS - New York, NY'},
-		{batchNumber: 6, batchLocation: 'CUNY Queens College - Flushing, NY'}
-	];
 	constructor(private http: HttpClient) { }
 
+
+	
 	/**
 	 * This function fetches all the batches.
 	 */
 	getAllBatches() {
-		return this.batches;
+		return this.http.get<Batch[]>(this.url);
 	}
 
 	getAllBatchesByLocation(location: string): Observable<Batch[]> {
@@ -37,5 +38,8 @@ export class BatchService {
 
 	getAllBatchesByLocation1(): Observable<Batch[]> {
 		return this.http.get<Batch[]>(`${this.url}`);
+	}
+	getBatchById(batchId): Observable<Batch> {
+	return this.http.get<Batch>(`${this.url}+${batchId}`);
 	}
 }

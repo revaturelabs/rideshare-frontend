@@ -1,77 +1,247 @@
-<a (click)="openModal(template)">Sign up</a >
+<a (click)="openModal(template)">Sign up</a>
   
-<ng-template #template >
+<!-- Maintain this template so that we may reference it without having to refactor the way the page works -->
+<ng-template #template>
   <p *ngIf="success != ''" class="success">{{success}}</p>
+  
   <div class="modal-header">
     <h4 class="modal-title">Sign Up</h4>
     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
+  
   <div class="modal-body">
-    <label for="firstname">First Name</label>
-    <input (keydown)="firstNameError = ''" id="firstname" type="text" [(ngModel)]="user.firstName" class="form-control" />
-    <p *ngIf="firstNameError != ''" class="error">{{firstNameError}}</p>
 
-    <label for="lastname">Last Name</label>
-    <input (keydown)="lastNameError = ''" id="lastname" type="text" [(ngModel)]="user.lastName" class="form-control" />
-    <p *ngIf="lastNameError != ''" class="error">{{lastNameError}}</p>
 
-    <label for="email">Email</label>
-    <input (keydown)="emailError = ''" id="email" type="email" [(ngModel)]="user.email" class="form-control"/>
-    <p *ngIf="emailError != ''" class="error">{{emailError}}</p>
 
-    <label for="phoneNumber">Phone Number</label>
-    <input (keydown)="phoneNumberError = ''" id="phoneNumber" type="text" [(ngModel)]="user.phoneNumber" class="form-control" />
-    <p *ngIf="phoneNumberError != ''" class="error">{{phoneNumberError}}</p>
+    <!-- THE CONTENT OF THE CODE WE ARE RESPONSIBLE FOR STARTS HERE.
+    NOTE THAT IT'S WITHIN THE MODAL BODY AND CAN BE TRANSFERRED EASILY IF WE OPT TO RID OURSELVES OF THE MODAL. -->
+    <form  [formGroup]="signUpForm" ngValidate (ngSubmit)="onSubmit()">
 
-    <label for="userName">User Name</label>
-    <input (keydown)="userNameError = ''" id="userName" type="text" [(ngModel)]="user.userName" class="form-control" />
-    <p *ngIf="userNameError != ''" class="error">{{userNameError}}</p>
 
-    <!--<label for="password">Password</label>
-    <input id="password" type="password" [(ngModel)]="password" class="form-control" />-->
 
-    <label id="state">Batch</label>
-    <select class="form-control" [(ngModel)]="user.batch">
-          <option value="none" >  
+      <!-- This is the DRIVER / RIDER button group. -->
+      <div class="btn-group" role="group">
+        <button type="button" class="btn btn-primary" (click)="setDriver(true)">Driver</button>
+        <button type="button" class="btn btn-primary" (click)="setDriver(false)">Rider</button>
+      </div>
+
+      <!-- This form group contains the FIRST NAME field input. -->
+      <div class="form-group">
+        <label for="firstname">First Name</label>
+        <input
+          type="text"
+          id="firstname"
+          class="form-control" 
+          name="firstname" 
+          formControlName="firstname" />
+        <span 
+          *ngIf="!signUpForm.get('firstname').valid && signUpForm.get('firstname').touched"
+          class="help-block">This field is required.
+        </span>
+      </div>
+
+      <!-- This form group contains the LAST NAME field input. -->
+      <div class="form-group">
+        <label for="lastname">Last Name</label>
+        <input
+          type="text"
+          id="lastname"
+          class="form-control" 
+          name="lastname" 
+          formControlName="lastname" />
+        <span 
+          *ngIf="!signUpForm.get('lastname').valid && signUpForm.get('lastname').touched"
+          class="help-block">This field is required.
+        </span>
+      </div>
+
+      <!-- This form group contains the EMAIL field input. -->
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          type="text"
+          id="email"
+          class="form-control"  
+          name="email"  
+          formControlName="email"/>
+        <span 
+          *ngIf="!signUpForm.get('email').valid && signUpForm.get('email').touched"
+          class="help-block">This field is required.
+        </span>
+      </div>
+
+      <!-- This form group contains the PHONENUMBER field input. -->
+      <div class="form-group">
+        <label for="phonenumber">Phone Number</label>
+        <input
+          type="text"
+          id="phonenumber"
+          formControlName="phonenumber"
+          class="form-control">
+        <span 
+          *ngIf="!signUpForm.get('phonenumber').valid && signUpForm.get('phonenumber').touched"
+          class="help-block">This field is required.
+        </span>
+      </div>
+
+      <!-- This form group contains the BATCH select input. -->
+      <div class="form-group">
+        <select 
+          (input)="setBatch()" 
+          id="batch" 
+          formControlName="batch" 
+          class="form-control">
+          <!-- The nested option elements are generated via this ngFor directive. -->
+          <option value="" disabled>
+            Choose your Batch
           </option>
-          <option *ngFor="let batch of batches" [ngValue]="batch">{{batch.batchNumber}} {{batch.batchLocation}}</option>
-    </select>
+          <option *ngFor="let batch of batches">
+            {{batch.batchNumber}}: {{batch.batchLocation}}
+          </option>
+        </select>
+        <span 
+          *ngIf="!signUpForm.get('batch').valid && signUpForm.get('batch').touched"
+          class="help-block">This field is required.
+        </span>
+      </div>
 
-    <label for="hAddress">Address</label>
-    <input (keydown)="hAddressError = ''" id="hAddress" type="text" [(ngModel)]="user.hAddress" class="form-control" />
-    <p *ngIf="hAddressError != ''" class="error">{{hAddressError}}</p>
 
-    <label id="hCity">City</label>
-    <input (keydown)="hCityError = ''" type="text" [(ngModel)]="user.hCity" class="form-control" />
-    <p *ngIf="hCityError != ''" class="error">{{hCityError}}</p>
 
-    <label id="hState">State</label>
-    <select (keydown)="hStateError = ''" class="form-control" [(ngModel)]="user.hState" id="hState" >
-            <option value="none" selected disabled hidden>  
-            </option>
-            <option *ngFor="let state of states" value="{{state}}">{{state}}</option>
-    </select>
-    <p *ngIf="hStateError != ''" class="error">{{hStateError}}</p>
+      <!-- This HORIZONTAL line spans 4 grids of the parent container to organize the form information into segments -->
+      <!-- USERNAME AND PASSWORD SECTION BELOW-->
+      <br />
+      <hr my-4>
 
-    <label id="hZip">Zip Code</label>
-    <input (keydown)="hZipError = ''" type="number" [(ngModel)]="user.hZip" class="form-control" />
-    <p *ngIf="hZipError != ''" class="error">{{hZipError}}</p>
 
-    <div class="radiobody">
-    <div class="btn-group" data-toggle="buttons">
-        <label class="btn btn-primary">
-          <input type="checkbox"  id="driver" [(ngModel)]="isDriver" /> Driver
-        </label>
-        <br>
-        <label class="btn btn-primary">
-          <input type="checkbox"  id="rider" [(ngModel)]="isRider"/> Rider
-        </label>
+
+      <!-- This form group contains the AUTOPLACES field input. -->
+      <div class="form-group">
+        <label for="autoplaces">Address</label>
+        <app-google-place class="form-control" (googlePlaceObj)="getGooglePlace($event)" (change)="handleAddressChange($event)"></app-google-place>
+
+        <!-- <input 
+          id="autoplaces" 
+          formControlName="address" 
+          placeholder="{{addressLine}}" 
+          ngx-google-places-autocomplete 
+          [options]='options' 
+          #placesRef="ngx-places"
+          (change)="handleAddressChange($event)" 
+          class="form-control"/> -->
+        <!-- Validation. -->
+        <span 
+          *ngIf="this.city==null && signUpForm.get('address').touched"
+          class="help-block">Use autocomplete to generate your address.
+        </span>
+      </div>
+
+      <!-- This form group contains the ADDRESS field input. -->
+      <!-- READONLY -->
+      <div class="form-group">
+        <label for="address">Address line</label>
+        <input
+          readonly
+          type="text"
+          id="address"
+          class="form-control" 
+          formControlName="address"
+          placeholder="{{addressLine}}">
+      </div>
+
+      <!-- This form group contains the CITY field input. -->
+      <!-- READONLY -->
+      <div class="form-group">
+        <label id="city">City</label>
+        <input
+          readonly
+          type="text"
+          id="city"
+          formControlName="city"
+          class="form-control" 
+          value="{{city}}">
+      </div>
+
+      <!-- This form group contains the STATE field input. -->
+      <!-- READONLY -->
+      <div class="form-group">
+        <label for="state">State</label>
+        <input
+          readonly
+          type="text"
+          id="state"
+          formControlName="state"
+          class="form-control" 
+          placeholder="{{state}}">
+      </div>
+
+      <!-- This form group contains the ZIP CODE field input. -->
+      <div class="form-group">
+        <label for="zip">Zip Code</label>
+        <input 
+        readonly
+          type="text"
+          id="zip"
+          formControlName="zip"
+          class="form-control"
+          placeholder="{{zip}}">
+        <span 
+          *ngIf="!signUpForm.get('zip').valid && signUpForm.get('zip').touched"
+          class="help-block">This field is required.
+        </span>
+      </div>
+
+
+
+      <!-- This HORIZONTAL line spans 4 grids of the parent container to organize the form information into segments -->
+      <!-- USERNAME AND PASSWORD SECTION BELOW-->
+      <br />
+      <hr my-4>
+
+
+
+      <!-- This form group contains the USERNAME field input. -->
+      <div class="form-group">
+        <label for="username">User Name</label>
+        <input
+          type="text"
+          id="username"
+          formControlName="username"
+          class="form-control">
+        <span 
+          *ngIf="!signUpForm.get('username').valid && signUpForm.get('username').touched"
+          class="help-block">This field is required.
+        </span>
+      </div>
+
+      <!-- This form group contains the PASSWORD field input. -->
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          formControlName="password"
+          class="form-control">
+        <span 
+          *ngIf="!signUpForm.get('password').valid && signUpForm.get('password').touched"
+          class="help-block">This field is required.
+        </span>
+      </div>
+
+      <!-- This is the submit button. -->
+      <div class="btn-container">
+        <button class="btn btn-primary register" type="submit" 
+        [disabled]="this.signUpForm.status == 'INVALID'">Submit</button>
+        <br />
+        <span *ngIf="this.signUpForm.status == 'INVALID'" class="help-block">Submit disabled: *Required fields are not valid.</span>
+      </div>
+    
+
+
+    </form>
+
+
+    
   </div>
-    </div>
-    <div class="btn-container">
-      <button type="submit" class="btn btn-primary register" (click)="submitUser()">Submit</button>
-    </div>
-  </div>
-</ng-template> 
+</ng-template>

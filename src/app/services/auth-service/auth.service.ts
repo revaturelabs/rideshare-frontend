@@ -4,28 +4,23 @@ import { Router } from '@angular/router';
 import { Admin } from 'src/app/models/admin';
 
 
+
+//THIS SERVICE AUTHORIZES A USER. NOTE THAT EACH PAGE IN THIS APPPLICATION HAS BEEN 
+//CODED WITH SOME KIND OF CRAP IN ONIT() THAT USES THIS SERVICE. TO REFACTOR ALL OF 
+//THIS WOULD BE A TEDIOUS TASK. THEY SHOULD'VE JUST USED SESSION STORAGE...
+
+
+
 @Injectable({
   	providedIn: 'root'
 })
 export class AuthService {
-	/**
-	 * This is the Authorization Service
-	 */
-
 
 	@Output() fireIsLoggedIn: EventEmitter<any> = new EventEmitter<any>();
 	 loggedIn: boolean = false;
 
-
-	/**
-	 * This is the constructor
-	 * @param router Creates a router instance
-	 */
 	constructor(private router: Router) { }
 
-	/**
-	 * An user object is created
-	 */
 	public user: any = {};
 	public admin: Admin = new Admin();
 
@@ -34,7 +29,6 @@ export class AuthService {
 	 * @param user 
 	 * @param chosenUserName 
 	 */
-
 	login(user: User, chosenUserName: string) {
 		if (user.userName === chosenUserName) {
 			this.user = user;
@@ -54,7 +48,6 @@ export class AuthService {
 	/**
 	 * This function returns an emitter.
 	 */
-
 	loginAsAdmin(admin: Admin, userName: string) {
 		if (admin.userName === userName) {
 			this.admin = admin;

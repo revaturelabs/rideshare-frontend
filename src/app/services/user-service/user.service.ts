@@ -56,8 +56,12 @@ export class UserService {
 		return(this.http.get<User>(this.url+idParam).toPromise());
 	}
 
-	getUserById2(idParam2: string): Observable<User> {
-		return(this.http.get<User>(this.url+idParam2));
+	 
+	getUserById2(idParam2: string): Observable<User>{
+		
+		//console.log(this.url)
+		return this.http.get<User>(this.url+idParam2);
+
 	}
 
 	/**
@@ -154,8 +158,9 @@ export class UserService {
 	 * @param user 
 	 */
 
-	updateUserInfo(id: Number, user: User) {
-		
+
+	updateUserInfo(id: number, user: User) {
+		//console.log(user);
 		return this.http.put(`${this.url}${id}`, user).toPromise();
 	}
 

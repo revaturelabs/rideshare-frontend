@@ -53,6 +53,7 @@ export class DriverRecommendationComponent implements OnInit {
 
 
       //You need this sleep function to run the this.displayDriverInfo(stuff);
+      //MAKE IT LAST LONGER then the rest
       this.sleep(2400).then(() => {
       this.displayDriverInfo(this.drivers);
       });

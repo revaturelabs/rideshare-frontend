@@ -238,7 +238,7 @@ export class UserService {
 	 */
 	getRecommendedDrivers(userId: number): Observable <any> {
 		return this.http.get(this.url + 'driver/recommend/' + userId)
-
+	}
 	getAllDrivers(): Observable <any> {
 		return this.http.get(`${this.url}?is-driver=true`)
 

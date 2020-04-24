@@ -1,0 +1,24 @@
+<div class="pagebody">
+<div class=" container profile-container">
+        <div class="btn-group-vertical" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-outline-warning btn-lg" (click)="showContact()">Contact Information</button>
+            <button type="button" class="btn btn-outline-warning btn-lg" (click)="showLoc()">Location</button>
+            <button type="button" class="btn btn-outline-warning btn-lg" (click)="showMembership()">Membership</button>
+            <button type="button" class="btn btn-outline-warning btn-lg" (click)="showCarInfo()">Car Information</button>
+          </div>  
+
+  
+    <div *ngIf='showCont'>
+        <app-profile-contact></app-profile-contact>
+    </div>
+    <div *ngIf='showCar'>
+          <app-profile-car></app-profile-car>
+    </div>
+    <div *ngIf='showMemberInfo'>
+          <app-profile-membership></app-profile-membership>
+    </div>
+    <div *ngIf='showLocation'>
+          <app-profile-location></app-profile-location>
+      </div>
+</div>
+</div>

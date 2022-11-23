@@ -11,6 +11,13 @@
     "moduleResolution": "node",
     "importHelpers": true,
     "target": "es2015",
+    "types": [
+      "jquery",
+      "bootstrap",  
+      "node",
+      "jest",
+      "mocha"
+],
     "typeRoots": [
       "node_modules/@types"
     ],

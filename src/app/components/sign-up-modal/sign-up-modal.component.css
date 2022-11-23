@@ -1,0 +1,164 @@
+*{
+    font-family: "Overpass",sans-serif;
+   
+}
+.signup{
+    cursor:pointer;
+    display:inline-block;
+    width: 70px;
+}
+
+
+label{
+    margin-left:10px;
+    font-size:25px;
+}
+
+h3{
+    text-align: center;
+    font-size:30px;
+}
+.modal-title{
+    font-size:60px;
+    font-weight:bold;
+}
+
+.modal-content{
+    top: 50px;
+}
+
+.modal-body{
+    font-size:20px;
+    margin:30px;
+    
+}
+
+.btn-container{
+    text-align: center;
+}
+.register{
+    margin-top:10px;
+    background-color: #F26925;
+    color:white;
+    width:300px;
+    font-family:"Overpass",sans-serif;
+    font-weight:bold;
+    font-size:22px;
+    border-radius:27px;
+    letter-spacing:1px;
+    height:45px;
+    display:inline-block;
+    
+}
+ 
+.register:hover{
+    background-color:white;
+    color:#F26925;
+    border: 2px solid #F26925;
+    border-radius: 22px ;
+    font-family:"Overpass",sans-serif;
+    font-size:23px;
+}
+
+.form-control{
+    border-radius: 10px;
+    font-size:20px;
+    margin-bottom:10px;
+    border:1px solid #F26925;
+    box-shadow:2px 2px 8px #F26925;
+}
+
+.city,.state,.zip{
+    display:inline-block;
+    margin-right:3px;
+}
+.city{
+    width:195px;
+}
+.zip{
+    width:115px;
+}
+.radiobody{
+    text-align:center;
+    margin-top:10px;
+}
+
+.btn-group{
+    width:100%;
+    height:100px;
+    
+   
+}
+.btn-group .btn-primary{
+    color: white;
+    margin:auto 0;
+    border:1px solid black;
+}
+
+.driver{
+    margin-right:10px;
+    
+}
+
+.rider{
+    margin-left:10px;
+}
+
+.borderbottom:hover{
+    border-bottom:2px solid #F26925;
+}
+
+/* error */
+.error {
+    border-radius: 5px;
+    color: red;
+    font-size: 16px;
+}
+
+/**success*/
+.success {
+    border-radius: 5px;
+    color: green;
+    font-size: 16px;
+}
+
+/*----------------Removes up/down input arrows for zipcode input field--------------*/
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/* Firefox */
+input[type=number] {
+  -moz-appearance:textfield;
+}
+
+/*---------------------------------------------------------------------------------*/
+
+/*---------------------Media Queries-----------------------------------------------*/
+
+
+@media only screen and (max-width:574px){
+    label{
+        font-size:20px;
+    }
+    .city{
+        width:100%;        
+    }
+    .state{
+        width:100%;
+    }
+    .zip{
+        width:100%;
+    }
+    .register{
+        border:1px solid black;
+        text-align:center;
+        width:70%;
+    }
+    .modal-title{
+        font-size:40px;
+    }
+}

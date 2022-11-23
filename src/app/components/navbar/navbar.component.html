@@ -1,0 +1,50 @@
+
+    <nav class="navbar navbar-expand-lg navbar-light mainnav">
+        <!-- <div class="content"> -->
+          <a class="navbar-brand logoRev" href="#">
+              <img class="imageLogo" src="../assets/revature-logo-600x219.png" routerLink="/" >
+            </a>
+            
+            <button class="navbar-toggler ml-auto " type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon" ></span>
+              </button>	     
+               <!-- </div> -->
+               <div *ngIf="currentUser != ''" class="collapse navbar-collapse myColapse" id="navbarSupportedContent">
+              <ul class="navbar-nav ml-auto">	
+                <li class="nav-item">
+                  <a class="nav-link" routerLink="/landingPage"><span class="borderbottom">Search</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" routerLink="/drivers"><span class="borderbottom">Drivers</span></a>
+                </li>
+                <li class="nav-item active dropdown">
+                  <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                   <span class="borderbottom nameplaceholder">{{currentUser}}</span><!--{{name placeholder}}-->
+                    <img ng-if="internImageUrl" src="https://app.revature.com/core/resources/download/default/interns/image?t=1580327501130" alt="" id="user-dropa" class="img-circle profileUpdate ng-scope userimg"/>	                
+      
+                    </a>
+                  
+                       <div class="dropdown-menu myDropDown" aria-labelledby="navbarDropdown">
+                          <a class="dropdown-item" routerLink="/profile">Profile</a>
+                          <div class="dropdown-divider"></div>
+                          <a class="dropdown-item" (click)="logout()" id="logout-btn">Log Out</a>
+                        </div>
+                </li>
+              </ul>
+            </div>
+          <nav *ngIf="admin" class="navbar navbar-expand-lg navbar-light ">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                  <a class="nav-link" routerLink="/login/adminhome">All Users </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" (click)="logout()">Log Out</a>
+                </li>
+              </ul>
+            </div>
+          </nav>
+        </nav>
+
+
+       

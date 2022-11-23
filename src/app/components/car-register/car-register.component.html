@@ -1,0 +1,40 @@
+<div class="container">
+    <form class="form-group text-center">
+        <h3>Add Car To Become A Driver</h3>
+        <div class="form-row justify-content-around mb-3">
+            <div class="form-group">
+                <label for="color">Color <small>*</small></label><br>
+                <input class="form-control" id="color" type="text" placeholder="Color of the Car" [(ngModel)]="car.color" name="color" autocomplete="off" required><br>
+            </div>
+            <div class="form-group">
+                <label for="seats">Seats <small>*</small></label><br>
+                <input class="form-control" id="seats" type="number" [(ngModel)]="car.seats" name="seats" min="1" max="6" step="1" autocomplete="off" required><br>
+                <small *ngIf="(car.seats || car.seats===0) && !validationService.validateSeats(car.seats)">The Passenger Capacity Must Between 1 To 6</small>
+            </div>
+        </div>
+        <div class="form-row justify-content-center mb-3">   
+            <div class="form-group">
+                <label for="make">Make <small>*</small></label><br>
+                <input class="form-control" id="make" type="text" placeholder="Brand of the Car" [(ngModel)]="car.make" name="make" autocomplete="off" required><br>
+            </div>
+        </div>
+        <div class="form-row justify-content-center mb-3">
+            <div class="form-group">
+                <label for="model">Model <small>*</small></label><br>
+                <input class="form-control" id="model" type="text" placeholder="Car Model" [(ngModel)]="car.model" name="model" autocomplete="off" required><br>
+            </div>
+        </div>
+        <div class="form-row justify-content-center">
+            <div class="form-group">
+                <label for="year">Year <small>*</small></label><br>
+                <select class="form-control" id="year" (change)='changeYear($event)'>
+                    <option *ngFor="let year of years" [value]="year">{{year}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group justify-content-center mb-3">
+            <button id="add-car-btn" class="btn btn-primary" type="submit" (click)="addCar()" (keyup.enter)="addCar()" [disabled]="!(car.color && car.seats && car.make && car.model)">Add New Car</button>
+            <a routerLink="/home">Cancel</a>
+        </div>
+    </form>
+</div>

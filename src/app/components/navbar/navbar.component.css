@@ -1,0 +1,116 @@
+*{
+    font-family:"Overpass",sans-serif;
+}
+
+.userimg {
+    width: 7%;
+    height: 7%;
+    cursor: pointer; 
+}
+
+.imageLogo {
+    height:60px;
+    width:140px;
+}
+
+#logout-btn, a {
+    cursor: pointer;
+}
+
+nav {
+    background-color: rgb(255, 255, 255); 
+}
+
+.navbar {
+     padding-left: 7%;
+     padding-right: 7%;
+    line-height: 42px;
+    font-size: -2.7rem;
+    font-weight: 800;
+
+}
+
+a.nav-link{
+    color:black !important;
+}
+
+.nav-link{
+    padding: 0;
+}
+.borderbottom:hover{
+    border-bottom: 2px solid #F26925;
+}
+
+.mainnav{
+    border-bottom: 1px inset rgb(214, 214, 214);
+    font-size:17px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-right: 0;
+}
+
+.mt-lg-0, .my-lg-0 {
+    margin-left: 100px;
+}
+.loginbutton{
+    margin-top:10px;
+    background-color: #F26925;
+    color:white;
+    width:150px;
+    font-family:"Overpass";
+    font-weight:bold;
+    font-size:22px;
+    border-radius:27px;
+    letter-spacing:1px;
+    height:45px;
+    display:inline-block;
+}
+ 
+.loginbutton:hover{
+    background-color:white;
+    color:#F26925;
+    border: 2px solid #F26925;
+    border-radius: 22px ;
+    font-family:"Overpass";
+    font-size:23px;
+}
+.dropdown-item {
+    padding: 0.25rem 4.5rem;
+}
+.dropdown-item:hover{
+    border: 3px solid #F26925;
+    background-color: rgb(212, 113, 64);
+    color:white;
+    font-weight:bold;
+}
+#user-dropa{
+    padding-left:10px;
+}
+
+@media (max-width: 993px){
+    .myDropDown{
+        width: 40%;
+    }
+}
+
+
+@media (min-width:993px){
+    .navbar-collapse {
+        flex-grow: 0;
+    }
+
+    .navbar {
+        padding-right: 0;
+
+    }
+    .userimg {
+        width: 20%;
+        height: 20%;
+    }
+
+    /* .myDropDown{
+        width: 70%;
+        background-color: coral;
+    } */
+}
